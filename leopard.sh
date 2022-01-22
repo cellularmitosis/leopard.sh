@@ -8,7 +8,7 @@ LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
 export LEOPARDSH_MIRROR
 
 osversion=$(sw_vers -productVersion | awk '{print $NF}')
-if ! echo $osversion | grep -q '10\.5\.'; then
+if ! echo $osversion | grep -q '10\.5'; then
     echo "Sorry, this script was written for OS X Leopard :(" >&2
     exit 1
 fi
