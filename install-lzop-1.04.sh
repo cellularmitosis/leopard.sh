@@ -13,7 +13,7 @@ for dep in \
     lzo-2.10 \
     pkg-config-0.29.2
 do
-    if ! test -e $dep; then
+    if ! test -e /opt/$dep; then
         leopard.sh $dep
     fi
     PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
