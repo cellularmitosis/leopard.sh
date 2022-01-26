@@ -85,4 +85,4 @@ script=install-$1.sh
 cd /tmp
 /opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/$script
 chmod +x $script
-nice ./$script
+nice ./$script | tee /tmp/$script.log
