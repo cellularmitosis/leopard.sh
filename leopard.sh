@@ -30,7 +30,29 @@ if test "$1" = "--os.cpu"; then
     exit 0
 fi
 
-if test -n "$1" -a -e /opt/$1; then
+if test "$1" = "--unlink"; then
+    if test -z "$2"; then
+        echo "Error: unlink which package?" >&2
+        echo "e.g. leopard.sh --unlink foo-1.0" >&2
+        exit 1
+    fi
+    pkg="$2"
+    # deletes any symlinks in /usr/local/* which point to /opt/foo-1.0/*.
+    # what a pain in the ass!
+    cd "/opt/$pkg"
+    find . -mindepth 1 \( -type f -or -type l \) -exec \
+        bash -e -c \
+            "if test -L \"/usr/local/{}\" \
+                && test \"\$(readlink \"/usr/local/{}\")\" = \"/opt/$pkg/\$(echo {} | cut -c3-)\" ; \
+            then \
+                rm -v \"/usr/local/{}\"
+            fi" \
+    \;
+    exit 0
+fi
+
+if test -n "$1" -a -e "/opt/$1"; then
+    # already installed.
     exit 0
 fi
 
@@ -79,9 +101,10 @@ if test -z "$1"; then
     exit 0
 fi
 
-echo "Installing $1" >&2
-echo -n -e "\033]0;Installing $1\007"
-script=install-$1.sh
+pkg="$1"
+echo "Installing $pkg" >&2
+echo -n -e "\033]0;Installing $pkg\007"
+script=install-$pkg.sh
 cd /tmp
 /opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/$script
 chmod +x $script

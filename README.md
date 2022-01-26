@@ -32,3 +32,17 @@ To install a package:
 ```
 $ leopard.sh automake-1.16.5
 ```
+
+To remove a package:
+
+```
+$ leopard.sh --unlink automake-1.16.5
+$ rm -r /opt/automake-1.16.5
+```
+
+Misc. other usage:
+
+```
+$ leopard.sh --os.cpu
+leopard.g4e
+```
