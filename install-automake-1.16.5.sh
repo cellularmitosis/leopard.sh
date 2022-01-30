@@ -33,7 +33,7 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
     ./configure --prefix=/opt/$package-$version
-    make
+    make V=1
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check
