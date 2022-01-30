@@ -32,6 +32,23 @@ if test "$1" = "--os.cpu"; then
     exit 0
 fi
 
+if test "$1" = "--mcpu"; then
+    cpu=$(sysctl hw.cpusubtype | awk '{print $NF}')
+    if test "$cpu" = "9"; then
+        echo 750
+    elif test "$cpu" = "10"; then
+        echo 7400
+    elif test "$cpu" = "11"; then
+        echo 7450
+    elif test "$cpu" = "100"; then
+        echo 970
+    else
+        echo "Error: unsupported CPU type." >&2
+        exit 1
+    fi
+    exit 0
+fi
+
 if test "$1" = "--unlink"; then
     if test -z "$2"; then
         echo "Error: unlink which package?" >&2

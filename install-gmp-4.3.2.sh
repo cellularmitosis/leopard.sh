@@ -32,7 +32,12 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
-    CC=gcc-4.2 CXX=g++-4.2 ./configure \
+
+    # Use -O2 rather than -O3:
+    perl -pi -e 's/-O3 -O2 -O1/-O2/g' configure
+
+    CC=gcc-4.2 CXX=g++-4.2 \
+    ./configure \
         --prefix=/opt/$package-$version \
         --enable-cxx
     make
@@ -42,6 +47,32 @@ else
     fi
 
     make install
+
+    if test "$(leopard.sh --os.cpu)" = "leopard.g5"; then
+        # On G5, gmp will build ppc64 by default.
+        # Build a second time for ppc and make universal libs.
+        cd /tmp/$package-$version
+        make clean
+        CC=gcc-4.2 CXX=g++-4.2 \
+        ABI=mode32 \
+        ./configure \
+            --prefix=/tmp/$package-$version.ppc \
+            --enable-cxx
+        make
+
+        if test -n "$LEOPARDSH_MAKE_CHECK"; then
+            make check
+        fi
+
+        for f in libgmp.3.5.2.dylib libgmpxx.4.1.2.dylib ; do
+            mv /opt/$package-$version/lib/$f /opt/$package-$version/lib/$f.orig
+            lipo -create \
+                -arch ppc64 /opt/$package-$version/lib/$f.orig \
+                -arch ppc /tmp/$package-$version/.libs/$f \
+                -output /opt/$package-$version/lib/$f
+            rm /opt/$package-$version/lib/$f.orig
+        done
+    fi
 fi
 
 # Note: /usr/bin/gcc (4.0.1) fails with:
