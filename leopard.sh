@@ -4,6 +4,8 @@
 
 set -e -o pipefail
 
+# Note: to use a local checkout, export LEOPARDSH_MIRROR=file:///Users/foo/leopard.sh before
+# calling leopard.sh.
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
 export LEOPARDSH_MIRROR
 
