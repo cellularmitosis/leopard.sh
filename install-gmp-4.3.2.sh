@@ -34,7 +34,7 @@ else
     cd $package-$version
 
     # Use -O2 rather than -O3:
-    perl -pi -e 's/-O3 -O2 -O1/-O2/g' configure
+    perl -pi -e 's/-O3 -O2 -O1/$(leopard.sh -O)/g' configure
 
     CC=gcc-4.2 CXX=g++-4.2 \
     ./configure \
@@ -49,8 +49,7 @@ else
     make install
 
     if test "$(leopard.sh --cpu)" = "g5"; then
-        # On G5, gmp will build ppc64 by default.
-        # Build a second time for ppc and make universal libs.
+        # On G5, build universal libs which contain both ppc and ppc64.
         cd /tmp/$package-$version
         make clean
         CC=gcc-4.2 CXX=g++-4.2 \

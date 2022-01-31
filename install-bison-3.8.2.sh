@@ -26,8 +26,12 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+    
+    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" configure
+    perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" configure
+
     ./configure --prefix=/opt/$package-$version
-    make
+    make V=1
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         # FIXME `make check` fails with:

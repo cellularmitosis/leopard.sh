@@ -32,8 +32,11 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+
+    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" configure
+
     CC=gcc-4.2 CFLAGS=-std=c99 ./configure --prefix=/opt/$package-$version
-    make
+    make V=1
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check
