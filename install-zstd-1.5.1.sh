@@ -28,11 +28,11 @@ else
     cd $package-$version
 
     # Fix for '-compatibility_version only allowed with -dynamiclib' error:
-    perl -pi -e 's/-compatibility_version/-dynamiclib -compatibility_version/' lib/Makefile
+    perl -pi -e "s/-compatibility_version/-dynamiclib -compatibility_version/" lib/Makefile
 
     # Switch from -O3 to -O2:
     for f in Makefile */Makefile */*/Makefile */*.mk ; do
-        perl -pi -e 's/-O3/-O2/g' $f
+        perl -pi -e "s/-O3/-O2/g" $f
     done
 
     make V=1 prefix=/opt/$package-$version

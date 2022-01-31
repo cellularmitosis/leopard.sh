@@ -33,8 +33,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
-    # Use -O2 rather than -O3:
-    perl -pi -e 's/-O3 -O2 -O1/$(leopard.sh -O)/g' configure
+    perl -pi -e "s/-O3/$(leopard.sh -O)/g" configure
+    perl -pi -e "s/-O2/$(leopard.sh -O)/g" configure
 
     CC=gcc-4.2 CXX=g++-4.2 \
     ./configure \
