@@ -26,6 +26,10 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+
+    # Don't use -g, and build for specific our arch / cpu:
+    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" configure
+
     ./configure --prefix=/opt/$package-$version
     make V=1
 

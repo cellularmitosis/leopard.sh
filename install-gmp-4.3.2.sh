@@ -48,7 +48,7 @@ else
 
     make install
 
-    if test "$(leopard.sh --os.cpu)" = "leopard.g5"; then
+    if test "$(leopard.sh --cpu)" = "g5"; then
         # On G5, gmp will build ppc64 by default.
         # Build a second time for ppc and make universal libs.
         cd /tmp/$package-$version
