@@ -4,8 +4,8 @@
 
 set -e -o pipefail
 
-# Note: to use a local checkout, export LEOPARDSH_MIRROR=file:///Users/foo/leopard.sh before
-# calling leopard.sh.
+# Note: to use a local checkout, export LEOPARDSH_MIRROR=file:///Users/foo/leopard.sh
+# before calling leopard.sh.
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
 export LEOPARDSH_MIRROR
 
@@ -127,7 +127,7 @@ if test -n "$1" -a -e "/opt/$1"; then
     exit 0
 fi
 
-if ! which /usr/bin/gcc >/dev/null 2>&1; then
+if ! which -s /usr/bin/gcc ; then
     echo "Error: please install Xcode." >&2
     echo "See https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/xcode314_2809_developerdvd.dmg" >&2
     exit 1
@@ -179,6 +179,6 @@ script=install-$pkg.sh
 cd /tmp
 /opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/$script
 chmod +x $script
-nice ./$script | tee /tmp/$script.log
+/usr/bin/time nice ./$script 2>&1 | tee /tmp/$script.log
 mkdir -p /opt/$pkg/share/leopard.sh
 mv /tmp/$script.log /opt/$pkg/share/leopard.sh/
