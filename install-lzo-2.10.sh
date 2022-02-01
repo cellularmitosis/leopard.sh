@@ -26,8 +26,11 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+
+    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -mcpu -O)\"/g" configure
+
     ./configure --prefix=/opt/$package-$version
-    make
+    make V=1
     # Note: no 'make check' available.
     make install
 fi
