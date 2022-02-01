@@ -39,6 +39,13 @@ def fix_set_e(lines):
         lines2.append(line)
     return lines2
 
+def fix_binpkgs(lines):
+    lines2 = []
+    for line in lines:
+        line = line.replace('$LEOPARDSH_MIRROR/$binpkg', '$LEOPARDSH_MIRROR/binpkgs/$binpkg')
+        lines2.append(line)
+    return lines2
+
 fd = open(sys.argv[1])
 lines = fd.read().splitlines()
 fd.close()
@@ -47,7 +54,8 @@ fd.close()
 # lines = fix_url(lines)
 # lines = fix_optmirror(lines)
 # lines = fix_binpkg(lines)
-lines = fix_set_e(lines)
+#lines = fix_set_e(lines)
+lines = fix_binpkgs(lines)
 
 text = '\n'.join(lines) + '\n'
 sys.stdout.write(text)

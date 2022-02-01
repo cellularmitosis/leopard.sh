@@ -161,7 +161,7 @@ done
 if ! test -e /opt/portable-curl; then
     echo "Installing curl with SSL support." >&2
     cd /tmp
-    curl -sSfLOk $LEOPARDSH_MIRROR/install-portable-curl.sh
+    curl -sSfLOk $LEOPARDSH_MIRROR/scripts/install-portable-curl.sh
     chmod +x install-portable-curl.sh
     ./install-portable-curl.sh
 fi
@@ -177,8 +177,10 @@ echo "Installing $pkg" >&2
 echo -n -e "\033]0;Installing $pkg\007"
 script=install-$pkg.sh
 cd /tmp
-/opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/$script
+/opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/scripts/$script
 chmod +x $script
 /usr/bin/time nice ./$script 2>&1 | tee /tmp/$script.log
+
 mkdir -p /opt/$pkg/share/leopard.sh
-mv /tmp/$script.log /opt/$pkg/share/leopard.sh/
+gzip /tmp/$script.log
+mv /tmp/$script.log.gz /opt/$pkg/share/leopard.sh/
