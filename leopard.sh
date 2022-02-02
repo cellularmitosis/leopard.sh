@@ -123,7 +123,7 @@ if test "$1" = "--unlink"; then
 fi
 
 if test -n "$1" -a -e "/opt/$1"; then
-    # already installed.
+    echo "$1 is already installed." >&2
     exit 0
 fi
 
