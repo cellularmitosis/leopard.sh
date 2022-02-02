@@ -37,7 +37,7 @@ else
     perl -pi -e "s/-O2/$(leopard.sh -O)/g" configure
 
     CC=gcc-4.2 CXX=g++-4.2 \
-    ./configure \
+    ./configure -C \
         --prefix=/opt/$package-$version \
         --enable-cxx
     make
@@ -54,7 +54,7 @@ else
         make clean
         CC=gcc-4.2 CXX=g++-4.2 \
         ABI=mode32 \
-        ./configure \
+        ./configure -C \
             --prefix=/tmp/$package-$version.ppc \
             --enable-cxx
         make

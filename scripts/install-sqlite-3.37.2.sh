@@ -34,7 +34,7 @@ else
     cd sqlite-autoconf-3370200
     CPPFLAGS=-I/opt/readline-8.1.2/include \
         LDFLAGS=-L/opt/readline-8.1.2/lib \
-        ./configure --prefix=/opt/$package-$version \
+        ./configure -C --prefix=/opt/$package-$version \
             --disable-dependency-tracking \
             --enable-threadsafe \
             --enable-readline

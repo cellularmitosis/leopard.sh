@@ -41,8 +41,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
     CPPFLAGS=-I/opt/readline-8.1.2/include \
-        LDFLAGS=-L/opt/readline-8.1.2/lib \
-        ./configure --prefix=/opt/$package-$version \
+    LDFLAGS=-L/opt/readline-8.1.2/lib \
+        ./configure -C --prefix=/opt/$package-$version \
             --with-libiconv-prefix=/opt/libiconv-1.16 \
             --with-libintl-prefix=/opt/gettext-0.21 \
             --with-readline

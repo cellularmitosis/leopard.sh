@@ -36,7 +36,7 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
-    ./configure --prefix=/opt/$package-$version \
+    ./configure -C --prefix=/opt/$package-$version \
         --with-gmp=/opt/gmp-6.2.1 \
         --with-mpfr=/opt/mpfr-4.1.0
     make

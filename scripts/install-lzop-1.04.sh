@@ -47,7 +47,7 @@ else
     LDFLAGS=$(pkg-config --libs-only-L $pkgconfignames)
     LIBS=$(pkg-config --libs-only-l $pkgconfignames)
     export CPPFLAGS LDFLAGS LIBS
-    ./configure --prefix=/opt/$package-$version
+    ./configure -C --prefix=/opt/$package-$version
 
     make
     # Note: no 'make check' available.

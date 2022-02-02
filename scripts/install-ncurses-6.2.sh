@@ -26,7 +26,7 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
-    ./configure --prefix=/opt/$package-$version --enable-widec --enable-pc-files
+    ./configure -C --prefix=/opt/$package-$version --enable-widec --enable-pc-files
     make
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then

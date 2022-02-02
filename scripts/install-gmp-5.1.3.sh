@@ -32,7 +32,7 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
-    CC=gcc-4.2 CXX=g++-4.2 ./configure \
+    CC=gcc-4.2 CXX=g++-4.2 ./configure -C \
         --prefix=/opt/$package-$version \
         --enable-cxx
     make

@@ -32,7 +32,7 @@ else
     rm -rf $package-$version
     cat ~/Downloads/$tarball | unxz | tar x
     cd $package-$version
-    ./configure --prefix=/opt/$package-$version
+    ./configure -C --prefix=/opt/$package-$version
     make
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then

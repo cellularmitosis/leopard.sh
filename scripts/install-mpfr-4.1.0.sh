@@ -38,7 +38,7 @@ else
     cd $package-$version
     # Note: --enabled-thread-safe requires TLS (thread-local storage),
     # which was supported as of gcc 4.9.
-    CC=/opt/gcc-4.9.4/bin/gcc ./configure --prefix=/opt/$package-$version \
+    CC=/opt/gcc-4.9.4/bin/gcc ./configure -C --prefix=/opt/$package-$version \
         --enable-thread-safe \
         --with-gmp=/opt/gmp-6.2.1
     make

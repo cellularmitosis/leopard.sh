@@ -34,7 +34,7 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
-    ./configure --prefix=/opt/$package-$version \
+    ./configure -C --prefix=/opt/$package-$version \
         --with-mpfr=/opt/mpfr-2.4.2 \
         --with-readline=/opt/readline-8.1.2
     make

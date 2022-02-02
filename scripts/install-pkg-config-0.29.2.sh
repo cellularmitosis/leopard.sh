@@ -26,8 +26,17 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
-    ./configure --prefix=/opt/$package-$version --with-internal-glib --disable-host-tool
-    make
+
+    for f in configure glib/configure ; do
+        perl -pi -e "s/CFLAGS=\"-g -Wall -O2\"/CFLAGS=\"-Wall $(leopard.sh -m64 -mcpu -O)\"/g" $f
+        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" $f
+        perl -pi -e "s/CFLAGS=\"-g\"/CFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" $f
+    done
+
+    ./configure -C --prefix=/opt/$package-$version \
+        --with-internal-glib \
+        --disable-host-tool
+    make V=1
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

@@ -32,7 +32,7 @@ else
     rm -rf $package-$version
     tar xjf ~/Downloads/$tarball
     cd $package-$version
-    ./configure --prefix=/opt/$package-$version \
+    ./configure -C --prefix=/opt/$package-$version \
         --with-gmp-prefix=/opt/gmp-4.3.2
     make V=1
 

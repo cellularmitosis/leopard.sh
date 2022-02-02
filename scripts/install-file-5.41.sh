@@ -33,7 +33,7 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
-    ./configure --prefix=/opt/$package-$version \
+    ./configure -C --prefix=/opt/$package-$version \
         CC=gcc-4.2 \
         CFLAGS="-std=c99 $(leopard.sh -m64 -mcpu -O)"
   

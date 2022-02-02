@@ -46,16 +46,25 @@ def fix_binpkgs(lines):
         lines2.append(line)
     return lines2
 
+def fix_cache_configure(lines):
+    lines2 = []
+    for line in lines:
+        if "./configure -C" not in line:
+            line = line.replace('./configure', './configure -C')
+        lines2.append(line)
+    return lines2
+
 fd = open(sys.argv[1])
 lines = fd.read().splitlines()
 fd.close()
 
-# lines = skip_optmirroreq(lines)
-# lines = fix_url(lines)
-# lines = fix_optmirror(lines)
-# lines = fix_binpkg(lines)
+#lines = skip_optmirroreq(lines)
+#lines = fix_url(lines)
+#lines = fix_optmirror(lines)
+#lines = fix_binpkg(lines)
 #lines = fix_set_e(lines)
-lines = fix_binpkgs(lines)
+#lines = fix_binpkgs(lines)
+lines = fix_cache_configure(lines)
 
 text = '\n'.join(lines) + '\n'
 sys.stdout.write(text)
