@@ -50,7 +50,7 @@ else
         cd /tmp/$package-$version
         perl -pi -e "s/-m64/-m32/g" configure
         make clean
-        ./configure -C --prefix=/opt/$package-$version
+        ./configure --prefix=/opt/$package-$version
         make $(leopard.sh -j)
 
         if test -n "$LEOPARDSH_MAKE_CHECK"; then

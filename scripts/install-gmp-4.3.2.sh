@@ -54,7 +54,7 @@ else
         make clean
         CC=gcc-4.2 CXX=g++-4.2 \
         ABI=mode32 \
-        ./configure -C \
+        ./configure \
             --prefix=/tmp/$package-$version.ppc \
             --enable-cxx
         make $(leopard.sh -j)
