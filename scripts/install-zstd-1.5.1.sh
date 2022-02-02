@@ -35,7 +35,7 @@ else
         perl -pi -e "s/-O3/-O2/g" $f
     done
 
-    make V=1 prefix=/opt/$package-$version
+    make $(leopard.sh -j) V=1 prefix=/opt/$package-$version
     make prefix=/opt/$package-$version install
 fi
 

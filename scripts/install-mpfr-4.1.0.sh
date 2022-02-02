@@ -41,7 +41,7 @@ else
     CC=/opt/gcc-4.9.4/bin/gcc ./configure -C --prefix=/opt/$package-$version \
         --enable-thread-safe \
         --with-gmp=/opt/gmp-6.2.1
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

@@ -41,7 +41,7 @@ else
         > /tmp/Makefile
     mv /tmp/Makefile .
 
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

@@ -43,7 +43,7 @@ else
         ./configure -C --prefix=/opt/$package-$version \
             --with-libiconv-prefix=/opt/libiconv-1.16 \
             --with-threads
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

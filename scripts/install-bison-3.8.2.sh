@@ -31,7 +31,7 @@ else
     perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" configure
 
     ./configure -C --prefix=/opt/$package-$version
-    make V=1
+    make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         # FIXME `make check` fails with:

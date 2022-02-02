@@ -39,7 +39,7 @@ else
     ./configure -C --prefix=/opt/$package-$version \
         --with-isl-prefix=/opt/isl-0.11.1 \
         --with-gmp-prefix=/opt/gmp-4.3.2
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         # FIXME some tests are failing

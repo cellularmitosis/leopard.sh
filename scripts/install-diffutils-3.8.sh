@@ -33,7 +33,7 @@ else
     cat ~/Downloads/$tarball | unxz | tar x
     cd $package-$version
     ./configure -C --prefix=/opt/$package-$version
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         # FIXME one failing test.

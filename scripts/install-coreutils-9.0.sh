@@ -27,7 +27,7 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
     ./configure -C --prefix=/opt/$package-$version
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         # FIXME fails with:

@@ -40,7 +40,7 @@ else
     ./configure -C \
         --prefix=/opt/$package-$version \
         --enable-cxx
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check
@@ -57,7 +57,7 @@ else
         ./configure -C \
             --prefix=/tmp/$package-$version.ppc \
             --enable-cxx
-        make
+        make $(leopard.sh -j)
 
         if test -n "$LEOPARDSH_MAKE_CHECK"; then
             make check

@@ -36,7 +36,7 @@ else
     ./configure -C --prefix=/opt/$package-$version \
         --disable-thread-safe \
         --with-gmp=/opt/gmp-4.3.2
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

@@ -39,7 +39,7 @@ else
     CC=gcc-4.2 CXX=g++-4.2 ./configure -C \
         --prefix=/opt/$package-$version \
         --enable-cxx
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

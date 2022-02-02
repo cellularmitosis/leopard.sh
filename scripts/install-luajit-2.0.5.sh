@@ -56,7 +56,7 @@ else
  export MULTILIB= lib
  ##############################################################################
 EOF
-    PATH="/opt/gcc-4.9.4/bin:$PATH" make
+    PATH="/opt/gcc-4.9.4/bin:$PATH" make $(leopard.sh -j)
 fi
 
 ln -sf /opt/$package-$version/bin/* /usr/local/bin/

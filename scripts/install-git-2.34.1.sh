@@ -60,7 +60,7 @@ else
             --with-curl=/opt/portable-curl-7.58.0-1 \
             --with-iconv=/opt/libiconv-1.16 \
             --with-expat=/opt/expat-2.4.3
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         # FIXME some tests need a recent python.

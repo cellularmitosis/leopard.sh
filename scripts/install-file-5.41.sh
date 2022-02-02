@@ -37,7 +37,7 @@ else
         CC=gcc-4.2 \
         CFLAGS="-std=c99 $(leopard.sh -m64 -mcpu -O)"
   
-    make V=1
+    make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

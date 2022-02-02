@@ -30,7 +30,7 @@ else
     perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -mcpu -O)\"/g" configure
 
     ./configure -C --prefix=/opt/$package-$version
-    make V=1
+    make $(leopard.sh -j) V=1
     # Note: no 'make check' available.
     make install
 fi

@@ -39,7 +39,7 @@ else
     ./configure -C --prefix=/opt/$package-$version \
         --with-gmp=/opt/gmp-6.2.1 \
         --with-mpfr=/opt/mpfr-4.1.0
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

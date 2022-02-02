@@ -49,7 +49,7 @@ else
     export CPPFLAGS LDFLAGS LIBS
     ./configure -C --prefix=/opt/$package-$version
 
-    make
+    make $(leopard.sh -j)
     # Note: no 'make check' available.
     make install
 fi

@@ -64,7 +64,7 @@ else
         --enable-lto \
         --enable-objc-gc \
         --program-suffix=-4.9
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

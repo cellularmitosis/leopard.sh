@@ -30,7 +30,7 @@ else
     perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" configure
     
     ./configure -C --prefix=/opt/$package-$version
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check
@@ -44,7 +44,7 @@ else
         perl -pi -e "s/-m64/-m32/g" configure
         make clean
         ./configure -C --prefix=/opt/$package-$version
-        make
+        make $(leopard.sh -j)
 
         if test -n "$LEOPARDSH_MAKE_CHECK"; then
             make check

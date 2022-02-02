@@ -37,7 +37,7 @@ else
     ./configure -C --prefix=/opt/$package-$version \
         --with-mpfr=/opt/mpfr-2.4.2 \
         --with-readline=/opt/readline-8.1.2
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         # FIXME one failing test.

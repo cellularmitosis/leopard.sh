@@ -51,7 +51,7 @@ else
         --with-threads \
         --enable-ipv6
 
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

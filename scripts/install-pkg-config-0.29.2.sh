@@ -36,7 +36,7 @@ else
     ./configure -C --prefix=/opt/$package-$version \
         --with-internal-glib \
         --disable-host-tool
-    make V=1
+    make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

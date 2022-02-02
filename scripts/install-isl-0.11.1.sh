@@ -34,7 +34,7 @@ else
     cd $package-$version
     ./configure -C --prefix=/opt/$package-$version \
         --with-gmp-prefix=/opt/gmp-4.3.2
-    make V=1
+    make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

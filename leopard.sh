@@ -15,6 +15,16 @@ if ! echo $osversion | grep -q '10\.5'; then
     exit 1
 fi
 
+# make flag generation:
+
+if test "$1" = "-j"; then
+    j=$(sysctl hw.logicalcpu | awk '{print $NF}')
+    echo "-j$j"
+    exit 0
+fi
+
+# gcc flag generation:
+
 if test "$1" = "-m64"; then
     flagmode=1
     cpu=$(sysctl hw.cpusubtype | awk '{print $NF}')
@@ -66,6 +76,8 @@ if test -n "$flagmode"; then
     exit 0
 fi
 
+# sysctl queries:
+
 if test "$1" = "--cpu"; then
     cpu=$(sysctl hw.cpusubtype | awk '{print $NF}')
     if test "$cpu" = "9"; then
@@ -100,6 +112,8 @@ if test "$1" = "--os.cpu"; then
     exit 0
 fi
 
+# subcommands:
+
 if test "$1" = "--unlink"; then
     shift 1
     if test -z "$1"; then
@@ -121,6 +135,8 @@ if test "$1" = "--unlink"; then
     \;
     exit 0
 fi
+
+# main:
 
 if test -n "$1" -a -e "/opt/$1"; then
     echo "$1 is already installed." >&2

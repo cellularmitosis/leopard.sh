@@ -38,7 +38,7 @@ else
             --disable-dependency-tracking \
             --enable-threadsafe \
             --enable-readline
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

@@ -46,7 +46,7 @@ else
             --with-libiconv-prefix=/opt/libiconv-1.16 \
             --with-libintl-prefix=/opt/gettext-0.21 \
             --with-readline
-    make
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_MAKE_CHECK"; then
         make check

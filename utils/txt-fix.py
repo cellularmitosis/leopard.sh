@@ -54,17 +54,31 @@ def fix_cache_configure(lines):
         lines2.append(line)
     return lines2
 
+def fix_make(lines):
+    lines2 = []
+    for line in lines:
+        if "$(leopard.sh -j)" not in line \
+            and "make install" not in line \
+            and "make check" not in line \
+            and "make clean" not in line \
+            and "make[" not in line \
+            and "make:" not in line:
+            line = line.replace("make", "make $(leopard.sh -j)")
+        lines2.append(line)
+    return lines2
+
 fd = open(sys.argv[1])
 lines = fd.read().splitlines()
 fd.close()
 
-#lines = skip_optmirroreq(lines)
-#lines = fix_url(lines)
-#lines = fix_optmirror(lines)
-#lines = fix_binpkg(lines)
-#lines = fix_set_e(lines)
-#lines = fix_binpkgs(lines)
-lines = fix_cache_configure(lines)
+# lines = skip_optmirroreq(lines)
+# lines = fix_url(lines)
+# lines = fix_optmirror(lines)
+# lines = fix_binpkg(lines)
+# lines = fix_set_e(lines)
+# lines = fix_binpkgs(lines)
+# lines = fix_cache_configure(lines)
+lines = fix_make(lines)
 
 text = '\n'.join(lines) + '\n'
 sys.stdout.write(text)
