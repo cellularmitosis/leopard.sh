@@ -174,7 +174,7 @@ fi
 
 pkg="$1"
 echo "Installing $pkg" >&2
-echo -n -e "\033]0;Installing $pkg\007"
+echo -n -e "\033]0;Installing $pkg ($(hostname -s))\007"
 script=install-$pkg.sh
 cd /tmp
 /opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/scripts/$script
