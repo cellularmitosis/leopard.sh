@@ -9,16 +9,14 @@ set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
 
-for dep in \
-    lzo-2.10 \
-    pkg-config-0.29.2
-do
-    if ! test -e /opt/$dep; then
-        leopard.sh $dep
-    fi
-    PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
-done
-export PKG_CONFIG_PATH
+if ! test -e /opt/pkg-config-0.29.2; then
+    leopard.sh pkg-config-0.29.2
+fi
+
+if ! test -e /opt/lzo-2.10; then
+    leopard.sh lzo-2.10
+fi
+export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 echo -n -e "\033]0;Installing $package-$version\007"
 
