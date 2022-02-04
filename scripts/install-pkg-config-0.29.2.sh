@@ -34,9 +34,9 @@ else
     cd $package-$version
 
     for f in configure glib/configure ; do
-        perl -pi -e "s/CFLAGS=\"-g -Wall -O2\"/CFLAGS=\"-Wall $(leopard.sh -m64 -mcpu -O)\"/g" $f
-        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" $f
-        perl -pi -e "s/CFLAGS=\"-g\"/CFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" $f
+        perl -pi -e "s/CFLAGS=\"-g -Wall -O2\"/CFLAGS=\"-Wall $(leopard.sh -m32 -mcpu -O)\"/g" $f
+        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+        perl -pi -e "s/CFLAGS=\"-g\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
     done
 
     ./configure -C --prefix=/opt/$pkgspec \

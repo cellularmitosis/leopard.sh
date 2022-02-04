@@ -2,4 +2,6 @@ gzip-1.11
 libiconv-1.16
 libressl-3.4.2
 lzo-2.10
+m4-1.4.19
+
 lzop-1.04

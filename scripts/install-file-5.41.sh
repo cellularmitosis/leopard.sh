@@ -41,7 +41,7 @@ else
 
     ./configure -C --prefix=/opt/$pkgspec \
         CC=gcc-4.2 \
-        CFLAGS="-std=c99 $(leopard.sh -m64 -mcpu -O)"
+        CFLAGS="-std=c99 $(leopard.sh -m32 -mcpu -O)"
   
     make $(leopard.sh -j) V=1
 

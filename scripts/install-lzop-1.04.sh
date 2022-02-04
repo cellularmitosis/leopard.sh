@@ -1,7 +1,6 @@
 #!/bin/bash
 # based on templates/template.sh v3
 
-
 # Install lzop on OS X Leopard / PowerPC.
 
 package=lzop
@@ -25,7 +24,7 @@ for dep in \
     lzo-2.10$ppc64
 do
     if ! test -e /opt/$dep ; then
-        tiger.sh $dep
+        leopard.sh $dep
     fi
     PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
 done
@@ -52,9 +51,9 @@ else
     cd $package-$version
 
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
     else
-        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CFLAGS=$(leopard.sh -m32 -mcpu -O)
     fi
     export CFLAGS
 

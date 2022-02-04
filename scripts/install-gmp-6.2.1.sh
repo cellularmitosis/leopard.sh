@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install gmp on Tiger / PowerPC.
+# Install gmp on Leopard / PowerPC.
 
 package=gmp
 version=6.2.1

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install python on Tiger / PowerPC.
+# Install python on Leopard / PowerPC.
 
 package=python
 version=2.7.18

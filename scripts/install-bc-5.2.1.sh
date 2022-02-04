@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install bc on Tiger / PowerPC.
+# Install bc on Leopard / PowerPC.
 
 package=bc
 version=5.2.1

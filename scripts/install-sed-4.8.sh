@@ -33,7 +33,7 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
-    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" configure
+    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" configure
 
     ./configure -C --prefix=/opt/$pkgspec
     make $(leopard.sh -j) V=1
