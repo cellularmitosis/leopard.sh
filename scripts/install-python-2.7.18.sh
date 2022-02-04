@@ -64,6 +64,12 @@ else
     fi
 
     make install
+
+    if test -e config.cache ; then
+        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+        gzip config.cache
+        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+    fi
 fi
 
 ln -sf /opt/$pkgspec/bin/python /usr/local/bin/python2
