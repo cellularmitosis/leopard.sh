@@ -174,6 +174,15 @@ def fix_config_cache(lines):
         + lines[start_index+1:]
     return lines2
 
+def fix_terminal_title(lines):
+    lines2 = []
+    for line in lines:
+        if "033" in line and "Installing" in line:
+            line = 'echo -n -e "\\033]0;leopard.sh $pkgspec ($(hostname -s))\\007'
+        lines2.append(line)
+    return lines2
+
+
 if __name__ == "__main__":
     fd = open(sys.argv[1])
     lines = fd.read().splitlines()
@@ -193,7 +202,8 @@ if __name__ == "__main__":
     # lines = fix_prefix(lines)
     # lines = fix_ln(lines)
     # lines = fix_prefix2(lines)
-    lines = fix_config_cache(lines)
+    # lines = fix_config_cache(lines)
+    lines = fix_terminal_title(lines)
 
     text = '\n'.join(lines) + '\n'
     sys.stdout.write(text)
