@@ -1,4 +1,6 @@
 #!/bin/bash
+# based on templates/template.sh v3
+
 
 # Install libressl on OS X Leopard / PowerPC.
 
@@ -32,8 +34,15 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+
+    for f in configure ; do
+        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+        perl -pi -e "s/CFLAGS=\"-O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+    done
+
     ./configure -C --prefix=/opt/$pkgspec
-    make $(leopard.sh -j)
+
+    make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
         make check

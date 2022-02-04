@@ -210,6 +210,6 @@ cd /tmp
 chmod +x $script
 /usr/bin/time nice ./$script 2>&1 | tee /tmp/$script.log
 
-mkdir -p /opt/$pkgspec/share/leopard.sh
+mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
 gzip /tmp/$script.log
-mv /tmp/$script.log.gz /opt/$pkgspec/share/leopard.sh/
+mv /tmp/$script.log.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/

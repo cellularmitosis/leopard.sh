@@ -148,6 +148,31 @@ def fix_prefix2(lines):
         lines2.append(line)
     return lines2
 
+def fix_config_cache(lines):
+    has_config_cache = False
+    for line in lines:
+        if 'test -e config.cache' in line:
+            has_config_cache = True
+            break
+    if has_config_cache:
+        return lines
+    start_index = None
+    for (i, line) in enumerate(lines):
+        if 'make install' in line:
+            start_index = i
+    if start_index is None:
+        return lines
+    lines2 = lines[:start_index+1] \
+        + [
+            '',
+            '    if test -e config.cache ; then',
+            '        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec',
+            '        gzip config.cache',
+            '        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/',
+            '    fi'
+        ] \
+        + lines[start_index+1:]
+    return lines2
 
 if __name__ == "__main__":
     fd = open(sys.argv[1])
@@ -167,7 +192,8 @@ if __name__ == "__main__":
     # lines = fix_semicolons(lines)
     # lines = fix_prefix(lines)
     # lines = fix_ln(lines)
-    lines = fix_prefix2(lines)
+    # lines = fix_prefix2(lines)
+    lines = fix_config_cache(lines)
 
     text = '\n'.join(lines) + '\n'
     sys.stdout.write(text)
