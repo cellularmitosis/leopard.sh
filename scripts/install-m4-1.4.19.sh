@@ -42,23 +42,21 @@ else
         fi
     done
 
-    if ! test -n "$ppc64" ; then
-        # 32-bit ppc fails with:
-        # sigsegv.c: In function 'sigsegv_handler':
-        # sigsegv.c:938: error: 'struct mcontext' has no member named '__ss'
-        # Thanks to https://trac.macports.org/ticket/63381
-        perl -pi -e "s/__ss.__r1/ss.r1/g" lib/sigsegv.c
-    fi
+    # if ! test -n "$ppc64" ; then
+    #     # 32-bit ppc fails with:
+    #     # sigsegv.c: In function 'sigsegv_handler':
+    #     # sigsegv.c:938: error: 'struct mcontext' has no member named '__ss'
+    #     # Thanks to https://trac.macports.org/ticket/63381
+    #     perl -pi -e "s/__ss.__r1/ss.r1/g" lib/sigsegv.c
+    # fi
 
     ./configure -C --prefix=/opt/$pkgspec
+
     make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
         # Note: `make check` currently fails with:
-        # Skipped checks were:
-        #   ./125.changeword ./126.changeword ./127.changeword ./128.changeword ./129.changeword ./130.changeword
-        # Failed checks were:
-        #   ./198.sysval:err
+        # test-pthread.c:35: error: 'PTHREAD_RWLOCK_INITIALIZER' undeclared here (not in a function)
         make check
     fi
 

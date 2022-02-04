@@ -34,14 +34,21 @@ else
     cd $package-$version
 
     for f in configure glib/configure ; do
-        perl -pi -e "s/CFLAGS=\"-g -Wall -O2\"/CFLAGS=\"-Wall $(leopard.sh -m32 -mcpu -O)\"/g" $f
-        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
-        perl -pi -e "s/CFLAGS=\"-g\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+        if test -n "$ppc64" ; then
+            perl -pi -e "s/CFLAGS=\"-g -Wall -O2\"/CFLAGS=\"-Wall -m64 $(leopard.sh -mcpu -O)\"/g" $f
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
+            perl -pi -e "s/CFLAGS=\"-g\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
+        else
+            perl -pi -e "s/CFLAGS=\"-g -Wall -O2\"/CFLAGS=\"-Wall $(leopard.sh -m32 -mcpu -O)\"/g" $f
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+            perl -pi -e "s/CFLAGS=\"-g\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+        fi
     done
 
     ./configure -C --prefix=/opt/$pkgspec \
         --with-internal-glib \
         --disable-host-tool
+
     make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
