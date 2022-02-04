@@ -70,12 +70,12 @@ else
         fi
 
         for f in libgmp.3.5.2.dylib libgmpxx.4.1.2.dylib ; do
-            mv /opt/$package-$version/lib/$f /opt/$package-$version/lib/$f.orig
+            mv /opt/$pkgspec/lib/$f /opt/$pkgspec/lib/$f.orig
             lipo -create \
-                -arch ppc64 /opt/$package-$version/lib/$f.orig \
+                -arch ppc64 /opt/$pkgspec/lib/$f.orig \
                 -arch ppc /tmp/$package-$version/.libs/$f \
-                -output /opt/$package-$version/lib/$f
-            rm /opt/$package-$version/lib/$f.orig
+                -output /opt/$pkgspec/lib/$f
+            rm /opt/$pkgspec/lib/$f.orig
         done
     fi
 fi

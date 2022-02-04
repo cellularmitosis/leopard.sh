@@ -66,7 +66,7 @@ else
     make install
 fi
 
-ln -sf /opt/$package-$version/bin/python /usr/local/bin/python2
+ln -sf /opt/$pkgspec/bin/python /usr/local/bin/python2
 
 # configure: WARNING: unrecognized options: --with-openssl
 

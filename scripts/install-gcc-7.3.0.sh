@@ -26,8 +26,8 @@ fi
 cd /tmp
 rm -rf $package
 tar xzf ~/Downloads/$tarball
-mv $package/$version /opt/$package-$version
+mv $package/$version /opt/$pkgspec
 rmdir $package
 
 mkdir -p ~/local/bin
-ln -sf /opt/$package-$version/bin/* ~/local/bin/
+ln -sf /opt/$pkgspec/bin/* ~/local/bin/

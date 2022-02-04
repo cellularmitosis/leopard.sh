@@ -32,7 +32,7 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
-    make install PREFIX=/opt/$package-$version
+    make install PREFIX=/opt/$pkgspec
 fi
 
 if test -e /opt/$pkgspec/bin ; then

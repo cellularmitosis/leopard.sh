@@ -64,12 +64,12 @@ else
         fi
 
         for f in libexpat.1.8.3.dylib ; do
-            mv /opt/$package-$version/lib/$f /opt/$package-$version/lib/$f.orig
+            mv /opt/$pkgspec/lib/$f /opt/$pkgspec/lib/$f.orig
             lipo -create \
-                -arch ppc64 /opt/$package-$version/lib/$f.orig \
+                -arch ppc64 /opt/$pkgspec/lib/$f.orig \
                 -arch ppc /tmp/$package-$version/lib/.libs/$f \
-                -output /opt/$package-$version/lib/$f
-            rm /opt/$package-$version/lib/$f.orig
+                -output /opt/$pkgspec/lib/$f
+            rm /opt/$pkgspec/lib/$f.orig
         done
     fi
 fi

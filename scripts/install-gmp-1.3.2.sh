@@ -40,6 +40,6 @@ else
     fi
 
     # no 'make install' available?!?
-    mkdir -p /opt/$package-$version/lib
-    cp libmp.a libgmp.a /opt/$package-$version/lib/
+    mkdir -p /opt/$pkgspec/lib
+    cp libmp.a libgmp.a /opt/$pkgspec/lib/
 fi

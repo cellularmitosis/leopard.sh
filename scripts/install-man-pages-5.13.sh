@@ -33,5 +33,5 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
     # FIXME this fails with: 'install: illegal option -T'
-    make $(leopard.sh -j) prefix=/opt/$package-$version install
+    make $(leopard.sh -j) prefix=/opt/$pkgspec install
 fi

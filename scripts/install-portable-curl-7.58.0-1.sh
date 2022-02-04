@@ -25,6 +25,6 @@ cd /tmp
 rm -rf $package
 tar xzf ~/Downloads/$tarball
 cd /opt
-mv /tmp/$package/$version /opt/$package-$version
+mv /tmp/$package/$version /opt/$pkgspec
 rmdir /tmp/$package
-ln -sf /opt/$package-$version /opt/$package
+ln -sf /opt/$pkgspec /opt/$package

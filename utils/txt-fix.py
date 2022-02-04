@@ -141,6 +141,13 @@ def fix_ln(lines):
             lines2.append(line)
     return lines2
 
+def fix_prefix2(lines):
+    lines2 = []
+    for line in lines:
+        line = line.replace('/opt/$package-$version', '/opt/$pkgspec')
+        lines2.append(line)
+    return lines2
+
 
 if __name__ == "__main__":
     fd = open(sys.argv[1])
@@ -159,7 +166,8 @@ if __name__ == "__main__":
     # lines = fix_pkgspec(lines)
     # lines = fix_semicolons(lines)
     # lines = fix_prefix(lines)
-    lines = fix_ln(lines)
+    # lines = fix_ln(lines)
+    lines = fix_prefix2(lines)
 
     text = '\n'.join(lines) + '\n'
     sys.stdout.write(text)
