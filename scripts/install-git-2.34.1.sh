@@ -15,33 +15,33 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! which -s xz; then
+if ! which -s xz ; then
     leopard.sh xz-5.2.5
 fi
 
-if ! test -e /opt/libressl-3.4.2; then
+if ! test -e /opt/libressl-3.4.2 ; then
     leopard.sh libressl-3.4.2
 fi
 
-if ! test -e /opt/libiconv-1.16; then
+if ! test -e /opt/libiconv-1.16 ; then
     leopard.sh libiconv-1.16
 fi
 
-if ! test -e /opt/expat-2.4.3; then
+if ! test -e /opt/expat-2.4.3 ; then
     leopard.sh expat-2.4.3
 fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD"; then
+if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
     srcmirror=https://www.kernel.org/pub/software/scm/$package
     tarball=$package-$version.tar.xz
 
-    if ! test -e ~/Downloads/$tarball; then
+    if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
         curl -#fLO $srcmirror/$tarball
     fi
@@ -68,7 +68,7 @@ else
             --with-expat=/opt/expat-2.4.3
     make $(leopard.sh -j)
 
-    if test -n "$LEOPARDSH_RUN_TESTS"; then
+    if test -n "$LEOPARDSH_RUN_TESTS" ; then
         # FIXME some tests need a recent python.
         make check
     fi

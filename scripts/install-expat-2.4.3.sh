@@ -15,21 +15,21 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-# if ! test -e /opt/m4-1.4.19; then
+# if ! test -e /opt/m4-1.4.19 ; then
 #     leopard.sh m4-1.4.19
 # fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD"; then
+if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
     srcmirror=https://github.com/libexpat/libexpat/releases/download/R_2_4_3
     tarball=$package-$version.tar.gz
 
-    if ! test -e ~/Downloads/$tarball; then
+    if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
         curl -#fLO $srcmirror/$tarball
     fi
@@ -45,13 +45,13 @@ else
     ./configure -C --prefix=/opt/$package-$version
     make $(leopard.sh -j)
 
-    if test -n "$LEOPARDSH_RUN_TESTS"; then
+    if test -n "$LEOPARDSH_RUN_TESTS" ; then
         make check
     fi
 
     make install
 
-    if test "$(leopard.sh --cpu)" = "g5"; then
+    if test "$(leopard.sh --cpu)" = "g5" ; then
         # On G5, build universal libs which contain both ppc and ppc64.
         cd /tmp/$package-$version
         perl -pi -e "s/-m64/-m32/g" configure
@@ -59,7 +59,7 @@ else
         ./configure --prefix=/opt/$package-$version
         make $(leopard.sh -j)
 
-        if test -n "$LEOPARDSH_RUN_TESTS"; then
+        if test -n "$LEOPARDSH_RUN_TESTS" ; then
             make check
         fi
 

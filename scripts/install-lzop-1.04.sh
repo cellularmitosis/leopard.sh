@@ -15,11 +15,11 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/pkg-config-0.29.2; then
+if ! test -e /opt/pkg-config-0.29.2 ; then
     leopard.sh pkg-config-0.29.2
 fi
 
-if ! test -e /opt/lzo-2.10; then
+if ! test -e /opt/lzo-2.10 ; then
     leopard.sh lzo-2.10
 fi
 export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
@@ -27,14 +27,14 @@ export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
 echo -n -e "\033]0;Installing $package-$version\007"
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD"; then
+if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
     srcmirror=https://www.lzop.org/download
     tarball=$package-$version.tar.gz
 
-    if ! test -e ~/Downloads/$tarball; then
+    if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
         curl -#fLO $srcmirror/$tarball
     fi

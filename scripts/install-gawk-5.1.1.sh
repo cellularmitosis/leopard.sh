@@ -15,23 +15,23 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/mpfr-2.4.2; then
+if ! test -e /opt/mpfr-2.4.2 ; then
     leopard.sh mpfr-2.4.2
 fi
 
-if ! test -e /opt/readline-8.1.2; then
+if ! test -e /opt/readline-8.1.2 ; then
     leopard.sh readline-8.1.2
 fi
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD"; then
+if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
     srcmirror=https://ftp.gnu.org/gnu/$package
     tarball=$package-$version.tar.gz
 
-    if ! test -e ~/Downloads/$tarball; then
+    if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
         curl -#fLO $srcmirror/$tarball
     fi
@@ -45,7 +45,7 @@ else
         --with-readline=/opt/readline-8.1.2
     make $(leopard.sh -j)
 
-    if test -n "$LEOPARDSH_RUN_TESTS"; then
+    if test -n "$LEOPARDSH_RUN_TESTS" ; then
         # FIXME one failing test.
         make check
     fi

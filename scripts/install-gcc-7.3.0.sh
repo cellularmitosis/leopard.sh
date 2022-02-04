@@ -18,7 +18,7 @@ pkgspec=$package-$version$ppc64
 mirror=https://archive.org/download/tigerbrew
 tarball=$package-$version.tiger_g3.bottle.tar.gz
 
-if ! test -e ~/Downloads/$tarball; then
+if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     /opt/portable-curl/bin/curl -fLO $mirror/$tarball
 fi

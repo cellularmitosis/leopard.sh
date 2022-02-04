@@ -16,14 +16,14 @@ fi
 pkgspec=$package-$version$ppc64
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD"; then
+if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
     srcmirror=https://mirrors.edge.kernel.org/pub/linux/docs/$package
     tarball=$package-$version.tar.gz
 
-    if ! test -e ~/Downloads/$tarball; then
+    if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
         curl -#fLO $srcmirror/$tarball
     fi

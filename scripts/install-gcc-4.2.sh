@@ -18,7 +18,7 @@ pkgspec=$package-$version$ppc64
 mirror=https://archive.org/download/tigerbrew
 tarball=gcc-42-5553-darwin8-all.tar.gz
 
-if ! test -e ~/Downloads/$tarball; then
+if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     /opt/portable-curl/bin/curl -#fLO $mirror/$tarball
 fi

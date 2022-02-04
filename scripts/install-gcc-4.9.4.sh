@@ -15,41 +15,41 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! which -s gcc-4.2; then
+if ! which -s gcc-4.2 ; then
     leopard.sh gcc-4.2
 fi
 
-if ! test -e /opt/gmp-4.3.2; then
+if ! test -e /opt/gmp-4.3.2 ; then
     leopard.sh gmp-4.3.2
 fi
 
-if ! test -e /opt/mpfr-2.4.2; then
+if ! test -e /opt/mpfr-2.4.2 ; then
     leopard.sh mpfr-2.4.2
 fi
 
-if ! test -e /opt/mpc-0.8.1; then
+if ! test -e /opt/mpc-0.8.1 ; then
     leopard.sh mpc-0.8.1
 fi
 
-if ! test -e /opt/isl-0.11.1; then
+if ! test -e /opt/isl-0.11.1 ; then
     leopard.sh isl-0.11.1
 fi
 
-if ! test -e /opt/cloog-0.18.1; then
+if ! test -e /opt/cloog-0.18.1 ; then
     leopard.sh cloog-0.18.1
 fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD"; then
+if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
     srcmirror=https://ftp.gnu.org/gnu/$package/$package-$version
     tarball=$package-$version.tar.gz
 
-    if ! test -e ~/Downloads/$tarball; then
+    if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
         curl -#fLO $srcmirror/$tarball
     fi
@@ -72,7 +72,7 @@ else
         --program-suffix=-4.9
     make $(leopard.sh -j)
 
-    if test -n "$LEOPARDSH_RUN_TESTS"; then
+    if test -n "$LEOPARDSH_RUN_TESTS" ; then
         make check
     fi
 

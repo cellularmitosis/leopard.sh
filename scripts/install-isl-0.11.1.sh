@@ -15,21 +15,21 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/gmp-4.3.2; then
+if ! test -e /opt/gmp-4.3.2 ; then
     leopard.sh gmp-4.3.2
 fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD"; then
+if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
     srcmirror=https://gcc.gnu.org/pub/gcc/infrastructure
     tarball=$package-$version.tar.bz2
 
-    if ! test -e ~/Downloads/$tarball; then
+    if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
         curl -#fLO $srcmirror/$tarball
     fi
@@ -42,7 +42,7 @@ else
         --with-gmp-prefix=/opt/gmp-4.3.2
     make $(leopard.sh -j) V=1
 
-    if test -n "$LEOPARDSH_RUN_TESTS"; then
+    if test -n "$LEOPARDSH_RUN_TESTS" ; then
         make check
     fi
 

@@ -16,7 +16,7 @@ pkgspec=$package-$version$ppc64
 
 tarball=$package-$version.tiger_g3.bottle.tar.gz
 
-if ! test -e ~/Downloads/$tarball; then
+if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     curl -#fLOk $LEOPARDSH_MIRROR/$tarball
 fi

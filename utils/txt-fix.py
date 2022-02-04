@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import re
 
 def skip_optmirroreq(lines):
     lines2 = []
@@ -154,8 +155,8 @@ if __name__ == "__main__":
     #lines = fix_make(lines)
     # lines = fix_tests(lines)
     # lines = fix_binpkg2(lines)
-    lines = fix_pkgspec(lines)
-    # lines = fix_semicolons(lines)
+    # lines = fix_pkgspec(lines)
+    lines = fix_semicolons(lines)
     # lines = fix_prefix(lines)
     # lines = fix_ln(lines)
 
