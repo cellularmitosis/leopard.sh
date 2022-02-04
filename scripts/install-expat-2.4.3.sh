@@ -15,8 +15,8 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-# if ! test -e /opt/m4-1.4.19 ; then
-#     leopard.sh m4-1.4.19
+# if ! test -e /opt/m4-1.4.19$ppc64 ; then
+#     leopard.sh m4-1.4.19$ppc64
 # fi
 
 echo -n -e "\033]0;Installing $package-$version\007"

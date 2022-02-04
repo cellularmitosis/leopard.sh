@@ -15,8 +15,8 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/gmp-4.3.2 ; then
-    leopard.sh gmp-4.3.2
+if ! test -e /opt/gmp-4.3.2$ppc64 ; then
+    leopard.sh gmp-4.3.2$ppc64
 fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
@@ -38,8 +38,10 @@ else
     rm -rf $package-$version
     tar xjf ~/Downloads/$tarball
     cd $package-$version
+
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-gmp-prefix=/opt/gmp-4.3.2
+        --with-gmp-prefix=/opt/gmp-4.3.2$ppc64
+
     make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

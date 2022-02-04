@@ -15,12 +15,12 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/mpfr-2.4.2 ; then
-    leopard.sh mpfr-2.4.2
+if ! test -e /opt/mpfr-3.1.6$ppc64 ; then
+    leopard.sh mpfr-3.1.6$ppc64
 fi
 
-if ! test -e /opt/readline-8.1.2 ; then
-    leopard.sh readline-8.1.2
+if ! test -e /opt/readline-8.1.2$ppc64 ; then
+    leopard.sh readline-8.1.2$ppc64
 fi
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
@@ -40,9 +40,11 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-mpfr=/opt/mpfr-2.4.2 \
-        --with-readline=/opt/readline-8.1.2
+        --with-mpfr=/opt/mpfr-3.1.6$ppc64 \
+        --with-readline=/opt/readline-8.1.2$ppc64
+
     make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
@@ -53,8 +55,6 @@ else
     make install
 fi
 
-
-# Note: using readline-8.1.2 to get "_rl_get_screen_size" and "_rl_completion_matches"
 if test -e /opt/$pkgspec/bin ; then
     ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
 fi
@@ -62,3 +62,5 @@ fi
 if test -e /opt/$pkgspec/sbin ; then
     ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
+
+# Note: using readline-8.1.2 to get "_rl_get_screen_size" and "_rl_completion_matches"

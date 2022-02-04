@@ -15,8 +15,8 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/gmp-4.3.2 ; then
-    leopard.sh gmp-4.3.2
+if ! test -e /opt/gmp-4.3.2$ppc64 ; then
+    leopard.sh gmp-4.3.2$ppc64
 fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
@@ -38,10 +38,12 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+
     # Note: disabling thread-safe because thread-local storage isn't supported until gcc 4.9.
     ./configure -C --prefix=/opt/$pkgspec \
         --disable-thread-safe \
-        --with-gmp=/opt/gmp-4.3.2
+        --with-gmp=/opt/gmp-4.3.2$ppc64
+
     make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

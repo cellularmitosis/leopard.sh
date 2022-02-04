@@ -15,21 +15,11 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-# if ! which -s xz ; then
-#     leopard.sh xz-5.2.5
-# fi
-
-if ! test -e /opt/gcc-4.9.4 ; then
-    leopard.sh gcc-4.9.4
+# Note: luajit needs at least GCC 4.3:
+# lj_arch.h:395:2: error: #error "Need at least GCC 4.3 or newer"
+if ! test -e /opt/gcc-4.9.4$ppc64 ; then
+    leopard.sh gcc-4.9.4$ppc64
 fi
-
-# if ! test -e /opt/libiconv-1.16 ; then
-#     leopard.sh libiconv-1.16
-# fi
-
-# if ! test -e /opt/expat-2.4.3 ; then
-#     leopard.sh expat-2.4.3
-# fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
 
@@ -62,12 +52,9 @@ else
  export MULTILIB= lib
  ##############################################################################
 EOF
-    PATH="/opt/gcc-4.9.4/bin:$PATH" make $(leopard.sh -j)
+    PATH="/opt/gcc-4.9.4$ppc64/bin:$PATH" make $(leopard.sh -j)
 fi
 
-
-# Note: luajit needs at least GCC 4.3:
-# lj_arch.h:395:2: error: #error "Need at least GCC 4.3 or newer"
 if test -e /opt/$pkgspec/bin ; then
     ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
 fi

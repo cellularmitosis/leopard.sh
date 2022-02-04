@@ -15,16 +15,16 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/libiconv-1.16 ; then
-    leopard.sh libiconv-1.16
+if ! test -e /opt/libiconv-1.16$ppc64 ; then
+    leopard.sh libiconv-1.16$ppc64
 fi
 
-if ! test -e /opt/gettext-0.21 ; then
-    leopard.sh gettext-0.21
+if ! test -e /opt/gettext-0.21$ppc64 ; then
+    leopard.sh gettext-0.21$ppc64
 fi
 
-if ! test -e /opt/readline-8.1.2 ; then
-    leopard.sh readline-8.1.2
+if ! test -e /opt/readline-8.1.2$ppc64 ; then
+    leopard.sh readline-8.1.2$ppc64
 fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
@@ -46,11 +46,11 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
-    CPPFLAGS=-I/opt/readline-8.1.2/include \
-    LDFLAGS=-L/opt/readline-8.1.2/lib \
+    CPPFLAGS=-I/opt/readline-8.1.2$ppc64/include \
+    LDFLAGS=-L/opt/readline-8.1.2$ppc64/lib \
         ./configure -C --prefix=/opt/$pkgspec \
-            --with-libiconv-prefix=/opt/libiconv-1.16 \
-            --with-libintl-prefix=/opt/gettext-0.21 \
+            --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
+            --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
             --with-readline
     make $(leopard.sh -j)
 
@@ -61,9 +61,6 @@ else
     make install
 fi
 
-
-# input-rl.c: In function 'instream_readline_history_get':
-# input-rl.c:194: error: subscripted value is neither array nor pointer
 if test -e /opt/$pkgspec/bin ; then
     ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
 fi
@@ -71,3 +68,6 @@ fi
 if test -e /opt/$pkgspec/sbin ; then
     ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
+
+# input-rl.c: In function 'instream_readline_history_get':
+# input-rl.c:194: error: subscripted value is neither array nor pointer

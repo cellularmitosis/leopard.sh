@@ -15,12 +15,12 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/gmp-4.3.2 ; then
-    leopard.sh gmp-4.3.2
+if ! test -e /opt/gmp-4.3.2$ppc64 ; then
+    leopard.sh gmp-4.3.2$ppc64
 fi
 
-if ! test -e /opt/libiconv-1.16 ; then
-    leopard.sh libiconv-1.16
+if ! test -e /opt/libiconv-1.16$ppc64 ; then
+    leopard.sh libiconv-1.16$ppc64
 fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
@@ -43,11 +43,11 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
     # Note: there is on --with-gmp option, so we use env vars.
-    CPPFLAGS=-I/opt/gmp-4.3.2/include \
-    LDFLAGS=-L/opt/gmp-4.3.2/lib \
+    CPPFLAGS=-I/opt/gmp-4.3.2$ppc64/include \
+    LDFLAGS=-L/opt/gmp-4.3.2$ppc64/lib \
     LIBS=-lgmp \
         ./configure -C --prefix=/opt/$pkgspec \
-            --with-libiconv-prefix=/opt/libiconv-1.16 \
+            --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
             --with-threads
     make $(leopard.sh -j)
 

@@ -19,24 +19,24 @@ if ! which -s gcc-4.2 ; then
     leopard.sh gcc-4.2
 fi
 
-if ! test -e /opt/gmp-4.3.2 ; then
-    leopard.sh gmp-4.3.2
+if ! test -e /opt/gmp-4.3.2$ppc64 ; then
+    leopard.sh gmp-4.3.2$ppc64
 fi
 
-if ! test -e /opt/mpfr-2.4.2 ; then
-    leopard.sh mpfr-2.4.2
+if ! test -e /opt/mpfr-3.1.6$ppc64 ; then
+    leopard.sh mpfr-3.1.6$ppc64
 fi
 
-if ! test -e /opt/mpc-0.8.1 ; then
-    leopard.sh mpc-0.8.1
+if ! test -e /opt/mpc-0.8.1$ppc64 ; then
+    leopard.sh mpc-0.8.1$ppc64
 fi
 
-if ! test -e /opt/isl-0.11.1 ; then
-    leopard.sh isl-0.11.1
+if ! test -e /opt/isl-0.11.1$ppc64 ; then
+    leopard.sh isl-0.11.1$ppc64
 fi
 
-if ! test -e /opt/cloog-0.18.1 ; then
-    leopard.sh cloog-0.18.1
+if ! test -e /opt/cloog-0.18.1$ppc64 ; then
+    leopard.sh cloog-0.18.1$ppc64
 fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
@@ -60,11 +60,11 @@ else
     cd $package-$version
     CC=gcc-4.2 CXX=g++-4.2 ./configure -C \
         --prefix=/opt/$pkgspec \
-        --with-gmp=/opt/gmp-4.3.2 \
-        --with-mpc=/opt/mpc-0.8.1 \
-        --with-mpfr=/opt/mpfr-2.4.2 \
-        --with-isl=/opt/isl-0.11.1 \
-        --with-cloog=/opt/cloog-0.18.1 \
+        --with-gmp=/opt/gmp-4.3.2$ppc64 \
+        --with-mpc=/opt/mpc-0.8.1$ppc64 \
+        --with-mpfr=/opt/mpfr-2.4.2$ppc64 \
+        --with-isl=/opt/isl-0.11.1$ppc64 \
+        --with-cloog=/opt/cloog-0.18.1$ppc64 \
         --enable-languages=c,c++,objc,obj-c++,fortran \
         --enable-libssp \
         --enable-lto \
@@ -79,10 +79,6 @@ else
     make install
 fi
 
-
-        # --enable-languages=c,c++,objc,obj-c++,fortran,java \
-        # --enable-libada \
-# see https://sourceforge.net/projects/gnuada/files/GNAT_GPL%20Mac%20OS%20X/2009-tiger-ppc/
 if test -e /opt/$pkgspec/bin ; then
     ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
 fi
@@ -90,3 +86,7 @@ fi
 if test -e /opt/$pkgspec/sbin ; then
     ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
+
+# --enable-languages=c,c++,objc,obj-c++,fortran,java \
+# --enable-libada \
+# see https://sourceforge.net/projects/gnuada/files/GNAT_GPL%20Mac%20OS%20X/2009-tiger-ppc/

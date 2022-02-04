@@ -15,8 +15,8 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/readline-8.1.2 ; then
-    leopard.sh readline-8.1.2
+if ! test -e /opt/readline-8.1.2$ppc64 ; then
+    leopard.sh readline-8.1.2$ppc64
 fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
@@ -38,12 +38,14 @@ else
     rm -rf sqlite-autoconf-3370200
     tar xzf ~/Downloads/$tarball
     cd sqlite-autoconf-3370200
-    CPPFLAGS=-I/opt/readline-8.1.2/include \
-        LDFLAGS=-L/opt/readline-8.1.2/lib \
+
+    CPPFLAGS=-I/opt/readline-8.1.2$ppc64/include \
+        LDFLAGS=-L/opt/readline-8.1.2$ppc64/lib \
         ./configure -C --prefix=/opt/$pkgspec \
             --disable-dependency-tracking \
             --enable-threadsafe \
             --enable-readline
+
     make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

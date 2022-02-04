@@ -15,21 +15,11 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-# if ! which -s xz ; then
-#     leopard.sh xz-5.2.5
-# fi
-
-if ! test -e /opt/gcc-4.9.4 ; then
-    leopard.sh gcc-4.9.4
+# Note: luajit needs at least GCC 4.3:
+# lj_arch.h:395:2: error: #error "Need at least GCC 4.3 or newer"
+if ! test -e /opt/gcc-4.9.4$ppc64 ; then
+    leopard.sh gcc-4.9.4$ppc64
 fi
-
-# if ! test -e /opt/libiconv-1.16 ; then
-#     leopard.sh libiconv-1.16
-# fi
-
-# if ! test -e /opt/expat-2.4.3 ; then
-#     leopard.sh expat-2.4.3
-# fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
 
@@ -62,12 +52,16 @@ else
  export MULTILIB= lib
  ##############################################################################
 EOF
-    PATH="/opt/gcc-4.9.4/bin:$PATH" make $(leopard.sh -j)
+    PATH="/opt/gcc-4.9.4$ppc64/bin:$PATH" make $(leopard.sh -j)
 fi
 
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
 
-# Note: luajit needs at least GCC 4.3:
-# lj_arch.h:395:2: error: #error "Need at least GCC 4.3 or newer"
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi
 
 # Failure:
 # BUILDVM   lj_vm.S
@@ -131,11 +125,3 @@ fi
 # host/buildvm -m recdef -o lj_recdef.h lib_base.c lib_math.c lib_bit.c lib_string.c lib_table.c lib_io.c lib_os.c lib_package.c lib_debug.c lib_jit.c lib_ffi.c
 # host/buildvm -m libdef -o lj_libdef.h lib_base.c lib_math.c lib_bit.c lib_string.c lib_table.c lib_io.c lib_os.c lib_package.c lib_debug.c lib_jit.c lib_ffi.c
 # host/buildvm -m vmdef -o jit/vmdef.lua lib_base.c lib_math.c lib_bit.c lib_string.c lib_table.c lib_io.c lib_os.c lib_package.c lib_debug.c lib_jit.c lib_ffi.c
-
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
-fi
-
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
-fi

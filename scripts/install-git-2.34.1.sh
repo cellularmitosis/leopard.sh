@@ -16,19 +16,19 @@ fi
 pkgspec=$package-$version$ppc64
 
 if ! which -s xz ; then
-    leopard.sh xz-5.2.5
+    leopard.sh xz-5.2.5$ppc64
 fi
 
-if ! test -e /opt/libressl-3.4.2 ; then
-    leopard.sh libressl-3.4.2
+if ! test -e /opt/libressl-3.4.2$ppc64 ; then
+    leopard.sh libressl-3.4.2$ppc64
 fi
 
-if ! test -e /opt/libiconv-1.16 ; then
-    leopard.sh libiconv-1.16
+if ! test -e /opt/libiconv-1.16$ppc64 ; then
+    leopard.sh libiconv-1.16$ppc64
 fi
 
-if ! test -e /opt/expat-2.4.3 ; then
-    leopard.sh expat-2.4.3
+if ! test -e /opt/expat-2.4.3$ppc64 ; then
+    leopard.sh expat-2.4.3$ppc64
 fi
 
 echo -n -e "\033]0;Installing $package-$version\007"
@@ -62,10 +62,11 @@ else
     LDFLAGS=-L/opt/portable-curl-7.58.0-1/lib \
     LIBS=-lcurl \
         ./configure -C --prefix=/opt/$pkgspec \
-            --with-openssl=/opt/libressl-3.4.2 \
+            --with-openssl=/opt/libressl-3.4.2$ppc64 \
             --with-curl=/opt/portable-curl-7.58.0-1 \
-            --with-iconv=/opt/libiconv-1.16 \
-            --with-expat=/opt/expat-2.4.3
+            --with-iconv=/opt/libiconv-1.16$ppc64 \
+            --with-expat=/opt/expat-2.4.3$ppc64
+
     make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

@@ -15,14 +15,14 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/pkg-config-0.29.2 ; then
-    leopard.sh pkg-config-0.29.2
+if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
+    leopard.sh pkg-config-0.29.2$ppc64
 fi
 
-if ! test -e /opt/lzo-2.10 ; then
-    leopard.sh lzo-2.10
+if ! test -e /opt/lzo-2.10$ppc64 ; then
+    leopard.sh lzo-2.10$ppc64
 fi
-export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="/opt/lzo-2.10$ppc64/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 echo -n -e "\033]0;Installing $package-$version\007"
 
@@ -47,10 +47,11 @@ else
     pkgconfignames="lzo2"
     # Note: the lzo2.pc file seems busted, it uses -I${includedir}/lzo instead of -I${includedir}.
     # CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    CPPFLAGS=-I/opt/lzo-2.10/include
+    CPPFLAGS=-I/opt/lzo-2.10$ppc64/include
     LDFLAGS=$(pkg-config --libs-only-L $pkgconfignames)
     LIBS=$(pkg-config --libs-only-l $pkgconfignames)
     export CPPFLAGS LDFLAGS LIBS
+
     ./configure -C --prefix=/opt/$pkgspec
 
     make $(leopard.sh -j)
