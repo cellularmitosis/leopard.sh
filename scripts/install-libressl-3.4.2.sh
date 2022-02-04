@@ -36,8 +36,13 @@ else
     cd $package-$version
 
     for f in configure ; do
-        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
-        perl -pi -e "s/CFLAGS=\"-O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+        if test -n "$ppc64" ; then
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
+            perl -pi -e "s/CFLAGS=\"-O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
+        else
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+            perl -pi -e "s/CFLAGS=\"-O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+        fi
     done
 
     ./configure -C --prefix=/opt/$pkgspec
