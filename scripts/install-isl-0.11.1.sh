@@ -38,7 +38,7 @@ else
     rm -rf $package-$version
     tar xjf ~/Downloads/$tarball
     cd $package-$version
-    ./configure -C --prefix=/opt/$package-$version \
+    ./configure -C --prefix=/opt/$pkgspec \
         --with-gmp-prefix=/opt/gmp-4.3.2
     make $(leopard.sh -j) V=1
 

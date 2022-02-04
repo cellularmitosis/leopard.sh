@@ -53,7 +53,7 @@ else
     LDFLAGS=$(pkg-config --libs-only-L $pkgconfignames)
     LIBS=$(pkg-config --libs-only-l $pkgconfignames)
     export CPPFLAGS LDFLAGS LIBS
-    ./configure -C --prefix=/opt/$package-$version \
+    ./configure -C --prefix=/opt/$pkgspec \
         --with-threads \
         --enable-ipv6
 

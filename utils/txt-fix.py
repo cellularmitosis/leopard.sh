@@ -156,8 +156,8 @@ if __name__ == "__main__":
     # lines = fix_tests(lines)
     # lines = fix_binpkg2(lines)
     # lines = fix_pkgspec(lines)
-    lines = fix_semicolons(lines)
-    # lines = fix_prefix(lines)
+    # lines = fix_semicolons(lines)
+    lines = fix_prefix(lines)
     # lines = fix_ln(lines)
 
     text = '\n'.join(lines) + '\n'

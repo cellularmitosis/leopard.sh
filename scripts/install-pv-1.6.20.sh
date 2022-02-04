@@ -34,7 +34,7 @@ else
     rm -rf $package-$version
     tar xjf ~/Downloads/$tarball
     cd $package-$version
-    ./configure -C --prefix=/opt/$package-$version
+    ./configure -C --prefix=/opt/$pkgspec
     make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

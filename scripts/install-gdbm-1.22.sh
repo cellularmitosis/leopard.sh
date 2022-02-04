@@ -48,7 +48,7 @@ else
     cd $package-$version
     CPPFLAGS=-I/opt/readline-8.1.2/include \
     LDFLAGS=-L/opt/readline-8.1.2/lib \
-        ./configure -C --prefix=/opt/$package-$version \
+        ./configure -C --prefix=/opt/$pkgspec \
             --with-libiconv-prefix=/opt/libiconv-1.16 \
             --with-libintl-prefix=/opt/gettext-0.21 \
             --with-readline

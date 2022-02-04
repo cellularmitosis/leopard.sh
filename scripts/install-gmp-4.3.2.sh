@@ -44,7 +44,7 @@ else
 
     CC=gcc-4.2 CXX=g++-4.2 \
     ./configure -C \
-        --prefix=/opt/$package-$version \
+        --prefix=/opt/$pkgspec \
         --enable-cxx
     make $(leopard.sh -j)
 

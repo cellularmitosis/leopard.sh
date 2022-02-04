@@ -39,7 +39,7 @@ else
         perl -pi -e "s/CFLAGS=\"-g\"/CFLAGS=\"$(leopard.sh -m64 -mcpu -O)\"/g" $f
     done
 
-    ./configure -C --prefix=/opt/$package-$version \
+    ./configure -C --prefix=/opt/$pkgspec \
         --with-internal-glib \
         --disable-host-tool
     make $(leopard.sh -j) V=1

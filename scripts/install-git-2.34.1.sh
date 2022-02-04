@@ -61,7 +61,7 @@ else
     CPPFLAGS=-I/opt/portable-curl-7.58.0-1/include \
     LDFLAGS=-L/opt/portable-curl-7.58.0-1/lib \
     LIBS=-lcurl \
-        ./configure -C --prefix=/opt/$package-$version \
+        ./configure -C --prefix=/opt/$pkgspec \
             --with-openssl=/opt/libressl-3.4.2 \
             --with-curl=/opt/portable-curl-7.58.0-1 \
             --with-iconv=/opt/libiconv-1.16 \

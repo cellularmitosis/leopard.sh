@@ -40,7 +40,7 @@ else
     cd $package-$version
     # Note: guile 3 needs c11 (i.e. gcc-4.9.4).
     # FIXME take a closer look at the available options.
-    CC=/opt/gcc-4.9.4/bin/gcc ./configure -C --prefix=/opt/$package-$version
+    CC=/opt/gcc-4.9.4/bin/gcc ./configure -C --prefix=/opt/$pkgspec
     make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

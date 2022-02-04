@@ -42,7 +42,7 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
-    ./configure -C --prefix=/opt/$package-$version \
+    ./configure -C --prefix=/opt/$pkgspec \
         --with-gmp=/opt/gmp-4.3.2 \
         --with-mpfr=/opt/mpfr-2.4.2
     make $(leopard.sh -j)

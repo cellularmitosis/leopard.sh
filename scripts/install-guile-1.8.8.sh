@@ -46,7 +46,7 @@ else
     CPPFLAGS=-I/opt/gmp-4.3.2/include \
     LDFLAGS=-L/opt/gmp-4.3.2/lib \
     LIBS=-lgmp \
-        ./configure -C --prefix=/opt/$package-$version \
+        ./configure -C --prefix=/opt/$pkgspec \
             --with-libiconv-prefix=/opt/libiconv-1.16 \
             --with-threads
     make $(leopard.sh -j)

@@ -39,7 +39,7 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
     # Note: disabling thread-safe because thread-local storage isn't supported until gcc 4.9.
-    ./configure -C --prefix=/opt/$package-$version \
+    ./configure -C --prefix=/opt/$pkgspec \
         --disable-thread-safe \
         --with-gmp=/opt/gmp-4.3.2
     make $(leopard.sh -j)

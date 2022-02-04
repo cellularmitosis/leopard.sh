@@ -35,7 +35,7 @@ else
 
     perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -mcpu -O)\"/g" configure
 
-    ./configure -C --prefix=/opt/$package-$version
+    ./configure -C --prefix=/opt/$pkgspec
     make $(leopard.sh -j) V=1
     # Note: no 'make check' available.
     make install

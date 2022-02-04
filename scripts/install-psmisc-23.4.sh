@@ -38,7 +38,7 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
-    ./configure -C --prefix=/opt/$package-$version
+    ./configure -C --prefix=/opt/$pkgspec
 
     # The OS X ld does not support '-z' nor 'relro'.
     cat Makefile \
