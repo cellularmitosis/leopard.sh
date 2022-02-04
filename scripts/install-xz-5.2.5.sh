@@ -43,28 +43,6 @@ else
     fi
 
     make install
-
-    if test "$(leopard.sh --cpu)" = "g5" ; then
-        # On G5, build universal libs which contain both ppc and ppc64.
-        cd /tmp/$package-$version
-        perl -pi -e "s/-m64/-m32/g" configure
-        make clean
-        ./configure --prefix=/opt/$pkgspec
-        make $(leopard.sh -j)
-
-        if test -n "$LEOPARDSH_RUN_TESTS" ; then
-            make check
-        fi
-
-        for f in liblzma.5.dylib ; do
-            mv /opt/$pkgspec/lib/$f /opt/$pkgspec/lib/$f.orig
-            lipo -create \
-                -arch ppc64 /opt/$pkgspec/lib/$f.orig \
-                -arch ppc /tmp/$package-$version/src/liblzma/.libs/$f \
-                -output /opt/$pkgspec/lib/$f
-            rm /opt/$pkgspec/lib/$f.orig
-        done
-    fi
 fi
 
 if test -e /opt/$pkgspec/bin ; then

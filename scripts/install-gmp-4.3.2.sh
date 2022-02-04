@@ -42,6 +42,10 @@ else
     perl -pi -e "s/-O3/$(leopard.sh -O)/g" configure
     perl -pi -e "s/-O2/$(leopard.sh -O)/g" configure
 
+    # Note: /usr/bin/gcc (4.0.1) fails with:
+    #   ld: duplicate symbol ___gmpz_abs in .libs/compat.o and .libs/assert.o
+    # So we use gcc-4.2 instead.
+    # Thanks to https://gmplib.org/list-archives/gmp-bugs/2010-January/001837.html
     CC=gcc-4.2 CXX=g++-4.2 \
     ./configure -C \
         --prefix=/opt/$pkgspec \
@@ -53,34 +57,4 @@ else
     fi
 
     make install
-
-    if test "$(leopard.sh --cpu)" = "g5" ; then
-        # On G5, build universal libs which contain both ppc and ppc64.
-        cd /tmp/$package-$version
-        make clean
-        CC=gcc-4.2 CXX=g++-4.2 \
-        ABI=mode32 \
-        ./configure \
-            --prefix=/tmp/$package-$version.ppc \
-            --enable-cxx
-        make $(leopard.sh -j)
-
-        if test -n "$LEOPARDSH_RUN_TESTS" ; then
-            make check
-        fi
-
-        for f in libgmp.3.5.2.dylib libgmpxx.4.1.2.dylib ; do
-            mv /opt/$pkgspec/lib/$f /opt/$pkgspec/lib/$f.orig
-            lipo -create \
-                -arch ppc64 /opt/$pkgspec/lib/$f.orig \
-                -arch ppc /tmp/$package-$version/.libs/$f \
-                -output /opt/$pkgspec/lib/$f
-            rm /opt/$pkgspec/lib/$f.orig
-        done
-    fi
 fi
-
-# Note: /usr/bin/gcc (4.0.1) fails with:
-#   ld: duplicate symbol ___gmpz_abs in .libs/compat.o and .libs/assert.o
-# So we use gcc-4.2 instead.
-# Thanks to https://gmplib.org/list-archives/gmp-bugs/2010-January/001837.html
