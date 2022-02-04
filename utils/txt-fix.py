@@ -36,7 +36,8 @@ def fix_binpkg(lines):
 def fix_set_e(lines):
     lines2 = []
     for line in lines:
-        line = line.replace('set -e -x', 'set -e -x -o pipefail')
+        if 'pipefail' not in line:
+            line = line.replace('set -e -x', 'set -e -x -o pipefail')
         lines2.append(line)
     return lines2
 

@@ -15,8 +15,6 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-echo -n -e "\033]0;Installing $package-$version\007"
-
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
 if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
@@ -34,7 +32,17 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+
+    for f in configure libcharset/configure ; do
+        if test -n "$ppc64" ; then
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
+        else
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+        fi
+    done
+
     ./configure -C --prefix=/opt/$pkgspec
+
     make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
@@ -42,4 +50,12 @@ else
     fi
 
     make install
+fi
+
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi

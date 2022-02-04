@@ -8,7 +8,7 @@
 package=foo
 version=1.0
 
-set -e -x
+set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
 
