@@ -112,7 +112,7 @@ if test "$1" = "--os.cpu"; then
     exit 0
 fi
 
-# subcommands:
+# unlink:
 
 if test "$1" = "--unlink"; then
     shift 1
@@ -136,12 +136,7 @@ if test "$1" = "--unlink"; then
     exit 0
 fi
 
-# main:
-
-if test -n "$1" -a -e "/opt/$1"; then
-    echo "$1 is already installed." >&2
-    exit 0
-fi
+# setup:
 
 if ! which -s /usr/bin/gcc ; then
     echo "Error: please install Xcode." >&2
@@ -182,9 +177,22 @@ if ! test -e /opt/portable-curl; then
     ./install-portable-curl.sh
 fi
 
+if test "$1" = "--setup" ; then
+    exit 0
+fi
+
+# list:
+
 if test -z "$1"; then
     echo "Available packages:" >&2
     /opt/portable-curl/bin/curl -sSfL $LEOPARDSH_MIRROR/packages.txt
+    exit 0
+fi
+
+# install:
+
+if test -n "$1" -a -e "/opt/$1"; then
+    echo "$1 is already installed." >&2
     exit 0
 fi
 
