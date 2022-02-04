@@ -32,7 +32,7 @@ else
     ./configure -C --prefix=/opt/$package-$version
     make $(leopard.sh -j)
 
-    if test -n "$LEOPARDSH_MAKE_CHECK"; then
+    if test -n "$LEOPARDSH_RUN_TESTS"; then
         make check
     fi
 
@@ -46,7 +46,7 @@ else
         ./configure --prefix=/opt/$package-$version
         make $(leopard.sh -j)
 
-        if test -n "$LEOPARDSH_MAKE_CHECK"; then
+        if test -n "$LEOPARDSH_RUN_TESTS"; then
             make check
         fi
 

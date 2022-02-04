@@ -33,7 +33,7 @@ else
     ./configure -C --prefix=/opt/$package-$version
     make $(leopard.sh -j) V=1
 
-    if test -n "$LEOPARDSH_MAKE_CHECK"; then
+    if test -n "$LEOPARDSH_RUN_TESTS"; then
         # FIXME `make check` fails with:
         # examples/c++/calc++/parser.cc: In constructor 'yy::parser::parser(driver&)':
         # examples/c++/calc++/parser.cc:149: error: the default argument for parameter 0 of 'yy::parser::stack<T, S>::stack(typename S::size_type) [with T = yy::parser::stack_symbol_type, S = std::vector<yy::parser::stack_symbol_type, std::allocator<yy::parser::stack_symbol_type> >]' has not yet been parsed

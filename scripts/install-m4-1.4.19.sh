@@ -29,7 +29,7 @@ else
     ./configure -C --prefix=/opt/$package-$version
     make $(leopard.sh -j) V=1
 
-    if test -n "$LEOPARDSH_MAKE_CHECK"; then
+    if test -n "$LEOPARDSH_RUN_TESTS"; then
         # Note: `make check` currently fails with:
         # Skipped checks were:
         #   ./125.changeword ./126.changeword ./127.changeword ./128.changeword ./129.changeword ./130.changeword

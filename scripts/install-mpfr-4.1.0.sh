@@ -43,7 +43,7 @@ else
         --with-gmp=/opt/gmp-6.2.1
     make $(leopard.sh -j)
 
-    if test -n "$LEOPARDSH_MAKE_CHECK"; then
+    if test -n "$LEOPARDSH_RUN_TESTS"; then
         make check
     fi
 

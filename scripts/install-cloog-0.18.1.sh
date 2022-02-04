@@ -41,7 +41,7 @@ else
         --with-gmp-prefix=/opt/gmp-4.3.2
     make $(leopard.sh -j)
 
-    if test -n "$LEOPARDSH_MAKE_CHECK"; then
+    if test -n "$LEOPARDSH_RUN_TESTS"; then
         # FIXME some tests are failing
         make check
     fi

@@ -62,7 +62,7 @@ else
             --with-expat=/opt/expat-2.4.3
     make $(leopard.sh -j)
 
-    if test -n "$LEOPARDSH_MAKE_CHECK"; then
+    if test -n "$LEOPARDSH_RUN_TESTS"; then
         # FIXME some tests need a recent python.
         make check
     fi
