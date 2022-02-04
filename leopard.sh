@@ -177,6 +177,13 @@ if ! test -e /opt/portable-curl ; then
     ./install-portable-curl.sh
 fi
 
+opt_config_cache=/opt/leopard.sh/share/leopard.sh/config.cache
+mkdir -p $opt_config_cache
+if ! test -e $opt_config_cache/leopard.cache ; then
+    cd $opt_config_cache
+    curl -sSfLOk $LEOPARDSH_MIRROR/config.cache/leopard.cache
+fi
+
 if test "$1" = "--setup" ; then
     exit 0
 fi

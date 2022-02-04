@@ -42,6 +42,7 @@ else
         fi
     done
 
+    # TODO: verify if this is needed on ppc64 leopard:
     # if ! test -n "$ppc64" ; then
     #     # 32-bit ppc fails with:
     #     # sigsegv.c: In function 'sigsegv_handler':
@@ -56,7 +57,10 @@ else
 
     if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
         # Note: `make check` currently fails with:
-        # test-pthread.c:35: error: 'PTHREAD_RWLOCK_INITIALIZER' undeclared here (not in a function)
+        # Skipped checks were:
+        #   ./125.changeword ./126.changeword ./127.changeword ./128.changeword ./129.changeword ./130.changeword
+        # Failed checks were:
+        #   ./198.sysval:err
         make check
     fi
 

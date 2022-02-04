@@ -68,6 +68,8 @@ else
 
     cd $package-$version
 
+    cat /opt/tiger.sh/share/tiger.sh/config.cache/base.sh > config.cache
+
     # 👇 EDIT HERE:
     export CC=gcc-4.2 CXX=g++-4.2
 

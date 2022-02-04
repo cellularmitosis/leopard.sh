@@ -88,6 +88,6 @@ for pkgspec in $(cat /tmp/to-build.txt) ; do
     rm -rf /opt/*
     binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
     rm -f ~/Desktop/leopard.sh/binpkgs/$binpkg
-    leopard.sh $pkgspec
+    time leopard.sh $pkgspec
     ~/Desktop/leopard.sh/utils/make-leopardsh-binpkg.sh $pkgspec
 done
