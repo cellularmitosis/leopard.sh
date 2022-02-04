@@ -21,7 +21,7 @@ if ! test -e /opt/gcc-4.9.4$ppc64 ; then
     leopard.sh gcc-4.9.4$ppc64
 fi
 
-echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007
+echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
 if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then

@@ -46,7 +46,10 @@ else
     ./configure -C --prefix=/opt/$pkgspec
     make $(leopard.sh -j) V=1
 
-    # Note: no 'make check' available.
+    if test -n "$LEOPARDSH_RUN_TESTS" ; then
+        make check
+        make test
+    fi
 
     make install
 
