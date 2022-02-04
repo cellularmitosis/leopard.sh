@@ -9,6 +9,12 @@ set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
 
+if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
+    ppc64=".ppc64"
+fi
+
+pkgspec=$package-$version$ppc64
+
 echo -n -e "\033]0;Installing $package-$version\007"
 
 if ! which -s guile; then

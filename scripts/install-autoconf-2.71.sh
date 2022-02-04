@@ -9,6 +9,12 @@ set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
 
+if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
+    ppc64=".ppc64"
+fi
+
+pkgspec=$package-$version$ppc64
+
 if ! test -e /opt/m4-1.4.19; then
     leopard.sh m4-1.4.19
 fi
