@@ -2,3 +2,4 @@ gzip-1.11.ppc64
 libiconv-1.16.ppc64
 libressl-3.4.2.ppc64
 lzo-2.10.ppc64
+lzop-1.04.ppc64

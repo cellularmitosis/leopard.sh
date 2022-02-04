@@ -1,4 +1,6 @@
 #!/bin/bash
+# based on templates/template.sh v3
+
 
 # Install lzop on OS X Leopard / PowerPC.
 
@@ -19,10 +21,15 @@ if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
     leopard.sh pkg-config-0.29.2$ppc64
 fi
 
-if ! test -e /opt/lzo-2.10$ppc64 ; then
-    leopard.sh lzo-2.10$ppc64
-fi
-export PKG_CONFIG_PATH="/opt/lzo-2.10$ppc64/lib/pkgconfig:$PKG_CONFIG_PATH"
+for dep in \
+    lzo-2.10$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+    PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+done
+export PKG_CONFIG_PATH
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
 
@@ -44,6 +51,13 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+    else
+        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+    fi
+    export CFLAGS
+
     pkgconfignames="lzo2"
     # Note: the lzo2.pc file seems busted, it uses -I${includedir}/lzo instead of -I${includedir}.
     # CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
@@ -54,8 +68,9 @@ else
 
     ./configure -C --prefix=/opt/$pkgspec
 
-    make $(leopard.sh -j)
+    make $(leopard.sh -j) V=1
     # Note: no 'make check' available.
+
     make install
 
     if test -e config.cache ; then
