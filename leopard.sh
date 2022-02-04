@@ -2,7 +2,7 @@
 
 # leopard.sh: build/install software for OS X Leopard / PowerPC.
 
-set -e -o pipefail
+set -e
 
 # Note: to use a local checkout, export LEOPARDSH_MIRROR=file:///Users/foo/leopard.sh
 # before calling leopard.sh.
@@ -14,6 +14,8 @@ if ! echo $osversion | grep -q '10\.5'; then
     echo "Sorry, this script was written for OS X Leopard :(" >&2
     exit 1
 fi
+
+set -o pipefail
 
 cpu=$(sysctl hw.cpusubtype | awk '{print $NF}')
 if test "$cpu" = "9" ; then
