@@ -45,7 +45,7 @@ else
 
     ./configure -C --prefix=/opt/$pkgspec \
         --with-gmp=/opt/gmp-4.3.2$ppc64 \
-        --with-mpfr=/opt/mpfr-2.4.2$ppc64
+        --with-mpfr=/opt/mpfr-3.1.6$ppc64
 
     make $(leopard.sh -j)
 
