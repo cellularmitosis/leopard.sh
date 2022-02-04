@@ -79,8 +79,14 @@ else
     make install
 fi
 
-ln -sf /opt/$package-$version/bin/* /usr/local/bin/
 
         # --enable-languages=c,c++,objc,obj-c++,fortran,java \
         # --enable-libada \
 # see https://sourceforge.net/projects/gnuada/files/GNAT_GPL%20Mac%20OS%20X/2009-tiger-ppc/
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi

@@ -52,7 +52,6 @@ else
     make install
 fi
 
-ln -sf /opt/$package-$version/bin/* /usr/local/bin/
 
 # Note: Using gcc-4.2 and -std=c99 to avoid the following failure:
 #   readelf.c:1046: error: 'for' loop initial declaration used outside C99 mode
@@ -66,3 +65,10 @@ ln -sf /opt/$package-$version/bin/* /usr/local/bin/
 #make[2]: *** [all] Error 2
 #make[1]: *** [all-recursive] Error 1
 #make: *** [all] Error 2
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi

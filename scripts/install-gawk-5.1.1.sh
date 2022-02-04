@@ -53,6 +53,12 @@ else
     make install
 fi
 
-ln -sf /opt/$package-$version/bin/* /usr/local/bin/
 
 # Note: using readline-8.1.2 to get "_rl_get_screen_size" and "_rl_completion_matches"
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi

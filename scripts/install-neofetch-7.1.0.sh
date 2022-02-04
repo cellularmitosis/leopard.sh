@@ -35,4 +35,10 @@ else
     make install PREFIX=/opt/$package-$version
 fi
 
-ln -sf /opt/$package-$version/bin/* /usr/local/bin/
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi

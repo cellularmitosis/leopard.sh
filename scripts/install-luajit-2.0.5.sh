@@ -65,7 +65,13 @@ EOF
     PATH="/opt/gcc-4.9.4/bin:$PATH" make $(leopard.sh -j)
 fi
 
-ln -sf /opt/$package-$version/bin/* /usr/local/bin/
 
 # Note: luajit needs at least GCC 4.3:
 # lj_arch.h:395:2: error: #error "Need at least GCC 4.3 or newer"
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi

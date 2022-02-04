@@ -61,7 +61,13 @@ else
     make install
 fi
 
-ln -sf /opt/$package-$version/bin/* /usr/local/bin/
 
 # input-rl.c: In function 'instream_readline_history_get':
 # input-rl.c:194: error: subscripted value is neither array nor pointer
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi
