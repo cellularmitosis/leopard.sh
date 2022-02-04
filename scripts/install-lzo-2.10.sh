@@ -1,4 +1,6 @@
 #!/bin/bash
+# based on templates/template.sh v3
+
 
 # Install lzo on OS X Leopard / PowerPC.
 
@@ -33,11 +35,19 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
-    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -mcpu -O)\"/g" configure
+    for f in configure ; do
+        if test -n "$ppc64" ; then
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
+        else
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+        fi
+    done
 
     ./configure -C --prefix=/opt/$pkgspec
     make $(leopard.sh -j) V=1
+
     # Note: no 'make check' available.
+
     make install
 
     if test -e config.cache ; then
@@ -45,4 +55,12 @@ else
         gzip config.cache
         mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
     fi
+fi
+
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
