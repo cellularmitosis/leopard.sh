@@ -2,10 +2,10 @@
 
 set -e -x
 
-pkg=$1
+pkgspec=$1
 cd /opt
-binpkg=$pkg.$(leopard.sh --os.cpu).tar.gz
+binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
 LEOPARDSH_BINPKG_PATH=${LEOPARDSH_BINPKG_PATH:-~/Desktop/leopard.sh/binpkgs}
 mkdir -p $LEOPARDSH_BINPKG_PATH
-tar czf /tmp/$binpkg $pkg
+tar czf /tmp/$binpkg $pkgspec
 mv /tmp/$binpkg $LEOPARDSH_BINPKG_PATH/
