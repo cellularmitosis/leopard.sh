@@ -17,7 +17,7 @@ if ! test -e /opt/readline-8.1.2; then
     leopard.sh readline-8.1.2
 fi
 
-binpkg=$package-$version.$(leopard.sh --os.cpu).tar.gz
+binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
 if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD"; then
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
