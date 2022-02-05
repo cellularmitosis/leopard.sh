@@ -35,6 +35,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     for f in configure ; do
         if test -n "$ppc64" ; then
             perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
@@ -56,6 +58,13 @@ else
         mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
         gzip config.cache
         mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+
+        url=$LEOPARDSH_MIRROR/config.cache/$pkgspec.cache
+        if curl -sSfI "$url" >/dev/null 2>&1 ; then
+            mkdir -p /opt/$pkgspec/share/leopard.sh/config.cache/
+            cd /opt/$pkgspec/share/leopard.sh/config.cache/
+            curl -sSfLOk "$url"
+        fi
     fi
 fi
 

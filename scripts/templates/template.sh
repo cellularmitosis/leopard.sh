@@ -68,7 +68,14 @@ else
 
     cd $package-$version
 
-    cat /opt/tiger.sh/share/tiger.sh/config.cache/base.sh > config.cache
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+    # 👇 EDIT HERE:
+    for dep in \
+        bar-2.1$ppc64 \
+        qux-3.4$ppc64
+    do
+        cat /opt/$dep/share/leopard.sh/config.cache/$dep.cache >> config.cache
+    done
 
     # 👇 EDIT HERE:
     export CC=gcc-4.2 CXX=g++-4.2
@@ -127,6 +134,13 @@ else
         mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
         gzip config.cache
         mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+
+        url=$LEOPARDSH_MIRROR/config.cache/$pkgspec.cache
+        if curl -sSfI "$url" >/dev/null 2>&1 ; then
+            mkdir -p /opt/$pkgspec/share/leopard.sh/config.cache/
+            cd /opt/$pkgspec/share/leopard.sh/config.cache/
+            curl -sSfLOk "$url"
+        fi
     fi
 fi
 
