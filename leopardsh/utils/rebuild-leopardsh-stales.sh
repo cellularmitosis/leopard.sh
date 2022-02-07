@@ -44,11 +44,11 @@ else
         echo -n "." >&2
         should_build=0
         binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-        if ! test -e ~/Desktop/leopard.sh/binpkgs/$binpkg ; then
+        if ! test -e ~/Desktop/leopardsh/binpkgs/$binpkg ; then
             should_build=1
         else
             /opt/portable-curl/bin/curl -RsSfLO $LEOPARDSH_MIRROR/scripts/install-$pkgspec.sh
-            binpkg_mtime=$(stat -f '%m' ~/Desktop/leopard.sh/binpkgs/$binpkg)
+            binpkg_mtime=$(stat -f '%m' ~/Desktop/leopardsh/binpkgs/$binpkg)
             script_mtime=$(stat -f '%m' install-$pkgspec.sh)
             if test "$binpkg_mtime" -lt "$script_mtime" ; then
                 should_build=1
@@ -76,7 +76,7 @@ fi
 # another pass to wipe.
 for pkgspec in $(cat /tmp/to-build.txt) ; do
     binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-    rm -f ~/Desktop/leopard.sh/binpkgs/$binpkg
+    rm -f ~/Desktop/leopardsh/binpkgs/$binpkg
 done
 
 set -x
@@ -87,7 +87,7 @@ for pkgspec in $(cat /tmp/to-build.txt) ; do
     rm -rf /usr/local/sbin/*
     rm -rf /opt/*
     binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-    rm -f ~/Desktop/leopard.sh/binpkgs/$binpkg
+    rm -f ~/Desktop/leopardsh/binpkgs/$binpkg
     time leopard.sh $pkgspec
-    ~/Desktop/leopard.sh/utils/make-leopardsh-binpkg.sh $pkgspec
+    ~/Desktop/leopardsh/utils/make-leopardsh-binpkg.sh $pkgspec
 done

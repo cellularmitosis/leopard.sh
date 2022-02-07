@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# leopard.sh: build/install software for OS X Leopard / PowerPC.
+# leopard.sh: build/install software on PowerPC Macs running OS X Leopard (10.5).
 
 set -e
 
-# Note: to use a local checkout, export LEOPARDSH_MIRROR=file:///Users/foo/leopard.sh
+# Note: for offline use, export e.g. LEOPARDSH_MIRROR=file:///Users/foo/leopardsh
 # before calling leopard.sh.
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
 export LEOPARDSH_MIRROR

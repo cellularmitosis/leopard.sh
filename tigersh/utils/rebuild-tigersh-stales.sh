@@ -44,11 +44,11 @@ else
         echo -n "." >&2
         should_build=0
         binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-        if ! test -e ~/Desktop/tiger.sh/binpkgs/$binpkg ; then
+        if ! test -e ~/Desktop/tigersh/binpkgs/$binpkg ; then
             should_build=1
         else
             /opt/portable-curl/bin/curl -RsSfLO $TIGERSH_MIRROR/scripts/install-$pkgspec.sh
-            binpkg_mtime=$(stat -f '%m' ~/Desktop/tiger.sh/binpkgs/$binpkg)
+            binpkg_mtime=$(stat -f '%m' ~/Desktop/tigersh/binpkgs/$binpkg)
             script_mtime=$(stat -f '%m' install-$pkgspec.sh)
             if test "$binpkg_mtime" -lt "$script_mtime" ; then
                 should_build=1
@@ -76,7 +76,7 @@ fi
 # another pass to wipe.
 for pkgspec in $(cat /tmp/to-build.txt) ; do
     binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-    rm -f ~/Desktop/tiger.sh/binpkgs/$binpkg
+    rm -f ~/Desktop/tigersh/binpkgs/$binpkg
 done
 
 set -x
@@ -87,7 +87,7 @@ for pkgspec in $(cat /tmp/to-build.txt) ; do
     rm -rf /usr/local/sbin/*
     rm -rf /opt/*
     binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-    rm -f ~/Desktop/tiger.sh/binpkgs/$binpkg
+    rm -f ~/Desktop/tigersh/binpkgs/$binpkg
     time tiger.sh $pkgspec
-    ~/Desktop/tiger.sh/utils/make-tigersh-binpkg.sh $pkgspec
+    ~/Desktop/tigersh/utils/make-tigersh-binpkg.sh $pkgspec
 done

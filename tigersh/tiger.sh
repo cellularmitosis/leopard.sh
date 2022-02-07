@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# tiger.sh: build/install software for OS X Tiger / PowerPC.
+# tiger.sh: build/install software on PowerPC Macs running OS X Tiger (10.4).
 
 set -e
 
-# Note: to use a local checkout, export TIGERSH_MIRROR=file:///Users/foo/tiger.sh
+# Note: for offline use, export e.g. TIGERSH_MIRROR=file:///Users/foo/tigersh
 # before calling tiger.sh.
 TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
 export TIGERSH_MIRROR

@@ -30,12 +30,12 @@ if test -n "%is_g5" ; then
     cat build-order.ppc64.txt >> build-order.txt
 fi
 
-rm -f ~/Desktop/leopard.sh/binpkgs/*
+rm -f ~/Desktop/leopardsh/binpkgs/*
 
 for pkgspec in $(cat /tmp/build-order.txt) ; do
     rm -rf /usr/local/bin/*
     rm -rf /usr/local/sbin/*
     rm -rf /opt/*
     time leopard.sh $pkgspec
-    ~/Desktop/leopard.sh/utils/make-leopardsh-binpkg.sh $pkgspec
+    ~/Desktop/leopardsh/utils/make-leopardsh-binpkg.sh $pkgspec
 done

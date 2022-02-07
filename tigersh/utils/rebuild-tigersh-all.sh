@@ -30,12 +30,12 @@ if test -n "%is_g5" ; then
     cat build-order.ppc64.txt >> build-order.txt
 fi
 
-rm -f ~/Desktop/tiger.sh/binpkgs/*
+rm -f ~/Desktop/tigersh/binpkgs/*
 
 for pkgspec in $(cat /tmp/build-order.txt) ; do
     rm -rf /usr/local/bin/*
     rm -rf /usr/local/sbin/*
     rm -rf /opt/*
     time tiger.sh $pkgspec
-    ~/Desktop/tiger.sh/utils/make-tigersh-binpkg.sh $pkgspec
+    ~/Desktop/tigersh/utils/make-tigersh-binpkg.sh $pkgspec
 done
