@@ -152,9 +152,17 @@ if ! test -e /opt ; then
 fi
 
 if ! mktemp /opt/write-check.XXX >/dev/null ; then
+    echo "Notice: can't write to /opt." >&2
+    echo "Running 'sudo chgrp admin /opt && sudo chmod g+w /opt'." >&2
+    sudo chgrp admin /opt
+    sudo chmod g+w /opt
+else
+    rm -f /opt/write-check.*
+fi
+
+if ! mktemp /opt/write-check.XXX >/dev/null ; then
     echo "Error: can't write to /opt." >&2
-    echo "Try 'sudo chmod g+w /opt'." >&2
-    echo "Also, ensure you are in the 'admin' group." >&2
+    echo "Check that you are in the 'admin' group (run 'groups')." >&2
     exit 1
 else
     rm -f /opt/write-check.*
