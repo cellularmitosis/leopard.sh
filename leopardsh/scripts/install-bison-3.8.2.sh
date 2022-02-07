@@ -35,10 +35,18 @@ else
     
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" configure
-    perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" configure
+    for f in configure ; do
+        if test -n "$ppc64" ; then
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
+            perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
+        else
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+            perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+        fi
+    done
 
     ./configure -C --prefix=/opt/$pkgspec
+    
     make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

@@ -34,9 +34,18 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
-    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" configure
+    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+
+    for f in configure ; do
+        if test -n "$ppc64" ; then
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
+        else
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
+        fi
+    done
 
     ./configure -C --prefix=/opt/$pkgspec
+
     make $(tiger.sh -j) V=1
 
     if test -n "$TIGERSH_RUN_TESTS" ; then

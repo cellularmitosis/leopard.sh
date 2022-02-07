@@ -39,6 +39,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     perl -pi -e "s/-O3/$(leopard.sh -O)/g" configure
     perl -pi -e "s/-O2/$(leopard.sh -O)/g" configure
 

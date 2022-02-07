@@ -39,6 +39,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     # Note: disabling thread-safe because thread-local storage isn't supported until gcc 4.9.
     ./configure -C --prefix=/opt/$pkgspec \
         --disable-thread-safe \

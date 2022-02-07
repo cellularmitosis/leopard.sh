@@ -34,6 +34,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     for f in configure ; do
         if test -n "$ppc64" ; then
             perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
@@ -41,15 +43,6 @@ else
             perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
         fi
     done
-
-    # TODO: verify if this is needed on ppc64 leopard:
-    # if ! test -n "$ppc64" ; then
-    #     # 32-bit ppc fails with:
-    #     # sigsegv.c: In function 'sigsegv_handler':
-    #     # sigsegv.c:938: error: 'struct mcontext' has no member named '__ss'
-    #     # Thanks to https://trac.macports.org/ticket/63381
-    #     perl -pi -e "s/__ss.__r1/ss.r1/g" lib/sigsegv.c
-    # fi
 
     ./configure -C --prefix=/opt/$pkgspec
 

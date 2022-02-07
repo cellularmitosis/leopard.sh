@@ -35,6 +35,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+
     for f in configure ; do
         if test -n "$ppc64" ; then
             perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f

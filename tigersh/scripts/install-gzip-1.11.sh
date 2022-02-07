@@ -60,13 +60,6 @@ else
         mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
         gzip config.cache
         mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
-
-        url=$TIGERSH_MIRROR/config.cache/$pkgspec.cache
-        if curl -sSfI "$url" >/dev/null 2>&1 ; then
-            mkdir -p /opt/$pkgspec/share/tiger.sh/config.cache/
-            cd /opt/$pkgspec/share/tiger.sh/config.cache/
-            curl -sSfLOk "$url"
-        fi
     fi
 fi
 

@@ -39,6 +39,8 @@ else
     tar xjf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     ./configure -C --prefix=/opt/$pkgspec \
         --with-gmp-prefix=/opt/gmp-4.3.2$ppc64
 

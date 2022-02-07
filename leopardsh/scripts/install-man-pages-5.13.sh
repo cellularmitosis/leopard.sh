@@ -32,6 +32,9 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     # FIXME this fails with: 'install: illegal option -T'
     make $(leopard.sh -j) prefix=/opt/$pkgspec install
 fi

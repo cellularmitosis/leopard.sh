@@ -43,6 +43,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     # Note: --enabled-thread-safe requires TLS (thread-local storage),
     # which was supported as of gcc 4.9.
     CC=/opt/gcc-4.9.4/bin/gcc ./configure -C --prefix=/opt/$pkgspec \

@@ -60,6 +60,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+
     export CC=gcc-4.2 CXX=g++-4.2
 
     # Note: I haven't figured out how to get gcc to build using custom flags,

@@ -40,6 +40,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+
     # Note: /usr/bin/gcc (4.0.1) fails with:
     #   ld: duplicate symbol ___gmpz_abs in .libs/compat.o and .libs/assert.o
     # So we use gcc-4.2 instead.
@@ -48,8 +50,13 @@ else
 
     # getting this to work was unusually finicky.
     if test "$(tiger.sh --cpu)" = "g5" ; then
-        CFLAGS="$(tiger.sh -m32 -mcpu -O)"
-        CXXFLAGS="$(tiger.sh -m32 -mcpu -O)"
+        if test -n "$ppc64" ; then
+            CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+            CXXFLAGS="-m64 $(tiger.sh -mcpu -O)"
+        else
+            CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -mcpu -O)"
+            CXXFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -mcpu -O)"
+        fi
     elif test "$(tiger.sh --cpu)" = "g4e" -o "$(tiger.sh --cpu)" = "g4" ; then
         CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -mcpu -O)"
         CXXFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -mcpu -O)"
@@ -59,7 +66,7 @@ else
     fi
     export CFLAGS CXXFLAGS
 
-    if test "$(tiger.sh --cpu)" = "g5" ; then
+    if test -n "$ppc64" ; then
         ./configure -C --prefix=/opt/$pkgspec \
             --enable-cxx \
             ABI=mode64

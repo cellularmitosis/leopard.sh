@@ -58,6 +58,9 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     CC=gcc-4.2 CXX=g++-4.2 ./configure -C \
         --prefix=/opt/$pkgspec \
         --with-gmp=/opt/gmp-4.3.2$ppc64 \

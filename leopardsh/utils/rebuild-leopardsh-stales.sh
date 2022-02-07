@@ -9,6 +9,11 @@ if test "$1" = "--dry-run" -o "$1" = "-d" ; then
     dry_run=1
 fi
 
+if test "$1" = "--force" -o "$1" = "-f" ; then
+    shift 1
+    force=1
+fi
+
 cpu=$(sysctl hw.cpusubtype | awk '{print $NF}')
 if test "$cpu" = "9" ; then
     is_g3=1
@@ -62,7 +67,7 @@ else
     echo >&2
 fi
 
-if ! test -e /tmp/to-build.txt ; then
+if test -z "$force" && ! test -e /tmp/to-build.txt ; then
     echo "Nothing to build." >&2
     exit 0
 fi

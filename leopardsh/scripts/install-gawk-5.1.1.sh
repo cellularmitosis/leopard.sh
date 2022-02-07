@@ -41,6 +41,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     ./configure -C --prefix=/opt/$pkgspec \
         --with-mpfr=/opt/mpfr-3.1.6$ppc64 \
         --with-readline=/opt/readline-8.1.2$ppc64

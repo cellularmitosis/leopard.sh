@@ -39,6 +39,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd sqlite-autoconf-3370200
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     CPPFLAGS=-I/opt/readline-8.1.2$ppc64/include \
         LDFLAGS=-L/opt/readline-8.1.2$ppc64/lib \
         ./configure -C --prefix=/opt/$pkgspec \

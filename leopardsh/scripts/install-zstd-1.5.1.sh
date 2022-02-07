@@ -33,6 +33,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     # Fix for '-compatibility_version only allowed with -dynamiclib' error:
     perl -pi -e "s/-compatibility_version/-dynamiclib -compatibility_version/" lib/Makefile
 
@@ -42,6 +44,7 @@ else
     done
 
     make $(leopard.sh -j) V=1 prefix=/opt/$pkgspec
+
     make prefix=/opt/$pkgspec install
 fi
 

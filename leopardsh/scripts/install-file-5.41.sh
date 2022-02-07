@@ -39,6 +39,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     ./configure -C --prefix=/opt/$pkgspec \
         CC=gcc-4.2 \
         CFLAGS="-std=c99 $(leopard.sh -m32 -mcpu -O)"

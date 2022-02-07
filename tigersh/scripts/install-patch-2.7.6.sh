@@ -32,7 +32,11 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+
+    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+
     ./configure -C --prefix=/opt/$pkgspec
+
     make $(tiger.sh -j)
 
     if test -n "$TIGERSH_RUN_TESTS" ; then

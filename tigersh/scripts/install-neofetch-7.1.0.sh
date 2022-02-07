@@ -33,6 +33,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+
     # FIXME oops this requires a more recent bash.
     exit 1
 

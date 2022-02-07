@@ -50,6 +50,9 @@ else
     rm -rf $package-$version
     cat ~/Downloads/$tarball | unxz | tar x
     cd $package-$version
+
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     # FIXME despite all of these flags, git is still missing a curl symbol:
     #     LINK git-http-fetch
     # Undefined symbols:

@@ -48,6 +48,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd Python-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     pkgconfignames="readline libressl gdbm"
     CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
     LDFLAGS=$(pkg-config --libs-only-L $pkgconfignames)

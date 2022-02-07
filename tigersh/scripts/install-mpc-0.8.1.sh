@@ -44,12 +44,18 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+
     if test "$(tiger.sh --cpu)" = "g5" ; then
-        CFLAGS="$(tiger.sh -m32 -mcpu -O)"
+        if test -n "$ppc64" ; then
+            CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+        else
+            CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -m32 -mcpu -O)"
+        fi
     elif test "$(tiger.sh --cpu)" = "g4e" -o "$(tiger.sh --cpu)" = "g4" ; then
-        CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -mcpu -O)"
+        CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -m32 -mcpu -O)"
     elif test "$(tiger.sh --cpu)" = "g3" ; then
-        CFALGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL $(tiger.sh -mcpu -O)"
+        CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL $(tiger.sh -m32 -mcpu -O)"
     fi
     export CFLAGS CXXFLAGS
 

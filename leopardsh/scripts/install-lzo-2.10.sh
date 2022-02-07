@@ -35,6 +35,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     for f in configure ; do
         if test -n "$ppc64" ; then
             perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
@@ -44,6 +46,7 @@ else
     done
 
     ./configure -C --prefix=/opt/$pkgspec
+
     make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

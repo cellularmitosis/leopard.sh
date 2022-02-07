@@ -39,6 +39,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     # Note: guile 3 needs c11 (i.e. gcc-4.9.4).
     # FIXME take a closer look at the available options.
     CC=/opt/gcc-4.9.4$ppc64/bin/gcc ./configure -C --prefix=/opt/$pkgspec

@@ -41,7 +41,13 @@ else
     tar xjf ~/Downloads/$tarball
     cd $package-$version
 
-    CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math $(tiger.sh -m32 -mcpu -O)"
+    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+
+    if test -n "$ppc64" ; then
+        CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math -m64 $(tiger.sh -mcpu -O)"
+    else
+        CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math $(tiger.sh -m32 -mcpu -O)"
+    fi
     export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \

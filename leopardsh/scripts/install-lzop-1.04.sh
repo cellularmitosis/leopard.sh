@@ -50,6 +50,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $(leopard.sh -mcpu -O)"
     else

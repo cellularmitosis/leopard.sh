@@ -43,6 +43,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     ./configure -C --prefix=/opt/$pkgspec \
         --with-gmp=/opt/gmp-6.2.1$ppc64 \
         --with-mpfr=/opt/mpfr-4.1.0$ppc64

@@ -34,9 +34,13 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd $package-$version
+
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     # Note: guile tries to use /lib/cpp, which is /usr/bin/cpp on leopard.
     # FIXME: take a closer look at the available options.
     CPP=/usr/bin/cpp ./configure -C --prefix=/opt/$pkgspec
+
     make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

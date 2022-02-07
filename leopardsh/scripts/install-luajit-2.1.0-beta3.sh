@@ -40,6 +40,9 @@ else
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
     cd LuaJIT-$version
+
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     patch << 'EOF'
 --- Makefile	2022-01-18 02:33:49.000000000 -0600
 +++ Makefile.new	2022-01-18 02:34:08.000000000 -0600

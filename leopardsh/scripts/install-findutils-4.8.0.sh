@@ -39,6 +39,8 @@ else
     cat ~/Downloads/$tarball | unxz | tar x
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" configure
 
     ./configure -C --prefix=/opt/$pkgspec
