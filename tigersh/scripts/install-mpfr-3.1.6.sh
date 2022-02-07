@@ -61,6 +61,14 @@ else
     fi
 fi
 
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi
+
 
 # test output on 32-bit ppc:
 #

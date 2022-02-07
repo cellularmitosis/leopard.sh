@@ -60,6 +60,14 @@ else
     fi
 fi
 
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi
+
 # Note: /usr/bin/gcc (4.0.1) fails with:
 #   ld: duplicate symbol ___gmpz_abs in .libs/compat.o and .libs/assert.o
 # So we use gcc-4.2 instead.

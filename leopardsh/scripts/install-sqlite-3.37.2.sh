@@ -61,8 +61,6 @@ else
     fi
 fi
 
-
-# Note: --disable-dependency-tracking speeds up one-time builds.
 if test -e /opt/$pkgspec/bin ; then
     ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
 fi
@@ -70,3 +68,5 @@ fi
 if test -e /opt/$pkgspec/sbin ; then
     ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
+
+# Note: --disable-dependency-tracking speeds up one-time builds.

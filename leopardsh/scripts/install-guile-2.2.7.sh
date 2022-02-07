@@ -52,12 +52,6 @@ else
     fi
 fi
 
-
-# failing with:
-# checking for socklen_t... no
-# checking for socklen_t equivalent... configure: error: Cannot find a type to use in place of socklen_t
-
-# see https://lists.gnu.org/archive/html/bug-guile/2006-07/msg00012.html
 if test -e /opt/$pkgspec/bin ; then
     ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
 fi
@@ -65,3 +59,9 @@ fi
 if test -e /opt/$pkgspec/sbin ; then
     ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
+
+# failing with:
+# checking for socklen_t... no
+# checking for socklen_t equivalent... configure: error: Cannot find a type to use in place of socklen_t
+
+# see https://lists.gnu.org/archive/html/bug-guile/2006-07/msg00012.html

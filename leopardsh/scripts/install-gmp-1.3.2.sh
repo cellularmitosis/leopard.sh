@@ -49,3 +49,11 @@ else
     mkdir -p /opt/$pkgspec/lib
     cp libmp.a libgmp.a /opt/$pkgspec/lib/
 fi
+
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi

@@ -43,6 +43,8 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
 
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
     ./configure -C --prefix=/opt/$pkgspec \
         --with-isl-prefix=/opt/isl-0.11.1$ppc64 \
         --with-gmp-prefix=/opt/gmp-4.3.2$ppc64
@@ -61,4 +63,12 @@ else
         gzip config.cache
         mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
     fi
+fi
+
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi

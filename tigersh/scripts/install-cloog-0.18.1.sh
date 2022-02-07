@@ -67,3 +67,11 @@ else
         mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
     fi
 fi
+
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi
