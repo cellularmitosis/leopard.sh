@@ -1,0 +1,129 @@
+
+# checking build system type... powerpc-apple-darwin8.11.0
+ac_cv_build=${ac_cv_build=powerpc-apple-darwin8.11.0}
+
+# checking for C/C++ restrict keyword... no
+ac_cv_c_restrict=${ac_cv_c_restrict=no}
+
+# checking for gcc -std=gnu99 options needed to detect all undeclared functions... none needed
+ac_cv_c_undeclared_builtin_options=${ac_cv_c_undeclared_builtin_options='none needed'}
+
+# checking whether __argv is declared... no
+ac_cv_have_decl___argv=${ac_cv_have_decl___argv=no}
+
+# checking whether _snprintf is declared... no
+ac_cv_have_decl__snprintf=${ac_cv_have_decl__snprintf=no}
+
+# checking whether program_invocation_name is declared... no
+ac_cv_have_decl_program_invocation_name=${ac_cv_have_decl_program_invocation_name=no}
+
+# checking whether program_invocation_short_name is declared... no
+ac_cv_have_decl_program_invocation_short_name=${ac_cv_have_decl_program_invocation_short_name=no}
+
+# checking whether stat file-mode macros are broken... no
+ac_cv_header_stat_broken=${ac_cv_header_stat_broken=no}
+
+# checking for stdio_ext.h... no
+ac_cv_header_stdio_ext_h=${ac_cv_header_stdio_ext_h=no}
+
+# checking for threads.h... no
+ac_cv_header_threads_h=${ac_cv_header_threads_h=no}
+
+# checking host system type... powerpc-apple-darwin8.11.0
+ac_cv_host=${ac_cv_host=powerpc-apple-darwin8.11.0}
+
+# checking for library containing clock_gettime... no
+ac_cv_search_clock_gettime=${ac_cv_search_clock_gettime=no}
+
+# checking whether _XOPEN_SOURCE should be defined... no
+ac_cv_should_define__xopen_source=${ac_cv_should_define__xopen_source=no}
+
+# checking for special C compiler options needed for large files... no
+ac_cv_sys_largefile_CC=${ac_cv_sys_largefile_CC=no}
+
+# checking dependency style of gcc -std=gnu99... gcc3
+am_cv_CC_dependencies_compiler_type=${am_cv_CC_dependencies_compiler_type=gcc3}
+
+# checking whether make supports nested variables... yes
+am_cv_make_support_nested_variables=${am_cv_make_support_nested_variables=yes}
+
+# checking whether gcc -std=gnu99 understands -c and -o together... yes
+am_cv_prog_cc_c_o=${am_cv_prog_cc_c_o=yes}
+
+# checking for bit size of ptrdiff_t... 32
+gl_cv_bitsizeof_ptrdiff_t=${gl_cv_bitsizeof_ptrdiff_t=32}
+
+# checking for bit size of sig_atomic_t... 32
+gl_cv_bitsizeof_sig_atomic_t=${gl_cv_bitsizeof_sig_atomic_t=32}
+
+# checking for bit size of size_t... 32
+gl_cv_bitsizeof_size_t=${gl_cv_bitsizeof_size_t=32}
+
+# checking for bit size of wchar_t... 32
+gl_cv_bitsizeof_wchar_t=${gl_cv_bitsizeof_wchar_t=32}
+
+# checking for bit size of wint_t... 32
+gl_cv_bitsizeof_wint_t=${gl_cv_bitsizeof_wint_t=32}
+
+# checking where to find the exponent in a 'double'... word 0 bit 20
+gl_cv_cc_double_expbit0=${gl_cv_cc_double_expbit0='word 0 bit 20'}
+
+# checking where to find the exponent in a 'float'... word 0 bit 23
+gl_cv_cc_float_expbit0=${gl_cv_cc_float_expbit0='word 0 bit 23'}
+
+# checking for compiler option needed when checking for declarations... none
+gl_cv_compiler_check_decl_option=${gl_cv_compiler_check_decl_option=none}
+
+# checking whether the compiler is clang... no
+gl_cv_compiler_clang=${gl_cv_compiler_clang=no}
+
+# checking whether NULL can be used in arbitrary expressions... yes
+gl_cv_decl_null_works=${gl_cv_decl_null_works=yes}
+
+# checking whether dirfd is a macro... yes
+gl_cv_func_dirfd_macro=${gl_cv_func_dirfd_macro=yes}
+
+# checking for working GNU getopt function... no
+gl_cv_func_getopt_gnu=${gl_cv_func_getopt_gnu=no}
+
+# checking whether getopt is POSIX compatible... yes
+gl_cv_func_getopt_posix=${gl_cv_func_getopt_posix=yes}
+
+# checking for gettimeofday with POSIX signature... almost
+gl_cv_func_gettimeofday_posix_signature=${gl_cv_func_gettimeofday_posix_signature=almost}
+
+# checking whether the preprocessor supports include_next... yes
+gl_cv_have_include_next=${gl_cv_have_include_next=yes}
+
+# checking whether imported symbols can be declared weak... no
+gl_cv_have_weak=${gl_cv_have_weak=no}
+
+# checking whether stdint.h conforms to C99... no
+gl_cv_header_working_stdint_h=${gl_cv_header_working_stdint_h=no}
+
+# checking for working stdnoreturn.h... no
+gl_cv_header_working_stdnoreturn_h=${gl_cv_header_working_stdnoreturn_h=no}
+
+# checking whether long double and double are the same... no
+gl_cv_long_double_equals_double=${gl_cv_long_double_equals_double=no}
+
+# checking for O_CLOEXEC... no
+gl_cv_macro_O_CLOEXEC=${gl_cv_macro_O_CLOEXEC=no}
+
+# checking whether malloc is ptrdiff_t safe... no
+gl_cv_malloc_ptrdiff=${gl_cv_malloc_ptrdiff=no}
+
+# checking whether <limits.h> defines MIN and MAX... no
+gl_cv_minmax_in_limits_h=${gl_cv_minmax_in_limits_h=no}
+
+# checking for C compiler flag to ignore unused libraries... none
+gl_cv_prog_c_ignore_unused_libraries=${gl_cv_prog_c_ignore_unused_libraries=none}
+
+# checking for alloca as a compiler built-in... yes
+gl_cv_rpl_alloca=${gl_cv_rpl_alloca=yes}
+
+# checking for 64-bit time_t with _TIME_BITS=64... no
+gl_cv_type_time_t_bits_macro=${gl_cv_type_time_t_bits_macro=no}
+
+# checking for time_t past the year 2038... no
+gl_cv_type_time_t_y2038=${gl_cv_type_time_t_y2038=no}
