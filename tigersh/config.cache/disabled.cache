@@ -127,3 +127,15 @@ gl_cv_type_time_t_bits_macro=${gl_cv_type_time_t_bits_macro=no}
 
 # checking for time_t past the year 2038... no
 gl_cv_type_time_t_y2038=${gl_cv_type_time_t_y2038=no}
+
+# checking for lutimes... no
+ac_cv_func_lutimes=${ac_cv_func_lutimes=no}
+
+# checking for sys/sdt.h... no
+ac_cv_header_sys_sdt_h=${ac_cv_header_sys_sdt_h=no}
+
+# checking whether unlink of a parent directory fails as it should... yes
+gl_cv_func_unlink_parent_fails=${gl_cv_func_unlink_parent_fails=yes}
+
+# checking for working fcntl.h... no (bad O_NOATIME, O_NOFOLLOW)
+gl_cv_header_working_fcntl_h=${gl_cv_header_working_fcntl_h='no (bad O_NOATIME, O_NOFOLLOW)'}

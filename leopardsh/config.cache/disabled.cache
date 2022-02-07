@@ -50,14 +50,14 @@ am_cv_make_support_nested_variables=${am_cv_make_support_nested_variables=yes}
 # checking whether gcc -std=gnu99 understands -c and -o together... yes
 am_cv_prog_cc_c_o=${am_cv_prog_cc_c_o=yes}
 
-# checking for bit size of ptrdiff_t... 32
-gl_cv_bitsizeof_ptrdiff_t=${gl_cv_bitsizeof_ptrdiff_t=32}
+# checking for bit size of ptrdiff_t... 64
+gl_cv_bitsizeof_ptrdiff_t=${gl_cv_bitsizeof_ptrdiff_t=64}
 
 # checking for bit size of sig_atomic_t... 32
 gl_cv_bitsizeof_sig_atomic_t=${gl_cv_bitsizeof_sig_atomic_t=32}
 
-# checking for bit size of size_t... 32
-gl_cv_bitsizeof_size_t=${gl_cv_bitsizeof_size_t=32}
+# checking for bit size of size_t... 64
+gl_cv_bitsizeof_size_t=${gl_cv_bitsizeof_size_t=64}
 
 # checking for bit size of wchar_t... 32
 gl_cv_bitsizeof_wchar_t=${gl_cv_bitsizeof_wchar_t=32}
@@ -118,3 +118,27 @@ gl_cv_type_time_t_bits_macro=${gl_cv_type_time_t_bits_macro=no}
 
 # checking for time_t past the year 2038... no
 gl_cv_type_time_t_y2038=${gl_cv_type_time_t_y2038=no}
+
+# checking for lutimes... yes
+ac_cv_func_lutimes=${ac_cv_func_lutimes=yes}
+
+# checking for sys/sdt.h... yes
+ac_cv_header_sys_sdt_h=${ac_cv_header_sys_sdt_h=yes}
+
+# checking whether unlink of a parent directory fails as it should... no
+gl_cv_func_unlink_parent_fails=${gl_cv_func_unlink_parent_fails=no}
+
+# checking for working fcntl.h... no (bad O_NOATIME)
+gl_cv_header_working_fcntl_h=${gl_cv_header_working_fcntl_h='no (bad O_NOATIME)'}
+
+# checking whether getopt is POSIX compatible... no
+gl_cv_func_getopt_posix=${gl_cv_func_getopt_posix=no}
+
+# 
+gl_cv_func_gettimeofday_posix_signature=${gl_cv_func_gettimeofday_posix_signature=yes}
+
+# checking whether calloc (0, n) and calloc (n, 0) return nonnull... yes
+ac_cv_func_calloc_0_nonnull=${ac_cv_func_calloc_0_nonnull=yes}
+
+# checking whether realloc (0, 0) returns nonnull... yes
+ac_cv_func_realloc_0_nonnull=${ac_cv_func_realloc_0_nonnull=yes}

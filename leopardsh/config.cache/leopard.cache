@@ -101,9 +101,6 @@ ac_cv_func_gettimeofday=${ac_cv_func_gettimeofday=yes}
 # checking for lstat... yes
 ac_cv_func_lstat=${ac_cv_func_lstat=yes}
 
-# checking for lutimes... yes
-ac_cv_func_lutimes=${ac_cv_func_lutimes=yes}
-
 # checking whether malloc (0) returns nonnull... yes
 ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
 
@@ -319,9 +316,6 @@ ac_cv_header_sys_mman_h=${ac_cv_header_sys_mman_h=yes}
 
 # checking for sys/param.h... yes
 ac_cv_header_sys_param_h=${ac_cv_header_sys_param_h=yes}
-
-# checking for sys/sdt.h... yes
-ac_cv_header_sys_sdt_h=${ac_cv_header_sys_sdt_h=yes}
 
 # checking for sys/socket.h... yes
 ac_cv_header_sys_socket_h=${ac_cv_header_sys_socket_h=yes}
@@ -608,9 +602,6 @@ gl_cv_func_ungetc_works=${gl_cv_func_ungetc_works=yes}
 # checking whether unlink honors trailing slashes... no
 gl_cv_func_unlink_honors_slashes=${gl_cv_func_unlink_honors_slashes=no}
 
-# checking whether unlink of a parent directory fails as it should... no
-gl_cv_func_unlink_parent_fails=${gl_cv_func_unlink_parent_fails=no}
-
 # checking whether utime handles trailing slashes on files... no
 gl_cv_func_utime_file_slash=${gl_cv_func_utime_file_slash=no}
 
@@ -652,9 +643,6 @@ gl_cv_header_stdint_h=${gl_cv_header_stdint_h=yes}
 
 # checking whether <wchar.h> uses 'inline' correctly... yes
 gl_cv_header_wchar_h_correct_inline=${gl_cv_header_wchar_h_correct_inline=yes}
-
-# checking for working fcntl.h... no (bad O_NOATIME)
-gl_cv_header_working_fcntl_h=${gl_cv_header_working_fcntl_h='no (bad O_NOATIME)'}
 
 # checking for working stdalign.h... no
 gl_cv_header_working_stdalign_h=${gl_cv_header_working_stdalign_h=no}
