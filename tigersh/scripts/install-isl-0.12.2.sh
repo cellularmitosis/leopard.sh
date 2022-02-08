@@ -1,11 +1,10 @@
 #!/bin/bash
 # based on templates/template.sh v1
 
-
 # Install isl on OS X Tiger / PowerPC.
 
 package=isl
-version=0.11.1
+version=0.12.2
 
 set -e -x
 PATH="/opt/portable-curl/bin:$PATH"

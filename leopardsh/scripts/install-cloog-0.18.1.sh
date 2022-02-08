@@ -19,8 +19,8 @@ if ! test -e /opt/gmp-4.3.2$ppc64 ; then
     leopard.sh gmp-4.3.2$ppc64
 fi
 
-if ! test -e /opt/isl-0.11.1$ppc64 ; then
-    leopard.sh isl-0.11.1$ppc64
+if ! test -e /opt/isl-0.12.2$ppc64 ; then
+    leopard.sh isl-0.12.2$ppc64
 fi
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
@@ -46,7 +46,7 @@ else
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-isl-prefix=/opt/isl-0.11.1$ppc64 \
+        --with-isl-prefix=/opt/isl-0.12.2$ppc64 \
         --with-gmp-prefix=/opt/gmp-4.3.2$ppc64
 
     make $(leopard.sh -j)

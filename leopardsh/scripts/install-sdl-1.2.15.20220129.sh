@@ -1,7 +1,7 @@
 #!/bin/bash
 # based on templates/template.sh v3
 
-# Install SDL 1.2 on OS X Tiger / PowerPC.
+# Install SDL 1.2 on OS X Leopard / PowerPC.
 
 package=sdl
 version=1.2.15.20220129

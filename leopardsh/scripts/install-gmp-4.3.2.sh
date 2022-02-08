@@ -1,7 +1,6 @@
 #!/bin/bash
 # based on templates/template.sh v3
 
-
 # Install gmp on OS X Leopard / PowerPC.
 
 package=gmp
@@ -56,8 +55,8 @@ else
             CFLAGS="-m64 $(leopard.sh -mcpu -O)"
             CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
         else
-            CFLAGS="-mpowerpc64 -force_cpusubtype_ALL $(leopard.sh -mcpu -O)"
-            CXXFLAGS="-mpowerpc64 -force_cpusubtype_ALL $(leopard.sh -mcpu -O)"
+            CFLAGS="-mpowerpc -force_cpusubtype_ALL $(leopard.sh -m32 -mcpu -O)"
+            CXXFLAGS="-mpowerpc -force_cpusubtype_ALL $(leopard.sh -m32 -mcpu -O)"
         fi
     elif test "$cpu" = "g4e" -o "$cpu" = "g4" ; then
         CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(leopard.sh -mcpu -O)"
@@ -76,7 +75,7 @@ else
         if test "$cpu" = "g5" ; then
             ./configure -C --prefix=/opt/$pkgspec \
                 --enable-cxx \
-                ABI=mode32
+                ABI=32
         else
             ./configure -C --prefix=/opt/$pkgspec \
                 --enable-cxx

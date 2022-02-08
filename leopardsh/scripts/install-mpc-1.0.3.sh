@@ -1,9 +1,10 @@
 #!/bin/bash
+# based on templates/template.sh v3
 
-# Install isl on OS X Leopard / PowerPC.
+# Install mpc on OS X Leopard / PowerPC.
 
-package=isl
-version=0.11.1
+package=mpc
+version=1.0.3
 
 set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"
@@ -19,6 +20,10 @@ if ! test -e /opt/gmp-4.3.2$ppc64 ; then
     leopard.sh gmp-4.3.2$ppc64
 fi
 
+if ! test -e /opt/mpfr-3.1.6$ppc64 ; then
+    leopard.sh mpfr-3.1.6$ppc64
+fi
+
 echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
@@ -27,7 +32,7 @@ if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEO
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
     srcmirror=https://gcc.gnu.org/pub/gcc/infrastructure
-    tarball=$package-$version.tar.bz2
+    tarball=$package-$version.tar.gz
 
     if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
@@ -36,15 +41,28 @@ else
 
     cd /tmp
     rm -rf $package-$version
-    tar xjf ~/Downloads/$tarball
+    tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    ./configure -C --prefix=/opt/$pkgspec \
-        --with-gmp-prefix=/opt/gmp-4.3.2$ppc64
+    if test "$(leopard.sh --cpu)" = "g5" ; then
+        if test -n "$ppc64" ; then
+            CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        else
+            CFLAGS="-mpowerpc -force_cpusubtype_ALL $(leopard.sh -m32 -mcpu -O)"
+        fi
+    else
+        CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL $(leopard.sh -m32 -mcpu -O)"
+    fi
+    export CFLAGS
 
-    make $(leopard.sh -j) V=1
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-gmp=/opt/gmp-4.3.2$ppc64 \
+        --with-mpfr=/opt/mpfr-3.1.6$ppc64
+
+    make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
         make check
