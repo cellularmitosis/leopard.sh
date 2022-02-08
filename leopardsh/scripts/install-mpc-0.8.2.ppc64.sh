@@ -1,1 +1,0 @@
-install-mpc-0.8.2.sh

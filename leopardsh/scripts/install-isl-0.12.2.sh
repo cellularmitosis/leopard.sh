@@ -1,4 +1,5 @@
 #!/bin/bash
+# based on templates/template.sh v3
 
 # Install isl on OS X Leopard / PowerPC.
 
@@ -40,6 +41,13 @@ else
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
+    if test -n "$ppc64" ; then
+        CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math -m64 $(leopard.sh -mcpu -O)"
+    else
+        CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math $(leopard.sh -m32 -mcpu -O)"
+    fi
+    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
         --with-gmp-prefix=/opt/gmp-4.3.2$ppc64

@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v1
+# based on templates/template.sh v3
 
 # Install isl on OS X Tiger / PowerPC.
 
