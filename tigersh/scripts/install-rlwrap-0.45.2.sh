@@ -22,6 +22,7 @@ if ! test -e /opt/pkg-config-0.29.2 ; then
 fi
 
 for dep in \
+    ncurses-6.3$ppc64 \
     readline-8.1.2$ppc64
 do
     if ! test -e /opt/$dep ; then
@@ -63,9 +64,9 @@ else
     fi
     export CFLAGS
 
-    pkgconfignames="readline"
+    pkgconfignames="ncurses readline"
     CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    LDFLAGS=$(pkg-config --libs-only-L $pkgconfignames)
+    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
     LIBS=$(pkg-config --libs-only-l $pkgconfignames)
     export CPPFLAGS LDFLAGS LIBS
 

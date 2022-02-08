@@ -22,6 +22,7 @@ if ! test -e /opt/pkg-config-0.29.2 ; then
 fi
 
 for dep in \
+    termcap-1.3.1$ppc64 \
     ncurses-6.3$ppc64
 do
     if ! test -e /opt/$dep ; then

@@ -16,6 +16,23 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
+    leopard.sh pkg-config-0.29.2$ppc64
+fi
+
+for dep in \
+    termcap-1.3.1$ppc64 \
+    ncurses-6.3$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+done
+export PKG_CONFIG_PATH
+
+echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
+
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
 if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
@@ -44,7 +61,14 @@ else
     fi
     export CFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec
+    pkgconfignames="ncurses"
+    CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
+    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
+    LIBS=$(pkg-config --libs-only-l $pkgconfignames)
+    export CPPFLAGS LDFLAGS LIBS
+
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-curses
 
     make $(leopard.sh -j)
 

@@ -52,7 +52,7 @@ else
 
     pkgconfignames="readline libressl gdbm"
     CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    LDFLAGS=$(pkg-config --libs-only-L $pkgconfignames)
+    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
     LIBS=$(pkg-config --libs-only-l $pkgconfignames)
     export CPPFLAGS LDFLAGS LIBS
     ./configure -C --prefix=/opt/$pkgspec \

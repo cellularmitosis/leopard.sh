@@ -54,6 +54,23 @@ else
 
     make install
 
+    # Note: termcap does not provide a .pc file, but readline requires one,
+    # so we supply one:
+    mkdir -p /opt/$pkgspec/lib/pkgconfig
+    cat > /opt/$pkgspec/lib/pkgconfig/$package.pc << "EOF"
+prefix=/opt/termcap-1.3.1
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Termcap
+Description: Terminal capability database
+URL: https://en.wikipedia.org/wiki/Termcap
+Version: 1.3.1
+Libs: -L${libdir} -ltermcap
+Cflags: -I${includedir}
+EOF
+
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
         gzip config.cache

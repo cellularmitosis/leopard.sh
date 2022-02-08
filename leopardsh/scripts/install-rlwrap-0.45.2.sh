@@ -1,10 +1,10 @@
 #!/bin/bash
 # based on templates/template.sh v3
 
-# Install lzop on OS X Leopard / PowerPC.
+# Install rlwrap on OS X Leopard / PowerPC.
 
-package=lzop
-version=1.04
+package=rlwrap
+version=0.45.2
 
 set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"
@@ -21,7 +21,8 @@ if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
 fi
 
 for dep in \
-    lzo-2.10$ppc64
+    ncurses-6.3$ppc64 \
+    readline-8.1.2$ppc64
 do
     if ! test -e /opt/$dep ; then
         leopard.sh $dep
@@ -37,7 +38,7 @@ if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEO
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-    srcmirror=https://www.lzop.org/download
+    srcmirror=https://github.com/hanslub42/$package/releases/download/v$version
     tarball=$package-$version.tar.gz
 
     if ! test -e ~/Downloads/$tarball ; then
@@ -47,22 +48,23 @@ else
 
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        export LDFLAGS=-m64
     else
         CFLAGS=$(leopard.sh -m32 -mcpu -O)
     fi
     export CFLAGS
 
-    pkgconfignames="lzo2"
-    # Note: the lzo2.pc file seems busted, it uses -I${includedir}/lzo instead of -I${includedir}.
-    # CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    CPPFLAGS=-I/opt/lzo-2.10$ppc64/include
+    pkgconfignames="ncurses readline"
+    CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
     LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
     LIBS=$(pkg-config --libs-only-l $pkgconfignames)
     export CPPFLAGS LDFLAGS LIBS
@@ -70,7 +72,10 @@ else
     ./configure -C --prefix=/opt/$pkgspec
 
     make $(leopard.sh -j) V=1
-    # Note: no 'make check' available.
+
+    if test -n "$LEOPARDSH_RUN_TESTS" ; then
+        make check
+    fi
 
     make install
 

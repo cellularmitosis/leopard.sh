@@ -65,7 +65,7 @@ else
     # Note: the lzo2.pc file seems busted, it uses -I${includedir}/lzo instead of -I${includedir}.
     # CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
     CPPFLAGS=-I/opt/lzo-2.10$ppc64/include
-    LDFLAGS=$(pkg-config --libs-only-L $pkgconfignames)
+    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
     LIBS=$(pkg-config --libs-only-l $pkgconfignames)
     export CPPFLAGS LDFLAGS LIBS
 
