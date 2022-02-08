@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v3
 
 # 👇 EDIT HERE:
 # Install foo on OS X Leopard / PowerPC.

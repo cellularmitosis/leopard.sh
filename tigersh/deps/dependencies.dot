@@ -17,6 +17,7 @@ rankdir = BT;
 "isl-0.12.2" -> "gmp-4.3.2"
 "libiconv-1.16"
 "libressl-3.4.2"
+"libsigsegv-2.14"
 "lzo-2.10"
 "lzop-1.04" -> "lzo-2.10"
 "lzop-1.04" -> "pkg-config-0.29.2"
