@@ -60,7 +60,7 @@ you're now also completely offline-capable.
 
 ### 10.3 / 10.2
 
-If I really get serious with this rabbit-hole, I might look at seeing what will port to Panther (10.3) and even Lion (10.2).
+If I really get serious with this rabbit-hole, I might look at seeing what will port to Panther (10.3) and even Jaguar (10.2).
 
 In a [blog post](https://gist.github.com/cellularmitosis/c56bb91d0b1ad0cd785ccd302abbba7c) I looked at data from [Everymac.com](https://everymac.com/systems/by_capability/maximum-macos-supported.html) to see which Macs are stuck on 10.3 and 10.2:
 
