@@ -48,14 +48,13 @@ else
     # Thanks to https://gmplib.org/list-archives/gmp-bugs/2010-January/001837.html
     export CC=gcc-4.2
 
-    # getting this to work was unusually finicky.
     if test "$(tiger.sh --cpu)" = "g5" ; then
         if test -n "$ppc64" ; then
             CFLAGS="-m64 $(tiger.sh -mcpu -O)"
             CXXFLAGS="-m64 $(tiger.sh -mcpu -O)"
         else
-            CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -mcpu -O)"
-            CXXFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -mcpu -O)"
+            CFLAGS="-mpowerpc64 -force_cpusubtype_ALL $(tiger.sh -mcpu -O)"
+            CXXFLAGS="-mpowerpc64 -force_cpusubtype_ALL $(tiger.sh -mcpu -O)"
         fi
     elif test "$(tiger.sh --cpu)" = "g4e" -o "$(tiger.sh --cpu)" = "g4" ; then
         CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -mcpu -O)"
@@ -71,8 +70,14 @@ else
             --enable-cxx \
             ABI=mode64
     else
-        ./configure -C --prefix=/opt/$pkgspec \
-            --enable-cxx
+        if test "$(tiger.sh --cpu)" = "g5" ; then
+            ./configure -C --prefix=/opt/$pkgspec \
+                --enable-cxx \
+                ABI=mode32
+        else
+            ./configure -C --prefix=/opt/$pkgspec \
+                --enable-cxx
+        fi
     fi
 
     make $(tiger.sh -j)

@@ -237,8 +237,10 @@ mkfifo $fifo
 tee /tmp/$script.log < $fifo &
 /usr/bin/time nice ./$script > $fifo 2>&1
 
-mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
-gzip /tmp/$script.log
-mv /tmp/$script.log.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
+if ! test -e /opt/$pkgspec/share/tiger.sh/$pkgspec/$script.log.gz ; then
+    mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
+    gzip /tmp/$script.log
+    mv /tmp/$script.log.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
+fi
 
 rm -f $fifo

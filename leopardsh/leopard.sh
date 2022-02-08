@@ -227,6 +227,8 @@ cd /tmp
 chmod +x $script
 /usr/bin/time nice ./$script 2>&1 | tee /tmp/$script.log
 
-mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-gzip /tmp/$script.log
-mv /tmp/$script.log.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+if ! test -e /opt/$pkgspec/share/leopard.sh/$pkgspec/$script.log.gz ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip /tmp/$script.log
+    mv /tmp/$script.log.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi

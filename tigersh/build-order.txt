@@ -1,8 +1,3 @@
+gmp-4.3.2.ppc64
 gzip-1.11
-libiconv-1.16
-libressl-3.4.2
-lzo-2.10
-m4-1.4.19
-pkg-config-0.29.2
-
-lzop-1.04
+sdl-1.2.15.20220129
