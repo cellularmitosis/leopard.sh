@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v1
+# based on templates/template.sh v3
 
 # Install gmp on OS X Tiger / PowerPC.
 
@@ -48,7 +48,9 @@ else
     # Thanks to https://gmplib.org/list-archives/gmp-bugs/2010-January/001837.html
     export CC=gcc-4.2
 
-    if test "$(tiger.sh --cpu)" = "g5" ; then
+    cpu=$(tiger.sh --cpu)
+
+    if test "$cpu" = "g5" ; then
         if test -n "$ppc64" ; then
             CFLAGS="-m64 $(tiger.sh -mcpu -O)"
             CXXFLAGS="-m64 $(tiger.sh -mcpu -O)"
@@ -56,10 +58,10 @@ else
             CFLAGS="-mpowerpc64 -force_cpusubtype_ALL $(tiger.sh -mcpu -O)"
             CXXFLAGS="-mpowerpc64 -force_cpusubtype_ALL $(tiger.sh -mcpu -O)"
         fi
-    elif test "$(tiger.sh --cpu)" = "g4e" -o "$(tiger.sh --cpu)" = "g4" ; then
+    elif test "$cpu" = "g4e" -o "$cpu" = "g4" ; then
         CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -mcpu -O)"
         CXXFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(tiger.sh -mcpu -O)"
-    elif test "$(tiger.sh --cpu)" = "g3" ; then
+    elif test "$cpu" = "g3" ; then
         CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL $(tiger.sh -mcpu -O)"
         CXXFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL $(tiger.sh -mcpu -O)"
     fi
@@ -70,7 +72,7 @@ else
             --enable-cxx \
             ABI=mode64
     else
-        if test "$(tiger.sh --cpu)" = "g5" ; then
+        if test "$cpu" = "g5" ; then
             ./configure -C --prefix=/opt/$pkgspec \
                 --enable-cxx \
                 ABI=mode32

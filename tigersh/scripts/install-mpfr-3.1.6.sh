@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v1
+# based on templates/template.sh v3
 
 # Install mpfr on OS X Tiger / PowerPC.
 
@@ -43,16 +43,17 @@ else
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
     if test -n "$ppc64" ; then
-        cflags="-Wall -Wmissing-prototypes -Wpointer-arith -m64 $(tiger.sh -mcpu -O)"
+        CFLAGS="-Wall -Wmissing-prototypes -Wpointer-arith -m64 $(tiger.sh -mcpu -O)"
     else
-        cflags="-Wall -Wmissing-prototypes -Wpointer-arith $(tiger.sh -m32 -mcpu -O)"
+        CFLAGS="-Wall -Wmissing-prototypes -Wpointer-arith $(tiger.sh -m32 -mcpu -O)"
     fi
+    export CFLAGS
 
     # Note: disabling thread-safe because thread-local storage isn't supported until gcc 4.9.
     ./configure -C --prefix=/opt/$pkgspec \
         --disable-thread-safe \
         --with-gmp=/opt/gmp-4.3.2$ppc64 \
-        CFLAGS="$cflags"
+        CFLAGS="$CFLAGS"
 
     make $(tiger.sh -j)
 

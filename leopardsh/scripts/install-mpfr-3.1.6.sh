@@ -1,9 +1,10 @@
 #!/bin/bash
+# based on templates/template.sh v3
 
 # Install mpfr on OS X Leopard / PowerPC.
 
 package=mpfr
-version=2.4.2
+version=3.1.6
 
 set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"
@@ -41,10 +42,18 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    if test -n "$ppc64" ; then
+        CFLAGS="-Wall -Wmissing-prototypes -Wpointer-arith -m64 $(leopard.sh -mcpu -O)"
+    else
+        CFLAGS="-Wall -Wmissing-prototypes -Wpointer-arith $(leopard.sh -m32 -mcpu -O)"
+    fi
+    export CFLAGS
+
     # Note: disabling thread-safe because thread-local storage isn't supported until gcc 4.9.
     ./configure -C --prefix=/opt/$pkgspec \
         --disable-thread-safe \
-        --with-gmp=/opt/gmp-4.3.2$ppc64
+        --with-gmp=/opt/gmp-4.3.2$ppc64 \
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j)
 

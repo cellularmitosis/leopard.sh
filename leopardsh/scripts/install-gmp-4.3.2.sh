@@ -1,4 +1,6 @@
 #!/bin/bash
+# based on templates/template.sh v3
+
 
 # Install gmp on OS X Leopard / PowerPC.
 
@@ -41,17 +43,46 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    perl -pi -e "s/-O3/$(leopard.sh -O)/g" configure
-    perl -pi -e "s/-O2/$(leopard.sh -O)/g" configure
-
     # Note: /usr/bin/gcc (4.0.1) fails with:
     #   ld: duplicate symbol ___gmpz_abs in .libs/compat.o and .libs/assert.o
     # So we use gcc-4.2 instead.
     # Thanks to https://gmplib.org/list-archives/gmp-bugs/2010-January/001837.html
-    CC=gcc-4.2 CXX=g++-4.2 \
-    ./configure -C \
-        --prefix=/opt/$pkgspec \
-        --enable-cxx
+    export CC=gcc-4.2
+
+    cpu=$(leopard.sh --cpu)
+
+    if test "$cpu" = "g5" ; then
+        if test -n "$ppc64" ; then
+            CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+            CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        else
+            CFLAGS="-mpowerpc64 -force_cpusubtype_ALL $(leopard.sh -mcpu -O)"
+            CXXFLAGS="-mpowerpc64 -force_cpusubtype_ALL $(leopard.sh -mcpu -O)"
+        fi
+    elif test "$cpu" = "g4e" -o "$cpu" = "g4" ; then
+        CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(leopard.sh -mcpu -O)"
+        CXXFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL -Wa,-maltivec $(leopard.sh -mcpu -O)"
+    elif test "$cpu" = "g3" ; then
+        CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL $(leopard.sh -mcpu -O)"
+        CXXFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL $(leopard.sh -mcpu -O)"
+    fi
+    export CFLAGS CXXFLAGS
+
+    if test -n "$ppc64" ; then
+        ./configure -C --prefix=/opt/$pkgspec \
+            --enable-cxx \
+            ABI=mode64
+    else
+        if test "$cpu" = "g5" ; then
+            ./configure -C --prefix=/opt/$pkgspec \
+                --enable-cxx \
+                ABI=mode32
+        else
+            ./configure -C --prefix=/opt/$pkgspec \
+                --enable-cxx
+        fi
+    fi
+
     make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

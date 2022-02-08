@@ -1,5 +1,6 @@
 gmp-4.3.2
 gzip-1.11
+mpfr-3.1.6
 ncurses-6.3
 ncursesw-6.3
 pv-1.6.20
