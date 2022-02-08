@@ -25,7 +25,7 @@ fi
 
 # 👇 EDIT HERE:
 if ! test -e /opt/bar-2.0$ppc64 ; then
-    leopard.sh bar-2.0$ppc64
+    tiger.sh bar-2.0$ppc64
 fi
 
 # 👇 EDIT HERE:

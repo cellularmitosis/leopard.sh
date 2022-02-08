@@ -1,11 +1,14 @@
 clisp-2.39.20210628
 cloog-0.18.1
 gcc-4.9.4
+gettext-0.21
 gmp-4.3.2
 gzip-1.11
 hyperspec-7.0
 isl-0.12.2
+libiconv-1.16
 libsigsegv-2.14
+libunistring-1.0
 mpc-1.0.3
 mpfr-3.1.6
 ncurses-6.3
