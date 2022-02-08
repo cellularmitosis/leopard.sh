@@ -3,3 +3,4 @@ gzip-1.11
 pv-1.6.20
 readline-8.1.2
 sdl-1.2.15.20220129
+termcap-1.3.1
