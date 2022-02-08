@@ -1,4 +1,4 @@
-# tiger.sh
+# `tiger.sh`
 
 A package manager / builder for PowerPC Macs running OS X Tiger (10.5), written in Bash 😱
 

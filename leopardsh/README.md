@@ -1,4 +1,4 @@
-# leopard.sh
+# `leopard.sh`
 
 A package manager / builder for PowerPC Macs running OS X Leopard (10.5), written in Bash 😱
 
