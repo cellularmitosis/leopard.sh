@@ -46,6 +46,7 @@ else
     done
 
     ./configure -C --prefix=/opt/$pkgspec
+
     make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

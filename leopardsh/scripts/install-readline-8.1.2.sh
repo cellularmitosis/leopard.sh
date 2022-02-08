@@ -1,4 +1,5 @@
 #!/bin/bash
+# based on templates/template.sh v3
 
 # Install readline on OS X Leopard / PowerPC.
 
@@ -34,6 +35,13 @@ else
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+    else
+        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+    fi
+    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec
 

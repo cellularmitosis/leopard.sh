@@ -1,4 +1,5 @@
 gmp-4.3.2.ppc64
 gzip-1.11.ppc64
 pv-1.6.20.ppc64
+readline-8.1.2.ppc64
 sdl-1.2.15.20220129.ppc64

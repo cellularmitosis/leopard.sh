@@ -1,4 +1,5 @@
 #!/bin/bash
+# based on templates/template.sh v3
 
 # Install readline on OS X Tiger / PowerPC.
 
@@ -35,6 +36,13 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+    else
+        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+    fi
+    export CFLAGS
+
     ./configure -C --prefix=/opt/$pkgspec
 
     make $(tiger.sh -j)
@@ -50,4 +58,12 @@ else
         gzip config.cache
         mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
     fi
+fi
+
+if test -e /opt/$pkgspec/bin ; then
+    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if test -e /opt/$pkgspec/sbin ; then
+    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
