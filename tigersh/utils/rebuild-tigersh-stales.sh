@@ -90,6 +90,10 @@ set -x
 for pkgspec in $(cat /tmp/to-build.txt) ; do
     rm -rf /usr/local/bin/*
     rm -rf /usr/local/sbin/*
+    if test -e /opt/local ; then
+        echo "Error: refusing to delete /opt/local." >&2
+        exit 1
+    fi
     rm -rf /opt/*
     binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
     rm -f ~/Desktop/tigersh/binpkgs/$binpkg

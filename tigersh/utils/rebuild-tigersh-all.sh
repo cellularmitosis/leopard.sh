@@ -35,6 +35,10 @@ rm -f ~/Desktop/tigersh/binpkgs/*
 for pkgspec in $(cat /tmp/build-order.txt) ; do
     rm -rf /usr/local/bin/*
     rm -rf /usr/local/sbin/*
+    if test -f /opt/local ; then
+        echo "Error: refusing to delete /opt/local." >&2
+        exit 1
+    fi
     rm -rf /opt/*
     time tiger.sh $pkgspec
     ~/Desktop/tigersh/utils/make-tigersh-binpkg.sh $pkgspec

@@ -35,6 +35,10 @@ rm -f ~/Desktop/leopardsh/binpkgs/*
 for pkgspec in $(cat /tmp/build-order.txt) ; do
     rm -rf /usr/local/bin/*
     rm -rf /usr/local/sbin/*
+    if test -e /opt/local ; then
+        echo "Error: refusing to delete /opt/local." >&2
+        exit 1
+    fi
     rm -rf /opt/*
     time leopard.sh $pkgspec
     ~/Desktop/leopardsh/utils/make-leopardsh-binpkg.sh $pkgspec
