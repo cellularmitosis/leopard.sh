@@ -18,6 +18,22 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+# Note: there is a dependency cycle between gettext and libiconv.
+# See the note in install-libiconv-bootstrap-1.16.sh.
+if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
+    tiger.sh libiconv-bootstrap-1.16$ppc64
+fi
+
+if ! test -e /opt/libunistring-1.0$ppc64 ; then
+    tiger.sh libunistring-1.0$ppc64
+fi
+
+if ! test -e /opt/xz-5.2.5$ppc64 ; then
+    tiger.sh xz-5.2.5$ppc64
+fi
+
+echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
+
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
 if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
     cd /opt
@@ -40,7 +56,6 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $(tiger.sh -mcpu -O)"
         CXXFLAGS="-m64 $(tiger.sh -mcpu -O)"
@@ -51,44 +66,14 @@ else
     fi
     export CFLAGS CXXFLAGS
 
-    # 👇 EDIT HERE:
-    for f in configure libfoo/configure ; do
-        if test -n "$ppc64" ; then
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-            perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-            export LDFLAGS=-m64
-        else
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-            perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-        fi
-    done
-
-    # 👇 EDIT HERE:
-    pkgconfignames="bar qux"
-    CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
-    LIBS=$(pkg-config --libs-only-l $pkgconfignames)
-    export CPPFLAGS LDFLAGS LIBS
-
-    # 👇 EDIT HERE:
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-bar=/opt/bar-1.0 \
-        --with-bar-prefix=/opt/bar-1.0 \
+        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
+        --with-libcurses-prefix=/opt/ncurses-6.3$ppc64 \
+        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64
 
     make $(tiger.sh -j) V=1
 
-    # 👇 EDIT HERE:
     if test -n "$TIGERSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    # 👇 EDIT HERE:
-    if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
-        make check
-    fi
-
-    # 👇 EDIT HERE:
-    if test -n "$TIGERSH_RUN_LONG_TESTS" ; then
         make check
     fi
 

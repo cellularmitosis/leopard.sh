@@ -1,4 +1,5 @@
 #!/bin/bash
+# based on templates/install-foo-1.0.sh v3
 
 # Install gettext on OS X Leopard / PowerPC.
 
@@ -17,6 +18,20 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+# Note: there is a dependency cycle between gettext and libiconv.
+# See the note in install-libiconv-bootstrap-1.16.sh.
+if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
+    leopard.sh libiconv-bootstrap-1.16$ppc64
+fi
+
+if ! test -e /opt/libunistring-1.0$ppc64 ; then
+    leopard.sh libunistring-1.0$ppc64
+fi
+
+if ! test -e /opt/xz-5.2.5$ppc64 ; then
+    leopard.sh xz-5.2.5$ppc64
+fi
+
 echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
@@ -34,14 +49,29 @@ else
 
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    ./configure -C --prefix=/opt/$pkgspec
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        export LDFLAGS=-m64
+    else
+        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CXXFLAGS=$(leopard.sh -m32 -mcpu -O)
+    fi
+    export CFLAGS CXXFLAGS
 
-    make $(leopard.sh -j)
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
+        --with-libcurses-prefix=/opt/ncurses-6.3$ppc64 \
+        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64
+
+    make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
         # FIXME two failing tests.

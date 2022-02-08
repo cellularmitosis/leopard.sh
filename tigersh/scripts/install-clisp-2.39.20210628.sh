@@ -95,7 +95,7 @@ else
     # export CPPFLAGS LDFLAGS LIBS
 
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-libsigsegv-prefix=/opt/libsigsegv-2.14 \
+        --with-libsigsegv-prefix=/opt/libsigsegv-2.14$ppc64 \
         --hyperspec=file:///opt/hyperspec-7.0/HyperSpec
 
     make $(tiger.sh -j) V=1

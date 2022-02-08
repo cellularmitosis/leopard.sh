@@ -16,6 +16,7 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+# Note: we use libiconv-bootstrap to break a dependency cycle with libiconv.
 if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
     leopard.sh libiconv-bootstrap-1.16$ppc64
 fi
@@ -53,11 +54,27 @@ else
     export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16
+        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64
 
     make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
+        # Note: tests faile to compile on leopard ppc64:
+        # gcc -std=gnu99 -DHAVE_CONFIG_H -DEXEEXT=\"\" -I. -I. -I../lib -I..  -DIN_LIBUNISTRING_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -Wno-error -m64 -mcpu=970 -O2 -MT test-stdint.o -MD -MP -MF $depbase.Tpo -c -o test-stdint.o test-stdint.c &&\
+        # mv -f $depbase.Tpo $depbase.Po
+        # test-stdint.c:265: error: negative width in bit-field '_gl_verify_error_if_negative'
+        # test-stdint.c:266: error: negative width in bit-field '_gl_verify_error_if_negative'
+        # test-stdint.c:415: error: negative width in bit-field '_gl_verify_error_if_negative'
+        # make[4]: *** [test-stdint.o] Error 1
+        # make[3]: *** [check-am] Error 2
+        # make[2]: *** [check-recursive] Error 1
+        # make[1]: *** [check] Error 2
+        # make: *** [check-recursive] Error 1
+
+        # Note: one failing test on leopard ppc:
+        # ../build-aux/test-driver: line 112: 25828 Abort trap              "$@" >> "$log_file" 2>&1
+        # FAIL: test-float
+
         make check
     fi
 

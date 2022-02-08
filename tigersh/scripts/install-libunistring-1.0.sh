@@ -16,6 +16,7 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+# Note: we use libiconv-bootstrap to break a dependency cycle with libiconv.
 if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
     tiger.sh libiconv-bootstrap-1.16$ppc64
 fi
@@ -53,11 +54,18 @@ else
     export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16
+        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64
 
     make $(tiger.sh -j) V=1
 
-    if test -n "$TIGERSH_RUN_TESTS" ; then
+    if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
+        # Note: the tests fail to compile:
+        # test-pthread.c:35: error: 'PTHREAD_RWLOCK_INITIALIZER' undeclared here (not in a function)
+        # make[4]: *** [test-pthread.o] Error 1
+        # make[3]: *** [check-am] Error 2
+        # make[2]: *** [check-recursive] Error 1
+        # make[1]: *** [check] Error 2
+        # make: *** [check-recursive] Error 1
         make check
     fi
 
