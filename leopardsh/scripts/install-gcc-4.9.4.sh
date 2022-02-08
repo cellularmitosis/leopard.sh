@@ -1,4 +1,5 @@
 #!/bin/bash
+# based on templates/template.sh v3
 
 # Install gcc on OS X Leopard / PowerPC.
 
@@ -60,8 +61,12 @@ else
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+    export CC=gcc-4.2 CXX=g++-4.2
 
-    CC=gcc-4.2 CXX=g++-4.2 ./configure -C \
+    # Note: I haven't figured out how to get gcc to build using custom flags,
+    # nor how to build a 64-bit gcc on G5.
+
+    ./configure -C \
         --prefix=/opt/$pkgspec \
         --with-gmp=/opt/gmp-4.3.2$ppc64 \
         --with-mpc=/opt/mpc-1.0.3$ppc64 \
@@ -73,7 +78,9 @@ else
         --enable-lto \
         --enable-objc-gc \
         --enable-shared \
-        --program-suffix=-4.9
+        --program-suffix=-4.9 \
+        --disable-bootstrap
+
     make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

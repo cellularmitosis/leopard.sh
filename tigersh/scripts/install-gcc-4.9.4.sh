@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v1
+# based on templates/template.sh v3
 
 # Install gcc on OS X Tiger / PowerPC.
 
@@ -28,12 +28,12 @@ if ! test -e /opt/mpfr-3.1.6$ppc64 ; then
     tiger.sh mpfr-3.1.6$ppc64
 fi
 
-if ! test -e /opt/mpc-0.8.1$ppc64 ; then
-    tiger.sh mpc-0.8.1$ppc64
+if ! test -e /opt/mpc-1.0.3$ppc64 ; then
+    tiger.sh mpc-1.0.3$ppc64
 fi
 
-if ! test -e /opt/isl-0.11.1$ppc64 ; then
-    tiger.sh isl-0.11.1$ppc64
+if ! test -e /opt/isl-0.12.2$ppc64 ; then
+    tiger.sh isl-0.12.2$ppc64
 fi
 
 if ! test -e /opt/cloog-0.18.1$ppc64 ; then
@@ -70,16 +70,17 @@ else
     ./configure -C \
         --prefix=/opt/$pkgspec \
         --with-gmp=/opt/gmp-4.3.2$ppc64 \
-        --with-mpc=/opt/mpc-0.8.1$ppc64 \
+        --with-mpc=/opt/mpc-1.0.3$ppc64 \
         --with-mpfr=/opt/mpfr-3.1.6$ppc64 \
-        --with-isl=/opt/isl-0.11.1$ppc64 \
+        --with-isl=/opt/isl-0.12.2$ppc64 \
         --with-cloog=/opt/cloog-0.18.1$ppc64 \
         --enable-languages=c,c++,objc,obj-c++,fortran \
         --enable-libssp \
         --enable-lto \
         --enable-objc-gc \
         --enable-shared \
-        --program-suffix=-4.9
+        --program-suffix=-4.9 \
+        --disable-bootstrap
 
     make $(tiger.sh -j)
 

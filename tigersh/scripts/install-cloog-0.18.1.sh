@@ -1,6 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v1
-
+# based on templates/template.sh v3
 
 # Install cloog on OS X Tiger / PowerPC.
 
@@ -47,13 +46,11 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    for f in configure ; do
-        if test -n "$ppc64" ; then
-            CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math -m64 $(tiger.sh -mcpu -O)"
-        else
-            CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math $(tiger.sh -m32 -mcpu -O)"
-        fi
-    done
+    if test -n "$ppc64" ; then
+        CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math -m64 $(tiger.sh -mcpu -O)"
+    else
+        CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math $(tiger.sh -m32 -mcpu -O)"
+    fi
     export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \

@@ -1,3 +1,5 @@
+cloog-0.18.1
+gcc-4.9.4
 gmp-4.3.2
 gzip-1.11
 isl-0.12.2
@@ -5,6 +7,7 @@ mpc-1.0.3
 mpfr-3.1.6
 ncurses-6.3
 ncursesw-6.3
+pkg-config-0.29.2
 pv-1.6.20
 readline-8.1.2
 rlwrap-0.45.2
