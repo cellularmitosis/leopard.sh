@@ -38,6 +38,7 @@ else
 
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+        export LDFLAGS=-m64
     else
         CFLAGS=$(tiger.sh -m32 -mcpu -O)
     fi

@@ -76,6 +76,7 @@ else
     # 👇 EDIT HERE:
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+        export LDFLAGS=-m64
     else
         CFLAGS=$(tiger.sh -m32 -mcpu -O)
     fi
@@ -86,6 +87,7 @@ else
         if test -n "$ppc64" ; then
             perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
             perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
+            export LDFLAGS=-m64
         else
             perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
             perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
