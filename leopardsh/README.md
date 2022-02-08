@@ -28,6 +28,8 @@ cloog-0.18.1
 ...
 ```
 
+![Dependency graph](deps/dependencies.png)
+
 To install a package:
 
 ```
