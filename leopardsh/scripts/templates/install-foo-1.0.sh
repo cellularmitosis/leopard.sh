@@ -24,6 +24,11 @@ if ! which -s gcc-4.2 ; then
 fi
 
 # 👇 EDIT HERE:
+if ! test -e /opt/bar-2.0$ppc64 ; then
+    leopard.sh bar-2.0$ppc64
+fi
+
+# 👇 EDIT HERE:
 if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
     leopard.sh pkg-config-0.29.2$ppc64
 fi

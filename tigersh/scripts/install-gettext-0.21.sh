@@ -1,12 +1,12 @@
 #!/bin/bash
 # based on templates/install-foo-1.0.sh v3
 
-# 👇 EDIT HERE:
-# Install foo on OS X Tiger / PowerPC.
+# Install gettext on OS X Tiger / PowerPC.
 
-# 👇 EDIT HERE:
-package=foo
-version=1.0
+# Note: gettext provides libintl.
+
+package=gettext
+version=0.21
 
 set -e -x
 PATH="/opt/portable-curl/bin:$PATH"
@@ -18,52 +18,13 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-# 👇 EDIT HERE:
-if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
-    tiger.sh gcc-4.2
-fi
-
-# 👇 EDIT HERE:
-if ! test -e /opt/bar-2.0$ppc64 ; then
-    leopard.sh bar-2.0$ppc64
-fi
-
-# 👇 EDIT HERE:
-# Note: ppc64 pkg-config unavailable on Tiger.
-if ! test -e /opt/pkg-config-0.29.2 ; then
-    tiger.sh pkg-config-0.29.2
-fi
-
-# 👇 EDIT HERE:
-for dep in \
-    bar-2.1$ppc64 \
-    qux-3.4$ppc64
-do
-    if ! test -e /opt/$dep ; then
-        tiger.sh $dep
-    fi
-    export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
-done
-
-# 👇 EDIT HERE:
-for dep in \
-    baz-4.5$ppc64
-do
-    export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
-done
-
-echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
-
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
 if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
     cd /opt
     curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-    # 👇 EDIT HERE:
     srcmirror=https://ftp.gnu.org/gnu/$package
     tarball=$package-$version.tar.gz
-    tarball=$package-$version.tar.bz2
-    tarball=$package-$version.tar.xz
 
     if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
@@ -73,19 +34,13 @@ else
     cd /tmp
     rm -rf $package-$version
 
-    # 👇 EDIT HERE:
     tar xzf ~/Downloads/$tarball
-    tar xjf ~/Downloads/$tarball
-    cat ~/Downloads/$tarball | unxz | tar x
 
     cd $package-$version
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    # 👇 EDIT HERE:
-    export CC=gcc-4.2 CXX=g++-4.2
 
-    # 👇 EDIT HERE:
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $(tiger.sh -mcpu -O)"
         CXXFLAGS="-m64 $(tiger.sh -mcpu -O)"
