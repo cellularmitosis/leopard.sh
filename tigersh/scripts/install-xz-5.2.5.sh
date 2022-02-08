@@ -1,4 +1,5 @@
 #!/bin/bash
+# based on templates/template.sh v3
 
 # Install xz on OS X Tiger / PowerPC.
 
@@ -35,13 +36,13 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    for f in configure ; do
-        if test -n "$ppc64" ; then
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-        else
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-        fi
-    done
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+        export LDFLAGS=-m64
+    else
+        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+    fi
+    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec
 

@@ -1,4 +1,6 @@
 #!/bin/bash
+# based on templates/template.sh v3
+
 
 # Install xz on OS X Leopard / PowerPC.
 
@@ -33,9 +35,18 @@ else
     tar xzf ~/Downloads/$tarball
     cd $package-$version
     
-    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" configure
-    
+    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        export LDFLAGS=-m64
+    else
+        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+    fi
+    export CFLAGS
+
     ./configure -C --prefix=/opt/$pkgspec
+
     make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
