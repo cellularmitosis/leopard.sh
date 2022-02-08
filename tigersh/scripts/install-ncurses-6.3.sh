@@ -1,9 +1,15 @@
 #!/bin/bash
 # based on templates/template.sh v3
 
-# Install ncurses on OS X Tiger / PowerPC.
+# Install ncurses / ncursesw on OS X Tiger / PowerPC.
 
-package=ncurses
+# Note: this file builds both the ncurses and ncursesw packages.
+if test -n "$(echo $0 | grep 'ncursesw')" ; then
+    package=ncursesw
+else
+    package=ncurses
+fi
+
 version=6.3
 
 set -e -x
@@ -28,8 +34,8 @@ if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGER
     cd /opt
     curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-    srcmirror=https://ftp.gnu.org/gnu/$package
-    tarball=$package-$version.tar.gz
+    srcmirror=https://ftp.gnu.org/gnu/ncurses
+    tarball=ncurses-$version.tar.gz
 
     if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
@@ -37,11 +43,11 @@ else
     fi
 
     cd /tmp
-    rm -rf $package-$version
+    rm -rf ncurses-$version
 
     tar xzf ~/Downloads/$tarball
 
-    cd $package-$version
+    cd ncurses-$version
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
@@ -58,13 +64,22 @@ else
     # Note: ncurses needs the directory for .pc files to already exist:
     mkdir -p /opt/$pkgspec/lib/pkgconfig
 
-    ./configure -C --prefix=/opt/$pkgspec \
-        --with-manpage-format=normal \
-        --enable-widec \
-        --enable-pc-files \
-        --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
-        --with-shared \
-        --without-debug
+    if test "$package" = "ncursesw" ; then
+        ./configure -C --prefix=/opt/$pkgspec \
+            --with-manpage-format=normal \
+            --enable-pc-files \
+            --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
+            --with-shared \
+            --without-debug \
+            --enable-widec
+    else
+        ./configure -C --prefix=/opt/$pkgspec \
+            --with-manpage-format=normal \
+            --enable-pc-files \
+            --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
+            --with-shared \
+            --without-debug
+    fi
 
     make $(tiger.sh -j) V=1
 
@@ -86,10 +101,3 @@ fi
 if test -e /opt/$pkgspec/sbin ; then
     ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
-
-
-# gcc -DHAVE_CONFIG_H -DBUILDING_NCURSES -I../ncurses -I. -I../include -D_DARWIN_C_SOURCE -DNDEBUG -O2 -no-cpp-precomp --param max-inline-insns-single=1200  -DNCURSES_STATIC -c ../ncurses/./base/lib_redrawln.c -o ../objects/lib_redrawln.o
-# gcc -DHAVE_CONFIG_H -DBUILDING_NCURSES -I../ncurses -I. -I../include -D_DARWIN_C_SOURCE -DNDEBUG -O2 -no-cpp-precomp --param max-inline-insns-single=1200  -DNCURSES_STATIC -c ../ncurses/./base/lib_refresh.c -o ../objects/lib_refresh.o
-# gcc -DHAVE_CONFIG_H -DBUILDING_NCURSES -I../ncurses -I. -I../include -D_DARWIN_C_SOURCE -DNDEBUG -O2 -no-cpp-precomp --param max-inline-insns-single=1200  -DNCURSES_STATIC -c ../ncurses/./base/lib_restart.c -o ../objects/lib_restart.o
-
-# gcc -DHAVE_CONFIG_H -DBUILDING_NCURSES -I../ncurses -I. -I../include -D_APPLE_C_SOURCE -D_XOPEN_SOURCE=600 -DSIGWINCH=28 -DNDEBUG -m32 -mcpu=970 -O2 -no-cpp-precomp --param max-inline-insns-single=1200  -DNCURSES_STATIC -g -DTRACE -c ../ncurses/./base/legacy_coding.c -o ../obj_g/legacy_coding.o

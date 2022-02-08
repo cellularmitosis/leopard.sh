@@ -1,6 +1,7 @@
 gmp-4.3.2
 gzip-1.11
 ncurses-6.3
+ncursesw-6.3
 pv-1.6.20
 readline-8.1.2
 sdl-1.2.15.20220129

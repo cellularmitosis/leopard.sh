@@ -100,7 +100,7 @@ else
     # 👇 EDIT HERE:
     pkgconfignames="bar qux"
     CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    LDFLAGS=$(pkg-config --libs-only-L $pkgconfignames)
+    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
     LIBS=$(pkg-config --libs-only-l $pkgconfignames)
     export CPPFLAGS LDFLAGS LIBS
 

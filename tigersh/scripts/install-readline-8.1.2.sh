@@ -16,6 +16,23 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+# Note: ppc64 pkg-config unavailable on Tiger.
+if ! test -e /opt/pkg-config-0.29.2 ; then
+    tiger.sh pkg-config-0.29.2
+fi
+
+for dep in \
+    ncurses-6.3$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+    PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+done
+export PKG_CONFIG_PATH
+
+echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
+
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
 if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
     cd /opt
@@ -44,7 +61,14 @@ else
     fi
     export CFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec
+    pkgconfignames="ncurses"
+    CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
+    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
+    LIBS=$(pkg-config --libs-only-l $pkgconfignames)
+    export CPPFLAGS LDFLAGS LIBS
+
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-curses
 
     make $(tiger.sh -j)
 

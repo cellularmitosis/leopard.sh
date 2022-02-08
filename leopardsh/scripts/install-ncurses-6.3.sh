@@ -1,9 +1,15 @@
 #!/bin/bash
 # based on templates/template.sh v3
 
-# Install ncurses on OS X Leopard / PowerPC.
+# Install ncurses / ncursesw on OS X Leopard / PowerPC.
 
-package=ncurses
+# Note: this file builds both the ncurses and ncursesw packages.
+if test -n "$(echo $0 | grep 'ncursesw')" ; then
+    package=ncursesw
+else
+    package=ncurses
+fi
+
 version=6.3
 
 set -e -x -o pipefail
@@ -27,8 +33,8 @@ if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEO
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-    srcmirror=https://ftp.gnu.org/gnu/$package
-    tarball=$package-$version.tar.gz
+    srcmirror=https://ftp.gnu.org/gnu/ncurses
+    tarball=ncurses-$version.tar.gz
 
     if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
@@ -36,11 +42,11 @@ else
     fi
 
     cd /tmp
-    rm -rf $package-$version
+    rm -rf ncurses-$version
 
     tar xzf ~/Downloads/$tarball
 
-    cd $package-$version
+    cd ncurses-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
@@ -57,14 +63,22 @@ else
     # Note: ncurses needs the directory for .pc files to already exist:
     mkdir -p /opt/$pkgspec/lib/pkgconfig
 
-
-    ./configure -C --prefix=/opt/$pkgspec \
-        --with-manpage-format=normal \
-        --enable-widec \
-        --enable-pc-files \
-        --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
-        --with-shared \
-        --without-debug
+    if test "$package" = "ncursesw" ; then
+        ./configure -C --prefix=/opt/$pkgspec \
+            --with-manpage-format=normal \
+            --enable-pc-files \
+            --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
+            --with-shared \
+            --without-debug \
+            --enable-widec
+    else
+        ./configure -C --prefix=/opt/$pkgspec \
+            --with-manpage-format=normal \
+            --enable-pc-files \
+            --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
+            --with-shared \
+            --without-debug
+    fi
 
     make $(leopard.sh -j) V=1
 
