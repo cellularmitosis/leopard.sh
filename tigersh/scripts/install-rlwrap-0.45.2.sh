@@ -16,8 +16,9 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
-    tiger.sh pkg-config-0.29.2$ppc64
+# Note: ppc64 pkg-config unavailable on Tiger.
+if ! test -e /opt/pkg-config-0.29.2 ; then
+    tiger.sh pkg-config-0.29.2
 fi
 
 for dep in \

@@ -76,11 +76,13 @@ else
     # 👇 EDIT HERE:
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
         export LDFLAGS=-m64
     else
         CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CXXFLAGS=$(leopard.sh -m32 -mcpu -O)
     fi
-    export CFLAGS
+    export CFLAGS CXXFLAGS
 
     # 👇 EDIT HERE:
     for f in configure libfoo/configure ; do

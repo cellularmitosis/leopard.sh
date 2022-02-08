@@ -24,8 +24,9 @@ if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
 fi
 
 # 👇 EDIT HERE:
-if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
-    tiger.sh pkg-config-0.29.2$ppc64
+# Note: ppc64 pkg-config unavailable on Tiger.
+if ! test -e /opt/pkg-config-0.29.2 ; then
+    tiger.sh pkg-config-0.29.2
 fi
 
 # 👇 EDIT HERE:
@@ -76,11 +77,13 @@ else
     # 👇 EDIT HERE:
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+        CXXFLAGS="-m64 $(tiger.sh -mcpu -O)"
         export LDFLAGS=-m64
     else
         CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CXXFLAGS=$(tiger.sh -m32 -mcpu -O)
     fi
-    export CFLAGS
+    export CFLAGS CXXFLAGS
 
     # 👇 EDIT HERE:
     for f in configure libfoo/configure ; do

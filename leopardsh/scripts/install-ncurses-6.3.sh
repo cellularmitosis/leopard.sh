@@ -1,9 +1,10 @@
 #!/bin/bash
+# based on templates/template.sh v3
 
 # Install ncurses on OS X Leopard / PowerPC.
 
 package=ncurses
-version=6.2
+version=6.3
 
 set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"
@@ -15,12 +16,18 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
+    leopard.sh pkg-config-0.29.2$ppc64
+fi
+
+echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
+
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
 if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-    srcmirror=https://invisible-mirror.net/archives/$package
+    srcmirror=https://ftp.gnu.org/gnu/$package
     tarball=$package-$version.tar.gz
 
     if ! test -e ~/Downloads/$tarball ; then
@@ -30,18 +37,38 @@ else
 
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    ./configure -C --prefix=/opt/$pkgspec --enable-widec --enable-pc-files
-
-    make $(leopard.sh -j)
-
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        export LDFLAGS=-m64
+    else
+        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CXXFLAGS=$(leopard.sh -m32 -mcpu -O)
     fi
+    export CFLAGS CXXFLAGS
+
+    # Note: ncurses needs the directory for .pc files to already exist:
+    mkdir -p /opt/$pkgspec/lib/pkgconfig
+
+
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-manpage-format=normal \
+        --enable-widec \
+        --enable-pc-files \
+        --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
+        --with-shared \
+        --without-debug
+
+    make $(leopard.sh -j) V=1
+
+    # Note: no 'make check' available.
 
     make install
 
