@@ -1,4 +1,4 @@
-# tiger.sh leopard.sh
+# tiger.sh and leopard.sh
 
 Package managers for PowerPC Macs running OS X Leopard (10.5) and Tiger (10.4), written in Bash 😱
 
