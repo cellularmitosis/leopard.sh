@@ -8,6 +8,7 @@ node [shape=box];
 "lzo-2.10"
 "m4-1.4.19"
 "pkg-config-0.29.2"
+"pv-1.6.20"
 "sdl-sdl-1.2.15.20220129"
 "sed-4.8"
 "xz-5.2.5"
