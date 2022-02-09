@@ -21,35 +21,20 @@ if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
 fi
 
 if ! test -e /opt/libsigsegv-2.14$ppc64 ; then
-    leopard.sh libsigsegv-2.14$ppc64
+    tiger.sh libsigsegv-2.14$ppc64
+fi
+
+if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
+    tiger.sh libiconv-bootstrap-1.16$ppc64
+fi
+
+if ! test -e /opt/readline-8.1.2$ppc64 ; then
+    tiger.sh readline-8.1.2$ppc64
 fi
 
 if ! test -e /opt/hyperspec-7.0 ; then
-    leopard.sh hyperspec-7.0
+    tiger.sh hyperspec-7.0
 fi
-
-# Note: ppc64 pkg-config unavailable on Tiger.
-if ! test -e /opt/pkg-config-0.29.2 ; then
-    tiger.sh pkg-config-0.29.2
-fi
-
-# 👇 EDIT HERE:
-# for dep in \
-#     bar-2.1$ppc64 \
-#     qux-3.4$ppc64
-# do
-#     if ! test -e /opt/$dep ; then
-#         tiger.sh $dep
-#     fi
-#     export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
-# done
-
-# 👇 EDIT HERE:
-# for dep in \
-#     baz-4.5$ppc64
-# do
-#     export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
-# done
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
 
@@ -58,8 +43,9 @@ if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGER
     cd /opt
     curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-    srcmirror=https://ftp.gnu.org/gnu/$package
-    tarball=$package-$version.tar.gz
+    commit=de01f0f47bb44d3a0f9e842464cf2520b238f356
+    srcmirror=https://gitlab.com/gnu-clisp/clisp/-/archive/$commit
+    tarball=$package-$commit.tar.gz
 
     if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
@@ -67,11 +53,11 @@ else
     fi
 
     cd /tmp
-    rm -rf $package-$version
+    rm -rf $package-$commit
 
     tar xzf ~/Downloads/$tarball
 
-    cd $package-$version
+    cd $package-$commit
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
@@ -87,24 +73,14 @@ else
     fi
     export CC
 
-    # 👇 EDIT HERE:
-    # pkgconfignames="bar qux"
-    # CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    # LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
-    # LIBS=$(pkg-config --libs-only-l $pkgconfignames)
-    # export CPPFLAGS LDFLAGS LIBS
-
     ./configure -C --prefix=/opt/$pkgspec \
         --with-libsigsegv-prefix=/opt/libsigsegv-2.14$ppc64 \
+        --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
+        --with-libreadline-prefix=/opt/libreadline-8.1.2$ppc64 \
         --hyperspec=file:///opt/hyperspec-7.0/HyperSpec
 
-    make $(tiger.sh -j) V=1
+    exit 1
 
-    if test -n "$TIGERSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
