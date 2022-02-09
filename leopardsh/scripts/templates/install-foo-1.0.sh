@@ -1,12 +1,10 @@
 #!/bin/bash
 # based on templates/install-foo-1.0.sh v3
 
-# 👇 EDIT HERE:
-# Install foo on OS X Leopard / PowerPC.
+# Install coreutils on OS X Leopard / PowerPC.
 
-# 👇 EDIT HERE:
-package=foo
-version=1.0
+package=coreutils
+version=9.0
 
 set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"

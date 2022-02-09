@@ -28,6 +28,11 @@ if ! test -e /opt/hyperspec-7.0 ; then
     tiger.sh hyperspec-7.0
 fi
 
+# Note: libffcall not available on tiger yet.
+# if ! test -e /opt/libffcall-2.4$ppc64 ; then
+#     leopard.sh libffcall-2.4$ppc64
+# fi
+
 if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
     tiger.sh libiconv-bootstrap-1.16$ppc64
 fi

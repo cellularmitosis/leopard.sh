@@ -1,13 +1,14 @@
 #!/bin/bash
+# based on templates/install-foo-1.0.sh v3
 
-# Install coreutils on OS X Leopard / PowerPC.
+# Install coreutils on OS X Tiger / PowerPC.
 
 package=coreutils
 version=9.0
 
-set -e -x -o pipefail
+set -e -x
 PATH="/opt/portable-curl/bin:$PATH"
-LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -15,32 +16,32 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! which -s gcc-4.2 ; then
-    leopard.sh gcc-4.2
+if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
+    tiger.sh gcc-4.2
 fi
 
-if ! test -e /opt/gettext-0.21$ppc64 ; then
-    leopard.sh gettext-0.21$ppc64
+if ! test -e /opt/gettext-0.20$ppc64 ; then
+    tiger.sh gettext-0.20$ppc64
 fi
 
 if ! test -e /opt/gmp-4.3.2$ppc64 ; then
-    leopard.sh gmp-4.3.2$ppc64
+    tiger.sh gmp-4.3.2$ppc64
 fi
 
 if ! test -e /opt/libiconv-1.16$ppc64 ; then
-    leopard.sh libiconv-1.16$ppc64
+    tiger.sh libiconv-1.16$ppc64
 fi
 
 if ! test -e /opt/libressl-3.4.2$ppc64 ; then
-    leopard.sh libressl-3.4.2$ppc64
+    tiger.sh libressl-3.4.2$ppc64
 fi
 
-echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
+echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
 
-binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
+binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
+if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
     cd /opt
-    curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
+    curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
     srcmirror=https://ftp.gnu.org/gnu/$package
     tarball=$package-$version.tar.gz
@@ -56,31 +57,20 @@ else
     rm -rf $package-$version
 
     tar xzf ~/Downloads/$tarball
-    
+
     cd $package-$version
 
-    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    # Note: fails to build when using the stock gcc, so we use gcc-4.2:
-    # gcc -std=gnu99   -mcpu=7450 -O2   -o src/make-prime-list src/make-prime-list.o  
-    # gcc -std=gnu99  -I. -I./lib  -Ilib -I./lib -Isrc -I./src -I/opt/libiconv-1.16/include -I/opt/gettext-0.21/include -fPIC   -mcpu=7450 -O2 -MT src/libstdbuf_so-libstdbuf.o -MD -MP -MF src/.deps/libstdbuf_so-libstdbuf.Tpo -c -o src/libstdbuf_so-libstdbuf.o `test -f 'src/libstdbuf.c' || echo './'`src/libstdbuf.c
-    # mv -f src/.deps/libstdbuf_so-libstdbuf.Tpo src/.deps/libstdbuf_so-libstdbuf.Po
-    # gcc -std=gnu99 -fPIC   -mcpu=7450 -O2 -shared  -o src/libstdbuf.so src/libstdbuf_so-libstdbuf.o -L/opt/gettext-0.21/lib -lintl -liconv -Wl,-framework -Wl,CoreFoundation 
-    # Undefined symbols:
-    #   "_main", referenced from:
-    #       start in crt1.10.5.o
-    # ld: symbol(s) not found
-    # collect2: ld returned 1 exit status
-    # make[2]: *** [src/libstdbuf.so] Error 1
-    # make[1]: *** [all-recursive] Error 1
-    # make: *** [all] Error 2
+    # Note: fails to build when using the stock gcc (see the leopard script
+    # for details), so we use gcc-4.2:
     export CC=gcc-4.2
 
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
         export LDFLAGS=-m64
     else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS=$(tiger.sh -m32 -mcpu -O)
     fi
     export CFLAGS
 
@@ -110,21 +100,18 @@ else
         --with-libgmp-prefix=/opt/gmp-4.3.2$ppc64 \
         --with-libintl-prefix=/opt/gettext-0.20$ppc64
 
-    make $(leopard.sh -j) V=1
+    make $(tiger.sh -j) V=1
 
-    if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
-        # FAIL: tests/misc/env-S
-        # FAIL: tests/misc/sort-continue
-        # FAIL: tests/misc/sort-merge-fdlimit
+    if test -n "$TIGERSH_RUN_TESTS" ; then
         make check
     fi
 
     make install
 
     if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+        mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
         gzip config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+        mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
     fi
 fi
 
