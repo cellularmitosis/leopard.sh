@@ -131,7 +131,7 @@ else
 
     cd src
     ./makemake \
-        --prefix=/tmp/opt/$pkgspec \
+        --prefix=/opt/$pkgspec \
         > Makefile
 
     make config.lisp
