@@ -113,10 +113,14 @@ else
     make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
+        # Note: three test failures on ppc32:
         # FAIL: tests/misc/env-S
         # FAIL: tests/misc/sort-continue
         # FAIL: tests/misc/sort-merge-fdlimit
         make check
+
+        # Note: 221 test failures on ppc64:
+        # FAIL:  221
     fi
 
     make install
