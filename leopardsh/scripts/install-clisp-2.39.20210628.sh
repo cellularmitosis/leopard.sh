@@ -20,6 +20,10 @@ if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
     leopard.sh gcc-4.2
 fi
 
+if ! test -e /opt/gettext-0.21$ppc64 ; then
+    leopard.sh gettext-0.21$ppc64
+fi
+
 if ! test -e /opt/hyperspec-7.0 ; then
     leopard.sh hyperspec-7.0
 fi
@@ -40,9 +44,9 @@ if ! test -e /opt/libunistring-1.0$ppc64 ; then
     leopard.sh libunistring-1.0$ppc64
 fi
 
-if ! test -e /opt/lightning-2.1.3$ppc64 ; then
-    leopard.sh lightning-2.1.3$ppc64
-fi
+# if ! test -e /opt/lightning-2.1.3$ppc64 ; then
+#     leopard.sh lightning-2.1.3$ppc64
+# fi
 
 if ! test -e /opt/readline-8.1.2$ppc64 ; then
     leopard.sh readline-8.1.2$ppc64
@@ -90,10 +94,10 @@ else
         --hyperspec=file:///opt/hyperspec-7.0/HyperSpec \
         --with-libffcall-prefix=/opt/libffcall-2.4$ppc64 \
         --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
+        --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
         --with-libreadline-prefix=/opt/readline-8.1.2$ppc64 \
         --with-libsigsegv-prefix=/opt/libsigsegv-2.14$ppc64 \
         --with-libunistring-prefix=/opt/libunistring-1.0$ppc64 \
-        --with-lightning-prefix=/opt/lightning-2.1.3$ppc64 \
             --with-module=asdf \
             --with-module=berkeley-db \
             --with-module=bindings/glibc \
@@ -122,7 +126,7 @@ else
             --with-module=zlib \
 
         # --with-jitc=lightning
-        # --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
+        # --with-lightning-prefix=/opt/lightning-2.1.3$ppc64 \
 
     cd src
     ./makemake \

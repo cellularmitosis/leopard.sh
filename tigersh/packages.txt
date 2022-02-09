@@ -1,7 +1,7 @@
 clisp-2.39.20210628
 cloog-0.18.1
 gcc-4.9.4
-gettext-0.21
+gettext-0.20
 gmp-4.3.2
 gzip-1.11
 hyperspec-7.0

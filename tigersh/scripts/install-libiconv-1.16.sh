@@ -16,6 +16,12 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+if ! test -e /opt/gettext-0.20$ppc64 ; then
+    tiger.sh gettext-0.20$ppc64
+fi
+
+echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
+
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
 if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
     cd /opt
@@ -44,7 +50,8 @@ else
     fi
     export CFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-libintl-prefix=/opt/gettext-0.20$ppc64
     
     make $(tiger.sh -j)
 

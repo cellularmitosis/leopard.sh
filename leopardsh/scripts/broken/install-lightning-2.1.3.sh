@@ -1,10 +1,10 @@
 #!/bin/bash
 # based on templates/install-foo-1.0.sh v3
 
-# Install libffcall on OS X Leopard / PowerPC.
+# Install lightning on OS X Leopard / PowerPC.
 
-package=libffcall
-version=2.4
+package=lightning
+version=2.1.3
 
 set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"
@@ -36,9 +36,6 @@ else
 
     cd $package-$version
 
-    cp ~/tmp/gettext/get_ppid_of.h libtextstyle/lib/
-    cp ~/tmp/gettext/fix1/get_ppid_of.c libtextstyle/lib/
-
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
     if test -n "$ppc64" ; then
@@ -51,8 +48,7 @@ else
     fi
     export CFLAGS CXXFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec \
-        --with-threads=posix
+    ./configure -C --prefix=/opt/$pkgspec
 
     make $(leopard.sh -j) V=1
 
@@ -77,26 +73,16 @@ if test -e /opt/$pkgspec/sbin ; then
     ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
 
-# Note: ppc64 fails to build:
-# cd avcall && make all
-# case "darwin9.8.0" in \
-# 	  aix*) syntax=aix;; \
-# 	  *) syntax=linux;; \
-# 	esac; \
-# 	case ${syntax} in \
-# 	  linux) \
-# 	    gcc -std=gnu99 -E `if test true = true; then echo '-DASM_UNDERSCORE'; fi` ./avcall-powerpc64-${syntax}.S | grep -v '^ *#line' | grep -v '^#' | sed -e 's,% ,%,g' -e 's,//.*$,,' > avcall-powerpc64.s || exit 1 ;; \
-# 	  *) \
-# 	    cp ./avcall-powerpc64-${syntax}.s avcall-powerpc64.s || exit 1 ;; \
-# 	esac
-# /bin/sh ../libtool --mode=compile gcc -std=gnu99 -x none -c avcall-powerpc64.s
-# libtool: compile:  gcc -std=gnu99 -x none -c avcall-powerpc64.s  -fno-common -DPIC -o .libs/avcall-powerpc64.o
-# avcall-powerpc64.c:2:unknown .machine argument: power4
-# avcall-powerpc64.c:3:Expected comma after segment-name
-# avcall-powerpc64.c:3:Rest of line ignored. 1st junk character valued 32 ( ).
-# avcall-powerpc64.c:9:Invalid mnemonic 'tocbase,0'
-# avcall-powerpc64.c:10:Unknown pseudo-op: .previous
-# avcall-powerpc64.c:11:Unknown pseudo-op: .type
-# avcall-powerpc64.c:11:Rest of line ignored. 1st junk character valued 97 (a).
-# avcall-powerpc64.c:11:Invalid mnemonic 'function'
-# avcall-powerpc64.c:13:Parameter syntax error (parameter 1)
+# fails to build:
+# make  all-recursive
+# Making all in check
+# make[2]: Nothing to be done for `all'.
+# Making all in doc
+#   CC       incr.o
+# incr.c: In function 'main':
+# incr.c:18: error: 'JIT_R0' undeclared (first use in this function)
+# incr.c:18: error: (Each undeclared identifier is reported only once
+# incr.c:18: error: for each function it appears in.)
+# make[2]: *** [incr.o] Error 1
+# make[1]: *** [all-recursive] Error 1
+# make: *** [all] Error 2

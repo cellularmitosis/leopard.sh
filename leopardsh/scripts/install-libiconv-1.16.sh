@@ -16,6 +16,12 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+if ! test -e /opt/gettext-0.21$ppc64 ; then
+    leopard.sh gettext-0.21$ppc64
+fi
+
+echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
+
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
 if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
@@ -44,7 +50,8 @@ else
     fi
     export CFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-libintl-prefix=/opt/gettext-0.21$ppc64
 
     make $(leopard.sh -j)
 
