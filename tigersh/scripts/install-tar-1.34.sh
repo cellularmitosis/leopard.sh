@@ -1,14 +1,15 @@
 #!/bin/bash
+# based on templates/install-foo-1.0.sh v3
 
 # Install tar on OS X Tiger / PowerPC.
-
-exit 1
 # FIXME it appears this version of tar has problems untarring tarballs
 # created by the stock os x tar:
-# tar xzf /Users/macuser/Downloads/gzip-1.11.tar.gz
-# tar: gzip-1.11/tests: Cannot utime: Invalid argument
-# tar: gzip-1.11: Cannot utime: Invalid argument
-# tar: Exiting with failure status due to previous errors
+#   tar xzf /Users/macuser/Downloads/gzip-1.11.tar.gz
+#   tar: gzip-1.11/tests: Cannot utime: Invalid argument
+#   tar: gzip-1.11: Cannot utime: Invalid argument
+#   tar: Exiting with failure status due to previous errors
+# There is only one google hit for this exact error:
+#   https://bugs.launchpad.net/ubuntu/+source/linux-meta-hwe/+bug/1820499
 
 package=tar
 version=1.34
@@ -22,6 +23,16 @@ if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
 fi
 
 pkgspec=$package-$version$ppc64
+
+if ! test -e /opt/gettext-0.20$ppc64 ; then
+    tiger.sh gettext-0.20$ppc64
+fi
+
+if ! test -e /opt/libiconv-1.16$ppc64 ; then
+    tiger.sh libiconv-1.16$ppc64
+fi
+
+echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
 
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
 if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
@@ -47,15 +58,17 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    for f in configure ; do
-        if test -n "$ppc64" ; then
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-        else
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-        fi
-    done
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+        export LDFLAGS=-m64
+    else
+        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+    fi
+    export CFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
+        --with-libintl-prefix=/opt/gettext-0.20$ppc64
 
     make $(tiger.sh -j) V=1
 

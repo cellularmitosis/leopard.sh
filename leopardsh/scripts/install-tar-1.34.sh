@@ -1,4 +1,5 @@
 #!/bin/bash
+# based on templates/install-foo-1.0.sh v3
 
 # Install tar on OS X Leopard / PowerPC.
 
@@ -15,6 +16,16 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+if ! test -e /opt/gettext-0.21$ppc64 ; then
+    leopard.sh gettext-0.21$ppc64
+fi
+
+if ! test -e /opt/libiconv-1.16$ppc64 ; then
+    leopard.sh libiconv-1.16$ppc64
+fi
+
+echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
+
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
 if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
     cd /opt
@@ -28,16 +39,29 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 9d5949e4c2d9665546ac65dafc0e726a
+
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" configure
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        export LDFLAGS=-m64
+    else
+        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+    fi
+    export CFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
+        --with-libintl-prefix=/opt/gettext-0.21$ppc64
+
     make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then

@@ -1,10 +1,12 @@
 #!/bin/bash
 # based on templates/install-foo-1.0.sh v3
 
-# Install coreutils on OS X Leopard / PowerPC.
+# 👇 EDIT HERE:
+# Install foo on OS X Leopard / PowerPC.
 
-package=coreutils
-version=9.0
+# 👇 EDIT HERE:
+package=foo
+version=1.0
 
 set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"
@@ -68,7 +70,7 @@ else
     fi
 
     # 👇 EDIT HERE:
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 1916ae6bd0e2a80545fee455c98673d
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = xxxxxxxzxxxxxxxxxxzxxxxxxxxxxzx
 
     cd /tmp
     rm -rf $package-$version
