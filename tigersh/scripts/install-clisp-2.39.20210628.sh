@@ -24,16 +24,24 @@ if ! test -e /opt/libsigsegv-2.14$ppc64 ; then
     tiger.sh libsigsegv-2.14$ppc64
 fi
 
+if ! test -e /opt/hyperspec-7.0 ; then
+    tiger.sh hyperspec-7.0
+fi
+
 if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
     tiger.sh libiconv-bootstrap-1.16$ppc64
 fi
 
-if ! test -e /opt/readline-8.1.2$ppc64 ; then
-    tiger.sh readline-8.1.2$ppc64
+if ! test -e /opt/libsigsegv-2.14$ppc64 ; then
+    tiger.sh libsigsegv-2.14$ppc64
 fi
 
-if ! test -e /opt/hyperspec-7.0 ; then
-    tiger.sh hyperspec-7.0
+if ! test -e /opt/libunistring-1.0$ppc64 ; then
+    tiger.sh libunistring-1.0$ppc64
+fi
+
+if ! test -e /opt/readline-8.1.2$ppc64 ; then
+    tiger.sh readline-8.1.2$ppc64
 fi
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
@@ -59,8 +67,6 @@ else
 
     cd $package-$commit
 
-    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
-
     cpu=$(tiger.sh --cpu)
     if test "$cpu" = "g5" ; then
         if test -n "$ppc64" ; then
@@ -73,14 +79,63 @@ else
     fi
     export CC
 
-    ./configure -C --prefix=/opt/$pkgspec \
+    ./configure --prefix=/opt/$pkgspec \
+        --with-unicode \
+        --with-threads=POSIX_THREADS \
+        --hyperspec=file:///opt/hyperspec-7.0/HyperSpec \
+        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
+        --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
+        --with-libreadline-prefix=/opt/readline-8.1.2$ppc64 \
         --with-libsigsegv-prefix=/opt/libsigsegv-2.14$ppc64 \
-        --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
-        --with-libreadline-prefix=/opt/libreadline-8.1.2$ppc64 \
-        --hyperspec=file:///opt/hyperspec-7.0/HyperSpec
+        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64
 
-    exit 1
+        # --with-ffcall \
+        # --with-libffcall-prefix=/opt/libffcall-2.4$ppc64 \
 
+            # --with-module=asdf \
+            # --with-module=berkeley-db \
+            # --with-module=bindings/glibc \
+            # --with-module=bindings/win32 \
+            # --with-module=clx/mit-clx \
+            # --with-module=clx/new-clx \
+            # --with-module=dbus \
+            # --with-module=dirkey \
+            # --with-module=editor \
+            # --with-module=fastcgi \
+            # --with-module=gdbm \
+            # --with-module=gtk2 \
+            # --with-module=i18n \
+            # --with-module=libsvm \
+            # --with-module=matlab \
+            # --with-module=netica \
+            # --with-module=oracle \
+            # --with-module=pari \
+            # --with-module=pcre \
+            # --with-module=postgresql \
+            # --with-module=queens \
+            # --with-module=rawsock \
+            # --with-module=readline \
+            # --with-module=regexp \
+            # --with-module=syscalls \
+            # --with-module=zlib \
+
+        # --with-jitc=lightning
+        # --with-lightning-prefix=/opt/lightning-2.1.3$ppc64 \
+
+    cd src
+    ./makemake \
+        --prefix=/tmp/opt/$pkgspec \
+        > Makefile
+
+    make config.lisp
+
+    make $(tiger.sh -j) V=1
+
+    if test -n "$TIGERSH_RUN_TESTS" ; then
+        make check
+    fi
+
+    make install
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec

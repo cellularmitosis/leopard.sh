@@ -8,11 +8,7 @@ package=portable-curl
 version="7.58.0-1"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
 
-if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
-    ppc64=".ppc64"
-fi
-
-pkgspec=$package-$version$ppc64
+pkgspec=$package-$version
 
 tarball=$package-$version.tiger_g3.bottle.tar.gz
 
@@ -21,10 +17,13 @@ if ! test -e ~/Downloads/$tarball ; then
     curl -#fLOk $LEOPARDSH_MIRROR/$tarball
 fi
 
+test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 678fcb1b24c4835695b3f66177886eba
+
+rm -rf /tmp/$package
 cd /tmp
-rm -rf $package
 tar xzf ~/Downloads/$tarball
-cd /opt
+
+rm -rf /opt/$package /opt/$pkgspec
 mv /tmp/$package/$version /opt/$pkgspec
 rmdir /tmp/$package
 ln -sf /opt/$pkgspec /opt/$package

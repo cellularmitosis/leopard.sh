@@ -1,4 +1,5 @@
 #!/bin/bash
+# based on templates/install-foo-1.0.sh v3
 
 # Install zstd on OS X Leopard / PowerPC.
 
@@ -30,20 +31,37 @@ else
 
     cd /tmp
     rm -rf $package-$version
-    tar xzf ~/Downloads/$tarball
-    cd $package-$version
 
-    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+    tar xzf ~/Downloads/$tarball
+
+    cd $package-$version
 
     # Fix for '-compatibility_version only allowed with -dynamiclib' error:
     perl -pi -e "s/-compatibility_version/-dynamiclib -compatibility_version/" lib/Makefile
 
-    # Switch from -O3 to -O2:
     for f in Makefile */Makefile */*/Makefile */*.mk ; do
-        perl -pi -e "s/-O3/-O2/g" $f
+        if test -n "$ppc64" ; then
+            perl -pi -e "s/-O3/-m64 $(leopard.sh -mcpu -O)/g" $f
+        else
+            perl -pi -e "s/-O3/$(leopard.sh -m32 -mcpu -O)/g" $f
+        fi
     done
 
     make $(leopard.sh -j) V=1 prefix=/opt/$pkgspec
+
+    if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
+        # 'make check' fails to build:
+        # cc1: error: unrecognized command line option "-Wvla"
+        # cc1: error: unrecognized command line option "-Wc++-compat"
+        # cc1: error: unrecognized command line option "-Wno-c++-compat"
+        # cc1: error: unrecognized command line option "-Wvla"
+        # cc1: error: unrecognized command line option "-Wc++-compat"
+        # cc1: error: unrecognized command line option "-Wno-c++-compat"
+        # make[1]: *** [datagen] Error 1
+        # make: *** [shortest] Error 2
+
+        make check
+    fi
 
     make prefix=/opt/$pkgspec install
 fi

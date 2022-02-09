@@ -1,10 +1,10 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v3
 
-# Install m4 on OS X Tiger / PowerPC.
+# Install make on OS X Tiger / PowerPC.
 
-package=m4
-version=1.4.19
+package=make
+version=4.3
 
 set -e -x
 PATH="/opt/portable-curl/bin:$PATH"
@@ -31,34 +31,26 @@ else
 
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    for f in configure ; do
-        if test -n "$ppc64" ; then
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-        else
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-        fi
-    done
-
-    if ! test -n "$ppc64" ; then
-        # 32-bit tiger ppc fails with:
-        # sigsegv.c: In function 'sigsegv_handler':
-        # sigsegv.c:938: error: 'struct mcontext' has no member named '__ss'
-        # Thanks to https://trac.macports.org/ticket/63381
-        perl -pi -e "s/__ss.__r1/ss.r1/g" lib/sigsegv.c
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+        export LDFLAGS=-m64
+    else
+        CFLAGS=$(tiger.sh -m32 -mcpu -O)
     fi
+    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec
 
     make $(tiger.sh -j) V=1
 
-    if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
-        # Note: `make check` currently fails with:
-        # test-pthread.c:35: error: 'PTHREAD_RWLOCK_INITIALIZER' undeclared here (not in a function)
+    if test -n "$TIGERSH_RUN_TESTS" ; then
         make check
     fi
 

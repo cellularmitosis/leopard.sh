@@ -32,9 +32,13 @@ else
         curl -#fL $srcmirror/$tarball > SDL-1.2-707e2cc25904bd4ea7ca94f45632e02d7dbee14c.tar.gz
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 61bdc303ab6f69cca619173e4d74fe5c
+
     cd /tmp
     rm -rf SDL-1.2-main
+
     tar xzf ~/Downloads/SDL-1.2-$tarball
+
     cd SDL-1.2-main
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache

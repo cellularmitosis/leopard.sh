@@ -42,6 +42,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = a2736befde5fee7d2b7eb45eb281cdbe
+
     cd /tmp
     rm -rf ncurses-$version
 

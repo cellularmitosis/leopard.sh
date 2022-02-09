@@ -43,28 +43,32 @@ else
     
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    for f in configure ; do
-        if test -n "$ppc64" ; then
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-            perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-        else
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-            perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-        fi
-    done
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+        CXXFLAGS="-m64 $(tiger.sh -mcpu -O)"
+        export LDFLAGS=-m64
+    else
+        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CXXFLAGS=$(tiger.sh -m32 -mcpu -O)
+    fi
+    export CFLAGS CXXFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec
 
     make $(tiger.sh -j) V=1
 
-    if test -n "$TIGERSH_RUN_TESTS" ; then
-        # FIXME `make check` fails with:
-        # examples/c++/calc++/parser.cc: In constructor 'yy::parser::parser(driver&)':
-        # examples/c++/calc++/parser.cc:149: error: the default argument for parameter 0 of 'yy::parser::stack<T, S>::stack(typename S::size_type) [with T = yy::parser::stack_symbol_type, S = std::vector<yy::parser::stack_symbol_type, std::allocator<yy::parser::stack_symbol_type> >]' has not yet been parsed
-        # make[3]: *** [examples/c++/calc++/calc__-parser.o] Error 1
+    if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
+        # The tests fail to build:
+        # gcc -std=gnu99 -DEXEEXT=\"\"   -DBISON_LOCALEDIR='""' -DLOCALEDIR='""' -I./examples/c/bistromathic -I./examples/c/bistromathic     -mcpu=7450 -O2 -MT examples/c/bistromathic/bistromathic-parse.o -MD -MP -MF examples/c/bistromathic/.deps/bistromathic-parse.Tpo -c -o examples/c/bistromathic/bistromathic-parse.o `test -f 'examples/c/bistromathic/parse.c' || echo './'`examples/c/bistromathic/parse.c
+        # examples/c/bistromathic/parse.c: In function 'completion':
+        # examples/c/bistromathic/parse.c:2411: error: 'rl_attempted_completion_over' undeclared (first use in this function)
+        # examples/c/bistromathic/parse.c:2411: error: (Each undeclared identifier is reported only once
+        # examples/c/bistromathic/parse.c:2411: error: for each function it appears in.)
+        # make[3]: *** [examples/c/bistromathic/bistromathic-parse.o] Error 1
         # make[2]: *** [check-am] Error 2
         # make[1]: *** [check-recursive] Error 1
         # make: *** [check] Error 2
+
         make check
     fi
 

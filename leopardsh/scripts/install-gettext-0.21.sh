@@ -74,9 +74,33 @@ else
     make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
-        # FIXME two failing tests:
+        # Two failing tests on ppc:
         # FAIL: msgunfmt-java-1
         # FAIL: lang-java
+
+        # 21 failing tests on ppc64:
+        # FAIL: msgattrib-properties-1
+        # FAIL: msgcat-properties-1
+        # FAIL: msgcat-properties-2
+        # FAIL: msgcmp-3
+        # FAIL: msgcomm-24
+        # FAIL: msgconv-4
+        # FAIL: msgen-2
+        # FAIL: msgexec-3
+        # FAIL: msgfilter-3
+        # FAIL: msgfmt-properties-1
+        # FAIL: msggrep-6
+        # FAIL: msgmerge-properties-1
+        # FAIL: msgmerge-properties-2
+        # FAIL: msgunfmt-java-1
+        # FAIL: msgunfmt-properties-1
+        # FAIL: msguniq-4
+        # FAIL: xgettext-properties-1
+        # FAIL: xgettext-properties-2
+        # FAIL: xgettext-properties-3
+        # FAIL: xgettext-properties-4
+        # FAIL: lang-java
+
         make check
     fi
 

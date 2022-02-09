@@ -35,12 +35,31 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" configure
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        export LDFLAGS=-m64
+    else
+        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+    fi
+    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec
+
     make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
+        # 'make check' fails on ppc64:
+        #   CC       test-stdint.o
+        # test-stdint.c:264: error: negative width in bit-field '_gl_verify_error_if_negative'
+        # test-stdint.c:265: error: negative width in bit-field '_gl_verify_error_if_negative'
+        # test-stdint.c:414: error: negative width in bit-field '_gl_verify_error_if_negative'
+        # make[5]: *** [test-stdint.o] Error 1
+        # make[4]: *** [check-am] Error 2
+        # make[3]: *** [check-recursive] Error 1
+        # make[2]: *** [check] Error 2
+        # make[1]: *** [check-recursive] Error 1
+        # make: *** [check] Error 2
+
         make check
     fi
 

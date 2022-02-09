@@ -70,6 +70,9 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    # 👇 EDIT HERE:
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 1916ae6bd0e2a80545fee455c98673d
+
     cd /tmp
     rm -rf $package-$version
 
