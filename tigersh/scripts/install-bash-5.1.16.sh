@@ -1,10 +1,10 @@
 #!/bin/bash
 # based on templates/install-foo-1.0.sh v3
 
-# Install pth on OS X Tiger / PowerPC.
+# Install bash on OS X Tiger / PowerPC.
 
-package=pth
-version=2.0.7
+package=bash
+version=5.1.16
 
 set -e -x
 PATH="/opt/portable-curl/bin:$PATH"
@@ -15,6 +15,16 @@ if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
 fi
 
 pkgspec=$package-$version$ppc64
+
+if ! test -e /opt/libiconv-1.16$ppc64 ; then
+    tiger.sh libiconv-1.16$ppc64
+fi
+
+if ! test -e /opt/gettext-0.20$ppc64 ; then
+    tiger.sh gettext-0.20$ppc64
+fi
+
+echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
 
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
 if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
@@ -29,7 +39,7 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 9cb4a25331a4c4db866a31cbe507c793
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = c17b20a09fc38d67fb303aeb6c130b4e
 
     cd /tmp
     rm -rf $package-$version
@@ -42,28 +52,21 @@ else
 
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-
-        # export LDFLAGS=-m64
-        # Note: the LDFLAGS approach isn't working:
-        #   ./libtool --mode=link --quiet gcc -m64 -o test_std test_std.o test_common.o libpth.la -ldl 
-        #   ld warning: in ./.libs/libpth.dylib, file is not of required architecture
-        #   Undefined symbols:
-        #     "_pth_attr_set", referenced from:
-        #         _main in test_std.o
-        #         _main in test_std.o
-        # Instead, we set CC:
-        export CC="gcc -m64"
+        export LDFLAGS=-m64
     else
         CFLAGS=$(tiger.sh -m32 -mcpu -O)
     fi
     export CFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        --enable-threads=posix \
+        --with-installed-readline \
+        --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
+        --with-libintl-prefix=/opt/gettext-0.20$ppc64
 
     make $(tiger.sh -j) V=1
 
     if test -n "$TIGERSH_RUN_TESTS" ; then
-        # Note: surprisingly, the tests pass on tiger but fail on leopard.
         make check
     fi
 

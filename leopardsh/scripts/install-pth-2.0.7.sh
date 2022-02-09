@@ -42,7 +42,17 @@ else
 
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
+
+        # export LDFLAGS=-m64
+        # Note: the LDFLAGS approach isn't working:
+        #   ./libtool --mode=link --quiet gcc -m64 -o test_std test_std.o test_common.o libpth.la -ldl 
+        #   ld warning: in ./.libs/libpth.dylib, file is not of required architecture
+        #   Undefined symbols:
+        #     "_pth_attr_set", referenced from:
+        #         _main in test_std.o
+        #         _main in test_std.o
+        # Instead, we set CC:
+        export CC="gcc -m64"
     else
         CFLAGS=$(leopard.sh -m32 -mcpu -O)
     fi
@@ -62,6 +72,8 @@ else
         #   *** set a breakpoint in malloc_error_break to debug
         #   Re-Initializing Pth system
         #   /bin/sh: line 1: 26288 Segmentation fault      ./test_std
+        # Surprisingly, the tests pass on tiger.
+        # Also, the tests pass on ppc64.
         make check
     fi
 

@@ -2,6 +2,8 @@ digraph mygraph {
 node [shape=box];
 rankdir = BT;
 
+"bash-5.1.16" -> "gettext-0.21"
+"bash-5.1.16" -> "libiconv-1.16"
 "bison-3.8.2" -> "m4-1.4.19"
 "clisp-2.39.20210628" -> "gcc-4.2"
 "clisp-2.39.20210628" -> "hyperspec-7.0"

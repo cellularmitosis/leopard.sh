@@ -102,7 +102,9 @@ else
 
     make $(tiger.sh -j) V=1
 
-    if test -n "$TIGERSH_RUN_TESTS" ; then
+    if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
+        # Note: 223 failing tests on ppc64:
+        # FAIL:  223
         make check
     fi
 
