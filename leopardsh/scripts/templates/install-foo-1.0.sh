@@ -41,8 +41,23 @@ do
     if ! test -e /opt/$dep ; then
         leopard.sh $dep
     fi
-    export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+    CPPFLAGS="$CPPFLAGS -I/opt/$dep/include"
+    LDFLAGS="$LDFLAGS -L/opt/$dep/lib"
 done
+export CPPFLAGS LDFLAGS
+export LIBS="-lbar -lqux"
+
+# 👇 EDIT HERE:
+for dep in \
+    bar-2.1$ppc64 \
+    qux-3.4$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+done
+export PKG_CONFIG_PATH
 
 # 👇 EDIT HERE:
 for dep in \

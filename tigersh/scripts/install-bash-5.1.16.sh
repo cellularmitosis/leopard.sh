@@ -86,3 +86,16 @@ fi
 if test -e /opt/$pkgspec/sbin ; then
     ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
+
+# Note: fails to build on ppc64:
+# gcc -L./builtins -L./lib/readline -L./lib/readline -L./lib/glob -L./lib/tilde  -L./lib/sh  -m64 -L./lib/termcap -L./lib/termcap  -m64 -mcpu=970 -O2    -o bash shell.o eval.o y.tab.o general.o make_cmd.o print_cmd.o  dispose_cmd.o execute_cmd.o variables.o copy_cmd.o error.o expr.o flags.o jobs.o subst.o hashcmd.o hashlib.o mailcheck.o trap.o input.o unwind_prot.o pathexp.o sig.o test.o version.o alias.o array.o arrayfunc.o assoc.o braces.o bracecomp.o bashhist.o bashline.o  list.o stringlib.o locale.o findcmd.o redir.o pcomplete.o pcomplib.o syntax.o xmalloc.o  -lbuiltins -lglob -lsh ./lib/readline/libreadline.a ./lib/readline/libhistory.a ./lib/termcap/libtermcap.a -ltilde  -L/opt/gettext-0.20.ppc64/lib -lintl -L/opt/libiconv-bootstrap-1.16.ppc64/lib -liconv  -L/opt/libiconv-1.16.ppc64/lib -liconv  -ldl 
+# Undefined symbols:
+#   _BC, referenced from:
+#       _BC$non_lazy_ptr in libreadline.a(terminal.o)
+#       __data@0 in libtermcap.a(tparam.o)
+#   _UP, referenced from:
+#       _UP$non_lazy_ptr in libreadline.a(terminal.o)
+#       __data@0 in libtermcap.a(tparam.o)
+# ld64-62.1 failed: symbol(s) not found
+# collect2: ld returned 1 exit status
+# make: *** [bash] Error 1

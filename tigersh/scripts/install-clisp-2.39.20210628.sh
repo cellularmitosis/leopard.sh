@@ -65,6 +65,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = b8b12ea8f6e1f23daa910a256dd55c49
+
     cd /tmp
     rm -rf $package-$commit
 
@@ -92,12 +94,14 @@ else
         --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
         --with-libreadline-prefix=/opt/readline-8.1.2$ppc64 \
         --with-libsigsegv-prefix=/opt/libsigsegv-2.14$ppc64 \
-        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64
+        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64 \
+            --with-module=asdf \
+            --with-module=editor \
+            --with-module=syscalls
 
         # --with-ffcall \
         # --with-libffcall-prefix=/opt/libffcall-2.4$ppc64 \
 
-            # --with-module=asdf \
             # --with-module=berkeley-db \
             # --with-module=bindings/glibc \
             # --with-module=bindings/win32 \
@@ -105,7 +109,6 @@ else
             # --with-module=clx/new-clx \
             # --with-module=dbus \
             # --with-module=dirkey \
-            # --with-module=editor \
             # --with-module=fastcgi \
             # --with-module=gdbm \
             # --with-module=gtk2 \
@@ -121,7 +124,6 @@ else
             # --with-module=rawsock \
             # --with-module=readline \
             # --with-module=regexp \
-            # --with-module=syscalls \
             # --with-module=zlib \
 
         # --with-jitc=lightning

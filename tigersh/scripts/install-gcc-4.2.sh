@@ -28,5 +28,7 @@ if ! test -e ~/Downloads/$tarball ; then
     /opt/portable-curl/bin/curl -#fLO $mirror/$tarball
 fi
 
+test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = xxxxxxxzxxxxxxxxxxzxxxxxxxxxxzx
+
 cd /
 sudo tar xzf ~/Downloads/$tarball

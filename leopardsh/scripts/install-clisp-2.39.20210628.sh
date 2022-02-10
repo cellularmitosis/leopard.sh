@@ -97,9 +97,11 @@ else
         --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
         --with-libreadline-prefix=/opt/readline-8.1.2$ppc64 \
         --with-libsigsegv-prefix=/opt/libsigsegv-2.14$ppc64 \
-        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64
-
-            # --with-module=asdf \
+        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64 \
+            --with-module=asdf \
+            --with-module=editor \
+            --with-module=syscalls
+  
             # --with-module=berkeley-db \
             # --with-module=bindings/glibc \
             # --with-module=bindings/win32 \
@@ -107,7 +109,6 @@ else
             # --with-module=clx/new-clx \
             # --with-module=dbus \
             # --with-module=dirkey \
-            # --with-module=editor \
             # --with-module=fastcgi \
             # --with-module=gdbm \
             # --with-module=gtk2 \
@@ -123,11 +124,31 @@ else
             # --with-module=rawsock \
             # --with-module=readline \
             # --with-module=regexp \
-            # --with-module=syscalls \
             # --with-module=zlib \
 
         # --with-jitc=lightning
         # --with-lightning-prefix=/opt/lightning-2.1.3$ppc64 \
+
+# * modules/berkeley-db (try also './modules/berkeley-db/configure --help')
+#   --with-libdb-prefix[=DIR]  search for libdb in DIR/include and DIR/lib
+# * modules/fastcgi (try also './modules/fastcgi/configure --help')
+#   --with-libfcgi-prefix[=DIR]  search for libfcgi in DIR/include and DIR/lib
+# * modules/gdbm (try also './modules/gdbm/configure --help')
+#   --with-libgdbm-prefix[=DIR]  search for libgdbm in DIR/include and DIR/lib
+# * modules/libsvm (try also './modules/libsvm/configure --help')
+#   --with-libsvm-prefix[=DIR]  search for libsvm in DIR/include and DIR/lib
+# * modules/pari (try also './modules/pari/configure --help')
+#   --with-libpari-prefix[=DIR]  search for libpari in DIR/include and DIR/lib
+# * modules/pcre (try also './modules/pcre/configure --help')
+#   --with-libpcre-prefix[=DIR]  search for libpcre in DIR/include and DIR/lib
+# * modules/postgresql (try also './modules/postgresql/configure --help')
+#   --with-libpq-prefix[=DIR]  search for libpq in DIR/include and DIR/lib
+# * modules/readline (try also './modules/readline/configure --help')
+#   --with-libtermcap-prefix[=DIR]
+#   --with-libreadline-prefix[=DIR]  search for libreadline in DIR/include and DIR
+# /lib
+# * modules/zlib (try also './modules/zlib/configure --help')
+#   --with-libz-prefix[=DIR]  search for libz in DIR/include and DIR/lib
 
     cd src
     ./makemake \

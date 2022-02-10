@@ -29,9 +29,13 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 39d3f3f9c55c87b1e5d6888e1420f4b5
+
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache

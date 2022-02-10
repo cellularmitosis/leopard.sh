@@ -36,6 +36,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 342070c1e18e74c66a836f79f334c4eb
+
     cd /tmp
     rm -rf $package-$version
 

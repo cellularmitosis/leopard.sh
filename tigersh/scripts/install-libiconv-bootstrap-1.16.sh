@@ -44,9 +44,13 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 7d2a800b952942bb2880efb00cfd524c
+
     cd /tmp
     rm -rf libiconv-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd libiconv-$version
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache

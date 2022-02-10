@@ -19,6 +19,8 @@ if ! test -e ~/Downloads/$tarball ; then
     curl -#fLO $srcmirror/$tarball
 fi
 
+test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 8df440c9f1614e2acfa5e9a360c8969a
+
 rm -rf /opt/$pkgspec
 mkdir -p /opt/$pkgspec
 cd /opt/$pkgspec

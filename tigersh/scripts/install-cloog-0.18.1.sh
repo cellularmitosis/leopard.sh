@@ -39,6 +39,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = e34fca0540d840e5d0f6427e98c92252
+
     cd /tmp
     rm -rf $package-$version    
     tar xzf ~/Downloads/$tarball
