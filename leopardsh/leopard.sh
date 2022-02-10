@@ -192,12 +192,12 @@ if test "$1" = "--setup" ; then
     exit 0
 fi
 
-# arch-check:
+# arch check:
 
 if test "$1" = "--arch-check" ; then
     shift 1
     if test -z "$1" ; then
-        echo "Error: arch-check which package??" >&2
+        echo "Error: arch-check which package?" >&2
         echo "e.g. leopard.sh --arch-check foo-1.0" >&2
         exit 1
     fi

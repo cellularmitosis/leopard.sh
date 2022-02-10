@@ -9,21 +9,29 @@ set -e
 TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
 export TIGERSH_MIRROR
 
+COLOR_GREEN="\\\e[32;1m"
+COLOR_YELLOW="\\\e[33;1m"
+COLOR_NONE="\\\e[0m"
+
 osversion=$(sw_vers -productVersion | awk '{print $NF}')
 if ! echo $osversion | grep -q '10\.4' ; then
     echo "Sorry, this script was written for OS X Tiger :(" >&2
     exit 1
 fi
 
-cpu=$(sysctl hw.cpusubtype | awk '{print $NF}')
-if test "$cpu" = "9" ; then
-    is_g3=1
-elif test "$cpu" = "10" ; then
-    is_g4=1
-elif test "$cpu" = "11" ; then
-    is_g4e=1
-elif test "$cpu" = "100" ; then
-    is_g5=1
+cpu_id=$(sysctl hw.cpusubtype | awk '{print $NF}')
+if test "$cpu_id" = "9" ; then
+    cpu_name=g3
+    cpu_num=750
+elif test "$cpu_id" = "10" ; then
+    cpu_name=g4
+    cpu_num=7400
+elif test "$cpu_id" = "11" ; then
+    cpu_name=g4e
+    cpu_num=7450
+elif test "$cpu_id" = "100" ; then
+    cpu_name=g5
+    cpu_num=970
 else
     echo "Error: unsupported CPU type." >&2
     exit 1
@@ -42,7 +50,7 @@ fi
 if test "$1" = "-m32" ; then
     # print -m32, but only if on a G5.
     flagmode=1
-    if test -n "$is_g5" ; then
+    if test "$cpu_name" = "g5" ; then
         flags="$flags -m32"
     fi
     shift 1
@@ -50,27 +58,19 @@ fi
 
 if test "$1" = "-mcpu" ; then
     flagmode=1
-    if test -n "$is_g3" ; then
-        flags="$flags -mcpu=750"
-    elif test -n "$is_g4" ; then
-        flags="$flags -mcpu=7400"
-    elif test -n "$is_g4e" ; then
-        flags="$flags -mcpu=7450"
-    elif test -n "$is_g5" ; then
-        flags="$flags -mcpu=970"
-    fi
+    flags="$flags -mcpu=$cpu_num"
     shift 1
 fi
 
 if test "$1" = "-O" ; then
     flagmode=1
-    if test -n "$is_g3" ; then
+    if test "$cpu_name" = "g3" ; then
         flags="$flags -Os"
-    elif test -n "$is_g4" ; then
+    elif test "$cpu_name" = "g4" ; then
         flags="$flags -Os"
-    elif test -n "$is_g4e" ; then
+    elif test "$cpu_name" = "g4e" ; then
         flags="$flags -O2"
-    elif test -n "$is_g5" ; then
+    elif test "$cpu_name" = "g5" ; then
         flags="$flags -O2"
     fi
     shift 1
@@ -85,28 +85,12 @@ fi
 # sysctl queries:
 
 if test "$1" = "--cpu" ; then
-    if test -n "$is_g3" ; then
-        echo g3
-    elif test -n "$is_g4" ; then
-        echo g4
-    elif test -n "$is_g4e" ; then
-        echo g4e
-    elif test -n "$is_g5" ; then
-        echo g5
-    fi
+    echo $cpu_name
     exit 0
 fi
 
 if test "$1" = "--os.cpu" ; then
-    if test -n "$is_g3" ; then
-        echo tiger.g3
-    elif test -n "$is_g4" ; then
-        echo tiger.g4
-    elif test -n "$is_g4e" ; then
-        echo tiger.g4e
-    elif test -n "$is_g5" ; then
-        echo tiger.g5
-    fi
+    echo tiger.$cpu_name
     exit 0
 fi
 
@@ -200,16 +184,17 @@ if test "$1" = "--setup" ; then
     exit 0
 fi
 
-# arch-check:
+# arch check:
 
 if test "$1" = "--arch-check" ; then
     shift 1
     if test -z "$1" ; then
-        echo "Error: arch-check which package??" >&2
+        echo "Error: arch-check which package?" >&2
         echo "e.g. tiger.sh --arch-check foo-1.0" >&2
         exit 1
     fi
     pkgspec="$1"
+    ppc64="$2"
     cd /opt/$pkgspec
     for d in bin sbin lib ; do
         if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
@@ -220,7 +205,62 @@ if test "$1" = "--arch-check" ; then
                         did_print_header=1
                     fi
                     file $f | sed 's/^/  /'
-                    lipo -info $f 2>/dev/null | sed 's/^/    /' || true
+                    if test -n "$ppc64" ; then
+                        echo -e "$(lipo -info $f 2>/dev/null \
+                            | sed 's/^/    /' \
+                            | sed "s/ ppc64/ ${COLOR_GREEN}ppc64${COLOR_NONE}/g" \
+                            | sed "s/ ppc750/ ${COLOR_YELLOW}ppc750${RED_NONE}/g" \
+                            | sed "s/ ppc7400/ ${COLOR_YELLOW}ppc7400${RED_NONE}/g" \
+                            | sed "s/ ppc7450/ ${COLOR_YELLOW}ppc7450${RED_NONE}/g" \
+                            | sed "s/ ppc970/ ${COLOR_YELLOW}ppc970${RED_NONE}/g" \
+                            | sed "s/ ppc/ ${COLOR_YELLOW}ppc${RED_NONE}/g" \
+                            || true
+                        )"
+                    else
+                        echo -e "$(lipo -info $f 2>/dev/null \
+                            | sed 's/^/    /' \
+                            | sed "s/ ppc${cpu_num}/ ${COLOR_GREEN}ppc750${RED_NONE}/g" \
+                            | sed "s/ ppc64/ ${COLOR_YELLOW}ppc64${COLOR_NONE}/g" \
+                            | sed "s/ ppc750/ ${COLOR_YELLOW}ppc750${RED_NONE}/g" \
+                            | sed "s/ ppc7400/ ${COLOR_YELLOW}ppc7400${RED_NONE}/g" \
+                            | sed "s/ ppc7450/ ${COLOR_YELLOW}ppc7450${RED_NONE}/g" \
+                            | sed "s/ ppc970/ ${COLOR_YELLOW}ppc970${RED_NONE}/g" \
+                            | sed "s/ ppc/ ${COLOR_GREEN}ppc${RED_NONE}/g" \
+                            || true
+                        )"
+                    fi
+                    echo
+                fi
+            done
+        fi
+    done
+    exit 0
+fi
+
+# linker check:
+
+if test "$1" = "--linker-check" ; then
+    shift 1
+    if test -z "$1" ; then
+        echo "Error: linker-check which package?" >&2
+        echo "e.g. tiger.sh --linker-check foo-1.0" >&2
+        exit 1
+    fi
+    pkgspec="$1"
+    cd /opt/$pkgspec
+    for d in bin sbin lib ; do
+        if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
+            for f in $d/* ; do
+                if test -f $f -a ! -L $f ; then
+                    if test -z "$did_print_header" ; then
+                        echo -e "\nLinker check: /opt/$pkgspec\n"
+                        did_print_header=1
+                    fi
+                    echo -e "$(otool -L $f \
+                        | sed 's/^/    /' \
+                        | sed "s|/usr/|/${COLOR_YELLOW}usr${COLOR_NONE}/|g" \
+                        | sed "s|/opt/|/${COLOR_GREEN}opt${COLOR_NONE}/|g" \
+                    )"
                     echo
                 fi
             done
@@ -235,7 +275,7 @@ if test -z "$1" ; then
     echo "Available packages:" >&2
     cd /tmp
     /opt/portable-curl/bin/curl -sSfLO $TIGERSH_MIRROR/packages.txt
-    if test -n "$is_g5" ; then
+    if test "$cpu_name" = "g5" ; then
         /opt/portable-curl/bin/curl -sSfLO $TIGERSH_MIRROR/packages.ppc64.txt
         cat packages.txt packages.ppc64.txt | sort
     else
