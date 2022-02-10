@@ -29,6 +29,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = b97d53547220355907dedec7de9a4f29
+
     cd /tmp
     rm -rf $package-$version
 
@@ -43,7 +45,7 @@ else
         if test -n "$ppc64" ; then
             perl -pi -e "s/-O3/-m64 $(leopard.sh -mcpu -O)/g" $f
         else
-            perl -pi -e "s/-O3/$(leopard.sh -m32 -mcpu -O)/g" $f
+            perl -pi -e "s/-O3/$(leopard.sh -mcpu -O)/g" $f
         fi
     done
 
@@ -64,6 +66,8 @@ else
     fi
 
     make prefix=/opt/$pkgspec install
+
+    leopard.sh --arch-check $pkgspec | tee -a /tmp/$script.log
 fi
 
 if test -e /opt/$pkgspec/bin ; then

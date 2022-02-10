@@ -122,10 +122,19 @@ if test "$1" = "--arch-check" ; then
         exit 1
     fi
     pkgspec="$1"
+    cd /opt/$pkgspec
     for d in bin sbin lib ; do
         if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
-            for f in /opt/$pkgspec/$d/* ; do
-                lipo -info $f 2>/dev/null || true
+            for f in $d/* ; do
+                if test -f $f ; then
+                    if test -z "$did_print_header" ; then
+                        echo "Architecture check: /opt/$pkgspec"
+                        did_print_header=1
+                    fi
+                    file $f | sed 's/^/  /'
+                    lipo -info $f 2>/dev/null | sed 's/^/    /' || true
+                    echo
+                fi
             done
         fi
     done
@@ -246,9 +255,6 @@ cd /tmp
 /opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/scripts/$script
 chmod +x $script
 /usr/bin/time nice ./$script 2>&1 | tee /tmp/$script.log
-
-echo -e "\nArchitecture check:" | tee -a /tmp/$script.log
-leopard.sh --arch-check $pkgspec | tee -a /tmp/$script.log
 
 if ! test -e /opt/$pkgspec/share/leopard.sh/$pkgspec/$script.log.gz ; then
     mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
