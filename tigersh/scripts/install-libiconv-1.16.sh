@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install libiconv on OS X Tiger / PowerPC.
 
@@ -16,9 +16,15 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/gettext-0.20$ppc64 ; then
-    tiger.sh gettext-0.20$ppc64
-fi
+for dep in \
+    gettext-0.20$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
@@ -35,7 +41,7 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = xxxxxxxzxxxxxxxxxxzxxxxxxxxxxzx
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 7d2a800b952942bb2880efb00cfd524c
 
     cd /tmp
     rm -rf $package-$version
@@ -46,16 +52,15 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-libintl-prefix=/opt/gettext-0.20$ppc64
+        --with-libintl-prefix=/opt/gettext-0.20$ppc64 \
+        CFLAGS="$CFLAGS" \
+        LDFLAGS="$LDFLAGS"
     
     make $(tiger.sh -j)
 

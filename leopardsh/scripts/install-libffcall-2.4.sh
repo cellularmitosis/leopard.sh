@@ -29,6 +29,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = e7ef6e7cab40f6e224a89cc8dec6fc15
+
     cd /tmp
     rm -rf $package-$version
 
@@ -36,6 +38,7 @@ else
 
     cd $package-$version
 
+    FIXME WIP
     cp ~/tmp/gettext/get_ppid_of.h libtextstyle/lib/
     cp ~/tmp/gettext/fix1/get_ppid_of.c libtextstyle/lib/
 

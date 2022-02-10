@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install libunistring on OS X Tiger / PowerPC.
 
@@ -17,9 +17,15 @@ fi
 pkgspec=$package-$version$ppc64
 
 # Note: we use libiconv-bootstrap to break a dependency cycle with libiconv.
-if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
-    tiger.sh libiconv-bootstrap-1.16$ppc64
-fi
+for dep in \
+    libiconv-bootstrap-1.16$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
@@ -47,16 +53,14 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64
+        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
+        CFLAGS="$CFLAGS"
 
     make $(tiger.sh -j) V=1
 

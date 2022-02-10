@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install libunistring on OS X Leopard / PowerPC.
 
@@ -17,9 +17,16 @@ fi
 pkgspec=$package-$version$ppc64
 
 # Note: we use libiconv-bootstrap to break a dependency cycle with libiconv.
-if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
-    leopard.sh libiconv-bootstrap-1.16$ppc64
-fi
+for dep in \
+    libiconv-bootstrap-1.16$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
+# LIBS="-lbar -lqux"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
@@ -36,6 +43,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 342070c1e18e74c66a836f79f334c4eb
+
     cd /tmp
     rm -rf $package-$version
 
@@ -45,16 +54,14 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64
+        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j) V=1
 

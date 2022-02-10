@@ -44,6 +44,8 @@ else
 
     cd $package-$version
 
+    FIXME WIP
+
     # Note: sys_icache_invalidate is unavailable on tiger.
     patch -p1 << "EOF"
 diff '--color=auto' -urN libffcall-2.4/callback/trampoline_r/trampoline.c libffcall-2.4.patched/callback/trampoline_r/trampoline.c

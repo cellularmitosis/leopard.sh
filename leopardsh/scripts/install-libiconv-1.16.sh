@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install libiconv on OS X Leopard / PowerPC.
 
@@ -16,9 +16,15 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/gettext-0.21$ppc64 ; then
-    leopard.sh gettext-0.21$ppc64
-fi
+for dep in \
+    gettext-0.21$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
@@ -35,23 +41,26 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 7d2a800b952942bb2880efb00cfd524c
+
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-libintl-prefix=/opt/gettext-0.21$ppc64
+        --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
+        CFLAGS="$CFLAGS" \
+        LDFLAGS="$LDFLAGS"
 
     make $(leopard.sh -j)
 

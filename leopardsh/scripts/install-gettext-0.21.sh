@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install gettext on OS X Leopard / PowerPC.
 
@@ -20,17 +20,18 @@ pkgspec=$package-$version$ppc64
 
 # Note: there is a dependency cycle between gettext and libiconv.
 # See the note in install-libiconv-bootstrap-1.16.sh.
-if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
-    leopard.sh libiconv-bootstrap-1.16$ppc64
-fi
-
-if ! test -e /opt/libunistring-1.0$ppc64 ; then
-    leopard.sh libunistring-1.0$ppc64
-fi
-
-if ! test -e /opt/xz-5.2.5$ppc64 ; then
-    leopard.sh xz-5.2.5$ppc64
-fi
+for dep in \
+    libiconv-bootstrap-1.16$ppc64 \
+    libunistring-1.0$ppc64 \
+    xz-5.2.5$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
+# LIBS="-lbar -lqux"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
@@ -47,6 +48,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = e71133e1bad4f2ce83121078fd33edde
+
     cd /tmp
     rm -rf $package-$version
 
@@ -56,20 +59,22 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    CFLAGS=$(leopard.sh -mcpu -O)
+    CXXFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
-        CXXFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
+        CXXFLAGS="-m64 $CXXFLAGS"
+        # LDFLAGS="-m64 $LDFLAGS"
     fi
-    export CFLAGS CXXFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
         --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
         --with-libcurses-prefix=/opt/ncurses-6.3$ppc64 \
-        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64
+        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64 \
+        CPPFLAGS="$CPPFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        CFLAGS="$CFLAGS" \
+        CXXFLAGS="$CXXFLAGS"
 
     make $(leopard.sh -j) V=1
 

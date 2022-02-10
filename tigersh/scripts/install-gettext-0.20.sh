@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install gettext on OS X Tiger / PowerPC.
 
@@ -20,17 +20,17 @@ pkgspec=$package-$version$ppc64
 
 # Note: there is a dependency cycle between gettext and libiconv.
 # See the note in install-libiconv-bootstrap-1.16.sh.
-if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
-    tiger.sh libiconv-bootstrap-1.16$ppc64
-fi
-
-if ! test -e /opt/libunistring-1.0$ppc64 ; then
-    tiger.sh libunistring-1.0$ppc64
-fi
-
-if ! test -e /opt/xz-5.2.5$ppc64 ; then
-    tiger.sh xz-5.2.5$ppc64
-fi
+for dep in \
+    libiconv-bootstrap-1.16$ppc64 \
+    libunistring-1.0$ppc64 \
+    xz-5.2.5$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
@@ -58,20 +58,22 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS=$(tiger.sh -mcpu -O)
+    CXXFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        CXXFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(tiger.sh -m32 -mcpu -O)
-        CXXFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
+        CXXFLAGS="-m64 $CXXFLAGS"
+        # LDFLAGS="-m64 $LDFLAGS"
     fi
-    export CFLAGS CXXFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
         --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
         --with-libcurses-prefix=/opt/ncurses-6.3$ppc64 \
-        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64
+        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64 \
+        CPPFLAGS="$CPPFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        CFLAGS="$CFLAGS" \
+        CXXFLAGS="$CXXFLAGS"
 
     make $(tiger.sh -j) V=1
 

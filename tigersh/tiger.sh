@@ -9,6 +9,8 @@ set -e
 TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
 export TIGERSH_MIRROR
 
+export PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
+
 COLOR_GREEN="\\\e[32;1m"
 COLOR_YELLOW="\\\e[33;1m"
 COLOR_CYAN="\\\e[36;1m"
@@ -252,7 +254,7 @@ if test "$1" = "--linker-check" ; then
     for d in bin sbin lib ; do
         if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
             for f in $d/* ; do
-                if test -f $f -a ! -L $f ; then
+                if test -f $f -a ! -L $f -a "${f: -2}" != ".a" ; then
                     if test -z "$did_print_header" ; then
                         echo -e "\nLinker check: /opt/$pkgspec\n"
                         did_print_header=1
