@@ -112,6 +112,26 @@ if test "$1" = "--os.cpu" ; then
     exit 0
 fi
 
+# arch-check:
+
+if test "$1" = "--arch-check" ; then
+    shift 1
+    if test -z "$1" ; then
+        echo "Error: arch-check which package??" >&2
+        echo "e.g. leopard.sh --arch-check foo-1.0" >&2
+        exit 1
+    fi
+    pkgspec="$1"
+    for d in bin sbin lib ; do
+        if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
+            for f in /opt/$pkgspec/$d/* ; do
+                lipo -info $f 2>/dev/null || true
+            done
+        fi
+    done
+    exit 0
+fi
+
 # unlink:
 
 if test "$1" = "--unlink" ; then
@@ -226,6 +246,9 @@ cd /tmp
 /opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/scripts/$script
 chmod +x $script
 /usr/bin/time nice ./$script 2>&1 | tee /tmp/$script.log
+
+echo -e "\nArchitecture check:" | tee -a /tmp/$script.log
+leopard.sh --arch-check $pkgspec | tee -a /tmp/$script.log
 
 if ! test -e /opt/$pkgspec/share/leopard.sh/$pkgspec/$script.log.gz ; then
     mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec

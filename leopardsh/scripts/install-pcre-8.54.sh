@@ -1,11 +1,10 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v3
 
+# Install pcre on OS X Leopard / PowerPC.
 
-# Install gzip on OS X Leopard / PowerPC.
-
-package=gzip
-version=1.11
+package=pcre
+version=8.45
 
 set -e -x -o pipefail
 PATH="/opt/portable-curl/bin:$PATH"
@@ -22,7 +21,7 @@ if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEO
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-    srcmirror=https://ftp.gnu.org/gnu/$package
+    srcmirror=https://ftp.exim.org/pub/pcre
     tarball=$package-$version.tar.gz
 
     if ! test -e ~/Downloads/$tarball ; then
@@ -30,22 +29,26 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = b8cab03ed69a1d69980c6a292a5ab853
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 01b80f8177ab91da63e7e5c5d5dfcb83
 
     cd /tmp
     rm -rf $package-$version
 
     tar xzf ~/Downloads/$tarball
-    
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    export CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        export CFLAGS="$CFLAGSS -m64"
+        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+        CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
         export LDFLAGS=-m64
+    else
+        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CXXFLAGS=$(leopard.sh -m32 -mcpu -O)
     fi
+    export CFLAGS CXXFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec
 

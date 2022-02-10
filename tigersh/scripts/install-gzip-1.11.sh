@@ -40,22 +40,20 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    for f in configure ; do
-        if test -n "$ppc64" ; then
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-        else
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-        fi
-    done
+    export CFLAGS=$(leopard.sh -mcpu -O)
+    if test -n "$ppc64" ; then
+        export CFLAGS="$CFLAGSS -m64"
+        export LDFLAGS=-m64
+    fi
 
     ./configure -C --prefix=/opt/$pkgspec
 
     make $(tiger.sh -j) V=1
 
-    # Note: there is one test failure:
-    # zgrep-signal: set-up failure: signal handling busted on this host
-    # ERROR: zgrep-signal
     if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
+        # Note: there is one test failure:
+        # zgrep-signal: set-up failure: signal handling busted on this host
+        # ERROR: zgrep-signal
         make check
     fi
 
