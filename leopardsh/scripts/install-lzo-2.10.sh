@@ -1,6 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
-
+# based on templates/install-foo-1.0.sh v4
 
 # Install lzo on OS X Leopard / PowerPC.
 
@@ -30,22 +29,25 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 39d3f3f9c55c87b1e5d6888e1420f4b5
+
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    for f in configure ; do
-        if test -n "$ppc64" ; then
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
-        else
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
-        fi
-    done
+    CFLAGS=$(leopard.sh -mcpu -O)
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $CFLAGS"
+    fi
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        --enable-shared \
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j) V=1
 

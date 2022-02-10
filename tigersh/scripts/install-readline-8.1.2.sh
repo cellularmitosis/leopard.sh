@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install readline on OS X Tiger / PowerPC.
 
@@ -16,11 +16,6 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-# Note: ppc64 pkg-config unavailable on Tiger.
-if ! test -e /opt/pkg-config-0.29.2 ; then
-    tiger.sh pkg-config-0.29.2
-fi
-
 for dep in \
     termcap-1.3.1$ppc64 \
     ncurses-6.3$ppc64
@@ -28,9 +23,10 @@ do
     if ! test -e /opt/$dep ; then
         tiger.sh $dep
     fi
-    PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
-export PKG_CONFIG_PATH
+# LIBS="-lbar -lqux"
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
@@ -58,22 +54,16 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS
-
-    pkgconfignames="ncurses"
-    CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
-    LIBS=$(pkg-config --libs-only-l $pkgconfignames)
-    export CPPFLAGS LDFLAGS LIBS
 
     ./configure -C --prefix=/opt/$pkgspec \
-        --with-curses
+        --with-curses \
+        CPPFLAGS="$CPPFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        CFLAGS="$CFLAGS"
 
     make $(tiger.sh -j)
 
