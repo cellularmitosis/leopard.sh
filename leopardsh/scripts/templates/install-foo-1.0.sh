@@ -108,8 +108,8 @@ else
         CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
         export LDFLAGS=-m64
     else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
-        CXXFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS=$(leopard.sh -mcpu -O)
+        CXXFLAGS=$(leopard.sh -mcpu -O)
     fi
     export CFLAGS CXXFLAGS
 
@@ -120,8 +120,8 @@ else
             perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
             export LDFLAGS=-m64
         else
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
-            perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
+            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -mcpu -O)\"/g" $f
+            perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(leopard.sh -mcpu -O)\"/g" $f
         fi
     done
 
