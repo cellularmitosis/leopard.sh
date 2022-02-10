@@ -183,13 +183,12 @@ def fix_terminal_title(lines):
 
 def fix_arch_check(lines):
     lines2 = []
-    prev_line = None
-    for line in lines:
+    for i, line in enumerate(lines):
         lines2.append(line)
-        if prev_line == "    make prefix=/opt/$pkgspec install" and line == "fi":
-            lines2.append("")
-            lines2.append("    leopard.sh --arch-check $pkgspec")
-        prev_line = line
+        if line == "    make install":
+            if "--arch-check" not in lines[i+2]:
+                lines2.append("")
+                lines2.append("    leopard.sh --arch-check $pkgspec")
     return lines2
 
 
