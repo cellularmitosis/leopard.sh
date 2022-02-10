@@ -112,35 +112,6 @@ if test "$1" = "--os.cpu" ; then
     exit 0
 fi
 
-# arch-check:
-
-if test "$1" = "--arch-check" ; then
-    shift 1
-    if test -z "$1" ; then
-        echo "Error: arch-check which package??" >&2
-        echo "e.g. leopard.sh --arch-check foo-1.0" >&2
-        exit 1
-    fi
-    pkgspec="$1"
-    cd /opt/$pkgspec
-    for d in bin sbin lib ; do
-        if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
-            for f in $d/* ; do
-                if test -f $f ; then
-                    if test -z "$did_print_header" ; then
-                        echo "Architecture check: /opt/$pkgspec"
-                        did_print_header=1
-                    fi
-                    file $f | sed 's/^/  /'
-                    lipo -info $f 2>/dev/null | sed 's/^/    /' || true
-                    echo
-                fi
-            done
-        fi
-    done
-    exit 0
-fi
-
 # unlink:
 
 if test "$1" = "--unlink" ; then
@@ -166,12 +137,6 @@ if test "$1" = "--unlink" ; then
 fi
 
 # setup:
-
-if ! which -s /usr/bin/gcc ; then
-    echo "Error: please install Xcode." >&2
-    echo "See https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/xcode314_2809_developerdvd.dmg" >&2
-    exit 1
-fi
 
 if ! test -e /opt ; then
     echo "Creating /opt." >&2
@@ -206,6 +171,8 @@ for d in /usr/local /usr/local/bin /usr/local/sbin ; do
     fi
 done
 
+mkdir -p ~/Downloads
+
 if ! test -e /opt/portable-curl ; then
     echo "Installing curl with SSL support." >&2
     cd /tmp
@@ -222,6 +189,35 @@ if ! test -e $opt_config_cache/leopard.cache ; then
 fi
 
 if test "$1" = "--setup" ; then
+    exit 0
+fi
+
+# arch-check:
+
+if test "$1" = "--arch-check" ; then
+    shift 1
+    if test -z "$1" ; then
+        echo "Error: arch-check which package??" >&2
+        echo "e.g. leopard.sh --arch-check foo-1.0" >&2
+        exit 1
+    fi
+    pkgspec="$1"
+    cd /opt/$pkgspec
+    for d in bin sbin lib ; do
+        if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
+            for f in $d/* ; do
+                if test -f $f -a ! -L $f ; then
+                    if test -z "$did_print_header" ; then
+                        echo -e "\nArchitecture check: /opt/$pkgspec\n"
+                        did_print_header=1
+                    fi
+                    file $f | sed 's/^/  /'
+                    lipo -info $f 2>/dev/null | sed 's/^/    /' || true
+                    echo
+                fi
+            done
+        fi
+    done
     exit 0
 fi
 
@@ -245,6 +241,12 @@ fi
 if test -n "$1" -a -e "/opt/$1" ; then
     echo "$1 is already installed." >&2
     exit 0
+fi
+
+if ! which -s /usr/bin/gcc ; then
+    echo "Error: please install Xcode." >&2
+    echo "See https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/xcode314_2809_developerdvd.dmg" >&2
+    exit 1
 fi
 
 pkgspec="$1"

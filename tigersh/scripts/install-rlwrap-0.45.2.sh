@@ -16,11 +16,6 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-# Note: ppc64 pkg-config unavailable on Tiger.
-if ! test -e /opt/pkg-config-0.29.2 ; then
-    tiger.sh pkg-config-0.29.2
-fi
-
 for dep in \
     ncurses-6.3$ppc64 \
     readline-8.1.2$ppc64
@@ -28,9 +23,10 @@ do
     if ! test -e /opt/$dep ; then
         tiger.sh $dep
     fi
-    PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
-export PKG_CONFIG_PATH
+LIBS="-lncurses -lreadline"
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
 
@@ -58,21 +54,17 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
     fi
-    export CFLAGS
 
-    pkgconfignames="ncurses readline"
-    CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
-    LIBS=$(pkg-config --libs-only-l $pkgconfignames)
-    export CPPFLAGS LDFLAGS LIBS
-
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        CPPFLAGS="$CPPFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        LIBS="$LIBS" \
+        CFLAGS="$CFLAGS"
 
     make $(tiger.sh -j) V=1
 

@@ -110,35 +110,6 @@ if test "$1" = "--os.cpu" ; then
     exit 0
 fi
 
-# arch-check:
-
-if test "$1" = "--arch-check" ; then
-    shift 1
-    if test -z "$1" ; then
-        echo "Error: arch-check which package??" >&2
-        echo "e.g. tiger.sh --arch-check foo-1.0" >&2
-        exit 1
-    fi
-    pkgspec="$1"
-    cd /opt/$pkgspec
-    for d in bin sbin lib ; do
-        if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
-            for f in $d/* ; do
-                if test -f $f ; then
-                    if test -z "$did_print_header" ; then
-                        echo "Architecture check: /opt/$pkgspec"
-                        did_print_header=1
-                    fi
-                    file $f | sed 's/^/  /'
-                    lipo -info $f 2>/dev/null | sed 's/^/    /' || true
-                    echo
-                fi
-            done
-        fi
-    done
-    exit 0
-fi
-
 # unlink:
 
 if test "$1" = "--unlink" ; then
@@ -164,12 +135,6 @@ if test "$1" = "--unlink" ; then
 fi
 
 # setup:
-
-if ! type -a /usr/bin/gcc >/dev/null 2>&1 ; then
-    echo "Error: please install Xcode." >&2
-    echo "See https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/xcode25_8m2558_developerdvd.dmg" >&2
-    exit 1
-fi
 
 if ! test -e /opt ; then
     echo "Creating /opt." >&2
@@ -221,7 +186,46 @@ if ! test -e $opt_config_cache/tiger.cache ; then
     curl -sSfLOk $TIGERSH_MIRROR/config.cache/tiger.cache
 fi
 
+# Tiger's 'otool -L' can't handle ppc64.
+if ! test -e /opt/otool-667.3 ; then
+    echo "Installing otool which understands ppc64." >&2
+    cd /tmp
+    curl -sSfLOk $TIGERSH_MIRROR/scripts/install-otool-667.3.sh
+    chmod +x install-otool-667.3.sh
+    ./install-otool-667.3.sh
+fi
+export PATH="/opt/otool-667.3/bin:$PATH"
+
 if test "$1" = "--setup" ; then
+    exit 0
+fi
+
+# arch-check:
+
+if test "$1" = "--arch-check" ; then
+    shift 1
+    if test -z "$1" ; then
+        echo "Error: arch-check which package??" >&2
+        echo "e.g. tiger.sh --arch-check foo-1.0" >&2
+        exit 1
+    fi
+    pkgspec="$1"
+    cd /opt/$pkgspec
+    for d in bin sbin lib ; do
+        if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
+            for f in $d/* ; do
+                if test -f $f -a ! -L $f ; then
+                    if test -z "$did_print_header" ; then
+                        echo -e "\nArchitecture check: /opt/$pkgspec\n"
+                        did_print_header=1
+                    fi
+                    file $f | sed 's/^/  /'
+                    lipo -info $f 2>/dev/null | sed 's/^/    /' || true
+                    echo
+                fi
+            done
+        fi
+    done
     exit 0
 fi
 
@@ -245,6 +249,12 @@ fi
 if test -n "$1" -a -e "/opt/$1" ; then
     echo "$1 is already installed." >&2
     exit 0
+fi
+
+if ! type -a /usr/bin/gcc >/dev/null 2>&1 ; then
+    echo "Error: please install Xcode." >&2
+    echo "See https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/xcode25_8m2558_developerdvd.dmg" >&2
+    exit 1
 fi
 
 # Thanks to https://trac.macports.org/ticket/16286

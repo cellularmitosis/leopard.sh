@@ -16,10 +16,6 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
-    leopard.sh pkg-config-0.29.2$ppc64
-fi
-
 for dep in \
     ncurses-6.3$ppc64 \
     readline-8.1.2$ppc64
@@ -27,9 +23,10 @@ do
     if ! test -e /opt/$dep ; then
         leopard.sh $dep
     fi
-    PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
-export PKG_CONFIG_PATH
+LIBS="-lncurses -lreadline"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
 
@@ -46,6 +43,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 20190f4c48758109649cc349605ac31d
+
     cd /tmp
     rm -rf $package-$version
 
@@ -55,21 +54,17 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
     fi
-    export CFLAGS
 
-    pkgconfignames="ncurses readline"
-    CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
-    LIBS=$(pkg-config --libs-only-l $pkgconfignames)
-    export CPPFLAGS LDFLAGS LIBS
-
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        CPPFLAGS="$CPPFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        LIBS="$LIBS" \
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j) V=1
 
