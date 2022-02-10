@@ -246,7 +246,10 @@ if test "$1" = "--linker-check" ; then
     for d in bin sbin lib ; do
         if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
             for f in $d/* ; do
-                if test -f $f -a ! -L $f -a "${f: -2}" != ".a" ; then
+                if test -f $f -a ! -L $f \
+                    -a "${f: -2}" != ".a" \
+                    -a "${f: -3}" != ".la"
+                then
                     if test -z "$did_print_header" ; then
                         echo -e "\nLinker check: /opt/$pkgspec\n"
                         did_print_header=1
@@ -255,7 +258,7 @@ if test "$1" = "--linker-check" ; then
                         | sed 's/^/    /' \
                         | sed -E "/\/usr\/lib\/(libSystem|libgcc_s)/! s|/usr/|/${COLOR_YELLOW}usr${COLOR_NONE}/|g" \
                         | sed "s|/opt/|/${COLOR_GREEN}opt${COLOR_NONE}/|g" \
-                        | sed -E "s/(libSystem|libgcc_s)/${COLOR_CYAN}\1${COLOR_NONE}/g"
+                        | sed -E "s/(libSystem|libgcc_s|libstdc\+\+)/${COLOR_CYAN}\1${COLOR_NONE}/g"
                     )"
                     echo
                 fi

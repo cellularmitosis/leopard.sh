@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install ncurses / ncursesw on OS X Leopard / PowerPC.
 
@@ -22,10 +22,6 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
-    leopard.sh pkg-config-0.29.2$ppc64
-fi
-
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
@@ -41,6 +37,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = a2736befde5fee7d2b7eb45eb281cdbe
+
     cd /tmp
     rm -rf ncurses-$version
 
@@ -50,35 +48,30 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    CFLAGS=$(leopard.sh -mcpu -O)
+    CXXFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
-        CXXFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
+        CXXFLAGS="-m64 $CXXFLAGS"
     fi
-    export CFLAGS CXXFLAGS
 
     # Note: ncurses needs the directory for .pc files to already exist:
     mkdir -p /opt/$pkgspec/lib/pkgconfig
 
     if test "$package" = "ncursesw" ; then
-        ./configure -C --prefix=/opt/$pkgspec \
-            --with-manpage-format=normal \
-            --enable-pc-files \
-            --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
-            --with-shared \
-            --without-debug \
-            --enable-widec
-    else
-        ./configure -C --prefix=/opt/$pkgspec \
-            --with-manpage-format=normal \
-            --enable-pc-files \
-            --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
-            --with-shared \
-            --without-debug
+        enable_widec="--enable-widec"
     fi
+
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-manpage-format=normal \
+        --with-shared \
+        --without-debug \
+        $enable_widec \
+        CFLAGS="$CFLAGS" \
+        CXXFLAGS="$CXXFLAGS"
+
+        # --enable-pc-files \
+        # --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
 
     make $(leopard.sh -j) V=1
 

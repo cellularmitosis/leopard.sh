@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install ncurses / ncursesw on OS X Tiger / PowerPC.
 
@@ -21,11 +21,6 @@ if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
 fi
 
 pkgspec=$package-$version$ppc64
-
-# Note: ppc64 pkg-config unavailable on Tiger.
-if ! test -e /opt/pkg-config-0.29.2 ; then
-    tiger.sh pkg-config-0.29.2
-fi
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
@@ -53,35 +48,30 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS=$(tiger.sh -mcpu -O)
+    CXXFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        CXXFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(tiger.sh -m32 -mcpu -O)
-        CXXFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
+        CXXFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS CXXFLAGS
 
     # Note: ncurses needs the directory for .pc files to already exist:
     mkdir -p /opt/$pkgspec/lib/pkgconfig
 
     if test "$package" = "ncursesw" ; then
-        ./configure -C --prefix=/opt/$pkgspec \
-            --with-manpage-format=normal \
-            --enable-pc-files \
-            --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
-            --with-shared \
-            --without-debug \
-            --enable-widec
-    else
-        ./configure -C --prefix=/opt/$pkgspec \
-            --with-manpage-format=normal \
-            --enable-pc-files \
-            --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
-            --with-shared \
-            --without-debug
+        enable_widec="--enable-widec"
     fi
+
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-manpage-format=normal \
+        --with-shared \
+        --without-debug \
+        $enable_widec \
+        CFLAGS="$CFLAGS" \
+        CXXFLAGS="$CXXFLAGS"
+
+        # --enable-pc-files \
+        # --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
 
     make $(tiger.sh -j) V=1
 

@@ -23,6 +23,7 @@ pkgspec=$package-$version$ppc64
 for dep in \
     libiconv-bootstrap-1.16$ppc64 \
     libunistring-1.0$ppc64 \
+    ncurses-6.3$ppc64 \
     xz-5.2.5$ppc64
 do
     if ! test -e /opt/$dep ; then
@@ -63,7 +64,6 @@ else
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $CFLAGS"
         CXXFLAGS="-m64 $CXXFLAGS"
-        # LDFLAGS="-m64 $LDFLAGS"
     fi
 
     ./configure -C --prefix=/opt/$pkgspec \

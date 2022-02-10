@@ -26,7 +26,6 @@ do
     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
-# LIBS="-lbar -lqux"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 

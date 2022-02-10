@@ -23,6 +23,7 @@ pkgspec=$package-$version$ppc64
 for dep in \
     libiconv-bootstrap-1.16$ppc64 \
     libunistring-1.0$ppc64 \
+    ncurses-6.3$ppc64 \
     xz-5.2.5$ppc64
 do
     if ! test -e /opt/$dep ; then
@@ -31,7 +32,6 @@ do
     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
-# LIBS="-lbar -lqux"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
@@ -48,7 +48,7 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = e71133e1bad4f2ce83121078fd33edde
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 28b1cd4c94a74428723ed966c38cf479
 
     cd /tmp
     rm -rf $package-$version
@@ -64,7 +64,6 @@ else
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $CFLAGS"
         CXXFLAGS="-m64 $CXXFLAGS"
-        # LDFLAGS="-m64 $LDFLAGS"
     fi
 
     ./configure -C --prefix=/opt/$pkgspec \
