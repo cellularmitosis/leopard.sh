@@ -117,6 +117,8 @@ else
     fi
 
     make prefix=/opt/$pkgspec install
+
+    tiger.sh --arch-check $pkgspec
 fi
 
 if test -e /opt/$pkgspec/bin ; then

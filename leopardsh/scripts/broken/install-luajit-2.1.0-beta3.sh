@@ -56,6 +56,8 @@ else
  ##############################################################################
 EOF
     PATH="/opt/gcc-4.9.4$ppc64/bin:$PATH" make $(leopard.sh -j)
+
+    exit 1
 fi
 
 if test -e /opt/$pkgspec/bin ; then
