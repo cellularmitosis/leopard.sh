@@ -57,7 +57,7 @@ else
 
     make install
 
-    leopard.sh --arch-check $pkgspec
+    leopard.sh --arch-check $pkgspec $ppc64
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec

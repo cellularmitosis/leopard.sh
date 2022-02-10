@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# tiger.sh: build/install software on PowerPC Macs running OS X Tiger (10.4).
+# tiger.sh: package manager PowerPC Macs running OS X Tiger (10.4).
 
 set -e
 

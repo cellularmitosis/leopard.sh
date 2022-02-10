@@ -67,7 +67,7 @@ else
 
     make prefix=/opt/$pkgspec install
 
-    leopard.sh --arch-check $pkgspec
+    leopard.sh --arch-check $pkgspec $ppc64
 fi
 
 if test -e /opt/$pkgspec/bin ; then

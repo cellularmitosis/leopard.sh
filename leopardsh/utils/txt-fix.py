@@ -192,6 +192,13 @@ def fix_arch_check(lines):
                 lines2.append("    tiger.sh --arch-check $pkgspec")
     return lines2
 
+def fix_arch_check2(lines):
+    lines2 = []
+    for line in lines:
+        line = line.replace('--arch-check $pkgspec', '--arch-check $pkgspec $ppc64')
+        lines2.append(line)
+    return lines2
+
 
 if __name__ == "__main__":
     fd = open(sys.argv[1])
@@ -214,7 +221,8 @@ if __name__ == "__main__":
     # lines = fix_prefix2(lines)
     # lines = fix_config_cache(lines)
     # lines = fix_terminal_title(lines)
-    lines = fix_arch_check(lines)
+    # lines = fix_arch_check(lines)
+    lines = fix_arch_check2(lines)
 
     text = '\n'.join(lines) + '\n'
     sys.stdout.write(text)

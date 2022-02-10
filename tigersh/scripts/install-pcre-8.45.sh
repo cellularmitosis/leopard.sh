@@ -99,7 +99,7 @@ else
 
     make install
 
-    tiger.sh --arch-check $pkgspec
+    tiger.sh --arch-check $pkgspec $ppc64
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
