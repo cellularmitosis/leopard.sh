@@ -302,7 +302,7 @@ export MACOSX_DEPLOYMENT_TARGET=10.4
 
 pkgspec="$1"
 echo "Installing $pkgspec" >&2
-echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
+echo -n -e "\033]0;tiger.sh $pkgspec (tiger.$cpu_name)\007"
 script=install-$pkgspec.sh
 cd /tmp
 /opt/portable-curl/bin/curl -sSfLO $TIGERSH_MIRROR/scripts/$script

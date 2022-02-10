@@ -31,7 +31,7 @@ do
 done
 export PKG_CONFIG_PATH
 
-echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
 binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
 if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then

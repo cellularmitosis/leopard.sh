@@ -291,7 +291,7 @@ fi
 
 pkgspec="$1"
 echo "Installing $pkgspec" >&2
-echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
+echo -n -e "\033]0;leopard.sh $pkgspec (leopard.$cpu_name))\007"
 script=install-$pkgspec.sh
 cd /tmp
 /opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/scripts/$script

@@ -28,7 +28,7 @@ do
 done
 LIBS="-lncurses -lreadline"
 
-echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
 if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then

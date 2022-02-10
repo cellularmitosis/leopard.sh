@@ -15,7 +15,7 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
 if ! which -s guile ; then
     leopard.sh guile-1.8.8
