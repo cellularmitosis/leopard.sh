@@ -1,9 +1,9 @@
 2 termcap-1.3.1 leopard.g4e
 2 termcap-1.3.1.ppc64 leopard.g5
 3 termcap-1.3.1 leopard.g5
-13 pv-1.6.20 leopard.g5
 13 pv-1.6.20.ppc64 leopard.g5
-16 pv-1.6.20 leopard.g4e
+14 pv-1.6.20 leopard.g5
+17 pv-1.6.20 leopard.g4e
 24 libsigsegv-2.14 leopard.g5
 30 libsigsegv-2.14 leopard.g4e
 40 lzop-1.04 leopard.g5
