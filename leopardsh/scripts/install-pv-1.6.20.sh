@@ -30,6 +30,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 85b25c827add82ebdd5a58a5ffde1d7d
+
     cd /tmp
     rm -rf $package-$version
     tar xjf ~/Downloads/$tarball
@@ -40,7 +42,7 @@ else
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $(leopard.sh -mcpu -O)"
     else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS=$(leopard.sh -mcpu -O)
     fi
     export CFLAGS
 
@@ -54,7 +56,7 @@ else
 
     make install
 
-    tiger.sh --arch-check $pkgspec
+    leopard.sh --arch-check $pkgspec
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
