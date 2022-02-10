@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install cloog on OS X Leopard / PowerPC.
 
@@ -16,13 +16,14 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/gmp-4.3.2$ppc64 ; then
-    leopard.sh gmp-4.3.2$ppc64
-fi
-
-if ! test -e /opt/isl-0.12.2$ppc64 ; then
-    leopard.sh isl-0.12.2$ppc64
-fi
+for dep in \
+    gmp-4.3.2$ppc64 \
+    isl-0.12.2$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+done
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
@@ -39,6 +40,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = e34fca0540d840e5d0f6427e98c92252
+
     cd /tmp
     rm -rf $package-$version
     tar xzf ~/Downloads/$tarball
@@ -46,16 +49,15 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math $(leopard.sh -mcpu -O)"
     if test -n "$ppc64" ; then
-        CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math -m64 $(leopard.sh -mcpu -O)"
-    else
-        CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math $(leopard.sh -m32 -mcpu -O)"
+        CFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
         --with-isl-prefix=/opt/isl-0.12.2$ppc64 \
-        --with-gmp-prefix=/opt/gmp-4.3.2$ppc64
+        --with-gmp-prefix=/opt/gmp-4.3.2$ppc64 \
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j) V=1
 

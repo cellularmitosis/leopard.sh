@@ -29,6 +29,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = ffe6f86e63a3a29fa53ac645faaabdfa
+
     cd /tmp
     rm -rf $package-$version
 
@@ -38,18 +40,17 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
     fi
 
     # Note: termcap's configure is too old to understand the -C flag,
     # and gets confused by passing it CFLAGS.
     ./configure --cache-file=config.cache --prefix=/opt/$pkgspec
 
-    make $(leopard.sh -j) V=1 CFLAGS="$CFLAGS"
+    make $(leopard.sh -j) V=1 \
+        CFLAGS="$CFLAGS"
 
     # Note: no 'make check' available.
 
@@ -57,23 +58,6 @@ else
 
     leopard.sh --linker-check $pkgspec
     leopard.sh --arch-check $pkgspec $ppc64
-
-    # Note: termcap does not provide a .pc file, but readline requires one,
-    # so we supply one:
-    mkdir -p /opt/$pkgspec/lib/pkgconfig
-    cat > /opt/$pkgspec/lib/pkgconfig/$package.pc << "EOF"
-prefix=/opt/termcap-1.3.1
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-includedir=${prefix}/include
-
-Name: Termcap
-Description: Terminal capability database
-URL: https://en.wikipedia.org/wiki/Termcap
-Version: 1.3.1
-Libs: -L${libdir} -ltermcap
-Cflags: -I${includedir}
-EOF
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec

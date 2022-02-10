@@ -1,4 +1,5 @@
 #!/bin/bash
+# based on templates/install-foo-1.0.sh v4
 
 # Install pv on OS X Leopard / PowerPC.
 
@@ -42,12 +43,10 @@ else
     CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $CFLAGS"
-        LDFLAGS="-m64 $LDFLAGS"
     fi
 
     ./configure -C --prefix=/opt/$pkgspec \
-        CFLAGS="$CFLAGS" \
-        LDFLAGS="$LDFLAGS"
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j)
 

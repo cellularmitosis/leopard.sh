@@ -40,17 +40,17 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-    else
-        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
     fi
 
     # Note: termcap's configure is too old to understand the -C flag,
     # and gets confused by passing it CFLAGS.
     ./configure --cache-file=config.cache --prefix=/opt/$pkgspec
 
-    make $(tiger.sh -j) V=1 CFLAGS="$CFLAGS"
+    make $(tiger.sh -j) V=1 \
+        CFLAGS="$CFLAGS"
 
     # Note: no 'make check' available.
 
@@ -58,23 +58,6 @@ else
 
     tiger.sh --linker-check $pkgspec
     tiger.sh --arch-check $pkgspec $ppc64
-
-    # Note: termcap does not provide a .pc file, but readline requires one,
-    # so we supply one:
-    mkdir -p /opt/$pkgspec/lib/pkgconfig
-    cat > /opt/$pkgspec/lib/pkgconfig/$package.pc << "EOF"
-prefix=/opt/termcap-1.3.1
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-includedir=${prefix}/include
-
-Name: Termcap
-Description: Terminal capability database
-URL: https://en.wikipedia.org/wiki/Termcap
-Version: 1.3.1
-Libs: -L${libdir} -ltermcap
-Cflags: -I${includedir}
-EOF
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec

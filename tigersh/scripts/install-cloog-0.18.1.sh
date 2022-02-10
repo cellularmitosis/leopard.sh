@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install cloog on OS X Tiger / PowerPC.
 
@@ -16,13 +16,14 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/gmp-4.3.2$ppc64 ; then
-    tiger.sh gmp-4.3.2$ppc64
-fi
-
-if ! test -e /opt/isl-0.12.2$ppc64 ; then
-    tiger.sh isl-0.12.2$ppc64
-fi
+for dep in \
+    gmp-4.3.2$ppc64 \
+    isl-0.12.2$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+done
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
@@ -48,16 +49,15 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math $(tiger.sh -mcpu -O)"
     if test -n "$ppc64" ; then
-        CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math -m64 $(tiger.sh -mcpu -O)"
-    else
-        CFLAGS="-fomit-frame-pointer -fstrict-aliasing -ffast-math $(tiger.sh -m32 -mcpu -O)"
+        CFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
         --with-isl-prefix=/opt/isl-0.12.2$ppc64 \
-        --with-gmp-prefix=/opt/gmp-4.3.2$ppc64
+        --with-gmp-prefix=/opt/gmp-4.3.2$ppc64 \
+        CFLAGS="$CFLAGS"
 
     make $(tiger.sh -j) V=1
 

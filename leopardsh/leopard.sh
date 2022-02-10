@@ -11,6 +11,7 @@ export LEOPARDSH_MIRROR
 
 COLOR_GREEN="\\\e[32;1m"
 COLOR_YELLOW="\\\e[33;1m"
+COLOR_CYAN="\\\e[36;1m"
 COLOR_NONE="\\\e[0m"
 
 osversion=$(sw_vers -productVersion | awk '{print $NF}')
@@ -250,8 +251,9 @@ if test "$1" = "--linker-check" ; then
                     fi
                     echo -e "$(otool -L $f \
                         | sed 's/^/    /' \
-                        | sed "s|/usr/|/${COLOR_YELLOW}usr${COLOR_NONE}/|g" \
+                        | sed -E "/\/usr\/lib\/(libSystem|libgcc_s)/! s|/usr/|/${COLOR_YELLOW}usr${COLOR_NONE}/|g" \
                         | sed "s|/opt/|/${COLOR_GREEN}opt${COLOR_NONE}/|g" \
+                        | sed -E "s/(libSystem|libgcc_s)/${COLOR_CYAN}\1${COLOR_NONE}/g"
                     )"
                     echo
                 fi

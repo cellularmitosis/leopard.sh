@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install libsigsegv on OS X Tiger / PowerPC.
 
@@ -43,13 +43,13 @@ else
     CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $CFLAGS"
-        LDFLAGS="-m64 $LDFLAGS"
+        # LDFLAGS="-m64 $LDFLAGS"
     fi
 
     ./configure -C --prefix=/opt/$pkgspec \
         --enable-shared \
         CFLAGS="$CFLAGS" \
-        LDFLAGS="$LDFLAGS"
+        # LDFLAGS="$LDFLAGS"
 
     make $(tiger.sh -j) V=1
 
