@@ -69,6 +69,7 @@ else
     # https://opensource.apple.com/source/cvs/cvs-42/cvs/lib/getdelim.c.auto.html
     make install
 
+    leopard.sh --linker-check $pkgspec
     leopard.sh --arch-check $pkgspec $ppc64
 
     if test -e config.cache ; then

@@ -201,23 +201,23 @@ if test "$1" = "--arch-check" ; then
                         echo -e "$(lipo -info $f 2>/dev/null \
                             | sed 's/^/    /' \
                             | sed "s/ ppc64/ ${COLOR_GREEN}ppc64${COLOR_NONE}/g" \
-                            | sed "s/ ppc750/ ${COLOR_YELLOW}ppc750${RED_NONE}/g" \
-                            | sed "s/ ppc7400/ ${COLOR_YELLOW}ppc7400${RED_NONE}/g" \
-                            | sed "s/ ppc7450/ ${COLOR_YELLOW}ppc7450${RED_NONE}/g" \
-                            | sed "s/ ppc970/ ${COLOR_YELLOW}ppc970${RED_NONE}/g" \
-                            | sed "s/ ppc/ ${COLOR_YELLOW}ppc${RED_NONE}/g" \
+                            | sed "s/ ppc750/ ${COLOR_YELLOW}ppc750${COLOR_NONE}/g" \
+                            | sed "s/ ppc7400/ ${COLOR_YELLOW}ppc7400${COLOR_NONE}/g" \
+                            | sed "s/ ppc7450/ ${COLOR_YELLOW}ppc7450${COLOR_NONE}/g" \
+                            | sed "s/ ppc970/ ${COLOR_YELLOW}ppc970${COLOR_NONE}/g" \
+                            | sed "s/ ppc/ ${COLOR_YELLOW}ppc${COLOR_NONE}/g" \
                             || true
                         )"
                     else
                         echo -e "$(lipo -info $f 2>/dev/null \
                             | sed 's/^/    /' \
-                            | sed "s/ ppc${cpu_num}/ ${COLOR_GREEN}ppc750${RED_NONE}/g" \
+                            | sed "s/ ppc${cpu_num}/ ${COLOR_GREEN}ppc${cpu_num}${COLOR_NONE}/g" \
                             | sed "s/ ppc64/ ${COLOR_YELLOW}ppc64${COLOR_NONE}/g" \
-                            | sed "s/ ppc750/ ${COLOR_YELLOW}ppc750${RED_NONE}/g" \
-                            | sed "s/ ppc7400/ ${COLOR_YELLOW}ppc7400${RED_NONE}/g" \
-                            | sed "s/ ppc7450/ ${COLOR_YELLOW}ppc7450${RED_NONE}/g" \
-                            | sed "s/ ppc970/ ${COLOR_YELLOW}ppc970${RED_NONE}/g" \
-                            | sed "s/ ppc/ ${COLOR_GREEN}ppc${RED_NONE}/g" \
+                            | sed "s/ ppc750/ ${COLOR_YELLOW}ppc750${COLOR_NONE}/g" \
+                            | sed "s/ ppc7400/ ${COLOR_YELLOW}ppc7400${COLOR_NONE}/g" \
+                            | sed "s/ ppc7450/ ${COLOR_YELLOW}ppc7450${COLOR_NONE}/g" \
+                            | sed "s/ ppc970/ ${COLOR_YELLOW}ppc970${COLOR_NONE}/g" \
+                            | sed "s/ ppc/ ${COLOR_GREEN}ppc${COLOR_NONE}/g" \
                             || true
                         )"
                     fi

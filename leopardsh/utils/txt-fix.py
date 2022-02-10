@@ -199,6 +199,14 @@ def fix_arch_check2(lines):
         lines2.append(line)
     return lines2
 
+def fix_linker_check(lines):
+    lines2 = []
+    for line in lines:
+        if "leopard.sh --arch-check $pkgspec $ppc64" in line:
+            lines2.append("    leopard.sh --linker-check $pkgspec")
+        lines2.append(line)
+    return lines2
+
 
 if __name__ == "__main__":
     fd = open(sys.argv[1])
@@ -222,7 +230,8 @@ if __name__ == "__main__":
     # lines = fix_config_cache(lines)
     # lines = fix_terminal_title(lines)
     # lines = fix_arch_check(lines)
-    lines = fix_arch_check2(lines)
+    # lines = fix_arch_check2(lines)
+    lines = fix_linker_check(lines)
 
     text = '\n'.join(lines) + '\n'
     sys.stdout.write(text)

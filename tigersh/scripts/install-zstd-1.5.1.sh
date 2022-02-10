@@ -118,6 +118,7 @@ else
 
     make prefix=/opt/$pkgspec install
 
+    tiger.sh --linker-check $pkgspec
     tiger.sh --arch-check $pkgspec $ppc64
 fi
 

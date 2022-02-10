@@ -67,6 +67,7 @@ else
 
     make install
 
+    tiger.sh --linker-check $pkgspec
     tiger.sh --arch-check $pkgspec $ppc64
 
     if test -e config.cache ; then

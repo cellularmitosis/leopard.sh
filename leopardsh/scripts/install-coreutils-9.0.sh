@@ -125,6 +125,7 @@ else
 
     make install
 
+    leopard.sh --linker-check $pkgspec
     leopard.sh --arch-check $pkgspec $ppc64
 
     if test -e config.cache ; then

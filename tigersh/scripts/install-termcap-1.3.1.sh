@@ -56,6 +56,7 @@ else
 
     make install
 
+    tiger.sh --linker-check $pkgspec
     tiger.sh --arch-check $pkgspec $ppc64
 
     # Note: termcap does not provide a .pc file, but readline requires one,
