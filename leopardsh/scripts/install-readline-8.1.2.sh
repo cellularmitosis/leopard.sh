@@ -17,7 +17,6 @@ fi
 pkgspec=$package-$version$ppc64
 
 for dep in \
-    termcap-1.3.1$ppc64 \
     ncurses-6.3$ppc64
 do
     if ! test -e /opt/$dep ; then
@@ -57,7 +56,14 @@ else
     CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $CFLAGS"
+        # Note: readline ends up linking a ppc dylib, rather than ppc64,
+        # so we pass -m64 in LDFLAGS:
+        LDFLAGS="-m64 $LDFLAGS"
     fi
+
+    # Note: the dylibs still end up being "ppc" rather than e.g. ppc7400,
+    # so we also pass -mcpu in LDFLAGS:
+    LDFLAGS="$(leopard.sh -mcpu) $LDFLAGS"
 
     ./configure -C --prefix=/opt/$pkgspec \
         --with-curses \
