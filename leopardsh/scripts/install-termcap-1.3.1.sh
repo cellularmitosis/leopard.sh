@@ -55,6 +55,8 @@ else
 
     make install
 
+    tiger.sh --arch-check $pkgspec
+
     # Note: termcap does not provide a .pc file, but readline requires one,
     # so we supply one:
     mkdir -p /opt/$pkgspec/lib/pkgconfig

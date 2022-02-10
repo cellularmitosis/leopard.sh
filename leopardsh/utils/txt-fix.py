@@ -182,6 +182,16 @@ def fix_terminal_title(lines):
         lines2.append(line)
     return lines2
 
+def fix_arch_check(lines):
+    lines2 = []
+    for i, line in enumerate(lines):
+        lines2.append(line)
+        if line == "    make install":
+            if "--arch-check" not in lines[i+2]:
+                lines2.append("")
+                lines2.append("    tiger.sh --arch-check $pkgspec")
+    return lines2
+
 
 if __name__ == "__main__":
     fd = open(sys.argv[1])
@@ -203,7 +213,8 @@ if __name__ == "__main__":
     # lines = fix_ln(lines)
     # lines = fix_prefix2(lines)
     # lines = fix_config_cache(lines)
-    lines = fix_terminal_title(lines)
+    # lines = fix_terminal_title(lines)
+    lines = fix_arch_check(lines)
 
     text = '\n'.join(lines) + '\n'
     sys.stdout.write(text)

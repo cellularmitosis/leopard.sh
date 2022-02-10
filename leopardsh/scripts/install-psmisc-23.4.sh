@@ -69,6 +69,8 @@ else
     # https://opensource.apple.com/source/cvs/cvs-42/cvs/lib/getdelim.c.auto.html
     make install
 
+    tiger.sh --arch-check $pkgspec
+
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
         gzip config.cache
