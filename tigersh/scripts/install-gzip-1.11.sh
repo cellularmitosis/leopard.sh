@@ -40,7 +40,7 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    export CFLAGS=$(leopard.sh -mcpu -O)
+    export CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
         export CFLAGS="$CFLAGSS -m64"
         export LDFLAGS=-m64
@@ -59,7 +59,7 @@ else
 
     make install
 
-    leopard.sh --arch-check $pkgspec
+    tiger.sh --arch-check $pkgspec
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec

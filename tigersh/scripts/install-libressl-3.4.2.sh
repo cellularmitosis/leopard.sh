@@ -70,7 +70,7 @@ else
 
     make install
 
-    leopard.sh --arch-check $pkgspec
+    tiger.sh --arch-check $pkgspec
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec

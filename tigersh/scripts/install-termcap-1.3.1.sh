@@ -56,7 +56,7 @@ else
 
     make install
 
-    leopard.sh --arch-check $pkgspec
+    tiger.sh --arch-check $pkgspec
 
     # Note: termcap does not provide a .pc file, but readline requires one,
     # so we supply one:

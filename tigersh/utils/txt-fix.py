@@ -188,7 +188,7 @@ def fix_arch_check(lines):
         if line == "    make install":
             if "--arch-check" not in lines[i+2]:
                 lines2.append("")
-                lines2.append("    leopard.sh --arch-check $pkgspec")
+                lines2.append("    tiger.sh --arch-check $pkgspec")
     return lines2
 
 

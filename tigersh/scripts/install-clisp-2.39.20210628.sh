@@ -30,7 +30,7 @@ fi
 
 # Note: libffcall not available on tiger yet.
 # if ! test -e /opt/libffcall-2.4$ppc64 ; then
-#     leopard.sh libffcall-2.4$ppc64
+#     tiger.sh libffcall-2.4$ppc64
 # fi
 
 if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
@@ -144,7 +144,7 @@ else
 
     make install
 
-    leopard.sh --arch-check $pkgspec
+    tiger.sh --arch-check $pkgspec
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
