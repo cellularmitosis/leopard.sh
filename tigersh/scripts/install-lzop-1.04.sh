@@ -1,7 +1,6 @@
 #!/bin/bash
 # based on templates/template.sh v3
 
-
 # Install lzop on OS X Tiger / PowerPC.
 
 package=lzop
@@ -17,20 +16,15 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-# Note: ppc64 pkg-config unavailable on Tiger.
-if ! test -e /opt/pkg-config-0.29.2 ; then
-    tiger.sh pkg-config-0.29.2
-fi
-
 for dep in \
     lzo-2.10$ppc64
 do
     if ! test -e /opt/$dep ; then
         tiger.sh $dep
     fi
-    PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
-export PKG_CONFIG_PATH
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
@@ -58,22 +52,16 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-    else
-        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
     fi
-    export CFLAGS
 
-    pkgconfignames="lzo2"
-    # Note: the lzo2.pc file seems busted, it uses -I${includedir}/lzo instead of -I${includedir}.
-    # CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    CPPFLAGS=-I/opt/lzo-2.10$ppc64/include
-    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
-    LIBS=$(pkg-config --libs-only-l $pkgconfignames)
-    export CPPFLAGS LDFLAGS LIBS
-
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        CPPFLAGS="$CPPFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        CFLAGS="$CFLAGS"
 
     make $(tiger.sh -j) V=1
 

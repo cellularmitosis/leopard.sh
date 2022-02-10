@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # 👇 EDIT HERE:
 # Install foo on OS X Leopard / PowerPC.
@@ -29,11 +29,6 @@ if ! test -e /opt/bar-2.0$ppc64 ; then
 fi
 
 # 👇 EDIT HERE:
-if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
-    leopard.sh pkg-config-0.29.2$ppc64
-fi
-
-# 👇 EDIT HERE:
 for dep in \
     bar-2.1$ppc64 \
     qux-3.4$ppc64
@@ -41,11 +36,15 @@ do
     if ! test -e /opt/$dep ; then
         leopard.sh $dep
     fi
-    CPPFLAGS="$CPPFLAGS -I/opt/$dep/include"
-    LDFLAGS="$LDFLAGS -L/opt/$dep/lib"
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
-export CPPFLAGS LDFLAGS
-export LIBS="-lbar -lqux"
+LIBS="-lbar -lqux"
+
+# 👇 EDIT HERE:
+if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
+    leopard.sh pkg-config-0.29.2$ppc64
+fi
 
 # 👇 EDIT HERE:
 for dep in \
@@ -100,18 +99,17 @@ else
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
     # 👇 EDIT HERE:
-    export CC=gcc-4.2 CXX=g++-4.2
+    CC=gcc-4.2
+    CXX=g++-4.2
 
     # 👇 EDIT HERE:
+    CFLAGS=$(leopard.sh -mcpu -O)
+    CXXFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -mcpu -O)
-        CXXFLAGS=$(leopard.sh -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
+        CXXFLAGS="-m64 $CXXFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
     fi
-    export CFLAGS CXXFLAGS
 
     # 👇 EDIT HERE:
     for f in configure libfoo/configure ; do
@@ -130,12 +128,18 @@ else
     CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
     LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
     LIBS=$(pkg-config --libs-only-l $pkgconfignames)
-    export CPPFLAGS LDFLAGS LIBS
 
     # 👇 EDIT HERE:
     ./configure -C --prefix=/opt/$pkgspec \
         --with-bar=/opt/bar-1.0 \
         --with-bar-prefix=/opt/bar-1.0 \
+        CPPFLAGS="$CPPFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        LIBS="$LIBS" \
+        CFLAGS="$CFLAGS" \
+        CXXFLAGS="$CXXFLAGS" \
+        CC="$CC" \
+        CXX="$CXX"
 
     make $(leopard.sh -j) V=1
 
@@ -153,6 +157,9 @@ else
     if test -n "$LEOPARDSH_RUN_LONG_TESTS" ; then
         make check
     fi
+
+    # 👇 EDIT HERE:
+    # Note: no 'make check' available.
 
     make install
 

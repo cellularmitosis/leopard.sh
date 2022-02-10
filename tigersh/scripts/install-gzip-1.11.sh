@@ -40,13 +40,15 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    export CFLAGS=$(tiger.sh -mcpu -O)
+    CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        export CFLAGS="$CFLAGSS -m64"
-        export LDFLAGS=-m64
+        CFLAGS="-m64 $CFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
     fi
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        CFLAGS="$CFLAGS" \
+        LDFLAGS="$LDFLAGS"
 
     make $(tiger.sh -j) V=1
 

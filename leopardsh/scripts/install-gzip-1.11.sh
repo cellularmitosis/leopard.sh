@@ -41,13 +41,15 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    export CFLAGS=$(leopard.sh -mcpu -O)
+    CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        export CFLAGS="$CFLAGSS -m64"
-        export LDFLAGS=-m64
+        CFLAGS="-m64 $CFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
     fi
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        CFLAGS="$CFLAGS" \
+        LDFLAGS="$LDFLAGS"
 
     make $(leopard.sh -j) V=1
 

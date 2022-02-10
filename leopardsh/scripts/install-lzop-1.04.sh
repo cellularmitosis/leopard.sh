@@ -16,19 +16,15 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
-    leopard.sh pkg-config-0.29.2$ppc64
-fi
-
 for dep in \
     lzo-2.10$ppc64
 do
     if ! test -e /opt/$dep ; then
         leopard.sh $dep
     fi
-    PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
-export PKG_CONFIG_PATH
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
@@ -45,29 +41,27 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 271eb10fde77a0a96b9cbf745e719ddf
+
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
     fi
-    export CFLAGS
 
-    pkgconfignames="lzo2"
-    # Note: the lzo2.pc file seems busted, it uses -I${includedir}/lzo instead of -I${includedir}.
-    # CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    CPPFLAGS=-I/opt/lzo-2.10$ppc64/include
-    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
-    LIBS=$(pkg-config --libs-only-l $pkgconfignames)
-    export CPPFLAGS LDFLAGS LIBS
-
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        CPPFLAGS="$CPPFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j) V=1
     # Note: no 'make check' available.
