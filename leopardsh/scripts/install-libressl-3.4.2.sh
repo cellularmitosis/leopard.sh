@@ -1,7 +1,6 @@
 #!/bin/bash
 # based on templates/template.sh v3
 
-
 # Install libressl on OS X Leopard / PowerPC.
 
 package=libressl
@@ -30,24 +29,24 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 18aa728e7947a30af3bb04243e4482aa
+
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    for f in configure ; do
-        if test -n "$ppc64" ; then
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
-            perl -pi -e "s/CFLAGS=\"-O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
-        else
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
-            perl -pi -e "s/CFLAGS=\"-O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
-        fi
-    done
+    CFLAGS=$(leopard.sh -mcpu -O)
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $CFLAGS"
+    fi
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j) V=1
 

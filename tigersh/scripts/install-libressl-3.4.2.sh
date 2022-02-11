@@ -1,6 +1,7 @@
 #!/bin/bash
 # based on templates/template.sh v3
 
+FIXME WIP
 
 # Install libressl on OS X Tiger / PowerPC.
 
@@ -51,7 +52,9 @@ else
         fi
     done
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        CFLAGS="$CFLAGS"
+
 
     make $(tiger.sh -j) V=1
 

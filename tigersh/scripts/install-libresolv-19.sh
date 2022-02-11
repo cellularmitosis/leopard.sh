@@ -1,10 +1,10 @@
 #!/bin/bash
 # based on templates/install-foo-1.0.sh v4
 
-# Install socat on OS X Tiger / PowerPC.
+# Install libresolv on OS X Tiger / PowerPC.
 
-package=socat
-version=1.7.4.3
+package=libresolv
+version=19
 
 set -e -x
 PATH="/opt/portable-curl/bin:$PATH"
@@ -16,25 +16,12 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-for dep in \
-    readline-8.1.2$ppc64 \
-    libressl-3.4.2$ppc64
-do
-    if ! test -e /opt/$dep ; then
-        tiger.sh $dep
-    fi
-    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
-    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
-done
-
-echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
-
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
 if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
     cd /opt
     curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-    srcmirror=http://www.dest-unreach.org/$package/download
+    srcmirror=https://opensource.apple.com/tarballs/$package
     tarball=$package-$version.tar.gz
 
     if ! test -e ~/Downloads/$tarball ; then
@@ -42,7 +29,7 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 5af5a1501da4d77cc5ea702ee5e40787
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 1411402275ee7ecfd4bebc5ccfd42962
 
     cd /tmp
     rm -rf $package-$version
@@ -51,17 +38,24 @@ else
 
     cd $package-$version
 
-    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+    curl -#fO https://opensource.apple.com/source/configd/configd-136.2/dnsinfo/dnsinfo.h
+    curl -#fO https://opensource.apple.com/source/Libinfo/Libinfo-222.3.6/lookup.subproj/netdb_async.h
 
     CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $CFLAGS"
     fi
 
-    ./configure -C --prefix=/opt/$pkgspec \
-        CFLAGS="$CFLAGS" \
-        CPPFLAGS="$CPPFLAGS" \
-        LDFLAGS="$LDFLAGS"
+    # ./configure -C --prefix=/opt/$pkgspec \
+    #     --with-bar=/opt/bar-1.0 \
+    #     --with-bar-prefix=/opt/bar-1.0 \
+    #     CPPFLAGS="$CPPFLAGS" \
+    #     LDFLAGS="$LDFLAGS" \
+    #     LIBS="$LIBS" \
+    #     CFLAGS="$CFLAGS" \
+    #     CXXFLAGS="$CXXFLAGS" \
+    #     CC="$CC" \
+    #     CXX="$CXX"
 
     make $(tiger.sh -j) V=1
 
@@ -69,16 +63,9 @@ else
         make check
     fi
 
-    make install
+    # Note: no 'make check' available.
 
-    tiger.sh --linker-check $pkgspec
-    tiger.sh --arch-check $pkgspec $ppc64
 
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
-        gzip config.cache
-        mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
-    fi
 fi
 
 if test -e /opt/$pkgspec/bin ; then
@@ -88,5 +75,3 @@ fi
 if test -e /opt/$pkgspec/sbin ; then
     ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
-
-# Note: unavailable on tiger ppc64 due to Apple's libresolv being 32-bit-only.

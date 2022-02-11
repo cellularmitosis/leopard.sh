@@ -59,7 +59,9 @@ else
     fi
 
     ./configure -C --prefix=/opt/$pkgspec \
-        CFLAGS="$CFLAGS" 
+        CFLAGS="$CFLAGS" \
+        CPPFLAGS="$CPPFLAGS" \
+        LDFLAGS="$LDFLAGS"
 
     make $(leopard.sh -j) V=1
 
