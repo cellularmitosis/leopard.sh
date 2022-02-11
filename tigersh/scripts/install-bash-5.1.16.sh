@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install bash on OS X Tiger / PowerPC.
 
@@ -16,13 +16,16 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/libiconv-1.16$ppc64 ; then
-    tiger.sh libiconv-1.16$ppc64
-fi
-
-if ! test -e /opt/gettext-0.20$ppc64 ; then
-    tiger.sh gettext-0.20$ppc64
-fi
+for dep in \
+    libiconv-1.16$ppc64 \
+    gettext-0.20$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
@@ -50,19 +53,18 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
     fi
-    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
         --enable-threads=posix \
         --with-installed-readline \
         --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
-        --with-libintl-prefix=/opt/gettext-0.20$ppc64
+        --with-libintl-prefix=/opt/gettext-0.20$ppc64 \
+        CFLAGS="$CFLAGS"
 
     make $(tiger.sh -j) V=1
 
