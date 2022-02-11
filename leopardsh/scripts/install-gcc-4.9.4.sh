@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install gcc on OS X Leopard / PowerPC.
 
@@ -20,25 +20,19 @@ if ! which -s gcc-4.2 ; then
     leopard.sh gcc-4.2
 fi
 
-if ! test -e /opt/gmp-4.3.2$ppc64 ; then
-    leopard.sh gmp-4.3.2$ppc64
-fi
-
-if ! test -e /opt/mpfr-3.1.6$ppc64 ; then
-    leopard.sh mpfr-3.1.6$ppc64
-fi
-
-if ! test -e /opt/mpc-1.0.3$ppc64 ; then
-    leopard.sh mpc-1.0.3$ppc64
-fi
-
-if ! test -e /opt/isl-0.12.2$ppc64 ; then
-    leopard.sh isl-0.12.2$ppc64
-fi
-
-if ! test -e /opt/cloog-0.18.1$ppc64 ; then
-    leopard.sh cloog-0.18.1$ppc64
-fi
+for dep in \
+    gmp-4.3.2$ppc64 \
+    mpfr-3.1.6$ppc64 \
+    mpc-1.0.3$ppc64 \
+    isl-0.12.2$ppc64 \
+    cloog-0.18.1$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
@@ -55,13 +49,19 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = b92b423b2f8f517c909fda2621ff2d7c
+
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
-    export CC=gcc-4.2 CXX=g++-4.2
+
+    CC=gcc-4.2
+    CXX=g++-4.2
 
     # Note: I haven't figured out how to get gcc to build using custom flags,
     # nor how to build a 64-bit gcc on G5.
@@ -79,7 +79,7 @@ else
         --enable-objc-gc \
         --enable-shared \
         --program-suffix=-4.9 \
-        --disable-bootstrap
+        --disable-bootstrap  # FIXME remove this
 
     make $(leopard.sh -j)
 

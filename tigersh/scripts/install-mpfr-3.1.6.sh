@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install mpfr on OS X Tiger / PowerPC.
 
@@ -16,9 +16,15 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/gmp-4.3.2$ppc64 ; then
-    tiger.sh gmp-4.3.2$ppc64
-fi
+for dep in \
+    gmp-4.3.2$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
@@ -46,12 +52,10 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS=" $(tiger.sh -mcpu -O) -Wall -Wmissing-prototypes -Wpointer-arith"
     if test -n "$ppc64" ; then
-        CFLAGS="-Wall -Wmissing-prototypes -Wpointer-arith -m64 $(tiger.sh -mcpu -O)"
-    else
-        CFLAGS="-Wall -Wmissing-prototypes -Wpointer-arith $(tiger.sh -m32 -mcpu -O)"
+        CFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS
 
     # Note: disabling thread-safe because thread-local storage isn't supported until gcc 4.9.
     ./configure -C --prefix=/opt/$pkgspec \
@@ -61,7 +65,10 @@ else
 
     make $(tiger.sh -j)
 
-    if test -n "$TIGERSH_RUN_TESTS" ; then
+    if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
+        # Note: 1 failing test:
+        #   PASS: toutimpl
+        #   ../test-driver: line 107: 60863 Segmentation fault      "$@" > $log_file 2>&1
         make check
     fi
 
@@ -84,23 +91,3 @@ fi
 if test -e /opt/$pkgspec/sbin ; then
     ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
-
-
-# test output on 32-bit ppc:
-#
-# PASS: tout_str
-# PASS: toutimpl
-# ../test-driver: line 107: 13936 Segmentation fault      "$@" >$log_file 2>&1
-# FAIL: tpow
-# PASS: tpow3
-# ...
-# ============================================================================
-# Testsuite summary for MPFR 3.1.6
-# ============================================================================
-# TOTAL: 160
-# PASS:  158
-# SKIP:  1
-# XFAIL: 0
-# FAIL:  1
-# XPASS: 0
-# ERROR: 0

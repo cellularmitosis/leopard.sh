@@ -3,8 +3,6 @@
 
 # Install mpc on OS X Tiger / PowerPC.
 
-FIXME WIP
-
 package=mpc
 version=1.0.3
 
@@ -18,13 +16,16 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/gmp-4.3.2$ppc64 ; then
-    tiger.sh gmp-4.3.2$ppc64
-fi
-
-if ! test -e /opt/mpfr-3.1.6$ppc64 ; then
-    tiger.sh mpfr-3.1.6$ppc64
-fi
+for dep in \
+    gmp-4.3.2$ppc64 \
+    mpfr-3.1.6$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
@@ -52,20 +53,30 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    if test "$(tiger.sh --cpu)" = "g5" ; then
-        if test -n "$ppc64" ; then
-            CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        else
-            CFLAGS="-mpowerpc -force_cpusubtype_ALL $(tiger.sh -m32 -mcpu -O)"
-        fi
-    else
-        CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL $(tiger.sh -m32 -mcpu -O)"
+    # Non-fat file: lib/libmpc.a is architecture: ppc
+    CC="gcc $(tiger.sh -mcpu)"
+
+    CFLAGS="$(tiger.sh -mcpu -O) -pedantic -no-cpp-precomp"
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $CFLAGS"
+    fi
+
+    cpu=$(tiger.sh --cpu)
+    if test "$cpu" = "g4e" \
+    || test "$cpu" = "g4" \
+    || test "$cpu" = "g5" -a -z "$ppc64"
+    then
+        # Note: see the comments in install-gmp-4.3.2.sh re: force_cpusubtype_ALL.
+        CFLAGS="$CFLAGS -force_cpusubtype_ALL"
     fi
 
     ./configure -C --prefix=/opt/$pkgspec \
         --with-gmp=/opt/gmp-4.3.2$ppc64 \
         --with-mpfr=/opt/mpfr-3.1.6$ppc64 \
-        CFLAGS="$CFLAGS"
+        CFLAGS="$CFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        CC="$CC"
+        # CPPFLAGS="$CPPFLAGS" \
 
     make $(tiger.sh -j)
 
