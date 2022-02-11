@@ -263,6 +263,7 @@ if test "$1" = "--linker-check" ; then
                         did_print_header=1
                     fi
                     echo -e "$(otool -L $f \
+                        | awk '{print $1}' \
                         | sed 's/^/    /' \
                         | sed -E "/\/usr\/lib\/(libSystem|libgcc_s|libstdc\+\+)/! s|/usr/|/${COLOR_YELLOW}usr${COLOR_NONE}/|g" \
                         | sed "s|/opt/|/${COLOR_GREEN}opt${COLOR_NONE}/|g" \

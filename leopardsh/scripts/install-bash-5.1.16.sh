@@ -18,7 +18,8 @@ pkgspec=$package-$version$ppc64
 
 for dep in \
     libiconv-1.16$ppc64 \
-    gettext-0.21$ppc64
+    gettext-0.21$ppc64 \
+    ncurses-6.3$ppc64
 do
     if ! test -e /opt/$dep ; then
         leopard.sh $dep
@@ -64,7 +65,8 @@ else
         --with-installed-readline \
         --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
         --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
-        CFLAGS="$CFLAGS"
+        CFLAGS="$CFLAGS" \
+        LDFLAGS="$LDFLAGS"
 
     make $(leopard.sh -j) V=1
 

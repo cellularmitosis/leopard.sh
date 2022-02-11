@@ -4,7 +4,9 @@ rankdir = BT;
 
 "bash-5.1.16" -> "gettext-0.21"
 "bash-5.1.16" -> "libiconv-1.16"
+"bash-5.1.16" -> "ncurses-6.3"
 "bison-3.8.2" -> "m4-1.4.19"
+
 "clisp-2.39.20210628" -> "gcc-4.2"
 "clisp-2.39.20210628" -> "hyperspec-7.0"
 "clisp-2.39.20210628" -> "libiconv-1.16"
@@ -13,6 +15,7 @@ rankdir = BT;
 "clisp-2.39.20210628" -> "libunistring-1.0"
 "clisp-2.39.20210628" -> "lightning-2.1.3"
 "clisp-2.39.20210628" -> "readline-8.1.2"
+
 "cloog-0.18.1" -> "gmp-4.3.2"
 "cloog-0.18.1" -> "isl-0.12.2"
 "coreutils-9.0" -> "gcc-4.2"
@@ -20,6 +23,7 @@ rankdir = BT;
 "coreutils-9.0" -> "gmp-4.3.2"
 "coreutils-9.0" -> "libiconv-1.16"
 "coreutils-9.0" -> "libressl-3.4.2"
+
 "gcc-4.2"
 "gcc-4.9.4" -> "cloog-0.18.1"
 "gcc-4.9.4" -> "gcc-4.2"
@@ -33,8 +37,11 @@ rankdir = BT;
 "gettext-0.21" -> "xz-5.2.5"
 "gmp-4.3.2" -> "gcc-4.2"
 "gzip-1.11"
+
 "hyperspec-7.0"
+
 "isl-0.12.2" -> "gmp-4.3.2"
+
 "libffcall-2.4"
 "libiconv-1.16" -> "gettext-0.21"
 "libiconv-bootstrap-1.16"
@@ -44,30 +51,38 @@ rankdir = BT;
 "lightning-2.1.3"
 "lzo-2.10"
 "lzop-1.04" -> "lzo-2.10"
+
 "m4-1.4.19"
 "make-4.3"
 "mpc-1.0.3" -> "gmp-4.3.2"
 "mpc-1.0.3" -> "mpfr-3.1.6"
 "mpfr-3.1.6" -> "gmp-4.3.2"
+
 "ncurses-6.3"
 "ncursesw-6.3"
+
 "pkg-config-0.29.2"
 "pth-2.0.7"
 "pv-1.6.20"
+
 "readline-8.1.2" -> "ncurses-6.3"
 "readline-8.1.2" -> "pkg-config-0.29.2"
 "readline-8.1.2" -> "termcap-1.3.1"
 "rlwrap-0.45.2" -> "ncurses-6.3"
 "rlwrap-0.45.2" -> "readline-8.1.2"
+
 "sdl-1.2.15.20220129"
 "sed-4.8"
 "socat-1.7.4.3" -> "libressl-3.4.2"
 "socat-1.7.4.3" -> "pkg-config-0.29.2"
 "socat-1.7.4.3" -> "readline-8.1.2"
+
 "tar-1.34" -> "gettext-0.21"
 "tar-1.34" -> "libiconv-1.16"
 "termcap-1.3.1"
+
 "xz-5.2.5"
+
 "zstd-1.5.1"
 
 }
