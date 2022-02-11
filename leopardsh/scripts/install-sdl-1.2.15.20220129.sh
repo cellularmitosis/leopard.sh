@@ -45,9 +45,15 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    # Note: we have to do a bit of flag hackery here to avoid the dylib reporting the wrong arch:
+    #   Non-fat file: lib/libSDL-1.2.0.dylib is architecture: ppc
+    CC="gcc $(leopard.sh -mcpu -O)"
+
     CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $CFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
+        CC="$CC -m64"
     fi
 
     ./configure -C --prefix=/opt/$pkgspec \
@@ -68,7 +74,9 @@ else
         --disable-input-tslib \
         --disable-video-grop \
         --disable-directx \
-        CFLAGS="$CFLAGS"
+        CFLAGS="$CFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        CC="$CC"
 
     make $(leopard.sh -j) V=1
 

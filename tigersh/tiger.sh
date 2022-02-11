@@ -266,6 +266,7 @@ if test "$1" = "--linker-check" ; then
                         | sed 's/^/    /' \
                         | sed -E "/\/usr\/lib\/(libSystem|libgcc_s|libstdc\+\+)/! s|/usr/|/${COLOR_YELLOW}usr${COLOR_NONE}/|g" \
                         | sed "s|/opt/|/${COLOR_GREEN}opt${COLOR_NONE}/|g" \
+                        | sed "s|/System/Library/Frameworks/|/${COLOR_CYAN}System${COLOR_NONE}/Library/Frameworks/|g" \
                         | sed -E "s/(libSystem|libgcc_s|libstdc\+\+)/${COLOR_CYAN}\1${COLOR_NONE}/g"
                     )"
                     echo

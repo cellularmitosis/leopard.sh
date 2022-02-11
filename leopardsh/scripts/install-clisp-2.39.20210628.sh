@@ -65,6 +65,19 @@ else
 
     cd $package-$commit
 
+    # Note: stock leopard gcc fails with:
+    #   gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..   -I/opt/libiconv-bootstrap-1.16/include -I/opt/libunistring-1.0/include -I/opt/libsigsegv-2.14/include -I/opt/gettext-0.21/include -I/opt/libffcall-2.4/include -I/opt/readline-8.1.2/include  -g -O2 -W -Wswitch -Wcomment -Wpointer-arith -Wreturn-type -Wmissing-declarations -Wimplicit -Wno-sign-compare -Wno-format-nonliteral -O2 -fwrapv -fno-strict-aliasing -DUNIX_BINARY_DISTRIB -DNO_ASM -DENABLE_UNICODE -DDYNAMIC_MODULES  -fno-common -DPIC  -MT localcharset.o -MD -MP -MF $depbase.Tpo -c -o localcharset.o localcharset.c &&\
+    #   mv -f $depbase.Tpo $depbase.Po
+    #   localcharset.c: In function 'locale_charset':
+    #   localcharset.c:1057: internal compiler error: Bus error
+    #   Please submit a full bug report,
+    #   with preprocessed source if appropriate.
+    #   See <URL:http://developer.apple.com/bugreporter> for instructions.
+    #   make[3]: *** [localcharset.o] Error 1
+    #   make[2]: *** [all-recursive] Error 1
+    #   make[1]: *** [all] Error 2
+    #   make: *** [gllib/libgnu.a] Error 2
+    # So we use gcc-4.2.
     CC=gcc-4.2
 
     CFLAGS=$(leopard.sh -mcpu -O)
@@ -86,7 +99,10 @@ else
         --with-libunistring-prefix=/opt/libunistring-1.0$ppc64 \
             --with-module=asdf \
             --with-module=editor \
-            --with-module=syscalls
+            --with-module=syscalls \
+        CFLAGS="$CFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        CC="$CC"
   
             # --with-module=berkeley-db \
             # --with-module=bindings/glibc \

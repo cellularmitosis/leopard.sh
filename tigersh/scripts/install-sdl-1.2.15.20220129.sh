@@ -45,9 +45,15 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    # Note: we have to do a bit of flag hackery here to avoid the dylib reporting the wrong arch:
+    #   Non-fat file: lib/libSDL-1.2.0.dylib is architecture: ppc
+    CC="gcc $(tiger.sh -mcpu -O)"
+
     CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $CFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
+        CC="$CC -m64"
     fi
 
     ./configure -C --prefix=/opt/$pkgspec \
@@ -68,7 +74,9 @@ else
         --disable-input-tslib \
         --disable-video-grop \
         --disable-directx \
-        CFLAGS="$CFLAGS"
+        CFLAGS="$CFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        CC="$CC"
 
     make $(tiger.sh -j) V=1
 
@@ -95,3 +103,17 @@ fi
 if test -e /opt/$pkgspec/sbin ; then
     ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
 fi
+
+# build fails on tiger pp64:
+# libtool: compile:  gcc -m64 -mcpu=970 -O2 -I./include -D_GNU_SOURCE=1 -DTARGET_API_MAC_CARBON -DTARGET_API_MAC_OSX -fvisibility=hidden -I/usr/X11R6/include -DXTHREADS -D_THREAD_SAFE -faltivec -force_cpusubtype_ALL -fpascal-strings -Wall -c ./src/audio/macosx/SDL_coreaudio.c  -fno-common -DPIC -o build/.libs/SDL_coreaudio.o
+# In file included from /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers/DriverServices.h:32,
+#                  from /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers/CarbonCore.h:125,
+#                  from /System/Library/Frameworks/CoreServices.framework/Headers/CoreServices.h:21,
+#                  from ./src/audio/macosx/SDL_coreaudio.c:25:
+# /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers/MachineExceptions.h:286: error: parse error before '*' token
+# /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers/MachineExceptions.h:320: error: parse error before '*' token
+# In file included from /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers/CarbonCore.h:161,
+#                  from /System/Library/Frameworks/CoreServices.framework/Headers/CoreServices.h:21,
+#                  from ./src/audio/macosx/SDL_coreaudio.c:25:
+# /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers/fp.h:1338: error: 'SIGDIGLEN' undeclared here (not in a function)
+# make: *** [build/SDL_coreaudio.lo] Error 1

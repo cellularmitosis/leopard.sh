@@ -25,8 +25,7 @@ if ! test -e /opt/hyperspec-7.0 ; then
 fi
 
 for dep in \
-    gettext-0.21$ppc64 \
-    libffcall-2.4$ppc64 \
+    gettext-0.20$ppc64 \
     libiconv-bootstrap-1.16$ppc64 \
     libsigsegv-2.14$ppc64 \
     libunistring-1.0$ppc64 \
@@ -36,7 +35,7 @@ for dep in \
     # libffcall-2.4$ppc64
 do
     if ! test -e /opt/$dep ; then
-        leopard.sh $dep
+        tiger.sh $dep
     fi
     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
@@ -80,13 +79,17 @@ else
         --with-threads=POSIX_THREADS \
         --hyperspec=file:///opt/hyperspec-7.0/HyperSpec \
         --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
-        --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
+        --with-libintl-prefix=/opt/gettext-0.20$ppc64 \
         --with-libreadline-prefix=/opt/readline-8.1.2$ppc64 \
         --with-libsigsegv-prefix=/opt/libsigsegv-2.14$ppc64 \
         --with-libunistring-prefix=/opt/libunistring-1.0$ppc64 \
             --with-module=asdf \
             --with-module=editor \
-            --with-module=syscalls
+            --with-module=syscalls \
+        CFLAGS="$CFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        CC="$CC"
+
 
         # --with-ffcall \
         # --with-libffcall-prefix=/opt/libffcall-2.4$ppc64 \
