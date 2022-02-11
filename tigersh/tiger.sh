@@ -264,7 +264,7 @@ if test "$1" = "--linker-check" ; then
                     fi
                     echo -e "$(otool -L $f \
                         | sed 's/^/    /' \
-                        | sed -E "/\/usr\/lib\/(libSystem|libgcc_s)/! s|/usr/|/${COLOR_YELLOW}usr${COLOR_NONE}/|g" \
+                        | sed -E "/\/usr\/lib\/(libSystem|libgcc_s|libstdc\+\+)/! s|/usr/|/${COLOR_YELLOW}usr${COLOR_NONE}/|g" \
                         | sed "s|/opt/|/${COLOR_GREEN}opt${COLOR_NONE}/|g" \
                         | sed -E "s/(libSystem|libgcc_s|libstdc\+\+)/${COLOR_CYAN}\1${COLOR_NONE}/g"
                     )"

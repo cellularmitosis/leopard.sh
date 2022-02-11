@@ -1,7 +1,9 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install mpc on OS X Leopard / PowerPC.
+
+FIXME WIP
 
 package=mpc
 version=1.0.3
@@ -39,8 +41,11 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = d6a1d5f8ddea3abd2cc3e98f58352d26
+
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
 
     cd $package-$version
@@ -56,11 +61,11 @@ else
     else
         CFLAGS="-pedantic -mpowerpc -no-cpp-precomp -force_cpusubtype_ALL $(leopard.sh -m32 -mcpu -O)"
     fi
-    export CFLAGS
 
     ./configure -C --prefix=/opt/$pkgspec \
         --with-gmp=/opt/gmp-4.3.2$ppc64 \
-        --with-mpfr=/opt/mpfr-3.1.6$ppc64
+        --with-mpfr=/opt/mpfr-3.1.6$ppc64 \
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j)
 
