@@ -39,8 +39,8 @@ rankdir = BT;
 "hyperspec-7.0"
 
 "isl-0.12.2" -> "gmp-4.3.2"
-"libiconv-1.16" -> "gettext-0.20"
 
+"libiconv-1.16" -> "gettext-0.20"
 "libiconv-bootstrap-1.16"
 "libressl-3.4.2"
 "libsigsegv-2.14"
@@ -63,8 +63,6 @@ rankdir = BT;
 "pv-1.6.20"
 
 "readline-8.1.2" -> "ncurses-6.3"
-"readline-8.1.2" -> "pkg-config-0.29.2"
-"readline-8.1.2" -> "termcap-1.3.1"
 "rlwrap-0.45.2" -> "ncurses-6.3"
 "rlwrap-0.45.2" -> "readline-8.1.2"
 
@@ -73,8 +71,8 @@ rankdir = BT;
 "socat-1.7.4.3" -> "libressl-3.4.2"
 "socat-1.7.4.3" -> "pkg-config-0.29.2"
 "socat-1.7.4.3" -> "readline-8.1.2"
-"tar-1.34" -> "gettext-0.20"
 
+"tar-1.34" -> "gettext-0.20"
 "tar-1.34" -> "libiconv-1.16"
 "termcap-1.3.1"
 

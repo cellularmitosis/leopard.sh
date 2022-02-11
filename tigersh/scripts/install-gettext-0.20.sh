@@ -73,7 +73,8 @@ else
         CPPFLAGS="$CPPFLAGS" \
         LDFLAGS="$LDFLAGS" \
         CFLAGS="$CFLAGS" \
-        CXXFLAGS="$CXXFLAGS"
+        CXXFLAGS="$CXXFLAGS" \
+        LIBS="-lncurses"
 
     make $(tiger.sh -j) V=1
 
