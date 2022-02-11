@@ -1,7 +1,9 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install xz on OS X Tiger / PowerPC.
+
+# Note: xz provides liblzma.
 
 package=xz
 version=5.2.5
@@ -33,20 +35,20 @@ else
 
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
+    CFLAGS=$(tiger.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        CFLAGS="$CFLAGS"
 
     make $(tiger.sh -j)
 

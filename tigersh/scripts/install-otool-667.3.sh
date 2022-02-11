@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install otool on OS X Tiger / PowerPC.
 
@@ -12,10 +12,6 @@ version=667.3
 set -e -x
 PATH="/opt/portable-curl/bin:$PATH"
 TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
-
-if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
-    ppc64=".ppc64"
-fi
 
 pkgspec=$package-$version$ppc64
 
@@ -57,6 +53,9 @@ else
 
     mkdir -p /opt/$pkgspec/share/man/man1
     cp man/otool.1 /opt/$pkgspec/share/man/man1/
+
+    tiger.sh --linker-check $pkgspec
+    tiger.sh --arch-check $pkgspec
 fi
 
 if test -e /opt/$pkgspec/bin ; then

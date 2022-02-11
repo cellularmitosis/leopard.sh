@@ -1,8 +1,9 @@
 #!/bin/bash
-# based on templates/template.sh v3
-
+# based on templates/install-foo-1.0.sh v4
 
 # Install xz on OS X Leopard / PowerPC.
+
+# Note: xz provides liblzma.
 
 package=xz
 version=5.2.5
@@ -30,22 +31,24 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 0d270c997aff29708c74d53f599ef717
+
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
     
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j)
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+# based on templates/install-foo-1.0.sh v4
 
 # Install sed on OS X Leopard / PowerPC.
 
@@ -28,22 +29,24 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 4b9b442ae2527ac316d2915facc41622
+
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+    CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
+        CFLAGS="-m64 $CFLAGS"
     fi
-    export CFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec
+    ./configure -C --prefix=/opt/$pkgspec \
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j) V=1
 
