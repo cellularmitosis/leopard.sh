@@ -1,3 +1,4 @@
 binpkgs/*.tar.gz
 leopardsh/binpkgs/*.tar.gz
 tigersh/binpkgs/*.tar.gz
+.vscode

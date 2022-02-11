@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install SDL 1.2 on OS X Leopard / PowerPC.
 
@@ -24,28 +24,31 @@ else
     # srcmirror=https://www.libsdl.org/release
     # tarball=SDL-$version.tar.gz
     srcmirror=https://github.com/libsdl-org/SDL-1.2/archive
-    tarball=707e2cc25904bd4ea7ca94f45632e02d7dbee14c.tar.gz
+    commithash=707e2cc25904bd4ea7ca94f45632e02d7dbee14c
+    tarball=$commithash.tar.gz
 
     if ! test -e ~/Downloads/SDL-1.2-$tarball ; then
         cd ~/Downloads
         # curl -#fLO $srcmirror/$tarball
-        curl -#fL $srcmirror/$tarball > SDL-1.2-707e2cc25904bd4ea7ca94f45632e02d7dbee14c.tar.gz
+        curl -#fL $srcmirror/$tarball > SDL-1.2-$commithash.tar.gz
     fi
+    tarball=SDL-1.2-$commithash.tar.gz
+
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 61bdc303ab6f69cca619173e4d74fe5c
 
     cd /tmp
     rm -rf SDL-1.2-main
-    tar xzf ~/Downloads/SDL-1.2-$tarball
+
+    tar xzf ~/Downloads/$tarball
+
     cd SDL-1.2-main
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    for f in configure ; do
-        if test -n "$ppc64" ; then
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
-        else
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -m32 -mcpu -O)\"/g" $f
-        fi
-    done
+    CFLAGS=$(leopard.sh -mcpu -O)
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $CFLAGS"
+    fi
 
     ./configure -C --prefix=/opt/$pkgspec \
         --disable-oss \
@@ -64,7 +67,8 @@ else
         --disable-video-wscons \
         --disable-input-tslib \
         --disable-video-grop \
-        --disable-directx
+        --disable-directx \
+        CFLAGS="$CFLAGS"
 
     make $(leopard.sh -j) V=1
 

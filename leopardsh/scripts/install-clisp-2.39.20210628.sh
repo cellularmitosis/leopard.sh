@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install clisp on OS X Leopard / PowerPC.
 
@@ -20,37 +20,25 @@ if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
     leopard.sh gcc-4.2
 fi
 
-if ! test -e /opt/gettext-0.21$ppc64 ; then
-    leopard.sh gettext-0.21$ppc64
-fi
-
 if ! test -e /opt/hyperspec-7.0 ; then
     leopard.sh hyperspec-7.0
 fi
 
-if ! test -e /opt/libffcall-2.4$ppc64 ; then
-    leopard.sh libffcall-2.4$ppc64
-fi
-
-if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
-    leopard.sh libiconv-bootstrap-1.16$ppc64
-fi
-
-if ! test -e /opt/libsigsegv-2.14$ppc64 ; then
-    leopard.sh libsigsegv-2.14$ppc64
-fi
-
-if ! test -e /opt/libunistring-1.0$ppc64 ; then
-    leopard.sh libunistring-1.0$ppc64
-fi
-
-# if ! test -e /opt/lightning-2.1.3$ppc64 ; then
-#     leopard.sh lightning-2.1.3$ppc64
-# fi
-
-if ! test -e /opt/readline-8.1.2$ppc64 ; then
-    leopard.sh readline-8.1.2$ppc64
-fi
+for dep in \
+    gettext-0.21$ppc64 \
+    libffcall-2.4$ppc64 \
+    libiconv-bootstrap-1.16$ppc64 \
+    libsigsegv-2.14$ppc64 \
+    libunistring-1.0$ppc64 \
+    readline-8.1.2$ppc64
+    # lightning-2.1.3$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
@@ -68,6 +56,8 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = b8b12ea8f6e1f23daa910a256dd55c49
+
     cd /tmp
     rm -rf $package-$commit
 
@@ -75,17 +65,13 @@ else
 
     cd $package-$commit
 
-    cpu=$(leopard.sh --cpu)
-    if test "$cpu" = "g5" ; then
-        if test -n "$ppc64" ; then
-            CC="gcc-4.2 -m64 $(leopard.sh -mcpu -O)"
-        else
-            CC="gcc-4.2 $(leopard.sh -m32 -mcpu -O)"
-        fi
-    else
-        CC="gcc-4.2 $(leopard.sh -m32 -mcpu -O)"
+    CC=gcc-4.2
+
+    CFLAGS=$(leopard.sh -mcpu -O)
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $CFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
     fi
-    export CC
 
     ./configure --prefix=/opt/$pkgspec \
         --with-ffcall \

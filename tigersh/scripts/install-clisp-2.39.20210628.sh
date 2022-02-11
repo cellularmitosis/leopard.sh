@@ -20,34 +20,27 @@ if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
     tiger.sh gcc-4.2
 fi
 
-if ! test -e /opt/libsigsegv-2.14$ppc64 ; then
-    tiger.sh libsigsegv-2.14$ppc64
-fi
-
 if ! test -e /opt/hyperspec-7.0 ; then
     tiger.sh hyperspec-7.0
 fi
 
-# Note: libffcall not available on tiger yet.
-# if ! test -e /opt/libffcall-2.4$ppc64 ; then
-#     tiger.sh libffcall-2.4$ppc64
-# fi
-
-if ! test -e /opt/libiconv-bootstrap-1.16$ppc64 ; then
-    tiger.sh libiconv-bootstrap-1.16$ppc64
-fi
-
-if ! test -e /opt/libsigsegv-2.14$ppc64 ; then
-    tiger.sh libsigsegv-2.14$ppc64
-fi
-
-if ! test -e /opt/libunistring-1.0$ppc64 ; then
-    tiger.sh libunistring-1.0$ppc64
-fi
-
-if ! test -e /opt/readline-8.1.2$ppc64 ; then
-    tiger.sh readline-8.1.2$ppc64
-fi
+for dep in \
+    gettext-0.21$ppc64 \
+    libffcall-2.4$ppc64 \
+    libiconv-bootstrap-1.16$ppc64 \
+    libsigsegv-2.14$ppc64 \
+    libunistring-1.0$ppc64 \
+    readline-8.1.2$ppc64
+    # lightning-2.1.3$ppc64
+    # Note: libffcall not available on tiger yet.
+    # libffcall-2.4$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
@@ -74,17 +67,13 @@ else
 
     cd $package-$commit
 
-    cpu=$(tiger.sh --cpu)
-    if test "$cpu" = "g5" ; then
-        if test -n "$ppc64" ; then
-            CC="gcc-4.2 -m64 $(tiger.sh -mcpu -O)"
-        else
-            CC="gcc-4.2 $(tiger.sh -m32 -mcpu -O)"
-        fi
-    else
-        CC="gcc-4.2 $(tiger.sh -m32 -mcpu -O)"
+    CC=gcc-4.2
+
+    CFLAGS=$(tiger.sh -mcpu -O)
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $CFLAGS"
+        LDFLAGS="-m64 $LDFLAGS"
     fi
-    export CC
 
     ./configure --prefix=/opt/$pkgspec \
         --with-unicode \
