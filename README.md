@@ -109,3 +109,9 @@ If Tiger.sh and Leopard.sh aren't for you, checkout these other package managers
 - [MacPorts](https://www.macports.org/)
 - [Tigerbrew](https://github.com/mistydemeo/tigerbrew)
 - [Fink](https://www.finkproject.org/) _(looks like they only support 10.6 and up these days)_
+
+
+## Useful links for OS X PowerPC users
+
+- [_Last versions of applications for Mac OS X on PowerPC_](http://matejhorvat.si/en/mac/osxppcsw/)
+

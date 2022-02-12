@@ -18,7 +18,7 @@ pkgspec=$package-$version
 # 👇 EDIT HERE:
 srcmirror=https://ccl.clozure.com/ftp/pub/release/$version
 # 👇 EDIT HERE:
-dmg=foo-$version.dmg
+dmg=${appname}_$version.dmg
 
 if ! test -e ~/Downloads/$dmg ; then
     cd ~/Downloads

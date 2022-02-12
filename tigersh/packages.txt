@@ -17,6 +17,7 @@ mpc-1.0.3
 mpfr-3.1.6
 ncurses-6.3
 ncursesw-6.3
+opera.app-10.63
 pkg-config-0.29.2
 pv-1.6.20
 readline-8.1.2

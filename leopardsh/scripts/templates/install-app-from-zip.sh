@@ -1,38 +1,36 @@
 #!/bin/bash
-# based on templates/install-app-from-dmg.sh v1
+# based on templates/install-app-from-zip.sh v1
 
+# 👇 EDIT HERE:
 # Install Foo.app on OS X / PowerPC.
 
-package=xbench.app
-appname=Xbench
-version=1.3
-mountpoint=/Volumes/$appname_$version
+# 👇 EDIT HERE:
+package=foo.app
+appname=Foo
+version=1.0
 
 set -e -x
 PATH="/opt/portable-curl/bin:$PATH"
 
 pkgspec=$package-$version
 
-srcmirror=http://www.xbench.com
-dmg=${appname}_$version.dmg
+# 👇 EDIT HERE:
+srcmirror=https://web.archive.org/web/20170331122430/http://arc.opera.com/pub/opera/mac/1063/
+# 👇 EDIT HERE:
+zip=${appname}_$version.zip
 
-if ! test -e ~/Downloads/$dmg ; then
+if ! test -e ~/Downloads/$zip ; then
     cd ~/Downloads
-    curl -#fLO $srcmirror/$dmg
+    curl -#fLO $srcmirror/$zip
 fi
 
-test "$(md5 ~/Downloads/$dmg | awk '{print $NF}')" = d9b31d4fe479cc648eaab9f47a1c0c03
-
-hdiutil attach -noverify -readonly ~/Downloads/$dmg
+# 👇 EDIT HERE:
+test "$(md5 ~/Downloads/$zip | awk '{print $NF}')" = xxxxxxxzxxxxxxxxxxzxxxxxxxxxxzxx
 
 mkdir -p /opt/$pkgspec
 
-# Note: rsyncing the entire mountpoint would fail:
-#     rsync: opendir "/Volumes/Foo-1.0/.Trashes" failed: Permission denied (13)
-# So we rsync $mountpoint/* instead.
-rsync -a $mountpoint/* /opt/$pkgspec/
-
-hdiutil detach $mountpoint || true
+cd /opt/$pkgspec
+unzip -q ~/Downloads/$zip
 
 # Create aliases in /Applications (must be aliases, symlinks don't work).
 # Note: if we call this too soon after the rsync, it will fail with:
