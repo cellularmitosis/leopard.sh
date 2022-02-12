@@ -1,13 +1,11 @@
 #!/bin/bash
 # based on templates/install-app-from-dmg.sh v1
 
-# 👇 EDIT HERE:
-# Install Foo.app on OS X / PowerPC.
+# Install TextWrangler.app on OS X / PowerPC.
 
-# 👇 EDIT HERE:
-package=foo.app
-appname=Foo
-version=1.0
+package=textwrangler.app
+appname=TextWrangler
+version=3.5.3
 mountpoint="/Volumes/$appname $version"
 
 set -e -x
@@ -15,9 +13,7 @@ PATH="/opt/portable-curl/bin:$PATH"
 
 pkgspec=$package-$version
 
-# 👇 EDIT HERE:
-srcmirror=https://ccl.clozure.com/ftp/pub/release/$version
-# 👇 EDIT HERE:
+srcmirror=https://pine.barebones.com/freeware
 dmg=${appname}_$version.dmg
 
 if ! test -e ~/Downloads/$dmg ; then
@@ -25,8 +21,7 @@ if ! test -e ~/Downloads/$dmg ; then
     curl -#fLO $srcmirror/$dmg
 fi
 
-# 👇 EDIT HERE:
-test "$(md5 ~/Downloads/$dmg | awk '{print $NF}')" = xxxxxxxzxxxxxxxxxxzxxxxxxxxxxzxx
+test "$(md5 ~/Downloads/$dmg | awk '{print $NF}')" = 4cc187412c803d7df63876daf7b176b3
 
 hdiutil attach -readonly -noverify -noautofsck -noautoopen ~/Downloads/$dmg
 
@@ -56,3 +51,11 @@ for i in 1 2 3 4 5 ; do
     mv "/opt/$pkgspec/$aliasname" "/Applications/$appname $version"
     break
 done
+
+mkdir -p /opt/$pkgspec/bin
+cd /opt/$pkgspec/bin
+for f in edit twdiff twfind ; do
+    ln -s ../$appname.app/Contents/MacOS/$f .
+done
+
+ln -sf /opt/$pkgspec/bin/* /usr/local/bin/

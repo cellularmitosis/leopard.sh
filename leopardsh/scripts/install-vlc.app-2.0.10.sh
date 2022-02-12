@@ -23,16 +23,16 @@ fi
 
 test "$(md5 ~/Downloads/$dmg | awk '{print $NF}')" = 3fb6a4b088d982c26f4c9da4a6660bc4
 
-hdiutil attach -noverify -readonly ~/Downloads/$dmg
+hdiutil attach -readonly -noverify -noautofsck -noautoopen ~/Downloads/$dmg
 
 mkdir -p /opt/$pkgspec
 
 # Note: rsyncing the entire mountpoint would fail:
 #     rsync: opendir "/Volumes/Foo-1.0/.Trashes" failed: Permission denied (13)
 # So we rsync $mountpoint/* instead.
-rsync -a $mountpoint/* /opt/$pkgspec/
+rsync -a "$mountpoint"/* /opt/$pkgspec/
 
-hdiutil detach $mountpoint || true
+hdiutil detach "$mountpoint" || true
 
 # Create aliases in /Applications (must be aliases, symlinks don't work).
 # Note: if we call this too soon after the rsync, it will fail with:

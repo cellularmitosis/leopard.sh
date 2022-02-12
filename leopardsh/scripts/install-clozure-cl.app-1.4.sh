@@ -27,16 +27,16 @@ fi
 
 test "$(md5 ~/Downloads/$dmg | awk '{print $NF}')" = c9c6a13612ee9d24265fb73208a621ed
 
-hdiutil attach -noverify -readonly ~/Downloads/$dmg
+hdiutil attach -readonly -noverify -noautofsck -noautoopen ~/Downloads/$dmg
 
 mkdir -p /opt/$pkgspec
 
 # Note: rsyncing the entire mountpoint would fail:
 #     rsync: opendir "/Volumes/Foo-1.0/.Trashes" failed: Permission denied (13)
 # So we rsync $mountpoint/* instead.
-rsync -a $mountpoint/* /opt/$pkgspec/
+rsync -a "$mountpoint"/* /opt/$pkgspec/
 
-hdiutil detach $mountpoint || true
+hdiutil detach "$mountpoint" || true
 
 # Create aliases in /Applications (must be aliases, symlinks don't work).
 for appname in "Clozure CL32" "Clozure CL64" ; do
