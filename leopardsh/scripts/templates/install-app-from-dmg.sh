@@ -6,6 +6,7 @@
 
 # 👇 EDIT HERE:
 package=foo.app
+appname=Foo
 version=1.0
 mountpoint=/Volumes/Foo
 
@@ -16,6 +17,7 @@ pkgspec=$package-$version
 
 # 👇 EDIT HERE:
 srcmirror=https://ccl.clozure.com/ftp/pub/release/$version
+# 👇 EDIT HERE:
 dmg=foo-$version.dmg
 
 if ! test -e ~/Downloads/$dmg ; then
@@ -38,22 +40,19 @@ rsync -a $mountpoint/* /opt/$pkgspec/
 hdiutil detach $mountpoint || true
 
 # Create aliases in /Applications (must be aliases, symlinks don't work).
-# 👇 EDIT HERE:
-for appname in "Foo" ; do
-    # Note: if we call this too soon after the rsync, it will fail with:
-    #     29:124: execution error: Finder got an error: The operation could not be completed. (-1407)
-    # So we try it a few times until it succeeds.  So gross!
-    for i in 1 2 3 4 5 ; do
-        aliasname=$(
-            osascript -e "tell application \"Finder\" to make alias file to POSIX file \"/opt/$pkgspec/$appname.app\" at POSIX file \"/opt/$pkgspec\"" || true
-        )
-        if test -z "$aliasname" ; then
-            sleep 1
-            continue
-        fi
-        aliasname=$( echo $aliasname | sed 's/^alias file //' )
-        rm -f "/Applications/$appname $version"
-        mv "/opt/$pkgspec/$aliasname" "/Applications/$appname $version"
-        break
-    done
+# Note: if we call this too soon after the rsync, it will fail with:
+#     29:124: execution error: Finder got an error: The operation could not be completed. (-1407)
+# So we try it a few times until it succeeds.  So gross!
+for i in 1 2 3 4 5 ; do
+    aliasname=$(
+        osascript -e "tell application \"Finder\" to make alias file to POSIX file \"/opt/$pkgspec/$appname.app\" at POSIX file \"/opt/$pkgspec\"" || true
+    )
+    if test -z "$aliasname" ; then
+        sleep 1
+        continue
+    fi
+    aliasname=$( echo $aliasname | sed 's/^alias file //' )
+    rm -f "/Applications/$appname $version"
+    mv "/opt/$pkgspec/$aliasname" "/Applications/$appname $version"
+    break
 done

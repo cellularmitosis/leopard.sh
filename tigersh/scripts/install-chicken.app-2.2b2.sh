@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-chicken.app-2.2b2.sh

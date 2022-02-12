@@ -1,27 +1,27 @@
 #!/bin/bash
 # based on templates/install-app-from-dmg.sh v1
 
-# Install Foo.app on OS X / PowerPC.
+# Install Chicken.app on OS X / PowerPC.
 
-package=xbench.app
-appname=Xbench
-version=1.3
-mountpoint=/Volumes/$appname_$version
+package=chicken.app
+appname=Chicken
+version=2.2b2
+mountpoint=/Volumes/$appname
 
 set -e -x
 PATH="/opt/portable-curl/bin:$PATH"
 
 pkgspec=$package-$version
 
-srcmirror=http://www.xbench.com
-dmg=$appname_$version.dmg
+srcmirror=https://phoenixnap.dl.sourceforge.net/project/chicken
+dmg=$appname-$version.dmg
 
 if ! test -e ~/Downloads/$dmg ; then
     cd ~/Downloads
     curl -#fLO $srcmirror/$dmg
 fi
 
-test "$(md5 ~/Downloads/$dmg | awk '{print $NF}')" = d9b31d4fe479cc648eaab9f47a1c0c03
+test "$(md5 ~/Downloads/$dmg | awk '{print $NF}')" = 248682fdad6d88701e6ba7008b395101
 
 hdiutil attach -noverify -readonly ~/Downloads/$dmg
 

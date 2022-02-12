@@ -1,3 +1,4 @@
+chicken.app-2.2b2
 clisp-2.39.20210628
 cloog-0.18.1
 clozure-cl.app-1.4
