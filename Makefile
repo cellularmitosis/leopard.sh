@@ -5,7 +5,6 @@ dependency-graphs:
 	cd tigersh/deps && make dependencies.png
 
 build-time-stats:
-	cd leopardsh/build-times && make
-	cd tigersh/build-times && make
+	cd stats && make
 
 .PHONY: all dependency-graphs build-time-stats
