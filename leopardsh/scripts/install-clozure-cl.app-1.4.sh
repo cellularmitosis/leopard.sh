@@ -70,6 +70,4 @@ for f in ccl ccl64 ; do
     ln -s ../scripts/$f .
 done
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
-fi
+ln -sf /opt/$pkgspec/bin/* /usr/local/bin/

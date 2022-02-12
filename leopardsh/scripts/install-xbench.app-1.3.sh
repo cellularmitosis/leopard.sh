@@ -1,31 +1,26 @@
 #!/bin/bash
 # based on templates/install-app-from-dmg.sh v1
 
-# Install Clozure CL.app on OS X / PowerPC.
+# Install Foo.app on OS X / PowerPC.
 
-package=clozure-cl.app
-version=1.6
-mountpoint=/Volumes/ccl
+package=xbench.app
+version=1.3
+mountpoint=/Volumes/Xbench_1.3
 
 set -e -x
 PATH="/opt/portable-curl/bin:$PATH"
 
 pkgspec=$package-$version
 
-# Note: there are two types of downloads available:
-# - ccl-1.4-darwinppc.dmg
-# - ccl-1.4-darwinppc.tar.gz
-# The .dmg contains a GUI IDE .app which the tarball does not.
-
-srcmirror=https://ccl.clozure.com/ftp/pub/release/$version
-dmg=ccl-$version-darwinppc.dmg
+srcmirror=http://www.xbench.com
+dmg=Xbench_$version.dmg
 
 if ! test -e ~/Downloads/$dmg ; then
     cd ~/Downloads
     curl -#fLO $srcmirror/$dmg
 fi
 
-test "$(md5 ~/Downloads/$dmg | awk '{print $NF}')" = c59321565544884f68868bae6270e3ce
+test "$(md5 ~/Downloads/$dmg | awk '{print $NF}')" = d9b31d4fe479cc648eaab9f47a1c0c03
 
 hdiutil attach -noverify -readonly ~/Downloads/$dmg
 
@@ -39,7 +34,7 @@ rsync -a $mountpoint/* /opt/$pkgspec/
 hdiutil detach $mountpoint || true
 
 # Create aliases in /Applications (must be aliases, symlinks don't work).
-for appname in "Clozure CL32" "Clozure CL64" ; do
+for appname in "Xbench" ; do
     # Note: if we call this too soon after the rsync, it will fail with:
     #     29:124: execution error: Finder got an error: The operation could not be completed. (-1407)
     # So we try it a few times until it succeeds.  So gross!
@@ -57,17 +52,3 @@ for appname in "Clozure CL32" "Clozure CL64" ; do
         break
     done
 done
-
-for f in ccl ccl64 ; do
-    perl -pi \
-        -e "s|CCL_DEFAULT_DIRECTORY=/usr/local/src/ccl|CCL_DEFAULT_DIRECTORY=/opt/$pkgspec|" \
-        /opt/$pkgspec/scripts/$f
-done
-
-mkdir -p /opt/$pkgspec/bin
-cd /opt/$pkgspec/bin
-for f in ccl ccl64 ; do
-    ln -s ../scripts/$f .
-done
-
-ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
