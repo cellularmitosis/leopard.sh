@@ -4,6 +4,8 @@
 # Install Clozure CL.app on OS X / PowerPC.
 
 package=clozure-cl.app
+appname1="Clozure CL32"
+appname1="Clozure CL64"
 version=1.4
 mountpoint=/Volumes/ccl-1.4
 
@@ -39,7 +41,7 @@ rsync -a "$mountpoint"/* /opt/$pkgspec/
 hdiutil detach "$mountpoint" || true
 
 # Create aliases in /Applications (must be aliases, symlinks don't work).
-for appname in "Clozure CL32" "Clozure CL64" ; do
+for appname in "$appname1" "$appname2" ; do
     # Note: if we call this too soon after the rsync, it will fail with:
     #     29:124: execution error: Finder got an error: The operation could not be completed. (-1407)
     # So we try it a few times until it succeeds.  So gross!

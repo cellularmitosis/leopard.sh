@@ -23,6 +23,8 @@ ncursesw-6.3
 opera.app-10.63
 pkg-config-0.29.2
 pv-1.6.20
+quake-pak0.pak-1.06
+quake.app-1.1
 readline-8.1.2
 rlwrap-0.45.2
 sdl-1.2.15.20220129

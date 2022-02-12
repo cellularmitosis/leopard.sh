@@ -40,6 +40,7 @@ rsync -a "$mountpoint"/* /opt/$pkgspec/
 hdiutil detach "$mountpoint" || true
 
 # Create aliases in /Applications (must be aliases, symlinks don't work).
+# Thanks to https://stackoverflow.com/a/10067437
 # Note: if we call this too soon after the rsync, it will fail with:
 #     29:124: execution error: Finder got an error: The operation could not be completed. (-1407)
 # So we try it a few times until it succeeds.  So gross!
