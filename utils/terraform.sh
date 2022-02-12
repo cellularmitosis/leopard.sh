@@ -121,7 +121,7 @@ echo "👉 push distfiles"
 for host in $uphosts ; do
     echo "  🖥  $host"
     cd ~/dist
-    rsync -ai --delete *.tar.gz *.tgz *.tar.bz2 *.tar.xz $host:/Users/macuser/Downloads/
+    rsync -ai --delete *.tar.gz *.tgz *.tar.bz2 *.tar.xz *.dmg $host:/Users/macuser/Downloads/
 done
 
 exit 0

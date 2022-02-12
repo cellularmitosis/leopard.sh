@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-vlc.app-0.9.10.sh

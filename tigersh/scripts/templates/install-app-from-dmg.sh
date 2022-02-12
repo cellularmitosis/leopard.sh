@@ -1,0 +1,1 @@
+../../../leopardsh/scripts/templates/install-app-from-dmg.sh

@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-clozure-cl.app-1.4.sh
