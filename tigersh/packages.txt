@@ -10,6 +10,7 @@ gzip-1.11
 hyperspec-7.0
 interwebppc.app-rr1
 isl-0.12.2
+jollysfastvnc.app-1.40
 libiconv-1.16
 libsigsegv-2.14
 libunistring-1.0

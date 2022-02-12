@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-jollysfastvnc.app-1.40.sh
