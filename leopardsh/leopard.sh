@@ -17,7 +17,7 @@ COLOR_CYAN="\\\e[36;1m"
 COLOR_NONE="\\\e[0m"
 
 osversion=$(sw_vers -productVersion | awk '{print $NF}')
-if ! echo $osversion | grep -q '10\.5'; then
+if ! test "${osversion:0:4}" = "10.5" ; then
     echo "Sorry, this script was written for OS X Leopard :(" >&2
     exit 1
 fi
