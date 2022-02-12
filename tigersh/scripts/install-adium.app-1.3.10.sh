@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-adium.app-1.3.10.sh
