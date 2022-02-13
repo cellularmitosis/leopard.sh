@@ -81,18 +81,35 @@ ln -s ../qwsv .
 
 ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
 
-mkdir -p /usr/local/share/quake
-ln -sf /opt/$pkgspec/qw /usr/local/share/quake/
-
 rm -rf $tmp
 
-# Thanks to https://stackoverflow.com/a/13484552
-$( osascript \
-    -e 'tell application "Finder"' \
-    -e 'activate' \
-    -e 'display dialog "When configuring Quake, please use the following id1 path:\n\n/usr/local/share/quake/id1\n\nNote that /usr is normally hidden in Finder.  However, if you start typing a / it will open a prompt." buttons {"OK"} default button 1' \
-    -e 'end tell'\
-    >/dev/null 2>&1 \
-    &
-)
+# Use the pak0.pak which we symlinked into ~/.quake/id1/.
+defaults write com.fruitz-of-dojo.quake "Quake ID1 Path" "$HOME/.quake/id1"
 
+# Default to "Millions of colors".
+defaults write com.fruitz-of-dojo.quake "GLQuake Display Depth" 1
+
+mkdir -p ~/.quake/id1
+
+ln -sf /opt/$pkgspec/qw ~/.quake/
+
+# Start off with some popular config settings.
+# Note: negative m_pitch means "invert mouse".
+# Note: "impules 10" means "next weapon".
+# Note: cl_backspeed, cl_backspeed mean "always run".
+if ! test -e ~/.quake/id1/config.cfg ; then
+    cat > ~/.quake/id1/config.cfg << "EOF"
+bind "w" "+forward"
+bind "a" "+moveleft"
+bind "s" "+back"
+bind "d" "+moveright"
+bind "SPACE" "+jump"
+bind "MOUSE1" "+attack"
+bind "MOUSE2" "+jump"
+bind "MWHEELDOWN" "impulse 10"
+bind "f" "impulse 10"
+cl_backspeed "400"
+cl_forwardspeed "400"
+m_pitch "-0.022"
+EOF
+fi

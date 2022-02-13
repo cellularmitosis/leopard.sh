@@ -32,6 +32,9 @@ mkdir -p /opt/$pkgspec
 cd /opt/$pkgspec
 unzip -q ~/Downloads/$zip
 
+# 👇 EDIT HERE:
+defaults write com.foo "Some Setting" "Some Value"
+
 # Create aliases in /Applications (must be aliases, symlinks don't work).
 # Thanks to https://stackoverflow.com/a/10067437
 # Note: if we call this too soon after the rsync, it will fail with:
@@ -50,3 +53,14 @@ for i in 1 2 3 4 5 ; do
     mv "/opt/$pkgspec/$aliasname" "/Applications/$appname $version"
     break
 done
+
+# 👇 EDIT HERE:
+# Thanks to https://stackoverflow.com/a/13484552
+$( osascript \
+    -e 'tell application "Finder"' \
+    -e 'activate' \
+    -e 'display dialog "Here is a way to tell the user something." buttons {"OK"} default button 1' \
+    -e 'end tell'\
+    >/dev/null 2>&1 \
+    &
+)

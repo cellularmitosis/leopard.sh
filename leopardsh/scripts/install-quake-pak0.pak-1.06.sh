@@ -44,15 +44,5 @@ lha xq resource.1 id1/pak0.pak
 # md5 hash from https://quakewiki.org/w/index.php?title=pak0.pak
 test "$(md5 id1/pak0.pak | awk '{print $NF}')" = 5906e5998fc3d896ddaf5e6a62e03abb
 
-mkdir -p /usr/local/share/quake/id1
-ln -sf /opt/$pkgspec/id1/pak0.pak /usr/local/share/quake/id1/
-
-# Thanks to https://stackoverflow.com/a/13484552
-$( osascript \
-    -e 'tell application "Finder"' \
-    -e 'activate' \
-    -e 'display dialog "When configuring Quake, please use the following id1 path:\n\n/usr/local/share/quake/id1\n\nNote that /usr is normally hidden in Finder.  However, if you start typing a / it will open a prompt." buttons {"OK"} default button 1' \
-    -e 'end tell'\
-    >/dev/null 2>&1 \
-    &
-)
+mkdir -p ~/.quake/id1
+ln -sf /opt/$pkgspec/id1/pak0.pak ~/.quake/id1/
