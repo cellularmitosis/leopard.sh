@@ -4,7 +4,6 @@
    1 checking for C compiler default output file name... checking whether we are using the GNU C compiler... (cached) yes
    1 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853578101) (memory 3853580607)
    1 checking for CLISP version... checking how to remove colons from paths... (cached) echo $x
-   1 checking for SSL_library_init... (cached) yes
    1 checking for alloca... (cached) checking whether malloc is ptrdiff_t safe... yes
    1 checking for compiler option needed when checking for declarations... checking for suffix of object files... (cached) none
    1 checking for fcntl.h... checking for sys/stat.h... (cached) yes
@@ -18,7 +17,6 @@
    1 checking for gcc... (cached) gcc -mcpu=750 -Os
    1 checking for gcc... (cached) gcc -mcpu=970 -O2 -m64
    1 checking for getrusage... checking for stdlib.h... (cached) yes
-   1 checking for hstrerror... (cached) yes
    1 checking for inttypes.h... checking for stdio.h... (cached) (cached) yes
    1 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   ... checking for grep that handles long lines and -e... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld
    1 checking for ld... (cached) /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
@@ -149,6 +147,7 @@
    6 checking whether link(2) dereferences a symlink... (cached) yes
    6 checking whether the compiler supports the __inline keyword... (cached) yes
    7 checking for CFPreferencesCopyAppValue... (cached) no
+   7 checking for SSL_library_init... (cached) yes
    7 checking for argz_count... (cached) no
    7 checking for argz_next... (cached) no
    7 checking for argz_stringify... (cached) no
@@ -156,6 +155,7 @@
    7 checking for dlopen... (cached) yes
    7 checking for gcc option to accept ISO C99... (cached) -std=gnu99
    7 checking for gmtime_r... (cached) yes
+   7 checking for hstrerror... (cached) yes
    7 checking for sched_yield in -lposix4... (cached) no
    7 checking for sched_yield in -lrt... (cached) no
    7 checking for shlload... (cached) no
@@ -315,7 +315,6 @@
   13 checking whether wcrtomb return value is correct... (cached) yes
   13 checking whether wcrtomb works in the C locale... (cached) yes
   13 checking whether we are using the GNU C Library 2 or newer... (cached) no
-  14 checking for arpa/nameser.h... (cached) yes
   14 checking for dvips... (cached) /tmp/gettext-0.20/build-aux/missing dvips
   14 checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
   14 checking for the common suffixes of directories in the library search path... (cached) lib,lib
@@ -341,7 +340,6 @@
   16 checking size of __int32... (cached) 0
   16 checking whether fdatasync is declared... (cached) no
   16 checking whether use of struct winsize requires sys/ptem.h... (cached) no
-  17 checking for stdbool.h... (cached) yes
   17 checking how to remove colons from paths... (cached) echo $x
   17 checking how to run the C preprocessor... (cached) gcc-4.2 -std=gnu99 -E
   17 checking whether ln -s works... (cached) yes
@@ -371,6 +369,7 @@
   19 checking whether stat file-mode macros are broken... (cached) no
   19 checking whether struct lconv is properly defined... (cached) yes
   19 checking whether utime handles trailing slashes on files... (cached) no
+  20 checking for arpa/nameser.h... (cached) yes
   21 checking for CFLocaleCopyPreferredLanguages... (cached) yes
   21 checking for asprintf... (cached) yes
   21 checking for ld used by gcc... (cached) /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
@@ -384,6 +383,7 @@
   22 checking for bit size of size_t... (cached) 32
   23 checking build system type... (cached) powerpc-apple-darwin9.8.0
   23 checking for ld used by gcc -std=gnu99... (cached) /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
+  23 checking for stdbool.h... (cached) yes
   23 checking host system type... (cached) powerpc-apple-darwin9.8.0
   23 checking whether gcc-4.2 accepts -g... (cached) yes
   24 checking for alloca as a compiler built-in... (cached) yes
@@ -431,7 +431,6 @@
   26 checking whether this system supports file names of any length... (cached) no
   26 checking whether we are using the GNU C Library >= 2.1 or uClibc... (cached) no
   27 checking for fchown... (cached) yes
-  27 checking for netinet/in.h... (cached) yes
   28 checking whether mbrtowc stores incomplete characters... (cached) no
   29 checking for __freading... (cached) no
   29 checking for _fseeki64... (cached) no
@@ -463,6 +462,7 @@
   32 checking whether the utimes function works... (cached) yes
   33 checking for long long int... (cached) yes
   33 checking for malloc.h... (cached) no
+  33 checking for netinet/in.h... (cached) yes
   33 checking for wctype.h... (cached) yes
   33 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) is GNU ld... (cached) no
   34 checking for working fcntl.h... (cached) no (bad O_NOATIME, O_NOFOLLOW)
@@ -541,7 +541,6 @@
   44 checking how to convert powerpc-apple-darwin8.11.0 file names to powerpc-apple-darwin8.11.0 format... (cached) func_convert_file_noop
   44 checking how to convert powerpc-apple-darwin8.11.0 file names to toolchain format... (cached) func_convert_file_noop
   44 checking how to run the C preprocessor... (cached) gcc -E
-  45 checking for netdb.h... (cached) yes
   45 checking whether lseek detects pipes... (cached) yes
   45 checking whether select detects invalid fds... (cached) yes
   45 checking whether select supports a 0 argument... (cached) yes
@@ -567,6 +566,7 @@
   50 checking for CFLocaleCopyPreferredLanguages... (cached) no
   50 checking whether g++ accepts -g... (cached) yes
   51 checking dependency style of gcc... (cached) gcc3
+  51 checking for netdb.h... (cached) yes
   51 checking whether gcc understands -c and -o together... (cached) yes
   52 checking for __xpg_strerror_r... (cached) no
   52 checking for catgets... (cached) yes
@@ -600,7 +600,6 @@
   61 checking for struct timeval... (cached) yes
   61 checking for wide-enough struct timeval.tv_sec member... (cached) yes
   61 checking for working stdalign.h... (cached) no
-  61 checking if g++ supports -c -o file.o... (cached) yes
   61 checking whether C symbols are prefixed with underscore at the linker level... (cached) yes
   61 checking whether alarm is declared... (cached) yes
   62 checking for -exported_symbols_list linker flag... (cached) yes
@@ -620,7 +619,6 @@
   62 checking how to truncate binary pipes... (cached) /bin/dd bs=4096 count=1
   62 checking if : is a manifest tool... (cached) no
   62 checking the maximum length of command line arguments... (cached) 196608
-  63 checking for off_t... (cached) yes
   63 checking for pipe... (cached) yes
   63 checking for setenv... (cached) yes
   63 checking for vasprintf... (cached) yes
@@ -637,6 +635,8 @@
   68 checking for grep that handles long lines and -e... (cached) /usr/bin/grep
   68 checking for sys/cdefs.h... (cached) yes
   68 checking whether <sys/param.h> defines MIN and MAX... (cached) yes
+  69 checking for off_t... (cached) yes
+  69 checking if g++ supports -c -o file.o... (cached) yes
   69 checking whether the compiler supports GNU C... (cached) yes
   70 checking dependency style of g++... (cached) gcc3
   70 checking for working vfork... (cached) yes
@@ -722,8 +722,6 @@
  114 checking whether imported symbols can be declared weak... (cached) no
  117 checking for strerror_r... (cached) yes
  118 checking for mempcpy... (cached) no
- 118 checking for mode_t... (cached) yes
- 120 checking for an ANSI C-conforming const... (cached) yes
  122 checking for Minix Amsterdam compiler... (cached) no
  122 checking for error_at_line... (cached) no
  122 checking whether __progname is defined in default libraries... (cached) yes
@@ -732,11 +730,11 @@
  123 checking for pthread_rwlock_t... (cached) yes
  123 checking for stpcpy... (cached) yes
  123 checking whether pthread_rwlock_rdlock prefers a writer to a reader... (cached) yes
+ 124 checking for mode_t... (cached) yes
  124 checking for mprotect... (cached) yes
  125 checking for _Bool... (cached) yes
  125 checking for stdbool.h that conforms to C99... (cached) yes
- 126 checking for fcntl.h... (cached) yes
- 127 checking for sigaction... (cached) yes
+ 126 checking for an ANSI C-conforming const... (cached) yes
  128 checking for EMULTIHOP value... (cached) yes
  128 checking for ENOLINK value... (cached) yes
  128 checking for EOVERFLOW value... (cached) yes
@@ -750,28 +748,30 @@
  131 checking for strnlen... (cached) no
  131 checking for struct stat.st_atim.tv_nsec... (cached) no
  131 checking for struct stat.st_atimespec.tv_nsec... (cached) yes
+ 132 checking for fcntl.h... (cached) yes
+ 133 checking for sigaction... (cached) yes
  134 checking for gawk... (cached) awk
  134 checking for lstat... (cached) yes
  139 checking for symlink... (cached) yes
- 139 checking if gcc supports -c -o file.o... (cached) yes
- 140 checking for uid_t in sys/types.h... (cached) yes
  146 checking for SIZE_MAX... (cached) yes
  146 checking for raise... (cached) yes
- 152 checking for sys/socket.h... (cached) yes
+ 146 checking for uid_t in sys/types.h... (cached) yes
+ 147 checking if gcc supports -c -o file.o... (cached) yes
  153 checking for gettimeofday... (cached) yes
- 158 checking whether make supports nested variables... (cached) yes
+ 158 checking for sys/socket.h... (cached) yes
  159 checking for good max_align_t... (cached) no
  160 checking for working alloca.h... (cached) yes
- 163 checking for pid_t... (cached) yes
  166 checking for nlink_t... (cached) yes
- 173 checking for ranlib... (cached) ranlib
+ 166 checking whether make supports nested variables... (cached) yes
+ 169 checking for pid_t... (cached) yes
  179 checking for getopt.h... (cached) yes
  179 checking whether byte ordering is bigendian... (cached) yes
  180 checking for _FILE_OFFSET_BITS value needed for large files... (cached) no
- 180 checking whether make sets $(MAKE)... (cached) yes
+ 181 checking for ranlib... (cached) ranlib
  186 checking for wcrtomb... (cached) yes
  187 checking for wchar.h... (cached) yes
  188 checking for ssize_t... (cached) yes
+ 188 checking whether make sets $(MAKE)... (cached) yes
  190 checking for minix/config.h... (cached) no
  190 checking whether it is safe to define __EXTENSIONS__... (cached) yes
  193 checking for mbrtowc... (cached) yes
@@ -780,26 +780,26 @@
  221 checking whether mbrtowc handles incomplete characters... (cached) yes
  221 checking whether mbrtowc works as well as mbtowc... (cached) yes
  228 checking for sigprocmask... (cached) yes
- 233 checking for sys/param.h... (cached) yes
  234 checking for ANSI C header files... (cached) yes
  235 checking for mmap... (cached) yes
+ 239 checking for sys/param.h... (cached) yes
  250 checking for a traditional japanese locale... (cached) ja_JP.eucJP
- 259 checking for size_t... (cached) yes
- 265 checking for limits.h... (cached) yes
  265 checking for ptrdiff_t... (cached) yes
- 267 checking for sys/time.h... (cached) yes
+ 265 checking for size_t... (cached) yes
+ 271 checking for limits.h... (cached) yes
+ 273 checking for sys/time.h... (cached) yes
  282 checking for a transitional chinese locale... (cached) zh_CN.GB18030
- 297 checking for memory.h... (cached) yes
  297 checking for snprintf... (cached) yes
- 298 checking for suffix of object files... (cached) o
- 306 checking whether we are using the GNU C compiler... (cached) yes
- 411 checking for sys/types.h... (cached) yes
- 427 checking for strings.h... (cached) yes
+ 311 checking for memory.h... (cached) yes
+ 312 checking for suffix of object files... (cached) o
+ 320 checking whether we are using the GNU C compiler... (cached) yes
+ 437 checking for sys/types.h... (cached) yes
  445 checking for a traditional french locale... (cached) fr_FR.ISO8859-1
+ 447 checking for strings.h... (cached) yes
  473 checking for a french Unicode locale... (cached) fr_FR.UTF-8
- 473 checking for sys/stat.h... (cached) yes
- 545 checking for inttypes.h... (cached) yes
- 588 checking for string.h... (cached) yes
- 635 checking for stdlib.h... (cached) yes
- 839 checking for stdint.h... (cached) yes
- 876 checking for unistd.h... (cached) yes
+ 493 checking for sys/stat.h... (cached) yes
+ 565 checking for inttypes.h... (cached) yes
+ 602 checking for string.h... (cached) yes
+ 649 checking for stdlib.h... (cached) yes
+ 859 checking for stdint.h... (cached) yes
+ 896 checking for unistd.h... (cached) yes

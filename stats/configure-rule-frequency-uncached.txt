@@ -7,8 +7,6 @@
    1 checking alignment of unsigned long... 8
    1 checking alloca.h presence... checking for memory.h... yes
    1 checking argz.h usability... yes
-   1 checking arpa/nameser.h presence... yes
-   1 checking arpa/nameser.h usability... yes
    1 checking assembler for .balign and .p2align... gcc-4.2 -c -DHAVE_CONFIG_H -g -O2  -I. -I../.././libiberty/../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  ../.././libiberty/setproctitle.c -o setproctitle.o
    1 checking assembler for .weakref... ranlib ./libiberty.a
    1 checking assembler for buggy dwarf2 .file directive... gcc-4.2 -c  -g -O2 -DHAVE_CONFIG_H  -I. -I../.././intl ../.././intl/loadmsgcat.c
@@ -19,8 +17,6 @@
    1 checking assembler for power8 support... gcc-4.2 -c  -g -O2 -DHAVE_CONFIG_H  -I. -I../.././intl ../.././intl/finddomain.c
    1 checking assembler for working .subsection -1... rm -f ./libiberty.a pic/./libiberty.a
    1 checking bison 3 or later... 2.3, old
-   1 checking bsd/libutil.h presence... no
-   1 checking bsd/libutil.h usability... no
    1 checking build system compiler gcc-4.2 -mcpu=7400 -Os -force_cpusubtype_ALL -std=gnu99... yes
    1 checking build system compiler gcc-4.2 -mcpu=750 -Os -std=gnu99... yes
    1 checking build system type... checking fenv.h usability... powerpc-apple-darwin8.11.0
@@ -118,10 +114,6 @@
    1 checking for -single_module linker flag... mv -f .deps/transpose_i16.Tpo .deps/transpose_i16.Plo
    1 checking for -single_module linker flag... o
    1 checking for .preinit_array/.init_array/.fini_array support... rm -f stamp-h1
-   1 checking for /dev/ptc... no
-   1 checking for /dev/ptmx... no
-   1 checking for /proc... no
-   1 checking for /proc/*/fd... no
    1 checking for /proc/10305/cwd/configure.ac... no
    1 checking for /proc/11694/cwd/configure.ac... no
    1 checking for /proc/13686/cwd/configure.ac... no
@@ -150,7 +142,6 @@
    1 checking for ANSI C header files... mv -f .deps/exponent_r4.Tpo .deps/exponent_r4.Plo
    1 checking for ANSI C header files... mv -f .deps/transpose_r4.Tpo .deps/transpose_r4.Plo
    1 checking for ANSI C header files... ok
-   1 checking for ASN1_STRING_get0_data... yes
    1 checking for C compiler default output file name... checking for C compiler default output file name... a.out
    1 checking for C compiler default output file name... checking sys/loadavg.h usability... no
    1 checking for C compiler default output file name... checking whether gcc-4.2 supports -Wall... yes
@@ -173,9 +164,6 @@
    1 checking for CLISP version... 2.49.93+ (2018-02-18) (built 3853577962) (memory 3853579933)
    1 checking for CLISP version... 2.49.93+ (2018-02-18) (built 3853578101) (memory 3853580607)
    1 checking for CLISP version... 2.49.93+ (2018-02-18) (built 3853578228) (memory 3853583566)
-   1 checking for DH_set0_pqg... yes
-   1 checking for DTLS_client_method... yes
-   1 checking for DTLS_server_method... yes
    1 checking for EBADMSG... checking for __atomic_exchange for size 8... yes
    1 checking for ECANCELED... no
    1 checking for ECHILD... no
@@ -189,13 +177,11 @@
    1 checking for ENOTSUP... mv -f .deps/iter.Tpo .deps/iter.Plo
    1 checking for EPERM... checking for __atomic_fetch_add for size 4... yes
    1 checking for EPROTO... mv -f .deps/error.Tpo .deps/error.Plo
-   1 checking for ERR_error_string... yes
    1 checking for ETIME... checking for __atomic_exchange for size 4... yes
    1 checking for ETIME... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../../.././libgomp -I../../.././libgomp/config/bsd -I../../.././libgomp/config/posix -I../../.././libgomp -Wall -pthread -Werror -g -O2 -m64 -MT iter.lo -MD -MP -MF .deps/iter.Tpo -c ../../.././libgomp/iter.c -o iter.o >/dev/null 2>&1
    1 checking for ETIMEDOUT... checking for __atomic_fetch_add for size 8... yes
    1 checking for EWOULDBLOCK... no
    1 checking for GNU libc compatible malloc... yes
-   1 checking for IPPROTO_SCTP... no
    1 checking for ISO C99 support in <stdlib.h>... checking fenv.h usability... yes
    1 checking for ISO C99 support to TR1 in <ctype.h>... configure: updating cache config.cache
    1 checking for ISO C99 support to TR1 in <fenv.h>... configure: creating ./config.status
@@ -207,10 +193,6 @@
    1 checking for MAP_ANON(YMOUS)... checking for memmove... yes
    1 checking for MAP_ANON(YMOUS)... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT in_pack_r16.lo -MD -MP -MF .deps/in_pack_r16.Tpo -c ../.././libgfortran/generated/in_pack_r16.c -o in_pack_r16.o >/dev/null 2>&1
    1 checking for MAP_ANON(YMOUS)... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT set_exponent_r10.lo -MD -MP -MF .deps/set_exponent_r10.Tpo -c ../.././libgfortran/generated/set_exponent_r10.c -o set_exponent_r10.o >/dev/null 2>&1
-   1 checking for OPENSSL_init_ssl... yes
-   1 checking for RAND_egd in -lcrypt... no
-   1 checking for RAND_egd... no
-   1 checking for RAND_status... yes
    1 checking for RLIMIT_AS... /bin/sh ./libtool --tag=CC   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -DHAVE_CONFIG_H -I../.././libatomic/config/powerpc -I../.././libatomic/config/posix -I../.././libatomic -I.    -Wall -Werror  -pthread -g -O2 -MT fsub_2_.lo -MD -MP -MF .deps/fsub_2_.lo.Ppo -DN=2  -c -o fsub_2_.lo ../.././libatomic/fsub_n.c
    1 checking for RLIMIT_DATA... /bin/sh ./libtool --tag=CC   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -DHAVE_CONFIG_H -I../.././libatomic/config/powerpc -I../.././libatomic/config/posix -I../.././libatomic -I.    -Wall -Werror  -pthread -g -O2 -MT fadd_2_.lo -MD -MP -MF .deps/fadd_2_.lo.Ppo -DN=2  -c -o fadd_2_.lo ../.././libatomic/fadd_n.c
    1 checking for RLIMIT_DATA... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgomp -I../.././libgomp/config/bsd -I../.././libgomp/config/posix -I../.././libgomp -Wall -pthread -Werror -g -O2 -MT sections.lo -MD -MP -MF .deps/sections.Tpo -c ../.././libgomp/sections.c -o sections.o >/dev/null 2>&1
@@ -220,12 +202,6 @@
    1 checking for RLIMIT_RSS... mv -f .deps/sections.Tpo .deps/sections.Plo
    1 checking for RLIMIT_VMEM... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgomp -I../.././libgomp/config/bsd -I../.././libgomp/config/posix -I../.././libgomp -Wall -pthread -Werror -g -O2 -MT single.lo -MD -MP -MF .deps/single.Tpo -c ../.././libgomp/single.c  -fno-common -DPIC -o .libs/single.o
    1 checking for RLIMIT_VMEM... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I../.././libatomic/config/powerpc -I../.././libatomic/config/posix -I../.././libatomic -I. -Wall -Werror -pthread -g -O2 -MT fadd_2_.lo -MD -MP -MF .deps/fadd_2_.lo.Ppo -DN=2 -c ../.././libatomic/fadd_n.c -o fadd_2_.o >/dev/null 2>&1
-   1 checking for SSL_CTX_clear_mode... no
-   1 checking for SSL_CTX_set_default_verify_paths... yes
-   1 checking for SSL_library_init... yes
-   1 checking for SSL_set_tlsext_host_name... no
-   1 checking for TLS_client_method... yes
-   1 checking for TLS_server_method... yes
    1 checking for Tcl supporting try/catch... no
    1 checking for _FILE_OFFSET_BITS value needed for large files... configure: creating cache config.cache
    1 checking for _FILE_OFFSET_BITS value needed for large files... gcc-4.2 -E
@@ -307,17 +283,7 @@
    1 checking for atoq... gcc-4.2 -c -DHAVE_CONFIG_H -g -O2  -I. -I../.././libiberty/../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  ../.././libiberty/fibheap.c -o fibheap.o
    1 checking for autoconf... ${SHELL} /tmp/binutils-2.37/missing autoconf
    1 checking for autoheader... ${SHELL} /tmp/binutils-2.37/missing autoheader
-   1 checking for basic type of struct cmsghdr.cmsg_len... 4 /* unsigned int */
-   1 checking for basic type of struct rlimit.rlim_max... 7 /* long long */
-   1 checking for basic type of struct stat.st_blksize... 3 /* int */
-   1 checking for basic type of struct stat.st_blocks... 7 /* long long */
-   1 checking for basic type of struct stat.st_ino... 4 /* unsigned int */
-   1 checking for basic type of struct stat.st_nlink... 2 /* unsigned short */
-   1 checking for basic type of struct stat.st_size... 7 /* long long */
-   1 checking for basic type of struct timespec.tv_nsec... 5 /* long */
-   1 checking for basic type of struct timeval.tv_usec... 3 /* int */
    1 checking for bcmp... no
-   1 checking for bsd/libutil.h... no
    1 checking for build system preprocessor... gcc-4.2 -mcpu=7400 -Os -force_cpusubtype_ALL -std=gnu99 -E
    1 checking for build system preprocessor... gcc-4.2 -mcpu=750 -Os -std=gnu99 -E
    1 checking for cabs... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=time_members.lo -g -O2  -c -o time_members.lo time_members.cc
@@ -351,11 +317,6 @@
    1 checking for cexp... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=numeric_members.lo -g -O2  -c -o numeric_members.lo numeric_members.cc
    1 checking for cexpl... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=valarray.lo -g -O2  -c -o valarray.lo ../../../.././libstdc++-v3/src/c++98/valarray.cc
    1 checking for cexpl... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -D_GLIBCXX_SHARED -fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi -fdiagnostics-show-location=once -ffunction-sections -fdata-sections -frandom-seed=numeric_members.lo -g -O2 -c numeric_members.cc  -fno-common -DPIC -D_GLIBCXX_SHARED -o numeric_members.o
-   1 checking for cfgetispeed... yes
-   1 checking for cfgetospeed... yes
-   1 checking for cfmakeraw... yes
-   1 checking for cfsetispeed... yes
-   1 checking for cfsetospeed... yes
    1 checking for clearerr_unlocked... checking for alloca.h... yes
    1 checking for clearerr_unlocked... if [ x"" != x ]; then \
    1 checking for clearerr_unlocked... if [ x"-fno-common" != x ]; then \
@@ -370,8 +331,6 @@
    1 checking for close... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=locale.lo -g -O2  -c -o locale.lo ../../../.././libstdc++-v3/src/c++98/locale.cc
    1 checking for collect2 libraries... gcc-4.2 -c -DHAVE_CONFIG_H -g -O2  -I. -I../.././libiberty/../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  ../.././libiberty/dwarfnames.c -o dwarfnames.o
    1 checking for complex.h... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=hash_tr1.lo -g -O2  -c -o hash_tr1.lo ../../../.././libstdc++-v3/src/c++98/hash_tr1.cc
-   1 checking for component names of sockaddr_in6... s6_addr
-   1 checking for components of libwrap... configure: checked for tcpd.h... yes
    1 checking for copysign... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -D_GLIBCXX_SHARED -fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi -fdiagnostics-show-location=once -ffunction-sections -fdata-sections -frandom-seed=ctype_members.lo -g -O2 -c ctype_members.cc  -fno-common -DPIC -D_GLIBCXX_SHARED -o ctype_members.o
    1 checking for copysignf... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=ctype_members.lo -g -O2  -c -o ctype_members.lo ctype_members.cc
    1 checking for copysignl... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=tree.lo -g -O2  -c -o tree.lo ../../../.././libstdc++-v3/src/c++98/tree.cc
@@ -382,7 +341,6 @@
    1 checking for cosl... libtool: link: /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -dynamiclib -Wl,-undefined -Wl,dynamic_lookup -o .libs/libgomp.1.dylib  .libs/alloc.o .libs/barrier.o .libs/critical.o .libs/env.o .libs/error.o .libs/iter.o .libs/iter_ull.o .libs/loop.o .libs/loop_ull.o .libs/ordered.o .libs/parallel.o .libs/sections.o .libs/single.o .libs/task.o .libs/team.o .libs/work.o .libs/lock.o .libs/mutex.o .libs/proc.o .libs/sem.o .libs/bar.o .libs/ptrlock.o .libs/time.o .libs/fortran.o .libs/affinity.o .libs/target.o    -pthread   -install_name  /opt/gcc-4.9.4/lib/libgomp.1.dylib -compatibility_version 2 -current_version 2.0 -Wl,-single_module
    1 checking for cpowf... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -D_GLIBCXX_SHARED -fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi -fdiagnostics-show-location=once -ffunction-sections -fdata-sections -frandom-seed=istream-inst.lo -g -O2 -c ../../../.././libstdc++-v3/src/c++98/istream-inst.cc  -fno-common -DPIC -D_GLIBCXX_SHARED -o istream-inst.o
    1 checking for ctanhf... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -std=gnu++11 -D_GLIBCXX_SHARED -fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi -fdiagnostics-show-location=once -ffunction-sections -fdata-sections -frandom-seed=functional.lo -g -O2 -c ../../../.././libstdc++-v3/src/c++11/functional.cc  -fno-common -DPIC -D_GLIBCXX_SHARED -o functional.o
-   1 checking for declaration of environ... no
    1 checking for dlfcn.h... Adding multilib support to Makefile in ../../.././libssp
    1 checking for dlfcn.h... config.status: executing depfiles commands
    1 checking for dlfcn.h... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT fraction_r4.lo -MD -MP -MF .deps/fraction_r4.Tpo -c ../.././libgfortran/generated/fraction_r4.c  -fno-common -DPIC -o .libs/fraction_r4.o
@@ -397,23 +355,6 @@
    1 checking for dup... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=locale_init.lo -g -O2  -c -o locale_init.lo ../../../.././libstdc++-v3/src/c++98/locale_init.cc
    1 checking for dup2... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -D_GLIBCXX_SHARED -fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi -fdiagnostics-show-location=once -ffunction-sections -fdata-sections -frandom-seed=list_associated-2.lo -g -O2 -c ../../../.././libstdc++-v3/src/c++98/list_associated-2.cc  -fno-common -DPIC -D_GLIBCXX_SHARED -o list_associated-2.o
    1 checking for dup3... yes
-   1 checking for equivalent simple type of dev_t... 3 /* int */
-   1 checking for equivalent simple type of gid_t... 4 /* unsigned int */
-   1 checking for equivalent simple type of int16_t... 1 /* short */
-   1 checking for equivalent simple type of int32_t... 3 /* int */
-   1 checking for equivalent simple type of int64_t... 7 /* long long */
-   1 checking for equivalent simple type of mode_t... 2 /* unsigned short */
-   1 checking for equivalent simple type of off64_t... 0 /* unknown, taking default */
-   1 checking for equivalent simple type of off_t... 7 /* long long */
-   1 checking for equivalent simple type of pid_t... 3 /* int */
-   1 checking for equivalent simple type of size_t... 6 /* unsigned long */
-   1 checking for equivalent simple type of socklen_t... 4 /* unsigned int */
-   1 checking for equivalent simple type of speed_t... 5 /* long */
-   1 checking for equivalent simple type of time_t... 5 /* long */
-   1 checking for equivalent simple type of uid_t... 4 /* unsigned int */
-   1 checking for equivalent simple type of uint16_t... 2 /* unsigned short */
-   1 checking for equivalent simple type of uint32_t... 4 /* unsigned int */
-   1 checking for equivalent simple type of uint64_t... 8 /* unsigned long long */
    1 checking for erff... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -std=gnu++11 -D_GLIBCXX_SHARED -fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi -fdiagnostics-show-location=once -ffunction-sections -fdata-sections -frandom-seed=future.lo -g -O2 -c ../../../.././libstdc++-v3/src/c++11/future.cc  -fno-common -DPIC -D_GLIBCXX_SHARED -o future.o
    1 checking for exception model to use... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT rrspacing_r16.lo -MD -MP -MF .deps/rrspacing_r16.Tpo -c ../.././libgfortran/generated/rrspacing_r16.c -o rrspacing_r16.o >/dev/null 2>&1
    1 checking for exception model to use... yes
@@ -435,7 +376,6 @@
    1 checking for fabsl declaration... mv -f .deps/gexch.Tpo .deps/gexch.Plo
    1 checking for fabsl... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I../.././libatomic/config/powerpc -I../.././libatomic/config/posix -I../.././libatomic -I. -Wall -Werror -pthread -g -O2 -MT glfree.lo -MD -MP -MF .deps/glfree.Tpo -c ../.././libatomic/glfree.c  -fno-common -DPIC -o .libs/glfree.o
    1 checking for fcntl... 4
-   1 checking for fdset->fds_bits... yes
    1 checking for feof_unlocked... 4
    1 checking for feof_unlocked... checking for getsysinfo... yes
    1 checking for feof_unlocked... checking for sys/sysmp.h... no
@@ -505,10 +445,8 @@
    1 checking for frexpl... mv -f .deps/error.Tpo .deps/error.Plo
    1 checking for frexpl... mv -f .deps/lock.Tpo .deps/lock.Plo
    1 checking for fseeko64... no
-   1 checking for fstat64... no
    1 checking for ftello64... no
    1 checking for ftruncate... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -D_GLIBCXX_SHARED -fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi -fdiagnostics-show-location=once -ffunction-sections -fdata-sections -frandom-seed=ios_init.lo -g -O2 -c ../../../.././libstdc++-v3/src/c++98/ios_init.cc  -fno-common -DPIC -D_GLIBCXX_SHARED -o ios_init.o
-   1 checking for ftruncate64... no
    1 checking for ftw.h... configure: [1m** I18N (Done)[m
    1 checking for fwrite_unlocked... checking for basename... no
    1 checking for fwrite_unlocked... if [ x"-fno-common" != x ]; then \
@@ -550,16 +488,12 @@
    1 checking for getcwd... no
    1 checking for geteuid... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -D_GLIBCXX_SHARED -fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi -fdiagnostics-show-location=once -ffunction-sections -fdata-sections -frandom-seed=locale_facets.lo -g -O2 -c ../../../.././libstdc++-v3/src/c++98/locale_facets.cc  -fno-common -DPIC -D_GLIBCXX_SHARED -o locale_facets.o
    1 checking for getexecname... 4
-   1 checking for getipnodebyname prototype... no
    1 checking for getpagesize... checking for getsysinfo... yes
    1 checking for getpagesize... checking whether clearerr_unlocked is declared... yes
-   1 checking for getprotobynumber... yes
-   1 checking for getprotobynumber_r() variant... 1 /* Linux */
    1 checking for getrlimit... if [ x"-fno-common" != x ]; then \
    1 checking for getrusage... gcc-4.2 -c -DHAVE_CONFIG_H -g -O2  -I. -I../.././libiberty/../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  ../.././libiberty/filename_cmp.c -o filename_cmp.o
    1 checking for gets declaration... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../../.././libgomp -I../../.././libgomp/config/bsd -I../../.././libgomp/config/posix -I../../.././libgomp -Wall -pthread -Werror -g -O2 -m64 -MT error.lo -MD -MP -MF .deps/error.Tpo -c ../../.././libgomp/error.c  -fno-common -DPIC -o .libs/error.o
    1 checking for getservent... ;; MODPREP: "/tmp/clisp-de01f0f47bb44d3a0f9e842464cf2520b238f356/modules/i18n/gettext.c" --> #P"gettext.m.c"
-   1 checking for gettimeofday prototype... yes
    1 checking for gettimeofday... checking sys/time.h usability... Adding multilib support to Makefile in ../../.././libatomic
    1 checking for gettimeofday... checking sys/time.h usability... mv -f .deps/parallel.Tpo .deps/parallel.Plo
    1 checking for gettimeofday... config.status: executing libtool commands
@@ -571,9 +505,6 @@
    1 checking for grep that handles long lines and -e... yes
    1 checking for grp.h... configure: updating cache ../config.cache
    1 checking for gthreads library... /bin/sh ./libtool --tag=CC   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -DHAVE_CONFIG_H -I../.././libatomic/config/powerpc -I../.././libatomic/config/posix -I../.././libatomic -I.    -Wall -Werror  -pthread -g -O2 -MT fior_2_.lo -MD -MP -MF .deps/fior_2_.lo.Ppo -DN=2  -c -o fior_2_.lo ../.././libatomic/fior_n.c
-   1 checking for hosts_allow_table... yes
-   1 checking for hstrerror prototype... yes
-   1 checking for hstrerror... yes
    1 checking for hw.ncpu sysctl... mv -f .deps/ssp.Tpo .deps/ssp.Plo
    1 checking for hypot declaration... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -m64 -DHAVE_CONFIG_H -I. -I../../.././libssp -Wall -g -O2 -m64 -MT memcpy-chk.lo -MD -MP -MF .deps/memcpy-chk.Tpo -c ../../.././libssp/memcpy-chk.c -o memcpy-chk.o >/dev/null 2>&1
    1 checking for hypot... mv -f .deps/memcpy-chk.Tpo .deps/memcpy-chk.Plo
@@ -594,7 +525,6 @@
    1 checking for iconv.h... if [ x"-fno-common" != x ]; then \
    1 checking for iconv_open in -liconv... yes
    1 checking for ieeefp.h... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -D_GLIBCXX_SHARED -fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi -fdiagnostics-show-location=once -ffunction-sections -fdata-sections -frandom-seed=globals_io.lo -g -O2 -c ../../../.././libstdc++-v3/src/c++98/globals_io.cc  -fno-common -DPIC -D_GLIBCXX_SHARED -o globals_io.o
-   1 checking for if_indextoname prototype... yes
    1 checking for index... no
    1 checking for inline... checking for grep that handles long lines and -e... /usr/bin/grep
    1 checking for inline... checking for strings.h... inline
@@ -683,15 +613,7 @@
    1 checking for libdebuginfod >= 0.179... no
    1 checking for library containing dlopen... gcc-4.2 -c  -g -O2 -DHAVE_CONFIG_H  -I. -I../.././intl ../.././intl/l10nflist.c
    1 checking for library containing frexp... none required
-   1 checking for library containing res_9_init... -lresolv
    1 checking for library containing strerror... no
-   1 checking for libssl... yes
-   1 checking for libwrap... yes
-   1 checking for linux/errqueue.h... no
-   1 checking for linux/ext2_fs.h... no
-   1 checking for linux/if_tun.h... no
-   1 checking for linux/types.h... no
-   1 checking for linux/vm_sockets.h... no
    1 checking for locale.h... if [ x"-fno-common" != x ]; then \
    1 checking for log10... libtool: link: ranlib .libs/libc++98convenience.a
    1 checking for log10f declaration... make  all-am
@@ -708,8 +630,6 @@
    1 checking for logl... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=ios-inst.lo -g -O2  -c -o ios-inst.lo ../../../.././libstdc++-v3/src/c++98/ios-inst.cc
    1 checking for logl... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I../.././libatomic/config/powerpc -I../.././libatomic/config/posix -I../.././libatomic -I. -Wall -Werror -pthread -g -O2 -MT load_1_.lo -MD -MP -MF .deps/load_1_.lo.Ppo -DN=1 -c ../.././libatomic/load_n.c -o load_1_.o >/dev/null 2>&1
    1 checking for long double round functions... mv -f .deps/gload.Tpo .deps/gload.Plo
-   1 checking for lseek64... no
-   1 checking for lstat64... no
    1 checking for machine/hal_sysinfo.h... checking for ferror_unlocked... no
    1 checking for machine/hal_sysinfo.h... yes
    1 checking for makeinfo... configure: creating cache config.cache
@@ -728,7 +648,6 @@
    1 checking for mempcpy... checking for spawnve... no
    1 checking for mempcpy... checking whether getchar_unlocked is declared... yes
    1 checking for mempcpy... configure: updating cache config.cache
-   1 checking for memrchr prototype... no
    1 checking for mkstemp... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -D_GLIBCXX_SHARED -fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi -fdiagnostics-show-location=once -ffunction-sections -fdata-sections -frandom-seed=ios_failure.lo -g -O2 -c ../../../.././libstdc++-v3/src/c++98/ios_failure.cc  -fno-common -DPIC -D_GLIBCXX_SHARED -o ios_failure.o
    1 checking for mkstemps... config.status: creating Makefile
    1 checking for mmap... if [ x"-fno-common" != x ]; then \
@@ -748,13 +667,6 @@
    1 checking for modfl... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgomp -I../.././libgomp/config/bsd -I../.././libgomp/config/posix -I../.././libgomp -Wall -pthread -Werror -g -O2 -MT loop.lo -MD -MP -MF .deps/loop.Tpo -c ../.././libgomp/loop.c  -fno-common -DPIC -o .libs/loop.o
    1 checking for modfl... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I../.././libatomic/config/powerpc -I../.././libatomic/config/posix -I../.././libatomic -I. -Wall -Werror -pthread -g -O2 -MT cas_1_.lo -MD -MP -MF .deps/cas_1_.lo.Ppo -DN=1 -c ../.././libatomic/cas_n.c  -fno-common -DPIC -o .libs/cas_1_.o
    1 checking for ncurses/termcap.h... yes
-   1 checking for net/if.h... yes
-   1 checking for net/if_dl.h... yes
-   1 checking for netinet/in_systm.h... yes
-   1 checking for netinet/ip.h... yes
-   1 checking for netinet/ip6.h... yes
-   1 checking for netinet6/in6.h... no
-   1 checking for netpacket/packet.h... no
    1 checking for nextafter... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -std=gnu++11 -D_GLIBCXX_SHARED -fno-implicit-templates -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi -fdiagnostics-show-location=once -ffunction-sections -fdata-sections -frandom-seed=condition_variable.lo -g -O2 -c ../../../.././libstdc++-v3/src/c++11/condition_variable.cc  -fno-common -DPIC -D_GLIBCXX_SHARED -o condition_variable.o
    1 checking for nextafterf... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=iostream-inst.lo -g -O2  -c -o iostream-inst.lo ../../../.././libstdc++-v3/src/c++98/iostream-inst.cc
    1 checking for nextafterf... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -std=gnu++11 -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=condition_variable.lo -g -O2  -c -o condition_variable.lo ../../../.././libstdc++-v3/src/c++11/condition_variable.cc
@@ -762,8 +674,6 @@
    1 checking for objdir... gcc3
    1 checking for objdir... mv -f .deps/pow_c10_i16.Tpo .deps/pow_c10_i16.Plo
    1 checking for objdir... yes
-   1 checking for off64_t... no
-   1 checking for openpty in -lbsd... no
    1 checking for perl... .libs
    1 checking for pid_t... checking for getc_unlocked... yes
    1 checking for pid_t... gcc-4.2 -c -DHAVE_CONFIG_H -g -O2  -I. -I../.././libiberty/../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  ../.././libiberty/lrealpath.c -o lrealpath.o
@@ -771,7 +681,6 @@
    1 checking for pkg-config library directory... checking for first directory... none
    1 checking for pkg-config... none
    1 checking for poll... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../../.././libgomp -I../../.././libgomp/config/bsd -I../../.././libgomp/config/posix -I../../.././libgomp -Wall -pthread -Werror -g -O2 -m64 -MT loop.lo -MD -MP -MF .deps/loop.Tpo -c ../../.././libgomp/loop.c -o loop.o >/dev/null 2>&1
-   1 checking for posix_memalign prototype... no
    1 checking for posix_memalign... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT in_pack_c8.lo -MD -MP -MF .deps/in_pack_c8.Tpo -c ../.././libgfortran/generated/in_pack_c8.c  -fno-common -DPIC -o .libs/in_pack_c8.o
    1 checking for posix_memalign... mv -f .deps/pow_i4_i4.Tpo .deps/pow_i4_i4.Plo
    1 checking for powerpc-apple-darwin8.11.0-gfortran... no
@@ -798,7 +707,6 @@
    1 checking for ptrdiff_t as int... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgomp -I../.././libgomp/config/bsd -I../.././libgomp/config/posix -I../.././libgomp -Wall -pthread -Werror -g -O2 -MT sections.lo -MD -MP -MF .deps/sections.Tpo -c ../.././libgomp/sections.c  -fno-common -DPIC -o .libs/sections.o
    1 checking for ptrdiff_t integer literal suffix... l
    1 checking for ptrdiff_t... if [ x"" != x ]; then \
-   1 checking for ptsname prototype... yes
    1 checking for putc_unlocked... checking for asprintf... yes
    1 checking for putc_unlocked... gcc-4.2 -c -DHAVE_CONFIG_H -g -O2  -I. -I../.././libiberty/../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  ../.././libiberty/hashtab.c -o hashtab.o
    1 checking for putenv... checking for an ANSI C-conforming const... yes
@@ -826,7 +734,6 @@
    1 checking for setservent... WARNING: yes
    1 checking for shared library run path origin... if [ x"-fno-common" != x ]; then \
    1 checking for shared library run path origin... no
-   1 checking for sighandler_t... yes
    1 checking for sigsetjmp... 
    1 checking for sigsetmask... checking for msgmerge... no
    1 checking for sigsetmask... config.status: creating mkheaders.almost
@@ -881,10 +788,8 @@
    1 checking for stpcpy... mkdir host-powerpc-apple-darwin8.11.0/zlib
    1 checking for stpncpy... 
    1 checking for strchr... none needed
-   1 checking for strdup prototype... yes
    1 checking for strdup... configure: creating cache config.cache
    1 checking for strdup... powerpc-apple-darwin8.11.0
-   1 checking for strerror prototype... yes
    1 checking for strerror... checking for putenv... yes
    1 checking for string.h... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=pool_allocator.lo -g -O2  -c -o pool_allocator.lo ../../../.././libstdc++-v3/src/c++98/pool_allocator.cc
    1 checking for string.h... checking alloca.h usability... yes
@@ -908,12 +813,10 @@
    1 checking for strncasecmp... powerpc-apple-darwin8.11.0
    1 checking for strncpy... checking whether we are using the GNU Fortran compiler... yes
    1 checking for strncpy... configure: creating cache config.cache
-   1 checking for strndup prototype... no
    1 checking for strndup... checking for grep that handles long lines and -e... /usr/bin/grep
    1 checking for strnlen... yes
    1 checking for strsignal... checking for setenv... yes
    1 checking for strsignal... if [ x"-fno-common" != x ]; then \
-   1 checking for strstr prototype... yes
    1 checking for strstr... checking for C compiler default output file name... yes
    1 checking for strtod... a.out
    1 checking for strtof... /bin/sh ./libtool --tag=CC   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -DHAVE_CONFIG_H -I../.././libatomic/config/powerpc -I../.././libatomic/config/posix -I../.././libatomic -I.    -Wall -Werror  -pthread -g -O2 -MT fior_1_.lo -MD -MP -MF .deps/fior_1_.lo.Ppo -DN=1  -c -o fior_1_.lo ../.././libatomic/fior_n.c
@@ -925,26 +828,6 @@
    1 checking for strtoull... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT in_pack_c4.lo -MD -MP -MF .deps/in_pack_c4.Tpo -c ../.././libgfortran/generated/in_pack_c4.c -o in_pack_c4.o >/dev/null 2>&1
    1 checking for strtoull... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT pow_i4_i4.lo -MD -MP -MF .deps/pow_i4_i4.Tpo -c ../.././libgfortran/generated/pow_i4_i4.c  -fno-common -DPIC -o .libs/pow_i4_i4.o
    1 checking for strtoull... no
-   1 checking for struct cmsghdr... yes
-   1 checking for struct ifreq... yes
-   1 checking for struct ifreq.ifr_ifindex... no
-   1 checking for struct ifreq.ifr_index... no
-   1 checking for struct in6_pktinfo... yes
-   1 checking for struct in_pktinfo... no
-   1 checking for struct iovec... yes
-   1 checking for struct ip... yes
-   1 checking for struct ip.ip_hl... yes
-   1 checking for struct ip_mreq... yes
-   1 checking for struct ip_mreq_source... no
-   1 checking for struct ipv6_mreq... yes
-   1 checking for struct linger... yes
-   1 checking for struct msghdr.msg_control... yes
-   1 checking for struct msghdr.msg_controllen... yes
-   1 checking for struct msghdr.msgflags... yes
-   1 checking for struct sock_extended_err... no
-   1 checking for struct stat64... no
-   1 checking for struct termios . c_ispeed... yes
-   1 checking for struct termios . c_ospeed... yes
    1 checking for struct tms... if [ x"-fno-common" != x ]; then \
    1 checking for struct utmpx.ut_host... 
    1 checking for strverscmp... none needed
@@ -982,7 +865,6 @@
    1 checking for sys/stat.h... mv -f .deps/pow_r16_i16.Tpo .deps/pow_r16_i16.Plo
    1 checking for sys/statfs.h... config.status: creating link.sh
    1 checking for sys/statvfs.h... config.status: creating Makefile
-   1 checking for sys/stropts.h... no
    1 checking for sys/sysinfo.h... checking whether gcc-4.2 supports -Woverlength-strings... no
    1 checking for sys/sysinfo.h... yes
    1 checking for sys/sysmp.h... checking whether gcc-4.2 supports -Wmissing-format-attribute... no
@@ -1021,9 +903,7 @@
    1 checking for tputs in -lcurses... no
    1 checking for tputs in -lncurses... no
    1 checking for tr1/unordered_map... if [ x"-fno-common" != x ]; then \
-   1 checking for truncate64... no
    1 checking for truncl... /bin/sh ../../libtool --tag CXX --tag disable-shared   --mode=compile /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -I/tmp/gcc-4.9.4/libstdc++-v3/../libgcc -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++  -std=gnu++11 -prefer-pic -D_GLIBCXX_SHARED -fno-implicit-templates  -Wall -Wextra -Wwrite-strings -Wcast-qual -Wabi  -fdiagnostics-show-location=once   -ffunction-sections -fdata-sections  -frandom-seed=future.lo -g -O2  -c -o future.lo ../../../.././libstdc++-v3/src/c++11/future.cc
-   1 checking for type EC_KEY... yes
    1 checking for uint64_t... /usr/bin/grep
    1 checking for uint64_t... config.status: executing libtool commands
    1 checking for uint64_t... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT in_pack_r10.lo -MD -MP -MF .deps/in_pack_r10.Tpo -c ../.././libgfortran/generated/in_pack_r10.c  -fno-common -DPIC -o .libs/in_pack_r10.o
@@ -1044,9 +924,7 @@
    1 checking for unistd.h... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT transpose_r16.lo -MD -MP -MF .deps/transpose_r16.Tpo -c ../.././libgfortran/generated/transpose_r16.c -o transpose_r16.o >/dev/null 2>&1
    1 checking for unistd.h... mv -f .deps/exponent_r16.Tpo .deps/exponent_r16.Plo
    1 checking for unordered_map... gcc-4.2 -c -DHAVE_CONFIG_H -g -O2  -I. -I../.././libiberty/../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  ../.././libiberty/cp-demint.c -o cp-demint.o
-   1 checking for usable readline in default location... yes
    1 checking for utimensat... no
-   1 checking for var environ... yes
    1 checking for vasprintf... rm: conftest.dSYM: is a directory
    1 checking for vfork... gcc-4.2 -c -DHAVE_CONFIG_H -g -O2  -I. -I../.././libiberty/../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  ../.././libiberty/make-relative-prefix.c -o make-relative-prefix.o
    1 checking for vfprintf... checking for off_t... yes
@@ -1149,9 +1027,6 @@
    1 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -fno-rtti -fno-exceptions... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../../.././libgomp -I../../.././libgomp/config/bsd -I../../.././libgomp/config/posix -I../../.././libgomp -Wall -pthread -Werror -g -O2 -m64 -MT alloc.lo -MD -MP -MF .deps/alloc.Tpo -c ../../.././libgomp/alloc.c -o alloc.o >/dev/null 2>&1
    1 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -fno-rtti -fno-exceptions... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT fraction_r8.lo -MD -MP -MF .deps/fraction_r8.Tpo -c ../.././libgfortran/generated/fraction_r8.c  -fno-common -DPIC -o .libs/fraction_r8.o
    1 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -fno-rtti -fno-exceptions... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT pack_r10.lo -MD -MP -MF .deps/pack_r10.Tpo -c ../.././libgfortran/generated/pack_r10.c  -fno-common -DPIC -o .libs/pack_r10.o
-   1 checking if _SVID3 is helpful... no
-   1 checking if _XPG4_2 is helpful... no
-   1 checking if __APPLE_USE_RFC_2292 is helpful... no
    1 checking if g++ -mcpu=7400 -Os -force_cpusubtype_ALL PIC flag -fno-common works... yes
    1 checking if g++ -mcpu=7400 -Os -force_cpusubtype_ALL static flag -static works... no
    1 checking if g++ -mcpu=7400 -Os -force_cpusubtype_ALL supports -c -o file.o... yes
@@ -1199,23 +1074,14 @@
    1 checking if gcc-4.2 supports -c -o file.o... rm: conftest.dSYM: is a directory
    1 checking if gcc-4.2 supports -fno-rtti -fno-exceptions... checking for grep that handles long lines and -e... no
    1 checking if gcc-4.2 supports -fno-rtti -fno-exceptions... gcc-4.2 -c -DHAVE_CONFIG_H -g -O2  -I. -I../.././libiberty/../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  ../.././libiberty/xstrdup.c -o xstrdup.o
-   1 checking if printf has Z modifier... no
-   1 checking if snprintf conforms to C99... yes
    1 checking if the linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld) is GNU ld... config.status: creating testsuite/Makefile
    1 checking if the linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld) is GNU ld... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I../.././libatomic/config/powerpc -I../.././libatomic/config/posix -I../.././libatomic -I. -Wall -Werror -pthread -g -O2 -MT fxor_1_.lo -MD -MP -MF .deps/fxor_1_.lo.Ppo -DN=1 -c ../.././libatomic/fxor_n.c -o fxor_1_.o >/dev/null 2>&1
    1 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.2.1/ld) is GNU ld... yes
    1 checking if we should install .pc files... no
-   1 checking included message level... debug
    1 checking lex library... none needed
    1 checking limits.h usability... checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    supports -fno-rtti -fno-exceptions... yes
    1 checking limits.h usability... o
    1 checking link.h usability... yes
-   1 checking linux/ext2_fs.h presence... no
-   1 checking linux/ext2_fs.h usability... no
-   1 checking linux/if_tun.h presence... no
-   1 checking linux/if_tun.h usability... no
-   1 checking linux/types.h presence... no
-   1 checking linux/types.h usability... no
    1 checking locale.h usability... config.status: executing depfiles commands
    1 checking locale.h usability... if [ x"" != x ]; then \
    1 checking locale.h usability... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../../.././libgomp -I../../.././libgomp/config/bsd -I../../.././libgomp/config/posix -I../../.././libgomp -Wall -pthread -Werror -g -O2 -m64 -MT single.lo -MD -MP -MF .deps/single.Tpo -c ../../.././libgomp/single.c  -fno-common -DPIC -o .libs/single.o
@@ -1240,35 +1106,19 @@
    1 checking nan.h usability... mv -f .deps/snprintf-chk.Tpo .deps/snprintf-chk.Plo
    1 checking ncurses/termcap.h presence... yes
    1 checking ncurses/termcap.h usability... yes
-   1 checking net/if_dl.h presence... yes
-   1 checking net/if_dl.h usability... yes
-   1 checking netinet/in_systm.h presence... yes
-   1 checking netinet/in_systm.h usability... yes
-   1 checking netinet/tcp.h presence... yes
-   1 checking netinet/tcp.h usability... yes
-   1 checking netinet6/in6.h presence... no
-   1 checking netinet6/in6.h usability... no
-   1 checking netpacket/packet.h presence... no
-   1 checking netpacket/packet.h usability... no
    1 checking nl_types.h presence... no
    1 checking paths.h presence... checking for stdint.h... yes
    1 checking paths.h presence... config.status: creating testsuite/Makefile
    1 checking paths.h usability... checking for inttypes.h... yes
    1 checking paths.h usability... config.status: creating omp_lib.f90
-   1 checking poll.h presence... yes
-   1 checking poll.h usability... yes
    1 checking printf.h presence... gcc3
    1 checking pthread.h presence... checking for --enable-version-specific-runtime-libs... no
    1 checking pthread.h usability... ok
-   1 checking pty.h usability... no
    1 checking readline detected... no
    1 checking sched.h usability... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT rrspacing_r10.lo -MD -MP -MF .deps/rrspacing_r10.Tpo -c ../.././libgfortran/generated/rrspacing_r10.c  -fno-common -DPIC -o .libs/rrspacing_r10.o
    1 checking sched.h usability... mv -f .deps/pack_r16.Tpo .deps/pack_r16.Plo
    1 checking semaphore.h usability... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT in_pack_i16.lo -MD -MP -MF .deps/in_pack_i16.Tpo -c ../.././libgfortran/generated/in_pack_i16.c  -fno-common -DPIC -o .libs/in_pack_i16.o
    1 checking semaphore.h usability... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT nearest_r8.lo -MD -MP -MF .deps/nearest_r8.Tpo -c ../.././libgfortran/generated/nearest_r8.c -o nearest_r8.o >/dev/null 2>&1
-   1 checking shift offset of CRDLY... 12
-   1 checking shift offset of CSIZE... 8
-   1 checking shift offset of TABDLY... 10
    1 checking size of gid_t... /tmp/clisp-de01f0f47bb44d3a0f9e842464cf2520b238f356/src/clisp -K boot  -E UTF-8 -Emisc 1:1 -norc -q -c /tmp/clisp-de01f0f47bb44d3a0f9e842464cf2520b238f356/modules/i18n/i18n.lisp -o ./
    1 checking size of int... checking for fprintf_unlocked... no
    1 checking size of int... if [ x"" != x ]; then \
@@ -1309,17 +1159,11 @@
    1 checking sys/resource.h presence... mv -f .deps/strcpy-chk.Tpo .deps/strcpy-chk.Plo
    1 checking sys/resource.h usability... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libssp -Wall -g -O2 -MT strcpy-chk.lo -MD -MP -MF .deps/strcpy-chk.Tpo -c ../.././libssp/strcpy-chk.c -o strcpy-chk.o >/dev/null 2>&1
    1 checking sys/sem.h usability... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libssp -Wall -g -O2 -MT strncat-chk.lo -MD -MP -MF .deps/strncat-chk.Tpo -c ../.././libssp/strncat-chk.c  -fno-common -DPIC -o .libs/strncat-chk.o
-   1 checking sys/stropts.h presence... no
-   1 checking sys/stropts.h usability... no
    1 checking sys/sysinfo.h presence... mv -f .deps/single.Tpo .deps/single.Plo
    1 checking sys/time.h presence... config.status: executing depfiles commands
    1 checking sys/time.h presence... mv -f .deps/in_pack_i16.Tpo .deps/in_pack_i16.Plo
    1 checking sys/time.h usability... mv -f .deps/nearest_r8.Tpo .deps/nearest_r8.Plo
    1 checking sys/uio.h usability... 8
-   1 checking sys/un.h presence... yes
-   1 checking sys/un.h usability... yes
-   1 checking sys/utsname.h presence... yes
-   1 checking sys/utsname.h usability... yes
    1 checking syslog.h usability... config.status: creating libgomp.spec
    1 checking target system type... checking for strncat... powerpc-apple-darwin8.11.0
    1 checking target system type... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT pack_i2.lo -MD -MP -MF .deps/pack_i2.Tpo -c ../.././libgfortran/generated/pack_i2.c  -fno-common -DPIC -o .libs/pack_i2.o
@@ -1558,43 +1402,6 @@
    1 checking whether the target supports thread-local storage... mv -f .deps/in_pack_c8.Tpo .deps/in_pack_c8.Plo
    1 checking whether time.h and sys/time.h may both be included... mv -f .deps/nearest_r4.Tpo .deps/nearest_r4.Plo
    1 checking whether time.h and sys/time.h may both be included... no
-   1 checking whether to include FD-number support... yes
-   1 checking whether to include IPv4 support... yes
-   1 checking whether to include IPv6 support... yes
-   1 checking whether to include OpenSSL method option... no
-   1 checking whether to include SCTP support... yes
-   1 checking whether to include STDIO support... yes
-   1 checking whether to include TCP support... yes
-   1 checking whether to include UDP support... yes
-   1 checking whether to include UNIX socket support... yes
-   1 checking whether to include abstract UNIX socket support... no
-   1 checking whether to include deprecated resolver option... no
-   1 checking whether to include direct create support... yes
-   1 checking whether to include direct file support... yes
-   1 checking whether to include exec support... yes
-   1 checking whether to include explicit pipe support... yes
-   1 checking whether to include explicit termios support... yes
-   1 checking whether to include file descriptor analyzer... yes
-   1 checking whether to include fs attributes support... yes
-   1 checking whether to include generic network interface support... yes
-   1 checking whether to include generic socket support... yes
-   1 checking whether to include gopen support... yes
-   1 checking whether to include help... yes
-   1 checking whether to include libwrap support... yes
-   1 checking whether to include listen support... yes
-   1 checking whether to include openssl fips support... no
-   1 checking whether to include openssl support... yes
-   1 checking whether to include proxy connect support... yes
-   1 checking whether to include pty address support... yes
-   1 checking whether to include raw IP support... yes
-   1 checking whether to include readline support... yes
-   1 checking whether to include retry support... yes
-   1 checking whether to include socks4 support... yes
-   1 checking whether to include socks4a support... yes
-   1 checking whether to include system (shell) support... yes
-   1 checking whether to include system call tracing... yes
-   1 checking whether to include tun/tap address support... yes
-   1 checking whether to include vsock support... yes
    1 checking whether to use debuginfod... auto
    1 checking whether vasprintf is declared... checking for bcopy... yes
    1 checking whether vsnprintf is declared... configure: creating cache config.cache
@@ -1613,7 +1420,6 @@
    1 checking whether we are using the GNU Fortran compiler... Checking multilib configuration for libquadmath...
    1 checking whether weak refs work like ELF... libtool: compile:  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include -DHAVE_CONFIG_H -I. -I../.././libgfortran -iquote../.././libgfortran/io -I../.././libgfortran/../gcc -I../.././libgfortran/../gcc/config -I../../host-powerpc-apple-darwin8.11.0/gcc -I../.././libgfortran/../libgcc -I../libgcc -std=gnu99 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wextra -Wwrite-strings -fcx-fortran-rules -ffunction-sections -fdata-sections -g -O2 -MT in_unpack_i1.lo -MD -MP -MF .deps/in_unpack_i1.Tpo -c ../.././libgfortran/generated/in_unpack_i1.c -o in_unpack_i1.o >/dev/null 2>&1
    1 checking whether yytext is a pointer... no
-   1 checking which defines needed for makedepend...  -D__DYNAMIC__
    2 checking ABI=mode64
    2 checking C++ compiler g++ -mcpu=7450 -O2 -force_cpusubtype_ALL  -pedantic -no-cpp-precomp... yes
    2 checking C++ compiler g++ -mcpu=970 -O2 -force_cpusubtype_ALL  -pedantic -no-cpp-precomp... yes
@@ -1879,11 +1685,19 @@
    3 checking assembler for .balign and .p2align... no
    3 checking for  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    option to produce PIC... -fno-common -DPIC
    3 checking for -single_module linker flag... no
+   3 checking for /dev/ptmx... yes
    3 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    option to accept ISO C89... yes
    3 checking for SIZE_MAX... yes
    3 checking for _Unwind_GetIPInfo... no
    3 checking for a Python interpreter with version >= 2.5... python
    3 checking for attribute ss_sp in struct sigaltstack from sys/signal.h... no
+   3 checking for basic type of struct rlimit.rlim_max... 8 /* unsigned long long */
+   3 checking for basic type of struct stat64.st_blksize... 3 /* int */
+   3 checking for basic type of struct stat64.st_blocks... 7 /* long long */
+   3 checking for basic type of struct stat64.st_dev... 3 /* int */
+   3 checking for basic type of struct stat64.st_ino... 8 /* unsigned long long */
+   3 checking for basic type of struct stat64.st_nlink... 2 /* unsigned short */
+   3 checking for basic type of struct stat64.st_size... 7 /* long long */
    3 checking for closedir... yes
    3 checking for default archive format... GNU
    3 checking for default archive... -
@@ -1896,8 +1710,10 @@
    3 checking for defines to add to ncursesw6-config script...  -D_DARWIN_C_SOURCE
    3 checking for dev_t... yes
    3 checking for dirfd... no
+   3 checking for equivalent simple type of speed_t... 6 /* unsigned long */
    3 checking for fchdir... yes
    3 checking for fdopendir... no
+   3 checking for fstat64... yes
    3 checking for fstatat... no
    3 checking for getcontext... yes
    3 checking for getcwd with POSIX signature... yes
@@ -1924,6 +1740,7 @@
    3 checking for library containing setsockopt... none required
    3 checking for linewrap.h... no
    3 checking for linux/fd.h... no
+   3 checking for lstat64... yes
    3 checking for makecontext... yes
    3 checking for memrchr... no
    3 checking for mkdirat... no
@@ -1946,7 +1763,7 @@
    3 checking for sigaltstack... yes
    3 checking for signbit macro... yes
    3 checking for st_fstype string in struct stat... no
-   3 checking for stat64... yes
+   3 checking for struct stat64... yes
    3 checking for suffix of executables... yes
    3 checking for swapcontext... yes
    3 checking for sys/buf.h... yes
@@ -1991,6 +1808,7 @@
    3 checking our pkgconfig cppflags... -I/opt/gmp-4.3.2.ppc64/include
    3 checking selinux/flask.h presence... no
    3 checking selinux/flask.h usability... no
+   3 checking shift offset of TABDLY... -1
    3 checking spawn.h presence... yes
    3 checking spawn.h usability... yes
    3 checking sys/sysmacros.h presence... no
@@ -2069,6 +1887,8 @@
    4 checking for  /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/include/powerpc-apple-darwin9.8.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    option to produce PIC... -fno-common -DPIC
    4 checking for -fPIC -shared... no
    4 checking for -force_load linker flag... /usr/libexec/gcc/powerpc-apple-darwin8/4.2.1/ld: unknown flag: -force_load
+   4 checking for /dev/ptc... no
+   4 checking for /dev/ptmx... no
    4 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 option to produce PIC... -fno-common -DPIC
    4 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    option to produce PIC... -fno-common
    4 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 option to produce PIC... -fno-common
@@ -2077,9 +1897,12 @@
    4 checking for X... libraries /usr/X11R6/lib, headers 
    4 checking for _SC_NPROCESSORS_ONLN... yes
    4 checking for a Python interpreter with version >= 2.5... none
+   4 checking for basic type of struct rlimit.rlim_max... 7 /* long long */
    4 checking for bison 2.4 or newer... 2.3, bad
+   4 checking for equivalent simple type of speed_t... 5 /* long */
    4 checking for error_at_line... no
    4 checking for execinfo.h... yes
+   4 checking for fstat64... no
    4 checking for gcc-4.2 option to accept ISO C89... yes
    4 checking for ld used by  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   ... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld
    4 checking for ld used by  /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/include/powerpc-apple-darwin9.8.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include   ... /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld
@@ -2088,6 +1911,7 @@
    4 checking for ld used by c++... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
    4 checking for libunistring... no, consider installing GNU libunistring
    4 checking for libunistring... no, trying again together with libiconv
+   4 checking for lstat64... no
    4 checking for powerpc-apple-darwin8.11.0-gnatbind... no
    4 checking for powerpc-apple-darwin8.11.0-gnatmake... no
    4 checking for powerpc-apple-darwin9.8.0-gfortran... /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include   
@@ -2099,7 +1923,7 @@
    4 checking for raise... yes
    4 checking for standard-conformant unsetenv declaration... no
    4 checking for standard-conformant unsetenv declaration... yes
-   4 checking for struct sigaction.sa_sigaction... yes
+   4 checking for struct stat64... no
    4 checking for the malloc address range... 0x02000000
    4 checking for time_t past the year 2038... yes
    4 checking for type of bool... unsigned char
@@ -2130,8 +1954,7 @@
    4 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/include/powerpc-apple-darwin9.8.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 static flag -static works... no
    4 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/include/powerpc-apple-darwin9.8.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 supports -c -o file.o... yes
    4 checking linker mapfile support for clearing hardware capabilities... no
-   4 checking linux/fs.h presence... no
-   4 checking linux/fs.h usability... no
+   4 checking shift offset of TABDLY... 10
    4 checking size of bool... 1
    4 checking size of intptr_t... 8
    4 checking size of ptrdiff_t... 8
@@ -2455,7 +2278,7 @@
    6 checking for setuid... yes
    6 checking for setutxent... yes
    6 checking for shlobj.h... no
-   6 checking for stat64... no
+   6 checking for stat64... yes
    6 checking for strip... no
    6 checking for strptime... yes
    6 checking for struct lconv.int_n_cs_precedes... yes
@@ -2606,6 +2429,10 @@
    6 checking whether vsnprintf is usable... yes
    6 checking whether we are using gold... no
    7 checking alignment of guint32... 4
+   7 checking arpa/nameser.h presence... yes
+   7 checking arpa/nameser.h usability... yes
+   7 checking bsd/libutil.h presence... no
+   7 checking bsd/libutil.h usability... no
    7 checking crt_externs.h presence... yes
    7 checking crt_externs.h usability... yes
    7 checking dependency style of c++... gcc3
@@ -2615,19 +2442,37 @@
    7 checking for --enable-vtable-verify... no
    7 checking for -Bsymbolic-functions linker flag... no
    7 checking for -fvisibility=hidden compiler flag... no
+   7 checking for /proc... no
+   7 checking for /proc/*/fd... no
    7 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    option to produce PIC... -fno-common
+   7 checking for ASN1_STRING_get0_data... yes
    7 checking for C99 snprintf... yes
    7 checking for C99 vsnprintf... yes
    7 checking for CLISP... yes
+   7 checking for DH_set0_pqg... yes
+   7 checking for DTLS_client_method... yes
+   7 checking for DTLS_server_method... yes
+   7 checking for ERR_error_string... yes
    7 checking for GIOChannel implementation... giounix.lo
    7 checking for GNUC varargs macros... yes
    7 checking for GNUC visibility attribute... no
+   7 checking for IPPROTO_SCTP... no
    7 checking for ISO C99 varargs macros in C++... yes
    7 checking for ISO C99 varargs macros in C... yes
    7 checking for Mac OS X Carbon support... yes
    7 checking for Mac OS X Cocoa support... yes
+   7 checking for OPENSSL_init_ssl... yes
    7 checking for OpenBSD strlcpy/strlcat... yes
+   7 checking for RAND_egd in -lcrypt... no
+   7 checking for RAND_egd... no
+   7 checking for RAND_status... yes
    7 checking for RTLD_GLOBAL brokenness... no
+   7 checking for SSL_CTX_clear_mode... no
+   7 checking for SSL_CTX_set_default_verify_paths... yes
+   7 checking for SSL_library_init... yes
+   7 checking for SSL_set_tlsext_host_name... no
+   7 checking for TLS_client_method... yes
+   7 checking for TLS_server_method... yes
    7 checking for _NSGetEnviron... yes
    7 checking for _SC_NPROCESSORS_ONLN... no
    7 checking for __inline... yes
@@ -2639,35 +2484,71 @@
    7 checking for an implementation of va_copy()... yes
    7 checking for atomic builtins for long long... yes
    7 checking for bash... /bin/bash
+   7 checking for basic type of struct cmsghdr.cmsg_len... 4 /* unsigned int */
+   7 checking for basic type of struct stat.st_blksize... 3 /* int */
+   7 checking for basic type of struct stat.st_blocks... 7 /* long long */
+   7 checking for basic type of struct stat.st_ino... 4 /* unsigned int */
+   7 checking for basic type of struct stat.st_nlink... 2 /* unsigned short */
+   7 checking for basic type of struct stat.st_size... 7 /* long long */
+   7 checking for basic type of struct timespec.tv_nsec... 5 /* long */
+   7 checking for basic type of struct timeval.tv_usec... 3 /* int */
    7 checking for bison 2.4 or newer... 1.28, bad
    7 checking for broken poll... yes
+   7 checking for bsd/libutil.h... no
    7 checking for c++ option to produce PIC... -fno-common -DPIC
+   7 checking for cfgetispeed... yes
+   7 checking for cfgetospeed... yes
+   7 checking for cfmakeraw... yes
+   7 checking for cfsetispeed... yes
+   7 checking for cfsetospeed... yes
    7 checking for chown... yes
    7 checking for compiler with PCH support... no
+   7 checking for component names of sockaddr_in6... s6_addr
+   7 checking for components of libwrap... configure: checked for tcpd.h... yes
    7 checking for crt_externs.h... yes
+   7 checking for declaration of environ... no
    7 checking for default BUILD_CONFIG... 
    7 checking for default search path for .pc files... ${libdir}/pkgconfig:${datadir}/pkgconfig
    7 checking for dirent.h that defines DIR... yes
    7 checking for dvips... /tmp/gettext-0.20/build-aux/missing dvips
    7 checking for enabled PCH... no
    7 checking for endmntent... no
+   7 checking for equivalent simple type of dev_t... 3 /* int */
+   7 checking for equivalent simple type of gid_t... 4 /* unsigned int */
+   7 checking for equivalent simple type of int16_t... 1 /* short */
+   7 checking for equivalent simple type of int32_t... 3 /* int */
+   7 checking for equivalent simple type of int64_t... 7 /* long long */
+   7 checking for equivalent simple type of mode_t... 2 /* unsigned short */
+   7 checking for equivalent simple type of off64_t... 0 /* unknown, taking default */
+   7 checking for equivalent simple type of off_t... 7 /* long long */
+   7 checking for equivalent simple type of pid_t... 3 /* int */
+   7 checking for equivalent simple type of size_t... 6 /* unsigned long */
+   7 checking for equivalent simple type of socklen_t... 4 /* unsigned int */
+   7 checking for equivalent simple type of time_t... 5 /* long */
+   7 checking for equivalent simple type of uid_t... 4 /* unsigned int */
+   7 checking for equivalent simple type of uint16_t... 2 /* unsigned short */
+   7 checking for equivalent simple type of uint32_t... 4 /* unsigned int */
+   7 checking for equivalent simple type of uint64_t... 8 /* unsigned long long */
    7 checking for eventfd(2) system call... no
    7 checking for expect... expect
    7 checking for extra flags for POSIX compliance... none needed
    7 checking for extra flags to get ANSI library prototypes... none needed
    7 checking for fd_set... yes, found in sys/types.h
+   7 checking for fdset->fds_bits... yes
    7 checking for fdwalk... no
    7 checking for format to printf and scanf a guint64... %llu
    7 checking for fstab.h... yes
+   7 checking for ftruncate64... no
    7 checking for futex(2) system call... no
    7 checking for gcc -std=gnu99 option to accept ISO C89... none needed
    7 checking for gccgo... no
    7 checking for getfsstat... yes
-   7 checking for getgrent... yes
-   7 checking for gethostent... yes
+   7 checking for getipnodebyname prototype... no
    7 checking for getmntent_r... no
-   7 checking for getpgid... yes
    7 checking for getprotobyname_r... no
+   7 checking for getprotobynumber... yes
+   7 checking for getprotobynumber_r() variant... 1 /* Linux */
+   7 checking for gettimeofday prototype... yes
    7 checking for getvfsstat... no
    7 checking for gm4... gm4
    7 checking for gnatbind... no
@@ -2675,7 +2556,11 @@
    7 checking for guint32... yes
    7 checking for guint64... yes
    7 checking for hasmntopt... no
+   7 checking for hosts_allow_table... yes
+   7 checking for hstrerror prototype... yes
+   7 checking for hstrerror... yes
    7 checking for iconv_open... no
+   7 checking for if_indextoname prototype... yes
    7 checking for if_indextoname... yes
    7 checking for if_nametoindex... yes
    7 checking for indent... indent
@@ -2686,20 +2571,39 @@
    7 checking for ld used by gcc-4.2 -std=gnu99... /usr/libexec/gcc/powerpc-apple-darwin9/4.2.1/ld
    7 checking for library containing opendir... none required
    7 checking for library containing posix_spawn... none required
+   7 checking for library containing res_9_init... -lresolv
+   7 checking for libssl... yes
+   7 checking for libwrap... yes
+   7 checking for linux/errqueue.h... no
+   7 checking for linux/ext2_fs.h... no
+   7 checking for linux/if_tun.h... no
    7 checking for linux/magic.h... no
    7 checking for linux/netlink.h... no
+   7 checking for linux/types.h... no
+   7 checking for linux/vm_sockets.h... no
    7 checking for ln... ln
    7 checking for lock-free atomic intrinsics... no
+   7 checking for lseek64... no
    7 checking for madvise... yes
    7 checking for makeinfo... makeinfo
-   7 checking for netinet/tcp.h... yes
+   7 checking for memrchr prototype... no
+   7 checking for net/if.h... yes
+   7 checking for net/if_dl.h... yes
+   7 checking for netinet/in_systm.h... yes
+   7 checking for netinet/ip.h... yes
+   7 checking for netinet/ip6.h... yes
+   7 checking for netinet6/in6.h... no
+   7 checking for netpacket/packet.h... no
    7 checking for nl_langinfo (CODESET)... yes
    7 checking for nl_langinfo (PM_STR)... yes
    7 checking for nl_langinfo (_NL_CTYPE_OUTDIGITn_MB)... no
+   7 checking for off64_t... no
+   7 checking for openpty in -lbsd... no
    7 checking for perl5... no
    7 checking for platform-dependent source... 
    7 checking for posix getgrgid_r... yes
    7 checking for posix getpwuid_r... yes
+   7 checking for posix_memalign prototype... no
    7 checking for posix_spawn_file_actions_t... yes
    7 checking for posix_spawnattr_t... yes
    7 checking for powerpc-apple-darwin8.11.0-gfortran... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   
@@ -2715,17 +2619,38 @@
    7 checking for pthread_cond_timedwait_monotonic... no
    7 checking for pthread_cond_timedwait_monotonic_np... no
    7 checking for pthread_create/pthread_join... yes
+   7 checking for ptsname prototype... yes
    7 checking for res_init... yes
    7 checking for res_query... in -lresolv
    7 checking for runtest... no
-   7 checking for setgrent... yes
    7 checking for setmntent... no
-   7 checking for setsockopt... yes
    7 checking for shlload... no
+   7 checking for sighandler_t... yes
    7 checking for signed... yes
    7 checking for statfs... yes
+   7 checking for strdup prototype... yes
+   7 checking for strerror prototype... yes
+   7 checking for strndup prototype... no
+   7 checking for strstr prototype... yes
    7 checking for strtoll_l... yes
    7 checking for strtoull_l... yes
+   7 checking for struct cmsghdr... yes
+   7 checking for struct ifreq... yes
+   7 checking for struct ifreq.ifr_ifindex... no
+   7 checking for struct ifreq.ifr_index... no
+   7 checking for struct in6_pktinfo... yes
+   7 checking for struct in_pktinfo... no
+   7 checking for struct iovec... yes
+   7 checking for struct ip... yes
+   7 checking for struct ip.ip_hl... yes
+   7 checking for struct ip_mreq... yes
+   7 checking for struct ip_mreq_source... no
+   7 checking for struct ipv6_mreq... yes
+   7 checking for struct linger... yes
+   7 checking for struct msghdr.msg_control... yes
+   7 checking for struct msghdr.msg_controllen... yes
+   7 checking for struct msghdr.msgflags... yes
+   7 checking for struct sock_extended_err... no
    7 checking for struct stat.st_ctim.tv_nsec... no
    7 checking for struct stat.st_ctimensec... no
    7 checking for struct stat.st_mtim.tv_nsec... no
@@ -2733,13 +2658,15 @@
    7 checking for struct statfs.f_bavail... yes
    7 checking for struct statvfs.f_basetype... no
    7 checking for struct statvfs.f_fstypename... no
+   7 checking for struct termios . c_ispeed... yes
+   7 checking for struct termios . c_ospeed... yes
    7 checking for struct tm.__tm_gmtoff... no
    7 checking for struct tms... yes
    7 checking for sys/event.h... yes
    7 checking for sys/inotify.h... no
    7 checking for sys/mntctl.h... no
    7 checking for sys/mnttab.h... no
-   7 checking for sys/un.h... yes
+   7 checking for sys/stropts.h... no
    7 checking for sys/vfstab.h... no
    7 checking for sys/vmount.h... no
    7 checking for system include path to avoid -I flags... /usr/include
@@ -2752,10 +2679,14 @@
    7 checking for the suffix of module shared libraries... .so
    7 checking for thread implementation... posix
    7 checking for tputs in -lncurses... yes
+   7 checking for truncate64... no
+   7 checking for type EC_KEY... yes
    7 checking for unsigned long long... yes
+   7 checking for usable readline in default location... yes
    7 checking for utime.h... yes
    7 checking for valloc... yes
    7 checking for values.h... no
+   7 checking for var environ... yes
    7 checking for waitid... yes
    7 checking for wmemcpy... yes
    7 checking for working do while(0) macros... no
@@ -2773,6 +2704,9 @@
    7 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 PIC flag -fno-common works... yes
    7 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 static flag -static works... no
    7 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -c -o file.o... yes
+   7 checking if _SVID3 is helpful... no
+   7 checking if _XPG4_2 is helpful... no
+   7 checking if __APPLE_USE_RFC_2292 is helpful... no
    7 checking if arpa/nameser_compat.h is needed... yes
    7 checking if building for some Win32 platform... no
    7 checking if c++ PIC flag -fno-common -DPIC works... yes
@@ -2792,14 +2726,38 @@
    7 checking if inline functions in headers work... yes
    7 checking if internal glib should be used... yes
    7 checking if prefix should be redefined at runtime... no
+   7 checking if printf has Z modifier... no
+   7 checking if snprintf conforms to C99... yes
+   7 checking included message level... debug
+   7 checking linux/ext2_fs.h presence... no
+   7 checking linux/ext2_fs.h usability... no
+   7 checking linux/if_tun.h presence... no
+   7 checking linux/if_tun.h usability... no
    7 checking linux/magic.h presence... no
    7 checking linux/magic.h usability... no
+   7 checking linux/types.h presence... no
+   7 checking linux/types.h usability... no
    7 checking mntent.h presence... no
    7 checking mntent.h usability... no
+   7 checking net/if_dl.h presence... yes
+   7 checking net/if_dl.h usability... yes
+   7 checking netinet/in_systm.h presence... yes
+   7 checking netinet/in_systm.h usability... yes
+   7 checking netinet/tcp.h presence... yes
+   7 checking netinet/tcp.h usability... yes
+   7 checking netinet6/in6.h presence... no
+   7 checking netinet6/in6.h usability... no
+   7 checking netpacket/packet.h presence... no
+   7 checking netpacket/packet.h usability... no
    7 checking number of arguments to statfs()... 2
+   7 checking poll.h presence... yes
+   7 checking poll.h usability... yes
+   7 checking pty.h usability... no
    7 checking readline detected... yes
    7 checking readline/history.h presence... yes
    7 checking readline/history.h usability... yes
+   7 checking shift offset of CRDLY... 12
+   7 checking shift offset of CSIZE... 8
    7 checking size of long... 8
    7 checking size of size_t... 8
    7 checking sys/event.h presence... yes
@@ -2816,6 +2774,12 @@
    7 checking sys/statfs.h usability... no
    7 checking sys/statvfs.h presence... yes
    7 checking sys/statvfs.h usability... yes
+   7 checking sys/stropts.h presence... no
+   7 checking sys/stropts.h usability... no
+   7 checking sys/un.h presence... yes
+   7 checking sys/un.h usability... yes
+   7 checking sys/utsname.h presence... yes
+   7 checking sys/utsname.h usability... yes
    7 checking sys/vfs.h presence... no
    7 checking sys/vfs.h usability... no
    7 checking sys/vfstab.h presence... no
@@ -2853,10 +2817,48 @@
    7 checking whether to compile timeloop... yes
    7 checking whether to disable memory pools... no
    7 checking whether to enable garbage collector friendliness... no
+   7 checking whether to include FD-number support... yes
+   7 checking whether to include IPv4 support... yes
+   7 checking whether to include IPv6 support... yes
+   7 checking whether to include OpenSSL method option... no
+   7 checking whether to include SCTP support... yes
+   7 checking whether to include STDIO support... yes
+   7 checking whether to include TCP support... yes
+   7 checking whether to include UDP support... yes
+   7 checking whether to include UNIX socket support... yes
+   7 checking whether to include abstract UNIX socket support... no
+   7 checking whether to include deprecated resolver option... no
+   7 checking whether to include direct create support... yes
+   7 checking whether to include direct file support... yes
+   7 checking whether to include exec support... yes
+   7 checking whether to include explicit pipe support... yes
+   7 checking whether to include explicit termios support... yes
+   7 checking whether to include file descriptor analyzer... yes
+   7 checking whether to include fs attributes support... yes
+   7 checking whether to include generic network interface support... yes
+   7 checking whether to include generic socket support... yes
+   7 checking whether to include gopen support... yes
+   7 checking whether to include help... yes
+   7 checking whether to include libwrap support... yes
+   7 checking whether to include listen support... yes
+   7 checking whether to include openssl fips support... no
+   7 checking whether to include openssl support... yes
+   7 checking whether to include proxy connect support... yes
+   7 checking whether to include pty address support... yes
+   7 checking whether to include raw IP support... yes
+   7 checking whether to include readline support... yes
+   7 checking whether to include retry support... yes
+   7 checking whether to include socks4 support... yes
+   7 checking whether to include socks4a support... yes
+   7 checking whether to include system (shell) support... yes
+   7 checking whether to include system call tracing... yes
+   7 checking whether to include tun/tap address support... yes
+   7 checking whether to include vsock support... yes
    7 checking whether to list both direct and indirect dependencies... no
    7 checking whether to use statfs or statvfs... statfs
    7 checking whether using Sun Studio C compiler... no
    7 checking whether va_lists can be copied by value... yes
+   7 checking which defines needed for makedepend...  -D__DYNAMIC__
    7 checking xlocale.h presence... yes
    7 checking xlocale.h usability... yes
    8 checking CFLAGS_WARN for maximum warnings... -Wall
@@ -2942,6 +2944,7 @@
    8 checking for a race-free mkdir -p... build-aux/install-sh -c -d
    8 checking for a single-argument based gettimeofday... no
    8 checking for a thread-safe mkdir -p... ./support/install.sh -c -d
+   8 checking for a thread-safe mkdir -p... autotools/install-sh -c -d
    8 checking for a thread-safe mkdir -p... tools/install-sh -c -d
    8 checking for a traditional Arabic locale... none
    8 checking for abs... yes
@@ -3168,7 +3171,6 @@
    8 checking for sigsetjmp... yes
    8 checking for size and type of struct rlimit fields... rlim_t
    8 checking for smack_new_label_from_self in -lsmack... no
-   8 checking for socket... yes
    8 checking for socketpair... yes
    8 checking for sscanf... yes
    8 checking for sstream... yes
@@ -3192,7 +3194,6 @@
    8 checking for strtonum... no
    8 checking for struct addrinfo... yes
    8 checking for struct fsstat.f_fstypename... no
-   8 checking for struct ip_mreqn... no
    8 checking for struct lconv.decimal_point... yes
    8 checking for struct lconv.thousands_sep... yes
    8 checking for struct pst_processor.psp_iticksperclktick... no
@@ -3298,7 +3299,6 @@
    8 checking for wcstombs... yes
    8 checking for wctomb... yes
    8 checking for working INTMAX_MAX... yes
-   8 checking for working memcmp... yes
    8 checking for working sbrk... yes
    8 checking for xgettext... xgettext
    8 checking for xlf... no
@@ -3439,8 +3439,6 @@
    8 checking sys/fpu.h usability... no
    8 checking sys/iograph.h presence... no
    8 checking sys/iograph.h usability... no
-   8 checking sys/poll.h presence... yes
-   8 checking sys/poll.h usability... yes
    8 checking sys/processor.h presence... no
    8 checking sys/processor.h usability... no
    8 checking sys/pstat.h presence... no
@@ -3630,42 +3628,26 @@
    9 checking for fpurge... yes
    9 checking for getdtablesize... yes
    9 checking for getexecname... no
-   9 checking for getgrouplist... yes
-   9 checking for grantpt... yes
    9 checking for iconv... no, consider installing GNU libiconv
-   9 checking for inet_aton... yes
-   9 checking for libutil.h... no
    9 checking for main in -lgmp... yes
-   9 checking for nanosleep... yes
-   9 checking for openpty in -lutil... yes
-   9 checking for openpty... yes
    9 checking for pod2html... pod2html
    9 checking for promoted mode_t type... int
    9 checking for pthread_kill in -lpthread... yes
    9 checking for ptrdiff_t integer literal suffix... 
-   9 checking for pty.h... no
    9 checking for readline/history.h... yes
    9 checking for sigaction... yes
    9 checking for siginterrupt... yes
+   9 checking for stat64... no
    9 checking for stdint types... stdint.h (shortcircuit)
-   9 checking for struct sockaddr.sa_len... yes
-   9 checking for struct timespec... yes
    9 checking for struct timeval... yes
-   9 checking for unlockpt... yes
-   9 checking for util.h... yes
    9 checking for wide-enough struct timeval.tv_sec member... yes
    9 checking for working stdalign.h... no
-   9 checking libutil.h presence... no
-   9 checking libutil.h usability... no
    9 checking our package / suffix... isl / 
    9 checking our pkgconfig description... isl Library
    9 checking our pkgconfig ext libs... -lisl -lgmp
    9 checking our pkgconfig libname... isl
    9 checking our pkgconfig version... 0.12.2
    9 checking our pkgconfig_libfile... isl.pc
-   9 checking pty.h presence... no
-   9 checking util.h presence... yes
-   9 checking util.h usability... yes
    9 checking whether <sys/param.h> defines MIN and MAX... yes
    9 checking whether <wchar.h> uses 'inline' correctly... yes
    9 checking whether HUGE_VAL works... yes
@@ -3783,6 +3765,7 @@
   10 checking for strerror_r... yes
   10 checking for strncpy... yes
   10 checking for strtold declaration... yes
+  10 checking for struct sigaction.sa_sigaction... yes
   10 checking for struct stat.st_birthtim.tv_nsec... no
   10 checking for struct stat.st_birthtimensec... no
   10 checking for struct stat.st_birthtimespec.tv_nsec... no
@@ -3806,6 +3789,8 @@
   10 checking if _XOPEN_SOURCE really is set... no
   10 checking if we should define _XOPEN_SOURCE... 600
   10 checking lex library... -lfl
+  10 checking linux/fs.h presence... no
+  10 checking linux/fs.h usability... no
   10 checking machine/param.h presence... yes
   10 checking sys/auxv.h usability... no
   10 checking sys/mkdev.h presence... no
@@ -4196,7 +4181,6 @@
   12 checking for ldexpf declaration... yes
   12 checking for lgammaf... yes
   12 checking for libiconv_open in -liconv... yes
-  12 checking for linux/fs.h... no
   12 checking for llround... yes
   12 checking for llroundf... yes
   12 checking for llroundl... yes
@@ -4210,6 +4194,7 @@
   12 checking for machine/param.h... yes
   12 checking for nan.h... no
   12 checking for nextafterl... yes
+  12 checking for openpty in -lutil... yes
   12 checking for parallel mode support... yes
   12 checking for powerpc-apple-darwin8.11.0-strip... no
   12 checking for powerpc-apple-darwin9.8.0-nm... /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/nm
@@ -4328,10 +4313,12 @@
   13 checking for fchown... yes
   13 checking for fsync... yes
   13 checking for gcc -std=gnu99 option to support OpenMP... unsupported
+  13 checking for getgrent... yes
   13 checking for getgrgid... yes
+  13 checking for gethostent... yes
+  13 checking for getpgid... yes
   13 checking for getresuid... no
   13 checking for getservent... yes
-  13 checking for getsid... yes
   13 checking for iconv declaration... install-shextern size_t iconv (iconv_t cd, const char * *inbuf, size_t *inbytesleft, char * *outbuf, size_t *outbytesleft);
   13 checking for jar... jar
   13 checking for ld used by gcc-4.2 -std=gnu99... /usr/libexec/gcc/powerpc-apple-darwin8/4.2.1/ld
@@ -4339,12 +4326,16 @@
   13 checking for libxml2/libxml/xmlexports.h... yes
   13 checking for libxml2/libxml/xmlversion.h... no
   13 checking for mbstowcs... yes
+  13 checking for netinet/tcp.h... yes
   13 checking for pow... yes
   13 checking for sched_yield in -lposix4... no
   13 checking for sched_yield in -lrt... no
+  13 checking for setgrent... yes
   13 checking for setlocale declaration... 
+  13 checking for setsockopt... yes
   13 checking for signal handlers with siginfo_t... yes
   13 checking for statvfs... yes
+  13 checking for sys/un.h... yes
   13 checking for sys_siglist... yes
   13 checking for tparam... no
   13 checking for vsprintf... yes
@@ -4372,7 +4363,6 @@
   14 checking for __argz_count... no
   14 checking for __argz_next... no
   14 checking for _longjmp... yes
-  14 checking for arpa/nameser.h... yes
   14 checking for as... as
   14 checking for atoll... yes
   14 checking for c++... c++
@@ -4387,27 +4377,30 @@
   14 checking for gcc-4.2 option to enable C99 features... -std=gnu99
   14 checking for gethostid... yes
   14 checking for getusershell... yes
-  14 checking for inet_ntop... yes
   14 checking for int32_t... yes
   14 checking for library containing inet_ntop... none required
   14 checking for mincore... yes
   14 checking for mktemp... yes
   14 checking for pipe... yes
-  14 checking for resolv.h... yes
   14 checking for setregid... yes
   14 checking for setresgid... no
   14 checking for setresuid... no
   14 checking for setreuid... yes
   14 checking for setsid... yes
   14 checking for shmat... yes
+  14 checking for socket... yes
   14 checking for struct dirent.d_namlen... yes
+  14 checking for struct ip_mreqn... no
   14 checking for struct utsname... yes
   14 checking for sync... yes
   14 checking for tgetent in -ltermcap... yes
   14 checking for utmpx.h... yes
+  14 checking for working memcmp... yes
   14 checking how to run the C preprocessor... gcc-4.2 -std=gnu99 -E
   14 checking nl_types.h presence... yes
   14 checking nl_types.h usability... yes
+  14 checking sys/poll.h presence... yes
+  14 checking sys/poll.h usability... yes
   14 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    and cc understand -c and -o together... yes
   14 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 and cc understand -c and -o together... yes
   14 checking whether a statically linked program can dlopen itself... yes
@@ -4423,44 +4416,52 @@
   15 checking for argz_next... no
   15 checking for argz_stringify... no
   15 checking for cc... cc
-  15 checking for endgrent... yes
   15 checking for fallocate... no
-  15 checking for flock... yes
+  15 checking for getgrouplist... yes
   15 checking for gfortran... no
-  15 checking for ld used by g++... /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
+  15 checking for grantpt... yes
+  15 checking for inet_aton... yes
   15 checking for libunistring version... 1.0.0
   15 checking for libunistring... yes
+  15 checking for libutil.h... no
   15 checking for mntent.h... no
+  15 checking for nanosleep... yes
   15 checking for nl_langinfo... yes
   15 checking for nl_types.h... yes
+  15 checking for openpty... yes
   15 checking for pkg-config... /usr/local/bin/pkg-config
   15 checking for pthread_condattr_setclock... no
+  15 checking for pty.h... no
   15 checking for readline in -lreadline... yes
   15 checking for recent MPFR... yes
-  15 checking for setgroups... yes
   15 checking for splice... no
   15 checking for struct dirent.d_type... yes
+  15 checking for struct sockaddr.sa_len... yes
   15 checking for struct stat.st_atimensec... no
   15 checking for struct statfs.f_fstypename... yes
+  15 checking for struct timespec... yes
   15 checking for suffix to add to pc-files... none
   15 checking for sys/mount.h... yes
-  15 checking for sys/utsname.h... yes
   15 checking for sys/vfs.h... no
   15 checking for sysctlbyname... yes
   15 checking for tcdrain... yes
-  15 checking for uint16_t... yes
-  15 checking for uint32_t... yes
-  15 checking for uint8_t... yes
   15 checking for union wait... no
+  15 checking for unlockpt... yes
   15 checking for unsigned long... yes
+  15 checking for util.h... yes
   15 checking if gcc-4.2 PIC flag -fno-common -DPIC works... yes
   15 checking if gcc-4.2 supports -c -o file.o... yes
   15 checking if gcc-4.2 supports -fno-rtti -fno-exceptions... no
   15 checking if we should install .pc files for /usr/local/bin/pkg-config... yes
+  15 checking libutil.h presence... no
+  15 checking libutil.h usability... no
+  15 checking pty.h presence... no
   15 checking readline/readline.h presence... yes
   15 checking readline/readline.h usability... yes
   15 checking size of char... 1
   15 checking the name lister (nm) interface... BSD nm
+  15 checking util.h presence... yes
+  15 checking util.h usability... yes
   15 checking whether a program can dlopen itself... yes
   15 checking whether gettimeofday clobbers localtime buffer... no
   15 checking whether iconv is compatible with its POSIX signature... yes
@@ -4551,7 +4552,6 @@
   16 checking for multithread API to use... none
   16 checking for opendir in -ldir... no
   16 checking for openpty header... util.h
-  16 checking for openpty in -lutil... no
   16 checking for options to update archives... -curv
   16 checking for package patch date... 20211021
   16 checking for package version... 6.3
@@ -4617,8 +4617,6 @@
   16 checking for wint_t in wctype.h... yes
   16 checking for working sigaltstack... guessing yes
   16 checking format of man-pages... normal
-  16 checking grp.h presence... yes
-  16 checking grp.h usability... yes
   16 checking how to copy files... cp -p
   16 checking how to run the C++ preprocessor... /usr/bin/g++ -E
   16 checking if -lm needed for math functions... no
@@ -4743,8 +4741,6 @@
   16 checking libaudit.h usability... no
   16 checking mbstr.h presence... no
   16 checking mbstr.h usability... no
-  16 checking netdb.h presence... yes
-  16 checking netdb.h usability... yes
   16 checking size of __int16... 0
   16 checking size of __int32... 0
   16 checking size of dev_t... 4
@@ -4806,14 +4802,11 @@
   17 checking for C compiler vendor... gnu
   17 checking for __mktime_internal... no
   17 checking for __xpg4... no
-  17 checking for bool... yes
   17 checking for getppriv... no
   17 checking for mknod... yes
   17 checking for pkg-config... no
-  17 checking for poll.h... yes
   17 checking for posix_memalign... no
   17 checking for priv.h... no
-  17 checking for regex.h... yes
   17 checking for timezone_t... no
   17 checking for wint_t... yes
   17 checking for working GNU fnmatch... no
@@ -4821,8 +4814,6 @@
   17 checking gmp.h usability... yes
   17 checking our pkgconfig requires... 
   17 checking our pkgconfig_libdir... ${libdir}/pkgconfig
-  17 checking regex.h presence... yes
-  17 checking regex.h usability... yes
   17 checking whether calloc is declared... yes
   17 checking whether errno is declared... no
   17 checking whether gcc-4.2 supports -Wcast-qual... yes
@@ -4851,7 +4842,9 @@
   18 checking for lchown... yes
   18 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include   ... /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld
   18 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64... /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld
+  18 checking for ld used by g++... /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
   18 checking for lgamma... yes
+  18 checking for linux/fs.h... no
   18 checking for memalign... no
   18 checking for sigset_t... yes
   18 checking for struct stat.st_atim.tv_nsec... no
@@ -4878,17 +4871,18 @@
   19 checking for autoheader... autoheader
   19 checking for calloc... yes
   19 checking for external symbol _system_configuration... no
+  19 checking for getsid... yes
   19 checking for gmtime_r... yes
   19 checking for library containing dlopen... none required
   19 checking for library containing setfilecon... no
   19 checking for on_exit... no
+  19 checking for openpty in -lutil... no
   19 checking for pstat_getdynamic... no
   19 checking for pstat_getstatic... no
   19 checking for selinux/selinux.h... no
   19 checking for sigsetmask... yes
   19 checking for strtoimax... yes
   19 checking for strtoumax... yes
-  19 checking for struct stat.st_rdev... yes
   19 checking for sys/filio.h... yes
   19 checking for sys/prctl.h... no
   19 checking for sys/sysmp.h... no
@@ -4913,17 +4907,20 @@
   20 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 option to accept ISO C89... none needed
   20 checking for /usr/libexec/gcc/powerpc-apple-darwin8/4.2.1/ld option to reload object files... -r
   20 checking for HOST_NAME_MAX... 256
+  20 checking for arpa/nameser.h... yes
   20 checking for clearerr_unlocked... yes
   20 checking for fputc_unlocked... no
   20 checking for fread_unlocked... no
   20 checking for fwrite_unlocked... no
   20 checking for gcc... gcc-4.2
+  20 checking for inet_ntop... yes
   20 checking for math.h... yes
   20 checking for mkstemps... yes
   20 checking for powerpc-apple-darwin9.8.0-gcc... /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include   
   20 checking for powerpc-apple-darwin9.8.0-gcc... /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64
   20 checking for powerpc-apple-darwin9.8.0-gcc... gcc-4.2
   20 checking for random... yes
+  20 checking for resolv.h... yes
   20 checking for sched_setparam... no
   20 checking for sched_setscheduler... no
   20 checking for strcasestr... yes
@@ -4935,7 +4932,6 @@
   20 checking for table... yes
   20 checking for windmc... no
   20 checking sys/sysinfo.h usability... no
-  20 checking syslog.h usability... yes
   20 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    accepts -g... yes
   20 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 accepts -g... yes
   21 checking argz.h usability... no
@@ -4943,10 +4939,12 @@
   21 checking arpa/inet.h usability... yes
   21 checking for bzero... yes
   21 checking for d_ino member in directory struct... yes
+  21 checking for endgrent... yes
   21 checking for fabsf... yes
   21 checking for ferror_unlocked... yes
   21 checking for fflush_unlocked... no
   21 checking for fgetc_unlocked... no
+  21 checking for flock... yes
   21 checking for floorf... yes
   21 checking for fmodl... yes
   21 checking for fprintf_unlocked... no
@@ -4958,17 +4956,20 @@
   21 checking for rename... yes
   21 checking for rewinddir... yes
   21 checking for sbrk... yes
+  21 checking for setgroups... yes
   21 checking for spawn.h... no
   21 checking for sqrtl... yes
   21 checking for strcspn... yes
-  21 checking for strtod... yes
   21 checking for strtod_l... yes
+  21 checking for sys/utsname.h... yes
   21 checking for tanhl... yes
   21 checking for texi2dvi... /usr/bin/texi2dvi
+  21 checking for uint16_t... yes
+  21 checking for uint32_t... yes
+  21 checking for uint8_t... yes
   21 checking for working mktime... yes
   21 checking host CPU and C ABI... powerpc
   21 checking semaphore.h usability... yes
-  21 checking syslog.h presence... yes
   21 checking vfork.h presence... no
   21 checking vfork.h usability... no
   21 checking whether _snwprintf is declared... no
@@ -5024,10 +5025,12 @@
   22 checking for tanhf... yes
   22 checking for uintmax_t... yes
   22 checking for working acl_get_file... no
+  22 checking grp.h presence... yes
+  22 checking grp.h usability... yes
   22 checking how to run the C preprocessor... /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    -E
   22 checking how to run the C preprocessor... /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 -E
-  22 checking netinet/in.h presence... yes
-  22 checking netinet/in.h usability... yes
+  22 checking netdb.h presence... yes
+  22 checking netdb.h usability... yes
   22 checking whether char is unsigned... no
   22 checking whether fgetc_unlocked is declared... no
   22 checking whether getloadavg is declared... yes
@@ -5040,6 +5043,7 @@
   23 checking for asinl... yes
   23 checking for atan2f... yes
   23 checking for atan2l... yes
+  23 checking for bool... yes
   23 checking for ceill... yes
   23 checking for coshf... yes
   23 checking for coshl... yes
@@ -5055,16 +5059,18 @@
   23 checking for ld... ld
   23 checking for logf... yes
   23 checking for long double... yes
-  23 checking for long long... yes
+  23 checking for poll.h... yes
   23 checking for readline/readline.h... yes
   23 checking for recent GMP... yes
+  23 checking for regex.h... yes
   23 checking for sin in -lm... yes
   23 checking for sinhl... yes
   23 checking for strnlen... no
   23 checking for tanl... yes
   23 checking for tmpnam... yes
-  23 checking for uname... yes
   23 checking how to create a ustar tar archive... gnutar
+  23 checking regex.h presence... yes
+  23 checking regex.h usability... yes
   23 checking size of __int64... 0
   23 checking size of off_t... 8
   23 checking sys/param.h usability... yes
@@ -5102,7 +5108,6 @@
   24 checking for strlcpy... yes
   24 checking for strnicmp... no
   24 checking for struct tm.tm_gmtoff... yes
-  24 checking for sys/poll.h... yes
   24 checking for termcap.h... yes
   24 checking for unsetenv() return type... int
   24 checking for working strcoll... yes
@@ -5125,13 +5130,12 @@
   24 checking whether the target supports thread-local storage... no
   24 checking whether to use the included libunistring... no
   24 checking whether unsetenv obeys POSIX... yes
+  25 checking for struct stat.st_rdev... yes
   25 checking for struct tm.tm_zone... yes
   25 checking for wchar_t... yes
   25 checking sched.h usability... yes
   25 checking size of size_t... 4
   25 checking size of void *... 4
-  25 checking termios.h presence... yes
-  25 checking termios.h usability... yes
   25 checking the name lister (/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/nm) interface... rm: conftest.dSYM: is a directory
   25 checking whether sbrk is declared... yes
   26 checking 32-bit host C ABI... no
@@ -5144,6 +5148,7 @@
   26 checking for getlogin... yes
   26 checking for preferred C# implementation... any
   26 checking for readelf... no
+  26 checking syslog.h usability... yes
   26 checking whether getcwd is declared... yes
   26 checking whether getline is declared... no
   26 checking whether malloc is ptrdiff_t safe... no
@@ -5162,6 +5167,7 @@
   27 checking for pthread.h... yes
   27 checking for ptrdiff_t... yes
   27 checking for stpcpy... yes
+  27 checking for strtod... yes
   27 checking for strverscmp... no
   27 checking for sys/pstat.h... no
   27 checking for vprintf... yes
@@ -5170,7 +5176,7 @@
   27 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.2.1/ld) is GNU ld... no
   27 checking sched.h presence... yes
   27 checking sys/mman.h presence... yes
-  27 checking sys/uio.h usability... yes
+  27 checking syslog.h presence... yes
   27 checking whether fopen supports the mode character 'e'... no
   27 checking whether integer division by zero raises SIGFPE... no
   27 checking whether link obeys POSIX... no
@@ -5180,34 +5186,32 @@
   28 checking for basename... yes
   28 checking for bcopy... yes
   28 checking for fgets_unlocked... no
-  28 checking for ld used by g++... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
   28 checking for mkostemp... no
   28 checking for pstat_getprocvm... no
   28 checking for sys/systemcfg.h... no
   28 checking for sysctl... yes
   28 checking for ttyname... yes
+  28 checking netinet/in.h presence... yes
+  28 checking netinet/in.h usability... yes
   28 checking paths.h presence... yes
   28 checking paths.h usability... yes
   28 checking size of long double... 16
   28 checking stdio.h usability... yes
-  28 checking sys/uio.h presence... yes
   28 checking whether ffs is declared... yes
   28 checking whether isnan macro works... yes
   28 checking whether the gcc -std=gnu99 linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) supports shared libraries... yes
   29 checking command to parse /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/nm output from /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    object... ok
-  29 checking dependency style of g++... gcc3
   29 checking fcntl.h usability... yes
   29 checking for __fpending... no
   29 checking for dlsym... yes
   29 checking for faccessat... no
   29 checking for localtime... yes
+  29 checking for long long... yes
   29 checking for mbslen... no
   29 checking for memcmp... yes
   29 checking for pthread_atfork... yes
   29 checking for strpbrk... yes
-  29 checking for strtoll... yes
-  29 checking for struct stat.st_blksize... yes
-  29 checking for sys/wait.h that is POSIX.1 compatible... yes
+  29 checking for uname... yes
   29 checking for useconds_t... yes
   29 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -c -o file.o... yes
   29 checking stdio.h presence... yes
@@ -5225,11 +5229,11 @@
   30 checking for dlopen in -ldl... yes
   30 checking for explicit_bzero... no
   30 checking for fnmatch.h... yes
-  30 checking for getaddrinfo... yes
   30 checking for library needed for semaphore functions... none
   30 checking for remove... yes
   30 checking for setitimer... yes
   30 checking for size_t... yes
+  30 checking for sys/poll.h... yes
   30 checking for syslog... yes
   30 checking for wcswidth... yes
   30 checking for wmemchr... yes
@@ -5247,7 +5251,6 @@
   31 checking dependency style of /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   ... gcc3
   31 checking fcntl.h presence... yes
   31 checking for __gmpz_init in -lgmp... yes
-  31 checking for clock_gettime in -lrt... no
   31 checking for complex.h... yes
   31 checking for flex... flex
   31 checking for gcc -std=gnu99 options needed to detect all undeclared functions... none needed
@@ -5256,6 +5259,8 @@
   31 checking for strtof... yes
   31 checking for sys/single_threaded.h... no
   31 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 PIC flag -fno-common -DPIC works... yes
+  31 checking termios.h presence... yes
+  31 checking termios.h usability... yes
   31 checking whether to use C++... yes
   32 checking fenv.h usability... yes
   32 checking for acl_create_entry_np... yes
@@ -5276,7 +5281,6 @@
   32 checking for funlockfile... yes
   32 checking for getxattr with XATTR_NAME_POSIX_ACL macros... no
   32 checking for gmsgfmt... /usr/local/bin/msgfmt
-  32 checking for grp.h... yes
   32 checking for int64_t... yes
   32 checking for isatty... yes
   32 checking for library containing acl_get_file... none required
@@ -5303,13 +5307,13 @@
   33 checking for GNU gettext in libintl... yes
   33 checking for getgroups... yes
   33 checking for intmax_t... yes
-  33 checking for ld used by gcc... /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
+  33 checking for ld used by g++... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
   33 checking for library containing strerror... none required
   33 checking for off_t... yes
-  33 checking for pselect... yes
   33 checking for sys/loadavg.h... no
   33 checking for working GNU getopt function... no
   33 checking for working chown... yes
+  33 checking sys/uio.h usability... yes
   33 checking where the gettext function comes from... included intl directory
   33 checking whether gcc-4.2 supports -Wold-style-definition... yes
   33 checking whether getopt is POSIX compatible... yes
@@ -5327,17 +5331,18 @@
   34 checking for seteuid... yes
   34 checking for strchrnul... no
   34 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    static flag -static works... no
+  34 checking sys/uio.h presence... yes
   34 checking whether fopen recognizes a trailing slash... yes
   34 checking whether gcc-4.2 supports -Wmissing-prototypes... yes
   34 checking whether getdelim is declared... no
   34 checking whether snprintf respects a size of 1... yes
   35 checking command to parse /usr/bin/nm -p output from gcc -std=gnu99 object... ok
-  35 checking for g++ option to produce PIC... -fno-common -DPIC
   35 checking for stpncpy... no
-  35 checking for syslog.h... yes
+  35 checking for strtoll... yes
+  35 checking for struct stat.st_blksize... yes
+  35 checking for sys/wait.h that is POSIX.1 compatible... yes
   35 checking for working nanosleep... yes
   35 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 static flag -static works... no
-  35 checking if g++ PIC flag -fno-common -DPIC works... yes
   35 checking whether gcc-4.2 supports -Wmissing-format-attribute... yes
   35 checking whether iswdigit is ISO C compliant... yes
   35 checking whether iswxdigit is ISO C compliant... yes
@@ -5350,7 +5355,9 @@
   36 checking for BSD- or MS-compatible name lister (nm)... /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/nm
   36 checking for bison... bison -y
   36 checking for byteswap.h... no
+  36 checking for getaddrinfo... yes
   36 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld
+  36 checking for ld used by gcc... /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
   36 checking for localtime_r... yes
   36 checking for mkfifo... yes
   36 checking for mquery... no
@@ -5362,23 +5369,19 @@
   36 checking langinfo.h presence... yes
   36 checking langinfo.h usability... yes
   36 checking size of double... 8
-  36 checking sys/ioctl.h usability... yes
   36 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 accepts -g... yes
   36 checking whether basename is declared... no
   36 checking whether the /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld) supports shared libraries... yes
   36 checking whether the /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld) supports shared libraries... yes
-  36 checking whether the g++ linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) supports shared libraries... yes
-  36 checking whether the gcc linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) supports shared libraries... yes
   36 checking whether vsnprintf is declared... yes
+  37 checking dependency style of g++... gcc3
   37 checking for SIGPIPE... yes
+  37 checking for clock_gettime in -lrt... no
   37 checking for iconv declaration... 
   37 checking for lstat... yes
   37 checking for perl... perl
   37 checking for waitpid... yes
-  37 checking pwd.h presence... yes
-  37 checking pwd.h usability... yes
   37 checking size of short... 2
-  37 checking sys/ioctl.h presence... yes
   37 checking where to find the exponent in a 'long double'... word 0 bit 20
   37 checking whether asprintf is declared... yes
   37 checking whether strstr works... yes
@@ -5386,10 +5389,10 @@
   38 checking for PTHREAD_MUTEX_RECURSIVE... yes
   38 checking for PTHREAD_MUTEX_ROBUST... no
   38 checking for PTHREAD_PROCESS_SHARED... yes
+  38 checking for grp.h... yes
   38 checking for mempcpy... no
   38 checking for pthread_spinlock_t... no
   38 checking for pthread_t... yes
-  38 checking for strftime... yes
   38 checking for working alloca.h... yes
   38 checking for working mkstemp... yes
   38 checking how to run the C preprocessor... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    -E
@@ -5402,6 +5405,7 @@
   39 checking for getrandom... no
   39 checking for mkdtemp... yes
   39 checking for powerpc-apple-darwin8.11.0-gcc... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   
+  39 checking for pselect... yes
   39 checking for snprintf... yes
   39 checking for stdio.h... yes
   39 checking for sys/random.h... yes
@@ -5411,6 +5415,7 @@
   39 checking sys/wait.h usability... yes
   39 checking wctype.h presence... yes
   39 checking whether the compiler generally respects inline... yes
+  39 checking whether the gcc linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) supports shared libraries... yes
   40 checking for __secure_getenv... no
   40 checking for asprintf... yes
   40 checking for gcc -std=gnu99 option to produce PIC... -fno-common -DPIC
@@ -5422,8 +5427,6 @@
   40 checking for powerpc-apple-darwin9.8.0-lipo... lipo
   40 checking for powerpc-apple-darwin9.8.0-strip... strip
   40 checking for wchar.h... yes
-  40 checking if g++ static flag -static works... no
-  40 checking if g++ supports -c -o file.o... yes
   40 checking if gcc -std=gnu99 PIC flag -fno-common -DPIC works... yes
   40 checking if gcc -std=gnu99 static flag -static works... no
   40 checking if gcc -std=gnu99 supports -c -o file.o... yes
@@ -5437,8 +5440,8 @@
   41 checking for gmp.h... yes
   41 checking for secure_getenv... no
   41 checking for strndup... no
+  41 checking for syslog.h... yes
   41 checking for the common suffixes of directories in the library search path... lib,lib,lib
-  41 checking whether gcc needs -traditional... no
   41 checking whether included gettext is requested... no
   42 checking for dup2... yes
   42 checking for gettimeofday with POSIX signature... almost
@@ -5448,24 +5451,26 @@
   42 checking for umask... yes
   42 checking how to run the C preprocessor... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 -E
   42 checking limits.h usability... yes
+  42 checking sys/ioctl.h usability... yes
   42 checking sys/time.h presence... yes
   42 checking whether iswblank is declared... yes
+  42 checking whether the g++ linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) supports shared libraries... yes
   42 checking whether the target supports dllexport... no
   42 checking whether wcwidth is declared... yes
   42 checking whether wcwidth works reasonably in UTF-8 locales... no
-  43 checking for -force_load linker flag... ld: unknown option: -force_load
   43 checking for CFLocaleCopyCurrent... yes
+  43 checking for g++ option to produce PIC... -fno-common -DPIC
   43 checking for usleep... yes
-  43 checking how to convert powerpc-apple-darwin9.8.0 file names to powerpc-apple-darwin9.8.0 format... func_convert_file_noop
-  43 checking how to convert powerpc-apple-darwin9.8.0 file names to toolchain format... func_convert_file_noop
-  43 checking how to run the C++ preprocessor... g++ -E
+  43 checking if g++ PIC flag -fno-common -DPIC works... yes
+  43 checking pwd.h presence... yes
+  43 checking pwd.h usability... yes
   43 checking size of long... 4
+  43 checking sys/ioctl.h presence... yes
   43 checking whether the target supports symbol aliases... no
   43 checking whether to use NLS... no
   44 checking for dlopen... yes
-  44 checking for gethostbyname... yes
   44 checking for nm... nm
-  44 checking for sig_atomic_t... yes
+  44 checking for strftime... yes
   44 checking limits.h presence... yes
   44 checking whether gcc -std=gnu99 understands -c and -o together... yes
   44 checking whether the gcc -std=gnu99 linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) supports shared libraries... yes
@@ -5476,7 +5481,6 @@
   45 checking for library containing nanosleep... none required
   45 checking for pthread_sigmask... yes
   45 checking for putenv compatible with GNU and SVID... no
-  45 checking for struct stat.st_blocks... yes
   45 checking signal.h presence... yes
   45 checking signal.h usability... yes
   45 checking whether _putenv is declared... no
@@ -5492,9 +5496,12 @@
   45 checking whether wctob works... yes
   45 checking whether we are cross compiling... yes
   45 checking whether we are using the GNU C Library >= 2.1 or uClibc... no
+  46 checking for -force_load linker flag... ld: unknown option: -force_load
   46 checking for fnmatch... yes
   46 checking for pathconf... yes
   46 checking for working re_compile_pattern... no
+  46 checking how to convert powerpc-apple-darwin9.8.0 file names to powerpc-apple-darwin9.8.0 format... func_convert_file_noop
+  46 checking how to convert powerpc-apple-darwin9.8.0 file names to toolchain format... func_convert_file_noop
   46 checking whether YESEXPR works... yes
   46 checking whether gcc-4.2 supports -W... yes
   46 checking whether isblank is declared... yes
@@ -5513,6 +5520,7 @@
   47 checking for struct sched_param... yes
   47 checking for working mmap... yes
   47 checking where to find the exponent in a 'float'... word 0 bit 23
+  47 checking whether gcc needs -traditional... no
   47 checking whether gcc-4.2 supports -Wstrict-prototypes... yes
   47 checking whether long double and double are the same... no
   48 checking for fenv.h... yes
@@ -5522,6 +5530,8 @@
   48 checking for strsignal... yes
   48 checking for working sleep... yes
   48 checking for working volatile... yes
+  48 checking if g++ static flag -static works... no
+  48 checking if g++ supports -c -o file.o... yes
   48 checking whether sleep is declared... yes
   48 checking whether symlink handles trailing slash correctly... no
   48 checking whether the compiler supports the __inline keyword... yes
@@ -5532,7 +5542,9 @@
   49 checking whether setlocale (category, NULL) is multithread-safe... yes
   49 checking whether strnlen is declared... no
   50 checking for eaccess... no
+  50 checking for gethostbyname... yes
   50 checking for mkstemp... yes
+  50 checking for sig_atomic_t... yes
   50 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.2.1/ld) is GNU ld... no
   50 checking where to find the exponent in a 'double'... word 0 bit 20
   50 checking whether INT32_MAX < INTMAX_MAX... yes
@@ -5547,7 +5559,8 @@
   51 checking for signal.h... yes
   51 checking for struct sockaddr_storage... yes
   51 checking for struct sockaddr_storage.ss_family... yes
-  51 checking sys/file.h usability... yes
+  51 checking for struct stat.st_blocks... yes
+  51 checking how to run the C++ preprocessor... g++ -E
   51 checking whether <netinet/in.h> is self-contained... yes
   51 checking whether <sys/select.h> is self-contained... yes
   51 checking whether <sys/socket.h> defines the SHUT_* macros... yes
@@ -5557,7 +5570,6 @@
   51 checking whether select supports a 0 argument... yes
   51 checking whether snprintf is declared... yes
   52 checking for issetugid... yes
-  52 checking for sa_family_t... yes
   52 checking whether to use Java... yes
   53 checking ctype.h presence... yes
   53 checking for Solaris 11.4 locale system... no
@@ -5570,9 +5582,6 @@
   53 checking for tcgetattr... yes
   53 checking for wctob... yes
   53 checking for working fork... yes
-  53 checking sys/file.h presence... yes
-  53 checking sys/select.h presence... yes
-  53 checking sys/select.h usability... yes
   53 checking whether <sys/ioctl.h> declares ioctl... yes
   53 checking whether wint_t is too small... no
   54 checking 32-bit host C ABI... yes
@@ -5593,7 +5602,6 @@
   54 checking whether setenv validates arguments... no
   54 checking whether wcrtomb return value is correct... yes
   54 checking whether wcrtomb works in the C locale... yes
-  55 checking for /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld option to reload object files... -r
   55 checking for atexit... yes
   55 checking for ctype.h... yes
   56 checking for CFLocaleCopyPreferredLanguages... no
@@ -5631,11 +5639,11 @@
   56 checking whether unsetenv is declared... yes
   57 checking for IPv4 sockets... yes
   57 checking for memcpy... yes
-  57 checking for poll... yes
   57 checking for sysconf... yes
-  57 checking for termios.h... yes
-  57 checking return type of signal handlers... void
+  57 checking sys/file.h usability... yes
+  58 checking for /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld option to reload object files... -r
   58 checking for bison... bison
+  58 checking for sa_family_t... yes
   58 checking for sys/mman.h... yes
   58 checking for sys/param.h... yes
   58 checking whether _snprintf is declared... no
@@ -5645,18 +5653,17 @@
   59 checking for strncasecmp... yes
   59 checking for sys/times.h... yes
   59 checking size of int... 4
+  59 checking sys/file.h presence... yes
   59 checking sys/resource.h presence... yes
   59 checking sys/resource.h usability... yes
+  59 checking sys/select.h presence... yes
+  59 checking sys/select.h usability... yes
   59 checking the name lister (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/nm) interface... BSD nm
   59 checking what to include in gstdint.h... stdint.h (already complete)
   59 checking whether getpagesize is declared... yes
-  59 checking whether the shell understands "+="... yes
   59 checking whether uselocale works... yes
   60 checking for ld... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
-  60 checking for netinet/in.h... yes
   60 checking for newlocale... yes
-  60 checking for select... yes
-  60 checking for socklen_t... yes
   60 checking for strchr... yes
   60 checking for strstr... yes
   60 checking for strtoull... yes
@@ -5671,22 +5678,22 @@
   62 checking for btowc... yes
   62 checking for compiler option needed when checking for declarations... none
   62 checking for ftruncate... yes
-  62 checking for g++... g++
   62 checking for getgid... yes
   62 checking for isblank... yes
   62 checking for iswctype... yes
-  62 checking for ld used by gcc... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
   62 checking for mbtowc... yes
   62 checking for threads.h... no
-  62 checking whether g++ accepts -g... yes
   62 checking whether the C++ compiler supports namespaces... yes
   62 checking whether the compiler is clang... no
+  62 checking whether the shell understands "+="... yes
   63 checking float.h presence... yes
   63 checking float.h usability... yes
   63 checking for isascii... yes
-  63 checking for netdb.h... yes
+  63 checking for poll... yes
   63 checking for stdio_ext.h... no
+  63 checking for termios.h... yes
   63 checking minix/config.h presence... no
+  63 checking return type of signal handlers... void
   64 checking errno.h presence... yes
   64 checking for float.h... yes
   64 checking whether <limits.h> defines MIN and MAX... no
@@ -5702,22 +5709,25 @@
   66 checking for gmsgfmt... :
   66 checking for makeinfo... makeinfo --split-size=5000000
   66 checking for msgfmt... no
-  66 checking for pwd.h... yes
+  66 checking for netinet/in.h... yes
+  66 checking for select... yes
+  66 checking for socklen_t... yes
   66 checking for uselocale... yes
   66 checking for wcwidth... yes
   66 checking for xgettext... no
   66 checking how to run the C preprocessor... gcc-4.2 -E
   66 checking whether byte ordering is bigendian... yes
   67 checking for int_least32_t... yes
-  67 checking for strtoul... yes
-  68 checking for strtol... yes
+  67 checking for ld used by gcc... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
   69 checking for canonicalize_file_name... no
+  69 checking for netdb.h... yes
   70 checking for IPv6 sockets... yes
   70 checking for O_CLOEXEC... no
   70 checking for alloca as a compiler built-in... yes
-  70 checking for sys/file.h... yes
+  70 checking for g++... g++
   70 checking for vfork.h... no
   70 checking target system type... powerpc-apple-darwin9.8.0
+  70 checking whether g++ accepts -g... yes
   71 checking for ssize_t... yes
   71 checking for strerror... yes
   71 checking for xlocale.h... yes
@@ -5725,59 +5735,52 @@
   72 checking for BSD- or MS-compatible name lister (nm)... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/nm
   72 checking for limits.h... yes
   72 checking for mbsinit... yes
+  72 checking for pwd.h... yes
   72 checking for search.h... yes
   72 checking for towlower... yes
   72 checking how to run the C preprocessor... gcc -std=gnu99 -E
   72 checking if environ is properly declared... no
   72 checking whether it is safe to define __EXTENSIONS__... yes
   72 checking whether setenv is declared... yes
-  73 checking for -force_load linker flag... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld: unknown flag: -force_load
   73 checking for errno.h... yes
+  73 checking for strtoul... yes
   73 checking for unsigned long long int... yes
-  73 checking whether the gcc linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) supports shared libraries... yes
   74 checking for sched.h... yes
+  74 checking for strtol... yes
   74 checking whether POSIX threads API is available... yes
   75 checking for bit size of ptrdiff_t... 32
   75 checking for bit size of size_t... 32
   76 checking for LC_MESSAGES... yes
   76 checking for geteuid... yes
   76 checking for setrlimit... yes
-  76 checking whether the g++ linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) supports shared libraries... yes
+  76 checking for sys/file.h... yes
   76 checking whether to activate relocatable installation... no
   77 checking for getegid... yes
   77 checking for minix/config.h... no
   77 checking for multithread API to use... posix
-  77 checking how to convert powerpc-apple-darwin8.11.0 file names to powerpc-apple-darwin8.11.0 format... func_convert_file_noop
-  77 checking how to convert powerpc-apple-darwin8.11.0 file names to toolchain format... func_convert_file_noop
   77 checking whether imported symbols can be declared weak... no
+  78 checking for -force_load linker flag... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld: unknown flag: -force_load
   78 checking for vfork... yes
   78 checking malloc.h usability... no
   78 checking whether gcc-4.2 accepts -g... yes
-  79 checking command to parse /usr/bin/nm -p output from gcc object... ok
+  78 checking whether the gcc linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) supports shared libraries... yes
   79 checking for fork... yes
-  79 checking for gcc option to produce PIC... -fno-common -DPIC
   79 checking for memset... yes
-  79 checking for putenv... yes
-  79 checking for sys/uio.h... yes
-  79 checking if gcc PIC flag -fno-common -DPIC works... yes
-  79 checking if gcc static flag -static works... no
-  79 checking if gcc supports -c -o file.o... yes
-  79 checking if gcc supports -fno-rtti -fno-exceptions... no
   79 checking whether fputc_unlocked is declared... no
   80 checking for library containing clock_gettime... no
   80 checking for powerpc-apple-darwin8.11.0-lipo... lipo
   80 checking for powerpc-apple-darwin8.11.0-strip... strip
-  80 checking for unsetenv... yes
   80 checking whether fputs_unlocked is declared... no
   80 checking whether fwrite_unlocked is declared... no
   80 checking whether getchar_unlocked is declared... yes
   81 checking for getrlimit... yes
   81 checking for perl... /usr/bin/perl
-  81 checking for uint64_t... yes
   81 checking malloc.h presence... no
   81 checking whether clearerr_unlocked is declared... yes
   81 checking whether fflush_unlocked is declared... no
   81 checking whether fread_unlocked is declared... no
+  82 checking how to convert powerpc-apple-darwin8.11.0 file names to powerpc-apple-darwin8.11.0 format... func_convert_file_noop
+  82 checking how to convert powerpc-apple-darwin8.11.0 file names to toolchain format... func_convert_file_noop
   82 checking whether ferror_unlocked is declared... yes
   82 checking whether putc_unlocked is declared... yes
   82 checking whether putchar_unlocked is declared... yes
@@ -5791,13 +5794,23 @@
   84 checking for powerpc-apple-darwin8.11.0-otool64... no
   85 checking for C/C++ restrict keyword... no
   85 checking for mbstate_t... yes
+  85 checking for putenv... yes
+  85 checking for sys/uio.h... yes
   85 checking whether the preprocessor supports include_next... yes
   86 checking for CFPreferencesCopyAppValue... yes
   86 checking for simple visibility declarations... yes
+  86 checking for unsetenv... yes
   86 checking whether the -Werror option is usable... yes
-  87 checking for /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld option to reload object files... -r
+  86 checking whether the g++ linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) supports shared libraries... yes
+  87 checking command to parse /usr/bin/nm -p output from gcc object... ok
   87 checking for a working dd... /bin/dd
+  87 checking for gcc option to produce PIC... -fno-common -DPIC
+  87 checking for uint64_t... yes
   87 checking how to truncate binary pipes... /bin/dd bs=4096 count=1
+  87 checking if gcc PIC flag -fno-common -DPIC works... yes
+  87 checking if gcc static flag -static works... no
+  87 checking if gcc supports -c -o file.o... yes
+  87 checking if gcc supports -fno-rtti -fno-exceptions... no
   87 checking stddef.h usability... yes
   87 checking whether __argv is declared... no
   87 checking whether fgets_unlocked is declared... no
@@ -5806,6 +5819,7 @@
   89 checking whether feof_unlocked is declared... yes
   89 checking whether getc_unlocked is declared... yes
   90 checking for working iconv... yes
+  92 checking for /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld option to reload object files... -r
   93 checking for bit size of sig_atomic_t... 32
   93 checking for bit size of wchar_t... 32
   93 checking for bit size of wint_t... 32
@@ -5823,114 +5837,114 @@
  101 checking whether _XOPEN_SOURCE should be defined... no
  102 checking for strdup... yes
  102 checking for tsearch... yes
- 102 checking whether gcc understands -c and -o together... yes
- 103 checking whether the shell understands "+="... no
- 104 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) is GNU ld... no
- 106 checking for sys/ioctl.h... yes
  107 checking for --enable-version-specific-runtime-libs... no
+ 108 checking whether the shell understands "+="... no
  109 checking whether stat file-mode macros are broken... no
- 110 checking dependency style of gcc... gcc3
  110 checking if the linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld) is GNU ld... no
+ 110 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) is GNU ld... no
+ 110 checking whether gcc understands -c and -o together... yes
  111 checking for powerpc-apple-darwin8.11.0-ranlib... ranlib
+ 112 checking for sys/ioctl.h... yes
  112 checking for wctype.h... yes
- 113 checking for sys/select.h... yes
  114 checking for iconv... yes
- 114 checking for otool64... no
  114 checking for vsnprintf... yes
  115 checking for readlink... yes
  115 checking for sys/wait.h... yes
+ 117 checking for otool64... no
+ 118 checking dependency style of gcc... gcc3
  118 checking for windres... no
  119 checking for -force_load linker flag... no
- 120 checking for archiver @FILE support... no
- 120 checking how to associate runtime and link libraries... printf %s\n
- 120 checking if : is a manifest tool... no
+ 119 checking for sys/select.h... yes
  120 checking target system type... powerpc-apple-darwin8.11.0
- 120 checking whether we are using the GNU C++ compiler... yes
  121 checking for inline... inline
  122 checking for memmove... yes
  122 checking for sys/resource.h... yes
  124 checking for getcwd... yes
  125 checking for uintptr_t... yes
  126 checking for shared library run path origin... done
+ 128 checking for archiver @FILE support... no
+ 128 checking how to associate runtime and link libraries... printf %s\n
+ 128 checking if : is a manifest tool... no
+ 128 checking whether we are using the GNU C++ compiler... yes
  133 checking for malloc.h... no
  134 checking for locale.h... yes
- 135 checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -p
- 135 checking the name lister (/usr/bin/nm -p) interface... BSD nm
- 137 checking for gcc option to accept ISO C89... none needed
  138 checking for nl_langinfo and CODESET... yes
- 138 checking whether time.h and sys/time.h may both be included... yes
+ 143 checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -p
  143 checking for gawk... awk
+ 143 checking the name lister (/usr/bin/nm -p) interface... BSD nm
  144 checking for getpagesize... yes
+ 144 checking whether time.h and sys/time.h may both be included... yes
  147 checking whether NLS is requested... yes
- 150 checking for setenv... yes
- 157 checking build system type... powerpc-apple-darwin9.8.0
- 157 checking host system type... powerpc-apple-darwin9.8.0
+ 151 checking for gcc option to accept ISO C89... none needed
+ 156 checking for setenv... yes
+ 160 checking build system type... powerpc-apple-darwin9.8.0
+ 160 checking host system type... powerpc-apple-darwin9.8.0
  161 checking how to link with libiconv... -liconv
- 162 checking whether the shell understands some XSI constructs... yes
- 166 checking dynamic linker characteristics... darwin9.8.0 dyld
- 167 checking for style of include used by make... GNU
- 168 checking how to run the C preprocessor... gcc -E
- 170 checking for otool64... otool64
- 172 checking for lipo... lipo
- 172 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) is GNU ld... no
+ 170 checking whether the shell understands some XSI constructs... yes
+ 172 checking dynamic linker characteristics... darwin9.8.0 dyld
  173 checking whether make supports the include directive... yes (GNU style)
+ 175 checking for otool64... otool64
+ 175 checking for style of include used by make... GNU
  178 checking for memory.h... yes
- 180 checking for strip... strip
- 182 checking for mt... no
- 182 checking for sysroot... no
+ 180 checking for lipo... lipo
+ 182 checking how to run the C preprocessor... gcc -E
+ 182 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) is GNU ld... no
  184 checking for stdlib.h... yes
  187 checking for string.h... yes
- 187 checking whether make supports nested variables... yes
+ 188 checking for strip... strip
+ 190 checking for mt... no
+ 190 checking for sysroot... no
  191 checking for strings.h... yes
  191 checking for sys/stat.h... yes
  191 checking for unistd.h... yes
  192 checking for sys/types.h... yes
+ 195 checking whether make supports nested variables... yes
  196 checking for special C compiler options needed for large files... no
  197 checking whether we are using the GNU C compiler... yes
  198 checking for suffix of object files... o
- 202 checking for dlltool... no
  202 checking whether to enable maintainer-specific portions of Makefiles... no
  203 checking for MAP_ANONYMOUS... yes
  207 checking for stdint.h... yes
+ 210 checking for dlltool... no
  214 checking for inttypes.h... yes
- 217 checking whether gcc accepts -g... yes
- 219 checking for awk... awk
- 219 checking for gawk... no
- 219 checking for mawk... no
- 219 checking for nawk... no
- 223 checking for objdump... no
- 224 checking for gcc... gcc
- 251 checking for ranlib... ranlib
- 255 checking for -single_module linker flag... yes
- 256 checking for -exported_symbols_list linker flag... yes
- 257 checking for ar... ar
- 258 checking build system type... powerpc-apple-darwin8.11.0
- 261 checking that generated files are newer than configure... done
- 265 checking for fgrep... /usr/bin/grep -F
- 265 checking host system type... powerpc-apple-darwin8.11.0
- 266 checking for dsymutil... dsymutil
- 266 checking for nmedit... nmedit
- 266 checking for otool... otool
- 274 checking how to recognize dependent libraries... pass_all
- 279 checking the maximum length of command line arguments... 196608
- 281 checking for dlfcn.h... yes
- 283 checking for objdir... .libs
- 311 checking how to print strings... printf
- 313 checking dynamic linker characteristics... darwin8.11.0 dyld
- 317 checking for ANSI C header files... yes
- 344 checking whether stripping libraries is possible... yes
- 352 checking for a sed that does not truncate output... /usr/bin/sed
- 352 checking whether to build static libraries... yes
- 367 checking if libtool supports shared libraries... yes
- 370 checking whether to build shared libraries... yes
- 384 checking whether make sets $(MAKE)... yes
- 391 checking whether build environment is sane... yes
- 397 checking for grep that handles long lines and -e... /usr/bin/grep
- 400 checking for a BSD-compatible install... /usr/bin/install -c
- 404 checking for egrep... /usr/bin/grep -E
- 423 checking whether ln -s works... yes
- 467 checking whether we are cross compiling... no
- 481 checking for C compiler default output file name... a.out
- 481 checking how to hardcode library paths into programs... immediate
- 484 checking for suffix of executables... 
- 510 checking whether the C compiler works... yes
+ 227 checking for awk... awk
+ 227 checking for gawk... no
+ 227 checking for mawk... no
+ 227 checking for nawk... no
+ 231 checking for objdump... no
+ 231 checking whether gcc accepts -g... yes
+ 238 checking for gcc... gcc
+ 263 checking build system type... powerpc-apple-darwin8.11.0
+ 263 checking for -single_module linker flag... yes
+ 264 checking for -exported_symbols_list linker flag... yes
+ 265 checking for ranlib... ranlib
+ 269 checking that generated files are newer than configure... done
+ 270 checking host system type... powerpc-apple-darwin8.11.0
+ 271 checking for ar... ar
+ 273 checking for fgrep... /usr/bin/grep -F
+ 274 checking for dsymutil... dsymutil
+ 274 checking for nmedit... nmedit
+ 274 checking for otool... otool
+ 282 checking how to recognize dependent libraries... pass_all
+ 287 checking the maximum length of command line arguments... 196608
+ 289 checking for dlfcn.h... yes
+ 291 checking for objdir... .libs
+ 319 checking how to print strings... printf
+ 323 checking dynamic linker characteristics... darwin8.11.0 dyld
+ 331 checking for ANSI C header files... yes
+ 352 checking whether stripping libraries is possible... yes
+ 360 checking for a sed that does not truncate output... /usr/bin/sed
+ 360 checking whether to build static libraries... yes
+ 375 checking if libtool supports shared libraries... yes
+ 378 checking whether to build shared libraries... yes
+ 392 checking whether make sets $(MAKE)... yes
+ 399 checking whether build environment is sane... yes
+ 411 checking for grep that handles long lines and -e... /usr/bin/grep
+ 414 checking for a BSD-compatible install... /usr/bin/install -c
+ 418 checking for egrep... /usr/bin/grep -E
+ 431 checking whether ln -s works... yes
+ 481 checking whether we are cross compiling... no
+ 495 checking for C compiler default output file name... a.out
+ 497 checking how to hardcode library paths into programs... immediate
+ 498 checking for suffix of executables... 
+ 524 checking whether the C compiler works... yes
