@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# tiger.sh: package manager PowerPC Macs running OS X Tiger (10.4).
+# tiger.sh: package manager for PowerPC Macs running OS X Tiger (10.4).
 
 set -e
 
@@ -193,7 +193,7 @@ if test "$1" = "--arch-check" ; then
     shift 1
     if test -z "$1" ; then
         echo "Error: arch-check which package?" >&2
-        echo "e.g. tiger.sh --arch-check foo-1.0" >&2
+        echo "e.g. tiger.sh --arch-check tar-1.34" >&2
         exit 1
     fi
     pkgspec="$1"
@@ -246,7 +246,7 @@ if test "$1" = "--linker-check" ; then
     shift 1
     if test -z "$1" ; then
         echo "Error: linker-check which package?" >&2
-        echo "e.g. tiger.sh --linker-check foo-1.0" >&2
+        echo "e.g. tiger.sh --linker-check tar-1.34" >&2
         exit 1
     fi
     pkgspec="$1"
@@ -295,10 +295,15 @@ fi
 
 # install:
 
-if test -n "$1" -a -e "/opt/$1" ; then
-    echo "$1 is already installed." >&2
+pkgspec="$1"
+
+if test -e "/opt/$pkgspec" \
+&& test ! -e "/opt/$pkgspec/.incomplete_installation" ; then
+    echo "$pkgspec is already installed." >&2
     exit 0
 fi
+
+rm -rf /opt/$pkgspec
 
 if ! type -a /usr/bin/gcc >/dev/null 2>&1 ; then
     echo "Error: please install Xcode." >&2
@@ -312,6 +317,8 @@ export MACOSX_DEPLOYMENT_TARGET=10.4
 pkgspec="$1"
 echo "Installing $pkgspec" >&2
 echo -n -e "\033]0;tiger.sh $pkgspec (tiger.$cpu_name)\007"
+mkdir -p /opt/$pkgspec
+touch /opt/$pkgspec/.incomplete_installation
 script=install-$pkgspec.sh
 cd /tmp
 /opt/portable-curl/bin/curl -sSfLO $TIGERSH_MIRROR/scripts/$script
@@ -331,3 +338,5 @@ if ! test -e /opt/$pkgspec/share/tiger.sh/$pkgspec/$script.log.gz ; then
     gzip /tmp/$script.log
     mv /tmp/$script.log.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
 fi
+
+rm -f /opt/$pkgspec/.incomplete_installation

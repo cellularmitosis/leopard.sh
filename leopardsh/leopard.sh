@@ -185,7 +185,7 @@ if test "$1" = "--arch-check" ; then
     shift 1
     if test -z "$1" ; then
         echo "Error: arch-check which package?" >&2
-        echo "e.g. leopard.sh --arch-check foo-1.0" >&2
+        echo "e.g. leopard.sh --arch-check tar-1.34" >&2
         exit 1
     fi
     pkgspec="$1"
@@ -238,7 +238,7 @@ if test "$1" = "--linker-check" ; then
     shift 1
     if test -z "$1" ; then
         echo "Error: linker-check which package?" >&2
-        echo "e.g. leopard.sh --linker-check foo-1.0" >&2
+        echo "e.g. leopard.sh --linker-check tar-1.34" >&2
         exit 1
     fi
     pkgspec="$1"
@@ -276,7 +276,7 @@ if test -z "$1" ; then
     echo "Available packages:" >&2
     cd /tmp
     /opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/packages.txt
-    if test -n "$is_g5" ; then
+    if test "$cpu_name" = "g5" ; then
         /opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/packages.ppc64.txt
         cat packages.txt packages.ppc64.txt | sort
     else
@@ -287,10 +287,15 @@ fi
 
 # install:
 
-if test -n "$1" -a -e "/opt/$1" ; then
-    echo "$1 is already installed." >&2
+pkgspec="$1"
+
+if test -e "/opt/$pkgspec" \
+&& test ! -e "/opt/$pkgspec/.incomplete_installation" ; then
+    echo "$pkgspec is already installed." >&2
     exit 0
 fi
+
+rm -rf /opt/$pkgspec
 
 if ! which -s /usr/bin/gcc ; then
     echo "Error: please install Xcode." >&2
@@ -298,9 +303,10 @@ if ! which -s /usr/bin/gcc ; then
     exit 1
 fi
 
-pkgspec="$1"
 echo "Installing $pkgspec" >&2
 echo -n -e "\033]0;leopard.sh $pkgspec (leopard.$cpu_name)\007"
+mkdir -p /opt/$pkgspec
+touch /opt/$pkgspec/.incomplete_installation
 script=install-$pkgspec.sh
 cd /tmp
 /opt/portable-curl/bin/curl -sSfLO $LEOPARDSH_MIRROR/scripts/$script
@@ -312,3 +318,5 @@ if ! test -e /opt/$pkgspec/share/leopard.sh/$pkgspec/$script.log.gz ; then
     gzip /tmp/$script.log
     mv /tmp/$script.log.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
 fi
+
+rm -f /opt/$pkgspec/.incomplete_installation
