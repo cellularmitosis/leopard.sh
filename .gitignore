@@ -1,4 +1,6 @@
 binpkgs/*.tar.gz
 leopardsh/binpkgs/*.tar.gz
 tigersh/binpkgs/*.tar.gz
+dist/*
+!dist/.keep
 .vscode
