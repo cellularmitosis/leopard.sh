@@ -30,10 +30,18 @@ done
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
+# binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
+# if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
+#     cd /opt
+#     curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
+
+echo "Error: this is still a work-in-progress" >&2
+exit 1
+
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
+binpkg_url=$TIGERSH_MIRROR/binpkgs/$binpkg
+if test -z "$TIGERSH_FORCE_BUILD" && tiger.sh --url-exists $binpkg_url >/dev/null 2>&1 ; then
+    tiger.sh --install-binpkg $pkgspec
 else
     srcmirror=https://ftp.gnu.org/gnu/$package
     tarball=$package-$version.tar.gz

@@ -187,6 +187,57 @@ if test "$1" = "--setup" ; then
     exit 0
 fi
 
+# url exists:
+
+if test "$1" = "--url-exists" ; then
+    shift 1
+    if test -z "$1" ; then
+        echo "Error: check which url?" >&2
+        echo "e.g. tiger.sh --url-exists http://example.com" >&2
+        exit 1
+    fi
+    url="$1"
+    curl -sSfI "$url" >/dev/null 2>&1
+    exit $?
+fi
+
+# install binpkg:
+
+if test "$1" = "--install-binpkg" ; then
+
+    echo "Error: this is still a work-in-progress" >&2
+    exit 1
+
+    shift 1
+    if test -z "$1" ; then
+        echo "Error: install which binpkg?" >&2
+        echo "e.g. tiger.sh --install-binpkg tar-1.34" >&2
+        exit 1
+    fi
+    pkgspec="$1"
+    binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
+    binpkg_url=$TIGERSH_MIRROR/binpkgs/$binpkg
+
+    rm -rf fifo md5. md5 gzip-1.11
+
+    fifo=$( mktemp -u /tmp/fifo.XXXX )
+    ( mkfifo $fifo  && cat $fifo | md5 > md5. && mv md5. md5 ) &
+
+    while ! test -e $fifo ; do sleep 0.1 ; done
+
+    size=$( curl -sI $ | grep -i '^content-length:' | awk '{print $2}' | sed "s/$(printf '\r')//" `
+
+    curl -sSf $binpkg_url \
+        | pv \
+        | tee $fifo \
+        | gunzip \
+        | tar x
+
+    while ! test -e md5 ; do sleep 0.1 ; done
+
+    test "$(cat md5)" = "b8cab03ed69a1d69980c6a292a5ab853"
+fi
+
 # arch check:
 
 if test "$1" = "--arch-check" ; then
