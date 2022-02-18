@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install m4 on OS X Tiger / PowerPC.
 
@@ -39,6 +39,10 @@ else
     cd $package-$version
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+    CFLAGS=$(tiger.sh -mcpu -O)
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $CFLAGS"
+    fi
 
     for f in configure ; do
         if test -n "$ppc64" ; then

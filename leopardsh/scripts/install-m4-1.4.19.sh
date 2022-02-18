@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/template.sh v3
+# based on templates/install-foo-1.0.sh v4
 
 # Install m4 on OS X Leopard / PowerPC.
 
@@ -29,12 +29,21 @@ else
         curl -#fLO $srcmirror/$tarball
     fi
 
+
+    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = f4a2b0284d80353b995f8ef2385ed73c
     cd /tmp
     rm -rf $package-$version
+
     tar xzf ~/Downloads/$tarball
+
     cd $package-$version
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+
+    CFLAGS=$(leopard.sh -mcpu -O)
+    if test -n "$ppc64" ; then
+        CFLAGS="-m64 $CFLAGS"
+    fi
 
     for f in configure ; do
         if test -n "$ppc64" ; then
