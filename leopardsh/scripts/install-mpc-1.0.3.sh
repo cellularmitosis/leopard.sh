@@ -53,9 +53,6 @@ else
 
     cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
-    # Non-fat file: lib/libmpc.a is architecture: ppc
-    CC="gcc $(leopard.sh -mcpu)"
-
     CFLAGS="$(leopard.sh -mcpu -O) -pedantic -no-cpp-precomp"
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $CFLAGS"
@@ -74,8 +71,8 @@ else
         --with-gmp=/opt/gmp-4.3.2$ppc64 \
         --with-mpfr=/opt/mpfr-3.1.6$ppc64 \
         CFLAGS="$CFLAGS" \
-        LDFLAGS="$LDFLAGS" \
-        CC="$CC"
+        # LDFLAGS="$LDFLAGS" \
+        # CC="$CC"
         # CPPFLAGS="$CPPFLAGS" \
 
     make $(leopard.sh -j)

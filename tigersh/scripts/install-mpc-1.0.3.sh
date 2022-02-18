@@ -53,9 +53,6 @@ else
 
     cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    # Non-fat file: lib/libmpc.a is architecture: ppc
-    CC="gcc $(tiger.sh -mcpu)"
-
     CFLAGS="$(tiger.sh -mcpu -O) -pedantic -no-cpp-precomp"
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $CFLAGS"
@@ -74,8 +71,8 @@ else
         --with-gmp=/opt/gmp-4.3.2$ppc64 \
         --with-mpfr=/opt/mpfr-3.1.6$ppc64 \
         CFLAGS="$CFLAGS" \
-        LDFLAGS="$LDFLAGS" \
-        CC="$CC"
+        # LDFLAGS="$LDFLAGS" \
+        # CC="$CC"
         # CPPFLAGS="$CPPFLAGS" \
 
     make $(tiger.sh -j)
