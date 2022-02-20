@@ -204,9 +204,10 @@ fi
 # install binpkg:
 
 if test "$1" = "--install-binpkg" ; then
+    # set -x
 
-    echo "Error: this is still a work-in-progress" >&2
-    exit 1
+    # echo "Error: this is still a work-in-progress" >&2
+    # exit 1
 
     shift 1
     if test -z "$1" ; then
@@ -218,24 +219,39 @@ if test "$1" = "--install-binpkg" ; then
     binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
     binpkg_url=$TIGERSH_MIRROR/binpkgs/$binpkg
 
-    rm -rf fifo md5. md5 gzip-1.11
+    echo "Unpacking $binpkg at /opt/$pkgspec"
 
-    fifo=$( mktemp -u /tmp/fifo.XXXX )
-    ( mkfifo $fifo  && cat $fifo | md5 > md5. && mv md5. md5 ) &
+    fifo=/tmp/$binpkg.fifo
+    rm -f $fifo
+    ( mkfifo $fifo \
+        && cat $fifo | md5 > /tmp/$binpkg.localmd5_ \
+        && mv /tmp/$binpkg.localmd5_ /tmp/$binpkg.localmd5
+    ) &
 
     while ! test -e $fifo ; do sleep 0.1 ; done
 
-    size=$( curl -sI $ | grep -i '^content-length:' | awk '{print $2}' | sed "s/$(printf '\r')//" `
+    size=$( curl --fail --silent --show-error --head $binpkg_url \
+        | grep -i '^content-length:' \
+        | awk '{print $NF}' \
+        | sed "s/$(printf '\r')//"
+    )
 
-    curl -sSf $binpkg_url \
-        | pv \
+    cd /tmp
+    curl --fail --silent --show-error --location --remote-name $binpkg_url.md5
+
+    cd /opt
+    curl --fail --silent --show-error $binpkg_url \
+        | pv --force --size $size \
         | tee $fifo \
         | gunzip \
         | tar x
 
-    while ! test -e md5 ; do sleep 0.1 ; done
+    while ! test -e /tmp/$binpkg.localmd5 ; do sleep 0.1 ; done
 
-    test "$(cat md5)" = "b8cab03ed69a1d69980c6a292a5ab853"
+    rm $fifo
+
+    test "$(cat /tmp/$binpkg.localmd5)" = "$(cat /tmp/$binpkg.md5)"
+    exit $?
 fi
 
 # arch check:
@@ -349,8 +365,8 @@ fi
 pkgspec="$1"
 
 if test -e "/opt/$pkgspec" \
-&& test ! -e "/opt/$pkgspec/.incomplete_installation" ; then
-    echo "$pkgspec is already installed." >&2
+&& test ! -e "/opt/$pkgspec/INCOMPLETE_INSTALLATION" ; then
+    echo "$pkgspec is already installed at /opt/$pkgspec" >&2
     exit 0
 fi
 
@@ -369,7 +385,7 @@ pkgspec="$1"
 echo "Installing $pkgspec" >&2
 echo -n -e "\033]0;tiger.sh $pkgspec (tiger.$cpu_name)\007"
 mkdir -p /opt/$pkgspec
-touch /opt/$pkgspec/.incomplete_installation
+touch /opt/$pkgspec/INCOMPLETE_INSTALLATION
 script=install-$pkgspec.sh
 cd /tmp
 /opt/portable-curl/bin/curl -sSfLO $TIGERSH_MIRROR/scripts/$script
@@ -390,4 +406,4 @@ if ! test -e /opt/$pkgspec/share/tiger.sh/$pkgspec/$script.log.gz ; then
     mv /tmp/$script.log.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
 fi
 
-rm -f /opt/$pkgspec/.incomplete_installation
+rm -f /opt/$pkgspec/INCOMPLETE_INSTALLATION

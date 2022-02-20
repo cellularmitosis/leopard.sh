@@ -6,7 +6,8 @@
 package=bash
 version=5.1.16
 
-set -e -x
+# set -e -x
+set -e
 PATH="/opt/portable-curl/bin:$PATH"
 TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
 
@@ -35,12 +36,12 @@ echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 #     cd /opt
 #     curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 
-echo "Error: this is still a work-in-progress" >&2
-exit 1
+# echo "Error: this is still a work-in-progress" >&2
+# exit 1
 
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
 binpkg_url=$TIGERSH_MIRROR/binpkgs/$binpkg
-if test -z "$TIGERSH_FORCE_BUILD" && tiger.sh --url-exists $binpkg_url >/dev/null 2>&1 ; then
+if test -z "$TIGERSH_FORCE_BUILD" && tiger.sh --url-exists $binpkg_url ; then
     tiger.sh --install-binpkg $pkgspec
 else
     srcmirror=https://ftp.gnu.org/gnu/$package

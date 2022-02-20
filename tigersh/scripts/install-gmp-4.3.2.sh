@@ -16,10 +16,6 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
-    tiger.sh gcc-4.2
-fi
-
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
@@ -27,6 +23,10 @@ if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGER
     cd /opt
     curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
+    if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
+        tiger.sh gcc-4.2
+    fi
+
     srcmirror=https://ftp.gnu.org/gnu/$package
     tarball=$package-$version.tar.gz
 

@@ -6,7 +6,8 @@
 package=gcc
 version=4.9.4
 
-set -e -x
+# set -e -x
+set -e
 PATH="/opt/portable-curl/bin:$PATH"
 TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
 
@@ -15,10 +16,6 @@ if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
 fi
 
 pkgspec=$package-$version$ppc64
-
-if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
-    tiger.sh gcc-4.2
-fi
 
 for dep in \
     gmp-4.3.2$ppc64 \
@@ -36,11 +33,20 @@ done
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
+# binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
+# if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
+#     cd /opt
+#     curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
+
 binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
+binpkg_url=$TIGERSH_MIRROR/binpkgs/$binpkg
+if test -z "$TIGERSH_FORCE_BUILD" && tiger.sh --url-exists $binpkg_url ; then
+    tiger.sh --install-binpkg $pkgspec
 else
+    if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
+        tiger.sh gcc-4.2
+    fi
+
     srcmirror=https://ftp.gnu.org/gnu/$package/$package-$version
     tarball=$package-$version.tar.gz
 
