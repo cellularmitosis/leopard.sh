@@ -6,10 +6,10 @@ set -e
 
 # Note: for offline use, export e.g. TIGERSH_MIRROR=file:///Users/foo/tigersh
 # before calling tiger.sh.
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh/tigersh}
 export TIGERSH_MIRROR
 
-export PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 COLOR_GREEN="\\\e[32;1m"
 COLOR_YELLOW="\\\e[33;1m"
@@ -158,12 +158,9 @@ done
 
 mkdir -p ~/Downloads
 
-if ! test -e /opt/portable-curl ; then
-    echo "Installing curl with SSL support." >&2
-    cd /tmp
-    curl -sSfLOk $TIGERSH_MIRROR/scripts/install-portable-curl.sh
-    chmod +x install-portable-curl.sh
-    ./install-portable-curl.sh
+if ! test -e /opt/tigersh-deps-0.1 ; then
+    echo "Installing tiger.sh dependencies (pv, otool w/ppc64 support, curl w/SSL)." >&2
+    tiger.sh --install-binpkg --no-pv tigersh-deps-0.1
 fi
 
 opt_config_cache=/opt/tiger.sh/share/tiger.sh/config.cache
@@ -204,17 +201,19 @@ fi
 # install binpkg:
 
 if test "$1" = "--install-binpkg" ; then
-    # set -x
-
-    # echo "Error: this is still a work-in-progress" >&2
-    # exit 1
-
     shift 1
+
+    if test "$1" = "--no-pv" ; then
+        shift 1
+        no_pv=1
+    fi
+
     if test -z "$1" ; then
         echo "Error: install which binpkg?" >&2
         echo "e.g. tiger.sh --install-binpkg tar-1.34" >&2
         exit 1
     fi
+
     pkgspec="$1"
     binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
     binpkg_url=$TIGERSH_MIRROR/binpkgs/$binpkg
@@ -239,9 +238,14 @@ if test "$1" = "--install-binpkg" ; then
     cd /tmp
     curl --fail --silent --show-error --location --remote-name $binpkg_url.md5
 
+    pv="pv --force --size $size"
+    if test -z "$no_pv" ; then
+        pv="cat"
+    fi
+
     cd /opt
     curl --fail --silent --show-error $binpkg_url \
-        | pv --force --size $size \
+        | $pv \
         | tee $fifo \
         | gunzip \
         | tar x
