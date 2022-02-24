@@ -10,5 +10,5 @@ mkdir -p $LEOPARDSH_BINPKG_PATH
 
 cd /opt
 tmpfile=$(mktemp /tmp/binpkg.XXXX)
-tar czf $tmpfile $pkgspec
+tar c $pkgspec | gzip -9 > $tmpfile
 mv $tmpfile $LEOPARDSH_BINPKG_PATH/$binpkg
