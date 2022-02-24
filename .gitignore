@@ -1,8 +1,7 @@
-binpkgs/*.tar.gz
-leopardsh/binpkgs/*.tar.gz
-leopardsh/binpkgs/*.tar.gz.md5
-tigersh/binpkgs/*.tar.gz
-tigersh/binpkgs/*.tar.gz.md5
+leopardsh/binpkgs/*
+!leopardsh/binpkgs/.keep
+tigersh/binpkgs/*
+!tigersh/binpkgs/.keep
 dist/*
 !dist/.keep
 .vscode
