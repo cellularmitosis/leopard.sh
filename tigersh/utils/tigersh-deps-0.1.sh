@@ -47,7 +47,7 @@ nice ./configure -C --prefix=$opt CFLAGS="-mcpu=750 -Os"
 nice make V=1
 make install
 
-# build otool which understand ppc64
+# build otool (Tiger's 'otool -L' doesn't understand ppc64).
 echo -n -e "\033]0;building otool\007"
 package=otool
 version=667.3
@@ -111,7 +111,7 @@ mkdir -p $opt/share
 cd $opt/share
 cp ~/Downloads/cacert.pem .
 
-# build curl with modern SSL support
+# build curl (with modern SSL support)
 echo -n -e "\033]0;building curl\007"
 package=curl
 version=7.81.0

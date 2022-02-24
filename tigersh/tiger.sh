@@ -4,9 +4,9 @@
 
 set -e
 
-# Note: for offline use, export e.g. TIGERSH_MIRROR=file:///Users/foo/tigersh
-# before calling tiger.sh.
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh/tigersh}
+# Note: for offline use or to run you own local fork, export e.g.
+#   TIGERSH_MIRROR=file:///Users/foo/tigersh
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-http://leopard.sh/tigersh}
 export TIGERSH_MIRROR
 
 export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
@@ -40,6 +40,7 @@ else
     exit 1
 fi
 
+
 # make flag generation:
 
 if test "$1" = "-j" ; then
@@ -47,6 +48,7 @@ if test "$1" = "-j" ; then
     echo "-j$j"
     exit 0
 fi
+
 
 # gcc flags generation:
 
@@ -85,6 +87,7 @@ if test -n "$flagmode" ; then
     exit 0
 fi
 
+
 # sysctl queries:
 
 if test "$1" = "--cpu" ; then
@@ -96,6 +99,7 @@ if test "$1" = "--os.cpu" ; then
     echo tiger.$cpu_name
     exit 0
 fi
+
 
 # unlink:
 
@@ -120,6 +124,7 @@ if test "$1" = "--unlink" ; then
     \;
     exit 0
 fi
+
 
 # setup:
 
@@ -158,9 +163,120 @@ done
 
 mkdir -p ~/Downloads
 
-if ! test -e /opt/tigersh-deps-0.1 ; then
-    echo "Installing tiger.sh dependencies (pv, otool w/ppc64 support, curl w/SSL)." >&2
-    tiger.sh --install-binpkg --no-pv tigersh-deps-0.1
+deps_pkgspec=tigersh-deps-0.1
+if test ! -e /opt/$deps_pkgspec \
+|| test -e /opt/$deps_pkgspec/INCOMPLETE_INSTALLATION ; then
+    echo "Installing tiger.sh dependencies (pv, curl w/SSL, otool w/ppc64 support)." >&2
+
+    rm -rf /opt/$deps_pkgspec
+    mkdir -p /opt/$deps_pkgspec
+    touch /opt/$deps_pkgspec/INCOMPLETE_INSTALLATION
+
+    cd /tmp
+
+    binpkg=$deps_pkgspec.tiger.g3.tar.gz
+    fifo=/tmp/$binpkg.fifo
+    rm -f $fifo
+    ( mkfifo $fifo \
+        && cat $fifo | md5 > /tmp/$binpkg.localmd5_ \
+        && mv /tmp/$binpkg.localmd5_ /tmp/$binpkg.localmd5
+    ) &
+
+    while ! test -e $fifo ; do sleep 0.1 ; done
+
+    binpkg_url=$TIGERSH_MIRROR/binpkgs/$binpkg
+    size=$( curl --fail --silent --show-error --head $binpkg_url \
+        | grep -i '^content-length:' \
+        | awk '{print $NF}' \
+        | sed "s/$(printf '\r')//"
+    )
+
+    cd /opt
+    curl --fail --silent --show-error $binpkg_url \
+        | pv --force --size $size \
+        | tee $fifo \
+        | gunzip \
+        | tar x
+
+    while ! test -e /tmp/$binpkg.localmd5 ; do sleep 0.1 ; done
+
+    rm $fifo
+
+    # FIXME install letsencrypt on leopard.sh and change this to https.
+    # Note: this qr code was generated via 'qrencode -t ANSI http://leopard.sh/md5'
+    echo
+    cat >&2 << EOF
+[47m                                                                  [0m
+[47m                                                                  [0m
+[47m                                                                  [0m
+[47m                                                                  [0m
+[47m        [40m              [47m    [40m  [47m    [40m          [47m  [40m              [47m        [0m
+[47m        [40m  [47m          [40m  [47m  [40m  [47m    [40m            [47m  [40m  [47m          [40m  [47m        [0m
+[47m        [40m  [47m  [40m      [47m  [40m  [47m  [40m          [47m  [40m  [47m  [40m  [47m  [40m  [47m  [40m      [47m  [40m  [47m        [0m
+[47m        [40m  [47m  [40m      [47m  [40m  [47m    [40m      [47m    [40m  [47m      [40m  [47m  [40m      [47m  [40m  [47m        [0m
+[47m        [40m  [47m  [40m      [47m  [40m  [47m  [40m  [47m          [40m      [47m  [40m  [47m  [40m      [47m  [40m  [47m        [0m
+[47m        [40m  [47m          [40m  [47m  [40m    [47m  [40m  [47m  [40m  [47m  [40m    [47m  [40m  [47m          [40m  [47m        [0m
+[47m        [40m              [47m  [40m  [47m  [40m  [47m  [40m  [47m  [40m  [47m  [40m  [47m  [40m              [47m        [0m
+[47m                        [40m    [47m    [40m  [47m  [40m  [47m  [40m  [47m                        [0m
+[47m        [40m    [47m  [40m  [47m    [40m    [47m    [40m  [47m    [40m    [47m      [40m      [47m  [40m    [47m          [0m
+[47m        [40m  [47m  [40m  [47m  [40m    [47m        [40m    [47m  [40m  [47m    [40m      [47m          [40m  [47m        [0m
+[47m        [40m        [47m  [40m    [47m  [40m      [47m    [40m  [47m      [40m  [47m    [40m  [47m    [40m    [47m        [0m
+[47m          [40m      [47m  [40m  [47m    [40m  [47m        [40m    [47m  [40m      [47m  [40m  [47m                [0m
+[47m          [40m  [47m    [40m  [47m  [40m    [47m        [40m              [47m    [40m  [47m  [40m    [47m        [0m
+[47m          [40m    [47m  [40m  [47m    [40m  [47m    [40m      [47m  [40m  [47m  [40m  [47m  [40m    [47m  [40m    [47m  [40m  [47m        [0m
+[47m        [40m  [47m  [40m    [47m    [40m  [47m    [40m    [47m  [40m  [47m  [40m  [47m  [40m      [47m      [40m  [47m  [40m  [47m        [0m
+[47m          [40m  [47m  [40m      [47m      [40m  [47m    [40m            [47m    [40m    [47m  [40m  [47m          [0m
+[47m        [40m    [47m  [40m  [47m  [40m    [47m  [40m  [47m    [40m  [47m  [40m    [47m  [40m              [47m            [0m
+[47m                        [40m  [47m  [40m  [47m      [40m      [47m      [40m      [47m  [40m  [47m        [0m
+[47m        [40m              [47m  [40m    [47m      [40m  [47m  [40m    [47m  [40m  [47m  [40m  [47m    [40m    [47m        [0m
+[47m        [40m  [47m          [40m  [47m    [40m  [47m  [40m  [47m  [40m  [47m    [40m  [47m      [40m      [47m            [0m
+[47m        [40m  [47m  [40m      [47m  [40m  [47m      [40m      [47m  [40m  [47m  [40m          [47m      [40m  [47m        [0m
+[47m        [40m  [47m  [40m      [47m  [40m  [47m  [40m    [47m  [40m      [47m  [40m    [47m    [40m    [47m  [40m  [47m            [0m
+[47m        [40m  [47m  [40m      [47m  [40m  [47m    [40m  [47m  [40m        [47m          [40m      [47m  [40m  [47m        [0m
+[47m        [40m  [47m          [40m  [47m  [40m  [47m  [40m        [47m    [40m  [47m        [40m  [47m              [0m
+[47m        [40m              [47m  [40m  [47m    [40m  [47m    [40m            [47m      [40m    [47m        [0m
+[47m                                                                  [0m
+[47m                                                                  [0m
+[47m                                                                  [0m
+[47m                                                                  [0m
+EOF
+    echo >&2
+    echo "OS X Tiger's support for SSL is too old to use, which means this script" >&2
+    echo "can't verify the integrity of the dependencies which it just installed." >&2
+    echo >&2
+    echo "    This is where I need your help, human!" >&2
+    echo >&2
+    echo "Please visit https://leopard.sh/md5 in a modern browser (or by scanning the" >&2
+    echo "above QR code on your smartphone) and verify that it matches this MD5 sum:" >&2
+    echo >&2
+    echo "    $( cat /tmp/$binpkg.localmd5 )" >&2
+    echo >&2
+
+    read -n 1 -p "Does the MD5 sum match? [Y/n]: " answer
+    while true ; do
+        if test "$answer" = "" ; then
+            break
+        elif test "$answer" = "y" -o "$answer" = "Y" ; then
+            echo >&2
+            break
+        elif test "$answer" = "n" -o "$answer" = "N" ; then
+            echo >&2
+            echo >&2
+            echo "If the MD5 sum doesn't match, that means something is wrong." >&2
+            echo >&2
+            echo "Please google 'macrumors powerpc' and start a forum thread." >&2
+            echo "The user 'cellularmitosis' will assist you." >&2
+            echo >&2
+            echo "Alternatively, if you are a github user, feel free to create an" >&2
+            echo "issue at https://github.com/cellularmitosis/leopard.sh" >&2
+            exit 1
+        else
+            echo >&2
+            read -n 1 -r -p "Please type 'y', 'n' or hit ENTER (same as 'y') " answer
+        fi
+    done
+
+    rm /opt/$deps_pkgspec/INCOMPLETE_INSTALLATION
 fi
 
 opt_config_cache=/opt/tiger.sh/share/tiger.sh/config.cache
@@ -170,19 +286,10 @@ if ! test -e $opt_config_cache/tiger.cache ; then
     curl -sSfLOk $TIGERSH_MIRROR/config.cache/tiger.cache
 fi
 
-# Tiger's 'otool -L' can't handle ppc64.
-if ! test -e /opt/otool-667.3 ; then
-    echo "Installing otool which understands ppc64." >&2
-    cd /tmp
-    curl -sSfLOk $TIGERSH_MIRROR/scripts/install-otool-667.3.sh
-    chmod +x install-otool-667.3.sh
-    ./install-otool-667.3.sh
-fi
-export PATH="/opt/otool-667.3/bin:$PATH"
-
 if test "$1" = "--setup" ; then
     exit 0
 fi
+
 
 # url exists:
 
@@ -198,15 +305,11 @@ if test "$1" = "--url-exists" ; then
     exit $?
 fi
 
+
 # install binpkg:
 
 if test "$1" = "--install-binpkg" ; then
     shift 1
-
-    if test "$1" = "--no-pv" ; then
-        shift 1
-        no_pv=1
-    fi
 
     if test -z "$1" ; then
         echo "Error: install which binpkg?" >&2
@@ -238,14 +341,9 @@ if test "$1" = "--install-binpkg" ; then
     cd /tmp
     curl --fail --silent --show-error --location --remote-name $binpkg_url.md5
 
-    pv="pv --force --size $size"
-    if test -z "$no_pv" ; then
-        pv="cat"
-    fi
-
     cd /opt
     curl --fail --silent --show-error $binpkg_url \
-        | $pv \
+        | pv --force --size $size \
         | tee $fifo \
         | gunzip \
         | tar x
@@ -257,6 +355,7 @@ if test "$1" = "--install-binpkg" ; then
     test "$(cat /tmp/$binpkg.localmd5)" = "$(cat /tmp/$binpkg.md5)"
     exit $?
 fi
+
 
 # arch check:
 
@@ -311,6 +410,7 @@ if test "$1" = "--arch-check" ; then
     exit 0
 fi
 
+
 # linker check:
 
 if test "$1" = "--linker-check" ; then
@@ -349,6 +449,7 @@ if test "$1" = "--linker-check" ; then
     exit 0
 fi
 
+
 # list:
 
 if test -z "$1" ; then
@@ -363,6 +464,7 @@ if test -z "$1" ; then
     fi
     exit 0
 fi
+
 
 # install:
 

@@ -3,6 +3,9 @@ all: md5s dependency-graphs
 md5s:
 	cd leopardsh/binpkgs && make
 	cd tigersh/binpkgs && make
+	$(shell echo "The MD5 sum you are looking for is:" > md5)
+	$(shell echo >> md5)
+	$(shell md5 -q tigersh/binpkgs/tigersh-deps-0.1.tiger.g3.tar.gz >> md5)
 
 dependency-graphs:
 	cd leopardsh/deps && make dependencies.png
