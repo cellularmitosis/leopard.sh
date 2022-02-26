@@ -1,7 +1,13 @@
-leopardsh/binpkgs/*
+leopardsh/binpkgs/*.*
 !leopardsh/binpkgs/.keep
-tigersh/binpkgs/*
+
+tigersh/binpkgs/*.*
 !tigersh/binpkgs/.keep
-dist/*
+
+dist/*.*
 !dist/.keep
+
+dist/orig/*.*
+!dist/orig/.keep
+
 .vscode
