@@ -1,805 +1,805 @@
-   1 checking for -plugin option... checking for powerpc-apple-darwin9.8.0-ar... (cached) ar 
-   1 checking for ANSI C header files... (cached) no
-   1 checking for ANSI C header files... checking for unistd.h... (cached) yes
-   1 checking for C compiler default output file name... checking whether we are using the GNU C compiler... (cached) yes
-   1 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853578101) (memory 3853580607)
-   1 checking for CLISP version... checking how to remove colons from paths... (cached) echo $x
-   1 checking for alloca... (cached) checking whether malloc is ptrdiff_t safe... yes
-   1 checking for compiler option needed when checking for declarations... checking for suffix of object files... (cached) none
-   1 checking for fcntl.h... checking for sys/stat.h... (cached) yes
-   1 checking for gcc -mcpu=7400 -Os option to accept ISO C89... (cached) none needed
-   1 checking for gcc -mcpu=750 -Os option to accept ISO C89... (cached) none needed
-   1 checking for gcc -mcpu=970 -O2 -m64 option to accept ISO C89... (cached) none needed
-   1 checking for gcc -std=gnu99 option to accept ISO C89... (cached) none needed
-   1 checking for gcc-4.2 -mcpu=7400 -Os -force_cpusubtype_ALL -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
-   1 checking for gcc-4.2 -mcpu=750 -Os -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
-   1 checking for gcc... (cached) gcc -mcpu=7400 -Os
-   1 checking for gcc... (cached) gcc -mcpu=750 -Os
-   1 checking for gcc... (cached) gcc -mcpu=970 -O2 -m64
-   1 checking for getrusage... checking for stdlib.h... (cached) yes
-   1 checking for inttypes.h... checking for stdio.h... (cached) (cached) yes
-   1 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   ... checking for grep that handles long lines and -e... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld
-   1 checking for ld... (cached) /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
-   1 checking for powerpc-apple-darwin9.8.0-gcc... (cached) gcc -std=gnu99
-   1 checking for pstat_getstatic... checking for unistd.h... (cached) yes
-   1 checking for stdint.h... (cached) checking for stdlib.h... (cached) yes
-   1 checking for stdio_ext.h... checking for unistd.h... (cached) yes
-   1 checking for string.h... checking whether ln -s works... (cached) (cached) yes
-   1 checking for struct lconv.int_p_cs_precedes... checking dependency style of gcc-4.2 -std=gnu99... (cached) gcc3
-   1 checking for suffix of object files... checking for sys/time.h... (cached) yes
-   1 checking for sys/stat.h... (cached) checking for minix/config.h... (cached) yes
-   1 checking for sys/types.h... (cached) checking whether it is safe to define __EXTENSIONS__... yes
-   1 checking for waitpid... checking for unistd.h... (cached) yes
-   1 checking how to run the C preprocessor... checking whether the compiler supports GNU C... (cached) yes
-   1 checking if gcc -mcpu=7400 -Os supports -c -o file.o... (cached) yes
-   1 checking if gcc -mcpu=750 -Os supports -c -o file.o... (cached) yes
-   1 checking if gcc -mcpu=970 -O2 -m64 supports -c -o file.o... (cached) yes
-   1 checking output filetype... checking for string.h... (cached) yes
-   1 checking whether _XOPEN_SOURCE should be defined... checking for a BSD-compatible install... (cached) no
-   1 checking whether _XOPEN_SOURCE should be defined... checking for unistd.h... (cached) (cached) no
-   1 checking whether gcc -mcpu=7400 -Os accepts -g... (cached) yes
-   1 checking whether gcc -mcpu=750 -Os accepts -g... (cached) yes
-   1 checking whether gcc -mcpu=970 -O2 -m64 accepts -g... (cached) yes
-   1 checking whether gcc -std=gnu99 accepts -g... (cached) yes
-   1 checking whether gcc -std=gnu99 supports -Wall... (cached) yes
-   1 checking whether gcc -std=gnu99 understands -c and -o together... (cached) yes
-   1 checking which library has the termcap functions... (cached) using libncurses
-   2 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853577756) (memory 3853578711)
-   2 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853577790) (memory 3853579535)
-   2 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853577948) (memory 3853580052)
-   2 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853577962) (memory 3853579933)
-   2 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853578228) (memory 3853583566)
-   2 checking for Java compiler... (cached) (cached) javac
-   2 checking for gcc -mcpu=7450 -O2 option to accept ISO C89... (cached) none needed
-   2 checking for gcc -mcpu=970 -O2 option to accept ISO C89... (cached) none needed
-   2 checking for gcc-4.2 -mcpu=7450 -O2 -force_cpusubtype_ALL -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
-   2 checking for gcc-4.2 -mcpu=970 -O2 -force_cpusubtype_ALL -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
-   2 checking for gcc-4.2 -mcpu=970 -O2 -m64 -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
-   2 checking for gcc... (cached) gcc -mcpu=7450 -O2
-   2 checking for gcc... (cached) gcc -mcpu=970 -O2
-   2 checking for ld... (cached) /usr/libexec/gcc/powerpc-apple-darwin9/4.2.1/ld
-   2 checking for powerpc-apple-darwin9.8.0-gcc... (cached) gcc-4.2
-   2 checking if  /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    supports -c -o file.o... (cached) yes
-   2 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 supports -c -o file.o... (cached) yes
-   2 checking if gcc -mcpu=7450 -O2 supports -c -o file.o... (cached) yes
-   2 checking if gcc -mcpu=970 -O2 supports -c -o file.o... (cached) yes
-   2 checking whether gcc -mcpu=7450 -O2 accepts -g... (cached) yes
-   2 checking whether gcc -mcpu=970 -O2 accepts -g... (cached) yes
-   2 checking whether snprintf fully supports the 'n' directive... (cached) yes
-   2 checking whether vsnprintf respects a zero size as in C99... (cached) yes
-   3 checking for Java compiler... (cached) javac
-   3 checking for gettimeofday with POSIX signature... (cached) almost
-   3 checking for gettimeofday with POSIX signature... (cached) yes
-   3 checking for iconv... (cached) no, consider installing GNU libiconv
-   3 checking for ld used by g++... (cached) /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
-   3 checking for library containing acl_get_file... (cached) none required
-   3 checking for library containing setsockopt... (cached) none required
-   3 checking for makecontext... (cached) yes
-   3 checking for powerpc-apple-darwin9.8.0-ar... (cached) ar 
-   3 checking for struct stat.st_blksize... (cached) yes
-   3 checking for sys/acl.h... (cached) yes
-   3 checking for sys/buf.h... (cached) yes
-   3 checking for sys/mtio.h... (cached) yes
-   3 checking for texi2pdf... (cached) /tmp/gettext-0.21/build-aux/missing texi2pdf
-   3 checking for texi2pdf... (cached) /usr/bin/texi2pdf
-   3 checking whether getopt is POSIX compatible... (cached) no
-   3 checking whether unlink of a parent directory fails as it should... (cached) no
-   4 checking dependency style of /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include   ... (cached) gcc3
-   4 checking dependency style of /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64... (cached) gcc3
-   4 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    option to accept ISO C89... (cached) none needed
-   4 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 option to accept ISO C89... (cached) none needed
-   4 checking for CFLocaleCopyCurrent... (cached) no
-   4 checking for bit size of ptrdiff_t... (cached) 64
-   4 checking for bit size of size_t... (cached) 64
-   4 checking for ld... (cached) /usr/libexec/gcc/powerpc-apple-darwin8/4.2.1/ld
-   4 checking for powerpc-apple-darwin8.11.0-gcc... (cached) gcc-4.2
-   4 checking for powerpc-apple-darwin9.8.0-gcc... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include   
-   4 checking for powerpc-apple-darwin9.8.0-gcc... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64
-   4 checking for powerpc-apple-darwin9.8.0-ranlib... (cached) ranlib 
-   4 checking if  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    supports -c -o file.o... (cached) yes
-   4 checking if  /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/include/powerpc-apple-darwin9.8.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    supports -c -o file.o... (cached) yes
-   4 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -c -o file.o... (cached) yes
-   4 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    supports -c -o file.o... (cached) yes
-   4 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 supports -c -o file.o... (cached) yes
-   4 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/include/powerpc-apple-darwin9.8.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 supports -c -o file.o... (cached) yes
-   4 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    accepts -g... (cached) yes
-   4 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 accepts -g... (cached) yes
-   5 checking for makecontext... (cached) no
-   5 checking whether the compiler supports GNU C++... (cached) yes
-   5 checking whether unlink of a parent directory fails as it should... (cached) yes
-   6 checking assembler for section merging support... (cached) no
-   6 checking for __xpg4... (cached) no
-   6 checking for alloca... (cached) checking for _setjmp... yes
-   6 checking for g++ option to enable C++11 features... (cached) unsupported
-   6 checking for g++ option to enable C++98 features... (cached) none needed
-   6 checking for gcc-4.2 -std=gnu99 options needed to detect all undeclared functions... (cached) none needed
-   6 checking for gcc-4.2 option to accept ISO C89... (cached) none needed
-   6 checking for gethostent... (cached) yes
-   6 checking for getloadavg... (cached) yes
-   6 checking for getrlimit... (cached) yes
-   6 checking for getrusage... (cached) yes
-   6 checking for ioctl... (cached) yes
-   6 checking for library containing setsockopt... (cached) none needed
-   6 checking for mknod... (cached) yes
-   6 checking for powerpc-apple-darwin9.8.0-strip... (cached) strip
-   6 checking for sa_family_t... (cached) yes
-   6 checking for setpgid... (cached) yes
-   6 checking for setregid... (cached) yes
-   6 checking for setreuid... (cached) yes
-   6 checking for setsid... (cached) yes
-   6 checking for socklen_t... (cached) yes
-   6 checking for struct sockaddr_storage... (cached) yes
-   6 checking for struct sockaddr_storage.ss_family... (cached) yes
-   6 checking for sys/loadavg.h... (cached) no
-   6 checking for sys/uio.h... (cached) yes
-   6 checking for sysconf... (cached) yes
-   6 checking for uname... (cached) yes
-   6 checking if g++-4.2 supports -c -o file.o... (cached) yes
-   6 checking if gcc-4.2 -std=gnu99 supports -c -o file.o... (cached) yes
-   6 checking size of off_t... (cached) 8
-   6 checking whether <sys/socket.h> defines the SHUT_* macros... (cached) yes
-   6 checking whether <sys/socket.h> is self-contained... (cached) yes
-   6 checking whether fdopen sets errno... (cached) yes
-   6 checking whether getloadavg is declared... (cached) yes
-   6 checking whether getrusage works... (cached) yes
-   6 checking whether iswdigit is ISO C compliant... (cached) yes
-   6 checking whether iswxdigit is ISO C compliant... (cached) yes
-   6 checking whether link(2) dereferences a symlink... (cached) yes
-   6 checking whether the compiler supports the __inline keyword... (cached) yes
-   7 checking for CFPreferencesCopyAppValue... (cached) no
-   7 checking for SSL_library_init... (cached) yes
-   7 checking for argz_count... (cached) no
-   7 checking for argz_next... (cached) no
-   7 checking for argz_stringify... (cached) no
-   7 checking for bison... (cached) bison -y
-   7 checking for dlopen... (cached) yes
-   7 checking for gcc option to accept ISO C99... (cached) -std=gnu99
-   7 checking for gmtime_r... (cached) yes
-   7 checking for hstrerror... (cached) yes
-   7 checking for sched_yield in -lposix4... (cached) no
-   7 checking for sched_yield in -lrt... (cached) no
-   7 checking for shlload... (cached) no
-   7 checking for texi2pdf... (cached) /tmp/gettext-0.20/build-aux/missing texi2pdf
-   7 checking if c++ supports -c -o file.o... (cached) yes
-   7 checking whether the inttypes.h PRIxNN macros are broken... (cached) no
-   7 checking which library has the termcap functions... (cached) using libtermcap
-   8 checking 32-bit host C ABI... (cached) no
-   8 checking POSIX termios... (cached) yes
-   8 checking dependency style of /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   ... (cached) gcc3
-   8 checking dependency style of /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64... (cached) gcc3
-   8 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    option to accept ISO C89... (cached) none needed
-   8 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 option to accept ISO C89... (cached) none needed
-   8 checking for Java compiler... (cached) (cached) no
-   8 checking for alloca... (cached) checking for C/C++ restrict keyword... no
-   8 checking for alloca... (cached) checking whether <wchar.h> uses 'inline' correctly... (cached) yes
-   8 checking for alloca... (cached) checking whether the preprocessor supports include_next... yes
-   8 checking for cc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
-   8 checking for getauxval... (cached) no
-   8 checking for gethostbyname... (cached) yes
-   8 checking for getopt_long... (cached) yes
-   8 checking for getservbyname... (cached) yes
-   8 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include   ... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld
-   8 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld
-   8 checking for library containing gethostbyname... (cached) none required
-   8 checking for library containing getservbyname... (cached) none required
-   8 checking for library containing inet_ntop... (cached) none required
-   8 checking for powerpc-apple-darwin8.11.0-gcc... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   
-   8 checking for powerpc-apple-darwin8.11.0-gcc... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64
-   8 checking for pstat_getdynamic... (cached) no
-   8 checking for setrlimit... (cached) yes
-   8 checking for sigstack... (cached) no
-   8 checking for standard gettimeofday... (cached) yes
-   8 checking for sys/fs_types.h... (cached) no
-   8 checking for sys/mount.h... (cached) yes
-   8 checking for sys/pstat.h... (cached) no
-   8 checking for sys/sysmp.h... (cached) no
-   8 checking for sysinfo... (cached) no
-   8 checking for sysmp... (cached) no
-   8 checking if  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    supports -c -o file.o... (cached) yes
-   8 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    supports -c -o file.o... (cached) yes
-   8 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -c -o file.o... (cached) yes
-   8 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -c -o file.o... (cached) yes
-   8 checking if cc -std=gnu99 supports -c -o file.o... (cached) yes
-   8 checking return type of signal handlers... (cached) void
-   8 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    accepts -g... (cached) yes
-   8 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 accepts -g... (cached) yes
-   8 checking whether inet_ntop is declared... (cached) yes
-   8 checking whether strsignal is declared... (cached) yes
-   8 checking whether use of TIOCGWINSZ requires sys/ioctl.h... (cached) no
-   9 checking for C compiler vendor... (cached) gnu
-   9 checking for alloca... (cached) checking whether malloc is ptrdiff_t safe... no
-   9 checking for ld used by gcc -std=gnu99... (cached) /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
-   9 checking for ld used by gcc... (cached) /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
-  10 checking for alloca... (cached) checking for inline... inline
-  10 checking for ld used by g++... (cached) /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
-  10 checking for vfork... (cached) yes
-  10 checking for working GNU getopt function... (cached) no
-  10 checking whether getopt is POSIX compatible... (cached) yes
-  11 checking dependency style of gcc-4.2 -std=gnu99... (cached) gcc3
-  11 checking for CLISP libdir... (cached) /private/tmp/clisp-de01f0f47bb44d3a0f9e842464cf2520b238f356/src/
-  11 checking for CLISP linking set... (cached) /private/tmp/clisp-de01f0f47bb44d3a0f9e842464cf2520b238f356/src
-  11 checking for CLISP... (cached) yes
-  11 checking for getgroups... (cached) yes
-  11 checking for struct tm.tm_zone... (cached) yes
-  11 checking for working getgroups... (cached) yes
-  12 checking for ELF binary format... (cached) no
-  12 checking for O_CLOEXEC... (cached) no
-  12 checking for dvips... (cached) /tmp/gettext-0.21/build-aux/missing dvips
-  12 checking for fenv.h... (cached) yes
-  12 checking for gethostname... (cached) yes
-  12 checking for locale.h... (cached) yes
-  12 checking for powerpc-apple-darwin8.11.0-strip... (cached) strip
-  12 checking for sin in -lm... (cached) yes
-  12 checking for the common suffixes of directories in the library search path... (cached) lib,lib,lib
-  12 checking for threads.h... (cached) no
-  13 checking for GNU gettext in libc... (cached) no
-  13 checking for GNU gettext in libintl... (cached) no
-  13 checking for LC_MESSAGES... (cached) yes
-  13 checking for SIGPIPE... (cached) yes
-  13 checking for Solaris 11.4 locale system... (cached) no
-  13 checking for __fsetlocking... (cached) no
-  13 checking for atexit... (cached) yes
-  13 checking for bison... (cached) bison
-  13 checking for canonicalize_file_name... (cached) no
-  13 checking for ctype.h... (cached) yes
-  13 checking for d_ino member in directory struct... (cached) yes
-  13 checking for dl.h... (cached) no
-  13 checking for duplocale... (cached) yes
-  13 checking for errno.h... (cached) yes
-  13 checking for fake locale system (OpenBSD)... (cached) no
-  13 checking for float.h... (cached) yes
-  13 checking for freelocale... (cached) yes
-  13 checking for g++ option to produce PIC... (cached) -fno-common -DPIC
-  13 checking for getaddrinfo... (cached) yes
-  13 checking for getline... (cached) no
-  13 checking for getlocalename_l... (cached) no
-  13 checking for iconv.h... (cached) yes
-  13 checking for iswblank... (cached) yes
-  13 checking for iswcntrl... (cached) yes
-  13 checking for jar... (cached) jar
-  13 checking for langinfo.h... (cached) yes
-  13 checking for localtime... (cached) yes
-  13 checking for mbsinit... (cached) yes
-  13 checking for mbslen... (cached) no
-  13 checking for mbtowc... (cached) yes
-  13 checking for memmove... (cached) yes
-  13 checking for readlinkat... (cached) no
-  13 checking for resolv.h... (cached) yes
-  13 checking for search.h... (cached) yes
-  13 checking for select... (cached) yes
-  13 checking for sig_atomic_t... (cached) yes
-  13 checking for stat... (cached) yes
-  13 checking for strchrnul... (cached) no
-  13 checking for strftime... (cached) yes
-  13 checking for tcdrain... (cached) yes
-  13 checking for wcwidth... (cached) yes
-  13 checking for wprintf... (cached) yes
-  13 checking for xlocale.h... (cached) yes
-  13 checking how to run the C++ preprocessor... (cached) g++ -E
-  13 checking if environ is properly declared... (cached) no
-  13 checking if g++ PIC flag -fno-common -DPIC works... (cached) yes
-  13 checking if g++ static flag -static works... (cached) no
-  13 checking whether <limits.h> defines MIN and MAX... (cached) no
-  13 checking whether _snwprintf is declared... (cached) no
-  13 checking whether btowc(0) is correct... (cached) yes
-  13 checking whether btowc(EOF) is correct... (cached) yes
-  13 checking whether clearerr_unlocked is declared... (cached) yes
-  13 checking whether fabs can be used without linking with libm... (cached) yes
-  13 checking whether ferror_unlocked is declared... (cached) yes
-  13 checking whether fflush_unlocked is declared... (cached) no
-  13 checking whether fopen recognizes a trailing slash... (cached) yes
-  13 checking whether fputc_unlocked is declared... (cached) no
-  13 checking whether fputs_unlocked is declared... (cached) no
-  13 checking whether fread_unlocked is declared... (cached) no
-  13 checking whether fwrite_unlocked is declared... (cached) no
-  13 checking whether getchar_unlocked is declared... (cached) yes
-  13 checking whether integer division by zero raises SIGFPE... (cached) no
-  13 checking whether isinf is declared... (cached) yes
-  13 checking whether isinf(long double) works... (cached) yes
-  13 checking whether iswblank is declared... (cached) yes
-  13 checking whether locale.h defines locale_t... (cached) no
-  13 checking whether log10 works... (cached) yes
-  13 checking whether long double and double are the same... (cached) no
-  13 checking whether mbswidth is declared in <wchar.h>... (cached) no
-  13 checking whether pow can be used without linking with libm... (cached) yes
-  13 checking whether putc_unlocked is declared... (cached) yes
-  13 checking whether putchar_unlocked is declared... (cached) yes
-  13 checking whether readlink handles trailing slash correctly... (cached) no
-  13 checking whether readlink signature is correct... (cached) yes
-  13 checking whether realpath works... (cached) no
-  13 checking whether setenv is declared... (cached) yes
-  13 checking whether setlocale supports the C locale... (cached) yes
-  13 checking whether snprintf is declared... (cached) yes
-  13 checking whether strnlen is declared... (cached) no
-  13 checking whether vsnprintf is declared... (cached) yes
-  13 checking whether wcrtomb return value is correct... (cached) yes
-  13 checking whether wcrtomb works in the C locale... (cached) yes
-  13 checking whether we are using the GNU C Library 2 or newer... (cached) no
-  14 checking for dvips... (cached) /tmp/gettext-0.20/build-aux/missing dvips
-  14 checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
-  14 checking for the common suffixes of directories in the library search path... (cached) lib,lib
-  14 checking for working fcntl.h... (cached) no (bad O_NOATIME)
-  15 checking for argz.h... (cached) no
-  15 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   ... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld
-  15 checking for rawmemchr... (cached) no
-  15 checking for sys/wait.h... (cached) yes
-  15 checking for vsnprintf... (cached) yes
-  15 checking whether ldexp() can be used without linking with libm... (cached) yes
-  16 checking for a turkish Unicode locale... (cached) none
-  16 checking for fdatasync... (cached) no
-  16 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld
-  16 checking for object suffix... (cached) o
-  16 checking for openssl/sha.h... (cached) yes
-  16 checking for remove... (cached) yes
-  16 checking for strip... (cached) /usr/bin/strip
-  16 checking for sys/ioctl.h... (cached) yes
-  16 checking for typedef stack_t... (cached) yes
-  16 checking for working fork... (cached) yes
-  16 checking if the linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld) is GNU ld... (cached) no
-  16 checking if we should include stdbool.h... (cached) yes
-  16 checking size of __int32... (cached) 0
-  16 checking whether fdatasync is declared... (cached) no
-  16 checking whether use of struct winsize requires sys/ptem.h... (cached) no
-  17 checking how to remove colons from paths... (cached) echo $x
-  17 checking how to run the C preprocessor... (cached) gcc-4.2 -std=gnu99 -E
-  17 checking whether ln -s works... (cached) yes
-  18 checking 32-bit host C ABI... (cached) yes
-  18 checking dependency style of gcc -std=gnu99... (cached) gcc3
-  18 checking for /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld option to reload object files... (cached) -r
-  18 checking for gcc option to enable C11 features... (cached) unsupported
-  18 checking for gcc option to enable C99 features... (cached) -std=gnu99
-  18 checking for gcc-4.2 option to enable C11 features... (cached) unsupported
-  18 checking for gcc-4.2 option to enable C99 features... (cached) -std=gnu99
-  18 checking for gcc... (cached) gcc-4.2
-  18 checking for sys/resource.h... (cached) yes
-  18 checking how to convert powerpc-apple-darwin9.8.0 file names to powerpc-apple-darwin9.8.0 format... (cached) func_convert_file_noop
-  18 checking how to convert powerpc-apple-darwin9.8.0 file names to toolchain format... (cached) func_convert_file_noop
-  18 checking how to make hard links... (cached) ln
-  18 checking how to run the C preprocessor... (cached) gcc -std=gnu99 -E
-  18 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    supports -c -o file.o... (cached) yes
-  18 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 supports -c -o file.o... (cached) yes
-  18 checking if gcc-4.2 supports -c -o file.o... (cached) yes
-  18 checking whether gcc-4.2 -std=gnu99 understands -c and -o together... (cached) yes
-  18 checking whether use of TIOCGWINSZ requires termios.h... (cached) yes
-  19 checking for linux/fs.h... (cached) no
-  19 checking for readlink... (cached) yes
-  19 checking for realpath... (cached) yes
-  19 checking for unlinkat... (cached) no
-  19 checking whether locale.h conforms to POSIX:2001... (cached) yes
-  19 checking whether stat file-mode macros are broken... (cached) no
-  19 checking whether struct lconv is properly defined... (cached) yes
-  19 checking whether utime handles trailing slashes on files... (cached) no
-  20 checking for arpa/nameser.h... (cached) yes
-  21 checking for CFLocaleCopyPreferredLanguages... (cached) yes
-  21 checking for asprintf... (cached) yes
-  21 checking for ld used by gcc... (cached) /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
-  21 checking for munmap... (cached) yes
-  21 checking for signal.h... (cached) yes
-  21 checking for stddef.h... (cached) yes
-  21 checking for strcasecmp... (cached) yes
-  21 checking for working mmap... (cached) yes
-  21 checking whether uselocale works... (cached) yes
-  22 checking for bit size of ptrdiff_t... (cached) 32
-  22 checking for bit size of size_t... (cached) 32
-  23 checking build system type... (cached) powerpc-apple-darwin9.8.0
-  23 checking for ld used by gcc -std=gnu99... (cached) /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
-  23 checking for stdbool.h... (cached) yes
-  23 checking host system type... (cached) powerpc-apple-darwin9.8.0
-  23 checking whether gcc-4.2 accepts -g... (cached) yes
-  24 checking for alloca as a compiler built-in... (cached) yes
-  24 checking for complex.h... (cached) yes
-  24 checking for flockfile... (cached) yes
-  24 checking for funlockfile... (cached) yes
-  24 checking for setlocale... (cached) yes
-  24 checking for sys/sysctl.h... (cached) yes
-  24 checking for sysctl... (cached) yes
-  24 checking whether mbrtowc and mbstate_t are properly declared... (cached) yes
-  25 checking for CFLocaleCopyCurrent... (cached) yes
-  26 checking for __builtin_expect... (cached) yes
-  26 checking for __fseterr... (cached) no
-  26 checking for bit size of sig_atomic_t... (cached) 32
-  26 checking for bit size of wchar_t... (cached) 32
-  26 checking for bit size of wint_t... (cached) 32
-  26 checking for fchdir... (cached) yes
-  26 checking for fdopendir... (cached) no
-  26 checking for fstatat... (cached) no
-  26 checking for g++... (cached) g++
-  26 checking for getegid... (cached) yes
-  26 checking for geteuid... (cached) yes
-  26 checking for getgid... (cached) yes
-  26 checking for getuid... (cached) yes
-  26 checking for gmsgfmt... (cached) :
-  26 checking for iconv declaration... (cached) 
-  26 checking for msgfmt... (cached) no
-  26 checking for msgmerge... (cached) no
-  26 checking for obstacks that work with any size object... (cached) no
-  26 checking for openat... (cached) no
-  26 checking for shared library run path origin... (cached) done
-  26 checking for sys/select.h... (cached) yes
-  26 checking for va_copy... (cached) yes
-  26 checking for xgettext... (cached) no
-  26 checking whether fchdir is declared... (cached) yes
-  26 checking whether fdopendir is declared... (cached) no
-  26 checking whether langinfo.h defines ALTMON_1... (cached) no
-  26 checking whether langinfo.h defines CODESET... (cached) yes
-  26 checking whether langinfo.h defines ERA... (cached) yes
-  26 checking whether langinfo.h defines T_FMT_AMPM... (cached) yes
-  26 checking whether langinfo.h defines YESEXPR... (cached) yes
-  26 checking whether limits.h has WORD_BIT, BOOL_WIDTH etc.... (cached) no
-  26 checking whether printf() supports POSIX/XSI format strings... (cached) yes
-  26 checking whether stdint.h conforms to C99... (cached) no
-  26 checking whether this system supports file names of any length... (cached) no
-  26 checking whether we are using the GNU C Library >= 2.1 or uClibc... (cached) no
-  27 checking for fchown... (cached) yes
-  28 checking whether mbrtowc stores incomplete characters... (cached) no
-  29 checking for __freading... (cached) no
-  29 checking for _fseeki64... (cached) no
-  29 checking for nl_langinfo and CODESET... (cached) yes
-  29 checking for shared library path variable... (cached) DYLD_LIBRARY_PATH
-  29 checking whether fpurge works... (cached) no
-  29 checking whether printf supports size specifiers as in C99... (cached) yes
-  29 checking whether printf supports the 'n' directive... (cached) yes
-  30 checking command to parse /usr/bin/nm -p output from gcc object... (cached) ok
-  30 checking for gcc option to produce PIC... (cached) -fno-common -DPIC
-  30 checking for powerpc-apple-darwin9.8.0-ar... (cached) ar
-  30 checking if gcc PIC flag -fno-common -DPIC works... (cached) yes
-  30 checking if gcc static flag -static works... (cached) no
-  30 checking if gcc supports -fno-rtti -fno-exceptions... (cached) no
-  31 checking for reallocarray... (cached) no
-  31 checking whether malloc, realloc, calloc set errno on failure... (cached) yes
-  32 checking command to parse /usr/bin/nm -p output from gcc -std=gnu99 object... (cached) ok
-  32 checking for C/C++ restrict keyword... (cached) no
-  32 checking for futimesat... (cached) no
-  32 checking for gcc -std=gnu99 option to produce PIC... (cached) -fno-common -DPIC
-  32 checking for library containing opendir... (cached) none required
-  32 checking for powerpc-apple-darwin9.8.0-ranlib... (cached) ranlib
-  32 checking for utimensat... (cached) no
-  32 checking if gcc -std=gnu99 PIC flag -fno-common -DPIC works... (cached) yes
-  32 checking if gcc -std=gnu99 static flag -static works... (cached) no
-  32 checking if gcc -std=gnu99 supports -fno-rtti -fno-exceptions... (cached) no
-  32 checking if the linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld) is GNU ld... (cached) no
-  32 checking whether fseeko is declared... (cached) yes
-  32 checking whether the utimes function works... (cached) yes
-  33 checking for long long int... (cached) yes
-  33 checking for malloc.h... (cached) no
-  33 checking for netinet/in.h... (cached) yes
-  33 checking for wctype.h... (cached) yes
-  33 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) is GNU ld... (cached) no
-  34 checking for working fcntl.h... (cached) no (bad O_NOATIME, O_NOFOLLOW)
-  34 checking whether ecvt is declared... (cached) yes
-  34 checking whether fcvt is declared... (cached) yes
-  34 checking whether gcvt is declared... (cached) yes
-  34 checking whether memrchr is declared... (cached) no
-  34 checking whether strdup is declared... (cached) yes
-  34 checking whether wcsdup is declared... (cached) no
-  34 checking whether wcwidth is declared... (cached) yes
-  34 checking whether wcwidth works reasonably in UTF-8 locales... (cached) no
-  35 checking for compiler option needed when checking for declarations... (cached) none
-  35 checking whether unlink honors trailing slashes... (cached) no
-  36 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    supports -c -o file.o... (cached) yes
-  36 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -c -o file.o... (cached) yes
-  36 checking whether free is known to preserve errno... (cached) no
-  36 checking whether malloc (0) returns nonnull... (cached) yes
-  36 checking whether the compiler is clang... (cached) no
-  37 checking for __fpurge... (cached) no
-  37 checking for fpurge... (cached) yes
-  37 checking for putenv... (cached) yes
-  37 checking for strdup... (cached) yes
-  37 checking whether fpurge is declared... (cached) yes
-  37 checking whether frexp() can be used without linking with libm... (cached) yes
-  37 checking whether frexpl is declared... (cached) yes
-  37 checking whether printf supports 'long double' arguments... (cached) yes
-  37 checking whether printf supports infinite 'double' arguments... (cached) yes
-  37 checking whether printf supports infinite 'long double' arguments... (cached) yes
-  37 checking whether printf supports large precisions... (cached) yes
-  37 checking whether printf supports the 'F' directive... (cached) yes
-  37 checking whether printf supports the 'a' and 'A' directives... (cached) no
-  37 checking whether printf supports the 'ls' directive... (cached) yes
-  37 checking whether printf supports the grouping flag... (cached) yes
-  37 checking whether printf supports the left-adjust flag correctly... (cached) yes
-  37 checking whether printf supports the zero flag correctly... (cached) no
-  37 checking whether printf survives out-of-memory conditions... (cached) no
-  39 checking for TIME_UTC in <time.h>... (cached) no
-  39 checking for arpa/inet.h... (cached) yes
-  39 checking for clock_settime... (cached) no
-  39 checking for flexible array member... (cached) yes
-  39 checking for newlocale... (cached) yes
-  39 checking for perl... (cached) /usr/bin/perl
-  39 checking for tsearch... (cached) yes
-  39 checking where to find the exponent in a 'long double'... (cached) word 0 bit 20
-  39 checking whether __argv is declared... (cached) no
-  39 checking whether dup works... (cached) yes
-  39 checking whether execvpe is declared... (cached) no
-  39 checking whether fcloseall is declared... (cached) no
-  39 checking whether feof_unlocked is declared... (cached) yes
-  39 checking whether fgets_unlocked is declared... (cached) no
-  39 checking whether ldexpl works... (cached) no
-  39 checking whether ldexpl() can be used without linking with libm... (cached) yes
-  39 checking whether system header files limit the line length... (cached) no
-  39 checking whether the compiler generally respects inline... (cached) yes
-  39 checking whether wint_t is large enough... (cached) yes
-  39 checking whether wint_t is too small... (cached) no
-  40 checking for futimens... (cached) no
-  40 checking for futimes... (cached) yes
-  40 checking whether ldexp can be used without linking with libm... (cached) yes
-  40 checking whether snprintf truncates the result as in C99... (cached) yes
-  41 checking for special C compiler options needed for large files... (cached) no
-  42 checking for memrchr... (cached) no
-  42 checking whether _XOPEN_SOURCE should be defined... (cached) no
-  42 checking whether ftello is declared... (cached) yes
-  42 checking whether mbrtowc handles a NULL pwc argument... (cached) yes
-  42 checking whether mbrtowc handles a NULL string argument... (cached) yes
-  42 checking whether mbrtowc has a correct return value... (cached) yes
-  42 checking whether mbrtowc returns 0 when parsing a NUL character... (cached) yes
-  42 checking whether mbrtowc works on empty input... (cached) yes
-  42 checking whether strstr works... (cached) yes
-  42 checking whether the C locale is free of encoding errors... (cached) yes
-  42 checking whether ungetc works on arbitrary bytes... (cached) yes
-  44 checking for /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld option to reload object files... (cached) -r
-  44 checking for otool64... (cached) otool64
-  44 checking for signbit compiler built-ins... (cached) no
-  44 checking how to convert powerpc-apple-darwin8.11.0 file names to powerpc-apple-darwin8.11.0 format... (cached) func_convert_file_noop
-  44 checking how to convert powerpc-apple-darwin8.11.0 file names to toolchain format... (cached) func_convert_file_noop
-  44 checking how to run the C preprocessor... (cached) gcc -E
-  45 checking whether lseek detects pipes... (cached) yes
-  45 checking whether select detects invalid fds... (cached) yes
-  45 checking whether select supports a 0 argument... (cached) yes
-  45 checking whether source code line length is unlimited... (cached) yes
-  45 checking whether stdin defaults to large file offsets... (cached) yes
-  45 checking whether the preprocessor supports include_next... (cached) yes
-  45 checking whether we are using the GNU C++ compiler... (cached) yes
-  46 checking for fchmod... (cached) yes
-  46 checking for strip... (cached) strip
-  47 checking for closedir... (cached) yes
-  47 checking for dirfd... (cached) no
-  47 checking for opendir... (cached) yes
-  47 checking for readdir... (cached) yes
-  47 checking for simple visibility declarations... (cached) yes
-  47 checking for strtoul... (cached) yes
-  47 checking for uselocale... (cached) yes
-  47 checking whether dirfd is declared... (cached) yes
-  47 checking whether the -Werror option is usable... (cached) yes
-  48 checking for dirent.h that defines DIR... (cached) yes
-  48 checking for utime... (cached) yes
-  48 checking for utime.h... (cached) yes
-  49 checking for getcwd... (cached) yes
-  50 checking for CFLocaleCopyPreferredLanguages... (cached) no
-  50 checking whether g++ accepts -g... (cached) yes
-  51 checking dependency style of gcc... (cached) gcc3
-  51 checking for netdb.h... (cached) yes
-  51 checking whether gcc understands -c and -o together... (cached) yes
-  52 checking for __xpg_strerror_r... (cached) no
-  52 checking for catgets... (cached) yes
-  52 checking for vasnprintf... (cached) no
-  52 checking whether _snprintf is declared... (cached) no
-  52 checking whether perror matches strerror... (cached) yes
-  53 checking for fsync... (cached) yes
-  54 checking for chown... (cached) yes
-  54 checking for unsigned long long int... (cached) yes
-  54 checking whether snprintf respects a size of 1... (cached) yes
-  55 checking for getcwd with POSIX signature... (cached) yes
-  55 checking for towlower... (cached) yes
-  55 checking for wctrans_t... (cached) yes
-  55 checking for wctype_t... (cached) yes
-  55 checking whether getcwd (NULL, 0) allocates memory for result... (cached) yes
-  55 checking whether iswcntrl works... (cached) yes
-  57 checking for shutdown... (cached) yes
-  57 checking for signbit macro... (cached) yes
-  57 checking whether HUGE_VAL works... (cached) yes
-  57 checking whether NAN macro works... (cached) yes
-  57 checking whether the compiler produces multi-arch binaries... (cached) no
-  58 checking build system type... (cached) powerpc-apple-darwin8.11.0
-  58 checking for time.h... (cached) yes
-  58 checking host system type... (cached) powerpc-apple-darwin8.11.0
-  60 checking for getopt_long_only... (cached) yes
-  60 checking for inline... (cached) inline
-  60 checking for powerpc-apple-darwin8.11.0-ar... (cached) ar
-  60 checking whether rmdir works... (cached) yes
-  60 checking whether snprintf returns a byte count as in C99... (cached) yes
-  61 checking for _LARGEFILE_SOURCE value needed for large files... (cached) no
-  61 checking for struct timeval... (cached) yes
-  61 checking for wide-enough struct timeval.tv_sec member... (cached) yes
-  61 checking for working stdalign.h... (cached) no
-  61 checking whether C symbols are prefixed with underscore at the linker level... (cached) yes
-  61 checking whether alarm is declared... (cached) yes
-  62 checking for -exported_symbols_list linker flag... (cached) yes
-  62 checking for -force_load linker flag... (cached) no
-  62 checking for -single_module linker flag... (cached) yes
-  62 checking for a working dd... (cached) /bin/dd
-  62 checking for archiver @FILE support... (cached) no
-  62 checking for dsymutil... (cached) dsymutil
-  62 checking for fgrep... (cached) /usr/bin/grep -F
-  62 checking for getpagesize... (cached) yes
-  62 checking for lipo... (cached) lipo
-  62 checking for nmedit... (cached) nmedit
-  62 checking for objdir... (cached) .libs
-  62 checking for otool... (cached) otool
-  62 checking how to associate runtime and link libraries... (cached) printf %s\n
-  62 checking how to recognize dependent libraries... (cached) pass_all
-  62 checking how to truncate binary pipes... (cached) /bin/dd bs=4096 count=1
-  62 checking if : is a manifest tool... (cached) no
-  62 checking the maximum length of command line arguments... (cached) 196608
-  63 checking for pipe... (cached) yes
-  63 checking for setenv... (cached) yes
-  63 checking for vasprintf... (cached) yes
-  64 checking for CFPreferencesCopyAppValue... (cached) yes
-  64 checking for powerpc-apple-darwin8.11.0-ranlib... (cached) ranlib
-  65 checking whether setlocale (LC_ALL, NULL) is multithread-safe... (cached) no
-  65 checking whether setlocale (category, NULL) is multithread-safe... (cached) yes
-  66 checking for GNU libc compatible malloc... (cached) yes
-  66 checking for iconv... (cached) yes
-  66 checking for working iconv... (cached) yes
-  67 checking whether malloc, realloc, calloc are POSIX compliant... (cached) yes
-  68 checking for egrep... (cached) /usr/bin/grep -E
-  68 checking for gcc option to accept ISO C89... (cached) none needed
-  68 checking for grep that handles long lines and -e... (cached) /usr/bin/grep
-  68 checking for sys/cdefs.h... (cached) yes
-  68 checking whether <sys/param.h> defines MIN and MAX... (cached) yes
-  69 checking for off_t... (cached) yes
-  69 checking if g++ supports -c -o file.o... (cached) yes
-  69 checking whether the compiler supports GNU C... (cached) yes
-  70 checking dependency style of g++... (cached) gcc3
-  70 checking for working vfork... (cached) yes
-  71 checking for clock_gettime... (cached) no
-  72 checking for promoted mode_t type... (cached) int
-  73 checking for fseeko... (cached) yes
-  73 checking whether <wchar.h> uses 'inline' correctly... (cached) yes
-  73 checking whether conversion from 'int' to 'long double' works... (cached) yes
-  76 checking whether NULL can be used in arbitrary expressions... (cached) yes
-  77 checking whether frexp works... (cached) yes
-  77 checking whether frexpl works... (cached) no
-  77 checking whether frexpl() can be used without linking with libm... (cached) yes
-  78 checking for mbstate_t... (cached) yes
-  78 checking for siginterrupt... (cached) yes
-  78 checking for struct sigaction.sa_sigaction... (cached) yes
-  80 checking whether getdtablesize is declared... (cached) yes
-  81 checking for crtdefs.h... (cached) no
-  81 checking whether memchr works... (cached) yes
-  83 checking for dirent.h... (cached) yes
-  83 checking whether limits.h has LLONG_MAX, WORD_BIT, ULLONG_WIDTH etc.... (cached) no
-  83 checking whether lstat correctly handles trailing slash... (cached) no
-  84 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) is GNU ld... (cached) no
-  84 checking whether getc_unlocked is declared... (cached) yes
-  85 checking whether printf supports POSIX/XSI format strings with positions... (cached) yes
-  86 checking for gcc... (cached) gcc
-  86 checking whether gcc accepts -g... (cached) yes
-  87 checking for pthread_kill in -lpthread... (cached) yes
-  88 checking for BSD- or MS-compatible name lister (nm)... (cached) /usr/bin/nm -p
-  88 checking the name lister (/usr/bin/nm -p) interface... (cached) BSD nm
-  89 checking where to find the exponent in a 'double'... (cached) word 0 bit 20
-  89 checking where to find the exponent in a 'float'... (cached) word 0 bit 23
-  93 checking for ftello... (cached) yes
-  93 checking for stdio.h... (cached) yes
-  93 checking whether dup2 works... (cached) yes
-  93 checking whether fcntl handles F_DUPFD correctly... (cached) yes
-  93 checking whether fcntl understands F_DUPFD_CLOEXEC... (cached) no
-  93 checking whether ftello works... (cached) yes
-  93 checking whether getdtablesize works... (cached) yes
-  94 checking for ar... (cached) ar
-  94 checking for getdtablesize... (cached) yes
-  94 checking for intmax_t... (cached) yes
-  94 checking for struct timespec in <time.h>... (cached) yes
-  99 checking for a BSD-compatible install... (cached) /usr/bin/install -c
-  99 checking whether open recognizes a trailing slash... (cached) no
- 101 checking for sigset_t... (cached) yes
- 102 checking for fcntl... (cached) yes
- 102 checking for sigaltstack... (cached) yes
- 104 checking for dlfcn.h... (cached) yes
- 104 checking if gcc -std=gnu99 supports -c -o file.o... (cached) yes
- 106 checking for a sed that does not truncate output... (cached) /usr/bin/sed
- 107 checking for math.h... (cached) yes
- 107 checking for struct stat.st_birthtim.tv_nsec... (cached) no
- 107 checking for struct stat.st_birthtimensec... (cached) no
- 107 checking for struct stat.st_birthtimespec.tv_nsec... (cached) no
- 107 checking for wcslen... (cached) yes
- 107 checking for wcsnlen... (cached) no
- 107 checking whether stat handles trailing slashes on files... (cached) no
- 109 checking for _set_invalid_parameter_handler... (cached) no
- 109 checking for getexecname... (cached) no
- 109 checking for getprogname... (cached) yes
- 109 checking for ptrdiff_t integer literal suffix... (cached) 
- 109 checking for sig_atomic_t integer literal suffix... (cached) 
- 109 checking for size_t integer literal suffix... (cached) ul
- 109 checking for sys/bitypes.h... (cached) no
- 109 checking for sys/inttypes.h... (cached) no
- 109 checking for wchar_t integer literal suffix... (cached) 
- 109 checking for wint_t integer literal suffix... (cached) 
- 109 checking whether sig_atomic_t is signed... (cached) yes
- 109 checking whether strerror(0) succeeds... (cached) no
- 109 checking whether strerror_r returns char *... (cached) no
- 109 checking whether wchar_t is signed... (cached) yes
- 109 checking whether wint_t is signed... (cached) yes
- 110 checking for alloca... (cached) yes
- 111 checking whether isnan(float) can be used without linking with libm... (cached) yes
- 111 checking whether isnan(float) works... (cached) yes
- 113 checking whether isnan(double) can be used without linking with libm... (cached) yes
- 113 checking whether isnan(long double) can be used without linking with libm... (cached) yes
- 113 checking whether isnanl works... (cached) yes
- 113 checking whether program_invocation_name is declared... (cached) no
- 113 checking whether program_invocation_short_name is declared... (cached) no
- 114 checking for sighandler_t... (cached) no
- 114 checking for volatile sig_atomic_t... (cached) yes
- 114 checking whether imported symbols can be declared weak... (cached) no
- 117 checking for strerror_r... (cached) yes
- 118 checking for mempcpy... (cached) no
- 122 checking for Minix Amsterdam compiler... (cached) no
- 122 checking for error_at_line... (cached) no
- 122 checking whether __progname is defined in default libraries... (cached) yes
- 122 checking whether strerror_r is declared... (cached) yes
- 122 checking which flavor of printf attribute matches inttypes macros... (cached) system
- 123 checking for pthread_rwlock_t... (cached) yes
- 123 checking for stpcpy... (cached) yes
- 123 checking whether pthread_rwlock_rdlock prefers a writer to a reader... (cached) yes
- 124 checking for mode_t... (cached) yes
- 124 checking for mprotect... (cached) yes
- 125 checking for _Bool... (cached) yes
- 125 checking for stdbool.h that conforms to C99... (cached) yes
- 126 checking for an ANSI C-conforming const... (cached) yes
- 128 checking for EMULTIHOP value... (cached) yes
- 128 checking for ENOLINK value... (cached) yes
- 128 checking for EOVERFLOW value... (cached) yes
- 128 checking for complete errno.h... (cached) no
- 128 checking for features.h... (cached) no
- 129 checking whether fflush works on input streams... (cached) no
- 130 checking for pthread.h... (cached) yes
- 130 checking for sys/mman.h... (cached) yes
- 130 checking for wchar_t... (cached) yes
- 130 checking for wint_t... (cached) yes
- 131 checking for strnlen... (cached) no
- 131 checking for struct stat.st_atim.tv_nsec... (cached) no
- 131 checking for struct stat.st_atimespec.tv_nsec... (cached) yes
- 132 checking for fcntl.h... (cached) yes
- 133 checking for sigaction... (cached) yes
- 134 checking for gawk... (cached) awk
- 134 checking for lstat... (cached) yes
- 139 checking for symlink... (cached) yes
- 146 checking for SIZE_MAX... (cached) yes
- 146 checking for raise... (cached) yes
- 146 checking for uid_t in sys/types.h... (cached) yes
- 147 checking if gcc supports -c -o file.o... (cached) yes
- 153 checking for gettimeofday... (cached) yes
- 158 checking for sys/socket.h... (cached) yes
- 159 checking for good max_align_t... (cached) no
- 160 checking for working alloca.h... (cached) yes
- 166 checking for nlink_t... (cached) yes
- 166 checking whether make supports nested variables... (cached) yes
- 169 checking for pid_t... (cached) yes
- 179 checking for getopt.h... (cached) yes
- 179 checking whether byte ordering is bigendian... (cached) yes
- 180 checking for _FILE_OFFSET_BITS value needed for large files... (cached) no
- 181 checking for ranlib... (cached) ranlib
- 186 checking for wcrtomb... (cached) yes
- 187 checking for wchar.h... (cached) yes
- 188 checking for ssize_t... (cached) yes
- 188 checking whether make sets $(MAKE)... (cached) yes
- 190 checking for minix/config.h... (cached) no
- 190 checking whether it is safe to define __EXTENSIONS__... (cached) yes
- 193 checking for mbrtowc... (cached) yes
- 208 checking whether // is distinct from /... (cached) no
- 209 checking for nl_langinfo... (cached) yes
- 221 checking whether mbrtowc handles incomplete characters... (cached) yes
- 221 checking whether mbrtowc works as well as mbtowc... (cached) yes
- 228 checking for sigprocmask... (cached) yes
- 234 checking for ANSI C header files... (cached) yes
- 235 checking for mmap... (cached) yes
- 239 checking for sys/param.h... (cached) yes
- 250 checking for a traditional japanese locale... (cached) ja_JP.eucJP
- 265 checking for ptrdiff_t... (cached) yes
- 265 checking for size_t... (cached) yes
- 271 checking for limits.h... (cached) yes
- 273 checking for sys/time.h... (cached) yes
- 282 checking for a transitional chinese locale... (cached) zh_CN.GB18030
- 297 checking for snprintf... (cached) yes
- 311 checking for memory.h... (cached) yes
- 312 checking for suffix of object files... (cached) o
- 320 checking whether we are using the GNU C compiler... (cached) yes
- 437 checking for sys/types.h... (cached) yes
- 445 checking for a traditional french locale... (cached) fr_FR.ISO8859-1
- 447 checking for strings.h... (cached) yes
- 473 checking for a french Unicode locale... (cached) fr_FR.UTF-8
- 493 checking for sys/stat.h... (cached) yes
- 565 checking for inttypes.h... (cached) yes
- 602 checking for string.h... (cached) yes
- 649 checking for stdlib.h... (cached) yes
- 859 checking for stdint.h... (cached) yes
- 896 checking for unistd.h... (cached) yes
+   2 checking for -plugin option... checking for powerpc-apple-darwin9.8.0-ar... (cached) ar 
+   2 checking for ANSI C header files... (cached) no
+   2 checking for ANSI C header files... checking for unistd.h... (cached) yes
+   2 checking for C compiler default output file name... checking whether we are using the GNU C compiler... (cached) yes
+   2 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853578101) (memory 3853580607)
+   2 checking for CLISP version... checking how to remove colons from paths... (cached) echo $x
+   2 checking for alloca... (cached) checking whether malloc is ptrdiff_t safe... yes
+   2 checking for compiler option needed when checking for declarations... checking for suffix of object files... (cached) none
+   2 checking for fcntl.h... checking for sys/stat.h... (cached) yes
+   2 checking for gcc -mcpu=7400 -Os option to accept ISO C89... (cached) none needed
+   2 checking for gcc -mcpu=750 -Os option to accept ISO C89... (cached) none needed
+   2 checking for gcc -mcpu=970 -O2 -m64 option to accept ISO C89... (cached) none needed
+   2 checking for gcc -std=gnu99 option to accept ISO C89... (cached) none needed
+   2 checking for gcc-4.2 -mcpu=7400 -Os -force_cpusubtype_ALL -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+   2 checking for gcc-4.2 -mcpu=750 -Os -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+   2 checking for gcc... (cached) gcc -mcpu=7400 -Os
+   2 checking for gcc... (cached) gcc -mcpu=750 -Os
+   2 checking for gcc... (cached) gcc -mcpu=970 -O2 -m64
+   2 checking for getrusage... checking for stdlib.h... (cached) yes
+   2 checking for inttypes.h... checking for stdio.h... (cached) (cached) yes
+   2 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   ... checking for grep that handles long lines and -e... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld
+   2 checking for ld... (cached) /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
+   2 checking for powerpc-apple-darwin9.8.0-gcc... (cached) gcc -std=gnu99
+   2 checking for pstat_getstatic... checking for unistd.h... (cached) yes
+   2 checking for stdint.h... (cached) checking for stdlib.h... (cached) yes
+   2 checking for stdio_ext.h... checking for unistd.h... (cached) yes
+   2 checking for string.h... checking whether ln -s works... (cached) (cached) yes
+   2 checking for struct lconv.int_p_cs_precedes... checking dependency style of gcc-4.2 -std=gnu99... (cached) gcc3
+   2 checking for suffix of object files... checking for sys/time.h... (cached) yes
+   2 checking for sys/stat.h... (cached) checking for minix/config.h... (cached) yes
+   2 checking for sys/types.h... (cached) checking whether it is safe to define __EXTENSIONS__... yes
+   2 checking for waitpid... checking for unistd.h... (cached) yes
+   2 checking how to run the C preprocessor... checking whether the compiler supports GNU C... (cached) yes
+   2 checking if gcc -mcpu=7400 -Os supports -c -o file.o... (cached) yes
+   2 checking if gcc -mcpu=750 -Os supports -c -o file.o... (cached) yes
+   2 checking if gcc -mcpu=970 -O2 -m64 supports -c -o file.o... (cached) yes
+   2 checking output filetype... checking for string.h... (cached) yes
+   2 checking whether _XOPEN_SOURCE should be defined... checking for a BSD-compatible install... (cached) no
+   2 checking whether _XOPEN_SOURCE should be defined... checking for unistd.h... (cached) (cached) no
+   2 checking whether gcc -mcpu=7400 -Os accepts -g... (cached) yes
+   2 checking whether gcc -mcpu=750 -Os accepts -g... (cached) yes
+   2 checking whether gcc -mcpu=970 -O2 -m64 accepts -g... (cached) yes
+   2 checking whether gcc -std=gnu99 accepts -g... (cached) yes
+   2 checking whether gcc -std=gnu99 supports -Wall... (cached) yes
+   2 checking whether gcc -std=gnu99 understands -c and -o together... (cached) yes
+   2 checking which library has the termcap functions... (cached) using libncurses
+   4 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853577756) (memory 3853578711)
+   4 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853577790) (memory 3853579535)
+   4 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853577948) (memory 3853580052)
+   4 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853577962) (memory 3853579933)
+   4 checking for CLISP version... (cached) 2.49.93+ (2018-02-18) (built 3853578228) (memory 3853583566)
+   4 checking for Java compiler... (cached) (cached) javac
+   4 checking for gcc -mcpu=7450 -O2 option to accept ISO C89... (cached) none needed
+   4 checking for gcc -mcpu=970 -O2 option to accept ISO C89... (cached) none needed
+   4 checking for gcc-4.2 -mcpu=7450 -O2 -force_cpusubtype_ALL -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+   4 checking for gcc-4.2 -mcpu=970 -O2 -force_cpusubtype_ALL -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+   4 checking for gcc-4.2 -mcpu=970 -O2 -m64 -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+   4 checking for gcc... (cached) gcc -mcpu=7450 -O2
+   4 checking for gcc... (cached) gcc -mcpu=970 -O2
+   4 checking for ld... (cached) /usr/libexec/gcc/powerpc-apple-darwin9/4.2.1/ld
+   4 checking for powerpc-apple-darwin9.8.0-gcc... (cached) gcc-4.2
+   4 checking if  /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    supports -c -o file.o... (cached) yes
+   4 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 supports -c -o file.o... (cached) yes
+   4 checking if gcc -mcpu=7450 -O2 supports -c -o file.o... (cached) yes
+   4 checking if gcc -mcpu=970 -O2 supports -c -o file.o... (cached) yes
+   4 checking whether gcc -mcpu=7450 -O2 accepts -g... (cached) yes
+   4 checking whether gcc -mcpu=970 -O2 accepts -g... (cached) yes
+   4 checking whether snprintf fully supports the 'n' directive... (cached) yes
+   4 checking whether vsnprintf respects a zero size as in C99... (cached) yes
+   6 checking for Java compiler... (cached) javac
+   6 checking for gettimeofday with POSIX signature... (cached) almost
+   6 checking for gettimeofday with POSIX signature... (cached) yes
+   6 checking for iconv... (cached) no, consider installing GNU libiconv
+   6 checking for ld used by g++... (cached) /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
+   6 checking for library containing acl_get_file... (cached) none required
+   6 checking for library containing setsockopt... (cached) none required
+   6 checking for makecontext... (cached) yes
+   6 checking for powerpc-apple-darwin9.8.0-ar... (cached) ar 
+   6 checking for struct stat.st_blksize... (cached) yes
+   6 checking for sys/acl.h... (cached) yes
+   6 checking for sys/buf.h... (cached) yes
+   6 checking for sys/mtio.h... (cached) yes
+   6 checking for texi2pdf... (cached) /tmp/gettext-0.21/build-aux/missing texi2pdf
+   6 checking for texi2pdf... (cached) /usr/bin/texi2pdf
+   6 checking whether getopt is POSIX compatible... (cached) no
+   6 checking whether unlink of a parent directory fails as it should... (cached) no
+   8 checking dependency style of /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include   ... (cached) gcc3
+   8 checking dependency style of /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64... (cached) gcc3
+   8 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    option to accept ISO C89... (cached) none needed
+   8 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 option to accept ISO C89... (cached) none needed
+   8 checking for CFLocaleCopyCurrent... (cached) no
+   8 checking for bit size of ptrdiff_t... (cached) 64
+   8 checking for bit size of size_t... (cached) 64
+   8 checking for ld... (cached) /usr/libexec/gcc/powerpc-apple-darwin8/4.2.1/ld
+   8 checking for powerpc-apple-darwin8.11.0-gcc... (cached) gcc-4.2
+   8 checking for powerpc-apple-darwin9.8.0-gcc... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include   
+   8 checking for powerpc-apple-darwin9.8.0-gcc... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64
+   8 checking for powerpc-apple-darwin9.8.0-ranlib... (cached) ranlib 
+   8 checking if  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    supports -c -o file.o... (cached) yes
+   8 checking if  /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/include/powerpc-apple-darwin9.8.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    supports -c -o file.o... (cached) yes
+   8 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -shared-libgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc -nostdinc++ -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -c -o file.o... (cached) yes
+   8 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    supports -c -o file.o... (cached) yes
+   8 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 supports -c -o file.o... (cached) yes
+   8 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/include/powerpc-apple-darwin9.8.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin9.8.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 supports -c -o file.o... (cached) yes
+   8 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    accepts -g... (cached) yes
+   8 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 accepts -g... (cached) yes
+  10 checking for makecontext... (cached) no
+  10 checking whether the compiler supports GNU C++... (cached) yes
+  10 checking whether unlink of a parent directory fails as it should... (cached) yes
+  12 checking assembler for section merging support... (cached) no
+  12 checking for __xpg4... (cached) no
+  12 checking for alloca... (cached) checking for _setjmp... yes
+  12 checking for g++ option to enable C++11 features... (cached) unsupported
+  12 checking for g++ option to enable C++98 features... (cached) none needed
+  12 checking for gcc-4.2 -std=gnu99 options needed to detect all undeclared functions... (cached) none needed
+  12 checking for gcc-4.2 option to accept ISO C89... (cached) none needed
+  12 checking for gethostent... (cached) yes
+  12 checking for getloadavg... (cached) yes
+  12 checking for getrlimit... (cached) yes
+  12 checking for getrusage... (cached) yes
+  12 checking for ioctl... (cached) yes
+  12 checking for library containing setsockopt... (cached) none needed
+  12 checking for mknod... (cached) yes
+  12 checking for powerpc-apple-darwin9.8.0-strip... (cached) strip
+  12 checking for sa_family_t... (cached) yes
+  12 checking for setpgid... (cached) yes
+  12 checking for setregid... (cached) yes
+  12 checking for setreuid... (cached) yes
+  12 checking for setsid... (cached) yes
+  12 checking for socklen_t... (cached) yes
+  12 checking for struct sockaddr_storage... (cached) yes
+  12 checking for struct sockaddr_storage.ss_family... (cached) yes
+  12 checking for sys/loadavg.h... (cached) no
+  12 checking for sys/uio.h... (cached) yes
+  12 checking for sysconf... (cached) yes
+  12 checking for uname... (cached) yes
+  12 checking if g++-4.2 supports -c -o file.o... (cached) yes
+  12 checking if gcc-4.2 -std=gnu99 supports -c -o file.o... (cached) yes
+  12 checking size of off_t... (cached) 8
+  12 checking whether <sys/socket.h> defines the SHUT_* macros... (cached) yes
+  12 checking whether <sys/socket.h> is self-contained... (cached) yes
+  12 checking whether fdopen sets errno... (cached) yes
+  12 checking whether getloadavg is declared... (cached) yes
+  12 checking whether getrusage works... (cached) yes
+  12 checking whether iswdigit is ISO C compliant... (cached) yes
+  12 checking whether iswxdigit is ISO C compliant... (cached) yes
+  12 checking whether link(2) dereferences a symlink... (cached) yes
+  12 checking whether the compiler supports the __inline keyword... (cached) yes
+  14 checking for CFPreferencesCopyAppValue... (cached) no
+  14 checking for SSL_library_init... (cached) yes
+  14 checking for argz_count... (cached) no
+  14 checking for argz_next... (cached) no
+  14 checking for argz_stringify... (cached) no
+  14 checking for bison... (cached) bison -y
+  14 checking for dlopen... (cached) yes
+  14 checking for gcc option to accept ISO C99... (cached) -std=gnu99
+  14 checking for gmtime_r... (cached) yes
+  14 checking for hstrerror... (cached) yes
+  14 checking for sched_yield in -lposix4... (cached) no
+  14 checking for sched_yield in -lrt... (cached) no
+  14 checking for shlload... (cached) no
+  14 checking for texi2pdf... (cached) /tmp/gettext-0.20/build-aux/missing texi2pdf
+  14 checking if c++ supports -c -o file.o... (cached) yes
+  14 checking whether the inttypes.h PRIxNN macros are broken... (cached) no
+  14 checking which library has the termcap functions... (cached) using libtermcap
+  16 checking 32-bit host C ABI... (cached) no
+  16 checking POSIX termios... (cached) yes
+  16 checking dependency style of /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   ... (cached) gcc3
+  16 checking dependency style of /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64... (cached) gcc3
+  16 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    option to accept ISO C89... (cached) none needed
+  16 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 option to accept ISO C89... (cached) none needed
+  16 checking for Java compiler... (cached) (cached) no
+  16 checking for alloca... (cached) checking for C/C++ restrict keyword... no
+  16 checking for alloca... (cached) checking whether <wchar.h> uses 'inline' correctly... (cached) yes
+  16 checking for alloca... (cached) checking whether the preprocessor supports include_next... yes
+  16 checking for cc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+  16 checking for getauxval... (cached) no
+  16 checking for gethostbyname... (cached) yes
+  16 checking for getopt_long... (cached) yes
+  16 checking for getservbyname... (cached) yes
+  16 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include   ... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld
+  16 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld
+  16 checking for library containing gethostbyname... (cached) none required
+  16 checking for library containing getservbyname... (cached) none required
+  16 checking for library containing inet_ntop... (cached) none required
+  16 checking for powerpc-apple-darwin8.11.0-gcc... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   
+  16 checking for powerpc-apple-darwin8.11.0-gcc... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64
+  16 checking for pstat_getdynamic... (cached) no
+  16 checking for setrlimit... (cached) yes
+  16 checking for sigstack... (cached) no
+  16 checking for standard gettimeofday... (cached) yes
+  16 checking for sys/fs_types.h... (cached) no
+  16 checking for sys/mount.h... (cached) yes
+  16 checking for sys/pstat.h... (cached) no
+  16 checking for sys/sysmp.h... (cached) no
+  16 checking for sysinfo... (cached) no
+  16 checking for sysmp... (cached) no
+  16 checking if  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    supports -c -o file.o... (cached) yes
+  16 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    supports -c -o file.o... (cached) yes
+  16 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/gfortran -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -c -o file.o... (cached) yes
+  16 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -c -o file.o... (cached) yes
+  16 checking if cc -std=gnu99 supports -c -o file.o... (cached) yes
+  16 checking return type of signal handlers... (cached) void
+  16 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    accepts -g... (cached) yes
+  16 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 accepts -g... (cached) yes
+  16 checking whether inet_ntop is declared... (cached) yes
+  16 checking whether strsignal is declared... (cached) yes
+  16 checking whether use of TIOCGWINSZ requires sys/ioctl.h... (cached) no
+  18 checking for C compiler vendor... (cached) gnu
+  18 checking for alloca... (cached) checking whether malloc is ptrdiff_t safe... no
+  18 checking for ld used by gcc -std=gnu99... (cached) /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
+  18 checking for ld used by gcc... (cached) /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
+  20 checking for alloca... (cached) checking for inline... inline
+  20 checking for ld used by g++... (cached) /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
+  20 checking for vfork... (cached) yes
+  20 checking for working GNU getopt function... (cached) no
+  20 checking whether getopt is POSIX compatible... (cached) yes
+  22 checking dependency style of gcc-4.2 -std=gnu99... (cached) gcc3
+  22 checking for CLISP libdir... (cached) /private/tmp/clisp-de01f0f47bb44d3a0f9e842464cf2520b238f356/src/
+  22 checking for CLISP linking set... (cached) /private/tmp/clisp-de01f0f47bb44d3a0f9e842464cf2520b238f356/src
+  22 checking for CLISP... (cached) yes
+  22 checking for getgroups... (cached) yes
+  22 checking for struct tm.tm_zone... (cached) yes
+  22 checking for working getgroups... (cached) yes
+  24 checking for ELF binary format... (cached) no
+  24 checking for O_CLOEXEC... (cached) no
+  24 checking for dvips... (cached) /tmp/gettext-0.21/build-aux/missing dvips
+  24 checking for fenv.h... (cached) yes
+  24 checking for gethostname... (cached) yes
+  24 checking for locale.h... (cached) yes
+  24 checking for powerpc-apple-darwin8.11.0-strip... (cached) strip
+  24 checking for sin in -lm... (cached) yes
+  24 checking for the common suffixes of directories in the library search path... (cached) lib,lib,lib
+  24 checking for threads.h... (cached) no
+  26 checking for GNU gettext in libc... (cached) no
+  26 checking for GNU gettext in libintl... (cached) no
+  26 checking for LC_MESSAGES... (cached) yes
+  26 checking for SIGPIPE... (cached) yes
+  26 checking for Solaris 11.4 locale system... (cached) no
+  26 checking for __fsetlocking... (cached) no
+  26 checking for atexit... (cached) yes
+  26 checking for bison... (cached) bison
+  26 checking for canonicalize_file_name... (cached) no
+  26 checking for ctype.h... (cached) yes
+  26 checking for d_ino member in directory struct... (cached) yes
+  26 checking for dl.h... (cached) no
+  26 checking for duplocale... (cached) yes
+  26 checking for errno.h... (cached) yes
+  26 checking for fake locale system (OpenBSD)... (cached) no
+  26 checking for float.h... (cached) yes
+  26 checking for freelocale... (cached) yes
+  26 checking for g++ option to produce PIC... (cached) -fno-common -DPIC
+  26 checking for getaddrinfo... (cached) yes
+  26 checking for getline... (cached) no
+  26 checking for getlocalename_l... (cached) no
+  26 checking for iconv.h... (cached) yes
+  26 checking for iswblank... (cached) yes
+  26 checking for iswcntrl... (cached) yes
+  26 checking for jar... (cached) jar
+  26 checking for langinfo.h... (cached) yes
+  26 checking for localtime... (cached) yes
+  26 checking for mbsinit... (cached) yes
+  26 checking for mbslen... (cached) no
+  26 checking for mbtowc... (cached) yes
+  26 checking for memmove... (cached) yes
+  26 checking for readlinkat... (cached) no
+  26 checking for resolv.h... (cached) yes
+  26 checking for search.h... (cached) yes
+  26 checking for select... (cached) yes
+  26 checking for sig_atomic_t... (cached) yes
+  26 checking for stat... (cached) yes
+  26 checking for strchrnul... (cached) no
+  26 checking for strftime... (cached) yes
+  26 checking for tcdrain... (cached) yes
+  26 checking for wcwidth... (cached) yes
+  26 checking for wprintf... (cached) yes
+  26 checking for xlocale.h... (cached) yes
+  26 checking how to run the C++ preprocessor... (cached) g++ -E
+  26 checking if environ is properly declared... (cached) no
+  26 checking if g++ PIC flag -fno-common -DPIC works... (cached) yes
+  26 checking if g++ static flag -static works... (cached) no
+  26 checking whether <limits.h> defines MIN and MAX... (cached) no
+  26 checking whether _snwprintf is declared... (cached) no
+  26 checking whether btowc(0) is correct... (cached) yes
+  26 checking whether btowc(EOF) is correct... (cached) yes
+  26 checking whether clearerr_unlocked is declared... (cached) yes
+  26 checking whether fabs can be used without linking with libm... (cached) yes
+  26 checking whether ferror_unlocked is declared... (cached) yes
+  26 checking whether fflush_unlocked is declared... (cached) no
+  26 checking whether fopen recognizes a trailing slash... (cached) yes
+  26 checking whether fputc_unlocked is declared... (cached) no
+  26 checking whether fputs_unlocked is declared... (cached) no
+  26 checking whether fread_unlocked is declared... (cached) no
+  26 checking whether fwrite_unlocked is declared... (cached) no
+  26 checking whether getchar_unlocked is declared... (cached) yes
+  26 checking whether integer division by zero raises SIGFPE... (cached) no
+  26 checking whether isinf is declared... (cached) yes
+  26 checking whether isinf(long double) works... (cached) yes
+  26 checking whether iswblank is declared... (cached) yes
+  26 checking whether locale.h defines locale_t... (cached) no
+  26 checking whether log10 works... (cached) yes
+  26 checking whether long double and double are the same... (cached) no
+  26 checking whether mbswidth is declared in <wchar.h>... (cached) no
+  26 checking whether pow can be used without linking with libm... (cached) yes
+  26 checking whether putc_unlocked is declared... (cached) yes
+  26 checking whether putchar_unlocked is declared... (cached) yes
+  26 checking whether readlink handles trailing slash correctly... (cached) no
+  26 checking whether readlink signature is correct... (cached) yes
+  26 checking whether realpath works... (cached) no
+  26 checking whether setenv is declared... (cached) yes
+  26 checking whether setlocale supports the C locale... (cached) yes
+  26 checking whether snprintf is declared... (cached) yes
+  26 checking whether strnlen is declared... (cached) no
+  26 checking whether vsnprintf is declared... (cached) yes
+  26 checking whether wcrtomb return value is correct... (cached) yes
+  26 checking whether wcrtomb works in the C locale... (cached) yes
+  26 checking whether we are using the GNU C Library 2 or newer... (cached) no
+  28 checking for dvips... (cached) /tmp/gettext-0.20/build-aux/missing dvips
+  28 checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+  28 checking for the common suffixes of directories in the library search path... (cached) lib,lib
+  28 checking for working fcntl.h... (cached) no (bad O_NOATIME)
+  30 checking for argz.h... (cached) no
+  30 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   ... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld
+  30 checking for rawmemchr... (cached) no
+  30 checking for sys/wait.h... (cached) yes
+  30 checking for vsnprintf... (cached) yes
+  30 checking whether ldexp() can be used without linking with libm... (cached) yes
+  32 checking for a turkish Unicode locale... (cached) none
+  32 checking for fdatasync... (cached) no
+  32 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64... (cached) /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld
+  32 checking for object suffix... (cached) o
+  32 checking for openssl/sha.h... (cached) yes
+  32 checking for remove... (cached) yes
+  32 checking for strip... (cached) /usr/bin/strip
+  32 checking for sys/ioctl.h... (cached) yes
+  32 checking for typedef stack_t... (cached) yes
+  32 checking for working fork... (cached) yes
+  32 checking if the linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld) is GNU ld... (cached) no
+  32 checking if we should include stdbool.h... (cached) yes
+  32 checking size of __int32... (cached) 0
+  32 checking whether fdatasync is declared... (cached) no
+  32 checking whether use of struct winsize requires sys/ptem.h... (cached) no
+  34 checking how to remove colons from paths... (cached) echo $x
+  34 checking how to run the C preprocessor... (cached) gcc-4.2 -std=gnu99 -E
+  34 checking whether ln -s works... (cached) yes
+  36 checking 32-bit host C ABI... (cached) yes
+  36 checking dependency style of gcc -std=gnu99... (cached) gcc3
+  36 checking for /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld option to reload object files... (cached) -r
+  36 checking for gcc option to enable C11 features... (cached) unsupported
+  36 checking for gcc option to enable C99 features... (cached) -std=gnu99
+  36 checking for gcc-4.2 option to enable C11 features... (cached) unsupported
+  36 checking for gcc-4.2 option to enable C99 features... (cached) -std=gnu99
+  36 checking for gcc... (cached) gcc-4.2
+  36 checking for sys/resource.h... (cached) yes
+  36 checking how to convert powerpc-apple-darwin9.8.0 file names to powerpc-apple-darwin9.8.0 format... (cached) func_convert_file_noop
+  36 checking how to convert powerpc-apple-darwin9.8.0 file names to toolchain format... (cached) func_convert_file_noop
+  36 checking how to make hard links... (cached) ln
+  36 checking how to run the C preprocessor... (cached) gcc -std=gnu99 -E
+  36 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    supports -c -o file.o... (cached) yes
+  36 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 supports -c -o file.o... (cached) yes
+  36 checking if gcc-4.2 supports -c -o file.o... (cached) yes
+  36 checking whether gcc-4.2 -std=gnu99 understands -c and -o together... (cached) yes
+  36 checking whether use of TIOCGWINSZ requires termios.h... (cached) yes
+  38 checking for linux/fs.h... (cached) no
+  38 checking for readlink... (cached) yes
+  38 checking for realpath... (cached) yes
+  38 checking for unlinkat... (cached) no
+  38 checking whether locale.h conforms to POSIX:2001... (cached) yes
+  38 checking whether stat file-mode macros are broken... (cached) no
+  38 checking whether struct lconv is properly defined... (cached) yes
+  38 checking whether utime handles trailing slashes on files... (cached) no
+  40 checking for arpa/nameser.h... (cached) yes
+  42 checking for CFLocaleCopyPreferredLanguages... (cached) yes
+  42 checking for asprintf... (cached) yes
+  42 checking for ld used by gcc... (cached) /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
+  42 checking for munmap... (cached) yes
+  42 checking for signal.h... (cached) yes
+  42 checking for stddef.h... (cached) yes
+  42 checking for strcasecmp... (cached) yes
+  42 checking for working mmap... (cached) yes
+  42 checking whether uselocale works... (cached) yes
+  44 checking for bit size of ptrdiff_t... (cached) 32
+  44 checking for bit size of size_t... (cached) 32
+  46 checking build system type... (cached) powerpc-apple-darwin9.8.0
+  46 checking for ld used by gcc -std=gnu99... (cached) /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
+  46 checking for stdbool.h... (cached) yes
+  46 checking host system type... (cached) powerpc-apple-darwin9.8.0
+  46 checking whether gcc-4.2 accepts -g... (cached) yes
+  48 checking for alloca as a compiler built-in... (cached) yes
+  48 checking for complex.h... (cached) yes
+  48 checking for flockfile... (cached) yes
+  48 checking for funlockfile... (cached) yes
+  48 checking for setlocale... (cached) yes
+  48 checking for sys/sysctl.h... (cached) yes
+  48 checking for sysctl... (cached) yes
+  48 checking whether mbrtowc and mbstate_t are properly declared... (cached) yes
+  50 checking for CFLocaleCopyCurrent... (cached) yes
+  52 checking for __builtin_expect... (cached) yes
+  52 checking for __fseterr... (cached) no
+  52 checking for bit size of sig_atomic_t... (cached) 32
+  52 checking for bit size of wchar_t... (cached) 32
+  52 checking for bit size of wint_t... (cached) 32
+  52 checking for fchdir... (cached) yes
+  52 checking for fdopendir... (cached) no
+  52 checking for fstatat... (cached) no
+  52 checking for g++... (cached) g++
+  52 checking for getegid... (cached) yes
+  52 checking for geteuid... (cached) yes
+  52 checking for getgid... (cached) yes
+  52 checking for getuid... (cached) yes
+  52 checking for gmsgfmt... (cached) :
+  52 checking for iconv declaration... (cached) 
+  52 checking for msgfmt... (cached) no
+  52 checking for msgmerge... (cached) no
+  52 checking for obstacks that work with any size object... (cached) no
+  52 checking for openat... (cached) no
+  52 checking for shared library run path origin... (cached) done
+  52 checking for sys/select.h... (cached) yes
+  52 checking for va_copy... (cached) yes
+  52 checking for xgettext... (cached) no
+  52 checking whether fchdir is declared... (cached) yes
+  52 checking whether fdopendir is declared... (cached) no
+  52 checking whether langinfo.h defines ALTMON_1... (cached) no
+  52 checking whether langinfo.h defines CODESET... (cached) yes
+  52 checking whether langinfo.h defines ERA... (cached) yes
+  52 checking whether langinfo.h defines T_FMT_AMPM... (cached) yes
+  52 checking whether langinfo.h defines YESEXPR... (cached) yes
+  52 checking whether limits.h has WORD_BIT, BOOL_WIDTH etc.... (cached) no
+  52 checking whether printf() supports POSIX/XSI format strings... (cached) yes
+  52 checking whether stdint.h conforms to C99... (cached) no
+  52 checking whether this system supports file names of any length... (cached) no
+  52 checking whether we are using the GNU C Library >= 2.1 or uClibc... (cached) no
+  54 checking for fchown... (cached) yes
+  56 checking whether mbrtowc stores incomplete characters... (cached) no
+  58 checking for __freading... (cached) no
+  58 checking for _fseeki64... (cached) no
+  58 checking for nl_langinfo and CODESET... (cached) yes
+  58 checking for shared library path variable... (cached) DYLD_LIBRARY_PATH
+  58 checking whether fpurge works... (cached) no
+  58 checking whether printf supports size specifiers as in C99... (cached) yes
+  58 checking whether printf supports the 'n' directive... (cached) yes
+  60 checking command to parse /usr/bin/nm -p output from gcc object... (cached) ok
+  60 checking for gcc option to produce PIC... (cached) -fno-common -DPIC
+  60 checking for powerpc-apple-darwin9.8.0-ar... (cached) ar
+  60 checking if gcc PIC flag -fno-common -DPIC works... (cached) yes
+  60 checking if gcc static flag -static works... (cached) no
+  60 checking if gcc supports -fno-rtti -fno-exceptions... (cached) no
+  62 checking for reallocarray... (cached) no
+  62 checking whether malloc, realloc, calloc set errno on failure... (cached) yes
+  64 checking command to parse /usr/bin/nm -p output from gcc -std=gnu99 object... (cached) ok
+  64 checking for C/C++ restrict keyword... (cached) no
+  64 checking for futimesat... (cached) no
+  64 checking for gcc -std=gnu99 option to produce PIC... (cached) -fno-common -DPIC
+  64 checking for library containing opendir... (cached) none required
+  64 checking for powerpc-apple-darwin9.8.0-ranlib... (cached) ranlib
+  64 checking for utimensat... (cached) no
+  64 checking if gcc -std=gnu99 PIC flag -fno-common -DPIC works... (cached) yes
+  64 checking if gcc -std=gnu99 static flag -static works... (cached) no
+  64 checking if gcc -std=gnu99 supports -fno-rtti -fno-exceptions... (cached) no
+  64 checking if the linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld) is GNU ld... (cached) no
+  64 checking whether fseeko is declared... (cached) yes
+  64 checking whether the utimes function works... (cached) yes
+  66 checking for long long int... (cached) yes
+  66 checking for malloc.h... (cached) no
+  66 checking for netinet/in.h... (cached) yes
+  66 checking for wctype.h... (cached) yes
+  66 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) is GNU ld... (cached) no
+  68 checking for working fcntl.h... (cached) no (bad O_NOATIME, O_NOFOLLOW)
+  68 checking whether ecvt is declared... (cached) yes
+  68 checking whether fcvt is declared... (cached) yes
+  68 checking whether gcvt is declared... (cached) yes
+  68 checking whether memrchr is declared... (cached) no
+  68 checking whether strdup is declared... (cached) yes
+  68 checking whether wcsdup is declared... (cached) no
+  68 checking whether wcwidth is declared... (cached) yes
+  68 checking whether wcwidth works reasonably in UTF-8 locales... (cached) no
+  70 checking for compiler option needed when checking for declarations... (cached) none
+  70 checking whether unlink honors trailing slashes... (cached) no
+  72 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    supports -c -o file.o... (cached) yes
+  72 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 supports -c -o file.o... (cached) yes
+  72 checking whether free is known to preserve errno... (cached) no
+  72 checking whether malloc (0) returns nonnull... (cached) yes
+  72 checking whether the compiler is clang... (cached) no
+  74 checking for __fpurge... (cached) no
+  74 checking for fpurge... (cached) yes
+  74 checking for putenv... (cached) yes
+  74 checking for strdup... (cached) yes
+  74 checking whether fpurge is declared... (cached) yes
+  74 checking whether frexp() can be used without linking with libm... (cached) yes
+  74 checking whether frexpl is declared... (cached) yes
+  74 checking whether printf supports 'long double' arguments... (cached) yes
+  74 checking whether printf supports infinite 'double' arguments... (cached) yes
+  74 checking whether printf supports infinite 'long double' arguments... (cached) yes
+  74 checking whether printf supports large precisions... (cached) yes
+  74 checking whether printf supports the 'F' directive... (cached) yes
+  74 checking whether printf supports the 'a' and 'A' directives... (cached) no
+  74 checking whether printf supports the 'ls' directive... (cached) yes
+  74 checking whether printf supports the grouping flag... (cached) yes
+  74 checking whether printf supports the left-adjust flag correctly... (cached) yes
+  74 checking whether printf supports the zero flag correctly... (cached) no
+  74 checking whether printf survives out-of-memory conditions... (cached) no
+  78 checking for TIME_UTC in <time.h>... (cached) no
+  78 checking for arpa/inet.h... (cached) yes
+  78 checking for clock_settime... (cached) no
+  78 checking for flexible array member... (cached) yes
+  78 checking for newlocale... (cached) yes
+  78 checking for perl... (cached) /usr/bin/perl
+  78 checking for tsearch... (cached) yes
+  78 checking where to find the exponent in a 'long double'... (cached) word 0 bit 20
+  78 checking whether __argv is declared... (cached) no
+  78 checking whether dup works... (cached) yes
+  78 checking whether execvpe is declared... (cached) no
+  78 checking whether fcloseall is declared... (cached) no
+  78 checking whether feof_unlocked is declared... (cached) yes
+  78 checking whether fgets_unlocked is declared... (cached) no
+  78 checking whether ldexpl works... (cached) no
+  78 checking whether ldexpl() can be used without linking with libm... (cached) yes
+  78 checking whether system header files limit the line length... (cached) no
+  78 checking whether the compiler generally respects inline... (cached) yes
+  78 checking whether wint_t is large enough... (cached) yes
+  78 checking whether wint_t is too small... (cached) no
+  80 checking for futimens... (cached) no
+  80 checking for futimes... (cached) yes
+  80 checking whether ldexp can be used without linking with libm... (cached) yes
+  80 checking whether snprintf truncates the result as in C99... (cached) yes
+  82 checking for special C compiler options needed for large files... (cached) no
+  84 checking for memrchr... (cached) no
+  84 checking whether _XOPEN_SOURCE should be defined... (cached) no
+  84 checking whether ftello is declared... (cached) yes
+  84 checking whether mbrtowc handles a NULL pwc argument... (cached) yes
+  84 checking whether mbrtowc handles a NULL string argument... (cached) yes
+  84 checking whether mbrtowc has a correct return value... (cached) yes
+  84 checking whether mbrtowc returns 0 when parsing a NUL character... (cached) yes
+  84 checking whether mbrtowc works on empty input... (cached) yes
+  84 checking whether strstr works... (cached) yes
+  84 checking whether the C locale is free of encoding errors... (cached) yes
+  84 checking whether ungetc works on arbitrary bytes... (cached) yes
+  88 checking for /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld option to reload object files... (cached) -r
+  88 checking for otool64... (cached) otool64
+  88 checking for signbit compiler built-ins... (cached) no
+  88 checking how to convert powerpc-apple-darwin8.11.0 file names to powerpc-apple-darwin8.11.0 format... (cached) func_convert_file_noop
+  88 checking how to convert powerpc-apple-darwin8.11.0 file names to toolchain format... (cached) func_convert_file_noop
+  88 checking how to run the C preprocessor... (cached) gcc -E
+  90 checking whether lseek detects pipes... (cached) yes
+  90 checking whether select detects invalid fds... (cached) yes
+  90 checking whether select supports a 0 argument... (cached) yes
+  90 checking whether source code line length is unlimited... (cached) yes
+  90 checking whether stdin defaults to large file offsets... (cached) yes
+  90 checking whether the preprocessor supports include_next... (cached) yes
+  90 checking whether we are using the GNU C++ compiler... (cached) yes
+  92 checking for fchmod... (cached) yes
+  92 checking for strip... (cached) strip
+  94 checking for closedir... (cached) yes
+  94 checking for dirfd... (cached) no
+  94 checking for opendir... (cached) yes
+  94 checking for readdir... (cached) yes
+  94 checking for simple visibility declarations... (cached) yes
+  94 checking for strtoul... (cached) yes
+  94 checking for uselocale... (cached) yes
+  94 checking whether dirfd is declared... (cached) yes
+  94 checking whether the -Werror option is usable... (cached) yes
+  96 checking for dirent.h that defines DIR... (cached) yes
+  96 checking for utime... (cached) yes
+  96 checking for utime.h... (cached) yes
+  98 checking for getcwd... (cached) yes
+ 100 checking for CFLocaleCopyPreferredLanguages... (cached) no
+ 100 checking whether g++ accepts -g... (cached) yes
+ 102 checking dependency style of gcc... (cached) gcc3
+ 102 checking for netdb.h... (cached) yes
+ 102 checking whether gcc understands -c and -o together... (cached) yes
+ 104 checking for __xpg_strerror_r... (cached) no
+ 104 checking for catgets... (cached) yes
+ 104 checking for vasnprintf... (cached) no
+ 104 checking whether _snprintf is declared... (cached) no
+ 104 checking whether perror matches strerror... (cached) yes
+ 106 checking for fsync... (cached) yes
+ 108 checking for chown... (cached) yes
+ 108 checking for unsigned long long int... (cached) yes
+ 108 checking whether snprintf respects a size of 1... (cached) yes
+ 110 checking for getcwd with POSIX signature... (cached) yes
+ 110 checking for towlower... (cached) yes
+ 110 checking for wctrans_t... (cached) yes
+ 110 checking for wctype_t... (cached) yes
+ 110 checking whether getcwd (NULL, 0) allocates memory for result... (cached) yes
+ 110 checking whether iswcntrl works... (cached) yes
+ 114 checking for shutdown... (cached) yes
+ 114 checking for signbit macro... (cached) yes
+ 114 checking whether HUGE_VAL works... (cached) yes
+ 114 checking whether NAN macro works... (cached) yes
+ 114 checking whether the compiler produces multi-arch binaries... (cached) no
+ 116 checking build system type... (cached) powerpc-apple-darwin8.11.0
+ 116 checking for time.h... (cached) yes
+ 116 checking host system type... (cached) powerpc-apple-darwin8.11.0
+ 120 checking for getopt_long_only... (cached) yes
+ 120 checking for inline... (cached) inline
+ 120 checking for powerpc-apple-darwin8.11.0-ar... (cached) ar
+ 120 checking whether rmdir works... (cached) yes
+ 120 checking whether snprintf returns a byte count as in C99... (cached) yes
+ 122 checking for _LARGEFILE_SOURCE value needed for large files... (cached) no
+ 122 checking for struct timeval... (cached) yes
+ 122 checking for wide-enough struct timeval.tv_sec member... (cached) yes
+ 122 checking for working stdalign.h... (cached) no
+ 122 checking whether C symbols are prefixed with underscore at the linker level... (cached) yes
+ 122 checking whether alarm is declared... (cached) yes
+ 124 checking for -exported_symbols_list linker flag... (cached) yes
+ 124 checking for -force_load linker flag... (cached) no
+ 124 checking for -single_module linker flag... (cached) yes
+ 124 checking for a working dd... (cached) /bin/dd
+ 124 checking for archiver @FILE support... (cached) no
+ 124 checking for dsymutil... (cached) dsymutil
+ 124 checking for fgrep... (cached) /usr/bin/grep -F
+ 124 checking for getpagesize... (cached) yes
+ 124 checking for lipo... (cached) lipo
+ 124 checking for nmedit... (cached) nmedit
+ 124 checking for objdir... (cached) .libs
+ 124 checking for otool... (cached) otool
+ 124 checking how to associate runtime and link libraries... (cached) printf %s\n
+ 124 checking how to recognize dependent libraries... (cached) pass_all
+ 124 checking how to truncate binary pipes... (cached) /bin/dd bs=4096 count=1
+ 124 checking if : is a manifest tool... (cached) no
+ 124 checking the maximum length of command line arguments... (cached) 196608
+ 126 checking for pipe... (cached) yes
+ 126 checking for setenv... (cached) yes
+ 126 checking for vasprintf... (cached) yes
+ 128 checking for CFPreferencesCopyAppValue... (cached) yes
+ 128 checking for powerpc-apple-darwin8.11.0-ranlib... (cached) ranlib
+ 130 checking whether setlocale (LC_ALL, NULL) is multithread-safe... (cached) no
+ 130 checking whether setlocale (category, NULL) is multithread-safe... (cached) yes
+ 132 checking for GNU libc compatible malloc... (cached) yes
+ 132 checking for iconv... (cached) yes
+ 132 checking for working iconv... (cached) yes
+ 134 checking whether malloc, realloc, calloc are POSIX compliant... (cached) yes
+ 136 checking for egrep... (cached) /usr/bin/grep -E
+ 136 checking for gcc option to accept ISO C89... (cached) none needed
+ 136 checking for grep that handles long lines and -e... (cached) /usr/bin/grep
+ 136 checking for sys/cdefs.h... (cached) yes
+ 136 checking whether <sys/param.h> defines MIN and MAX... (cached) yes
+ 138 checking for off_t... (cached) yes
+ 138 checking if g++ supports -c -o file.o... (cached) yes
+ 138 checking whether the compiler supports GNU C... (cached) yes
+ 140 checking dependency style of g++... (cached) gcc3
+ 140 checking for working vfork... (cached) yes
+ 142 checking for clock_gettime... (cached) no
+ 144 checking for promoted mode_t type... (cached) int
+ 146 checking for fseeko... (cached) yes
+ 146 checking whether <wchar.h> uses 'inline' correctly... (cached) yes
+ 146 checking whether conversion from 'int' to 'long double' works... (cached) yes
+ 152 checking whether NULL can be used in arbitrary expressions... (cached) yes
+ 154 checking whether frexp works... (cached) yes
+ 154 checking whether frexpl works... (cached) no
+ 154 checking whether frexpl() can be used without linking with libm... (cached) yes
+ 156 checking for mbstate_t... (cached) yes
+ 156 checking for siginterrupt... (cached) yes
+ 156 checking for struct sigaction.sa_sigaction... (cached) yes
+ 160 checking whether getdtablesize is declared... (cached) yes
+ 162 checking for crtdefs.h... (cached) no
+ 162 checking whether memchr works... (cached) yes
+ 166 checking for dirent.h... (cached) yes
+ 166 checking whether limits.h has LLONG_MAX, WORD_BIT, ULLONG_WIDTH etc.... (cached) no
+ 166 checking whether lstat correctly handles trailing slash... (cached) no
+ 168 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) is GNU ld... (cached) no
+ 168 checking whether getc_unlocked is declared... (cached) yes
+ 170 checking whether printf supports POSIX/XSI format strings with positions... (cached) yes
+ 172 checking for gcc... (cached) gcc
+ 172 checking whether gcc accepts -g... (cached) yes
+ 174 checking for pthread_kill in -lpthread... (cached) yes
+ 176 checking for BSD- or MS-compatible name lister (nm)... (cached) /usr/bin/nm -p
+ 176 checking the name lister (/usr/bin/nm -p) interface... (cached) BSD nm
+ 178 checking where to find the exponent in a 'double'... (cached) word 0 bit 20
+ 178 checking where to find the exponent in a 'float'... (cached) word 0 bit 23
+ 186 checking for ftello... (cached) yes
+ 186 checking for stdio.h... (cached) yes
+ 186 checking whether dup2 works... (cached) yes
+ 186 checking whether fcntl handles F_DUPFD correctly... (cached) yes
+ 186 checking whether fcntl understands F_DUPFD_CLOEXEC... (cached) no
+ 186 checking whether ftello works... (cached) yes
+ 186 checking whether getdtablesize works... (cached) yes
+ 188 checking for ar... (cached) ar
+ 188 checking for getdtablesize... (cached) yes
+ 188 checking for intmax_t... (cached) yes
+ 188 checking for struct timespec in <time.h>... (cached) yes
+ 198 checking for a BSD-compatible install... (cached) /usr/bin/install -c
+ 198 checking whether open recognizes a trailing slash... (cached) no
+ 202 checking for sigset_t... (cached) yes
+ 204 checking for fcntl... (cached) yes
+ 204 checking for sigaltstack... (cached) yes
+ 208 checking for dlfcn.h... (cached) yes
+ 208 checking if gcc -std=gnu99 supports -c -o file.o... (cached) yes
+ 212 checking for a sed that does not truncate output... (cached) /usr/bin/sed
+ 214 checking for math.h... (cached) yes
+ 214 checking for struct stat.st_birthtim.tv_nsec... (cached) no
+ 214 checking for struct stat.st_birthtimensec... (cached) no
+ 214 checking for struct stat.st_birthtimespec.tv_nsec... (cached) no
+ 214 checking for wcslen... (cached) yes
+ 214 checking for wcsnlen... (cached) no
+ 214 checking whether stat handles trailing slashes on files... (cached) no
+ 218 checking for _set_invalid_parameter_handler... (cached) no
+ 218 checking for getexecname... (cached) no
+ 218 checking for getprogname... (cached) yes
+ 218 checking for ptrdiff_t integer literal suffix... (cached) 
+ 218 checking for sig_atomic_t integer literal suffix... (cached) 
+ 218 checking for size_t integer literal suffix... (cached) ul
+ 218 checking for sys/bitypes.h... (cached) no
+ 218 checking for sys/inttypes.h... (cached) no
+ 218 checking for wchar_t integer literal suffix... (cached) 
+ 218 checking for wint_t integer literal suffix... (cached) 
+ 218 checking whether sig_atomic_t is signed... (cached) yes
+ 218 checking whether strerror(0) succeeds... (cached) no
+ 218 checking whether strerror_r returns char *... (cached) no
+ 218 checking whether wchar_t is signed... (cached) yes
+ 218 checking whether wint_t is signed... (cached) yes
+ 220 checking for alloca... (cached) yes
+ 222 checking whether isnan(float) can be used without linking with libm... (cached) yes
+ 222 checking whether isnan(float) works... (cached) yes
+ 226 checking whether isnan(double) can be used without linking with libm... (cached) yes
+ 226 checking whether isnan(long double) can be used without linking with libm... (cached) yes
+ 226 checking whether isnanl works... (cached) yes
+ 226 checking whether program_invocation_name is declared... (cached) no
+ 226 checking whether program_invocation_short_name is declared... (cached) no
+ 228 checking for sighandler_t... (cached) no
+ 228 checking for volatile sig_atomic_t... (cached) yes
+ 228 checking whether imported symbols can be declared weak... (cached) no
+ 234 checking for strerror_r... (cached) yes
+ 236 checking for mempcpy... (cached) no
+ 244 checking for Minix Amsterdam compiler... (cached) no
+ 244 checking for error_at_line... (cached) no
+ 244 checking whether __progname is defined in default libraries... (cached) yes
+ 244 checking whether strerror_r is declared... (cached) yes
+ 244 checking which flavor of printf attribute matches inttypes macros... (cached) system
+ 246 checking for pthread_rwlock_t... (cached) yes
+ 246 checking for stpcpy... (cached) yes
+ 246 checking whether pthread_rwlock_rdlock prefers a writer to a reader... (cached) yes
+ 248 checking for mode_t... (cached) yes
+ 248 checking for mprotect... (cached) yes
+ 250 checking for _Bool... (cached) yes
+ 250 checking for stdbool.h that conforms to C99... (cached) yes
+ 252 checking for an ANSI C-conforming const... (cached) yes
+ 256 checking for EMULTIHOP value... (cached) yes
+ 256 checking for ENOLINK value... (cached) yes
+ 256 checking for EOVERFLOW value... (cached) yes
+ 256 checking for complete errno.h... (cached) no
+ 256 checking for features.h... (cached) no
+ 258 checking whether fflush works on input streams... (cached) no
+ 260 checking for pthread.h... (cached) yes
+ 260 checking for sys/mman.h... (cached) yes
+ 260 checking for wchar_t... (cached) yes
+ 260 checking for wint_t... (cached) yes
+ 262 checking for strnlen... (cached) no
+ 262 checking for struct stat.st_atim.tv_nsec... (cached) no
+ 262 checking for struct stat.st_atimespec.tv_nsec... (cached) yes
+ 264 checking for fcntl.h... (cached) yes
+ 266 checking for sigaction... (cached) yes
+ 268 checking for gawk... (cached) awk
+ 268 checking for lstat... (cached) yes
+ 278 checking for symlink... (cached) yes
+ 292 checking for SIZE_MAX... (cached) yes
+ 292 checking for raise... (cached) yes
+ 292 checking for uid_t in sys/types.h... (cached) yes
+ 294 checking if gcc supports -c -o file.o... (cached) yes
+ 306 checking for gettimeofday... (cached) yes
+ 316 checking for sys/socket.h... (cached) yes
+ 318 checking for good max_align_t... (cached) no
+ 320 checking for working alloca.h... (cached) yes
+ 332 checking for nlink_t... (cached) yes
+ 332 checking whether make supports nested variables... (cached) yes
+ 338 checking for pid_t... (cached) yes
+ 358 checking for getopt.h... (cached) yes
+ 358 checking whether byte ordering is bigendian... (cached) yes
+ 360 checking for _FILE_OFFSET_BITS value needed for large files... (cached) no
+ 362 checking for ranlib... (cached) ranlib
+ 372 checking for wcrtomb... (cached) yes
+ 374 checking for wchar.h... (cached) yes
+ 376 checking for ssize_t... (cached) yes
+ 376 checking whether make sets $(MAKE)... (cached) yes
+ 380 checking for minix/config.h... (cached) no
+ 380 checking whether it is safe to define __EXTENSIONS__... (cached) yes
+ 386 checking for mbrtowc... (cached) yes
+ 416 checking whether // is distinct from /... (cached) no
+ 418 checking for nl_langinfo... (cached) yes
+ 442 checking whether mbrtowc handles incomplete characters... (cached) yes
+ 442 checking whether mbrtowc works as well as mbtowc... (cached) yes
+ 456 checking for sigprocmask... (cached) yes
+ 468 checking for ANSI C header files... (cached) yes
+ 470 checking for mmap... (cached) yes
+ 478 checking for sys/param.h... (cached) yes
+ 500 checking for a traditional japanese locale... (cached) ja_JP.eucJP
+ 530 checking for ptrdiff_t... (cached) yes
+ 530 checking for size_t... (cached) yes
+ 542 checking for limits.h... (cached) yes
+ 546 checking for sys/time.h... (cached) yes
+ 564 checking for a transitional chinese locale... (cached) zh_CN.GB18030
+ 594 checking for snprintf... (cached) yes
+ 622 checking for memory.h... (cached) yes
+ 624 checking for suffix of object files... (cached) o
+ 640 checking whether we are using the GNU C compiler... (cached) yes
+ 874 checking for sys/types.h... (cached) yes
+ 890 checking for a traditional french locale... (cached) fr_FR.ISO8859-1
+ 894 checking for strings.h... (cached) yes
+ 946 checking for a french Unicode locale... (cached) fr_FR.UTF-8
+ 986 checking for sys/stat.h... (cached) yes
+1130 checking for inttypes.h... (cached) yes
+1204 checking for string.h... (cached) yes
+1298 checking for stdlib.h... (cached) yes
+1718 checking for stdint.h... (cached) yes
+1792 checking for unistd.h... (cached) yes

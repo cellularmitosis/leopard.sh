@@ -1,8 +1,5 @@
-leopardsh/binpkgs/*.*
-!leopardsh/binpkgs/.keep
-
-tigersh/binpkgs/*.*
-!tigersh/binpkgs/.keep
+binpkgs/*.*
+!binpkgs/.keep
 
 dist/*.*
 !dist/.keep

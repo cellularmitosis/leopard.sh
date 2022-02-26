@@ -12,9 +12,8 @@ md5s:
 	$(shell echo "The MD5 sum of tigersh-deps-0.1-tiger.g3 is:" >> md5)
 	$(shell echo >> md5)
 	$(shell md5 -q tigersh/binpkgs/tigersh-deps-0.1.tiger.g3.tar.gz >> md5)
-	cd leopardsh/binpkgs && make
-	cd tigersh/binpkgs && make
-
+	cd binpkgs && make
+	cd dist && make
 
 dependency-graphs:
 	cd leopardsh/deps && make dependencies.png
@@ -24,8 +23,8 @@ stats:
 	cd stats && make
 
 clean:
-	cd leopardsh/binpkgs && make clean
-	cd tigersh/binpkgs && make clean
+	cd binpkgs && make clean
+	cd dist && make clean
 	cd leopardsh/deps && make clean
 	cd tigersh/deps && make clean
 	cd stats && make clean
