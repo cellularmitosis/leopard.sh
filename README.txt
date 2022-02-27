@@ -222,8 +222,8 @@ In fact, as long as you drop any needed source tarballs into `~/Downloads`
 before running `leopard.sh`, you're now also completely offline-capable.
 
 
-Non-goals:
-----------
+Project non-goals:
+------------------
 
 - Supporting Intel Macs ;p
 
