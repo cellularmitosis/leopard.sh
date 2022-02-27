@@ -22,7 +22,7 @@ I build pre-compiled binary packages optimized for the following platforms:
 
 |         | G3  | G4  | G4e | G5/32 | G5/64 |
 | ------- |:---:|:---:|:---:|:---:  |:---:  |
-| Leopard |     |     |  ✅  | ✅    | ✅    |
+| Leopard | -   | -   |  ✅  | ✅    | ✅    |
 | Tiger   | ✅  | ✅  |  ✅  | ✅    | ✅    |
 
 The above processors can be understood as the following gcc flags:
@@ -244,7 +244,7 @@ before running `leopard.sh`, you're now also completely offline-capable.
 
 ## Project non-goals:
 
-- Supporting Intel Macs ;p
+- Supporting Intel Macs 😜
 
 ![intel](.media/intel.jpg)
 
