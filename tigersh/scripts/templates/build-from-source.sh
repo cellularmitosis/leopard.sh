@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/build-from-source.sh v4
+# based on templates/build-from-source.sh v5
 
 # 👇 EDIT HERE:
 # Install foo on OS X Tiger / PowerPC.
@@ -61,124 +61,101 @@ do
     export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
 done
 
-echo -n -e "\033]0;tiger.sh $pkgspec ($(hostname -s))\007"
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
-binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
-    if ! test -e /usr/bin/gcc ; then
-        tiger.sh xcode-2.5
-    fi
+if tiger.sh --install-binpkg $pkgspec ; then
+    exit 0
+fi
 
-    # 👇 EDIT HERE:
-    if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
-        tiger.sh gcc-4.2
-    fi
+echo "Building $pkgspec from source." >&2
 
-    # 👇 EDIT HERE:
-    srcmirror=https://ftp.gnu.org/gnu/$package
-    tarball=$package-$version.tar.gz
-    tarball=$package-$version.tar.bz2
-    tarball=$package-$version.tar.xz
+if ! test -e /usr/bin/gcc ; then
+    tiger.sh xcode-2.5
+fi
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
+# 👇 EDIT HERE:
+if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
+    tiger.sh gcc-4.2
+fi
 
-    # 👇 EDIT HERE:
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = xxxxxxxzxxxxxxxxxxzxxxxxxxxxxzx
+upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
-    cd /tmp
-    rm -rf $package-$version
+tiger.sh --unpack-dist $pkgspec
+cd /tmp/$package-$version
 
-    # 👇 EDIT HERE:
-    tar xzf ~/Downloads/$tarball
-    tar xjf ~/Downloads/$tarball
-    cat ~/Downloads/$tarball | unxz | tar x
+# 👇 EDIT HERE:
+cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
 
-    cd $package-$version
+# 👇 EDIT HERE:
+CC=gcc-4.2
+CXX=g++-4.2
 
-    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+# 👇 EDIT HERE:
+CFLAGS=$(tiger.sh -mcpu -O)
+CXXFLAGS=$(tiger.sh -mcpu -O)
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
+    CXXFLAGS="-m64 $CXXFLAGS"
+    LDFLAGS="-m64 $LDFLAGS"
+fi
 
-    # 👇 EDIT HERE:
-    CC=gcc-4.2
-    CXX=g++-4.2
-
-    # 👇 EDIT HERE:
-    CFLAGS=$(tiger.sh -mcpu -O)
-    CXXFLAGS=$(tiger.sh -mcpu -O)
+# 👇 EDIT HERE:
+for f in configure libfoo/configure ; do
     if test -n "$ppc64" ; then
-        CFLAGS="-m64 $CFLAGS"
-        CXXFLAGS="-m64 $CXXFLAGS"
-        LDFLAGS="-m64 $LDFLAGS"
+        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
+        perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
+        export LDFLAGS=-m64
+    else
+        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -mcpu -O)\"/g" $f
+        perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(tiger.sh -mcpu -O)\"/g" $f
     fi
+done
 
-    # 👇 EDIT HERE:
-    for f in configure libfoo/configure ; do
-        if test -n "$ppc64" ; then
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-            perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-            export LDFLAGS=-m64
-        else
-            perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -mcpu -O)\"/g" $f
-            perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(tiger.sh -mcpu -O)\"/g" $f
-        fi
-    done
+# 👇 EDIT HERE:
+pkgconfignames="bar qux"
+CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
+LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
+LIBS=$(pkg-config --libs-only-l $pkgconfignames)
 
-    # 👇 EDIT HERE:
-    pkgconfignames="bar qux"
-    CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
-    LIBS=$(pkg-config --libs-only-l $pkgconfignames)
+# 👇 EDIT HERE:
+nice ./configure -C --prefix=/opt/$pkgspec \
+    --with-bar=/opt/bar-1.0 \
+    --with-bar-prefix=/opt/bar-1.0 \
+    CPPFLAGS="$CPPFLAGS" \
+    LDFLAGS="$LDFLAGS" \
+    LIBS="$LIBS" \
+    CFLAGS="$CFLAGS" \
+    CXXFLAGS="$CXXFLAGS" \
+    CC="$CC" \
+    CXX="$CXX"
 
-    # 👇 EDIT HERE:
-    ./configure -C --prefix=/opt/$pkgspec \
-        --with-bar=/opt/bar-1.0 \
-        --with-bar-prefix=/opt/bar-1.0 \
-        CPPFLAGS="$CPPFLAGS" \
-        LDFLAGS="$LDFLAGS" \
-        LIBS="$LIBS" \
-        CFLAGS="$CFLAGS" \
-        CXXFLAGS="$CXXFLAGS" \
-        CC="$CC" \
-        CXX="$CXX"
+nice make $(tiger.sh -j) V=1
 
-    make $(tiger.sh -j) V=1
-
-    # 👇 EDIT HERE:
-    if test -n "$TIGERSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    # 👇 EDIT HERE:
-    if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
-        make check
-    fi
-
-    # 👇 EDIT HERE:
-    if test -n "$TIGERSH_RUN_LONG_TESTS" ; then
-        make check
-    fi
-
-    # 👇 EDIT HERE:
-    # Note: no 'make check' available.
-
-    make install
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
-        gzip config.cache
-        mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
-    fi
+# 👇 EDIT HERE:
+if test -n "$TIGERSH_RUN_TESTS" ; then
+    make check
 fi
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+# 👇 EDIT HERE:
+if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
+    make check
 fi
 
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+# 👇 EDIT HERE:
+if test -n "$TIGERSH_RUN_LONG_TESTS" ; then
+    make check
+fi
+
+# 👇 EDIT HERE:
+# Note: no 'make check' available.
+
+make install
+
+tiger.sh --linker-check $pkgspec
+tiger.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
+    nice gzip config.cache
+    mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
 fi

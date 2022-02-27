@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v4
+# based on templates/build-from-source.sh v5
 
 # Install pv on OS X Tiger / PowerPC.
 
@@ -7,8 +7,8 @@ package=pv
 version=1.6.20
 
 set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -18,58 +18,45 @@ pkgspec=$package-$version$ppc64
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
-binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
-    srcmirror=https://distfiles.gentoo.org/distfiles
-    tarball=$package-$version.tar.bz2
-
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
-
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 85b25c827add82ebdd5a58a5ffde1d7d
-
-    cd /tmp
-    rm -rf $package-$version
-    tar xjf ~/Downloads/$tarball
-    cd $package-$version
-
-    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
-
-    CFLAGS=$(tiger.sh -mcpu -O)
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $CFLAGS"
-    fi
-
-    ./configure -C --prefix=/opt/$pkgspec \
-        CFLAGS="$CFLAGS"
-
-    make $(tiger.sh -j)
-
-    if test -n "$TIGERSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    tiger.sh --linker-check $pkgspec
-    tiger.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
-        gzip config.cache
-        mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
-    fi
+if tiger.sh --install-binpkg $pkgspec ; then
+    exit 0
 fi
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+echo "Building $pkgspec from source." >&2
+
+if ! test -e /usr/bin/gcc ; then
+    tiger.sh xcode-2.5
 fi
 
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+upstream=https://distfiles.gentoo.org/distfiles/$package-$version.tar.bz2
+
+
+tiger.sh --unpack-dist $pkgspec
+cd /tmp/$package-$version
+
+cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+
+CFLAGS=$(tiger.sh -mcpu -O)
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
+fi
+
+nice ./configure -C --prefix=/opt/$pkgspec \
+    CFLAGS="$CFLAGS"
+
+nice make $(tiger.sh -j)
+
+if test -n "$TIGERSH_RUN_TESTS" ; then
+    make check
+fi
+
+make install
+
+tiger.sh --linker-check $pkgspec
+tiger.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
+    nice gzip config.cache
+    mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
 fi

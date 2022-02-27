@@ -131,7 +131,7 @@ fi
 
 # setup:
 
-for d in /opt /usr/local /usr/local/bin /usr/local/sbin ; do
+for d in /opt /usr/local /usr/local/bin /usr/local/sbin /usr/local/share /usr/local/share/man ; do
     if ! test -e $d ; then
         echo "Creating $d." >&2
         sudo mkdir $d
@@ -174,27 +174,27 @@ if test ! -e /opt/$deps_pkgspec \
     fifo=/tmp/$binpkg.fifo
     rm -f $fifo
     ( mkfifo $fifo \
-        && cat $fifo | md5 > /tmp/$binpkg.localmd5_ \
+        && cat $fifo | nice md5 > /tmp/$binpkg.localmd5_ \
         && mv /tmp/$binpkg.localmd5_ /tmp/$binpkg.localmd5
     ) &
 
     while ! test -e $fifo ; do sleep 0.1 ; done
 
-    binpkg_url=$TIGERSH_MIRROR/binpkgs/$binpkg
+    url=$TIGERSH_MIRROR/binpkgs/$binpkg
     # At this point we are still using /usr/bin/curl, so drop back to http.
-    binpkg_url=$(echo "$binpkg_url" | sed 's|^https:|^http:|')
-    size=$(curl --fail --silent --show-error --head --insecure $binpkg_url \
+    url=$(echo "$url" | sed 's|^https:|^http:|')
+    size=$(curl --fail --silent --show-error --head --insecure $url \
         | grep -i '^content-length:' \
         | awk '{print $NF}' \
         | sed "s/$(printf '\r')//"
     )
 
     cd /opt
-    curl --fail --silent --show-error --insecure $binpkg_url \
+    nice curl --fail --silent --show-error --insecure $url \
         | pv --force --size $size \
         | tee $fifo \
-        | gunzip \
-        | tar x
+        | nice gunzip \
+        | nice tar x
 
     while ! test -e /tmp/$binpkg.localmd5 ; do sleep 0.1 ; done
 
@@ -337,7 +337,7 @@ if test "$1" = "--install-binpkg" ; then
     url=$TIGERSH_MIRROR/binpkgs/$binpkg
 
     # since we are checking the MD5 sum, drop from https to http.
-    url=$(echo "$binpkg_url" | sed 's|^https:|^http:|')
+    url=$(echo "$url" | sed 's|^https:|^http:|')
 
     if ! tiger.sh --url-exists "$url" ; then
         echo "Pre-compiled binary package unavailable for $pkgspec on $os_cpu." >&2
@@ -345,12 +345,13 @@ if test "$1" = "--install-binpkg" ; then
     fi
 
     if test -n "$TIGERSH_FORCE_BUILD" ; then
-        echo "Ignoring $binpkg due to '$TIGERSH_FORCE_BUILD'" >&2
+        echo "Ignoring $binpkg due to '\$TIGERSH_FORCE_BUILD'" >&2
         exit 1
     fi
 
     echo "Unpacking $binpkg into /opt." >&2
     tiger.sh --unpack-tarball-check-md5 $url /opt
+    exit $?
 fi
 
 
@@ -371,7 +372,7 @@ if test "$1" = "--unpack-dist" ; then
     url=$TIGERSH_MIRROR/dist/$tarball
 
     # since we are checking the MD5 sum, drop from https to http.
-    url=$(echo "$binpkg_url" | sed 's|^https:|^http:|')
+    url=$(echo "$url" | sed 's|^https:|^http:|')
 
     echo "Unpacking $tarball into /tmp." >&2
     rm -rf /tmp/$pkgspec
@@ -395,7 +396,7 @@ if test "$1" = "--unpack-tarball-check-md5" ; then
     shift 1
 
     # since we are checking the MD5 sum, drop from https to http.
-    url=$(echo "$binpkg_url" | sed 's|^https:|^http:|')
+    url=$(echo "$url" | sed 's|^https:|^http:|')
 
     if test -z "$1" ; then
         echo "Error: unpack tarball where?" >&2
@@ -410,7 +411,7 @@ if test "$1" = "--unpack-tarball-check-md5" ; then
     fifo=$tmp.fifo
     rm -f $fifo
     ( mkfifo $fifo \
-        && cat $fifo | md5 > $tmp.localmd5_ \
+        && cat $fifo | nice md5 > $tmp.localmd5_ \
         && mv $tmp.localmd5_ $tmp.localmd5
     ) &
 
@@ -426,18 +427,22 @@ if test "$1" = "--unpack-tarball-check-md5" ; then
     curl --fail --silent --show-error --location --remote-name $url.md5
 
     cd /tmp
-    curl --fail --silent --show-error $url \
+    nice curl --fail --silent --show-error $url \
         | pv --force --size $size \
         | tee $fifo \
-        | gunzip \
-        | tar x
+        | nice gunzip \
+        | nice tar x
 
     while ! test -e $tmp.localmd5 ; do sleep 0.1 ; done
 
     rm -f $fifo $tmp.localmd5 $tmp.md5
 
-    test "$(cat $tmp.localmd5)" = "$(cat $tmp.md5)"
-    exit $?
+    if ! test "$(cat $tmp.localmd5)" = "$(cat $tmp.md5)" ; then
+        echo "Error: MD5 sum mismatch for $url."
+        exit 1
+    else
+        exit 0
+    fi
 fi
 
 
@@ -587,10 +592,30 @@ tee /tmp/$script.log < $fifo &
 /usr/bin/time nice ./$script > $fifo 2>&1
 rm -f $fifo
 
+if find /opt/$pkgspec/bin -mindepth 1 | grep -q . ; then
+    ln -vsf /opt/$pkgspec/bin/* /usr/local/bin/
+fi
+
+if find /opt/$pkgspec/sbin -mindepth 1 | grep -q . ; then
+    ln -vsf /opt/$pkgspec/sbin/* /usr/local/sbin/
+fi
+
+if find /opt/$pkgspec/share/man -mindepth 1 | grep -q . ; then
+    cd /opt/$pkgspec/share/man
+    for d in * ; do
+        if find /opt/$pkgspec/share/man/$d -mindepth 1 | grep -q . ; then
+            mkdir -p /usr/local/share/man/$d/
+            ln -vsf /opt/$pkgspec/share/man/$d/* /usr/local/share/man/$d/
+        fi
+    done
+    cd - >/dev/null
+fi
+
 if ! test -e /opt/$pkgspec/share/tiger.sh/$pkgspec/$script.log.gz ; then
     mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
-    gzip /tmp/$script.log
+    nice gzip /tmp/$script.log
     mv /tmp/$script.log.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
 fi
 
 rm -f /opt/$pkgspec/INCOMPLETE_INSTALLATION
+rm -f /tmp/$script
