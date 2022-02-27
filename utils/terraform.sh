@@ -79,38 +79,32 @@ echo
 echo "👉 pull binpkgs"
 for host in $uphosts ; do
     echo "  🖥  $host"
-    ssh $host mkdir -p /Users/macuser/Desktop/binpkgs
-    rsync -ai --update $host:/Users/macuser/Desktop/binpkgs/ ~/leopard.sh/binpkgs
-done
-
-echo
-echo "👉 push tiger.sh"
-for host in $uphosts ; do
-    echo "  🖥  $host"
-    cd ~/tigersh
-    rsync -ai --delete * $host:/Users/macuser/Desktop/tigersh/
-    ssh $host "cd /Users/macuser/bin \
-        && ln -sf /Users/macuser/Desktop/tigersh/tiger.sh . \
-        && ln -sf /Users/macuser/Desktop/tigersh/utils/make-tigersh-binpkg.sh . \
-        && ln -sf /Users/macuser/Desktop/tigersh/utils/rebuild-tigersh-stales.sh . \
-        && ln -sf /Users/macuser/Desktop/tigersh/utils/rebuild-tigersh-all.sh . \
-        && rm -f /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache \
-        && rm -f /opt/tiger.sh/share/tiger.sh/config.cache/disabled.cache"
+    ssh $host mkdir -p /Users/macuser/Desktop/leopard.sh/binpkgs
+    rsync -ai --update $host:/Users/macuser/Desktop/leopard.sh/binpkgs/ ~/leopard.sh/binpkgs
 done
 
 echo
 echo "👉 push leopard.sh"
 for host in $uphosts ; do
     echo "  🖥  $host"
-    cd ~/leopardsh
-    rsync -ai --delete * $host:/Users/macuser/Desktop/leopardsh/
+    rsync -ai --delete ~/leopard.sh/ \
+        --exclude='/dist/*' \
+        --exclude='/binpkgs/*' \
+        $host:/Users/macuser/Desktop/leopard.sh
     ssh $host "cd /Users/macuser/bin \
-        && ln -sf /Users/macuser/Desktop/leopardsh/leopard.sh . \
-        && ln -sf /Users/macuser/Desktop/leopardsh/utils/make-leopardsh-binpkg.sh . \
-        && ln -sf /Users/macuser/Desktop/leopardsh/utils/rebuild-leopardsh-stales.sh . \
-        && ln -sf /Users/macuser/Desktop/leopardsh/utils/rebuild-leopardsh-all.sh . \
+        && rm -rf /Users/macuser/Desktop/leopardsh \
+        && rm -rf /Users/macuser/Desktop/tigersh \
+        && ln -sf /Users/macuser/Desktop/leopard.sh/leopard.sh . \
+        && ln -sf /Users/macuser/Desktop/leopard.sh/tiger.sh . \
+        && ln -sf /Users/macuser/Desktop/leopard.sh/leopardsh/utils/make-leopardsh-binpkg.sh . \
+        && ln -sf /Users/macuser/Desktop/leopard.sh/tigersh/utils/make-tigersh-binpkg.sh . \
+        && ln -sf /Users/macuser/Desktop/leopard.sh/leopardsd/utils/rebuild-leopardsh-stales.sh . \
+        && ln -sf /Users/macuser/Desktop/leopard.sh/tigersh/utils/rebuild-tigersh-stales.sh . \
+        && ln -sf /Users/macuser/Desktop/leopard.sh/leopardsh/utils/rebuild-leopardsh-all.sh . \
+        && ln -sf /Users/macuser/Desktop/leopard.sh/tigersh/utils/rebuild-tigersh-all.sh . \
         && rm -f /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache \
-        && rm -f /opt/leopard.sh/share/leopard.sh/config.cache/disabled.cache"
+        && rm -f /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache \
+        && rm -f /opt/tiger.sh/share/tiger.sh/config.cache/disabled.cache"
 done
 
 #echo
