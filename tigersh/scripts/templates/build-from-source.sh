@@ -8,7 +8,7 @@
 package=foo
 version=1.0
 
-set -e -x
+set -e
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
@@ -68,6 +68,7 @@ if tiger.sh --install-binpkg $pkgspec ; then
 fi
 
 echo "Building $pkgspec from source." >&2
+set -x
 
 if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
@@ -118,18 +119,18 @@ LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
 LIBS=$(pkg-config --libs-only-l $pkgconfignames)
 
 # 👇 EDIT HERE:
-nice ./configure -C --prefix=/opt/$pkgspec \
-    --with-bar=/opt/bar-1.0 \
-    --with-bar-prefix=/opt/bar-1.0 \
-    CPPFLAGS="$CPPFLAGS" \
-    LDFLAGS="$LDFLAGS" \
-    LIBS="$LIBS" \
-    CFLAGS="$CFLAGS" \
-    CXXFLAGS="$CXXFLAGS" \
-    CC="$CC" \
-    CXX="$CXX"
-
-nice make $(tiger.sh -j) V=1
+/usr/bin/time \
+    ./configure -C --prefix=/opt/$pkgspec \
+        --with-bar=/opt/bar-1.0 \
+        --with-bar-prefix=/opt/bar-1.0 \
+        CPPFLAGS="$CPPFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        LIBS="$LIBS" \
+        CFLAGS="$CFLAGS" \
+        CXXFLAGS="$CXXFLAGS" \
+        CC="$CC" \
+        CXX="$CXX" \
+    && make $(tiger.sh -j) V=1
 
 # 👇 EDIT HERE:
 if test -n "$TIGERSH_RUN_TESTS" ; then
@@ -156,6 +157,6 @@ tiger.sh --arch-check $pkgspec $ppc64
 
 if test -e config.cache ; then
     mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
-    nice gzip config.cache
+    gzip config.cache
     mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
 fi

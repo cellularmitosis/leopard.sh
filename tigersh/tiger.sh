@@ -271,9 +271,11 @@ EOF
     rm /opt/$deps_pkgspec/INCOMPLETE_INSTALLATION
 fi
 
-echo "Running 'sudo mv \"$0\" /usr/local/bin/'." >&2
-cd "$orig_pwd"
-sudo mv "$0" /usr/local/bin/
+if test ! -e /usr/local/bin/tiger.sh || test "$(md5 -q "$0")" != "$(md5 -q /usr/local/bin/tiger.sh)" ; then
+    echo "Moving $0 to /usr/local/bin/." >&2
+    cd "$orig_pwd"
+    sudo mv "$0" /usr/local/bin/
+fi
 
 if ! echo $PATH | tr ':' '\n' | egrep '^/usr/local/bin/?$' >/dev/null ; then
     echo "Adding /usr/local/bin to your \$PATH." >&2
@@ -404,7 +406,7 @@ if test "$1" = "--unpack-tarball-check-md5" ; then
         echo "e.g. tiger.sh --unpack-tarball-check-md5 http://leopard.sh/binpkgs/gzip-1.11.tiger.g3.tar.gz /opt" >&2
         exit 1
     fi
-    dest="$2"
+    dest="$1"
     shift 1
 
     tmp=$(mktemp -u /tmp/tarball.XXXX)
@@ -424,9 +426,9 @@ if test "$1" = "--unpack-tarball-check-md5" ; then
     )
 
     cd /tmp
-    curl --fail --silent --show-error --location --remote-name $url.md5
+    curl --fail --silent --show-error --location $url.md5 > $tmp.md5
 
-    cd /tmp
+    cd $dest
     nice curl --fail --silent --show-error $url \
         | pv --force --size $size \
         | tee $fifo \
@@ -435,9 +437,13 @@ if test "$1" = "--unpack-tarball-check-md5" ; then
 
     while ! test -e $tmp.localmd5 ; do sleep 0.1 ; done
 
+    if ! test "$(cat $tmp.localmd5)" = "$(cat $tmp.md5)" ; then
+        badmd5=1
+    fi
+
     rm -f $fifo $tmp.localmd5 $tmp.md5
 
-    if ! test "$(cat $tmp.localmd5)" = "$(cat $tmp.md5)" ; then
+    if test -n "$badmd5" ; then
         echo "Error: MD5 sum mismatch for $url."
         exit 1
     else
@@ -553,6 +559,7 @@ if test -z "$1" ; then
     else
         cat packages.txt
     fi
+    rm -f packages.txt packages.ppc64.txt
     exit 0
 fi
 
@@ -573,12 +580,13 @@ rm -rf /opt/$pkgspec
 export MACOSX_DEPLOYMENT_TARGET=10.4
 
 pkgspec="$1"
-echo "Installing $pkgspec" >&2
+echo "Installing $pkgspec." >&2
 echo -n -e "\033]0;tiger.sh $pkgspec (tiger.$cpu_name)\007"
 mkdir -p /opt/$pkgspec
 touch /opt/$pkgspec/INCOMPLETE_INSTALLATION
 script=install-$pkgspec.sh
 cd /tmp
+echo "Fetching $script." >&2
 curl --fail --silent --show-error --location --remote-name \
     $TIGERSH_MIRROR/tigersh/scripts/$script
 chmod +x $script
@@ -589,23 +597,23 @@ fifo=/tmp/.tiger.sh.$script.fifo
 rm -f $fifo
 mkfifo $fifo
 tee /tmp/$script.log < $fifo &
-/usr/bin/time nice ./$script > $fifo 2>&1
+nice ./$script > $fifo 2>&1
 rm -f $fifo
 
-if find /opt/$pkgspec/bin -mindepth 1 | grep -q . ; then
-    ln -vsf /opt/$pkgspec/bin/* /usr/local/bin/
+if find /opt/$pkgspec/bin -mindepth 1 2>/dev/null | grep -q . ; then
+    ln -vsf /opt/$pkgspec/bin/* /usr/local/bin
 fi
 
-if find /opt/$pkgspec/sbin -mindepth 1 | grep -q . ; then
-    ln -vsf /opt/$pkgspec/sbin/* /usr/local/sbin/
+if find /opt/$pkgspec/sbin -mindepth 1 2>/dev/null | grep -q . ; then
+    ln -vsf /opt/$pkgspec/sbin/* /usr/local/sbin
 fi
 
-if find /opt/$pkgspec/share/man -mindepth 1 | grep -q . ; then
+if find /opt/$pkgspec/share/man -mindepth 1 2>/dev/null | grep -q . ; then
     cd /opt/$pkgspec/share/man
     for d in * ; do
-        if find /opt/$pkgspec/share/man/$d -mindepth 1 | grep -q . ; then
+        if find /opt/$pkgspec/share/man/$d -mindepth 1 2>/dev/null | grep -q . ; then
             mkdir -p /usr/local/share/man/$d/
-            ln -vsf /opt/$pkgspec/share/man/$d/* /usr/local/share/man/$d/
+            ln -vsf /opt/$pkgspec/share/man/$d/* /usr/local/share/man/$d
         fi
     done
     cd - >/dev/null

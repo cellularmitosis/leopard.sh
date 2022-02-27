@@ -1,11 +1,13 @@
 #!/bin/bash
 
-set -e
+set -e -x
 
 if test -e /opt/local ; then
     echo "Nope!  Not taking the risk of wiping out your MacPorts installation." >&2
     exit 1
 fi
+
+cd
 
 rm -rf \
     ~/Desktop/leopard.sh \
@@ -21,5 +23,5 @@ rm -rf \
     ~/bin/rebuild-tigersh-all.sh \
 
 if test "$1" = "--really-nuke-it" ; then
-    rm -rf /opt /usr/local
+    sudo rm -rf /opt /usr/local
 fi
