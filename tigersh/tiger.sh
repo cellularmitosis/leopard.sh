@@ -4,12 +4,15 @@
 
 set -e
 
+orig_pwd=$PWD
+
 # Note: for offline use or to run you own local fork, export e.g.
-#   TIGERSH_MIRROR=file:///Users/foo/tigersh
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-http://leopard.sh/tigersh}
+#   TIGERSH_MIRROR=file:///Users/foo/github/cellularmitosis/leopard.sh
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-http://leopard.sh}
 export TIGERSH_MIRROR
 
-export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
+# no alarms and no surprises, please.
+export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 
 COLOR_GREEN="\\\e[32;1m"
 COLOR_YELLOW="\\\e[33;1m"
@@ -128,36 +131,29 @@ fi
 
 # setup:
 
-if ! test -e /opt ; then
-    echo "Creating /opt." >&2
-    sudo mkdir /opt
-    sudo chgrp admin /opt
-    sudo chmod g+w /opt
-fi
-
-if ! mktemp /opt/write-check.XXX >/dev/null ; then
-    echo "Notice: can't write to /opt." >&2
-    echo "Running 'sudo chgrp admin /opt && sudo chmod g+w /opt'." >&2
-    sudo chgrp admin /opt
-    sudo chmod g+w /opt
-else
-    rm -f /opt/write-check.*
-fi
-
-if ! mktemp /opt/write-check.XXX >/dev/null ; then
-    echo "Error: can't write to /opt." >&2
-    echo "Check that you are in the 'admin' group (run 'groups')." >&2
-    exit 1
-else
-    rm -f /opt/write-check.*
-fi
-
-for d in /usr/local /usr/local/bin /usr/local/sbin ; do
+for d in /opt /usr/local /usr/local/bin /usr/local/sbin ; do
     if ! test -e $d ; then
         echo "Creating $d." >&2
-        sudo mkdir -p $d
+        sudo mkdir $d
         sudo chgrp admin $d
         sudo chmod g+w $d
+    fi
+
+    if ! mktemp $d/write-check.XXX >/dev/null ; then
+        echo "Notice: can't write to $d." >&2
+        echo "Running 'sudo chgrp admin $d && sudo chmod g+w /opt'." >&2
+        sudo chgrp admin $d
+        sudo chmod g+w $d
+    else
+        rm -f $d/write-check.*
+    fi
+
+    if ! mktemp $d/write-check.XXX >/dev/null ; then
+        echo "Error: can't write to $d." >&2
+        echo "Check that you are in the 'admin' group (run 'groups')." >&2
+        exit 1
+    else
+        rm -f $d/write-check.*
     fi
 done
 
@@ -185,14 +181,16 @@ if test ! -e /opt/$deps_pkgspec \
     while ! test -e $fifo ; do sleep 0.1 ; done
 
     binpkg_url=$TIGERSH_MIRROR/binpkgs/$binpkg
-    size=$( curl --fail --silent --show-error --head $binpkg_url \
+    # At this point we are still using /usr/bin/curl, so no https for you!
+    binpkg_url=$(echo "$binpkg_url" | sed 's|^https:|^http:|')
+    size=$(curl --fail --silent --show-error --head --insecure $binpkg_url \
         | grep -i '^content-length:' \
         | awk '{print $NF}' \
         | sed "s/$(printf '\r')//"
     )
 
     cd /opt
-    curl --fail --silent --show-error $binpkg_url \
+    curl --fail --silent --show-error --insecure $binpkg_url \
         | pv --force --size $size \
         | tee $fifo \
         | gunzip \
@@ -202,57 +200,54 @@ if test ! -e /opt/$deps_pkgspec \
 
     rm $fifo
 
-    # FIXME install letsencrypt on leopard.sh and change this to https.
-    # Note: this qr code was generated via 'qrencode -t ANSI http://leopard.sh/md5'
+    # Note: this qr code was generated via 'qrencode -t ANSI https://leopard.sh/md5'
     echo
     cat >&2 << EOF
-[47m                                                                  [0m
-[47m                                                                  [0m
-[47m                                                                  [0m
-[47m                                                                  [0m
-[47m        [40m              [47m    [40m  [47m    [40m          [47m  [40m              [47m        [0m
-[47m        [40m  [47m          [40m  [47m  [40m  [47m    [40m            [47m  [40m  [47m          [40m  [47m        [0m
-[47m        [40m  [47m  [40m      [47m  [40m  [47m  [40m          [47m  [40m  [47m  [40m  [47m  [40m  [47m  [40m      [47m  [40m  [47m        [0m
-[47m        [40m  [47m  [40m      [47m  [40m  [47m    [40m      [47m    [40m  [47m      [40m  [47m  [40m      [47m  [40m  [47m        [0m
-[47m        [40m  [47m  [40m      [47m  [40m  [47m  [40m  [47m          [40m      [47m  [40m  [47m  [40m      [47m  [40m  [47m        [0m
-[47m        [40m  [47m          [40m  [47m  [40m    [47m  [40m  [47m  [40m  [47m  [40m    [47m  [40m  [47m          [40m  [47m        [0m
-[47m        [40m              [47m  [40m  [47m  [40m  [47m  [40m  [47m  [40m  [47m  [40m  [47m  [40m              [47m        [0m
-[47m                        [40m    [47m    [40m  [47m  [40m  [47m  [40m  [47m                        [0m
-[47m        [40m    [47m  [40m  [47m    [40m    [47m    [40m  [47m    [40m    [47m      [40m      [47m  [40m    [47m          [0m
-[47m        [40m  [47m  [40m  [47m  [40m    [47m        [40m    [47m  [40m  [47m    [40m      [47m          [40m  [47m        [0m
-[47m        [40m        [47m  [40m    [47m  [40m      [47m    [40m  [47m      [40m  [47m    [40m  [47m    [40m    [47m        [0m
-[47m          [40m      [47m  [40m  [47m    [40m  [47m        [40m    [47m  [40m      [47m  [40m  [47m                [0m
-[47m          [40m  [47m    [40m  [47m  [40m    [47m        [40m              [47m    [40m  [47m  [40m    [47m        [0m
-[47m          [40m    [47m  [40m  [47m    [40m  [47m    [40m      [47m  [40m  [47m  [40m  [47m  [40m    [47m  [40m    [47m  [40m  [47m        [0m
-[47m        [40m  [47m  [40m    [47m    [40m  [47m    [40m    [47m  [40m  [47m  [40m  [47m  [40m      [47m      [40m  [47m  [40m  [47m        [0m
-[47m          [40m  [47m  [40m      [47m      [40m  [47m    [40m            [47m    [40m    [47m  [40m  [47m          [0m
-[47m        [40m    [47m  [40m  [47m  [40m    [47m  [40m  [47m    [40m  [47m  [40m    [47m  [40m              [47m            [0m
-[47m                        [40m  [47m  [40m  [47m      [40m      [47m      [40m      [47m  [40m  [47m        [0m
-[47m        [40m              [47m  [40m    [47m      [40m  [47m  [40m    [47m  [40m  [47m  [40m  [47m    [40m    [47m        [0m
-[47m        [40m  [47m          [40m  [47m    [40m  [47m  [40m  [47m  [40m  [47m    [40m  [47m      [40m      [47m            [0m
-[47m        [40m  [47m  [40m      [47m  [40m  [47m      [40m      [47m  [40m  [47m  [40m          [47m      [40m  [47m        [0m
-[47m        [40m  [47m  [40m      [47m  [40m  [47m  [40m    [47m  [40m      [47m  [40m    [47m    [40m    [47m  [40m  [47m            [0m
-[47m        [40m  [47m  [40m      [47m  [40m  [47m    [40m  [47m  [40m        [47m          [40m      [47m  [40m  [47m        [0m
-[47m        [40m  [47m          [40m  [47m  [40m  [47m  [40m        [47m    [40m  [47m        [40m  [47m              [0m
-[47m        [40m              [47m  [40m  [47m    [40m  [47m    [40m            [47m      [40m    [47m        [0m
-[47m                                                                  [0m
-[47m                                                                  [0m
-[47m                                                                  [0m
-[47m                                                                  [0m
+[47m                                                            [0m
+[47m                                                            [0m
+[47m     [40m              [47m      [40m  [47m    [40m      [47m    [40m              [47m     [0m
+[47m     [40m  [47m          [40m  [47m    [40m  [47m      [40m  [47m  [40m    [47m  [40m  [47m          [40m  [47m     [0m
+[47m     [40m  [47m  [40m      [47m  [40m  [47m  [40m  [47m    [40m  [47m    [40m      [47m  [40m  [47m  [40m      [47m  [40m  [47m     [0m
+[47m     [40m  [47m  [40m      [47m  [40m  [47m    [40m  [47m    [40m  [47m    [40m    [47m  [40m  [47m  [40m      [47m  [40m  [47m     [0m
+[47m     [40m  [47m  [40m      [47m  [40m  [47m    [40m  [47m    [40m        [47m    [40m  [47m  [40m      [47m  [40m  [47m     [0m
+[47m     [40m  [47m          [40m  [47m      [40m      [47m  [40m    [47m    [40m  [47m          [40m  [47m     [0m
+[47m     [40m              [47m  [40m  [47m  [40m  [47m  [40m  [47m  [40m  [47m  [40m  [47m  [40m              [47m     [0m
+[47m                     [40m  [47m    [40m  [47m  [40m    [47m  [40m  [47m                     [0m
+[47m     [40m      [47m  [40m          [47m      [40m    [47m  [40m        [47m      [40m  [47m         [0m
+[47m     [40m  [47m    [40m  [47m  [40m  [47m  [40m      [47m  [40m    [47m        [40m    [47m          [40m  [47m     [0m
+[47m     [40m  [47m  [40m  [47m  [40m  [47m  [40m      [47m  [40m      [47m      [40m      [47m  [40m  [47m  [40m      [47m     [0m
+[47m     [40m            [47m  [40m        [47m  [40m          [47m      [40m  [47m    [40m  [47m       [0m
+[47m     [40m    [47m        [40m  [47m  [40m  [47m  [40m    [47m  [40m  [47m    [40m      [47m    [40m  [47m  [40m    [47m     [0m
+[47m       [40m  [47m  [40m    [47m    [40m  [47m  [40m      [47m  [40m  [47m    [40m      [47m    [40m  [47m    [40m  [47m     [0m
+[47m     [40m  [47m  [40m  [47m    [40m    [47m  [40m  [47m              [40m    [47m  [40m  [47m    [40m      [47m     [0m
+[47m       [40m        [47m    [40m    [47m  [40m    [47m  [40m  [47m        [40m  [47m  [40m  [47m    [40m  [47m       [0m
+[47m     [40m  [47m        [40m      [47m        [40m      [47m  [40m            [47m           [0m
+[47m                     [40m  [47m  [40m          [47m  [40m  [47m      [40m    [47m  [40m    [47m     [0m
+[47m     [40m              [47m  [40m  [47m    [40m    [47m    [40m    [47m  [40m  [47m  [40m    [47m  [40m    [47m     [0m
+[47m     [40m  [47m          [40m  [47m  [40m  [47m  [40m  [47m  [40m      [47m  [40m  [47m      [40m    [47m  [40m    [47m     [0m
+[47m     [40m  [47m  [40m      [47m  [40m  [47m  [40m  [47m    [40m  [47m    [40m  [47m  [40m            [47m  [40m    [47m     [0m
+[47m     [40m  [47m  [40m      [47m  [40m  [47m      [40m    [47m              [40m        [47m         [0m
+[47m     [40m  [47m  [40m      [47m  [40m  [47m  [40m  [47m        [40m  [47m    [40m    [47m    [40m  [47m      [40m  [47m     [0m
+[47m     [40m  [47m          [40m  [47m  [40m  [47m    [40m  [47m      [40m      [47m    [40m    [47m  [40m  [47m       [0m
+[47m     [40m              [47m  [40m  [47m  [40m  [47m  [40m  [47m    [40m    [47m  [40m    [47m      [40m    [47m     [0m
+[47m                                                            [0m
+[47m                                                            [0m
 EOF
     echo >&2
     echo "OS X Tiger's support for SSL is too old to use, which means this script" >&2
-    echo "can't verify the integrity of the dependencies which it just installed." >&2
+    echo "can't verify the integrity of the dependencies which it just downloaded." >&2
     echo >&2
-    echo "    This is where I need your help, human!" >&2
+    echo "    -> This is where I need your help, human! <-" >&2
     echo >&2
     echo "Please visit https://leopard.sh/md5 in a modern browser (or by scanning the" >&2
-    echo "above QR code on your smartphone) and verify that it matches this MD5 sum:" >&2
+    echo "above QR code on your smartphone) and verify the following MD5 sums:" >&2
     echo >&2
-    echo "    $( cat /tmp/$binpkg.localmd5 )" >&2
+    echo "    $(basename \"$0\"): $(cd "$orig_pwd" && md5 -q "$0")" >&2
+    echo >&2
+    echo "    $binpkg: $(cat /tmp/$binpkg.localmd5)" >&2
     echo >&2
 
-    read -n 1 -p "Does the MD5 sum match? [Y/n]: " answer
+    read -n 1 -p "Do the MD5 sums match? [Y/n]: " answer
     while true ; do
         if test "$answer" = "" ; then
             break
@@ -262,7 +257,7 @@ EOF
         elif test "$answer" = "n" -o "$answer" = "N" ; then
             echo >&2
             echo >&2
-            echo "If the MD5 sum doesn't match, that means something is wrong." >&2
+            echo "If the MD5 sums don't match, that means something is wrong." >&2
             echo >&2
             echo "Please google 'macrumors powerpc' and start a forum thread." >&2
             echo "The user 'cellularmitosis' will assist you." >&2
@@ -279,11 +274,30 @@ EOF
     rm /opt/$deps_pkgspec/INCOMPLETE_INSTALLATION
 fi
 
+echo "Running 'sudo mv \"$0\" /usr/local/bin/'." >&2
+sudo mv "$0" /usr/local/bin/
+
+if ! echo $PATH | tr ':' '\n' | egrep '^/usr/local/bin/?$' ; then
+    echo "Adding /usr/local/bin to your \$PATH." >&2
+    for f in ~/.bashrc ~/.bash_profile ~/.profile ; do
+        if test -e $f ; then
+            echo >> $f
+            echo "# Added by tiger.sh:" >> $f
+            echo "export PATH=\"/usr/local/bin:/usr/local/sbin:\$PATH\"" >> $f
+        fi
+    done
+    echo >&2
+    echo "Note: this script has modified your \$PATH to include /usr/local/bin, but" >&2
+    echo "that change won't take effect until you open a new Terminal.app window." >&2
+    echo >&2
+fi
+
 opt_config_cache=/opt/tiger.sh/share/tiger.sh/config.cache
 mkdir -p $opt_config_cache
 if ! test -e $opt_config_cache/tiger.cache ; then
+    echo "Fetching configure cache." >&2
     cd $opt_config_cache
-    curl -sSfLOk $TIGERSH_MIRROR/config.cache/tiger.cache
+    curl --fail --silent --show-error --location --remote-name $TIGERSH_MIRROR/tigersh/config.cache/tiger.cache
 fi
 
 if test "$1" = "--setup" ; then
@@ -301,19 +315,27 @@ if test "$1" = "--url-exists" ; then
         exit 1
     fi
     url="$1"
-    curl -sSfI "$url" >/dev/null 2>&1
+    curl --fail --silent --show-error -I "$url" >/dev/null 2>&1
     exit $?
 fi
 
 
 # install binpkg:
 
+FIXME wrap up this refactor
+
+tiger.sh --unpack-tarball-check-md5 http://leopard.sh/dist/gzip-1.11.tar.gz /tmp/gzip-1.11.tar.gz.XXXX
+tiger.sh --unpack-tarball-check-md5 http://leopard.sh/binpkgs/gzip-1.11.tiger.g3.tar.gz /opt
+
+tiger.sh --install-binpkg gzip-1.11
+tiger.sh --unpack-distfile gzip-1.11.tar.gz /tmp/gzip-1.11.tar.gz.XXXX
+
 if test "$1" = "--install-binpkg" ; then
     shift 1
 
     if test -z "$1" ; then
         echo "Error: install which binpkg?" >&2
-        echo "e.g. tiger.sh --install-binpkg tar-1.34" >&2
+        echo "e.g. tiger.sh --install-binpkg gzip-1.11" >&2
         exit 1
     fi
 
@@ -332,7 +354,7 @@ if test "$1" = "--install-binpkg" ; then
 
     while ! test -e $fifo ; do sleep 0.1 ; done
 
-    size=$( curl --fail --silent --show-error --head $binpkg_url \
+    size=$(curl --fail --silent --show-error --head $binpkg_url \
         | grep -i '^content-length:' \
         | awk '{print $NF}' \
         | sed "s/$(printf '\r')//"
@@ -353,6 +375,91 @@ if test "$1" = "--install-binpkg" ; then
     rm $fifo
 
     test "$(cat /tmp/$binpkg.localmd5)" = "$(cat /tmp/$binpkg.md5)"
+    exit $?
+fi
+
+
+
+if test "$1" = "--install-binpkg" ; then
+    shift 1
+
+    tiger.sh --unpack-tarball-check-md5 $url /opt
+fi
+
+
+# unpack a distfile into /tmp:
+
+if test "$1" = "--unpack-distfile" ; then
+    shift 1
+
+    if test -z "$1" ; then
+        echo "Error: unpack which distfile?" >&2
+        echo "e.g. tiger.sh --unpack-distfile gzip-1.11.tar.gz" >&2
+        exit 1
+    fi
+    distfile="$1"
+    shift 1
+
+    url=$TIGERSH_MIRROR/dist/$distfile
+    tiger.sh --unpack-tarball-check-md5 $url /tmp
+    exit $?
+fi
+
+
+# unpack a tarball and verify its MD5 sum:
+
+if test "$1" = "--unpack-tarball-check-md5" ; then
+    shift 1
+
+    if test -z "$1" ; then
+        echo "Error: unpack which tarball url?" >&2
+        echo "e.g. tiger.sh --unpack-tarball-check-md5 http://leopard.sh/dist/gzip-1.11.tar.gz /tmp" >&2
+        echo "e.g. tiger.sh --unpack-tarball-check-md5 http://leopard.sh/binpkgs/gzip-1.11.tiger.g3.tar.gz /opt" >&2
+        exit 1
+    fi
+    url="$1"
+    shift 1
+
+    if test -z "$1" ; then
+        echo "Error: unpack tarball where?" >&2
+        echo "e.g. tiger.sh --unpack-tarball-check-md5 http://leopard.sh/dist/gzip-1.11.tar.gz /tmp" >&2
+        echo "e.g. tiger.sh --unpack-tarball-check-md5 http://leopard.sh/binpkgs/gzip-1.11.tiger.g3.tar.gz /opt" >&2
+        exit 1
+    fi
+    dest="$2"
+    shift 1
+
+    tmp=$(mktemp -u /tmp/tarball.XXXX)
+    fifo=$tmp.fifo
+    rm -f $fifo
+    ( mkfifo $fifo \
+        && cat $fifo | md5 > $tmp.localmd5_ \
+        && mv $tmp.localmd5_ $tmp.localmd5
+    ) &
+
+    while ! test -e $fifo ; do sleep 0.1 ; done
+
+    size=$(curl --fail --silent --show-error --head $url \
+        | grep -i '^content-length:' \
+        | awk '{print $NF}' \
+        | sed "s/$(printf '\r')//"
+    )
+
+    cd /tmp
+    curl --fail --silent --show-error --location --remote-name $url.md5
+
+    cd /tmp
+    curl --fail --silent --show-error $url \
+        | pv --force --size $size \
+        | tee $fifo \
+        | gunzip \
+        | tar x
+
+    while ! test -e $tmp.localmd5 ; do sleep 0.1 ; done
+
+    rm -f $fifo $tmp.localmd5 $tmp.md5
+
+    test "$(cat $tmp.localmd5)" = "$(cat $tmp.md5)"
     exit $?
 fi
 
@@ -455,9 +562,9 @@ fi
 if test -z "$1" ; then
     echo "Available packages:" >&2
     cd /tmp
-    /opt/portable-curl/bin/curl -sSfLO $TIGERSH_MIRROR/packages.txt
+    curl --fail --silent --show-error --location --remote-name $TIGERSH_MIRROR/tigersh/packages.txt
     if test "$cpu_name" = "g5" ; then
-        /opt/portable-curl/bin/curl -sSfLO $TIGERSH_MIRROR/packages.ppc64.txt
+        curl --fail --silent --show-error --location --remote-name $TIGERSH_MIRROR/tigersh/packages.ppc64.txt
         cat packages.txt packages.ppc64.txt | sort
     else
         cat packages.txt
@@ -478,12 +585,6 @@ fi
 
 rm -rf /opt/$pkgspec
 
-if ! type -a /usr/bin/gcc >/dev/null 2>&1 ; then
-    echo "Error: please install Xcode." >&2
-    echo "See https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/xcode25_8m2558_developerdvd.dmg" >&2
-    exit 1
-fi
-
 # Thanks to https://trac.macports.org/ticket/16286
 export MACOSX_DEPLOYMENT_TARGET=10.4
 
@@ -494,7 +595,7 @@ mkdir -p /opt/$pkgspec
 touch /opt/$pkgspec/INCOMPLETE_INSTALLATION
 script=install-$pkgspec.sh
 cd /tmp
-/opt/portable-curl/bin/curl -sSfLO $TIGERSH_MIRROR/scripts/$script
+curl --fail --silent --show-error --location --remote-name $TIGERSH_MIRROR/tigersh/scripts/$script
 chmod +x $script
 
 # unfortunately, tiger's bash doesn't have pipefail.
