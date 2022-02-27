@@ -1,7 +1,6 @@
 #!/bin/bash
 # based on templates/install-foo-1.0.sh v4
 
-
 # Install pv on OS X Tiger / PowerPC.
 
 package=pv

@@ -9,19 +9,14 @@ package=foo
 version=1.0
 
 set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
 fi
 
 pkgspec=$package-$version$ppc64
-
-# 👇 EDIT HERE:
-if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
-    tiger.sh gcc-4.2
-fi
 
 # 👇 EDIT HERE:
 if ! test -e /opt/bar-2.0$ppc64 ; then
@@ -73,6 +68,15 @@ if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGER
     cd /opt
     curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
+    if ! test -e /usr/bin/gcc ; then
+        tiger.sh xcode-2.5
+    fi
+
+    # 👇 EDIT HERE:
+    if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
+        tiger.sh gcc-4.2
+    fi
+
     # 👇 EDIT HERE:
     srcmirror=https://ftp.gnu.org/gnu/$package
     tarball=$package-$version.tar.gz

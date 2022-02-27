@@ -79,11 +79,8 @@ echo
 echo "👉 pull binpkgs"
 for host in $uphosts ; do
     echo "  🖥  $host"
-    ssh $host mkdir -p \
-        /Users/macuser/Desktop/tigersh/binpkgs \
-        /Users/macuser/Desktop/leopardsh/binpkgs
-    rsync -ai --update $host:/Users/macuser/Desktop/tigersh/binpkgs/ ~/tigersh/binpkgs
-    rsync -ai --update $host:/Users/macuser/Desktop/leopardsh/binpkgs/ ~/leopardsh/binpkgs
+    ssh $host mkdir -p /Users/macuser/Desktop/binpkgs
+    rsync -ai --update $host:/Users/macuser/Desktop/binpkgs/ ~/leopard.sh/binpkgs
 done
 
 echo
@@ -116,13 +113,13 @@ for host in $uphosts ; do
         && rm -f /opt/leopard.sh/share/leopard.sh/config.cache/disabled.cache"
 done
 
-echo
-echo "👉 push distfiles"
-for host in $uphosts ; do
-    echo "  🖥  $host"
-    cd ~/dist
-    rsync -ai --delete *.tar.gz *.tgz *.tar.bz2 *.tar.xz *.dmg *.zip *.pem $host:/Users/macuser/Downloads/
-done
+#echo
+#echo "👉 push distfiles"
+#for host in $uphosts ; do
+#    echo "  🖥  $host"
+#    cd ~/dist
+#    rsync -ai --delete *.tar.gz *.tgz *.tar.bz2 *.tar.xz *.dmg *.zip *.pem $host:/Users/macuser/Downloads/
+#done
 
 exit 0
 

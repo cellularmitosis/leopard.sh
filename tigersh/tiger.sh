@@ -8,7 +8,7 @@ orig_pwd=$PWD
 
 # Note: for offline use or to run you own local fork, export e.g.
 #   TIGERSH_MIRROR=file:///Users/foo/github/cellularmitosis/leopard.sh
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-http://leopard.sh}
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 export TIGERSH_MIRROR
 
 # no alarms and no surprises, please.
@@ -181,7 +181,7 @@ if test ! -e /opt/$deps_pkgspec \
     while ! test -e $fifo ; do sleep 0.1 ; done
 
     binpkg_url=$TIGERSH_MIRROR/binpkgs/$binpkg
-    # At this point we are still using /usr/bin/curl, so no https for you!
+    # At this point we are still using /usr/bin/curl, so drop back to http.
     binpkg_url=$(echo "$binpkg_url" | sed 's|^https:|^http:|')
     size=$(curl --fail --silent --show-error --head --insecure $binpkg_url \
         | grep -i '^content-length:' \
@@ -237,25 +237,23 @@ EOF
     echo "OS X Tiger's support for SSL is too old to use, which means this script" >&2
     echo "can't verify the integrity of the dependencies which it just downloaded." >&2
     echo >&2
-    echo "    -> This is where I need your help, human! <-" >&2
-    echo >&2
     echo "Please visit https://leopard.sh/md5 in a modern browser (or by scanning the" >&2
     echo "above QR code on your smartphone) and verify the following MD5 sums:" >&2
     echo >&2
-    echo "    $(basename \"$0\"): $(cd "$orig_pwd" && md5 -q "$0")" >&2
+    echo "The MD5 sum of $(basename "$0") is:" >&2
     echo >&2
-    echo "    $binpkg: $(cat /tmp/$binpkg.localmd5)" >&2
+    echo "    $(cd "$orig_pwd" && md5 -q "$0")" >&2
+    echo >&2
+    echo "The MD5 sum of $binpkg is:" >&2
+    echo >&2
+    echo "    $(cat /tmp/$binpkg.localmd5)" >&2
     echo >&2
 
-    read -n 1 -p "Do the MD5 sums match? [Y/n]: " answer
+    read -p "Do the MD5 sums match? [Y/n]: " answer
     while true ; do
-        if test "$answer" = "" ; then
-            break
-        elif test "$answer" = "y" -o "$answer" = "Y" ; then
-            echo >&2
+        if test "$answer" = "y" -o "$answer" = "Y" -o "$answer" = "" ; then
             break
         elif test "$answer" = "n" -o "$answer" = "N" ; then
-            echo >&2
             echo >&2
             echo "If the MD5 sums don't match, that means something is wrong." >&2
             echo >&2
@@ -266,8 +264,7 @@ EOF
             echo "issue at https://github.com/cellularmitosis/leopard.sh" >&2
             exit 1
         else
-            echo >&2
-            read -n 1 -r -p "Please type 'y', 'n' or hit ENTER (same as 'y') " answer
+            read -p "Please type 'y', 'n' or hit ENTER (same as 'y') " answer
         fi
     done
 
@@ -275,9 +272,10 @@ EOF
 fi
 
 echo "Running 'sudo mv \"$0\" /usr/local/bin/'." >&2
+cd "$orig_pwd"
 sudo mv "$0" /usr/local/bin/
 
-if ! echo $PATH | tr ':' '\n' | egrep '^/usr/local/bin/?$' ; then
+if ! echo $PATH | tr ':' '\n' | egrep '^/usr/local/bin/?$' >/dev/null ; then
     echo "Adding /usr/local/bin to your \$PATH." >&2
     for f in ~/.bashrc ~/.bash_profile ~/.profile ; do
         if test -e $f ; then
@@ -292,12 +290,13 @@ if ! echo $PATH | tr ':' '\n' | egrep '^/usr/local/bin/?$' ; then
     echo >&2
 fi
 
-opt_config_cache=/opt/tiger.sh/share/tiger.sh/config.cache
+opt_config_cache=/opt/tiger.sh/share/tiger.sh
 mkdir -p $opt_config_cache
 if ! test -e $opt_config_cache/tiger.cache ; then
     echo "Fetching configure cache." >&2
     cd $opt_config_cache
-    curl --fail --silent --show-error --location --remote-name $TIGERSH_MIRROR/tigersh/config.cache/tiger.cache
+    curl --fail --silent --show-error --location --remote-name \
+        $TIGERSH_MIRROR/tigersh/config.cache/tiger.cache
 fi
 
 if test "$1" = "--setup" ; then
@@ -320,15 +319,7 @@ if test "$1" = "--url-exists" ; then
 fi
 
 
-# install binpkg:
-
-FIXME wrap up this refactor
-
-tiger.sh --unpack-tarball-check-md5 http://leopard.sh/dist/gzip-1.11.tar.gz /tmp/gzip-1.11.tar.gz.XXXX
-tiger.sh --unpack-tarball-check-md5 http://leopard.sh/binpkgs/gzip-1.11.tiger.g3.tar.gz /opt
-
-tiger.sh --install-binpkg gzip-1.11
-tiger.sh --unpack-distfile gzip-1.11.tar.gz /tmp/gzip-1.11.tar.gz.XXXX
+# install a binpkg into /opt:
 
 if test "$1" = "--install-binpkg" ; then
     shift 1
@@ -338,69 +329,52 @@ if test "$1" = "--install-binpkg" ; then
         echo "e.g. tiger.sh --install-binpkg gzip-1.11" >&2
         exit 1
     fi
-
     pkgspec="$1"
-    binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-    binpkg_url=$TIGERSH_MIRROR/binpkgs/$binpkg
-
-    echo "Unpacking $binpkg at /opt/$pkgspec"
-
-    fifo=/tmp/$binpkg.fifo
-    rm -f $fifo
-    ( mkfifo $fifo \
-        && cat $fifo | md5 > /tmp/$binpkg.localmd5_ \
-        && mv /tmp/$binpkg.localmd5_ /tmp/$binpkg.localmd5
-    ) &
-
-    while ! test -e $fifo ; do sleep 0.1 ; done
-
-    size=$(curl --fail --silent --show-error --head $binpkg_url \
-        | grep -i '^content-length:' \
-        | awk '{print $NF}' \
-        | sed "s/$(printf '\r')//"
-    )
-
-    cd /tmp
-    curl --fail --silent --show-error --location --remote-name $binpkg_url.md5
-
-    cd /opt
-    curl --fail --silent --show-error $binpkg_url \
-        | pv --force --size $size \
-        | tee $fifo \
-        | gunzip \
-        | tar x
-
-    while ! test -e /tmp/$binpkg.localmd5 ; do sleep 0.1 ; done
-
-    rm $fifo
-
-    test "$(cat /tmp/$binpkg.localmd5)" = "$(cat /tmp/$binpkg.md5)"
-    exit $?
-fi
-
-
-
-if test "$1" = "--install-binpkg" ; then
     shift 1
 
+    os_cpu=$(tiger.sh --os.cpu)
+    binpkg=$pkgspec.$os_cpu.tar.gz
+    url=$TIGERSH_MIRROR/binpkgs/$binpkg
+
+    # since we are checking the MD5 sum, drop from https to http.
+    url=$(echo "$binpkg_url" | sed 's|^https:|^http:|')
+
+    if ! tiger.sh --url-exists "$url" ; then
+        echo "Pre-compiled binary package unavailable for $pkgspec on $os_cpu." >&2
+        exit 1
+    fi
+
+    if test -n "$TIGERSH_FORCE_BUILD" ; then
+        echo "Ignoring $binpkg due to '$TIGERSH_FORCE_BUILD'" >&2
+        exit 1
+    fi
+
+    echo "Unpacking $binpkg into /opt." >&2
     tiger.sh --unpack-tarball-check-md5 $url /opt
 fi
 
 
 # unpack a distfile into /tmp:
 
-if test "$1" = "--unpack-distfile" ; then
+if test "$1" = "--unpack-dist" ; then
     shift 1
 
     if test -z "$1" ; then
-        echo "Error: unpack which distfile?" >&2
-        echo "e.g. tiger.sh --unpack-distfile gzip-1.11.tar.gz" >&2
+        echo "Error: unpack distfile for which pkgspec?" >&2
+        echo "e.g. tiger.sh --unpack-dist gzip-1.11" >&2
         exit 1
     fi
-    distfile="$1"
+    pkgspec="$1"
     shift 1
 
-    url=$TIGERSH_MIRROR/dist/$distfile
+    tarball=$pkgspec.tar.gz
+    url=$TIGERSH_MIRROR/dist/$tarball
+
+    # since we are checking the MD5 sum, drop from https to http.
+    url=$(echo "$binpkg_url" | sed 's|^https:|^http:|')
+
+    echo "Unpacking $tarball into /tmp." >&2
+    rm -rf /tmp/$pkgspec
     tiger.sh --unpack-tarball-check-md5 $url /tmp
     exit $?
 fi
@@ -419,6 +393,9 @@ if test "$1" = "--unpack-tarball-check-md5" ; then
     fi
     url="$1"
     shift 1
+
+    # since we are checking the MD5 sum, drop from https to http.
+    url=$(echo "$binpkg_url" | sed 's|^https:|^http:|')
 
     if test -z "$1" ; then
         echo "Error: unpack tarball where?" >&2
@@ -562,9 +539,11 @@ fi
 if test -z "$1" ; then
     echo "Available packages:" >&2
     cd /tmp
-    curl --fail --silent --show-error --location --remote-name $TIGERSH_MIRROR/tigersh/packages.txt
+    curl --fail --silent --show-error --location --remote-name \
+        $TIGERSH_MIRROR/tigersh/packages.txt
     if test "$cpu_name" = "g5" ; then
-        curl --fail --silent --show-error --location --remote-name $TIGERSH_MIRROR/tigersh/packages.ppc64.txt
+        curl --fail --silent --show-error --location --remote-name \
+            $TIGERSH_MIRROR/tigersh/packages.ppc64.txt
         cat packages.txt packages.ppc64.txt | sort
     else
         cat packages.txt
@@ -595,7 +574,8 @@ mkdir -p /opt/$pkgspec
 touch /opt/$pkgspec/INCOMPLETE_INSTALLATION
 script=install-$pkgspec.sh
 cd /tmp
-curl --fail --silent --show-error --location --remote-name $TIGERSH_MIRROR/tigersh/scripts/$script
+curl --fail --silent --show-error --location --remote-name \
+    $TIGERSH_MIRROR/tigersh/scripts/$script
 chmod +x $script
 
 # unfortunately, tiger's bash doesn't have pipefail.
