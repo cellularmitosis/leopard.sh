@@ -253,56 +253,6 @@ before running `leopard.sh`, you're now also completely offline-capable.
 ![intel](.media/intel.jpg)
 
 
-## Possible future work:
-
-### 10.3 / 10.2
-
-If I really get serious with this rabbit-hole, I might look at seeing what will
-port to Panther (10.3) and even Jaguar (10.2).
-
-In a [blog post](https://gist.github.com/cellularmitosis/c56bb91d0b1ad0cd785ccd302abbba7c)
-I looked at data from [Everymac.com](https://everymac.com/systems/by_capability/maximum-macos-supported.html)
-to see which Macs are stuck on 10.3 and 10.2:
-
-There are 9 Macs stuck on 10.3:
-
-```
-['iBook', 'G3/300_(Original/Clamshell)', 'X_10.3.9']
-['iBook_G3/366_SE_(Original/Clamshell)', 'X', '10.3.9']
-['iMac_G3_233_Original_-_Bondi_(Rev._A_&_B)', 'X_10.3.9']
-['iMac_G3_266_(Fruit', 'Colors)', 'X_10.3.9']
-['iMac_G3_333_(Fruit_Colors)', 'X_10.3.9']
-['iMac_G3_350_(Slot', 'Loading_-_Blueberry)', 'X_10.3.9']
-['iMac_G3_350_(Summer', '2000_-_Indigo)', 'X_10.3.9']
-['PowerBook_G3_333_(Bronze_KB/Lombard)', 'X_10.3.9']
-['PowerBook', 'G3_400_(Bronze_KB/Lombard)', 'X_10.3.9']
-```
-
-There are 19 Macs stuck on 10.2:
-
-```
-['Mac_Server_G3_233_Minitower', 'X', '10.2.8']
-['Mac_Server_G3_266_Minitower', 'X_10.2.8']
-['Mac_Server_G3_300_Minitower', 'X_10.2.8']
-['Mac_Server_G3_333_Minitower', 'X_10.2.8']
-['PowerBook_G3_233_', '(Wallstreet)', 'X_10.2.8']
-['PowerBook_G3_250_(Wallstreet)', 'X_10.2.8']
-['PowerBook', 'G3_292_(Wallstreet)', 'X_10.2.8']
-['PowerBook_G3_233_(PDQ_-_Late_1998)', 'X_10.2.8']
-['PowerBook_G3_266_(PDQ_-_Late_1998)', 'X_10.2.8']
-['PowerBook_G3_300_(PDQ_-_Late', '1998)', 'X_10.2.8']
-['Power', 'Macintosh_G3_233_Desktop', 'X_10.2.8']
-['Power_Macintosh_G3_233_Minitower', 'X_10.2.8']
-['Power_Macintosh_G3_266_Desktop', 'X_10.2.8']
-['Power_Macintosh_G3_266_Minitower', 'X_10.2.8']
-['Power_Macintosh_G3_300_Desktop', 'X_10.2.8']
-['Power_Macintosh_G3_300', 'Minitower', 'X_10.2.8']
-['Power_Macintosh_G3_333_Minitower', 'X_10.2.8']
-['Power', 'Macintosh_G3_233_All-in-One', 'X_10.2.8']
-['Power_Macintosh_G3_266_All-in-One', 'X', '10.2.8']
-```
-
-
 ## Other options:
 
 If `leopard.sh` and `tiger.sh` aren't for you, checkout these other package managers:
