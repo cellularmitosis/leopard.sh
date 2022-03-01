@@ -192,6 +192,10 @@ No, I'm not kidding :)  Of course you could also just manually run:
 Project goals:
 --------------
 
+- Performance
+
+It should be snappier than homebrew, even on a slow G3.
+
 - Full binary package availability.
 
 Every pkgspec should have a pre-compiled binary package available for every

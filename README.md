@@ -208,6 +208,10 @@ $ ln -s /opt/gzip-1.11/bin/* /usr/local/bin/
 
 ## Project goals:
 
+- Performance
+
+It should be snappier than homebrew, even on a slow G3.
+
 - Full binary package availability.
 
 Every pkgspec should have a pre-compiled binary package available for every
