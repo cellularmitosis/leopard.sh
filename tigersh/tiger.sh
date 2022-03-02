@@ -15,20 +15,21 @@ export TIGERSH_MIRROR
 # no alarms and no surprises, please.
 export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 
-# FIXME this doesn't work if tiger.sh is called bare.
+# FIXME this doesn't work with e.g. `bash -x tiger.sh`
 script_path=$(cd "$(dirname "$0")" && pwd)
-
-COLOR_GREEN="\\\e[32;1m"
-COLOR_YELLOW="\\\e[33;1m"
-COLOR_CYAN="\\\e[36;1m"
-COLOR_NONE="\\\e[0m"
 
 
 # process the command line args:
 
 needs_setup_check=1
 
-if test "$1" = "--unlink" ; then
+if test "$1" = "--setup" ; then
+    op=setup
+elif test "$1" = "--list" ; then
+    op=list
+elif test "$1" = "--link" ; then
+    op=link
+elif test "$1" = "--unlink" ; then
     op=unlink
 elif test "$1" = "-j" ; then
     op=makeflags
@@ -43,15 +44,11 @@ elif test "$1" = "--linker-check" ; then
 elif test "$1" = "--url-exists" ; then
     op=url-exists
 elif test "$1" = "--install-binpkg" ; then
-    op=installbinpkg
+    op=install-binpkg
 elif test "$1" = "--unpack-dist" ; then
     op=unpack-dist
 elif test "$1" = "--unpack-tarball-check-md5" ; then
     op=unpack-tarball-check-md5
-elif test "$1" = "--setup" ; then
-    op=setup
-elif test "$1" = "--list" ; then
-    op=list
 elif test -n "$1" ; then
     op=install
 else
@@ -74,6 +71,18 @@ orig_pwd=$PWD
 if ! test -e ~/.tigersh/checks ; then
     mkdir -p ~/.tigersh/checks
 fi
+
+
+# functions
+
+COLOR_GREEN="\e[32;1m"
+COLOR_YELLOW="\e[33;1m"
+COLOR_CYAN="\e[36;1m"
+COLOR_NONE="\e[0m"
+
+function print_msg {
+    echo -e "${COLOR_CYAN}tiger.sh${COLOR_NONE}: $1" >&2
+}
 
 
 # get the CPU type:
@@ -345,44 +354,27 @@ if test "$op" = "install" ; then
     export MACOSX_DEPLOYMENT_TARGET=10.4
 
     pkgspec="$1"
-    echo "Installing $pkgspec." >&2
+    print_msg "Installing ${COLOR_YELLOW}$pkgspec${COLOR_NONE}."
     echo -n -e "\033]0;tiger.sh $pkgspec (tiger.$cpu_name)\007"
     mkdir -p /opt/$pkgspec
     touch /opt/$pkgspec/INCOMPLETE_INSTALLATION
     script=install-$pkgspec.sh
     cd /tmp
-    echo "Fetching $script." >&2
+    print_msg "Fetching $script."
     curl --fail --silent --show-error --location --remote-name \
         $TIGERSH_MIRROR/tigersh/scripts/$script
     chmod +x $script
 
     # unfortunately, tiger's bash doesn't have pipefail.
     # thanks to https://stackoverflow.com/a/1221844
-    fifo=/tmp/.tiger.sh.$script.fifo
+    fifo=/tmp/$script.fifo
     rm -f $fifo
     mkfifo $fifo
     tee /tmp/$script.log < $fifo &
     TIGERSH_RECURSED=1 nice ./$script > $fifo 2>&1
     rm -f $fifo
 
-    if find /opt/$pkgspec/bin -mindepth 1 2>/dev/null | grep -q . ; then
-        ln -vsf /opt/$pkgspec/bin/* /usr/local/bin
-    fi
-
-    if find /opt/$pkgspec/sbin -mindepth 1 2>/dev/null | grep -q . ; then
-        ln -vsf /opt/$pkgspec/sbin/* /usr/local/sbin
-    fi
-
-    if find /opt/$pkgspec/share/man -mindepth 1 2>/dev/null | grep -q . ; then
-        cd /opt/$pkgspec/share/man
-        for d in * ; do
-            if find /opt/$pkgspec/share/man/$d -mindepth 1 2>/dev/null | grep -q . ; then
-                mkdir -p /usr/local/share/man/$d/
-                ln -vsf /opt/$pkgspec/share/man/$d/* /usr/local/share/man/$d
-            fi
-        done
-        cd - >/dev/null
-    fi
+    TIGERSH_RECURSED=1 tiger.sh --link $pkgspec
 
     if ! test -e /opt/$pkgspec/share/tiger.sh/$pkgspec/$script.log.gz ; then
         mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
@@ -441,10 +433,10 @@ if test "$op" = "install-binpkg" ; then
         exit 1
     fi
 
-    echo "Unpacking $binpkg into /opt." >&2
+    print_msg "Unpacking $binpkg into /opt."
     TIGERSH_RECURSED=1 tiger.sh --unpack-tarball-check-md5 $url /opt
 
-    exit $0
+    exit 0
 fi
 
 
@@ -467,11 +459,11 @@ if test "$op" = "unpack-dist" ; then
     # since we are checking the MD5 sum, drop from https to http.
     url=$(echo "$url" | sed 's|^https:|^http:|')
 
-    echo "Unpacking $tarball into /tmp." >&2
+    print_msg "Unpacking $tarball into /tmp."
     rm -rf /tmp/$pkgspec
     TIGERSH_RECURSED=1 tiger.sh --unpack-tarball-check-md5 $url /tmp
 
-    exit $0
+    exit 0
 fi
 
 
@@ -540,6 +532,68 @@ if test "$op" = "unpack-tarball-check-md5" ; then
     else
         exit 0
     fi
+fi
+
+
+# link:
+
+if test "$op" = "link" ; then
+    shift 1
+    if test -z "$1" ; then
+        echo "Error: link which package?" >&2
+        echo "e.g. tiger.sh --link foo-1.0" >&2
+        exit 1
+    fi
+
+    pkgspec="$1"
+
+    print_msg "Linking $pkgspec into /usr/local."
+
+    if find /opt/$pkgspec/bin -mindepth 1 2>/dev/null | grep -q . ; then
+        ln -vsf /opt/$pkgspec/bin/* /usr/local/bin
+    fi
+
+    if find /opt/$pkgspec/sbin -mindepth 1 2>/dev/null | grep -q . ; then
+        ln -vsf /opt/$pkgspec/sbin/* /usr/local/sbin
+    fi
+
+    if find /opt/$pkgspec/share/man -mindepth 1 2>/dev/null | grep -q . ; then
+        cd /opt/$pkgspec/share/man
+        for d in * ; do
+            if find /opt/$pkgspec/share/man/$d -mindepth 1 2>/dev/null | grep -q . ; then
+                mkdir -p /usr/local/share/man/$d/
+                ln -vsf /opt/$pkgspec/share/man/$d/* /usr/local/share/man/$d
+            fi
+        done
+        cd - >/dev/null
+    fi
+fi
+
+
+# unlink:
+
+if test "$op" = "unlink" ; then
+    shift 1
+    if test -z "$1" ; then
+        echo "Error: unlink which package?" >&2
+        echo "e.g. tiger.sh --unlink foo-1.0" >&2
+        exit 1
+    fi
+
+    pkgspec="$1"
+    # deletes any symlinks in /usr/local/* which point to /opt/foo-1.0/*.
+    # what a pain in the ass!
+    cd "/opt/$pkgspec"
+    find . -mindepth 1 \( -type f -or -type l \) -exec \
+        bash -e -c \
+            "if test -L \"/usr/local/{}\" \
+                && test \"\$(readlink \"/usr/local/{}\")\" = \"/opt/$pkgspec/\$(echo {} | cut -c3-)\" ; \
+            then \
+                rm -v \"/usr/local/{}\"
+            fi" \
+    \;
+
+    exit 0
 fi
 
 
@@ -621,6 +675,12 @@ if test "$op" = "arch-check" ; then
 
     pkgspec="$1"
     ppc64="$2"
+
+    COLOR_GREEN="\\\e[32;1m"
+    COLOR_YELLOW="\\\e[33;1m"
+    COLOR_CYAN="\\\e[36;1m"
+    COLOR_NONE="\\\e[0m"
+
     cd /opt/$pkgspec
     for d in bin sbin lib ; do
         if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
@@ -676,6 +736,12 @@ if test "$op" = "linker-check" ; then
     fi
 
     pkgspec="$1"
+
+    COLOR_GREEN="\\\e[32;1m"
+    COLOR_YELLOW="\\\e[33;1m"
+    COLOR_CYAN="\\\e[36;1m"
+    COLOR_NONE="\\\e[0m"
+
     cd /opt/$pkgspec
     for d in bin sbin lib ; do
         if test -e /opt/$pkgspec/$d && test -n "$(ls /opt/$pkgspec/$d/)" ; then
@@ -701,33 +767,6 @@ if test "$op" = "linker-check" ; then
             done
         fi
     done
-
-    exit 0
-fi
-
-
-# unlink:
-
-if test "$op" = "unlink" ; then
-    shift 1
-    if test -z "$1" ; then
-        echo "Error: unlink which package?" >&2
-        echo "e.g. tiger.sh --unlink foo-1.0" >&2
-        exit 1
-    fi
-
-    pkgspec="$1"
-    # deletes any symlinks in /usr/local/* which point to /opt/foo-1.0/*.
-    # what a pain in the ass!
-    cd "/opt/$pkgspec"
-    find . -mindepth 1 \( -type f -or -type l \) -exec \
-        bash -e -c \
-            "if test -L \"/usr/local/{}\" \
-                && test \"\$(readlink \"/usr/local/{}\")\" = \"/opt/$pkgspec/\$(echo {} | cut -c3-)\" ; \
-            then \
-                rm -v \"/usr/local/{}\"
-            fi" \
-    \;
 
     exit 0
 fi
