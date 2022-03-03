@@ -81,13 +81,17 @@ for host in $uphosts ; do
     echo "  🖥  $host"
     ssh $host mkdir -p /Users/macuser/Desktop/leopard.sh/binpkgs
     rsync -ai --update $host:/Users/macuser/Desktop/leopard.sh/binpkgs/ ~/leopard.sh/binpkgs
+    ssh $host rm -f '/Users/macuser/Desktop/leopard.sh/binpkgs/*'
 done
 
 echo
 echo "👉 push leopard.sh"
 for host in $uphosts ; do
     echo "  🖥  $host"
-    scp ~/leopard.sh/leopardsh/utils/make-leopardsh-binpkg.sh \
+    rsync -ai ~/leopard.sh/leopardsh/leopard.sh \
+        ~/leopard.sh/tigersh/tiger.sh \
+        $host:/usr/local/bin/
+    rsync -ai ~/leopard.sh/leopardsh/utils/make-leopardsh-binpkg.sh \
         ~/leopard.sh/leopardsh/utils/rebuild-leopardsh-stales.sh \
         ~/leopard.sh/leopardsh/utils/rebuild-leopardsh-all.sh \
         ~/leopard.sh/tigersh/utils/make-tigersh-binpkg.sh \

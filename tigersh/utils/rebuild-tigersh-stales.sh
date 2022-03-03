@@ -32,15 +32,17 @@ cd /tmp
 rm -f build-order.txt build-order.ppc64.txt to-build.txt
 
 tiger.sh --setup
+export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
+
 
 if test -n "$1" ; then
     # if the user specifies a pkgspec, just rebuild that one.
     echo "$1" > /tmp/to-build.txt
 else
-    /opt/portable-curl/bin/curl -sSfLO $TIGERSH_MIRROR/build-order.txt
+    curl -sSfLO $TIGERSH_MIRROR/build-order.txt
 
     if test -n "$is_g5" ; then
-        /opt/portable-curl/bin/curl -sSfLO $TIGERSH_MIRROR/build-order.ppc64.txt
+        curl -sSfLO $TIGERSH_MIRROR/build-order.ppc64.txt
         cat build-order.ppc64.txt >> build-order.txt
     fi
 
@@ -49,11 +51,11 @@ else
         echo -n "." >&2
         should_build=0
         binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-        if ! test -e ~/Desktop/tigersh/binpkgs/$binpkg ; then
+        if ! test -e ~/Desktop/leopard.sh/binpkgs/$binpkg ; then
             should_build=1
         else
-            /opt/portable-curl/bin/curl -RsSfLO $TIGERSH_MIRROR/scripts/install-$pkgspec.sh
-            binpkg_mtime=$(stat -f '%m' ~/Desktop/tigersh/binpkgs/$binpkg)
+            curl -RsSfLO $TIGERSH_MIRROR/scripts/install-$pkgspec.sh
+            binpkg_mtime=$(stat -f '%m' ~/Desktop/leopard.sh/binpkgs/$binpkg)
             script_mtime=$(stat -f '%m' install-$pkgspec.sh)
             if test "$binpkg_mtime" -lt "$script_mtime" ; then
                 should_build=1
@@ -81,22 +83,29 @@ fi
 # another pass to wipe.
 for pkgspec in $(cat /tmp/to-build.txt) ; do
     binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-    rm -f ~/Desktop/tigersh/binpkgs/$binpkg
+    rm -f ~/Desktop/leopard.sh/binpkgs/$binpkg
 done
 
 set -x
 
 # and another pass to build.
 for pkgspec in $(cat /tmp/to-build.txt) ; do
+    mv /usr/local/bin/tiger.sh /opt/tigersh-deps-0.1 /tmp/
+
     rm -rf /usr/local/bin/*
     rm -rf /usr/local/sbin/*
+    rm -rf /usr/local/share/man/*
     if test -e /opt/local ; then
         echo "Error: refusing to delete /opt/local." >&2
         exit 1
     fi
     rm -rf /opt/*
+
+    mv /tmp/tiger.sh /usr/local/bin/
+    mv /tmp/tigersh-deps-0.1 /opt/
+
     binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-    rm -f ~/Desktop/tigersh/binpkgs/$binpkg
-    time tiger.sh $pkgspec
-    ~/Desktop/tigersh/utils/make-tigersh-binpkg.sh $pkgspec
+    rm -f ~/Desktop/leopard.sh/binpkgs/$binpkg
+    time TIGERSH_FORCE_BUILD=1 tiger.sh $pkgspec
+    ~/bin/make-tigersh-binpkg.sh $pkgspec
 done
