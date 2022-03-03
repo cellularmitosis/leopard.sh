@@ -5,8 +5,6 @@
 
 set -e -o pipefail
 
-# vars:
-
 # Note: for offline use or to run you own local fork, export e.g.
 #   LEOPARDSH_MIRROR=file:///Users/foo/github/cellularmitosis/leopard.sh
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
@@ -14,9 +12,6 @@ export LEOPARDSH_MIRROR
 
 # no alarms and no surprises, please.
 export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
-
-# FIXME this doesn't work with e.g. `bash -x leopard.sh`
-script_path=$(cd "$(dirname "$0")" && pwd)
 
 
 # process the command line args:
@@ -73,16 +68,13 @@ if ! test -e ~/.leopardsh/checks ; then
 fi
 
 
-# functions
+# colors:
 
-COLOR_GREEN="\e[32;1m"
-COLOR_YELLOW="\e[33;1m"
-COLOR_CYAN="\e[36;1m"
-COLOR_NONE="\e[0m"
-
-function print_msg {
-    echo -e "${COLOR_CYAN}tiger.sh${COLOR_NONE}: $1" >&2
-}
+export COLOR_GREEN="\e[32;1m"
+export COLOR_YELLOW="\e[33;1m"
+export COLOR_CYAN="\e[36;1m"
+export COLOR_MAGENTA="\e[35;1m"
+export COLOR_NONE="\e[0m"
 
 
 # get the CPU type:
@@ -165,7 +157,7 @@ if test -n "$needs_setup_check" ; then
             fi
         fi
 
-        if ! mktemp $d/write-check.XXX >/dev/null ; then
+        if ! mktemp $d/leopard.shwrite-check.XXX >/dev/null ; then
             echo "Error: can't write to $d." >&2
             exit 1
         else
@@ -178,10 +170,15 @@ if test -n "$needs_setup_check" ; then
         mkdir -p ~/Downloads
     fi
 
+    if test "$BASH_SOURCE" != "/usr/local/bin/leopard.sh" ; then
+        echo "Moving leopard.sh into /usr/local/bin." >&2
+        sudo mv "$0" /usr/local/bin/
+    fi
+
     deps_pkgspec=tigersh-deps-0.1
     if test ! -e /opt/$deps_pkgspec \
     || test -e /opt/$deps_pkgspec/INCOMPLETE_INSTALLATION ; then
-        echo "Installing leopard.sh dependencies (pv, curl w/SSL, otool w/ppc64 support)." >&2
+        echo -e "${COLOR_CYAN}Installing${COLOR_NONE} leopard.sh dependencies (pv, curl w/SSL, otool w/ppc64 support)." >&2
 
         rm -rf /opt/$deps_pkgspec
         mkdir -p /opt/$deps_pkgspec
@@ -191,7 +188,7 @@ if test -n "$needs_setup_check" ; then
 
         binpkg=$deps_pkgspec.tiger.g3.tar.gz
         fifo=/tmp/$binpkg.fifo
-        rm -f $fifo
+        rm -f $fifo /tmp/$binpkg.localmd5_ /tmp/$binpkg.localmd5
         ( mkfifo $fifo \
             && cat $fifo | nice md5 > /tmp/$binpkg.localmd5_ \
             && mv /tmp/$binpkg.localmd5_ /tmp/$binpkg.localmd5
@@ -201,12 +198,7 @@ if test -n "$needs_setup_check" ; then
 
         url=$LEOPARDSH_MIRROR/binpkgs/$binpkg
         # At this point we are still using /usr/bin/curl, so drop back to http.
-        url=$(echo "$url" | sed 's|^https:|^http:|')
-        size=$(curl --fail --silent --show-error --head --insecure $url \
-            | grep -i '^content-length:' \
-            | awk '{print $NF}' \
-            | sed "s/$(printf '\r')//"
-        )
+        url=$(echo "$url" | sed 's|^https:|http:|')
 
         cd /opt
         nice curl --fail --silent --show-error --insecure $url \
@@ -258,9 +250,9 @@ EOF
         echo "Please visit https://leopard.sh/md5 in a modern browser (or by scanning the" >&2
         echo "above QR code on your smartphone) and verify the following MD5 sums:" >&2
         echo >&2
-        echo "The MD5 sum of $(basename "$0") is:" >&2
+        echo "The MD5 sum of leopard.sh is:" >&2
         echo >&2
-        echo "    $(md5 -q "$script_path/$(basename "$0")")" >&2
+        echo "    $(md5 -q /usr/local/bin/leopard.sh)" >&2
         echo >&2
         echo "The MD5 sum of $binpkg is:" >&2
         echo >&2
@@ -306,7 +298,7 @@ EOF
         fi
     fi
 
-    opt_config_cache=/opt/leopard.sh/share/leopard.sh
+    opt_config_cache=/opt/leopard.sh/share/leopard.sh/config.cache
     if ! test -e $opt_config_cache/leopard.cache ; then
         echo "Fetching configure cache." >&2
         mkdir -p $opt_config_cache
@@ -344,20 +336,20 @@ if test "$op" = "install" ; then
 
     if test -e "/opt/$pkgspec" \
     && test ! -e "/opt/$pkgspec/INCOMPLETE_INSTALLATION" ; then
-        echo "$pkgspec is already installed at /opt/$pkgspec" >&2
+        echo -e "${COLOR_YELLOW}${pkgspec}${COLOR_NONE} is already installed at /opt/$pkgspec" >&2
         exit 0
     fi
 
     rm -rf /opt/$pkgspec
 
     pkgspec="$1"
-    print_msg "Installing ${COLOR_YELLOW}$pkgspec${COLOR_NONE}."
+    echo -e "${COLOR_CYAN}Installing${COLOR_NONE} ${COLOR_YELLOW}$pkgspec${COLOR_NONE}." >&2
     echo -n -e "\033]0;leopard.sh $pkgspec (leopard.$cpu_name)\007"
     mkdir -p /opt/$pkgspec
     touch /opt/$pkgspec/INCOMPLETE_INSTALLATION
     script=install-$pkgspec.sh
     cd /tmp
-    print_msg "Fetching $script."
+    echo -e "${COLOR_CYAN}Fetching${COLOR_NONE} $script." >&2
     curl --fail --silent --show-error --location --remote-name \
         $LEOPARDSH_MIRROR/leopardsh/scripts/$script
     chmod +x $script
@@ -368,7 +360,7 @@ if test "$op" = "install" ; then
 
     if ! test -e /opt/$pkgspec/share/leopard.sh/$pkgspec/$script.log.gz ; then
         mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        nice gzip /tmp/$script.log
+        nice gzip -9 /tmp/$script.log
         mv /tmp/$script.log.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
     fi
 
@@ -411,7 +403,7 @@ if test "$op" = "install-binpkg" ; then
     url=$LEOPARDSH_MIRROR/binpkgs/$binpkg
 
     # since we are checking the MD5 sum, drop from https to http.
-    url=$(echo "$url" | sed 's|^https:|^http:|')
+    url=$(echo "$url" | sed 's|^https:|http:|')
 
     if ! LEOPARDSH_RECURSED=1 leopard.sh --url-exists "$url" ; then
         echo "Pre-compiled binary package unavailable for $pkgspec on $os_cpu." >&2
@@ -423,7 +415,7 @@ if test "$op" = "install-binpkg" ; then
         exit 1
     fi
 
-    print_msg "Unpacking $binpkg into /opt."
+    echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $binpkg into /opt." >&2
     LEOPARDSH_RECURSED=1 leopard.sh --unpack-tarball-check-md5 $url /opt
 
     exit 0
@@ -447,9 +439,9 @@ if test "$op" = "unpack-dist" ; then
     url=$LEOPARDSH_MIRROR/dist/$tarball
 
     # since we are checking the MD5 sum, drop from https to http.
-    url=$(echo "$url" | sed 's|^https:|^http:|')
+    url=$(echo "$url" | sed 's|^https:|http:|')
 
-    print_msg "Unpacking $tarball into /tmp."
+    echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $tarball into /tmp." >&2
     rm -rf /tmp/$pkgspec
     LEOPARDSH_RECURSED=1 leopard.sh --unpack-tarball-check-md5 $url /tmp
 
@@ -471,7 +463,7 @@ if test "$op" = "unpack-tarball-check-md5" ; then
     shift 1
 
     # since we are checking the MD5 sum, drop from https to http.
-    url=$(echo "$url" | sed 's|^https:|^http:|')
+    url=$(echo "$url" | sed 's|^https:|http:|')
 
     if test -z "$1" ; then
         echo "Error: unpack tarball where?" >&2
@@ -482,7 +474,7 @@ if test "$op" = "unpack-tarball-check-md5" ; then
     dest="$1"
     shift 1
 
-    tmp=$(mktemp -u /tmp/tarball.XXXX)
+    tmp=$(mktemp -u /tmp/leopard.sh.tarball.XXXX)
     fifo=$tmp.fifo
     rm -f $fifo
     ( mkfifo $fifo \
@@ -537,14 +529,14 @@ if test "$op" = "link" ; then
 
     pkgspec="$1"
 
-    print_msg "Linking $pkgspec into /usr/local."
+    echo -e "${COLOR_CYAN}Linking${COLOR_NONE} $pkgspec into /usr/local." >&2
 
     if find /opt/$pkgspec/bin -mindepth 1 2>/dev/null | grep -q . ; then
-        ln -vsf /opt/$pkgspec/bin/* /usr/local/bin
+        ln -vsf /opt/$pkgspec/bin/* /usr/local/bin | sed 's/^/  /'
     fi
 
     if find /opt/$pkgspec/sbin -mindepth 1 2>/dev/null | grep -q . ; then
-        ln -vsf /opt/$pkgspec/sbin/* /usr/local/sbin
+        ln -vsf /opt/$pkgspec/sbin/* /usr/local/sbin | sed 's/^/  /'
     fi
 
     if find /opt/$pkgspec/share/man -mindepth 1 2>/dev/null | grep -q . ; then
@@ -552,7 +544,7 @@ if test "$op" = "link" ; then
         for d in * ; do
             if find /opt/$pkgspec/share/man/$d -mindepth 1 2>/dev/null | grep -q . ; then
                 mkdir -p /usr/local/share/man/$d/
-                ln -vsf /opt/$pkgspec/share/man/$d/* /usr/local/share/man/$d
+                ln -vsf /opt/$pkgspec/share/man/$d/* /usr/local/share/man/$d | sed 's/^/  /'
             fi
         done
         cd - >/dev/null
@@ -571,15 +563,19 @@ if test "$op" = "unlink" ; then
     fi
 
     pkgspec="$1"
+
+    echo -e "${COLOR_CYAN}Unlinking${COLOR_NONE} $pkgspec from /usr/local." >&2
+
     # deletes any symlinks in /usr/local/* which point to /opt/foo-1.0/*.
     # what a pain in the ass!
     cd "/opt/$pkgspec"
     find . -mindepth 1 \( -type f -or -type l \) -exec \
         bash -e -c \
-            "if test -L \"/usr/local/{}\" \
-                && test \"\$(readlink \"/usr/local/{}\")\" = \"/opt/$pkgspec/\$(echo {} | cut -c3-)\" ; \
+            "subpath=\$(echo {} | sed 's|^\\./||')
+            if test -L \"/usr/local/\$subpath\" \
+                && test \"\$(readlink \"/usr/local/\$subpath\")\" = \"/opt/$pkgspec/\$subpath\" ; \
             then \
-                rm -v \"/usr/local/{}\"
+                rm -v \"/usr/local/\$subpath\" | sed 's/^/  rm /'
             fi" \
     \;
 

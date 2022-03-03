@@ -22,7 +22,7 @@ if tiger.sh --install-binpkg $pkgspec ; then
     exit 0
 fi
 
-echo "Building $pkgspec from source." >&2
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
 set -x
 
 if ! test -e /usr/bin/gcc ; then
@@ -57,6 +57,6 @@ tiger.sh --arch-check $pkgspec $ppc64
 
 if test -e config.cache ; then
     mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
-    gzip config.cache
+    gzip -9 config.cache
     mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
 fi

@@ -1,6 +1,9 @@
 binpkgs/*.*
 !binpkgs/.keep
 
+binpkgs/old/
+!binpkgs/.keep
+
 dist/*.*
 !dist/.keep
 

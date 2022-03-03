@@ -7,14 +7,14 @@ set -e
 mkdir -p ~/.ssh/sockets
 
 # hosts:
-# ibookg3, graphite, emac2, emac3, pbookg42, imacg5 imacg52
+# imacg3, ibookg3, graphite, emac2, emac3, pbookg42, imacg5 imacg52
 
 # map:
-# tiger g3:    ibookg3
+# tiger g3:    ibookg3, imacg3
 # tiger g4:    graphite
-# tiger g4e:   emac3
+# tiger g4e:   emac2, emac3
 # tiger g5:    imacg52
-# leopard g4e: emac3
+# leopard g4e: pbookg42
 # leopard g5:  imacg5
 
 if test "$1" = "--minimal" ; then
@@ -22,7 +22,7 @@ if test "$1" = "--minimal" ; then
     shift 1
 fi
 
-hosts=${1:-"imacg5 imacg52 emac3 emac2 pbookg42 graphite ibookg3"}
+hosts=${1:-"imacg5 imacg52 emac2 emac3 pbookg42 graphite ibookg3 imacg3"}
 
 uphosts=""
 echo "👉 ping"
@@ -87,24 +87,16 @@ echo
 echo "👉 push leopard.sh"
 for host in $uphosts ; do
     echo "  🖥  $host"
-    rsync -ai --delete ~/leopard.sh/ \
-        --exclude='/dist/*' \
-        --exclude='/binpkgs/*' \
-        $host:/Users/macuser/Desktop/leopard.sh
-    ssh $host "cd /Users/macuser/bin \
-        && rm -rf /Users/macuser/Desktop/leopardsh \
-        && rm -rf /Users/macuser/Desktop/tigersh \
-        && ln -sf /Users/macuser/Desktop/leopard.sh/leopard.sh . \
-        && ln -sf /Users/macuser/Desktop/leopard.sh/tiger.sh . \
-        && ln -sf /Users/macuser/Desktop/leopard.sh/leopardsh/utils/make-leopardsh-binpkg.sh . \
-        && ln -sf /Users/macuser/Desktop/leopard.sh/tigersh/utils/make-tigersh-binpkg.sh . \
-        && ln -sf /Users/macuser/Desktop/leopard.sh/leopardsd/utils/rebuild-leopardsh-stales.sh . \
-        && ln -sf /Users/macuser/Desktop/leopard.sh/tigersh/utils/rebuild-tigersh-stales.sh . \
-        && ln -sf /Users/macuser/Desktop/leopard.sh/leopardsh/utils/rebuild-leopardsh-all.sh . \
-        && ln -sf /Users/macuser/Desktop/leopard.sh/tigersh/utils/rebuild-tigersh-all.sh . \
-        && rm -f /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache \
-        && rm -f /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache \
-        && rm -f /opt/tiger.sh/share/tiger.sh/config.cache/disabled.cache"
+    scp ~/leopard.sh/leopardsh/utils/make-leopardsh-binpkg.sh \
+        ~/leopard.sh/leopardsh/utils/rebuild-leopardsh-stales.sh \
+        ~/leopard.sh/leopardsh/utils/rebuild-leopardsh-all.sh \
+        ~/leopard.sh/tigersh/utils/make-tigersh-binpkg.sh \
+        ~/leopard.sh/tigersh/utils/rebuild-tigersh-stales.sh \
+        ~/leopard.sh/tigersh/utils/rebuild-tigersh-all.sh \
+        $host:/Users/macuser/bin/
+    ssh $host "rm -f /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache \
+        /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache \
+        /opt/tiger.sh/share/tiger.sh/config.cache/disabled.cache"
 done
 
 #echo

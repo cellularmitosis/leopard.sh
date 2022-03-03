@@ -1,14 +1,14 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v4
+# based on templates/build-from-source.sh v5
 
 # Install pv on OS X Leopard / PowerPC.
 
 package=pv
 version=1.6.20
 
-set -e -x -o pipefail
-PATH="/opt/portable-curl/bin:$PATH"
-LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
+set -e
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -18,58 +18,45 @@ pkgspec=$package-$version$ppc64
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
-binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
-    srcmirror=https://distfiles.gentoo.org/distfiles
-    tarball=$package-$version.tar.bz2
+if leopard.sh --install-binpkg $pkgspec ; then
+    exit 0
+fi
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
+set -x
 
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 85b25c827add82ebdd5a58a5ffde1d7d
+if ! test -e /usr/bin/gcc ; then
+    leopard.sh xcode-3.1.4
+fi
 
-    cd /tmp
-    rm -rf $package-$version
-    tar xjf ~/Downloads/$tarball
-    cd $package-$version
+upstream=https://distfiles.gentoo.org/distfiles/$package-$version.tar.bz2
 
-    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+leopard.sh --unpack-dist $pkgspec
+cd /tmp/$package-$version
 
-    CFLAGS=$(leopard.sh -mcpu -O)
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $CFLAGS"
-    fi
+cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
+CFLAGS=$(leopard.sh -mcpu -O)
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
+fi
+
+/usr/bin/time \
     ./configure -C --prefix=/opt/$pkgspec \
-        CFLAGS="$CFLAGS"
+        CFLAGS="$CFLAGS" \
+    && make $(leopard.sh -j)
 
-    make $(leopard.sh -j)
-
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    make check
 fi
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
-fi
+make install
 
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
 fi
