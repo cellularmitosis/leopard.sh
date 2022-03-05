@@ -1,0 +1,77 @@
+#!/bin/bash
+
+set -e
+
+if test -n "$1" ; then
+    # tell another machine to sleep.
+    host=$1
+    ssh $host osascript -e \'tell application \"Finder\" to sleep\'
+
+elif test -n "$SSH_TTY" ; then
+    # sleep the machine you are ssh'ed into and also log out of the ssh session.
+    # this was trickier than I would have guessed.
+
+    # turns out you can't just 'logout' from within a shell script.
+    # instead, we have to find the $PID of our bash shell and kill it.
+    # I tried killing the PID of our ssh session but that seems to
+    # also kill the osascript call.
+    ipid=$PID
+    ippid=$PPID
+    tmp=$(mktemp /tmp/sleep.XXXX)
+    ps -x -o user,pid,ppid,command \
+        | sed -E 's/ +/ /g' \
+        | grep -v '^USER PID PPID COMMAND$' \
+        > $tmp
+    while true ; do
+        notfound=1
+        while read line ; do
+            lpid=$(echo $line | awk '{print $2}')
+            if test "$ippid" = "$lpid" ; then
+                cmd=$(echo $line | cut -d' ' -f4-)
+                if test "$cmd" = "/usr/sbin/sshd -i" ; then
+                    # found it.
+                    tokill=$ipid
+                    break 2
+                else
+                    # ascend to ppid and start again.
+                    lppid=$(echo $line | awk '{print $3}')
+                    ipid=$lpid
+                    ippid=$lppid
+                    unset notfound
+                    break 1
+                fi
+            else
+                continue
+            fi
+        done < $tmp
+
+        if test -n "$notfound" ; then
+            echo "Error: couldn't determine \$PID of your ssh session." >&2
+            exit 1
+        else
+            continue
+        fi
+    done
+    rm -f $tmp
+
+    # now fork off a sleep script into the background and kill ssh.
+    cd /tmp
+    cat > /tmp/sleep2.sh << "EOF"
+#!/bin/bash
+set -e
+sleep 0.2
+osascript -e 'tell application "Finder" to sleep'
+EOF
+    chmod +x /tmp/sleep2.sh
+    # turns out we have to redirect nohup's stdout and stderr to prevent ssh from killing it.
+    nohup /tmp/sleep2.sh >/dev/null 2>&1 </dev/null &
+    disown
+    sleep 0.1
+    # argh, it turns out we have to 'kill -9' bash, which means we lose bash history.
+    kill -9 $tokill
+
+else
+    # sleep this machine.
+    osascript -e 'tell application "Finder" to sleep'
+
+fi

@@ -7,6 +7,7 @@
 # 👇 EDIT HERE:
 package=foo
 version=1.0
+upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
 set -e -x -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -60,7 +61,7 @@ do
     export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
 done
 
-echo -n -e "\033]0;leopard.sh $pkgspec ($(hostname -s))\007"
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
     exit 0
@@ -77,9 +78,6 @@ fi
 if ! which -s gcc-4.2 ; then
     leopard.sh gcc-4.2
 fi
-
-# 👇 EDIT HERE:
-upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
@@ -119,18 +117,18 @@ LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
 LIBS=$(pkg-config --libs-only-l $pkgconfignames)
 
     # 👇 EDIT HERE:
-/usr/bin/time \
-    ./configure -C --prefix=/opt/$pkgspec \
-        --with-bar=/opt/bar-1.0 \
-        --with-bar-prefix=/opt/bar-1.0 \
-        CPPFLAGS="$CPPFLAGS" \
-        LDFLAGS="$LDFLAGS" \
-        LIBS="$LIBS" \
-        CFLAGS="$CFLAGS" \
-        CXXFLAGS="$CXXFLAGS" \
-        CC="$CC" \
-        CXX="$CXX" \
-    && make $(tiger.sh -j) V=1
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --with-bar=/opt/bar-1.0 \
+    --with-bar-prefix=/opt/bar-1.0 \
+    CPPFLAGS="$CPPFLAGS" \
+    LDFLAGS="$LDFLAGS" \
+    LIBS="$LIBS" \
+    CFLAGS="$CFLAGS" \
+    CXXFLAGS="$CXXFLAGS" \
+    CC="$CC" \
+    CXX="$CXX"
+
+/usr/bin/time make $(tiger.sh -j) V=1
 
 # 👇 EDIT HERE:
 if test -n "$LEOPARDSH_RUN_TESTS" ; then

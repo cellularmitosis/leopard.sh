@@ -1,10 +1,11 @@
 #!/bin/bash
 # based on templates/build-from-source.sh v5
 
-# Install pv on OS X Tiger / PowerPC.
+# Install lzo on OS X Tiger / PowerPC.
 
-package=pv
-version=1.6.20
+package=lzo
+version=2.10
+upstream=http://www.oberhumer.com/opensource/$package/download/$package-$version.tar.gz
 
 set -e
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -29,8 +30,6 @@ if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
 fi
 
-upstream=https://distfiles.gentoo.org/distfiles/$package-$version.tar.bz2
-
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
@@ -42,12 +41,14 @@ if test -n "$ppc64" ; then
 fi
 
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --enable-shared \
     CFLAGS="$CFLAGS"
 
-/usr/bin/time make $(tiger.sh -j)
+/usr/bin/time make $(tiger.sh -j) V=1
 
 if test -n "$TIGERSH_RUN_TESTS" ; then
     make check
+    make test
 fi
 
 make install

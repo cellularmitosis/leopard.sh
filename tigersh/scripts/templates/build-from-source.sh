@@ -7,6 +7,7 @@
 # 👇 EDIT HERE:
 package=foo
 version=1.0
+upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
 set -e
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -29,7 +30,7 @@ for dep in \
     qux-3.4$ppc64
 do
     if ! test -e /opt/$dep ; then
-        leopard.sh $dep
+        tiger.sh $dep
     fi
     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
@@ -48,7 +49,7 @@ for dep in \
     qux-3.4$ppc64
 do
     if ! test -e /opt/$dep ; then
-        leopard.sh $dep
+        tiger.sh $dep
     fi
     PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
 done
@@ -61,7 +62,7 @@ do
     export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
 done
 
-echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 if tiger.sh --install-binpkg $pkgspec ; then
     exit 0
@@ -78,9 +79,6 @@ fi
 if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
     tiger.sh gcc-4.2
 fi
-
-# 👇 EDIT HERE:
-upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
@@ -120,18 +118,18 @@ LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
 LIBS=$(pkg-config --libs-only-l $pkgconfignames)
 
 # 👇 EDIT HERE:
-/usr/bin/time \
-    ./configure -C --prefix=/opt/$pkgspec \
-        --with-bar=/opt/bar-1.0 \
-        --with-bar-prefix=/opt/bar-1.0 \
-        CPPFLAGS="$CPPFLAGS" \
-        LDFLAGS="$LDFLAGS" \
-        LIBS="$LIBS" \
-        CFLAGS="$CFLAGS" \
-        CXXFLAGS="$CXXFLAGS" \
-        CC="$CC" \
-        CXX="$CXX" \
-    && make $(tiger.sh -j) V=1
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --with-bar=/opt/bar-1.0 \
+    --with-bar-prefix=/opt/bar-1.0 \
+    CPPFLAGS="$CPPFLAGS" \
+    LDFLAGS="$LDFLAGS" \
+    LIBS="$LIBS" \
+    CFLAGS="$CFLAGS" \
+    CXXFLAGS="$CXXFLAGS" \
+    CC="$CC" \
+    CXX="$CXX"
+
+/usr/bin/time make $(tiger.sh -j) V=1
 
 # 👇 EDIT HERE:
 if test -n "$TIGERSH_RUN_TESTS" ; then

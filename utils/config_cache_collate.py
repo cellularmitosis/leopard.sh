@@ -29,6 +29,7 @@ skippable_prefixes = [
     "ac_cv_prog_",  # never cache the path to a program (let the user dictate).
     "ac_cv_path_",  # never cache the path to a program (let the user dictate).
     "gl_cv_next_",  # these seem to be follow-up calls after ac_cv_header_*?
+    "ac_cv_sizeof_",  # these will be different on a G5.
 ]
 
 # these just create noise.
@@ -79,19 +80,24 @@ def generate_and_run_extract_script(pkgspec, os_cpu):
 
 set -e -o pipefail
 pkgspec=%s
-binpkg=$pkgspec.%s.tar.gz
+os_cpu=%s
+binpkg=$pkgspec.$os_cpu.tar.gz
 
 cd /tmp
 rm -rf $pkgspec
-cat /Users/cell/leopardsh/binpkgs/$binpkg | gunzip | tar x
+cat /Users/cell/leopard.sh/binpkgs/$binpkg | gunzip | tar x
 
-cat $pkgspec/share/leopardsh/$pkgspec/config.cache.gz \
+os=$(echo $os_cpu | cut -d. -f1)
+cat $pkgspec/share/$os.sh/$pkgspec/config.cache.gz \
     | gunzip \
     > /tmp/1
 
-cat $pkgspec/share/leopardsh/$pkgspec/install-$pkgspec.sh.log.gz \
+cat $pkgspec/share/$os.sh/$pkgspec/install-$pkgspec.sh.log.gz \
     | gunzip \
     > /tmp/2
+
+cat ~/leopard.sh/${os}sh/config.cache/${os}.cache > /tmp/3
+cat ~/leopard.sh/${os}sh/config.cache/disabled.cache >> /tmp/3
 
     """ % (pkgspec, os_cpu)
 

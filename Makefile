@@ -9,6 +9,7 @@ md5s:
 	$(shell md5 -q tigersh/binpkgs/tigersh-deps-0.1.tiger.g3.tar.gz >> md5)
 	cd binpkgs && make
 	cd dist && make
+	cd dist/orig && make
 
 dependency-graphs:
 	cd leopardsh/deps && make dependencies.png

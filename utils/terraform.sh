@@ -28,8 +28,9 @@ uphosts=""
 echo "👉 ping"
 # make two passes, because sometimes the .local hosts resolve after a ping.
 for host in $hosts ; do
-    ping -o -t 1 $host.local >/dev/null 2>&1 || true
+    ping -o -t 1 $host.local >/dev/null 2>&1 &
 done
+sleep 0.25
 for host in $hosts ; do
     if ping -o -t 1 $host.local >/dev/null 2>&1 ; then
         uphosts="$uphosts $host"
@@ -97,6 +98,7 @@ for host in $uphosts ; do
         ~/leopard.sh/tigersh/utils/make-tigersh-binpkg.sh \
         ~/leopard.sh/tigersh/utils/rebuild-tigersh-stales.sh \
         ~/leopard.sh/tigersh/utils/rebuild-tigersh-all.sh \
+        ~/leopard.sh/utils/sleep.sh \
         $host:/Users/macuser/bin/
     ssh $host "rm -f /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache \
         /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache \
