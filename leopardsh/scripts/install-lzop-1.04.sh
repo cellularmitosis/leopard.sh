@@ -1,10 +1,11 @@
 #!/bin/bash
 # based on templates/build-from-source.sh v5
 
-# Install pv on OS X Leopard / PowerPC.
+# Install lzop on OS X Leopard / PowerPC.
 
-package=pv
-version=1.6.20
+package=lzop
+version=1.04
+upstream=https://www.lzop.org/download/$package-$version.tar.gz
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -15,6 +16,16 @@ if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
 fi
 
 pkgspec=$package-$version$ppc64
+
+for dep in \
+    lzo-2.10$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+done
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
@@ -29,8 +40,6 @@ if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
 
-upstream=https://distfiles.gentoo.org/distfiles/$package-$version.tar.bz2
-
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
@@ -42,13 +51,13 @@ if test -n "$ppc64" ; then
 fi
 
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    CPPFLAGS="$CPPFLAGS" \
+    LDFLAGS="$LDFLAGS" \
     CFLAGS="$CFLAGS"
 
-/usr/bin/time make $(leopard.sh -j)
+/usr/bin/time make $(leopard.sh -j) V=1
 
-if test -n "$LEOPARDSH_RUN_TESTS" ; then
-    make check
-fi
+# Note: no 'make check' available.
 
 make install
 

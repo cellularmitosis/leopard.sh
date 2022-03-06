@@ -9,7 +9,7 @@ package=foo
 version=1.0
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
-set -e -x -o pipefail
+set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
@@ -128,7 +128,7 @@ LIBS=$(pkg-config --libs-only-l $pkgconfignames)
     CC="$CC" \
     CXX="$CXX"
 
-/usr/bin/time make $(tiger.sh -j) V=1
+/usr/bin/time make $(leopard.sh -j) V=1
 
 # 👇 EDIT HERE:
 if test -n "$LEOPARDSH_RUN_TESTS" ; then
