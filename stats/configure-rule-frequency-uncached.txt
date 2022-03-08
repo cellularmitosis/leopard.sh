@@ -1956,9 +1956,6 @@
    8 checking linker mapfile support for clearing hardware capabilities... no
    8 checking shift offset of TABDLY... 10
    8 checking size of bool... 1
-   8 checking size of intptr_t... 8
-   8 checking size of ptrdiff_t... 8
-   8 checking size of uintptr_t... 8
    8 checking sys/sdt.h in the target C library... no
    8 checking version of bison... 1.28, ok
    8 checking what linker to use... /usr/libexec/gcc/powerpc-apple-darwin8/4.2.1/ld
@@ -2077,8 +2074,6 @@
   10 checking our pkgconfig ldflags... -L/opt/gmp-4.3.2.ppc64/lib
   10 checking output filetype... 
   10 checking size of gid_t... 4
-  10 checking size of ssize_t... 8
-  10 checking size of void *... 8
   10 checking spawn.h presence... no
   10 checking spawn.h usability... no
   10 checking the name lister (nm) interface... rm: conftest.dSYM: is a directory
@@ -2349,12 +2344,14 @@
   12 checking size of char *... 4
   12 checking size of fsblkcnt_t... 4
   12 checking size of fsfilcnt_t... 4
+  12 checking size of intptr_t... 8
   12 checking size of mp_limb_t... 4
   12 checking size of pid_t... 4
+  12 checking size of ptrdiff_t... 8
   12 checking size of rlim_t... 8
   12 checking size of struct timeval... 8
-  12 checking size of time_t... 8
   12 checking size of uid_t... 4
+  12 checking size of uintptr_t... 8
   12 checking size of unsigned long... 4
   12 checking unwind.h presence... yes
   12 checking unwind.h usability... yes
@@ -2758,8 +2755,8 @@
   14 checking readline/history.h usability... yes
   14 checking shift offset of CRDLY... 12
   14 checking shift offset of CSIZE... 8
-  14 checking size of long... 8
-  14 checking size of size_t... 8
+  14 checking size of ssize_t... 8
+  14 checking size of void *... 8
   14 checking sys/event.h presence... yes
   14 checking sys/event.h usability... yes
   14 checking sys/inotify.h presence... no
@@ -3419,6 +3416,7 @@
   16 checking share.h presence... no
   16 checking share.h usability... no
   16 checking shared object configuration for loadable builtins... supported
+  16 checking size of time_t... 8
   16 checking size of unsigned short... 2
   16 checking size of unsigned... 4
   16 checking sstream presence... yes
@@ -3581,7 +3579,6 @@
   16 checking whether to build against external Dmalloc library... no
   16 checking whether to build against external OSSP ex library... no
   16 checking whether to build against external Sfio library... no
-  16 checking whether to build assembly versions... no
   16 checking whether to use C++... no
   16 checking whether to use builtin arc4random... yes
   16 checking whether to use high resolution file timestamps... yes
@@ -3598,7 +3595,6 @@
   16 checking whether we can find command line under <opt_proc_mountpoint>/<pid>/cmdline and mirror it by overwriting our own *argv (this may take a few secs)... no
   16 checking whether we can get the system boot time... yes
   16 checking whether your compiler passes the ACC conformance test... yes
-  16 checking whether your compiler passes the LZO conformance test... yes
   16 checking whether your readline headers and library know about rl_basic_quote_characters... yes
   16 checking whether your readline headers and library know about rl_executing_keyseq... yes
   16 checking whether your readline headers and library know about rl_readline_version... yes
@@ -3648,6 +3644,8 @@
   18 checking our pkgconfig libname... isl
   18 checking our pkgconfig version... 0.12.2
   18 checking our pkgconfig_libfile... isl.pc
+  18 checking size of long... 8
+  18 checking size of size_t... 8
   18 checking whether <sys/param.h> defines MIN and MAX... yes
   18 checking whether <wchar.h> uses 'inline' correctly... yes
   18 checking whether HUGE_VAL works... yes
@@ -3825,6 +3823,8 @@
   22 checking POSIX version of getpwuid_r with 5 arguments... yes
   22 checking alloca.h presence... yes
   22 checking alloca.h usability... yes
+  22 checking assert.h presence... yes
+  22 checking assert.h usability... yes
   22 checking dependency style of g++-4.2... gcc3
   22 checking for /usr/libexec/gcc/powerpc-apple-darwin9/4.2.1/ld option to reload object files... -r
   22 checking for 1 byte integer... yes
@@ -3869,9 +3869,11 @@
   22 checking for _sincosf declaration... no
   22 checking for _sincosl declaration... no
   22 checking for asin... yes
+  22 checking for assert.h... yes
   22 checking for atan... yes
   22 checking for atan2l declaration... yes
   22 checking for atanhf... yes
+  22 checking for atol... yes
   22 checking for atomic builtins for bool... yes
   22 checking for bcmp... yes
   22 checking for cabs... yes
@@ -3897,6 +3899,8 @@
   22 checking for copysignl... yes
   22 checking for cpowf... yes
   22 checking for ctanhf... yes
+  22 checking for ctime... yes
+  22 checking for difftime... yes
   22 checking for enabled wchar_t specializations... yes
   22 checking for erff... yes
   22 checking for euidaccess... no
@@ -3921,6 +3925,7 @@
   22 checking for fp_trap... no
   22 checking for get_nprocs... no
   22 checking for gets declaration... yes
+  22 checking for gmtime... yes
   22 checking for group_member... no
   22 checking for gthreads library... yes
   22 checking for hw.ncpu sysctl... yes
@@ -3950,6 +3955,8 @@
   22 checking for major_t... no
   22 checking for memchr... yes
   22 checking for minor_t... no
+  22 checking for mkdir... yes
+  22 checking for mktime... yes
   22 checking for net/errno.h... no
   22 checking for nextafter... yes
   22 checking for nl_langinfo and YESEXPR... yes
@@ -3963,12 +3970,14 @@
   22 checking for reallocarray... no
   22 checking for renameat... no
   22 checking for renameat2... no
+  22 checking for rmdir... yes
   22 checking for roundf... yes
   22 checking for rpmatch... no
   22 checking for selinux/flask.h... no
   22 checking for setenv declaration... yes
   22 checking for setmode... yes
   22 checking for setproctitle... no
+  22 checking for signal... yes
   22 checking for sincos declaration... no
   22 checking for sincosl declaration... no
   22 checking for sinh... yes
@@ -3982,6 +3991,7 @@
   22 checking for sys/sysmacros.h... no
   22 checking for sys_errlist... yes
   22 checking for the value of EOF... -1
+  22 checking for time... yes
   22 checking for truncl... yes
   22 checking for wait... yes
   22 checking for working getgroups... yes
@@ -4257,9 +4267,6 @@
   24 checking if the assembler supports HTM... no
   24 checking our pkgconfig ldflags... -L/opt/gmp-4.3.2/lib
   24 checking size of bool... 4
-  24 checking size of intptr_t... 4
-  24 checking size of ptrdiff_t... 4
-  24 checking size of uintptr_t... 4
   24 checking stack direction for C alloca... -1
   24 checking stdalign.h presence... yes
   24 checking stdalign.h usability... yes
@@ -4349,6 +4356,7 @@
   26 checking whether included libxml is requested... no
   26 checking whether isinf is declared... yes
   26 checking whether isinf(long double) works... yes
+  26 checking whether limits.h is sane... yes
   26 checking whether ln works... yes
   26 checking whether log10 works... yes
   26 checking whether pow can be used without linking with libm... yes
@@ -4470,8 +4478,6 @@
   30 checking whether to enable maintainer-specific portions of Makefiles... yes
   32 checking $CC variable... ok
   32 checking $CFLAGS variable... ok
-  32 checking assert.h presence... yes
-  32 checking assert.h usability... yes
   32 checking byte ordering... big endian
   32 checking declaration of size-change... yes
   32 checking default object directory... obj_s
@@ -4487,27 +4493,20 @@
   32 checking for _LARGE_FILES value needed for large files... no
   32 checking for __freadahead... no
   32 checking for a shell that conforms to POSIX... /bin/sh
-  32 checking for alloca... no
   32 checking for alternate terminal capabilities file... Caps
   32 checking for arc4random... yes
-  32 checking for assert.h... yes
-  32 checking for atol... yes
   32 checking for builtin bool type... no
   32 checking for builtin bool type... yes
-  32 checking for clock_getcpuclockid... no
-  32 checking for clock_getres... no
   32 checking for correct stack_t interpretation... yes
   32 checking for cppcheck... no
   32 checking for ctags... ctags
   32 checking for ctags... yes
-  32 checking for ctime... yes
   32 checking for default loader flags... 
   32 checking for default model... shared
   32 checking for desired basename for cxx library... ncurses++
   32 checking for desired basename for form library... form
   32 checking for desired basename for menu library... menu
   32 checking for desired basename for panel library... panel
-  32 checking for difftime... yes
   32 checking for etags... etags
   32 checking for exctags... no
   32 checking for executable suffix... 
@@ -4520,7 +4519,6 @@
   32 checking for getentropy... no
   32 checking for getttynam... yes
   32 checking for ggrep... no
-  32 checking for gmtime... yes
   32 checking for gnat... no
   32 checking for gnatgcc... no
   32 checking for gpm.h... no
@@ -4547,8 +4545,6 @@
   32 checking for mbscmp... no
   32 checking for mbsnrtowcs... yes
   32 checking for mbstr.h... no
-  32 checking for mkdir... yes
-  32 checking for mktime... yes
   32 checking for multithread API to use... none
   32 checking for opendir in -ldir... no
   32 checking for openpty header... util.h
@@ -4563,14 +4559,12 @@
   32 checking for presence of POSIX-style sigsetjmp/siglongjmp... present
   32 checking for quad_t... yes
   32 checking for regular-expression headers... regex.h
-  32 checking for rmdir... yes
   32 checking for setbuf... yes
   32 checking for setbuffer... yes
   32 checking for setfsuid... no
   32 checking for setlinebuf... yes
   32 checking for sig_atomic_t in signal.h... yes
   32 checking for signal global datatype... volatile sig_atomic_t
-  32 checking for signal... yes
   32 checking for signbit compiler built-ins... no
   32 checking for signed char... yes
   32 checking for sigstack... no
@@ -4593,7 +4587,6 @@
   32 checking for sys/termio.h... no
   32 checking for tgetent... no
   32 checking for tic... tic
-  32 checking for time... yes
   32 checking for towupper... yes
   32 checking for ttyent.h... yes
   32 checking for type of bool... auto
@@ -4741,14 +4734,7 @@
   32 checking libaudit.h usability... no
   32 checking mbstr.h presence... no
   32 checking mbstr.h usability... no
-  32 checking size of __int16... 0
-  32 checking size of __int32... 0
-  32 checking size of dev_t... 4
-  32 checking size of float... 4
-  32 checking size of fpos_t... 8
-  32 checking size of mode_t... 2
   32 checking size of signed char... 1
-  32 checking size of uintmax_t... 8
   32 checking sys/acl.h presence... yes
   32 checking sys/acl.h usability... yes
   32 checking sys/pte.h presence... no
@@ -4771,7 +4757,6 @@
   32 checking whether gcc __attribute__ ((mode (XX))) works... yes
   32 checking whether getenv is declared... yes
   32 checking whether getpw functions are declared in pwd.h... yes
-  32 checking whether limits.h is sane... yes
   32 checking whether make sets ${MAKE}... yes
   32 checking whether or not strcoll and strcmp differ... no
   32 checking whether posix_spawn_file_actions_addclose works... no
@@ -4788,20 +4773,22 @@
   32 checking whether termios.h needs _POSIX_SOURCE... no
   32 checking whether the  /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld) supports shared libraries... yes
   32 checking whether the /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xg++ -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -nostdinc++ -nostdinc++ -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/include/powerpc-apple-darwin8.11.0 -I/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/include -I/tmp/gcc-4.9.4/libstdc++-v3/libsupc++ -I/tmp/gcc-4.9.4/libstdc++-v3/include/backward -I/tmp/gcc-4.9.4/libstdc++-v3/testsuite/util -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/src/.libs -L/tmp/gcc-4.9.4/powerpc-apple-darwin8.11.0/ppc64/libstdc++-v3/libsupc++/.libs -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld) supports shared libraries... yes
-  32 checking whether the C preprocessor needs special flags... none needed
   32 checking whether the ctype macros accept non-ascii characters... yes
   32 checking whether the target supports thread-local storage... yes
   32 checking whether to add trace feature to all models... no
+  32 checking whether to build assembly versions... no
   32 checking whether to build static libraries... no
   32 checking whether to enable _LP64 definition in curses.h... yes
   32 checking whether to use hashed database instead of directory/tree... no
   32 checking whether to use struct dirent64... no
   32 checking whether unlink of a parent directory fails as it should... yes
+  32 checking whether your compiler passes the LZO conformance test... yes
   32 checking which gcc option to use... -fPIC
   32 checking which terminfo source-file will be installed... ${top_srcdir}/misc/terminfo.src
   34 checking for C compiler vendor... gnu
   34 checking for __mktime_internal... no
   34 checking for __xpg4... no
+  34 checking for chmod... yes
   34 checking for getppriv... no
   34 checking for mknod... yes
   34 checking for pkg-config... no
@@ -4861,12 +4848,14 @@
   36 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 static flag -static works... no
   36 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 supports -c -o file.o... yes
   36 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 supports -fno-rtti -fno-exceptions... no
-  36 checking size of ssize_t... 4
-  36 checking size of time_t... 4
+  36 checking size of intptr_t... 4
+  36 checking size of ptrdiff_t... 4
+  36 checking size of uintptr_t... 4
   36 checking whether g++-4.2 accepts -g... yes
   36 checking whether the /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include    linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld) supports shared libraries... yes
   36 checking whether the /tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin9.8.0/sys-include  -m64 linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld) supports shared libraries... yes
   38 checking for aclocal... aclocal
+  38 checking for atoi... yes
   38 checking for autoconf... autoconf
   38 checking for autoheader... autoheader
   38 checking for calloc... yes
@@ -4875,11 +4864,14 @@
   38 checking for gmtime_r... yes
   38 checking for library containing dlopen... none required
   38 checking for library containing setfilecon... no
+  38 checking for longjmp... yes
   38 checking for on_exit... no
   38 checking for openpty in -lutil... no
   38 checking for pstat_getdynamic... no
   38 checking for pstat_getstatic... no
+  38 checking for qsort... yes
   38 checking for selinux/selinux.h... no
+  38 checking for setjmp.h... yes
   38 checking for sigsetmask... yes
   38 checking for strtoimax... yes
   38 checking for strtoumax... yes
@@ -4889,6 +4881,8 @@
   38 checking for time.h... yes
   38 checking libgen.h presence... yes
   38 checking libgen.h usability... yes
+  38 checking setjmp.h presence... yes
+  38 checking setjmp.h usability... yes
   38 checking sys/filio.h presence... yes
   38 checking sys/filio.h usability... yes
   38 checking sys/ipc.h presence... yes
@@ -4992,7 +4986,6 @@
   44 checking for atanf... yes
   44 checking for atanl... yes
   44 checking for ceilf... yes
-  44 checking for chmod... yes
   44 checking for cosf... yes
   44 checking for dlclose... yes
   44 checking for exception model to use... call frame
@@ -5071,8 +5064,6 @@
   46 checking how to create a ustar tar archive... gnutar
   46 checking regex.h presence... yes
   46 checking regex.h usability... yes
-  46 checking size of __int64... 0
-  46 checking size of off_t... 8
   46 checking sys/param.h usability... yes
   46 checking sys/times.h presence... yes
   46 checking sys/times.h usability... yes
@@ -5086,27 +5077,25 @@
   46 checking whether the target supports .symver directive... no
   48 checking dlfcn.h presence... yes
   48 checking dlfcn.h usability... yes
-  48 checking for a thread-safe mkdir -p... autoconf/install-sh -c -d
+  48 checking for alloca... no
   48 checking for alloca.h... yes
-  48 checking for atoi... yes
   48 checking for clock... yes
+  48 checking for clock_getcpuclockid... no
+  48 checking for clock_getres... no
   48 checking for egrep... grep -E
   48 checking for function prototypes... yes
   48 checking for getline... no
   48 checking for getopt... yes
   48 checking for getopt_long... yes
-  48 checking for longjmp... yes
+  48 checking for localtime... yes
+  48 checking for memcmp... yes
   48 checking for powerpc-apple-darwin8.11.0-nm... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/nm
   48 checking for putchar_unlocked... yes
-  48 checking for qsort... yes
   48 checking for regcomp... yes
-  48 checking for setjmp.h... yes
   48 checking for sinl... yes
   48 checking for stack_t... yes
-  48 checking for stricmp... no
   48 checking for strlcat... yes
   48 checking for strlcpy... yes
-  48 checking for strnicmp... no
   48 checking for struct tm.tm_gmtoff... yes
   48 checking for termcap.h... yes
   48 checking for unsetenv() return type... int
@@ -5114,19 +5103,25 @@
   48 checking libintl.h presence... no
   48 checking libintl.h usability... no
   48 checking semaphore.h presence... yes
-  48 checking setjmp.h presence... yes
-  48 checking setjmp.h usability... yes
-  48 checking size of intmax_t... 8
+  48 checking size of __int16... 0
+  48 checking size of __int32... 0
+  48 checking size of dev_t... 4
+  48 checking size of float... 4
+  48 checking size of fpos_t... 8
+  48 checking size of mode_t... 2
+  48 checking size of ssize_t... 4
+  48 checking size of time_t... 4
+  48 checking size of uintmax_t... 8
   48 checking size of wchar_t... 4
   48 checking sys/param.h presence... yes
   48 checking termcap.h presence... yes
   48 checking termcap.h usability... yes
-  48 checking the archiver (ar) interface... ar
   48 checking whether fileno_unlocked is declared... yes
   48 checking whether getopt is declared... yes
   48 checking whether sched_yield is declared... yes
   48 checking whether strtod obeys C99... no
   48 checking whether sys_siglist is declared... yes
+  48 checking whether the C preprocessor needs special flags... none needed
   48 checking whether the target supports thread-local storage... no
   48 checking whether to use the included libunistring... no
   48 checking whether unsetenv obeys POSIX... yes
@@ -5134,8 +5129,6 @@
   50 checking for struct tm.tm_zone... yes
   50 checking for wchar_t... yes
   50 checking sched.h usability... yes
-  50 checking size of size_t... 4
-  50 checking size of void *... 4
   50 checking the name lister (/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/nm) interface... rm: conftest.dSYM: is a directory
   50 checking whether sbrk is declared... yes
   52 checking 32-bit host C ABI... no
@@ -5158,6 +5151,7 @@
   54 checking for _doprnt... no
   54 checking for fcntl... yes
   54 checking for getsysinfo... no
+  54 checking for isatty... yes
   54 checking for ld used by gcc -std=gnu99... /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
   54 checking for ld... /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
   54 checking for libgen.h... yes
@@ -5166,6 +5160,7 @@
   54 checking for pid_t... yes
   54 checking for pthread.h... yes
   54 checking for ptrdiff_t... yes
+  54 checking for setjmp... yes
   54 checking for stpcpy... yes
   54 checking for strtod... yes
   54 checking for strverscmp... no
@@ -5195,7 +5190,6 @@
   56 checking netinet/in.h usability... yes
   56 checking paths.h presence... yes
   56 checking paths.h usability... yes
-  56 checking size of long double... 16
   56 checking stdio.h usability... yes
   56 checking whether ffs is declared... yes
   56 checking whether isnan macro works... yes
@@ -5205,10 +5199,9 @@
   58 checking for __fpending... no
   58 checking for dlsym... yes
   58 checking for faccessat... no
-  58 checking for localtime... yes
+  58 checking for fstat... yes
   58 checking for long long... yes
   58 checking for mbslen... no
-  58 checking for memcmp... yes
   58 checking for pthread_atfork... yes
   58 checking for strpbrk... yes
   58 checking for uname... yes
@@ -5256,13 +5249,19 @@
   62 checking for gcc -std=gnu99 options needed to detect all undeclared functions... none needed
   62 checking for shared library path variable... DYLD_LIBRARY_PATH
   62 checking for stat... yes
+  62 checking for strrchr... yes
   62 checking for strtof... yes
   62 checking for sys/single_threaded.h... no
   62 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 PIC flag -fno-common -DPIC works... yes
+  62 checking size of __int64... 0
+  62 checking size of off_t... 8
+  62 checking size of size_t... 4
+  62 checking size of void *... 4
   62 checking termios.h presence... yes
   62 checking termios.h usability... yes
   62 checking whether to use C++... yes
   64 checking fenv.h usability... yes
+  64 checking for a thread-safe mkdir -p... autoconf/install-sh -c -d
   64 checking for acl_create_entry_np... yes
   64 checking for acl_delete_def_file... yes
   64 checking for acl_delete_fd_np... yes
@@ -5282,14 +5281,14 @@
   64 checking for getxattr with XATTR_NAME_POSIX_ACL macros... no
   64 checking for gmsgfmt... /usr/local/bin/msgfmt
   64 checking for int64_t... yes
-  64 checking for isatty... yes
   64 checking for library containing acl_get_file... none required
   64 checking for msgfmt... /usr/local/bin/msgfmt
   64 checking for msgmerge... /usr/local/bin/msgmerge
   64 checking for powerpc-apple-darwin8.11.0-as... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/as
-  64 checking for setjmp... yes
   64 checking for setvbuf... yes
+  64 checking for stricmp... no
   64 checking for strip... /usr/bin/strip
+  64 checking for strnicmp... no
   64 checking for strtold... yes
   64 checking for sys/acl.h... yes
   64 checking for tcgetpgrp... yes
@@ -5302,6 +5301,8 @@
   64 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    supports -fno-rtti -fno-exceptions... no
   64 checking search.h presence... yes
   64 checking search.h usability... yes
+  64 checking size of intmax_t... 8
+  64 checking the archiver (ar) interface... ar
   64 checking where the gettext function comes from... external libintl
   64 checking whether unsetenv obeys POSIX... no
   66 checking for GNU gettext in libintl... yes
@@ -5319,9 +5320,9 @@
   66 checking whether getopt is POSIX compatible... yes
   68 checking fenv.h presence... yes
   68 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    option to accept ISO C89... none needed
+  68 checking for access... yes
   68 checking for confstr... yes
   68 checking for dup... yes
-  68 checking for fstat... yes
   68 checking for getdelim... no
   68 checking for getloadavg... yes
   68 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   ... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld
@@ -5332,11 +5333,14 @@
   68 checking for strchrnul... no
   68 checking if /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    static flag -static works... no
   68 checking sys/uio.h presence... yes
+  68 checking sys/wait.h presence... yes
+  68 checking sys/wait.h usability... yes
   68 checking whether fopen recognizes a trailing slash... yes
   68 checking whether gcc-4.2 supports -Wmissing-prototypes... yes
   68 checking whether getdelim is declared... no
   68 checking whether snprintf respects a size of 1... yes
   70 checking command to parse /usr/bin/nm -p output from gcc -std=gnu99 object... ok
+  70 checking for getenv... yes
   70 checking for stpncpy... no
   70 checking for strtoll... yes
   70 checking for struct stat.st_blksize... yes
@@ -5357,18 +5361,16 @@
   72 checking for byteswap.h... no
   72 checking for getaddrinfo... yes
   72 checking for ld used by /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld
-  72 checking for ld used by gcc... /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
   72 checking for localtime_r... yes
   72 checking for mkfifo... yes
   72 checking for mquery... no
-  72 checking for strrchr... yes
   72 checking for symlink... yes
   72 checking for sys/sysctl.h... yes
   72 checking for thread model used by GCC... posix
   72 checking for working fcntl.h... no (bad O_NOATIME)
   72 checking langinfo.h presence... yes
   72 checking langinfo.h usability... yes
-  72 checking size of double... 8
+  72 checking size of long double... 16
   72 checking whether /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 accepts -g... yes
   72 checking whether basename is declared... no
   72 checking whether the /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include    linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld) supports shared libraries... yes
@@ -5380,8 +5382,8 @@
   74 checking for iconv declaration... 
   74 checking for lstat... yes
   74 checking for perl... perl
+  74 checking for umask... yes
   74 checking for waitpid... yes
-  74 checking size of short... 2
   74 checking where to find the exponent in a 'long double'... word 0 bit 20
   74 checking whether asprintf is declared... yes
   74 checking whether strstr works... yes
@@ -5401,25 +5403,22 @@
   76 checking whether pthread_create exists as a global function... yes
   76 checking whether pthread_sigmask is a macro... no
   76 checking whether vasprintf is declared... yes
-  78 checking for access... yes
   78 checking for getrandom... no
+  78 checking for ld used by gcc... /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
   78 checking for mkdtemp... yes
   78 checking for powerpc-apple-darwin8.11.0-gcc... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include   
   78 checking for pselect... yes
   78 checking for snprintf... yes
   78 checking for stdio.h... yes
+  78 checking for strftime... yes
   78 checking for sys/random.h... yes
   78 checking for sys/sysinfo.h... no
   78 checking for the common suffixes of directories in the library search path... lib,lib
-  78 checking sys/wait.h presence... yes
-  78 checking sys/wait.h usability... yes
   78 checking wctype.h presence... yes
   78 checking whether the compiler generally respects inline... yes
-  78 checking whether the gcc linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) supports shared libraries... yes
   80 checking for __secure_getenv... no
   80 checking for asprintf... yes
   80 checking for gcc -std=gnu99 option to produce PIC... -fno-common -DPIC
-  80 checking for getenv... yes
   80 checking for kill... yes
   80 checking for long file names... yes
   80 checking for powerpc-apple-darwin8.11.0-gcc... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64
@@ -5431,7 +5430,8 @@
   80 checking if gcc -std=gnu99 static flag -static works... no
   80 checking if gcc -std=gnu99 supports -c -o file.o... yes
   80 checking if gcc -std=gnu99 supports -fno-rtti -fno-exceptions... no
-  80 checking size of long long... 8
+  80 checking signal.h presence... yes
+  80 checking signal.h usability... yes
   80 checking whether INT64_MAX == LONG_MAX... no
   80 checking whether UINT64_MAX == ULONG_MAX... no
   82 checking for ANSI C header files... rm: conftest.dSYM: is a directory
@@ -5448,13 +5448,13 @@
   84 checking for iswblank... yes
   84 checking for obstacks that work with any size object... no
   84 checking for readlinkat... no
-  84 checking for umask... yes
   84 checking how to run the C preprocessor... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/xgcc -B/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/bin/ -B/opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/lib/ -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/include -isystem /opt/gcc-4.9.4/powerpc-apple-darwin8.11.0/sys-include  -m64 -E
   84 checking limits.h usability... yes
   84 checking sys/ioctl.h usability... yes
   84 checking sys/time.h presence... yes
   84 checking whether iswblank is declared... yes
   84 checking whether the g++ linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) supports shared libraries... yes
+  84 checking whether the gcc linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) supports shared libraries... yes
   84 checking whether the target supports dllexport... no
   84 checking whether wcwidth is declared... yes
   84 checking whether wcwidth works reasonably in UTF-8 locales... no
@@ -5464,14 +5464,14 @@
   86 checking if g++ PIC flag -fno-common -DPIC works... yes
   86 checking pwd.h presence... yes
   86 checking pwd.h usability... yes
-  86 checking size of long... 4
   86 checking sys/ioctl.h presence... yes
   86 checking whether the target supports symbol aliases... no
   86 checking whether to use NLS... no
   88 checking for dlopen... yes
+  88 checking for munmap... yes
   88 checking for nm... nm
-  88 checking for strftime... yes
   88 checking limits.h presence... yes
+  88 checking size of double... 8
   88 checking whether gcc -std=gnu99 understands -c and -o together... yes
   88 checking whether the gcc -std=gnu99 linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) supports shared libraries... yes
   90 checking for a turkish Unicode locale... none
@@ -5481,8 +5481,7 @@
   90 checking for library containing nanosleep... none required
   90 checking for pthread_sigmask... yes
   90 checking for putenv compatible with GNU and SVID... no
-  90 checking signal.h presence... yes
-  90 checking signal.h usability... yes
+  90 checking size of short... 2
   90 checking whether _putenv is declared... no
   90 checking whether fdopen sets errno... yes
   90 checking whether gcc-4.2 supports -Wall... yes
@@ -5496,12 +5495,10 @@
   90 checking whether wctob works... yes
   90 checking whether we are cross compiling... yes
   90 checking whether we are using the GNU C Library >= 2.1 or uClibc... no
-  92 checking for -force_load linker flag... ld: unknown option: -force_load
   92 checking for fnmatch... yes
   92 checking for pathconf... yes
+  92 checking for signal.h... yes
   92 checking for working re_compile_pattern... no
-  92 checking how to convert powerpc-apple-darwin9.8.0 file names to powerpc-apple-darwin9.8.0 format... func_convert_file_noop
-  92 checking how to convert powerpc-apple-darwin9.8.0 file names to toolchain format... func_convert_file_noop
   92 checking whether YESEXPR works... yes
   92 checking whether gcc-4.2 supports -W... yes
   92 checking whether isblank is declared... yes
@@ -5523,6 +5520,7 @@
   94 checking whether gcc needs -traditional... no
   94 checking whether gcc-4.2 supports -Wstrict-prototypes... yes
   94 checking whether long double and double are the same... no
+  96 checking ctype.h presence... yes
   96 checking for fenv.h... yes
   96 checking for mmap... yes
   96 checking for paths.h... yes
@@ -5532,15 +5530,22 @@
   96 checking for working volatile... yes
   96 checking if g++ static flag -static works... no
   96 checking if g++ supports -c -o file.o... yes
+  96 checking size of long long... 8
   96 checking whether sleep is declared... yes
   96 checking whether symlink handles trailing slash correctly... no
   96 checking whether the compiler supports the __inline keyword... yes
+  98 checking ctype.h usability... yes
+  98 checking for -force_load linker flag... ld: unknown option: -force_load
   98 checking for gettimeofday... yes
-  98 checking for munmap... yes
+  98 checking how to convert powerpc-apple-darwin9.8.0 file names to powerpc-apple-darwin9.8.0 format... func_convert_file_noop
+  98 checking how to convert powerpc-apple-darwin9.8.0 file names to toolchain format... func_convert_file_noop
+  98 checking size of long... 4
   98 checking whether mbrtowc stores incomplete characters... no
   98 checking whether setlocale (LC_ALL, NULL) is multithread-safe... no
   98 checking whether setlocale (category, NULL) is multithread-safe... yes
   98 checking whether strnlen is declared... no
+ 100 checking for atexit... yes
+ 100 checking for ctype.h... yes
  100 checking for eaccess... no
  100 checking for gethostbyname... yes
  100 checking for mkstemp... yes
@@ -5556,11 +5561,13 @@
  102 checking for library containing inet_pton... none required
  102 checking for library containing setsockopt... none needed
  102 checking for shutdown... yes
- 102 checking for signal.h... yes
+ 102 checking for stdarg.h... yes
  102 checking for struct sockaddr_storage... yes
  102 checking for struct sockaddr_storage.ss_family... yes
  102 checking for struct stat.st_blocks... yes
  102 checking how to run the C++ preprocessor... g++ -E
+ 102 checking stdarg.h presence... yes
+ 102 checking stdarg.h usability... yes
  102 checking whether <netinet/in.h> is self-contained... yes
  102 checking whether <sys/select.h> is self-contained... yes
  102 checking whether <sys/socket.h> defines the SHUT_* macros... yes
@@ -5570,8 +5577,8 @@
  102 checking whether select supports a 0 argument... yes
  102 checking whether snprintf is declared... yes
  104 checking for issetugid... yes
+ 104 checking for memcpy... yes
  104 checking whether to use Java... yes
- 106 checking ctype.h presence... yes
  106 checking for Solaris 11.4 locale system... no
  106 checking for a race-free mkdir -p... ./build-aux/install-sh -c -d
  106 checking for fake locale system (OpenBSD)... no
@@ -5585,13 +5592,15 @@
  106 checking whether <sys/ioctl.h> declares ioctl... yes
  106 checking whether wint_t is too small... no
  108 checking 32-bit host C ABI... yes
- 108 checking ctype.h usability... yes
  108 checking for _FILE_OFFSET_BITS value needed for large files... no
  108 checking for a thread-safe mkdir -p... ./install-sh -c -d
  108 checking for flexible array member... yes
  108 checking for link... yes
  108 checking for mbsrtowcs... yes
  108 checking for modern makeinfo... yes
+ 108 checking for strncasecmp... yes
+ 108 checking sys/resource.h presence... yes
+ 108 checking sys/resource.h usability... yes
  108 checking whether btowc(0) is correct... yes
  108 checking whether btowc(EOF) is correct... yes
  108 checking whether langinfo.h defines ALTMON_1... no
@@ -5602,8 +5611,8 @@
  108 checking whether setenv validates arguments... no
  108 checking whether wcrtomb return value is correct... yes
  108 checking whether wcrtomb works in the C locale... yes
- 110 checking for atexit... yes
- 110 checking for ctype.h... yes
+ 110 checking for strchr... yes
+ 110 checking for strstr... yes
  112 checking for CFLocaleCopyPreferredLanguages... no
  112 checking for __builtin_expect... yes
  112 checking for a french Unicode locale... fr_FR.UTF-8
@@ -5616,13 +5625,10 @@
  112 checking for iconv.h... yes
  112 checking for iswcntrl... yes
  112 checking for powerpc-apple-darwin9.8.0-ranlib... ranlib
- 112 checking for stdarg.h... yes
  112 checking for va_copy... yes
  112 checking for wctrans_t... yes
  112 checking for wctype_t... yes
  112 checking if the linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin9.8.0/gcc/collect-ld) is GNU ld... no
- 112 checking stdarg.h presence... yes
- 112 checking stdarg.h usability... yes
  112 checking whether iswcntrl works... yes
  112 checking whether locale.h conforms to POSIX:2001... yes
  112 checking whether locale.h defines locale_t... no
@@ -5638,36 +5644,35 @@
  112 checking whether the target supports hidden visibility... yes
  112 checking whether unsetenv is declared... yes
  114 checking for IPv4 sockets... yes
- 114 checking for memcpy... yes
  114 checking for sysconf... yes
  114 checking sys/file.h usability... yes
- 116 checking for /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld option to reload object files... -r
+ 116 checking float.h presence... yes
+ 116 checking float.h usability... yes
  116 checking for bison... bison
  116 checking for sa_family_t... yes
  116 checking for sys/mman.h... yes
  116 checking for sys/param.h... yes
  116 checking whether _snprintf is declared... no
  116 checking whether realpath works... no
+ 118 checking errno.h presence... yes
  118 checking for arpa/inet.h... yes
+ 118 checking for float.h... yes
  118 checking for sleep... yes
- 118 checking for strncasecmp... yes
  118 checking for sys/times.h... yes
- 118 checking size of int... 4
  118 checking sys/file.h presence... yes
- 118 checking sys/resource.h presence... yes
- 118 checking sys/resource.h usability... yes
  118 checking sys/select.h presence... yes
  118 checking sys/select.h usability... yes
  118 checking the name lister (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/nm) interface... BSD nm
  118 checking what to include in gstdint.h... stdint.h (already complete)
  118 checking whether getpagesize is declared... yes
  118 checking whether uselocale works... yes
+ 120 checking errno.h usability... yes
  120 checking for ld... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
  120 checking for newlocale... yes
- 120 checking for strchr... yes
- 120 checking for strstr... yes
  120 checking for strtoull... yes
+ 120 checking return type of signal handlers... void
  122 checking dependency style of gcc -std=gnu99... gcc3
+ 122 checking for /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld option to reload object files... -r
  122 checking for a thread-safe mkdir -p... build-aux/install-sh -c -d
  122 checking for gcc-4.2 option to accept ISO C89... none needed
  122 checking for getuid... yes
@@ -5686,21 +5691,15 @@
  124 checking whether the C++ compiler supports namespaces... yes
  124 checking whether the compiler is clang... no
  124 checking whether the shell understands "+="... yes
- 126 checking float.h presence... yes
- 126 checking float.h usability... yes
  126 checking for isascii... yes
  126 checking for poll... yes
  126 checking for stdio_ext.h... no
  126 checking for termios.h... yes
  126 checking minix/config.h presence... no
- 126 checking return type of signal handlers... void
- 128 checking errno.h presence... yes
- 128 checking for float.h... yes
  128 checking whether <limits.h> defines MIN and MAX... no
  128 checking whether readlink handles trailing slash correctly... no
  128 checking whether readlink signature is correct... yes
  128 checking whether to use NLS... yes
- 130 checking errno.h usability... yes
  130 checking for int_fast32_t... yes
  130 checking for long long int... yes
  130 checking for msgmerge... no
@@ -5712,13 +5711,15 @@
  132 checking for netinet/in.h... yes
  132 checking for select... yes
  132 checking for socklen_t... yes
+ 132 checking for strerror... yes
  132 checking for uselocale... yes
  132 checking for wcwidth... yes
  132 checking for xgettext... no
  132 checking how to run the C preprocessor... gcc-4.2 -E
  132 checking whether byte ordering is bigendian... yes
  134 checking for int_least32_t... yes
- 134 checking for ld used by gcc... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
+ 134 checking size of int... 4
+ 136 checking for errno.h... yes
  138 checking for canonicalize_file_name... no
  138 checking for netdb.h... yes
  140 checking for IPv6 sockets... yes
@@ -5726,13 +5727,12 @@
  140 checking for alloca as a compiler built-in... yes
  140 checking for g++... g++
  140 checking for vfork.h... no
- 140 checking target system type... powerpc-apple-darwin9.8.0
  140 checking whether g++ accepts -g... yes
  142 checking for ssize_t... yes
- 142 checking for strerror... yes
  142 checking for xlocale.h... yes
  144 checking for /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld option to reload object files... -r
  144 checking for BSD- or MS-compatible name lister (nm)... /tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/nm
+ 144 checking for ld used by gcc... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld
  144 checking for limits.h... yes
  144 checking for mbsinit... yes
  144 checking for pwd.h... yes
@@ -5742,9 +5742,10 @@
  144 checking if environ is properly declared... no
  144 checking whether it is safe to define __EXTENSIONS__... yes
  144 checking whether setenv is declared... yes
- 146 checking for errno.h... yes
  146 checking for strtoul... yes
  146 checking for unsigned long long int... yes
+ 146 checking target system type... powerpc-apple-darwin9.8.0
+ 148 checking for memset... yes
  148 checking for sched.h... yes
  148 checking for strtol... yes
  148 checking whether POSIX threads API is available... yes
@@ -5759,13 +5760,10 @@
  154 checking for minix/config.h... no
  154 checking for multithread API to use... posix
  154 checking whether imported symbols can be declared weak... no
- 156 checking for -force_load linker flag... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld: unknown flag: -force_load
  156 checking for vfork... yes
- 156 checking malloc.h usability... no
  156 checking whether gcc-4.2 accepts -g... yes
- 156 checking whether the gcc linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) supports shared libraries... yes
  158 checking for fork... yes
- 158 checking for memset... yes
+ 158 checking for getrusage... yes
  158 checking whether fputc_unlocked is declared... no
  160 checking for library containing clock_gettime... no
  160 checking for powerpc-apple-darwin8.11.0-lipo... lipo
@@ -5775,23 +5773,23 @@
  160 checking whether getchar_unlocked is declared... yes
  162 checking for getrlimit... yes
  162 checking for perl... /usr/bin/perl
- 162 checking malloc.h presence... no
  162 checking whether clearerr_unlocked is declared... yes
  162 checking whether fflush_unlocked is declared... no
  162 checking whether fread_unlocked is declared... no
- 164 checking how to convert powerpc-apple-darwin8.11.0 file names to powerpc-apple-darwin8.11.0 format... func_convert_file_noop
- 164 checking how to convert powerpc-apple-darwin8.11.0 file names to toolchain format... func_convert_file_noop
+ 164 checking stddef.h usability... yes
  164 checking whether ferror_unlocked is declared... yes
  164 checking whether putc_unlocked is declared... yes
  164 checking whether putchar_unlocked is declared... yes
+ 166 checking for -force_load linker flag... /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld: unknown flag: -force_load
  166 checking for powerpc-apple-darwin8.11.0-dsymutil... no
  166 checking for realpath... yes
  166 checking for sys/time.h... yes
- 168 checking for getrusage... yes
+ 166 checking whether the gcc linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) supports shared libraries... yes
  168 checking for powerpc-apple-darwin8.11.0-nmedit... no
  168 checking for powerpc-apple-darwin8.11.0-objdump... objdump
  168 checking for powerpc-apple-darwin8.11.0-otool... no
  168 checking for powerpc-apple-darwin8.11.0-otool64... no
+ 168 checking stddef.h presence... yes
  170 checking for C/C++ restrict keyword... no
  170 checking for mbstate_t... yes
  170 checking for putenv... yes
@@ -5800,151 +5798,153 @@
  172 checking for CFPreferencesCopyAppValue... yes
  172 checking for simple visibility declarations... yes
  172 checking for unsetenv... yes
+ 172 checking malloc.h usability... no
  172 checking whether the -Werror option is usable... yes
  172 checking whether the g++ linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) supports shared libraries... yes
- 174 checking command to parse /usr/bin/nm -p output from gcc object... ok
  174 checking for a working dd... /bin/dd
- 174 checking for gcc option to produce PIC... -fno-common -DPIC
  174 checking for uint64_t... yes
+ 174 checking how to convert powerpc-apple-darwin8.11.0 file names to powerpc-apple-darwin8.11.0 format... func_convert_file_noop
+ 174 checking how to convert powerpc-apple-darwin8.11.0 file names to toolchain format... func_convert_file_noop
  174 checking how to truncate binary pipes... /bin/dd bs=4096 count=1
- 174 checking if gcc PIC flag -fno-common -DPIC works... yes
- 174 checking if gcc static flag -static works... no
- 174 checking if gcc supports -c -o file.o... yes
- 174 checking if gcc supports -fno-rtti -fno-exceptions... no
- 174 checking stddef.h usability... yes
  174 checking whether __argv is declared... no
  174 checking whether fgets_unlocked is declared... no
  174 checking whether program_invocation_short_name is declared... no
- 178 checking stddef.h presence... yes
+ 178 checking if gcc static flag -static works... no
+ 178 checking malloc.h presence... no
  178 checking whether feof_unlocked is declared... yes
  178 checking whether getc_unlocked is declared... yes
  180 checking for working iconv... yes
- 184 checking for /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld option to reload object files... -r
+ 182 checking for strcasecmp... yes
+ 184 checking for stddef.h... yes
  186 checking for bit size of sig_atomic_t... 32
  186 checking for bit size of wchar_t... 32
  186 checking for bit size of wint_t... 32
  186 checking whether NULL can be used in arbitrary expressions... yes
  186 checking whether stdint.h conforms to C99... no
+ 190 checking command to parse /usr/bin/nm -p output from gcc object... ok
  190 checking for GNU gettext in libc... no
+ 190 checking for gcc option to produce PIC... -fno-common -DPIC
+ 190 checking if gcc PIC flag -fno-common -DPIC works... yes
+ 190 checking if gcc supports -c -o file.o... yes
+ 190 checking if gcc supports -fno-rtti -fno-exceptions... no
  190 checking whether program_invocation_name is declared... no
  192 checking for langinfo.h... yes
  192 checking for powerpc-apple-darwin8.11.0-ar... ar
- 192 checking for strcasecmp... yes
- 194 checking for stddef.h... yes
+ 194 checking for /usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld option to reload object files... -r
+ 194 checking for strdup... yes
  194 checking locale.h usability... yes
  198 checking for setlocale... yes
  200 checking locale.h presence... yes
  202 checking whether _XOPEN_SOURCE should be defined... no
- 204 checking for strdup... yes
  204 checking for tsearch... yes
  214 checking for --enable-version-specific-runtime-libs... no
  216 checking whether the shell understands "+="... no
+ 218 checking for vsnprintf... yes
  218 checking whether stat file-mode macros are broken... no
+ 220 checking for sys/wait.h... yes
  220 checking if the linker (/tmp/gcc-4.9.4/host-powerpc-apple-darwin8.11.0/gcc/collect-ld) is GNU ld... no
- 220 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) is GNU ld... no
- 220 checking whether gcc understands -c and -o together... yes
  222 checking for powerpc-apple-darwin8.11.0-ranlib... ranlib
  224 checking for sys/ioctl.h... yes
  224 checking for wctype.h... yes
+ 226 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) is GNU ld... no
  228 checking for iconv... yes
- 228 checking for vsnprintf... yes
  230 checking for readlink... yes
- 230 checking for sys/wait.h... yes
- 234 checking for otool64... no
- 236 checking dependency style of gcc... gcc3
+ 234 checking for memmove... yes
+ 234 checking for sys/resource.h... yes
  236 checking for windres... no
+ 236 checking whether gcc understands -c and -o together... yes
  238 checking for -force_load linker flag... no
  238 checking for sys/select.h... yes
- 240 checking target system type... powerpc-apple-darwin8.11.0
+ 240 checking for otool64... no
  242 checking for inline... inline
- 244 checking for memmove... yes
- 244 checking for sys/resource.h... yes
  248 checking for getcwd... yes
  250 checking for uintptr_t... yes
+ 250 checking target system type... powerpc-apple-darwin8.11.0
  252 checking for shared library run path origin... done
- 256 checking for archiver @FILE support... no
- 256 checking how to associate runtime and link libraries... printf %s\n
- 256 checking if : is a manifest tool... no
  256 checking whether we are using the GNU C++ compiler... yes
- 266 checking for malloc.h... no
+ 268 checking dependency style of gcc... gcc3
  268 checking for locale.h... yes
+ 272 checking for archiver @FILE support... no
+ 272 checking how to associate runtime and link libraries... printf %s\n
+ 272 checking if : is a manifest tool... no
  276 checking for nl_langinfo and CODESET... yes
- 286 checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -p
+ 278 checking for getpagesize... yes
+ 278 checking whether time.h and sys/time.h may both be included... yes
+ 282 checking for malloc.h... no
  286 checking for gawk... awk
- 286 checking the name lister (/usr/bin/nm -p) interface... BSD nm
- 288 checking for getpagesize... yes
- 288 checking whether time.h and sys/time.h may both be included... yes
+ 290 checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -p
+ 290 checking the name lister (/usr/bin/nm -p) interface... BSD nm
  294 checking whether NLS is requested... yes
- 302 checking for gcc option to accept ISO C89... none needed
  312 checking for setenv... yes
- 320 checking build system type... powerpc-apple-darwin9.8.0
- 320 checking host system type... powerpc-apple-darwin9.8.0
+ 318 checking for gcc option to accept ISO C89... none needed
  322 checking how to link with libiconv... -liconv
+ 326 checking build system type... powerpc-apple-darwin9.8.0
+ 326 checking host system type... powerpc-apple-darwin9.8.0
  340 checking whether the shell understands some XSI constructs... yes
- 344 checking dynamic linker characteristics... darwin9.8.0 dyld
  346 checking whether make supports the include directive... yes (GNU style)
- 350 checking for otool64... otool64
- 350 checking for style of include used by make... GNU
+ 350 checking dynamic linker characteristics... darwin9.8.0 dyld
  356 checking for memory.h... yes
- 360 checking for lipo... lipo
- 364 checking how to run the C preprocessor... gcc -E
- 364 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) is GNU ld... no
+ 360 checking for otool64... otool64
+ 366 checking for style of include used by make... GNU
  368 checking for stdlib.h... yes
  374 checking for string.h... yes
- 376 checking for strip... strip
- 380 checking for mt... no
- 380 checking for sysroot... no
+ 374 checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin8/4.0.1/ld) is GNU ld... no
+ 376 checking for lipo... lipo
+ 380 checking how to run the C preprocessor... gcc -E
  382 checking for strings.h... yes
  382 checking for sys/stat.h... yes
  382 checking for unistd.h... yes
  384 checking for sys/types.h... yes
- 390 checking whether make supports nested variables... yes
- 392 checking for special C compiler options needed for large files... no
+ 392 checking for strip... strip
  394 checking whether we are using the GNU C compiler... yes
+ 396 checking for mt... no
  396 checking for suffix of object files... o
- 404 checking whether to enable maintainer-specific portions of Makefiles... no
+ 396 checking for sysroot... no
  406 checking for MAP_ANONYMOUS... yes
+ 406 checking whether make supports nested variables... yes
+ 408 checking for special C compiler options needed for large files... no
  414 checking for stdint.h... yes
- 420 checking for dlltool... no
+ 420 checking whether to enable maintainer-specific portions of Makefiles... no
  428 checking for inttypes.h... yes
- 454 checking for awk... awk
- 454 checking for gawk... no
- 454 checking for mawk... no
- 454 checking for nawk... no
- 462 checking for objdump... no
- 462 checking whether gcc accepts -g... yes
- 476 checking for gcc... gcc
- 526 checking build system type... powerpc-apple-darwin8.11.0
- 526 checking for -single_module linker flag... yes
- 528 checking for -exported_symbols_list linker flag... yes
- 530 checking for ranlib... ranlib
- 538 checking that generated files are newer than configure... done
- 540 checking host system type... powerpc-apple-darwin8.11.0
- 542 checking for ar... ar
- 546 checking for fgrep... /usr/bin/grep -F
- 548 checking for dsymutil... dsymutil
- 548 checking for nmedit... nmedit
- 548 checking for otool... otool
- 564 checking how to recognize dependent libraries... pass_all
- 574 checking the maximum length of command line arguments... 196608
+ 436 checking for dlltool... no
+ 470 checking for awk... awk
+ 470 checking for gawk... no
+ 470 checking for mawk... no
+ 470 checking for nawk... no
+ 478 checking for objdump... no
+ 478 checking whether gcc accepts -g... yes
+ 492 checking for gcc... gcc
+ 536 checking build system type... powerpc-apple-darwin8.11.0
+ 542 checking for -single_module linker flag... yes
+ 544 checking for -exported_symbols_list linker flag... yes
+ 546 checking for ranlib... ranlib
+ 550 checking host system type... powerpc-apple-darwin8.11.0
+ 554 checking that generated files are newer than configure... done
+ 558 checking for ar... ar
+ 562 checking for fgrep... /usr/bin/grep -F
+ 564 checking for dsymutil... dsymutil
+ 564 checking for nmedit... nmedit
+ 564 checking for otool... otool
  578 checking for dlfcn.h... yes
- 582 checking for objdir... .libs
- 638 checking how to print strings... printf
- 646 checking dynamic linker characteristics... darwin8.11.0 dyld
- 662 checking for ANSI C header files... yes
- 704 checking whether stripping libraries is possible... yes
- 720 checking for a sed that does not truncate output... /usr/bin/sed
- 720 checking whether to build static libraries... yes
- 750 checking if libtool supports shared libraries... yes
- 756 checking whether to build shared libraries... yes
- 784 checking whether make sets $(MAKE)... yes
- 798 checking whether build environment is sane... yes
- 822 checking for grep that handles long lines and -e... /usr/bin/grep
- 828 checking for a BSD-compatible install... /usr/bin/install -c
- 836 checking for egrep... /usr/bin/grep -E
- 862 checking whether ln -s works... yes
- 962 checking whether we are cross compiling... no
- 990 checking for C compiler default output file name... a.out
- 994 checking how to hardcode library paths into programs... immediate
- 996 checking for suffix of executables... 
-1048 checking whether the C compiler works... yes
+ 580 checking how to recognize dependent libraries... pass_all
+ 586 checking for objdir... .libs
+ 590 checking the maximum length of command line arguments... 196608
+ 652 checking for ANSI C header files... yes
+ 654 checking how to print strings... printf
+ 656 checking dynamic linker characteristics... darwin8.11.0 dyld
+ 720 checking whether stripping libraries is possible... yes
+ 736 checking for a sed that does not truncate output... /usr/bin/sed
+ 736 checking whether to build static libraries... yes
+ 766 checking if libtool supports shared libraries... yes
+ 772 checking whether to build shared libraries... yes
+ 800 checking whether make sets $(MAKE)... yes
+ 814 checking whether build environment is sane... yes
+ 838 checking for grep that handles long lines and -e... /usr/bin/grep
+ 844 checking for a BSD-compatible install... /usr/bin/install -c
+ 852 checking for egrep... /usr/bin/grep -E
+ 878 checking whether ln -s works... yes
+ 978 checking whether we are cross compiling... no
+1006 checking for C compiler default output file name... a.out
+1010 checking how to hardcode library paths into programs... immediate
+1012 checking for suffix of executables... 
+1064 checking whether the C compiler works... yes

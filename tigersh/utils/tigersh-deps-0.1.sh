@@ -22,6 +22,8 @@ tiger.sh --setup
 
 opt=/opt/tigersh-deps-0.1
 
+cp $opt/bin/curl /tmp/
+
 rm -rf $opt
 
 # build pv
@@ -34,7 +36,7 @@ if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     # FIXME get rid of this circular bootstrap dependency situation.
     # Tell the user to download the dist files on another PC if needed.
-    /opt/portable-curl/bin/curl -#fLO $srcmirror/$tarball
+    /tmp/curl -#fLO $srcmirror/$tarball
     cd - >/dev/null
 fi
 test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 85b25c827add82ebdd5a58a5ffde1d7d
@@ -57,7 +59,7 @@ if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     # FIXME get rid of this circular bootstrap dependency situation.
     # Tell the user to download the dist files on another PC if needed.
-    /opt/portable-curl/bin/curl -#fLO $srcmirror/$tarball
+    /tmp/curl -#fLO $srcmirror/$tarball
     cd - >/dev/null
 fi
 test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = e90e5b27f96eddacd966a3f983a80cbf
@@ -75,6 +77,28 @@ nice make OFLAG="-mcpu=750 -Os"
 cd ..
 cp otool/otool.NEW $opt/bin/otool
 
+# build bash (tiger's bash doesn't support 'set -o pipefail').
+package=bash
+version=3.2.57
+srcmirror=https://ftp.gnu.org/gnu/$package
+tarball=$package-$version.tar.gz
+if ! test -e ~/Downloads/$tarball ; then
+    cd ~/Downloads
+    # FIXME get rid of this circular bootstrap dependency situation.
+    # Tell the user to download the dist files on another PC if needed.
+    /tmp/curl -#fLO $srcmirror/$tarball
+    cd - >/dev/null
+fi
+test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 237a8767c990b43ae2c89895c2dbc062
+cd /tmp
+rm -rf $package-$version
+tar xzf ~/Downloads/$tarball
+cd $package-$version
+cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+nice ./configure -C --prefix=$opt CFLAGS="-mcpu=750 -Os"
+nice make V=1
+make install
+
 # build libressl
 echo -n -e "\033]0;building libressl\007"
 package=libressl
@@ -85,7 +109,7 @@ if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     # FIXME get rid of this circular bootstrap dependency situation.
     # Tell the user to download the dist files on another PC if needed.
-    /opt/portable-curl/bin/curl -#fLO $srcmirror/$tarball
+    /tmp/curl -#fLO $srcmirror/$tarball
     cd - >/dev/null
 fi
 test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 18aa728e7947a30af3bb04243e4482aa
@@ -104,7 +128,7 @@ if ! test -e ~/Downloads/cacert.pem ; then
     cd ~/Downloads
     # FIXME get rid of this circular bootstrap dependency situation.
     # Tell the user to download the dist files on another PC if needed.
-    /opt/portable-curl/bin/curl -#fLO https://curl.se/ca/cacert.pem
+    /tmp/curl -#fLO https://curl.se/ca/cacert.pem
     cd - >/dev/null
 fi
 mkdir -p $opt/share
@@ -121,7 +145,7 @@ if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     # FIXME get rid of this circular bootstrap dependency situation.
     # Tell the user to download the dist files on another PC if needed.
-    /opt/portable-curl/bin/curl -#fLO $srcmirror/$tarball
+    /tmp/curl -#fLO $srcmirror/$tarball
     cd - >/dev/null
 fi
 test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 9e5e81fc7657eea8dc66672768082c46
@@ -154,6 +178,7 @@ cd /tmp/tigersh-deps-0.1
 mkdir bin lib share
 cp $opt/bin/pv bin/
 cp $opt/bin/otool bin/
+cp $opt/bin/bash bin/
 cp $opt/bin/curl bin/
 cp $opt/lib/libssl.50.dylib lib/
 cp $opt/lib/libcrypto.47.dylib lib/

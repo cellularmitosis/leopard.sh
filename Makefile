@@ -10,6 +10,9 @@ md5s:
 	cd binpkgs && make
 	cd dist && make
 	cd dist/orig && make
+	cd leopardsh/scripts && make
+	cd tigersh/scripts && make
+	utils/generate-manifest.sh
 
 dependency-graphs:
 	cd leopardsh/deps && make dependencies.png
@@ -21,6 +24,10 @@ stats:
 clean:
 	cd binpkgs && make clean
 	cd dist && make clean
+	cd dist/orig && make clean
+	cd leopardsh/scripts && make clean
+	cd tigersh/scripts && make clean
+	rm -f md5s.manifest md5s.manifest.gz
 	cd leopardsh/deps && make clean
 	cd tigersh/deps && make clean
 	cd stats && make clean
