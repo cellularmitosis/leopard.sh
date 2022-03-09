@@ -211,11 +211,12 @@ if test -n "$needs_setup_check" ; then
         while ! test -e $fifo ; do sleep 0.1 ; done
 
         url=$TIGERSH_MIRROR/binpkgs/$binpkg
+
         # At this point we are still using /usr/bin/curl, so drop back to http.
-        url=$(echo "$url" | sed 's|^https:|http:|')
+        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
 
         cd /opt
-        nice curl --fail --silent --show-error --insecure $url \
+        nice curl --fail --silent --show-error $insecure_url \
             | tee $fifo \
             | nice gunzip \
             | nice tar x
@@ -328,11 +329,13 @@ fi
 if test "$op" = "list" ; then
     echo "Available packages:" >&2
     cd /tmp
-    curl --fail --silent --show-error --location --remote-name \
-        $TIGERSH_MIRROR/tigersh/packages.txt
+    url=$TIGERSH_MIRROR/tigersh/packages.txt
+    insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    curl --fail --silent --show-error --location --remote-name $insecure_url
     if test "$cpu_name" = "g5" ; then
-        curl --fail --silent --show-error --location --remote-name \
-            $TIGERSH_MIRROR/tigersh/packages.ppc64.txt
+        url=$TIGERSH_MIRROR/tigersh/packages.ppc64.txt
+        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+        curl --fail --silent --show-error --location --remote-name $insecure_url
         cat packages.txt packages.ppc64.txt | sort
     else
         cat packages.txt
@@ -354,22 +357,24 @@ if test "$op" = "install" ; then
         exit 0
     fi
 
-    rm -rf /opt/$pkgspec
-
     # Thanks to https://trac.macports.org/ticket/16286
     export MACOSX_DEPLOYMENT_TARGET=10.4
 
     pkgspec="$1"
+    script=install-$pkgspec.sh
+
     echo -e "${COLOR_CYAN}Installing${COLOR_NONE} ${COLOR_YELLOW}$pkgspec${COLOR_NONE}." >&2
     echo -n -e "\033]0;tiger.sh $pkgspec (tiger.$cpu_name)\007"
+
+    echo -e "${COLOR_CYAN}Fetching${COLOR_NONE} $script." >&2
+    url=$TIGERSH_MIRROR/tigersh/scripts/$script
+    cd /tmp
+    curl --fail --silent --show-error --location --remote-name $url &
+    curl_script_pid=$!
+
+    rm -rf /opt/$pkgspec
     mkdir -p /opt/$pkgspec
     touch /opt/$pkgspec/INCOMPLETE_INSTALLATION
-    script=install-$pkgspec.sh
-    cd /tmp
-    echo -e "${COLOR_CYAN}Fetching${COLOR_NONE} $script." >&2
-    curl --fail --silent --show-error --location --remote-name \
-        $TIGERSH_MIRROR/tigersh/scripts/$script
-    chmod +x $script
 
     # unfortunately, tiger's bash doesn't have pipefail.
     # thanks to https://stackoverflow.com/a/1221844
@@ -377,11 +382,16 @@ if test "$op" = "install" ; then
     rm -f $fifo
     mkfifo $fifo
     tee /tmp/$script.log < $fifo &
+
+    wait $curl_script_pid
+    chmod +x $script
+
     if test -n "$TIGERSH_VERBOSE" ; then
         TIGERSH_RECURSED=1 nice bash -x ./$script > $fifo 2>&1
     else
         TIGERSH_RECURSED=1 nice ./$script > $fifo 2>&1
     fi
+
     rm -f $fifo
 
     TIGERSH_RECURSED=1 tiger.sh --link $pkgspec
@@ -407,7 +417,7 @@ if test "$op" = "url-exists" ; then
         exit 1
     fi
     url="$1"
-    curl --fail --silent --show-error -I "$url" >/dev/null 2>&1
+    curl --fail --silent --show-error --head "$url" >/dev/null 2>&1
 
     exit 0
 fi
@@ -429,17 +439,20 @@ if test "$op" = "install-binpkg" ; then
     os_cpu=$(TIGERSH_RECURSED=1 tiger.sh --os.cpu)
     binpkg=$pkgspec.$os_cpu.tar.gz
     url=$TIGERSH_MIRROR/binpkgs/$binpkg
+    insecure_url=$(echo "$url" | sed 's|^https:|http:|')
 
-    # since we are checking the MD5 sum, drop from https to http.
-    url=$(echo "$url" | sed 's|^https:|http:|')
-
-    if ! TIGERSH_RECURSED=1 tiger.sh --url-exists "$url" ; then
+    if ! TIGERSH_RECURSED=1 tiger.sh --url-exists "$insecure_url" ; then
         echo "Pre-compiled binary package unavailable for $pkgspec on $os_cpu." >&2
         exit 1
     fi
 
-    if test -n "$TIGERSH_FORCE_BUILD" ; then
-        echo "Ignoring $binpkg due to '\$TIGERSH_FORCE_BUILD'" >&2
+    if test "$TIGERSH_FORCE_BUILD_PKGSPEC" = "$pkgspec" ; then
+        echo "Ignoring $binpkg due to '\$TIGERSH_FORCE_BUILD_PKGSPEC'" >&2
+        exit 1
+    fi
+
+    if test -n "$TIGERSH_FORCE_BUILD_ALL" ; then
+        echo "Ignoring $binpkg due to '\$TIGERSH_FORCE_BUILD_ALL'" >&2
         exit 1
     fi
 
@@ -466,9 +479,6 @@ if test "$op" = "unpack-dist" ; then
     tarball=$pkgspec.tar.gz
     url=$TIGERSH_MIRROR/dist/$tarball
 
-    # since we are checking the MD5 sum, drop from https to http.
-    url=$(echo "$url" | sed 's|^https:|http:|')
-
     echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $tarball into /tmp." >&2
     rm -rf /tmp/$pkgspec
     TIGERSH_RECURSED=1 tiger.sh --unpack-tarball-check-md5 $url /tmp
@@ -488,10 +498,8 @@ if test "$op" = "unpack-tarball-check-md5" ; then
         exit 1
     fi
     url="$1"
+    insecure_url=$(echo "$url" | sed 's|^https:|http:|')
     shift 1
-
-    # since we are checking the MD5 sum, drop from https to http.
-    url=$(echo "$url" | sed 's|^https:|http:|')
 
     if test -z "$1" ; then
         echo "${COLOR_RED}Error${COLOR_NONE}: unpack tarball where?" >&2
@@ -503,8 +511,12 @@ if test "$op" = "unpack-tarball-check-md5" ; then
     shift 1
 
     tmp=$(mktemp -u /tmp/tiger.sh.tarball.XXXX)
+
+    cd /tmp
+    curl --fail --silent --show-error --location $url.md5 > $tmp.md5 &
+    curl_md5_pid=$!
+
     fifo=$tmp.fifo
-    rm -f $fifo
     ( mkfifo $fifo \
         && cat $fifo | nice md5 > $tmp.localmd5_ \
         && mv $tmp.localmd5_ $tmp.localmd5
@@ -512,23 +524,22 @@ if test "$op" = "unpack-tarball-check-md5" ; then
 
     while ! test -e $fifo ; do sleep 0.1 ; done
 
-    size=$(curl --fail --silent --show-error --head $url \
+    size=$(curl --fail --silent --show-error --head $insecure_url \
         | grep -i '^content-length:' \
         | awk '{print $NF}' \
         | sed "s/$(printf '\r')//"
     )
 
-    cd /tmp
-    curl --fail --silent --show-error --location $url.md5 > $tmp.md5
-
     cd $dest
-    nice curl --fail --silent --show-error $url \
+    nice curl --fail --silent --show-error $insecure_url \
         | pv --force --size $size \
         | tee $fifo \
         | nice gunzip \
         | nice tar x
 
     while ! test -e $tmp.localmd5 ; do sleep 0.1 ; done
+
+    wait $curl_md5_pid
 
     if ! test "$(cat $tmp.localmd5)" = "$(cat $tmp.md5)" ; then
         badmd5=1

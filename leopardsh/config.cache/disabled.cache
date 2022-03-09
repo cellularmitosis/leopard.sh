@@ -2,11 +2,41 @@
 # checking build system type... powerpc-apple-darwin9.8.0
 ac_cv_build=${ac_cv_build=powerpc-apple-darwin9.8.0}
 
+# checking target system type... powerpc-apple-darwin9.8.0
+ac_cv_target=${ac_cv_target=powerpc-apple-darwin9.8.0}
+
+# checking host system type... powerpc-apple-darwin9.8.0
+ac_cv_host=${ac_cv_host=powerpc-apple-darwin9.8.0}
+
 # checking for C/C++ restrict keyword... no
 ac_cv_c_restrict=${ac_cv_c_restrict=no}
 
 # checking for gcc -std=gnu99 options needed to detect all undeclared functions... none needed
 ac_cv_c_undeclared_builtin_options=${ac_cv_c_undeclared_builtin_options='none needed'}
+
+# checking for alloca... no
+ac_cv_func_alloca=${ac_cv_func_alloca=no}
+
+# checking for clock_getcpuclockid... no
+ac_cv_func_clock_getcpuclockid=${ac_cv_func_clock_getcpuclockid=no}
+
+# checking for clock_getres... no
+ac_cv_func_clock_getres=${ac_cv_func_clock_getres=no}
+
+# checking for open64... no
+ac_cv_func_open64=${ac_cv_func_open64=no}
+
+# checking for splice... no
+ac_cv_func_splice=${ac_cv_func_splice=no}
+
+# checking for strnlen... no
+ac_cv_func_strnlen=${ac_cv_func_strnlen=no}
+
+# checking for stricmp... no
+ac_cv_func_stricmp=${ac_cv_func_stricmp=no}
+
+# checking for strnicmp... no
+ac_cv_func_strnicmp=${ac_cv_func_strnicmp=no}
 
 # checking whether __argv is declared... no
 ac_cv_have_decl___argv=${ac_cv_have_decl___argv=no}
@@ -29,8 +59,29 @@ ac_cv_header_stdio_ext_h=${ac_cv_header_stdio_ext_h=no}
 # checking for threads.h... no
 ac_cv_header_threads_h=${ac_cv_header_threads_h=no}
 
-# checking host system type... powerpc-apple-darwin9.8.0
-ac_cv_host=${ac_cv_host=powerpc-apple-darwin9.8.0}
+# checking for conio.h... no
+ac_cv_header_conio_h=${ac_cv_header_conio_h=no}
+
+# checking for direct.h... no
+ac_cv_header_direct_h=${ac_cv_header_direct_h=no}
+
+# checking for dos.h... no
+ac_cv_header_dos_h=${ac_cv_header_dos_h=no}
+
+# checking for io.h... no
+ac_cv_header_io_h=${ac_cv_header_io_h=no}
+
+# checking for libintl.h... no
+ac_cv_header_libintl_h=${ac_cv_header_libintl_h=no}
+
+# checking for malloc.h... no
+ac_cv_header_malloc_h=${ac_cv_header_malloc_h=no}
+
+# checking for share.h... no
+ac_cv_header_share_h=${ac_cv_header_share_h=no}
+
+# checking for sys/utime.h... no
+ac_cv_header_sys_utime_h=${ac_cv_header_sys_utime_h=no}
 
 # checking for library containing clock_gettime... no
 ac_cv_search_clock_gettime=${ac_cv_search_clock_gettime=no}
@@ -50,14 +101,47 @@ am_cv_make_support_nested_variables=${am_cv_make_support_nested_variables=yes}
 # checking whether gcc -std=gnu99 understands -c and -o together... yes
 am_cv_prog_cc_c_o=${am_cv_prog_cc_c_o=yes}
 
-# checking for bit size of ptrdiff_t... 64
-gl_cv_bitsizeof_ptrdiff_t=${gl_cv_bitsizeof_ptrdiff_t=64}
+# checking the archiver (ar) interface... ar
+am_cv_ar_interface=${am_cv_ar_interface=ar}
+
+# checking for archiver @FILE support... no
+lt_cv_ar_at_file=${lt_cv_ar_at_file=no}
+
+# checking for -exported_symbols_list linker flag... yes
+lt_cv_ld_exported_symbols_list=${lt_cv_ld_exported_symbols_list=yes}
+
+# checking for -force_load linker flag... ld: unknown option: -force_load
+lt_cv_ld_force_load=${lt_cv_ld_force_load=no}
+
+# checking for /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld option to reload object files... -r
+lt_cv_ld_reload_flag=${lt_cv_ld_reload_flag=-r}
+
+# checking for ld used by gcc... /usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld
+lt_cv_path_LD=${lt_cv_path_LD=/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld}
+
+# checking if the linker (/usr/libexec/gcc/powerpc-apple-darwin9/4.0.1/ld) is GNU ld... no
+lt_cv_prog_gnu_ld=${lt_cv_prog_gnu_ld=no}
+
+# checking for gcc option to produce PIC... -fno-common -DPIC
+lt_cv_prog_compiler_pic=${lt_cv_prog_compiler_pic='-fno-common -DPIC'}
+
+# checking if gcc PIC flag -fno-common -DPIC works... yes
+lt_cv_prog_compiler_pic_works=${lt_cv_prog_compiler_pic_works=yes}
+
+# checking if gcc supports -fno-rtti -fno-exceptions... no
+lt_cv_prog_compiler_rtti_exceptions=${lt_cv_prog_compiler_rtti_exceptions=no}
+
+# checking how to convert powerpc-apple-darwin9.8.0 file names to powerpc-apple-darwin9.8.0 format... func_convert_file_noop
+lt_cv_to_host_file_cmd=${lt_cv_to_host_file_cmd=func_convert_file_noop}
+
+# checking for bit size of ptrdiff_t... 32
+gl_cv_bitsizeof_ptrdiff_t=${gl_cv_bitsizeof_ptrdiff_t=32}
 
 # checking for bit size of sig_atomic_t... 32
 gl_cv_bitsizeof_sig_atomic_t=${gl_cv_bitsizeof_sig_atomic_t=32}
 
-# checking for bit size of size_t... 64
-gl_cv_bitsizeof_size_t=${gl_cv_bitsizeof_size_t=64}
+# checking for bit size of size_t... 32
+gl_cv_bitsizeof_size_t=${gl_cv_bitsizeof_size_t=32}
 
 # checking for bit size of wchar_t... 32
 gl_cv_bitsizeof_wchar_t=${gl_cv_bitsizeof_wchar_t=32}
@@ -82,6 +166,12 @@ gl_cv_decl_null_works=${gl_cv_decl_null_works=yes}
 
 # checking whether dirfd is a macro... yes
 gl_cv_func_dirfd_macro=${gl_cv_func_dirfd_macro=yes}
+
+# checking whether getopt is POSIX compatible... no
+gl_cv_func_getopt_posix=${gl_cv_func_getopt_posix=no}
+
+# checking for gettimeofday with POSIX signature... yes
+gl_cv_func_gettimeofday_posix_signature=${gl_cv_func_gettimeofday_posix_signature=yes}
 
 # checking whether the preprocessor supports include_next... yes
 gl_cv_have_include_next=${gl_cv_have_include_next=yes}
@@ -119,26 +209,23 @@ gl_cv_type_time_t_bits_macro=${gl_cv_type_time_t_bits_macro=no}
 # checking for time_t past the year 2038... no
 gl_cv_type_time_t_y2038=${gl_cv_type_time_t_y2038=no}
 
-# checking for lutimes... yes
-ac_cv_func_lutimes=${ac_cv_func_lutimes=yes}
-
-# checking for sys/sdt.h... yes
-ac_cv_header_sys_sdt_h=${ac_cv_header_sys_sdt_h=yes}
-
 # checking whether unlink of a parent directory fails as it should... no
 gl_cv_func_unlink_parent_fails=${gl_cv_func_unlink_parent_fails=no}
 
 # checking for working fcntl.h... no (bad O_NOATIME)
 gl_cv_header_working_fcntl_h=${gl_cv_header_working_fcntl_h='no (bad O_NOATIME)'}
 
-# checking whether getopt is POSIX compatible... no
-gl_cv_func_getopt_posix=${gl_cv_func_getopt_posix=no}
-
-# 
-gl_cv_func_gettimeofday_posix_signature=${gl_cv_func_gettimeofday_posix_signature=yes}
-
 # checking whether calloc (0, n) and calloc (n, 0) return nonnull... yes
 ac_cv_func_calloc_0_nonnull=${ac_cv_func_calloc_0_nonnull=yes}
 
 # checking whether realloc (0, 0) returns nonnull... yes
 ac_cv_func_realloc_0_nonnull=${ac_cv_func_realloc_0_nonnull=yes}
+
+# checking for -single_module linker flag... yes
+lt_cv_apple_cc_single_mod=${lt_cv_apple_cc_single_mod=yes}
+
+# checking the name lister (/usr/bin/nm -p) interface... BSD nm
+lt_cv_nm_interface=${lt_cv_nm_interface='BSD nm'}
+
+# checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -p
+lt_cv_path_NM=${lt_cv_path_NM='/usr/bin/nm -p'}

@@ -7,14 +7,14 @@ set -e
 mkdir -p ~/.ssh/sockets
 
 # hosts:
-# imacg3, ibookg3, graphite, emac2, emac3, pbookg42, imacg5 imacg52
+# imacg3, ibookg3, graphite, emac2, emac3, pbookg4, pbookg42, imacg5 imacg52
 
 # map:
 # tiger g3:    ibookg3, imacg3
 # tiger g4:    graphite
 # tiger g4e:   emac2, emac3
 # tiger g5:    imacg52
-# leopard g4e: pbookg42
+# leopard g4e: pbookg4, pbookg42
 # leopard g5:  imacg5
 
 if test "$1" = "--minimal" ; then
@@ -22,7 +22,7 @@ if test "$1" = "--minimal" ; then
     shift 1
 fi
 
-hosts=${1:-"imacg5 imacg52 emac2 emac3 pbookg42 graphite ibookg3 imacg3"}
+hosts=${1:-"imacg5 imacg52 emac2 emac3 pbookg4 pbookg42 graphite ibookg3 imacg3"}
 
 uphosts=""
 echo "👉 ping"
@@ -62,15 +62,18 @@ echo
 echo "👉 user files"
 for host in $uphosts ; do
     echo "  🖥  $host"
-    ssh $host mkdir -p \
-        /Users/macuser/.ssh/sockets \
-        /Users/macuser/Downloads \
-        /Users/macuser/bin \
-        /Users/macuser/tmp
-    rsync -ai host_files/all/ $host:/Users/macuser/
-    rsync -ai tmp/ $host:/Users/macuser/tmp/
-    ssh $host rm -f /Users/macuser/.profile
+    (
+        ssh $host mkdir -p \
+            /Users/macuser/.ssh/sockets \
+            /Users/macuser/Downloads \
+            /Users/macuser/bin \
+            /Users/macuser/tmp
+        rsync -ai host_files/all/ $host:/Users/macuser/
+        rsync -ai tmp/ $host:/Users/macuser/tmp/
+        ssh $host rm -f /Users/macuser/.profile
+    ) &
 done
+wait
 
 if test -n "$minimal" ; then
     exit 0
@@ -80,30 +83,37 @@ echo
 echo "👉 pull binpkgs"
 for host in $uphosts ; do
     echo "  🖥  $host"
-    ssh $host mkdir -p /Users/macuser/Desktop/leopard.sh/binpkgs
-    rsync -ai --update $host:/Users/macuser/Desktop/leopard.sh/binpkgs/ ~/leopard.sh/binpkgs
-    ssh $host rm -f '/Users/macuser/Desktop/leopard.sh/binpkgs/*'
+    (
+        ssh $host mkdir -p /Users/macuser/Desktop/leopard.sh/binpkgs /Users/macuser/Desktop/tiger.sh/binpkgs
+        rsync -ai --update $host:/Users/macuser/Desktop/leopard.sh/binpkgs/ ~/leopard.sh/binpkgs
+        rsync -ai --update $host:/Users/macuser/Desktop/tiger.sh/binpkgs/ ~/leopard.sh/binpkgs
+        ssh $host rm -f '/Users/macuser/Desktop/*.sh/binpkgs/*'
+    ) &
 done
+wait
 
 echo
 echo "👉 push leopard.sh"
 for host in $uphosts ; do
     echo "  🖥  $host"
-    rsync -ai ~/leopard.sh/leopardsh/leopard.sh \
-        ~/leopard.sh/tigersh/tiger.sh \
-        $host:/usr/local/bin/
-    rsync -ai ~/leopard.sh/leopardsh/utils/make-leopardsh-binpkg.sh \
-        ~/leopard.sh/leopardsh/utils/rebuild-leopardsh-stales.sh \
-        ~/leopard.sh/leopardsh/utils/rebuild-leopardsh-all.sh \
-        ~/leopard.sh/tigersh/utils/make-tigersh-binpkg.sh \
-        ~/leopard.sh/tigersh/utils/rebuild-tigersh-stales.sh \
-        ~/leopard.sh/tigersh/utils/rebuild-tigersh-all.sh \
-        ~/leopard.sh/utils/sleep.sh \
-        $host:/Users/macuser/bin/
-    ssh $host "rm -f /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache \
-        /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache \
-        /opt/tiger.sh/share/tiger.sh/config.cache/disabled.cache"
+    (
+        rsync -ai ~/leopard.sh/leopardsh/leopard.sh \
+            ~/leopard.sh/tigersh/tiger.sh \
+            $host:/usr/local/bin/
+        rsync -ai ~/leopard.sh/leopardsh/utils/make-leopardsh-binpkg.sh \
+            ~/leopard.sh/leopardsh/utils/rebuild-leopardsh-stales.sh \
+            ~/leopard.sh/leopardsh/utils/rebuild-leopardsh-all.sh \
+            ~/leopard.sh/tigersh/utils/make-tigersh-binpkg.sh \
+            ~/leopard.sh/tigersh/utils/rebuild-tigersh-stales.sh \
+            ~/leopard.sh/tigersh/utils/rebuild-tigersh-all.sh \
+            ~/leopard.sh/utils/sleep.sh \
+            $host:/Users/macuser/bin/
+        ssh $host "rm -f /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache \
+            /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache \
+            /opt/tiger.sh/share/tiger.sh/config.cache/disabled.cache"
+    ) &
 done
+wait
 
 #echo
 #echo "👉 push distfiles"
@@ -119,6 +129,9 @@ echo
 echo "👉 [tiger|leopard].sh --setup"
 for host in $uphosts ; do
     echo "  🖥  $host"
-    ssh $host 'test "$(uname -r | cut -d. -f1)" = "8" && tiger.sh --setup || true'
-    ssh $host 'test "$(uname -r | cut -d. -f1)" = "9" && leopard.sh --setup || true'
+    (
+        ssh $host 'test "$(uname -r | cut -d. -f1)" = "8" && tiger.sh --setup || true'
+        ssh $host 'test "$(uname -r | cut -d. -f1)" = "9" && leopard.sh --setup || true'
+    ) &
 done
+wait

@@ -12,8 +12,9 @@ uphosts=""
 echo "👉 ping"
 # make two passes, because sometimes the .local hosts resolve after a ping.
 for host in $hosts ; do
-    ping -o -t 1 $host.local >/dev/null 2>&1 || true
+    ( ping -o -t 1 $host.local >/dev/null 2>&1 || true ) &
 done
+sleep 0.1
 for host in $hosts ; do
     if ping -o -t 1 $host.local >/dev/null 2>&1 ; then
         uphosts="$uphosts $host"
@@ -29,5 +30,6 @@ echo
 echo "😴 sleep"
 for host in $uphosts ; do
     echo "  🖥  $host"
-    ssh $host '~/bin/sleep.sh' \& 
+    ( ssh $host '~/bin/sleep.sh' \& ) &
 done
+wait

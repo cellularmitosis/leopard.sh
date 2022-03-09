@@ -16,15 +16,12 @@ if ! test "$cpu_id" = "9" ; then
     exit 1
 fi
 
-# FIXME get rid of this circular bootstrap dependency situation.
-# Tell the user to download the dist files on another PC if needed.
-tiger.sh --setup
-
 opt=/opt/tigersh-deps-0.1
 
-cp $opt/bin/curl /tmp/
-
+# FIXME get rid of this circular bootstrap dependency situation.
+# Tell the user to download the dist files on another PC if needed.
 rm -rf $opt
+tiger.sh --setup
 
 # build pv
 echo -n -e "\033]0;building pv\007"
@@ -36,7 +33,7 @@ if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     # FIXME get rid of this circular bootstrap dependency situation.
     # Tell the user to download the dist files on another PC if needed.
-    /tmp/curl -#fLO $srcmirror/$tarball
+    $opt/bin/curl -#fLO $srcmirror/$tarball
     cd - >/dev/null
 fi
 test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 85b25c827add82ebdd5a58a5ffde1d7d
@@ -59,7 +56,7 @@ if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     # FIXME get rid of this circular bootstrap dependency situation.
     # Tell the user to download the dist files on another PC if needed.
-    /tmp/curl -#fLO $srcmirror/$tarball
+    $opt/bin/curl -#fLO $srcmirror/$tarball
     cd - >/dev/null
 fi
 test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = e90e5b27f96eddacd966a3f983a80cbf
@@ -86,7 +83,7 @@ if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     # FIXME get rid of this circular bootstrap dependency situation.
     # Tell the user to download the dist files on another PC if needed.
-    /tmp/curl -#fLO $srcmirror/$tarball
+    $opt/bin/curl -#fLO $srcmirror/$tarball
     cd - >/dev/null
 fi
 test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 237a8767c990b43ae2c89895c2dbc062
@@ -109,7 +106,7 @@ if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     # FIXME get rid of this circular bootstrap dependency situation.
     # Tell the user to download the dist files on another PC if needed.
-    /tmp/curl -#fLO $srcmirror/$tarball
+    $opt/bin/curl -#fLO $srcmirror/$tarball
     cd - >/dev/null
 fi
 test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 18aa728e7947a30af3bb04243e4482aa
@@ -128,7 +125,7 @@ if ! test -e ~/Downloads/cacert.pem ; then
     cd ~/Downloads
     # FIXME get rid of this circular bootstrap dependency situation.
     # Tell the user to download the dist files on another PC if needed.
-    /tmp/curl -#fLO https://curl.se/ca/cacert.pem
+    $opt/bin/curl -#fLO https://curl.se/ca/cacert.pem
     cd - >/dev/null
 fi
 mkdir -p $opt/share
@@ -145,7 +142,7 @@ if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
     # FIXME get rid of this circular bootstrap dependency situation.
     # Tell the user to download the dist files on another PC if needed.
-    /tmp/curl -#fLO $srcmirror/$tarball
+    $opt/bin/curl -#fLO $srcmirror/$tarball
     cd - >/dev/null
 fi
 test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 9e5e81fc7657eea8dc66672768082c46
@@ -184,7 +181,9 @@ cp $opt/lib/libssl.50.dylib lib/
 cp $opt/lib/libcrypto.47.dylib lib/
 cp $opt/share/cacert.pem share/
 
-cd /tmp
+TIGERSH_BINPKG_PATH=${TIGERSH_BINPKG_PATH:-~/Desktop/tiger.sh/binpkgs}
+mkdir -p $TIGERSH_BINPKG_PATH
+cd $TIGERSH_BINPKG_PATH
 tar c tigersh-deps-0.1 | nice gzip -9 > tigersh-deps-0.1.tiger.g3.tar.gz
 
 rm -rf $opt

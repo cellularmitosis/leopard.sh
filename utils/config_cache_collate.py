@@ -87,6 +87,8 @@ cd /tmp
 rm -rf $pkgspec
 cat /Users/cell/leopard.sh/binpkgs/$binpkg | gunzip | tar x
 
+rm -f /tmp/1 /tmp/2 /tmp/3
+
 os=$(echo $os_cpu | cut -d. -f1)
 cat $pkgspec/share/$os.sh/$pkgspec/config.cache.gz \
     | gunzip \
@@ -112,6 +114,8 @@ def generate_and_run_scrub_script():
     script = """
 
 set -e -o pipefail
+
+rm -f /tmp/1. /tmp/2. /tmp/3.
 
 cd /tmp
 
@@ -582,7 +586,7 @@ def compute_word_weights(desc_word_freqs):
     return weights
 
 
-def reconsile_config_and_site_caches(cache_lines, site_lines):
+def reconcile_config_and_site_caches(cache_lines, site_lines):
     site_d = {}
     for site_line in site_lines:
         (site_var, site_value) = parse_cache_line(site_line)
@@ -590,20 +594,24 @@ def reconsile_config_and_site_caches(cache_lines, site_lines):
 
     cache_lines2 = []
     diff_lines = []
+    status_d = {}
     for cache_line in cache_lines:
         (cache_var, cache_value) = parse_cache_line(cache_line)
         if cache_var not in site_d:
             # not in site.cache: process it.
+            status_d[cache_var] = "new"
             cache_lines2.append(cache_line)
             continue
         (site_value, site_line) = site_d[cache_var]
         if site_value == cache_value:
             # already in site.cache, skip.
+            status_d[cache_var] = "skipped"
             continue
         else:
             # value differs from site.cache.
+            status_d[cache_var] = "changed"
             diff_lines.append((site_line, cache_line))
-    return (cache_lines2, diff_lines)
+    return (cache_lines2, diff_lines, status_d)
 
 
 if __name__ == "__main__":
@@ -613,14 +621,14 @@ if __name__ == "__main__":
     have_site_cache = False
     if os.path.exists(arg1) and os.path.exists(arg2):
         sys.stderr.write("Using files %s and %s\n" % (arg1, arg2))
-        subprocess.check_call("cp %s %s" % (arg1, "/tmp/1"), shell=True)
-        subprocess.check_call("cp %s %s" % (arg2, "/tmp/2"), shell=True)
+        subprocess.check_call("cp %s /tmp/1" % arg1, shell=True)
+        subprocess.check_call("cp %s /tmp/2" % arg2, shell=True)
         subprocess.check_call("rm -f /tmp/3", shell=True)
         if arg3 is not None:
             if not os.path.exists(arg3):
                 usage_and_die()
             have_site_cache = True
-            subprocess.check_call("rm -f /tmp/3 ; cp %s %s" % (arg3, "/tmp/3"), shell=True)
+            subprocess.check_call("rm -f /tmp/3 ; cp %s /tmp/3" % arg3, shell=True)
     else:
         pkgspec = arg1
         os_cpu = arg2
@@ -635,7 +643,7 @@ if __name__ == "__main__":
     description_pairs = load_description_pairs("/tmp/2")
     site_lines = load_cache_lines("/tmp/3")
 
-    (cache_lines, diff_lines) = reconsile_config_and_site_caches(cache_lines, site_lines)
+    (cache_lines, diff_lines, status_d) = reconcile_config_and_site_caches(cache_lines, site_lines)
 
     desc_word_freqs = compute_description_word_frequencies(description_pairs)
     desc_word_weights = compute_word_weights(desc_word_freqs)
@@ -648,6 +656,7 @@ if __name__ == "__main__":
             if shell_var.startswith(prefix):
                 should_skip = True
         if should_skip:
+            status_d[shell_var] = "skipped"
             continue
         
         slug = strip_prefixes(shell_var)
@@ -677,3 +686,8 @@ if __name__ == "__main__":
         print("# This value has changed:")
         print("# from: %s" % site_line)
         print("# to: %s" % cache_line)
+    
+    for k in sorted(status_d.keys()):
+        status = status_d[k]
+        if status != "skipped":
+            sys.stderr.write("%s: %s\n" % (status_d[k], k))

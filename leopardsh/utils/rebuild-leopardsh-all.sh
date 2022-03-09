@@ -40,6 +40,6 @@ for pkgspec in $(cat /tmp/build-order.txt) ; do
         exit 1
     fi
     rm -rf /opt/*
-    time leopard.sh $pkgspec
+    time LEOPARDSH_FORCE_BUILD_PKGSPEC=$pkgspec leopard.sh $pkgspec
     ~/Desktop/leopardsh/utils/make-leopardsh-binpkg.sh $pkgspec
 done

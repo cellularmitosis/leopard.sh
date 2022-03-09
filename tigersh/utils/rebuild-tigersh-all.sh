@@ -40,6 +40,6 @@ for pkgspec in $(cat /tmp/build-order.txt) ; do
         exit 1
     fi
     rm -rf /opt/*
-    time tiger.sh $pkgspec
+    time TIGERSH_FORCE_BUILD_PKGSPEC=$pkgspec tiger.sh $pkgspec
     ~/Desktop/tigersh/utils/make-tigersh-binpkg.sh $pkgspec
 done

@@ -106,6 +106,6 @@ for pkgspec in $(cat /tmp/to-build.txt) ; do
 
     binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
     rm -f ~/Desktop/leopard.sh/binpkgs/$binpkg
-    time TIGERSH_FORCE_BUILD=1 tiger.sh $pkgspec
+    time TIGERSH_FORCE_BUILD_PKGSPEC=$pkgspec tiger.sh $pkgspec
     ~/bin/make-tigersh-binpkg.sh $pkgspec
 done
