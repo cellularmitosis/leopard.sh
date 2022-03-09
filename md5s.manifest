@@ -154,14 +154,14 @@ binpkgs/m4-1.4.19.tiger.g3.tar.gz 50eb4d5574dc8b13da419a0d77fdd0c8
 binpkgs/m4-1.4.19.tiger.g4.tar.gz 1055a7bd99289d919e655c23e07605dc
 binpkgs/m4-1.4.19.tiger.g4e.tar.gz 2a67a90a397059bea62e4cc35ed599d1
 binpkgs/m4-1.4.19.tiger.g5.tar.gz 3dbe5578f8e8e625a5c63ce4896effdb
-binpkgs/make-4.3.leopard.g4e.tar.gz c1d531f5c0f1f17a452299a7d80278b7
-binpkgs/make-4.3.leopard.g5.tar.gz b43d58120c79e243694bf4f1321d33dd
-binpkgs/make-4.3.ppc64.leopard.g5.tar.gz 84240f6e3215bc8e7553f46e39e66ed3
-binpkgs/make-4.3.ppc64.tiger.g5.tar.gz 1a5453e9a39003940d324e2fdd14feb1
-binpkgs/make-4.3.tiger.g3.tar.gz 05b058942f76149b3da3cf8a1f66dc49
-binpkgs/make-4.3.tiger.g4.tar.gz c8eb9c5be90a063bf36a70a0aea65a40
-binpkgs/make-4.3.tiger.g4e.tar.gz d02efe22f938599f9079bae58a36d0e9
-binpkgs/make-4.3.tiger.g5.tar.gz 3cddbfec4960fc63ecf051e4eea97872
+binpkgs/make-4.3.leopard.g4e.tar.gz acce9b1e6a2da43fa3b8e4efb62ee24e
+binpkgs/make-4.3.leopard.g5.tar.gz ed639ee02440aa8a750036c971896ea1
+binpkgs/make-4.3.ppc64.leopard.g5.tar.gz 57d6c80529b1489290fbbc4e11e4ec48
+binpkgs/make-4.3.ppc64.tiger.g5.tar.gz e8de0af4d7fc57cfd60add487b1237ad
+binpkgs/make-4.3.tiger.g3.tar.gz 8f5a1cfb5167b1ca15bca0fae09f4af5
+binpkgs/make-4.3.tiger.g4.tar.gz 2a00e375c61aab87a8b65b2f14528731
+binpkgs/make-4.3.tiger.g4e.tar.gz f17b0f24611704ba21800d93b31ba8e9
+binpkgs/make-4.3.tiger.g5.tar.gz d9d0940c3c551c6dbb6e5696f9e7d7fd
 binpkgs/mpc-0.8.1.tiger.g3.tar.gz e12c943671e1c39977c27c6167060a85
 binpkgs/mpc-0.8.1.tiger.g4.tar.gz ac1d84116cc8e014bd5415a14c94b810
 binpkgs/mpc-0.8.1.tiger.g4e.tar.gz 9a83a983fbb125ea253a21bbd55440c7
@@ -302,6 +302,7 @@ dist/busybox-1.35.0.tar.gz ac2de1902bb2c8718a6f0114dcfc38a9
 dist/gzip-1.11.tar.gz b8cab03ed69a1d69980c6a292a5ab853
 dist/lzo-2.10.tar.gz 39d3f3f9c55c87b1e5d6888e1420f4b5
 dist/lzop-1.04.tar.gz 271eb10fde77a0a96b9cbf745e719ddf
+dist/make-4.3.tar.gz fc7a67ea86ace13195b0bce683fd4469
 dist/pv-1.6.20.tar.gz 4d86da21618265c24161faa0f59350dd
 dist/xcode-2.5.tar.gz 5376dfd3d62e79ffe509c2ec16bbfad8
 dist/xcode-3.1.4.tar.gz e68665645ac69d1f8eec467bf55db0d5
@@ -373,6 +374,7 @@ dist/orig/ircle35a6.zip ac6822ec64067ea19abe54c139602b0e
 dist/orig/ircle40a5.dmg 65dd8da93c77e357654846ac9b391490
 dist/orig/lzo-2.10.tar.gz 39d3f3f9c55c87b1e5d6888e1420f4b5
 dist/orig/lzop-1.04.tar.gz 271eb10fde77a0a96b9cbf745e719ddf
+dist/orig/make-4.3.tar.gz fc7a67ea86ace13195b0bce683fd4469
 dist/orig/quake106.zip 8cee4d03ee092909fdb6a4f84f0c1357
 dist/orig/vlc-0.9.10-powerpc.dmg 458ccb894b449af108bf89a8d91e9d96
 dist/orig/vlc-2.0.10-powerpc.dmg 3fb6a4b088d982c26f4c9da4a6660bc4
@@ -384,6 +386,8 @@ leopardsh/scripts/install-lzo-2.10.ppc64.sh fea7a2e7c5b0e524809345a48f59401e
 leopardsh/scripts/install-lzo-2.10.sh fea7a2e7c5b0e524809345a48f59401e
 leopardsh/scripts/install-lzop-1.04.ppc64.sh 80585e86b83010cc98e2c7932fbedaaa
 leopardsh/scripts/install-lzop-1.04.sh 80585e86b83010cc98e2c7932fbedaaa
+leopardsh/scripts/install-make-4.3.ppc64.sh c758ccf8487eed6bc80c51543af0b302
+leopardsh/scripts/install-make-4.3.sh c758ccf8487eed6bc80c51543af0b302
 leopardsh/scripts/install-pv-1.6.20.ppc64.sh 4410e9d265664e149c849ecd4641f020
 leopardsh/scripts/install-pv-1.6.20.sh 4410e9d265664e149c849ecd4641f020
 leopardsh/scripts/install-xcode-3.1.4.sh 4231e6ecbb0317c077bf6ec586e95d7e
@@ -394,6 +398,8 @@ tigersh/scripts/install-lzo-2.10.ppc64.sh 8d4eb0f381532a69989b573b24d027aa
 tigersh/scripts/install-lzo-2.10.sh 8d4eb0f381532a69989b573b24d027aa
 tigersh/scripts/install-lzop-1.04.ppc64.sh 4e7a3dd96c94439118fb5765ebf11a9d
 tigersh/scripts/install-lzop-1.04.sh 4e7a3dd96c94439118fb5765ebf11a9d
+tigersh/scripts/install-make-4.3.ppc64.sh 5d96fc450fd2805b55f8bd62323bcbe2
+tigersh/scripts/install-make-4.3.sh 5d96fc450fd2805b55f8bd62323bcbe2
 tigersh/scripts/install-pv-1.6.20.ppc64.sh e3b112985b70c34db7c57585b491138d
 tigersh/scripts/install-pv-1.6.20.sh e3b112985b70c34db7c57585b491138d
 tigersh/scripts/install-xcode-2.5.sh 5f458406698cea945ab1a9a08f171e2b

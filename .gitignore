@@ -10,4 +10,8 @@ dist/*.*
 dist/orig/*.*
 !dist/orig/.keep
 
+**/*.md5
+**/md5s.manifest
+**/md5s.manifest.gz
+
 .vscode

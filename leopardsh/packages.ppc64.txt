@@ -1,4 +1,5 @@
 gzip-1.11.ppc64
 lzo-2.10.ppc64
 lzop-1.04.ppc64
+make-4.3.ppc64
 pv-1.6.20.ppc64
