@@ -371,10 +371,12 @@ if test "$op" = "install" ; then
     curl_script_pid=$!
 
     rm -rf /opt/$pkgspec
+
+    wait $curl_script_pid
+
     mkdir -p /opt/$pkgspec
     touch /opt/$pkgspec/INCOMPLETE_INSTALLATION
 
-    wait $curl_script_pid
     chmod +x $script
 
     if test -n "$LEOPARDSH_VERBOSE" ; then
