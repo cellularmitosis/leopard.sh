@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/install-app-from-dmg.sh v1
 
 # 👇 EDIT HERE:
@@ -10,8 +10,9 @@ appname=Foo
 version=1.0
 mountpoint="/Volumes/$appname $version"
 
-set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
+set -e -o pipefail
+set -x
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 
 pkgspec=$package-$version
 

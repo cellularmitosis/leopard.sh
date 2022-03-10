@@ -1,5 +1,5 @@
-#!/bin/bash
-# based on templates/build-from-source.sh v5
+#!/opt/tigersh-deps-0.1/bin/bash
+# based on templates/build-from-source.sh v6
 
 # 👇 EDIT HERE:
 # Install foo on OS X Tiger / PowerPC.
@@ -9,7 +9,7 @@ package=foo
 version=1.0
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
-set -e
+set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 

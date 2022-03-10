@@ -1,9 +1,16 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # tiger.sh: package manager for PowerPC Macs running OS X Tiger (10.4).
-# see https://github.com/cellularmitosis/leopard.sh
+# See https://github.com/cellularmitosis/leopard.sh
 
 set -e
+
+if test "${BASH_VERSION:0:2}" = "2." && test -e /opt/tigersh-deps-0.1/bin/bash ; then
+    # recurse but with bash 3.2:
+    PATH="/opt/tigersh-deps-0.1/bin:$PATH" $0 "$@"
+    exit $?
+fi
+
 
 if test "$1" = "--verbose" ; then
     shift 1
@@ -15,8 +22,10 @@ if test -n "$TIGERSH_VERBOSE" ; then
 fi
 
 
-# Note: for offline use or to run you own local fork, export e.g.
-#   TIGERSH_MIRROR=file:///Users/foo/github/cellularmitosis/leopard.sh
+# Note: for offline use or to run you own local fork, put this in your ~/.bashrc:
+#   export TIGERSH_MIRROR=file:///Users/foo/leopard.sh
+# If you care more about speed than glowies, drop HTTPS for a speed-up:
+#   export TIGERSH_MIRROR=http://leopard.sh
 TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 export TIGERSH_MIRROR
 
@@ -116,7 +125,7 @@ fi
 
 # setup:
 
-if test -n "$needs_setup_check" ; then
+if test "$op" = "setup" || test -n "$needs_setup_check" ; then
     if ! test -e ~/.tigersh/checks/os-is-tiger ; then
         osversion=$(sw_vers -productVersion)
         if ! test "${osversion:0:4}" = "10.4" ; then
@@ -318,10 +327,20 @@ EOF
         echo "Fetching configure cache." >&2
         mkdir -p $opt_config_cache
         cd $opt_config_cache
-        curl --fail --silent --show-error --location --remote-name \
-            $TIGERSH_MIRROR/tigersh/config.cache/tiger.cache
+        url=$TIGERSH_MIRROR/tigersh/config.cache/tiger.cache
+        curl --fail --silent --show-error --location --remote-name $url
+    fi
+
+    if test "${BASH_VERSION:0:2}" = "2." ; then
+        # recurse but with bash 3.2:
+        PATH="/opt/tigersh-deps-0.1/bin:$PATH" /usr/local/bin/tiger.sh "$@"
+        exit $?
     fi
 fi
+
+
+# at this point we should be running bash 3.2.
+set -o pipefail
 
 
 # list:
@@ -376,23 +395,14 @@ if test "$op" = "install" ; then
     mkdir -p /opt/$pkgspec
     touch /opt/$pkgspec/INCOMPLETE_INSTALLATION
 
-    # unfortunately, tiger's bash doesn't have pipefail.
-    # thanks to https://stackoverflow.com/a/1221844
-    fifo=/tmp/$script.fifo
-    rm -f $fifo
-    mkfifo $fifo
-    tee /tmp/$script.log < $fifo &
-
     wait $curl_script_pid
     chmod +x $script
 
     if test -n "$TIGERSH_VERBOSE" ; then
-        TIGERSH_RECURSED=1 nice bash -x ./$script > $fifo 2>&1
+        TIGERSH_RECURSED=1 nice bash -x ./$script 2>&1 | tee /tmp/$script.log
     else
-        TIGERSH_RECURSED=1 nice ./$script > $fifo 2>&1
+        TIGERSH_RECURSED=1 nice ./$script 2>&1 | tee /tmp/$script.log
     fi
-
-    rm -f $fifo
 
     TIGERSH_RECURSED=1 tiger.sh --link $pkgspec
 
@@ -404,6 +414,8 @@ if test "$op" = "install" ; then
 
     rm -f /opt/$pkgspec/INCOMPLETE_INSTALLATION
     rm -f /tmp/$script
+
+    exit 0
 fi
 
 
@@ -588,6 +600,8 @@ if test "$op" = "link" ; then
         done
         cd - >/dev/null
     fi
+
+    exit 0
 fi
 
 

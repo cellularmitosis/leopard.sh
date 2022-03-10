@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # leopard.sh: package manager for PowerPC Macs running OS X Leopard (10.5).
-# see https://github.com/cellularmitosis/leopard.sh
+# See https://github.com/cellularmitosis/leopard.sh
 
 set -e -o pipefail
 
@@ -15,9 +15,11 @@ if test -n "$LEOPARDSH_VERBOSE" ; then
 fi
 
 
-# Note: for offline use or to run you own local fork, export e.g.
-#   LEOPARDSH_MIRROR=file:///Users/foo/github/cellularmitosis/leopard.sh
-LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
+# Note: for offline use or to run you own local fork, put this in your ~/.bashrc:
+#   export LEOPARDSH_MIRROR=file:///Users/foo/leopard.sh
+# If you care more about speed than glowies, drop HTTPS for a speed-up:
+#   export LEOPARDSH_MIRROR=http://leopard.sh
+LEOPARDSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 export LEOPARDSH_MIRROR
 
 
@@ -116,7 +118,7 @@ fi
 
 # setup:
 
-if test -n "$needs_setup_check" ; then
+if test "$op" = "setup" || test -n "$needs_setup_check" ; then
     if ! test -e ~/.leopardsh/checks/os-is-leopard ; then
         osversion=$(sw_vers -productVersion)
         if ! test "${osversion:0:4}" = "10.5" ; then
@@ -317,8 +319,8 @@ EOF
         echo "Fetching configure cache." >&2
         mkdir -p $opt_config_cache
         cd $opt_config_cache
-        curl --fail --silent --show-error --location --remote-name \
-            $LEOPARDSH_MIRROR/leopardsh/config.cache/leopard.cache
+        url=$LEOPARDSH_MIRROR/leopardsh/config.cache/leopard.cache
+        curl --fail --silent --show-error --location --remote-name $url
     fi
 fi
 
@@ -328,11 +330,11 @@ fi
 if test "$op" = "list" ; then
     echo "Available packages:" >&2
     cd /tmp
-    url=$LEOPARDSH_MIRROR/tigersh/packages.txt
+    url=$LEOPARDSH_MIRROR/leopardsh/packages.txt
     insecure_url=$(echo "$url" | sed 's|^https:|http:|')
     curl --fail --silent --show-error --location --remote-name $insecure_url
     if test "$cpu_name" = "g5" ; then
-        url=$LEOPARDSH_MIRROR/tigersh/packages.ppc64.txt
+        url=$LEOPARDSH_MIRROR/leopardsh/packages.ppc64.txt
         insecure_url=$(echo "$url" | sed 's|^https:|http:|')
         curl --fail --silent --show-error --location --remote-name $insecure_url
         cat packages.txt packages.ppc64.txt | sort
@@ -376,9 +378,9 @@ if test "$op" = "install" ; then
     chmod +x $script
 
     if test -n "$LEOPARDSH_VERBOSE" ; then
-        LEOPARDSH_RECURSED=1 nice bash -x ./$script 2>&2 | tee /tmp/$script.log
+        LEOPARDSH_RECURSED=1 nice bash -x ./$script 2>&1 | tee /tmp/$script.log
     else
-        LEOPARDSH_RECURSED=1 nice ./$script 2>&2 | tee /tmp/$script.log
+        LEOPARDSH_RECURSED=1 nice ./$script 2>&1 | tee /tmp/$script.log
     fi
 
     LEOPARDSH_RECURSED=1 leopard.sh --link $pkgspec
@@ -391,6 +393,8 @@ if test "$op" = "install" ; then
 
     rm -f /opt/$pkgspec/INCOMPLETE_INSTALLATION
     rm -f /tmp/$script
+
+    exit 0
 fi
 
 
@@ -575,6 +579,8 @@ if test "$op" = "link" ; then
         done
         cd - >/dev/null
     fi
+
+    exit 0
 fi
 
 

@@ -1,12 +1,12 @@
-#!/bin/bash
-# based on templates/build-from-source.sh v5
+#!/opt/tigersh-deps-0.1/bin/bash
+# based on templates/build-from-source.sh v6
 
 # Install pv on OS X Tiger / PowerPC.
 
 package=pv
 version=1.6.20
 
-set -e
+set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
