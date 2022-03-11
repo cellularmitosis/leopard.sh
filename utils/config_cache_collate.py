@@ -29,7 +29,6 @@ skippable_prefixes = [
     "ac_cv_prog_",  # never cache the path to a program (let the user dictate).
     "ac_cv_path_",  # never cache the path to a program (let the user dictate).
     "gl_cv_next_",  # these seem to be follow-up calls after ac_cv_header_*?
-    "ac_cv_sizeof_",  # these will be different on a G5.
 ]
 
 # these just create noise.
@@ -76,12 +75,20 @@ def process_cmdline():
 
 
 def generate_and_run_extract_script(pkgspec, os_cpu):
-    script = """
+    bits = "32"
+    if ".ppc64" in pkgspec:
+        bits = "64"
 
+    os = os_cpu.split(".")[0]
+
+    binpkg = "%s.%s.tar.gz" % (pkgspec, os_cpu)
+
+    script = """
 set -e -o pipefail
 pkgspec=%s
-os_cpu=%s
-binpkg=$pkgspec.$os_cpu.tar.gz
+os=%s
+bits=%s
+binpkg=%s
 
 cd /tmp
 rm -rf $pkgspec
@@ -89,7 +96,6 @@ cat /Users/cell/leopard.sh/binpkgs/$binpkg | gunzip | tar x
 
 rm -f /tmp/1 /tmp/2 /tmp/3
 
-os=$(echo $os_cpu | cut -d. -f1)
 cat $pkgspec/share/$os.sh/$pkgspec/config.cache.gz \
     | gunzip \
     > /tmp/1
@@ -98,15 +104,19 @@ cat $pkgspec/share/$os.sh/$pkgspec/install-$pkgspec.sh.log.gz \
     | gunzip \
     > /tmp/2
 
-cat ~/leopard.sh/${os}sh/config.cache/${os}.cache > /tmp/3
-cat ~/leopard.sh/${os}sh/config.cache/disabled.cache >> /tmp/3
+cat ~/leopard.sh/${os}sh/config.cache/${os}.cache \
+    ~/leopard.sh/${os}sh/config.cache/${os}.${bits}.cache \
+    ~/leopard.sh/${os}sh/config.cache/disabled.cache \
+    > /tmp/3
 
-    """ % (pkgspec, os_cpu)
+    """ % (pkgspec, os, bits, binpkg)
 
     fd = open("/tmp/script.sh", "w")
     fd.write(script)
     fd.close()
 
+    sys.stderr.write("Unpacking %s.%s.tar.gz\n" % (pkgspec, os_cpu))
+    sys.stderr.write("Using %s, %s and disabled.cache\n" % ("%s.cache" % os, "%s.%s.cache" % (os, bits)))
     subprocess.check_call("bash /tmp/script.sh", shell=True)
 
 

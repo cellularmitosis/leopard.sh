@@ -1,0 +1,102 @@
+
+# checking size of __int16... 0
+ac_cv_sizeof___int16=${ac_cv_sizeof___int16=0}
+
+# checking size of __int32... 0
+ac_cv_sizeof___int32=${ac_cv_sizeof___int32=0}
+
+# checking size of __int64... 0
+ac_cv_sizeof___int64=${ac_cv_sizeof___int64=0}
+
+# checking size of dev_t... 4
+ac_cv_sizeof_dev_t=${ac_cv_sizeof_dev_t=4}
+
+# checking size of double... 8
+ac_cv_sizeof_double=${ac_cv_sizeof_double=8}
+
+# checking size of float... 4
+ac_cv_sizeof_float=${ac_cv_sizeof_float=4}
+
+# checking size of fpos_t... 8
+ac_cv_sizeof_fpos_t=${ac_cv_sizeof_fpos_t=8}
+
+# checking size of int... 4
+ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
+
+# checking size of intmax_t... 8
+ac_cv_sizeof_intmax_t=${ac_cv_sizeof_intmax_t=8}
+
+# checking size of intptr_t... 4
+ac_cv_sizeof_intptr_t=${ac_cv_sizeof_intptr_t=4}
+
+# checking size of long... 4
+ac_cv_sizeof_long=${ac_cv_sizeof_long=4}
+
+# checking size of long double... 16
+ac_cv_sizeof_long_double=${ac_cv_sizeof_long_double=16}
+
+# checking size of long long... 8
+ac_cv_sizeof_long_long=${ac_cv_sizeof_long_long=8}
+
+# checking size of mode_t... 2
+ac_cv_sizeof_mode_t=${ac_cv_sizeof_mode_t=2}
+
+# checking size of off_t... 8
+ac_cv_sizeof_off_t=${ac_cv_sizeof_off_t=8}
+
+# checking size of ptrdiff_t... 4
+ac_cv_sizeof_ptrdiff_t=${ac_cv_sizeof_ptrdiff_t=4}
+
+# checking size of short... 2
+ac_cv_sizeof_short=${ac_cv_sizeof_short=2}
+
+# checking size of size_t... 4
+ac_cv_sizeof_size_t=${ac_cv_sizeof_size_t=4}
+
+# checking size of ssize_t... 4
+ac_cv_sizeof_ssize_t=${ac_cv_sizeof_ssize_t=4}
+
+# checking size of time_t... 4
+ac_cv_sizeof_time_t=${ac_cv_sizeof_time_t=4}
+
+# checking size of uintmax_t... 8
+ac_cv_sizeof_uintmax_t=${ac_cv_sizeof_uintmax_t=8}
+
+# checking size of uintptr_t... 4
+ac_cv_sizeof_uintptr_t=${ac_cv_sizeof_uintptr_t=4}
+
+# checking size of void *... 4
+ac_cv_sizeof_void_p=${ac_cv_sizeof_void_p=4}
+
+# checking for bit size of ptrdiff_t... 32
+gl_cv_bitsizeof_ptrdiff_t=${gl_cv_bitsizeof_ptrdiff_t=32}
+
+# checking for bit size of sig_atomic_t... 32
+gl_cv_bitsizeof_sig_atomic_t=${gl_cv_bitsizeof_sig_atomic_t=32}
+
+# checking for bit size of size_t... 32
+gl_cv_bitsizeof_size_t=${gl_cv_bitsizeof_size_t=32}
+
+# checking for bit size of wchar_t... 32
+gl_cv_bitsizeof_wchar_t=${gl_cv_bitsizeof_wchar_t=32}
+
+# checking for bit size of wint_t... 32
+gl_cv_bitsizeof_wint_t=${gl_cv_bitsizeof_wint_t=32}
+
+# checking where to find the exponent in a 'double'... word 0 bit 20
+gl_cv_cc_double_expbit0=${gl_cv_cc_double_expbit0='word 0 bit 20'}
+
+# checking where to find the exponent in a 'float'... word 0 bit 23
+gl_cv_cc_float_expbit0=${gl_cv_cc_float_expbit0='word 0 bit 23'}
+
+# 
+gl_cv_type_size_t_signed=${gl_cv_type_size_t_signed=no}
+
+# 
+gl_cv_type_size_t_suffix=${gl_cv_type_size_t_suffix=ul}
+
+# checking for 64-bit time_t with _TIME_BITS=64... no
+gl_cv_type_time_t_bits_macro=${gl_cv_type_time_t_bits_macro=no}
+
+# checking for time_t past the year 2038... no
+gl_cv_type_time_t_y2038=${gl_cv_type_time_t_y2038=no}

@@ -50,7 +50,7 @@ elif test "$1" = "-j" ; then
     op=makeflags
 elif test "$1" = "-m32" -o "$1" = "-mcpu" -o "$1" = "-O" ; then
     op=gccflags
-elif test "$1" = "--cpu" -o "$1" = "--os.cpu" ; then
+elif test "$1" = "--cpu" -o "$1" = "--os.cpu" -o "$1" = "--bits" ; then
     op=platform-info
 elif test "$1" = "--arch-check" ; then
     op=arch-check
@@ -323,12 +323,25 @@ EOF
     fi
 
     opt_config_cache=/opt/tiger.sh/share/tiger.sh/config.cache
-    if ! test -e $opt_config_cache/tiger.cache ; then
-        echo "Fetching configure cache." >&2
+    if ! test -e $opt_config_cache ; then
         mkdir -p $opt_config_cache
+    fi
+    if test "$(sysctl hw.cpusubtype | awk '{print $NF}')" = "100" ; then
+        bits=64
+    else
+        bits=32
+    fi
+    if test ! -e $opt_config_cache/tiger.cache || test ! -e $opt_config_cache/tiger.$bits.cache ; then
+        echo "Fetching configure cache." >&2
         cd $opt_config_cache
-        url=$TIGERSH_MIRROR/tigersh/config.cache/tiger.cache
-        curl --fail --silent --show-error --location --remote-name $url
+        if ! test -e $opt_config_cache/tiger.cache ; then
+            url=$TIGERSH_MIRROR/tigersh/config.cache/tiger.cache
+            curl --fail --silent --show-error --location --remote-name $url
+        fi
+        if ! test -e $opt_config_cache/tiger.$bits.cache ; then
+            url=$TIGERSH_MIRROR/tigersh/config.cache/tiger.$bits.cache
+            curl --fail --silent --show-error --location --remote-name $url
+        fi
     fi
 
     if test "${BASH_VERSION:0:2}" = "2." ; then
@@ -496,6 +509,12 @@ if test "$op" = "unpack-dist" ; then
     echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $tarball into /tmp." >&2
     rm -rf /tmp/$pkgspec
     TIGERSH_RECURSED=1 tiger.sh --unpack-tarball-check-md5 $url /tmp
+
+    if test -e /tmp/$pkgspec/configure ; then
+        cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache \
+            /opt/tiger.sh/share/tiger.sh/config.cache/tiger.$(tiger.sh --bits).cache \
+            > /tmp/$pkgspec/config.cache
+    fi
 
     exit 0
 fi
@@ -703,6 +722,12 @@ if test "$op" = "platform-info" ; then
         echo $cpu_name
     elif test "$1" = "--os.cpu" ; then
         echo tiger.$cpu_name
+    elif test "$1" = "--bits" ; then
+        if test "$cpu_name" = "g5" ; then
+            echo 64
+        else
+            echo 32
+        fi
     fi
 
     exit 0

@@ -43,7 +43,7 @@ elif test "$1" = "-j" ; then
     op=makeflags
 elif test "$1" = "-m32" -o "$1" = "-mcpu" -o "$1" = "-O" ; then
     op=gccflags
-elif test "$1" = "--cpu" -o "$1" = "--os.cpu" ; then
+elif test "$1" = "--cpu" -o "$1" = "--os.cpu" -o "$1" = "--bits" ; then
     op=platform-info
 elif test "$1" = "--arch-check" ; then
     op=arch-check
@@ -315,12 +315,25 @@ EOF
     fi
 
     opt_config_cache=/opt/leopard.sh/share/leopard.sh/config.cache
-    if ! test -e $opt_config_cache/leopard.cache ; then
-        echo "Fetching configure cache." >&2
+    if ! test -e $opt_config_cache ; then
         mkdir -p $opt_config_cache
+    fi
+    if test "$(sysctl hw.cpusubtype | awk '{print $NF}')" = "100" ; then
+        bits=64
+    else
+        bits=32
+    fi
+    if test ! -e $opt_config_cache/leopard.cache || test ! -e $opt_config_cache/leopard.$bits.cache ; then
+        echo "Fetching configure cache." >&2
         cd $opt_config_cache
-        url=$LEOPARDSH_MIRROR/leopardsh/config.cache/leopard.cache
-        curl --fail --silent --show-error --location --remote-name $url
+        if ! test -e $opt_config_cache/leopard.cache ; then
+            url=$LEOPARDSH_MIRROR/leopardsh/config.cache/leopard.cache
+            curl --fail --silent --show-error --location --remote-name $url
+        fi
+        if ! test -e $opt_config_cache/leopard.$bits.cache ; then
+            url=$LEOPARDSH_MIRROR/leopardsh/config.cache/leopard.$bits.cache
+            curl --fail --silent --show-error --location --remote-name $url
+        fi
     fi
 fi
 
@@ -475,6 +488,12 @@ if test "$op" = "unpack-dist" ; then
     echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $tarball into /tmp." >&2
     rm -rf /tmp/$pkgspec
     LEOPARDSH_RECURSED=1 leopard.sh --unpack-tarball-check-md5 $url /tmp
+
+    if test -e /tmp/$pkgspec/configure ; then
+        cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache \
+            /opt/leopard.sh/share/leopard.sh/config.cache/leopard.$(leopard.sh --bits).cache \
+            > /tmp/$pkgspec/config.cache
+    fi
 
     exit 0
 fi
@@ -682,6 +701,12 @@ if test "$op" = "platform-info" ; then
         echo $cpu_name
     elif test "$1" = "--os.cpu" ; then
         echo leopard.$cpu_name
+    elif test "$1" = "--bits" ; then
+        if test "$cpu_name" = "g5" ; then
+            echo 64
+        else
+            echo 32
+        fi
     fi
 
     exit 0

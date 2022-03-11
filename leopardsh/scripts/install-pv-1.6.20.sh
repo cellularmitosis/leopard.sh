@@ -34,8 +34,6 @@ upstream=https://distfiles.gentoo.org/distfiles/$package-$version.tar.bz2
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
-
 CFLAGS=$(leopard.sh -mcpu -O)
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"

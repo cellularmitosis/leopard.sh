@@ -34,8 +34,6 @@ upstream=https://distfiles.gentoo.org/distfiles/$package-$version.tar.bz2
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
-
 CFLAGS=$(tiger.sh -mcpu -O)
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"

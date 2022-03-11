@@ -23,11 +23,77 @@ ac_cv_func_clock_getcpuclockid=${ac_cv_func_clock_getcpuclockid=no}
 # checking for clock_getres... no
 ac_cv_func_clock_getres=${ac_cv_func_clock_getres=no}
 
+# checking for clock_gettime... no
+ac_cv_func_clock_gettime=${ac_cv_func_clock_gettime=no}
+
+# checking for clock_settime... no
+ac_cv_func_clock_settime=${ac_cv_func_clock_settime=no}
+
+# checking for dirfd... no
+ac_cv_func_dirfd=${ac_cv_func_dirfd=no}
+
+# checking for eaccess... no
+ac_cv_func_eaccess=${ac_cv_func_eaccess=no}
+
+# checking for fdatasync... no
+ac_cv_func_fdatasync=${ac_cv_func_fdatasync=no}
+
+# checking for fdopendir... no
+ac_cv_func_fdopendir=${ac_cv_func_fdopendir=no}
+
+# checking for __fpurge... no
+ac_cv_func___fpurge=${ac_cv_func___fpurge=no}
+
+# checking for __freading... no
+ac_cv_func___freading=${ac_cv_func___freading=no}
+
+# checking for _fseeki64... no
+ac_cv_func__fseeki64=${ac_cv_func__fseeki64=no}
+
+# checking for __fseterr... no
+ac_cv_func___fseterr=${ac_cv_func___fseterr=no}
+
+# checking for fstatat... no
+ac_cv_func_fstatat=${ac_cv_func_fstatat=no}
+
+# checking for futimens... no
+ac_cv_func_futimens=${ac_cv_func_futimens=no}
+
+# checking for futimesat... no
+ac_cv_func_futimesat=${ac_cv_func_futimesat=no}
+
+# checking for getexecname... no
+ac_cv_func_getexecname=${ac_cv_func_getexecname=no}
+
 # checking for open64... no
 ac_cv_func_open64=${ac_cv_func_open64=no}
 
+# checking for openat... no
+ac_cv_func_openat=${ac_cv_func_openat=no}
+
+# checking for mempcpy... no
+ac_cv_func_mempcpy=${ac_cv_func_mempcpy=no}
+
+# checking for memrchr... no
+ac_cv_func_memrchr=${ac_cv_func_memrchr=no}
+
+# checking for reallocarray... no
+ac_cv_func_reallocarray=${ac_cv_func_reallocarray=no}
+
+# checking for _set_invalid_parameter_handler... no
+ac_cv_func__set_invalid_parameter_handler=${ac_cv_func__set_invalid_parameter_handler=no}
+
 # checking for splice... no
 ac_cv_func_splice=${ac_cv_func_splice=no}
+
+# checking for strcmpi... no
+ac_cv_func_strcmpi=${ac_cv_func_strcmpi=no}
+
+# checking for strncmpi... no
+ac_cv_func_strncmpi=${ac_cv_func_strncmpi=no}
+
+# checking for strndup... no
+ac_cv_func_strndup=${ac_cv_func_strndup=no}
 
 # checking for strnlen... no
 ac_cv_func_strnlen=${ac_cv_func_strnlen=no}
@@ -38,11 +104,41 @@ ac_cv_func_stricmp=${ac_cv_func_stricmp=no}
 # checking for strnicmp... no
 ac_cv_func_strnicmp=${ac_cv_func_strnicmp=no}
 
+# checking for unlinkat... no
+ac_cv_func_unlinkat=${ac_cv_func_unlinkat=no}
+
+# checking for utimensat... no
+ac_cv_func_utimensat=${ac_cv_func_utimensat=no}
+
+# checking for vasnprintf... no
+ac_cv_func_vasnprintf=${ac_cv_func_vasnprintf=no}
+
+# checking for wcsnlen... no
+ac_cv_func_wcsnlen=${ac_cv_func_wcsnlen=no}
+
+# checking for __xpg_strerror_r... no
+ac_cv_func___xpg_strerror_r=${ac_cv_func___xpg_strerror_r=no}
+
 # checking whether __argv is declared... no
 ac_cv_have_decl___argv=${ac_cv_have_decl___argv=no}
 
-# checking whether _snprintf is declared... no
-ac_cv_have_decl__snprintf=${ac_cv_have_decl__snprintf=no}
+# checking whether execvpe is declared... no
+ac_cv_have_decl_execvpe=${ac_cv_have_decl_execvpe=no}
+
+# checking whether fcloseall is declared... no
+ac_cv_have_decl_fcloseall=${ac_cv_have_decl_fcloseall=no}
+
+# checking whether fdatasync is declared... no
+ac_cv_have_decl_fdatasync=${ac_cv_have_decl_fdatasync=no}
+
+# checking whether fdopendir is declared... no
+ac_cv_have_decl_fdopendir=${ac_cv_have_decl_fdopendir=no}
+
+# checking for features.h... no
+ac_cv_header_features_h=${ac_cv_header_features_h=no}
+
+# checking whether memrchr is declared... no
+ac_cv_have_decl_memrchr=${ac_cv_have_decl_memrchr=no}
 
 # checking whether program_invocation_name is declared... no
 ac_cv_have_decl_program_invocation_name=${ac_cv_have_decl_program_invocation_name=no}
@@ -50,17 +146,23 @@ ac_cv_have_decl_program_invocation_name=${ac_cv_have_decl_program_invocation_nam
 # checking whether program_invocation_short_name is declared... no
 ac_cv_have_decl_program_invocation_short_name=${ac_cv_have_decl_program_invocation_short_name=no}
 
-# checking whether stat file-mode macros are broken... no
-ac_cv_header_stat_broken=${ac_cv_header_stat_broken=no}
+# checking whether __sys_siglist is declared... no
+ac_cv_have_decl___sys_siglist=${ac_cv_have_decl___sys_siglist=no}
 
-# checking for stdio_ext.h... no
-ac_cv_header_stdio_ext_h=${ac_cv_header_stdio_ext_h=no}
+# checking whether _sys_siglist is declared... no
+ac_cv_have_decl__sys_siglist=${ac_cv_have_decl__sys_siglist=no}
 
-# checking for threads.h... no
-ac_cv_header_threads_h=${ac_cv_header_threads_h=no}
+# checking whether _snprintf is declared... no
+ac_cv_have_decl__snprintf=${ac_cv_have_decl__snprintf=no}
+
+# checking whether wcsdup is declared... no
+ac_cv_have_decl_wcsdup=${ac_cv_have_decl_wcsdup=no}
 
 # checking for conio.h... no
 ac_cv_header_conio_h=${ac_cv_header_conio_h=no}
+
+# checking for crtdefs.h... no
+ac_cv_header_crtdefs_h=${ac_cv_header_crtdefs_h=no}
 
 # checking for direct.h... no
 ac_cv_header_direct_h=${ac_cv_header_direct_h=no}
@@ -77,11 +179,50 @@ ac_cv_header_libintl_h=${ac_cv_header_libintl_h=no}
 # checking for malloc.h... no
 ac_cv_header_malloc_h=${ac_cv_header_malloc_h=no}
 
+# checking for minix/config.h... no
+ac_cv_header_minix_config_h=${ac_cv_header_minix_config_h=no}
+
 # checking for share.h... no
 ac_cv_header_share_h=${ac_cv_header_share_h=no}
 
+# checking whether stat file-mode macros are broken... no
+ac_cv_header_stat_broken=${ac_cv_header_stat_broken=no}
+
+# checking for stdio_ext.h... no
+ac_cv_header_stdio_ext_h=${ac_cv_header_stdio_ext_h=no}
+
+# checking for sys/bitypes.h... no
+ac_cv_header_sys_bitypes_h=${ac_cv_header_sys_bitypes_h=no}
+
+# checking for sys/inttypes.h... no
+ac_cv_header_sys_inttypes_h=${ac_cv_header_sys_inttypes_h=no}
+
+# checking for sys/loadavg.h... no
+ac_cv_header_sys_loadavg_h=${ac_cv_header_sys_loadavg_h=no}
+
 # checking for sys/utime.h... no
 ac_cv_header_sys_utime_h=${ac_cv_header_sys_utime_h=no}
+
+# checking for threads.h... no
+ac_cv_header_threads_h=${ac_cv_header_threads_h=no}
+
+# checking for vfork.h... no
+ac_cv_header_vfork_h=${ac_cv_header_vfork_h=no}
+
+# checking for error_at_line... no
+ac_cv_lib_error_at_line=${ac_cv_lib_error_at_line=no}
+
+# checking for struct stat.st_atim.tv_nsec... no
+ac_cv_member_struct_stat_st_atim_tv_nsec=${ac_cv_member_struct_stat_st_atim_tv_nsec=no}
+
+# checking for struct stat.st_birthtimespec.tv_nsec... no
+ac_cv_member_struct_stat_st_birthtim_tv_nsec=${ac_cv_member_struct_stat_st_birthtim_tv_nsec=no}
+
+# checking for struct stat.st_birthtimensec... no
+ac_cv_member_struct_stat_st_birthtimensec=${ac_cv_member_struct_stat_st_birthtimensec=no}
+
+# checking for struct stat.st_birthtimespec.tv_nsec... no
+ac_cv_member_struct_stat_st_birthtimespec_tv_nsec=${ac_cv_member_struct_stat_st_birthtimespec_tv_nsec=no}
 
 # checking for library containing clock_gettime... no
 ac_cv_search_clock_gettime=${ac_cv_search_clock_gettime=no}
@@ -91,6 +232,9 @@ ac_cv_should_define__xopen_source=${ac_cv_should_define__xopen_source=no}
 
 # checking for special C compiler options needed for large files... no
 ac_cv_sys_largefile_CC=${ac_cv_sys_largefile_CC=no}
+
+# checking for sighandler_t... no
+ac_cv_type_sighandler_t=${ac_cv_type_sighandler_t=no}
 
 # checking dependency style of gcc -std=gnu99... gcc3
 am_cv_CC_dependencies_compiler_type=${am_cv_CC_dependencies_compiler_type=gcc3}
@@ -134,26 +278,8 @@ lt_cv_prog_compiler_rtti_exceptions=${lt_cv_prog_compiler_rtti_exceptions=no}
 # checking how to convert powerpc-apple-darwin9.8.0 file names to powerpc-apple-darwin9.8.0 format... func_convert_file_noop
 lt_cv_to_host_file_cmd=${lt_cv_to_host_file_cmd=func_convert_file_noop}
 
-# checking for bit size of ptrdiff_t... 32
-gl_cv_bitsizeof_ptrdiff_t=${gl_cv_bitsizeof_ptrdiff_t=32}
-
-# checking for bit size of sig_atomic_t... 32
-gl_cv_bitsizeof_sig_atomic_t=${gl_cv_bitsizeof_sig_atomic_t=32}
-
-# checking for bit size of size_t... 32
-gl_cv_bitsizeof_size_t=${gl_cv_bitsizeof_size_t=32}
-
-# checking for bit size of wchar_t... 32
-gl_cv_bitsizeof_wchar_t=${gl_cv_bitsizeof_wchar_t=32}
-
-# checking for bit size of wint_t... 32
-gl_cv_bitsizeof_wint_t=${gl_cv_bitsizeof_wint_t=32}
-
-# checking where to find the exponent in a 'double'... word 0 bit 20
-gl_cv_cc_double_expbit0=${gl_cv_cc_double_expbit0='word 0 bit 20'}
-
-# checking where to find the exponent in a 'float'... word 0 bit 23
-gl_cv_cc_float_expbit0=${gl_cv_cc_float_expbit0='word 0 bit 23'}
+# checking whether the compiler produces multi-arch binaries... no
+gl_cv_c_multiarch=${gl_cv_c_multiarch=no}
 
 # checking for compiler option needed when checking for declarations... none
 gl_cv_compiler_check_decl_option=${gl_cv_compiler_check_decl_option=none}
@@ -167,17 +293,80 @@ gl_cv_decl_null_works=${gl_cv_decl_null_works=yes}
 # checking whether dirfd is a macro... yes
 gl_cv_func_dirfd_macro=${gl_cv_func_dirfd_macro=yes}
 
+# checking whether fcntl understands F_DUPFD_CLOEXEC... no
+gl_cv_func_fcntl_f_dupfd_cloexec=${gl_cv_func_fcntl_f_dupfd_cloexec=no}
+
+# checking whether fflush works on input streams... no
+gl_cv_func_fflush_stdin=${gl_cv_func_fflush_stdin=no}
+
+# checking whether fpurge works... no
+gl_cv_func_fpurge_works=${gl_cv_func_fpurge_works=no}
+
+# checking whether free is known to preserve errno... no
+gl_cv_func_free_preserves_errno=${gl_cv_func_free_preserves_errno=no}
+
+# checking whether frexpl works... no
+gl_cv_func_frexpl_works=${gl_cv_func_frexpl_works=no}
+
 # checking whether getopt is POSIX compatible... no
 gl_cv_func_getopt_posix=${gl_cv_func_getopt_posix=no}
 
 # checking for gettimeofday with POSIX signature... yes
 gl_cv_func_gettimeofday_posix_signature=${gl_cv_func_gettimeofday_posix_signature=yes}
 
+# checking whether ldexpl works... no
+gl_cv_func_ldexpl_works=${gl_cv_func_ldexpl_works=no}
+
+# checking whether lstat correctly handles trailing slash... no
+gl_cv_func_lstat_dereferences_slashed_symlink=${gl_cv_func_lstat_dereferences_slashed_symlink=no}
+
+# checking whether open recognizes a trailing slash... no
+gl_cv_func_open_slash=${gl_cv_func_open_slash=no}
+
+# checking whether printf supports the 'a' and 'A' directives... no
+gl_cv_func_printf_directive_a=${gl_cv_func_printf_directive_a=no}
+
+# checking whether printf survives out-of-memory conditions... no
+gl_cv_func_printf_enomem=${gl_cv_func_printf_enomem=no}
+
+# checking whether printf supports the zero flag correctly... no
+gl_cv_func_printf_flag_zero=${gl_cv_func_printf_flag_zero=no}
+
+# checking for signbit compiler built-ins... no
+gl_cv_func_signbit_builtins=${gl_cv_func_signbit_builtins=no}
+
+# checking whether stat handles trailing slashes on files... no
+gl_cv_func_stat_file_slash=${gl_cv_func_stat_file_slash=no}
+
+# checking whether strerror(0) succeeds... no
+gl_cv_func_strerror_0_works=${gl_cv_func_strerror_0_works=no}
+
+# checking whether unlink honors trailing slashes... no
+gl_cv_func_unlink_honors_slashes=${gl_cv_func_unlink_honors_slashes=no}
+
+# checking whether unlink of a parent directory fails as it should... no
+gl_cv_func_unlink_parent_fails=${gl_cv_func_unlink_parent_fails=no}
+
+# checking whether utime handles trailing slashes on files... no
+gl_cv_func_utime_file_slash=${gl_cv_func_utime_file_slash=no}
+
+# checking whether this system supports file names of any length... no
+gl_cv_have_unlimited_file_name_length=${gl_cv_have_unlimited_file_name_length=no}
+
 # checking whether the preprocessor supports include_next... yes
 gl_cv_have_include_next=${gl_cv_have_include_next=yes}
 
 # checking whether imported symbols can be declared weak... no
 gl_cv_have_weak=${gl_cv_have_weak=no}
+
+# checking for complete errno.h... no
+gl_cv_header_errno_h_complete=${gl_cv_header_errno_h_complete=no}
+
+# checking whether limits.h has WORD_BIT, BOOL_WIDTH etc.... no
+gl_cv_header_limits_width=${gl_cv_header_limits_width=no}
+
+# checking for working stdalign.h... no
+gl_cv_header_working_stdalign_h=${gl_cv_header_working_stdalign_h=no}
 
 # checking whether stdint.h conforms to C99... no
 gl_cv_header_working_stdint_h=${gl_cv_header_working_stdint_h=no}
@@ -203,14 +392,11 @@ gl_cv_prog_c_ignore_unused_libraries=${gl_cv_prog_c_ignore_unused_libraries=none
 # checking for alloca as a compiler built-in... yes
 gl_cv_rpl_alloca=${gl_cv_rpl_alloca=yes}
 
-# checking for 64-bit time_t with _TIME_BITS=64... no
-gl_cv_type_time_t_bits_macro=${gl_cv_type_time_t_bits_macro=no}
+# checking for TIME_UTC in <time.h>... no
+gl_cv_time_h_has_TIME_UTC=${gl_cv_time_h_has_TIME_UTC=no}
 
-# checking for time_t past the year 2038... no
-gl_cv_type_time_t_y2038=${gl_cv_type_time_t_y2038=no}
-
-# checking whether unlink of a parent directory fails as it should... no
-gl_cv_func_unlink_parent_fails=${gl_cv_func_unlink_parent_fails=no}
+# checking for good max_align_t... no
+gl_cv_type_max_align_t=${gl_cv_type_max_align_t=no}
 
 # checking for working fcntl.h... no (bad O_NOATIME)
 gl_cv_header_working_fcntl_h=${gl_cv_header_working_fcntl_h='no (bad O_NOATIME)'}

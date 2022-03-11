@@ -84,9 +84,6 @@ tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
 # 👇 EDIT HERE:
-cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
-
-# 👇 EDIT HERE:
 CC=gcc-4.2
 CXX=g++-4.2
 

@@ -8,6 +8,9 @@ ac_cv_c_compiler_gnu=${ac_cv_c_compiler_gnu=yes}
 # checking for an ANSI C-conforming const... yes
 ac_cv_c_const=${ac_cv_c_const=yes}
 
+# checking whether system uses MSDOS-style paths... no
+ac_cv_dos_paths=${ac_cv_dos_paths=no}
+
 # checking for access... yes
 ac_cv_func_access=${ac_cv_func_access=yes}
 
@@ -35,14 +38,11 @@ ac_cv_func_chmod=${ac_cv_func_chmod=yes}
 # checking for chown... yes
 ac_cv_func_chown=${ac_cv_func_chown=yes}
 
-# checking for clock_gettime... no
-ac_cv_func_clock_gettime=${ac_cv_func_clock_gettime=no}
-
-# checking for clock_settime... no
-ac_cv_func_clock_settime=${ac_cv_func_clock_settime=no}
-
 # checking for closedir... yes
 ac_cv_func_closedir=${ac_cv_func_closedir=yes}
+
+# checking whether closedir returns void... no
+ac_cv_func_closedir_void=${ac_cv_func_closedir_void=no}
 
 # checking for ctime... yes
 ac_cv_func_ctime=${ac_cv_func_ctime=yes}
@@ -50,20 +50,20 @@ ac_cv_func_ctime=${ac_cv_func_ctime=yes}
 # checking for difftime... yes
 ac_cv_func_difftime=${ac_cv_func_difftime=yes}
 
-# checking for dirfd... no
-ac_cv_func_dirfd=${ac_cv_func_dirfd=no}
+# checking for fdopen... yes
+ac_cv_func_fdopen=${ac_cv_func_fdopen=yes}
 
-# checking for __fpurge... no
-ac_cv_func___fpurge=${ac_cv_func___fpurge=no}
+# checking for dup... yes
+ac_cv_func_dup=${ac_cv_func_dup=yes}
 
-# checking for __freading... no
-ac_cv_func___freading=${ac_cv_func___freading=no}
+# checking for dup2... yes
+ac_cv_func_dup2=${ac_cv_func_dup2=yes}
 
-# checking for _fseeki64... no
-ac_cv_func__fseeki64=${ac_cv_func__fseeki64=no}
+# checking for fork... yes
+ac_cv_func_fork=${ac_cv_func_fork=yes}
 
-# checking for __fseterr... no
-ac_cv_func___fseterr=${ac_cv_func___fseterr=no}
+# checking for working fork... yes
+ac_cv_func_fork_works=${ac_cv_func_fork_works=yes}
 
 # checking for fchdir... yes
 ac_cv_func_fchdir=${ac_cv_func_fchdir=yes}
@@ -77,32 +77,20 @@ ac_cv_func_fchown=${ac_cv_func_fchown=yes}
 # checking for fcntl... yes
 ac_cv_func_fcntl=${ac_cv_func_fcntl=yes}
 
-# checking for fdatasync... no
-ac_cv_func_fdatasync=${ac_cv_func_fdatasync=no}
-
-# checking for fdopendir... no
-ac_cv_func_fdopendir=${ac_cv_func_fdopendir=no}
-
 # checking for fpurge... yes
 ac_cv_func_fpurge=${ac_cv_func_fpurge=yes}
 
 # checking for fstat... yes
 ac_cv_func_fstat=${ac_cv_func_fstat=yes}
 
-# checking for fstatat... no
-ac_cv_func_fstatat=${ac_cv_func_fstatat=no}
-
 # checking for fsync... yes
 ac_cv_func_fsync=${ac_cv_func_fsync=yes}
-
-# checking for futimens... no
-ac_cv_func_futimens=${ac_cv_func_futimens=no}
 
 # checking for futimes... yes
 ac_cv_func_futimes=${ac_cv_func_futimes=yes}
 
-# checking for futimesat... no
-ac_cv_func_futimesat=${ac_cv_func_futimesat=no}
+# checking for getcwd... yes
+ac_cv_func_getcwd=${ac_cv_func_getcwd=yes}
 
 # checking for getdtablesize... yes
 ac_cv_func_getdtablesize=${ac_cv_func_getdtablesize=yes}
@@ -110,8 +98,11 @@ ac_cv_func_getdtablesize=${ac_cv_func_getdtablesize=yes}
 # checking for getenv... yes
 ac_cv_func_getenv=${ac_cv_func_getenv=yes}
 
-# checking for getexecname... no
-ac_cv_func_getexecname=${ac_cv_func_getexecname=no}
+# checking for getgroups... yes
+ac_cv_func_getgroups=${ac_cv_func_getgroups=yes}
+
+# checking for getloadavg... yes
+ac_cv_func_getloadavg=${ac_cv_func_getloadavg=yes}
 
 # checking for getopt... yes
 ac_cv_func_getopt=${ac_cv_func_getopt=yes}
@@ -127,6 +118,9 @@ ac_cv_func_getpagesize=${ac_cv_func_getpagesize=yes}
 
 # checking for getprogname... yes
 ac_cv_func_getprogname=${ac_cv_func_getprogname=yes}
+
+# checking for getrlimit... yes
+ac_cv_func_getrlimit=${ac_cv_func_getrlimit=yes}
 
 # checking for getrusage... yes
 ac_cv_func_getrusage=${ac_cv_func_getrusage=yes}
@@ -170,14 +164,14 @@ ac_cv_func_memmove=${ac_cv_func_memmove=yes}
 # checking for memset... yes
 ac_cv_func_memset=${ac_cv_func_memset=yes}
 
-# checking for mempcpy... no
-ac_cv_func_mempcpy=${ac_cv_func_mempcpy=no}
-
-# checking for memrchr... no
-ac_cv_func_memrchr=${ac_cv_func_memrchr=no}
-
 # checking for mkdir... yes
 ac_cv_func_mkdir=${ac_cv_func_mkdir=yes}
+
+# checking for mkstemp... yes
+ac_cv_func_mkstemp=${ac_cv_func_mkstemp=yes}
+
+# checking for mktemp... yes
+ac_cv_func_mktemp=${ac_cv_func_mktemp=yes}
 
 # checking for mktime... yes
 ac_cv_func_mktime=${ac_cv_func_mktime=yes}
@@ -194,14 +188,20 @@ ac_cv_func_munmap=${ac_cv_func_munmap=yes}
 # checking for nl_langinfo... yes
 ac_cv_func_nl_langinfo=${ac_cv_func_nl_langinfo=yes}
 
-# checking for openat... no
-ac_cv_func_openat=${ac_cv_func_openat=no}
-
 # checking for opendir... yes
 ac_cv_func_opendir=${ac_cv_func_opendir=yes}
 
 # checking for pipe... yes
 ac_cv_func_pipe=${ac_cv_func_pipe=yes}
+
+# checking for posix_spawn... yes
+ac_cv_func_posix_spawn=${ac_cv_func_posix_spawn=yes}
+
+# checking for posix_spawnattr_setsigmask... yes
+ac_cv_func_posix_spawnattr_setsigmask=${ac_cv_func_posix_spawnattr_setsigmask=yes}
+
+# checking for pselect... yes
+ac_cv_func_pselect=${ac_cv_func_pselect=yes}
 
 # checking for qsort... yes
 ac_cv_func_qsort=${ac_cv_func_qsort=yes}
@@ -212,17 +212,41 @@ ac_cv_func_raise=${ac_cv_func_raise=yes}
 # checking for readdir... yes
 ac_cv_func_readdir=${ac_cv_func_readdir=yes}
 
-# checking for reallocarray... no
-ac_cv_func_reallocarray=${ac_cv_func_reallocarray=no}
+# checking for readlink... yes
+ac_cv_func_readlink=${ac_cv_func_readlink=yes}
+
+# checking for realpath... yes
+ac_cv_func_realpath=${ac_cv_func_realpath=yes}
 
 # checking for rmdir... yes
 ac_cv_func_rmdir=${ac_cv_func_rmdir=yes}
 
+# checking for setegid... yes
+ac_cv_func_setegid=${ac_cv_func_setegid=yes}
+
+# checking for seteuid... yes
+ac_cv_func_seteuid=${ac_cv_func_seteuid=yes}
+
 # checking for setjmp... yes
 ac_cv_func_setjmp=${ac_cv_func_setjmp=yes}
 
-# checking for _set_invalid_parameter_handler... no
-ac_cv_func__set_invalid_parameter_handler=${ac_cv_func__set_invalid_parameter_handler=no}
+# checking for setlinebuf... yes
+ac_cv_func_setlinebuf=${ac_cv_func_setlinebuf=yes}
+
+# checking for setregid... yes
+ac_cv_func_setregid=${ac_cv_func_setregid=yes}
+
+# checking for setreuid... yes
+ac_cv_func_setreuid=${ac_cv_func_setreuid=yes}
+
+# checking for setrlimit... yes
+ac_cv_func_setrlimit=${ac_cv_func_setrlimit=yes}
+
+# checking for setvbuf... yes
+ac_cv_func_setvbuf=${ac_cv_func_setvbuf=yes}
+
+# 
+ac_cv_func_setvbuf_reversed=${ac_cv_func_setvbuf_reversed=no}
 
 # checking for sigaction... yes
 ac_cv_func_sigaction=${ac_cv_func_sigaction=yes}
@@ -239,6 +263,9 @@ ac_cv_func_siginterrupt=${ac_cv_func_siginterrupt=yes}
 # checking for sigprocmask... yes
 ac_cv_func_sigprocmask=${ac_cv_func_sigprocmask=yes}
 
+# checking for sigsetmask... yes
+ac_cv_func_sigsetmask=${ac_cv_func_sigsetmask=yes}
+
 # checking for snprintf... yes
 ac_cv_func_snprintf=${ac_cv_func_snprintf=yes}
 
@@ -253,6 +280,9 @@ ac_cv_func_strcasecmp=${ac_cv_func_strcasecmp=yes}
 
 # checking for strchr... yes
 ac_cv_func_strchr=${ac_cv_func_strchr=yes}
+
+# checking for working strcoll... yes
+ac_cv_func_strcoll_works=${ac_cv_func_strcoll_works=yes}
 
 # checking for strdup... yes
 ac_cv_func_strdup=${ac_cv_func_strdup=yes}
@@ -275,6 +305,9 @@ ac_cv_func_strncasecmp=${ac_cv_func_strncasecmp=yes}
 # checking for strrchr... yes
 ac_cv_func_strrchr=${ac_cv_func_strrchr=yes}
 
+# checking for strsignal... yes
+ac_cv_func_strsignal=${ac_cv_func_strsignal=yes}
+
 # checking for strstr... yes
 ac_cv_func_strstr=${ac_cv_func_strstr=yes}
 
@@ -284,8 +317,8 @@ ac_cv_func_symlink=${ac_cv_func_symlink=yes}
 # checking for time... yes
 ac_cv_func_time=${ac_cv_func_time=yes}
 
-# checking for unlinkat... no
-ac_cv_func_unlinkat=${ac_cv_func_unlinkat=no}
+# checking for ttyname... yes
+ac_cv_func_ttyname=${ac_cv_func_ttyname=yes}
 
 # checking for umask... yes
 ac_cv_func_umask=${ac_cv_func_umask=yes}
@@ -293,14 +326,20 @@ ac_cv_func_umask=${ac_cv_func_umask=yes}
 # checking for utime... yes
 ac_cv_func_utime=${ac_cv_func_utime=yes}
 
-# checking for utimensat... no
-ac_cv_func_utimensat=${ac_cv_func_utimensat=no}
+# checking for vfork... yes
+ac_cv_func_vfork=${ac_cv_func_vfork=yes}
 
-# checking for vasnprintf... no
-ac_cv_func_vasnprintf=${ac_cv_func_vasnprintf=no}
+# checking for working vfork... yes
+ac_cv_func_vfork_works=${ac_cv_func_vfork_works=yes}
 
 # checking for vsnprintf... yes
 ac_cv_func_vsnprintf=${ac_cv_func_vsnprintf=yes}
+
+# checking for wait3... yes
+ac_cv_func_wait3=${ac_cv_func_wait3=yes}
+
+# checking for waitpid... yes
+ac_cv_func_waitpid=${ac_cv_func_waitpid=yes}
 
 # checking for wcrtomb... yes
 ac_cv_func_wcrtomb=${ac_cv_func_wcrtomb=yes}
@@ -308,38 +347,32 @@ ac_cv_func_wcrtomb=${ac_cv_func_wcrtomb=yes}
 # checking for wcslen... yes
 ac_cv_func_wcslen=${ac_cv_func_wcslen=yes}
 
-# checking for wcsnlen... no
-ac_cv_func_wcsnlen=${ac_cv_func_wcsnlen=no}
-
-# checking for __xpg_strerror_r... no
-ac_cv_func___xpg_strerror_r=${ac_cv_func___xpg_strerror_r=no}
-
 # checking whether alarm is declared... yes
 ac_cv_have_decl_alarm=${ac_cv_have_decl_alarm=yes}
+
+# checking whether bsd_signal is declared... yes
+ac_cv_have_decl_bsd_signal=${ac_cv_have_decl_bsd_signal=yes}
 
 # checking whether dirfd is declared... yes
 ac_cv_have_decl_dirfd=${ac_cv_have_decl_dirfd=yes}
 
+# checking whether dlerror is declared... yes
+ac_cv_have_decl_dlerror=${ac_cv_have_decl_dlerror=yes}
+
+# checking whether dlopen is declared... yes
+ac_cv_have_decl_dlopen=${ac_cv_have_decl_dlopen=yes}
+
+# checking whether dlsym is declared... yes
+ac_cv_have_decl_dlsym=${ac_cv_have_decl_dlsym=yes}
+
 # checking whether ecvt is declared... yes
 ac_cv_have_decl_ecvt=${ac_cv_have_decl_ecvt=yes}
-
-# checking whether execvpe is declared... no
-ac_cv_have_decl_execvpe=${ac_cv_have_decl_execvpe=no}
 
 # checking whether fchdir is declared... yes
 ac_cv_have_decl_fchdir=${ac_cv_have_decl_fchdir=yes}
 
-# checking whether fcloseall is declared... no
-ac_cv_have_decl_fcloseall=${ac_cv_have_decl_fcloseall=no}
-
 # checking whether fcvt is declared... yes
 ac_cv_have_decl_fcvt=${ac_cv_have_decl_fcvt=yes}
-
-# checking whether fdatasync is declared... no
-ac_cv_have_decl_fdatasync=${ac_cv_have_decl_fdatasync=no}
-
-# checking whether fdopendir is declared... no
-ac_cv_have_decl_fdopendir=${ac_cv_have_decl_fdopendir=no}
 
 # checking whether fpurge is declared... yes
 ac_cv_have_decl_fpurge=${ac_cv_have_decl_fpurge=yes}
@@ -359,8 +392,8 @@ ac_cv_have_decl_gcvt=${ac_cv_have_decl_gcvt=yes}
 # checking whether getdtablesize is declared... yes
 ac_cv_have_decl_getdtablesize=${ac_cv_have_decl_getdtablesize=yes}
 
-# checking whether memrchr is declared... no
-ac_cv_have_decl_memrchr=${ac_cv_have_decl_memrchr=no}
+# checking whether getloadavg is declared... yes
+ac_cv_have_decl_getloadavg=${ac_cv_have_decl_getloadavg=yes}
 
 # checking whether strdup is declared... yes
 ac_cv_have_decl_strdup=${ac_cv_have_decl_strdup=yes}
@@ -368,14 +401,11 @@ ac_cv_have_decl_strdup=${ac_cv_have_decl_strdup=yes}
 # checking whether strerror_r is declared... yes
 ac_cv_have_decl_strerror_r=${ac_cv_have_decl_strerror_r=yes}
 
-# checking whether wcsdup is declared... no
-ac_cv_have_decl_wcsdup=${ac_cv_have_decl_wcsdup=no}
+# checking whether sys_siglist is declared... yes
+ac_cv_have_decl_sys_siglist=${ac_cv_have_decl_sys_siglist=yes}
 
 # checking for assert.h... yes
 ac_cv_header_assert_h=${ac_cv_header_assert_h=yes}
-
-# checking for crtdefs.h... no
-ac_cv_header_crtdefs_h=${ac_cv_header_crtdefs_h=no}
 
 # checking for ctype.h... yes
 ac_cv_header_ctype_h=${ac_cv_header_ctype_h=yes}
@@ -394,9 +424,6 @@ ac_cv_header_errno_h=${ac_cv_header_errno_h=yes}
 
 # checking for fcntl.h... yes
 ac_cv_header_fcntl_h=${ac_cv_header_fcntl_h=yes}
-
-# checking for features.h... no
-ac_cv_header_features_h=${ac_cv_header_features_h=no}
 
 # checking for float.h... yes
 ac_cv_header_float_h=${ac_cv_header_float_h=yes}
@@ -422,9 +449,6 @@ ac_cv_header_math_h=${ac_cv_header_math_h=yes}
 # checking for memory.h... yes
 ac_cv_header_memory_h=${ac_cv_header_memory_h=yes}
 
-# checking for minix/config.h... no
-ac_cv_header_minix_config_h=${ac_cv_header_minix_config_h=no}
-
 # checking for pthread.h... yes
 ac_cv_header_pthread_h=${ac_cv_header_pthread_h=yes}
 
@@ -433,6 +457,9 @@ ac_cv_header_setjmp_h=${ac_cv_header_setjmp_h=yes}
 
 # checking for signal.h... yes
 ac_cv_header_signal_h=${ac_cv_header_signal_h=yes}
+
+# checking for spawn.h... yes
+ac_cv_header_spawn_h=${ac_cv_header_spawn_h=yes}
 
 # checking for stdarg.h... yes
 ac_cv_header_stdarg_h=${ac_cv_header_stdarg_h=yes}
@@ -461,14 +488,11 @@ ac_cv_header_string_h=${ac_cv_header_string_h=yes}
 # checking for strings.h... yes
 ac_cv_header_strings_h=${ac_cv_header_strings_h=yes}
 
-# checking for sys/bitypes.h... no
-ac_cv_header_sys_bitypes_h=${ac_cv_header_sys_bitypes_h=no}
-
 # checking for sys/cdefs.h... yes
 ac_cv_header_sys_cdefs_h=${ac_cv_header_sys_cdefs_h=yes}
 
-# checking for sys/inttypes.h... no
-ac_cv_header_sys_inttypes_h=${ac_cv_header_sys_inttypes_h=no}
+# checking for sys/file.h... yes
+ac_cv_header_sys_file_h=${ac_cv_header_sys_file_h=yes}
 
 # checking for sys/ipc.h... yes
 ac_cv_header_sys_ipc_h=${ac_cv_header_sys_ipc_h=yes}
@@ -485,6 +509,9 @@ ac_cv_header_sys_resource_h=${ac_cv_header_sys_resource_h=yes}
 # checking for sys/sdt.h... yes
 ac_cv_header_sys_sdt_h=${ac_cv_header_sys_sdt_h=yes}
 
+ # checking for sys/select.h... yes
+ac_cv_header_sys_select_h=${ac_cv_header_sys_select_h=yes}
+
 # checking for sys/socket.h... yes
 ac_cv_header_sys_socket_h=${ac_cv_header_sys_socket_h=yes}
 
@@ -493,6 +520,9 @@ ac_cv_header_sys_stat_h=${ac_cv_header_sys_stat_h=yes}
 
 # checking for sys/time.h... yes
 ac_cv_header_sys_time_h=${ac_cv_header_sys_time_h=yes}
+
+# checking for sys/timeb.h... yes
+ac_cv_header_sys_timeb_h=${ac_cv_header_sys_timeb_h=yes}
 
 # checking for sys/types.h... yes
 ac_cv_header_sys_types_h=${ac_cv_header_sys_types_h=yes}
@@ -515,29 +545,17 @@ ac_cv_header_utime_h=${ac_cv_header_utime_h=yes}
 # checking for wchar.h... yes
 ac_cv_header_wchar_h=${ac_cv_header_wchar_h=yes}
 
-# checking for error_at_line... no
-ac_cv_lib_error_at_line=${ac_cv_lib_error_at_line=no}
-
 # checking for pthread_kill in -lpthread... yes
 ac_cv_lib_pthread_pthread_kill=${ac_cv_lib_pthread_pthread_kill=yes}
+
+# checking for struct dirent.d_type... yes
+ac_cv_member_struct_dirent_d_type=${ac_cv_member_struct_dirent_d_type=yes}
 
 # checking for struct sigaction.sa_sigaction... yes
 ac_cv_member_struct_sigaction_sa_sigaction=${ac_cv_member_struct_sigaction_sa_sigaction=yes}
 
-# checking for struct stat.st_atim.tv_nsec... no
-ac_cv_member_struct_stat_st_atim_tv_nsec=${ac_cv_member_struct_stat_st_atim_tv_nsec=no}
-
 # checking for struct stat.st_atimespec.tv_nsec... yes
 ac_cv_member_struct_stat_st_atimespec_tv_nsec=${ac_cv_member_struct_stat_st_atimespec_tv_nsec=yes}
-
-# checking for struct stat.st_birthtimespec.tv_nsec... no
-ac_cv_member_struct_stat_st_birthtim_tv_nsec=${ac_cv_member_struct_stat_st_birthtim_tv_nsec=no}
-
-# checking for struct stat.st_birthtimensec... no
-ac_cv_member_struct_stat_st_birthtimensec=${ac_cv_member_struct_stat_st_birthtimensec=no}
-
-# checking for struct stat.st_birthtimespec.tv_nsec... no
-ac_cv_member_struct_stat_st_birthtimespec_tv_nsec=${ac_cv_member_struct_stat_st_birthtimespec_tv_nsec=no}
 
 # checking for suffix of object files... o
 ac_cv_objext=${ac_cv_objext=o}
@@ -545,8 +563,20 @@ ac_cv_objext=${ac_cv_objext=o}
 # checking whether it is safe to define __EXTENSIONS__... yes
 ac_cv_safe_to_define___extensions__=${ac_cv_safe_to_define___extensions__=yes}
 
+# checking for library containing dlopen... none required
+ac_cv_search_dlopen=${ac_cv_search_dlopen='none required'}
+
+# checking for library containing getpwnam... none required
+ac_cv_search_getpwnam=${ac_cv_search_getpwnam='none required'}
+
 # checking for library containing opendir... none required
 ac_cv_search_opendir=${ac_cv_search_opendir='none required'}
+
+# checking for library containing strerror... none required
+ac_cv_search_strerror=${ac_cv_search_strerror='none required'}
+
+# checking for nanoseconds field of struct stat... st_mtimespec.tv_nsec
+ac_cv_struct_st_mtim_nsec=${ac_cv_struct_st_mtim_nsec=st_mtimespec.tv_nsec}
 
 # checking for _FILE_OFFSET_BITS value needed for large files... no
 ac_cv_sys_file_offset_bits=${ac_cv_sys_file_offset_bits=no}
@@ -575,9 +605,6 @@ ac_cv_type_pthread_rwlock_t=${ac_cv_type_pthread_rwlock_t=yes}
 # checking for ptrdiff_t... yes
 ac_cv_type_ptrdiff_t=${ac_cv_type_ptrdiff_t=yes}
 
-# checking for sighandler_t... no
-ac_cv_type_sighandler_t=${ac_cv_type_sighandler_t=no}
-
 # checking return type of signal handlers... void
 ac_cv_type_signal=${ac_cv_type_signal=void}
 
@@ -587,8 +614,17 @@ ac_cv_type_sigset_t=${ac_cv_type_sigset_t=yes}
 # checking for size_t... yes
 ac_cv_type_size_t=${ac_cv_type_size_t=yes}
 
+# checking for ssize_t... yes
+ac_cv_type_ssize_t=${ac_cv_type_ssize_t=yes}
+
 # checking for uid_t in sys/types.h... yes
 ac_cv_type_uid_t=${ac_cv_type_uid_t=yes}
+
+# checking for uintmax_t... yes
+ac_cv_type_uintmax_t=${ac_cv_type_uintmax_t=yes}
+
+# checking for unsigned long long int... yes
+ac_cv_type_unsigned_long_long_int=${ac_cv_type_unsigned_long_long_int=yes}
 
 # checking for volatile sig_atomic_t... yes
 ac_cv_type_volatile_sig_atomic_t=${ac_cv_type_volatile_sig_atomic_t=yes}
@@ -599,9 +635,6 @@ ac_cv_working_alloca_h=${ac_cv_working_alloca_h=yes}
 # checking for Minix Amsterdam compiler... no
 gl_cv_c_amsterdam_compiler=${gl_cv_c_amsterdam_compiler=no}
 
-# checking whether the compiler produces multi-arch binaries... no
-gl_cv_c_multiarch=${gl_cv_c_multiarch=no}
-
 # checking whether // is distinct from /... no
 gl_cv_double_slash_root=${gl_cv_double_slash_root=no}
 
@@ -611,23 +644,11 @@ gl_cv_func_dup2_works=${gl_cv_func_dup2_works=yes}
 # checking whether dup works... yes
 gl_cv_func_dup_works=${gl_cv_func_dup_works=yes}
 
-# checking whether fcntl understands F_DUPFD_CLOEXEC... no
-gl_cv_func_fcntl_f_dupfd_cloexec=${gl_cv_func_fcntl_f_dupfd_cloexec=no}
-
 # checking whether fcntl handles F_DUPFD correctly... yes
 gl_cv_func_fcntl_f_dupfd_works=${gl_cv_func_fcntl_f_dupfd_works=yes}
 
-# checking whether fflush works on input streams... no
-gl_cv_func_fflush_stdin=${gl_cv_func_fflush_stdin=no}
-
 # 
 gl_cv_func_fprintf_posix=${gl_cv_func_fprintf_posix=no}
-
-# checking whether fpurge works... no
-gl_cv_func_fpurge_works=${gl_cv_func_fpurge_works=no}
-
-# checking whether free is known to preserve errno... no
-gl_cv_func_free_preserves_errno=${gl_cv_func_free_preserves_errno=no}
 
 # checking whether frexp() can be used without linking with libm... yes
 gl_cv_func_frexp_no_libm=${gl_cv_func_frexp_no_libm=yes}
@@ -637,9 +658,6 @@ gl_cv_func_frexp_works=${gl_cv_func_frexp_works=yes}
 
 # checking whether frexpl() can be used without linking with libm... yes
 gl_cv_func_frexpl_no_libm=${gl_cv_func_frexpl_no_libm=yes}
-
-# checking whether frexpl works... no
-gl_cv_func_frexpl_works=${gl_cv_func_frexpl_works=no}
 
 # checking for fseeko... yes
 gl_cv_func_fseeko=${gl_cv_func_fseeko=yes}
@@ -683,14 +701,8 @@ gl_cv_func_ldexp_no_libm=${gl_cv_func_ldexp_no_libm=yes}
 # checking whether ldexpl() can be used without linking with libm... yes
 gl_cv_func_ldexpl_no_libm=${gl_cv_func_ldexpl_no_libm=yes}
 
-# checking whether ldexpl works... no
-gl_cv_func_ldexpl_works=${gl_cv_func_ldexpl_works=no}
-
 # checking whether lseek detects pipes... yes
 gl_cv_func_lseek_pipe=${gl_cv_func_lseek_pipe=yes}
-
-# checking whether lstat correctly handles trailing slash... no
-gl_cv_func_lstat_dereferences_slashed_symlink=${gl_cv_func_lstat_dereferences_slashed_symlink=no}
 
 # 
 gl_cv_func_malloc_0_nonnull=${gl_cv_func_malloc_0_nonnull=1}
@@ -701,17 +713,11 @@ gl_cv_func_malloc_posix=${gl_cv_func_malloc_posix=yes}
 # checking whether memchr works... yes
 gl_cv_func_memchr_works=${gl_cv_func_memchr_works=yes}
 
-# checking whether open recognizes a trailing slash... no
-gl_cv_func_open_slash=${gl_cv_func_open_slash=no}
-
 # checking whether perror matches strerror... yes
 gl_cv_func_perror_works=${gl_cv_func_perror_works=yes}
 
 # checking which flavor of printf attribute matches inttypes macros... system
 gl_cv_func_printf_attribute_flavor=${gl_cv_func_printf_attribute_flavor=system}
-
-# checking whether printf supports the 'a' and 'A' directives... no
-gl_cv_func_printf_directive_a=${gl_cv_func_printf_directive_a=no}
 
 # checking whether printf supports the 'f' directive... yes
 gl_cv_func_printf_directive_f=${gl_cv_func_printf_directive_f=yes}
@@ -722,17 +728,11 @@ gl_cv_func_printf_directive_ls=${gl_cv_func_printf_directive_ls=yes}
 # checking whether printf supports the 'n' directive... yes
 gl_cv_func_printf_directive_n=${gl_cv_func_printf_directive_n=yes}
 
-# checking whether printf survives out-of-memory conditions... no
-gl_cv_func_printf_enomem=${gl_cv_func_printf_enomem=no}
-
 # checking whether printf supports the grouping flag... yes
 gl_cv_func_printf_flag_grouping=${gl_cv_func_printf_flag_grouping=yes}
 
 # checking whether printf supports the left-adjust flag correctly... yes
 gl_cv_func_printf_flag_leftadjust=${gl_cv_func_printf_flag_leftadjust=yes}
-
-# checking whether printf supports the zero flag correctly... no
-gl_cv_func_printf_flag_zero=${gl_cv_func_printf_flag_zero=no}
 
 # checking whether printf supports infinite 'double' arguments... yes
 gl_cv_func_printf_infinite=${gl_cv_func_printf_infinite=yes}
@@ -758,38 +758,20 @@ gl_cv_func_rmdir_works=${gl_cv_func_rmdir_works=yes}
 # checking for signbit macro... yes
 gl_cv_func_signbit=${gl_cv_func_signbit=yes}
 
-# checking for signbit compiler built-ins... no
-gl_cv_func_signbit_builtins=${gl_cv_func_signbit_builtins=no}
-
 # checking whether snprintf returns a byte count as in C99... yes
 gl_cv_func_snprintf_retval_c99=${gl_cv_func_snprintf_retval_c99=yes}
 
 # checking whether snprintf truncates the result as in C99... yes
 gl_cv_func_snprintf_truncation_c99=${gl_cv_func_snprintf_truncation_c99=yes}
 
-# checking whether stat handles trailing slashes on files... no
-gl_cv_func_stat_file_slash=${gl_cv_func_stat_file_slash=no}
-
-# checking whether strerror(0) succeeds... no
-gl_cv_func_strerror_0_works=${gl_cv_func_strerror_0_works=no}
-
 # checking whether ungetc works on arbitrary bytes... yes
 gl_cv_func_ungetc_works=${gl_cv_func_ungetc_works=yes}
-
-# checking whether unlink honors trailing slashes... no
-gl_cv_func_unlink_honors_slashes=${gl_cv_func_unlink_honors_slashes=no}
-
-# checking whether utime handles trailing slashes on files... no
-gl_cv_func_utime_file_slash=${gl_cv_func_utime_file_slash=no}
 
 # 
 gl_cv_func_vfprintf_posix=${gl_cv_func_vfprintf_posix=no}
 
 # checking whether the utimes function works... yes
 gl_cv_func_working_utimes=${gl_cv_func_working_utimes=yes}
-
-# checking whether this system supports file names of any length... no
-gl_cv_have_unlimited_file_name_length=${gl_cv_have_unlimited_file_name_length=no}
 
 # checking for EMULTIHOP value... yes
 gl_cv_header_errno_h_EMULTIHOP=${gl_cv_header_errno_h_EMULTIHOP=yes}
@@ -800,14 +782,8 @@ gl_cv_header_errno_h_ENOLINK=${gl_cv_header_errno_h_ENOLINK=yes}
 # checking for EOVERFLOW value... yes
 gl_cv_header_errno_h_EOVERFLOW=${gl_cv_header_errno_h_EOVERFLOW=yes}
 
-# checking for complete errno.h... no
-gl_cv_header_errno_h_complete=${gl_cv_header_errno_h_complete=no}
-
 # checking for inttypes.h... yes
 gl_cv_header_inttypes_h=${gl_cv_header_inttypes_h=yes}
-
-# checking whether limits.h has WORD_BIT, BOOL_WIDTH etc.... no
-gl_cv_header_limits_width=${gl_cv_header_limits_width=no}
 
 # checking whether HUGE_VAL works... yes
 gl_cv_header_math_huge_val_works=${gl_cv_header_math_huge_val_works=yes}
@@ -820,9 +796,6 @@ gl_cv_header_stdint_h=${gl_cv_header_stdint_h=yes}
 
 # checking whether <wchar.h> uses 'inline' correctly... yes
 gl_cv_header_wchar_h_correct_inline=${gl_cv_header_wchar_h_correct_inline=yes}
-
-# checking for working stdalign.h... no
-gl_cv_header_working_stdalign_h=${gl_cv_header_working_stdalign_h=no}
 
 # checking whether <sys/param.h> defines MIN and MAX... yes
 gl_cv_minmax_in_sys_param_h=${gl_cv_minmax_in_sys_param_h=yes}
@@ -851,12 +824,6 @@ gl_cv_sys_struct_timeval=${gl_cv_sys_struct_timeval=yes}
 # checking for wide-enough struct timeval.tv_sec member... yes
 gl_cv_sys_struct_timeval_tv_sec=${gl_cv_sys_struct_timeval_tv_sec=yes}
 
-# checking for TIME_UTC in <time.h>... no
-gl_cv_time_h_has_TIME_UTC=${gl_cv_time_h_has_TIME_UTC=no}
-
-# checking for good max_align_t... no
-gl_cv_type_max_align_t=${gl_cv_type_max_align_t=no}
-
 # 
 gl_cv_type_ptrdiff_t_signed=${gl_cv_type_ptrdiff_t_signed=yes}
 
@@ -871,12 +838,6 @@ gl_cv_type_sig_atomic_t_suffix=${gl_cv_type_sig_atomic_t_suffix=}
 
 # checking for sigset_t... yes
 gl_cv_type_sigset_t=${gl_cv_type_sigset_t=yes}
-
-# 
-gl_cv_type_size_t_signed=${gl_cv_type_size_t_signed=no}
-
-# 
-gl_cv_type_size_t_suffix=${gl_cv_type_size_t_suffix=ul}
 
 # checking whether wchar_t is signed... yes
 gl_cv_type_wchar_t_signed=${gl_cv_type_wchar_t_signed=yes}
