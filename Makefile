@@ -12,6 +12,8 @@ md5s:
 	cd dist/orig && make
 	cd leopardsh/scripts && make
 	cd tigersh/scripts && make
+	cd leopardsh/config.cache && make
+	cd tigersh/config.cache && make
 	utils/generate-manifest.sh
 
 dependency-graphs:
@@ -27,6 +29,8 @@ clean:
 	cd dist/orig && make clean
 	cd leopardsh/scripts && make clean
 	cd tigersh/scripts && make clean
+	cd leopardsh/config.cache && make clean
+	cd tigersh/config.cache && make clean
 	rm -f md5s.manifest md5s.manifest.gz
 	cd leopardsh/deps && make clean
 	cd tigersh/deps && make clean
