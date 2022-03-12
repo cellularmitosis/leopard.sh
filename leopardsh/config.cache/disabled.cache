@@ -8,11 +8,62 @@ ac_cv_target=${ac_cv_target=powerpc-apple-darwin9.8.0}
 # checking host system type... powerpc-apple-darwin9.8.0
 ac_cv_host=${ac_cv_host=powerpc-apple-darwin9.8.0}
 
+# checking whether we are using the GNU C++ compiler... yes
+ac_cv_cxx_compiler_gnu=${ac_cv_cxx_compiler_gnu=yes}
+
 # checking for C/C++ restrict keyword... no
 ac_cv_c_restrict=${ac_cv_c_restrict=no}
 
 # checking for gcc -std=gnu99 options needed to detect all undeclared functions... none needed
 ac_cv_c_undeclared_builtin_options=${ac_cv_c_undeclared_builtin_options='none needed'}
+
+# checking for __fpurge... no
+ac_cv_func___fpurge=${ac_cv_func___fpurge=no}
+
+# checking for __freading... no
+ac_cv_func___freading=${ac_cv_func___freading=no}
+
+# checking for __fseterr... no
+ac_cv_func___fseterr=${ac_cv_func___fseterr=no}
+
+# checking for __xpg_strerror_r... no
+ac_cv_func___xpg_strerror_r=${ac_cv_func___xpg_strerror_r=no}
+
+# checking for _fseeki64... no
+ac_cv_func__fseeki64=${ac_cv_func__fseeki64=no}
+
+# checking for _i64toa... no
+ac_cv_func__i64toa=${ac_cv_func__i64toa=no}
+
+# checking for _ltoa... no
+ac_cv_func__ltoa=${ac_cv_func__ltoa=no}
+
+# checking for _set_invalid_parameter_handler... no
+ac_cv_func__set_invalid_parameter_handler=${ac_cv_func__set_invalid_parameter_handler=no}
+
+# checking for _stricmp... no
+ac_cv_func__stricmp=${ac_cv_func__stricmp=no}
+
+# checking for _strlwr... no
+ac_cv_func__strlwr=${ac_cv_func__strlwr=no}
+
+# checking for _strnicmp... no
+ac_cv_func__strnicmp=${ac_cv_func__strnicmp=no}
+
+# checking for _strrev... no
+ac_cv_func__strrev=${ac_cv_func__strrev=no}
+
+# checking for _strupr... no
+ac_cv_func__strupr=${ac_cv_func__strupr=no}
+
+# checking for _ui64toa... no
+ac_cv_func__ui64toa=${ac_cv_func__ui64toa=no}
+
+# checking for _uitoa... no
+ac_cv_func__uitoa=${ac_cv_func__uitoa=no}
+
+# checking for _ultoa... no
+ac_cv_func__ultoa=${ac_cv_func__ultoa=no}
 
 # checking for alloca... no
 ac_cv_func_alloca=${ac_cv_func_alloca=no}
@@ -35,23 +86,14 @@ ac_cv_func_dirfd=${ac_cv_func_dirfd=no}
 # checking for eaccess... no
 ac_cv_func_eaccess=${ac_cv_func_eaccess=no}
 
+# checking for elf_aux_info... no
+ac_cv_func_elf_aux_info=${ac_cv_func_elf_aux_info=no}
+
 # checking for fdatasync... no
 ac_cv_func_fdatasync=${ac_cv_func_fdatasync=no}
 
 # checking for fdopendir... no
 ac_cv_func_fdopendir=${ac_cv_func_fdopendir=no}
-
-# checking for __fpurge... no
-ac_cv_func___fpurge=${ac_cv_func___fpurge=no}
-
-# checking for __freading... no
-ac_cv_func___freading=${ac_cv_func___freading=no}
-
-# checking for _fseeki64... no
-ac_cv_func__fseeki64=${ac_cv_func__fseeki64=no}
-
-# checking for __fseterr... no
-ac_cv_func___fseterr=${ac_cv_func___fseterr=no}
 
 # checking for fstatat... no
 ac_cv_func_fstatat=${ac_cv_func_fstatat=no}
@@ -62,8 +104,17 @@ ac_cv_func_futimens=${ac_cv_func_futimens=no}
 # checking for futimesat... no
 ac_cv_func_futimesat=${ac_cv_func_futimesat=no}
 
+# checking for getauxval... no
+ac_cv_func_getauxval=${ac_cv_func_getauxval=no}
+
 # checking for getexecname... no
 ac_cv_func_getexecname=${ac_cv_func_getexecname=no}
+
+# checking for iconv... no
+ac_cv_func_iconv=${ac_cv_func_iconv=no}
+
+# checking for itoa... no
+ac_cv_func_itoa=${ac_cv_func_itoa=no}
 
 # checking for open64... no
 ac_cv_func_open64=${ac_cv_func_open64=no}
@@ -79,9 +130,6 @@ ac_cv_func_memrchr=${ac_cv_func_memrchr=no}
 
 # checking for reallocarray... no
 ac_cv_func_reallocarray=${ac_cv_func_reallocarray=no}
-
-# checking for _set_invalid_parameter_handler... no
-ac_cv_func__set_invalid_parameter_handler=${ac_cv_func__set_invalid_parameter_handler=no}
 
 # checking for splice... no
 ac_cv_func_splice=${ac_cv_func_splice=no}
@@ -115,9 +163,6 @@ ac_cv_func_vasnprintf=${ac_cv_func_vasnprintf=no}
 
 # checking for wcsnlen... no
 ac_cv_func_wcsnlen=${ac_cv_func_wcsnlen=no}
-
-# checking for __xpg_strerror_r... no
-ac_cv_func___xpg_strerror_r=${ac_cv_func___xpg_strerror_r=no}
 
 # checking whether __argv is declared... no
 ac_cv_have_decl___argv=${ac_cv_have_decl___argv=no}

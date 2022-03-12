@@ -2,6 +2,12 @@
 # checking whether byte ordering is bigendian... yes
 ac_cv_c_bigendian=${ac_cv_c_bigendian=yes}
 
+# checking for inline... inline
+ac_cv_c_inline=${ac_cv_c_inline=inline}
+
+# checking for working volatile... yes
+ac_cv_c_volatile=${ac_cv_c_volatile=yes}
+
 # checking whether the compiler supports GNU C... yes
 ac_cv_c_compiler_gnu=${ac_cv_c_compiler_gnu=yes}
 
@@ -10,6 +16,9 @@ ac_cv_c_const=${ac_cv_c_const=yes}
 
 # checking whether system uses MSDOS-style paths... no
 ac_cv_dos_paths=${ac_cv_dos_paths=no}
+
+# checking for abs... yes
+ac_cv_func_abs=${ac_cv_func_abs=yes}
 
 # checking for access... yes
 ac_cv_func_access=${ac_cv_func_access=yes}
@@ -20,6 +29,9 @@ ac_cv_func_alloca_works=${ac_cv_func_alloca_works=yes}
 # checking for atexit... yes
 ac_cv_func_atexit=${ac_cv_func_atexit=yes}
 
+# checking for atof... yes
+ac_cv_func_atof=${ac_cv_func_atof=yes}
+
 # checking for atoi... yes
 ac_cv_func_atoi=${ac_cv_func_atoi=yes}
 
@@ -28,6 +40,12 @@ ac_cv_func_atol=${ac_cv_func_atol=yes}
 
 # checking for basename... yes
 ac_cv_func_basename=${ac_cv_func_basename=yes}
+
+# checking for bcopy... yes
+ac_cv_func_bcopy=${ac_cv_func_bcopy=yes}
+
+# checking for calloc... yes
+ac_cv_func_calloc=${ac_cv_func_calloc=yes}
 
 # checking for catgets... yes
 ac_cv_func_catgets=${ac_cv_func_catgets=yes}
@@ -44,6 +62,9 @@ ac_cv_func_closedir=${ac_cv_func_closedir=yes}
 # checking whether closedir returns void... no
 ac_cv_func_closedir_void=${ac_cv_func_closedir_void=no}
 
+# checking for connect... yes
+ac_cv_func_connect=${ac_cv_func_connect=yes}
+
 # checking for ctime... yes
 ac_cv_func_ctime=${ac_cv_func_ctime=yes}
 
@@ -58,6 +79,9 @@ ac_cv_func_dup=${ac_cv_func_dup=yes}
 
 # checking for dup2... yes
 ac_cv_func_dup2=${ac_cv_func_dup2=yes}
+
+# checking for free... yes
+ac_cv_func_free=${ac_cv_func_free=yes}
 
 # checking for fork... yes
 ac_cv_func_fork=${ac_cv_func_fork=yes}
@@ -100,6 +124,9 @@ ac_cv_func_getenv=${ac_cv_func_getenv=yes}
 
 # checking for getgroups... yes
 ac_cv_func_getgroups=${ac_cv_func_getgroups=yes}
+
+# checking for gethostbyname... yes
+ac_cv_func_gethostbyname=${ac_cv_func_gethostbyname=yes}
 
 # checking for getloadavg... yes
 ac_cv_func_getloadavg=${ac_cv_func_getloadavg=yes}
@@ -146,6 +173,9 @@ ac_cv_func_lstat=${ac_cv_func_lstat=yes}
 # checking for lutimes... yes
 ac_cv_func_lutimes=${ac_cv_func_lutimes=yes}
 
+# checking for malloc... yes
+ac_cv_func_malloc=${ac_cv_func_malloc=yes}
+
 # checking whether malloc (0) returns nonnull... yes
 ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
 
@@ -154,6 +184,9 @@ ac_cv_func_mbrtowc=${ac_cv_func_mbrtowc=yes}
 
 # checking for memcmp... yes
 ac_cv_func_memcmp=${ac_cv_func_memcmp=yes}
+
+# checking for working memcmp... yes
+ac_cv_func_memcmp_working=${ac_cv_func_memcmp_working=yes}
 
 # checking for memcpy... yes
 ac_cv_func_memcpy=${ac_cv_func_memcpy=yes}
@@ -185,6 +218,9 @@ ac_cv_func_mprotect=${ac_cv_func_mprotect=yes}
 # checking for munmap... yes
 ac_cv_func_munmap=${ac_cv_func_munmap=yes}
 
+# checking for nanosleep... yes
+ac_cv_func_nanosleep=${ac_cv_func_nanosleep=yes}
+
 # checking for nl_langinfo... yes
 ac_cv_func_nl_langinfo=${ac_cv_func_nl_langinfo=yes}
 
@@ -203,6 +239,9 @@ ac_cv_func_posix_spawnattr_setsigmask=${ac_cv_func_posix_spawnattr_setsigmask=ye
 # checking for pselect... yes
 ac_cv_func_pselect=${ac_cv_func_pselect=yes}
 
+# checking for putenv... yes
+ac_cv_func_putenv=${ac_cv_func_putenv=yes}
+
 # checking for qsort... yes
 ac_cv_func_qsort=${ac_cv_func_qsort=yes}
 
@@ -215,8 +254,14 @@ ac_cv_func_readdir=${ac_cv_func_readdir=yes}
 # checking for readlink... yes
 ac_cv_func_readlink=${ac_cv_func_readlink=yes}
 
+# checking for realloc... yes
+ac_cv_func_realloc=${ac_cv_func_realloc=yes}
+
 # checking for realpath... yes
 ac_cv_func_realpath=${ac_cv_func_realpath=yes}
+
+# checking for remove... yes
+ac_cv_func_remove=${ac_cv_func_remove=yes}
 
 # checking for rmdir... yes
 ac_cv_func_rmdir=${ac_cv_func_rmdir=yes}
@@ -248,6 +293,9 @@ ac_cv_func_setvbuf=${ac_cv_func_setvbuf=yes}
 # 
 ac_cv_func_setvbuf_reversed=${ac_cv_func_setvbuf_reversed=no}
 
+# checking for shmat... yes
+ac_cv_func_shmat=${ac_cv_func_shmat=yes}
+
 # checking for sigaction... yes
 ac_cv_func_sigaction=${ac_cv_func_sigaction=yes}
 
@@ -271,6 +319,12 @@ ac_cv_func_snprintf=${ac_cv_func_snprintf=yes}
 
 # checking for stat64... yes
 ac_cv_func_stat64=${ac_cv_func_stat64=yes}
+
+# checking for sscanf... yes
+ac_cv_func_sscanf=${ac_cv_func_sscanf=yes}
+
+# checking for strcmp... yes
+ac_cv_func_strcmp=${ac_cv_func_strcmp=yes}
 
 # checking for stpcpy... yes
 ac_cv_func_stpcpy=${ac_cv_func_stpcpy=yes}
@@ -299,8 +353,20 @@ ac_cv_func_strerror_r_char_p=${ac_cv_func_strerror_r_char_p=no}
 # checking for strftime... yes
 ac_cv_func_strftime=${ac_cv_func_strftime=yes}
 
+# checking for strlcat... yes
+ac_cv_func_strlcat=${ac_cv_func_strlcat=yes}
+
+# checking for strlcpy... yes
+ac_cv_func_strlcpy=${ac_cv_func_strlcpy=yes}
+
+# checking for strlen... yes
+ac_cv_func_strlen=${ac_cv_func_strlen=yes}
+
 # checking for strncasecmp... yes
 ac_cv_func_strncasecmp=${ac_cv_func_strncasecmp=yes}
+
+# checking for strncmp... yes
+ac_cv_func_strncmp=${ac_cv_func_strncmp=yes}
 
 # checking for strrchr... yes
 ac_cv_func_strrchr=${ac_cv_func_strrchr=yes}
@@ -310,6 +376,21 @@ ac_cv_func_strsignal=${ac_cv_func_strsignal=yes}
 
 # checking for strstr... yes
 ac_cv_func_strstr=${ac_cv_func_strstr=yes}
+
+# checking for working strtod... yes
+ac_cv_func_strtod=${ac_cv_func_strtod=yes}
+
+# checking for strtol... yes
+ac_cv_func_strtol=${ac_cv_func_strtol=yes}
+
+# checking for strtoll... yes
+ac_cv_func_strtoll=${ac_cv_func_strtoll=yes}
+
+# checking for strtoul... yes
+ac_cv_func_strtoul=${ac_cv_func_strtoul=yes}
+
+# checking for strtoull... yes
+ac_cv_func_strtoull=${ac_cv_func_strtoull=yes}
 
 # checking for symlink... yes
 ac_cv_func_symlink=${ac_cv_func_symlink=yes}
@@ -322,6 +403,9 @@ ac_cv_func_ttyname=${ac_cv_func_ttyname=yes}
 
 # checking for umask... yes
 ac_cv_func_umask=${ac_cv_func_umask=yes}
+
+# checking for unsetenv... yes
+ac_cv_func_unsetenv=${ac_cv_func_unsetenv=yes}
 
 # checking for utime... yes
 ac_cv_func_utime=${ac_cv_func_utime=yes}
@@ -403,6 +487,9 @@ ac_cv_have_decl_strerror_r=${ac_cv_have_decl_strerror_r=yes}
 
 # checking whether sys_siglist is declared... yes
 ac_cv_have_decl_sys_siglist=${ac_cv_have_decl_sys_siglist=yes}
+
+# 
+ac_cv_have_x=${ac_cv_have_x='have_x=yes	ac_x_includes='\''/usr/X11R6/include'\''	ac_x_libraries='\''/usr/X11R6/lib'\'''}
 
 # checking for assert.h... yes
 ac_cv_header_assert_h=${ac_cv_header_assert_h=yes}
@@ -545,6 +632,12 @@ ac_cv_header_utime_h=${ac_cv_header_utime_h=yes}
 # checking for wchar.h... yes
 ac_cv_header_wchar_h=${ac_cv_header_wchar_h=yes}
 
+# checking for X11/extensions/Xrandr.h... yes
+ac_cv_header_X11_extensions_Xrandr_h=${ac_cv_header_X11_extensions_Xrandr_h=yes}
+
+# checking for pow in -lm... yes
+ac_cv_lib_m_pow=${ac_cv_lib_m_pow=yes}
+
 # checking for pthread_kill in -lpthread... yes
 ac_cv_lib_pthread_pthread_kill=${ac_cv_lib_pthread_pthread_kill=yes}
 
@@ -586,6 +679,9 @@ ac_cv_sys_largefile_source=${ac_cv_sys_largefile_source=no}
 
 # checking for _Bool... yes
 ac_cv_type__Bool=${ac_cv_type__Bool=yes}
+
+# checking for int64_t... yes
+ac_cv_type_int64_t=${ac_cv_type_int64_t=yes}
 
 # checking for mode_t... yes
 ac_cv_type_mode_t=${ac_cv_type_mode_t=yes}
@@ -874,6 +970,9 @@ gt_cv_ssize_t=${gt_cv_ssize_t=yes}
 
 # checking if gcc static flag -static works... no
 lt_cv_prog_compiler_static_works=${lt_cv_prog_compiler_static_works=no}
+
+# checking if g++ static flag -static works... no
+lt_cv_prog_compiler_static_works_CXX=${lt_cv_prog_compiler_static_works_CXX=no}
 
 # checking for objdir... .libs
 lt_cv_objdir=${lt_cv_objdir=.libs}

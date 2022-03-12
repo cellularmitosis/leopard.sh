@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/build-from-source.sh v5
+# based on templates/build-from-source.sh v6
 
 # 👇 EDIT HERE:
 # Install foo on OS X Leopard / PowerPC.
@@ -81,9 +81,6 @@ fi
 
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
-
-# 👇 EDIT HERE:
-cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
 # 👇 EDIT HERE:
 CC=gcc-4.2
