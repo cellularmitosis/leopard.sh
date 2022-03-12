@@ -54,8 +54,8 @@ else
             should_build=1
         else
             curl -RsSfLO $LEOPARDSH_MIRROR/scripts/install-$pkgspec.sh
-            binpkg_mtime=$(stat -f '%m' ~/Desktop/leopard.sh/binpkgs/$binpkg)
-            script_mtime=$(stat -f '%m' install-$pkgspec.sh)
+            binpkg_mtime=$(stat -L -f '%m' ~/Desktop/leopard.sh/binpkgs/$binpkg)
+            script_mtime=$(stat -L -f '%m' install-$pkgspec.sh)
             if test "$binpkg_mtime" -lt "$script_mtime" ; then
                 should_build=1
             fi

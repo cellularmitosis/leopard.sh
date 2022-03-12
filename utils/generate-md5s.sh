@@ -18,8 +18,8 @@ while read f ; do
     if ! test -e "$f.md5" ; then
         should_md5=1
     else
-        md5_mtime=$(stat -f '%m' "$f.md5")
-        binpkg_mtime=$(stat -f '%m' "$f")
+        md5_mtime=$(stat -L -f '%m' "$f.md5")
+        binpkg_mtime=$(stat -L -f '%m' "$f")
         if test "$md5_mtime" -lt "$binpkg_mtime" ; then
             should_md5=1
         fi

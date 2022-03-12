@@ -5,6 +5,8 @@ lzop-1.04
 make-4.3
 patch-2.7.6
 pv-1.6.20
+quake.app-1.1
+quake-pak0.pak-1.06
 sdl-1.2.15.20220129
 sed-4.8
 termcap-1.3.1

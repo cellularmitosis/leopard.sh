@@ -213,6 +213,7 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
         while ! test -e $fifo ; do sleep 0.1 ; done
 
         url=$LEOPARDSH_MIRROR/binpkgs/$binpkg
+
         # At this point we are still using /usr/bin/curl, so drop back to http.
         insecure_url=$(echo "$url" | sed 's|^https:|http:|')
 
@@ -580,13 +581,19 @@ if test "$op" = "link" ; then
 
     pkgspec="$1"
 
-    echo -e "${COLOR_CYAN}Linking${COLOR_NONE} $pkgspec into /usr/local." >&2
-
     if find /opt/$pkgspec/bin -mindepth 1 2>/dev/null | grep -q . ; then
+        if test -z "$did_print_header" ; then
+            echo -e "${COLOR_CYAN}Linking${COLOR_NONE} $pkgspec into /usr/local." >&2
+            did_print_header=1
+        fi
         ln -vsf /opt/$pkgspec/bin/* /usr/local/bin | sed 's/^/  /'
     fi
 
     if find /opt/$pkgspec/sbin -mindepth 1 2>/dev/null | grep -q . ; then
+        if test -z "$did_print_header" ; then
+            echo -e "${COLOR_CYAN}Linking${COLOR_NONE} $pkgspec into /usr/local." >&2
+            did_print_header=1
+        fi
         ln -vsf /opt/$pkgspec/sbin/* /usr/local/sbin | sed 's/^/  /'
     fi
 
@@ -594,6 +601,10 @@ if test "$op" = "link" ; then
         cd /opt/$pkgspec/share/man
         for d in * ; do
             if find /opt/$pkgspec/share/man/$d -mindepth 1 2>/dev/null | grep -q . ; then
+                if test -z "$did_print_header" ; then
+                    echo -e "${COLOR_CYAN}Linking${COLOR_NONE} $pkgspec into /usr/local." >&2
+                    did_print_header=1
+                fi
                 mkdir -p /usr/local/share/man/$d/
                 ln -vsf /opt/$pkgspec/share/man/$d/* /usr/local/share/man/$d | sed 's/^/  /'
             fi
