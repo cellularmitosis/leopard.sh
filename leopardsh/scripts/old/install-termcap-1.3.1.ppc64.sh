@@ -1,1 +1,0 @@
-install-termcap-1.3.1.sh

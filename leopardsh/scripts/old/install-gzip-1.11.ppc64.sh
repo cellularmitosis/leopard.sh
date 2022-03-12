@@ -1,1 +1,0 @@
-install-gzip-1.11.sh
