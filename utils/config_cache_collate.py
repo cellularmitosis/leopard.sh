@@ -75,11 +75,11 @@ def process_cmdline():
 
 
 def generate_and_run_extract_script(pkgspec, os_cpu):
-    bits = "32"
-    if ".ppc64" in pkgspec:
-        bits = "64"
+    (os, cpu) = os_cpu.split(".")
 
-    os = os_cpu.split(".")[0]
+    bits = "32"
+    if cpu == "g5":
+        bits = "64"
 
     binpkg = "%s.%s.tar.gz" % (pkgspec, os_cpu)
 
