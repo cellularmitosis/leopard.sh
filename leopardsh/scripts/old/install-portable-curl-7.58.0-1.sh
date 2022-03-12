@@ -6,7 +6,7 @@ set -e -x -o pipefail
 
 package=portable-curl
 version="7.58.0-1"
-LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
+LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
 pkgspec=$package-$version
 

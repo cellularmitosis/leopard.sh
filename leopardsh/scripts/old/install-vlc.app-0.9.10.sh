@@ -9,7 +9,7 @@ version=0.9.10
 mountpoint=/Volumes/vlc-0.9.10
 
 set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 
 pkgspec=$package-$version
 

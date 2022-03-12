@@ -7,7 +7,7 @@ package=quake-pak0.pak
 version=1.06
 
 set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
 
 pkgspec=$package-$version

@@ -10,7 +10,7 @@ version=1.6
 mountpoint=/Volumes/ccl
 
 set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 
 pkgspec=$package-$version
 

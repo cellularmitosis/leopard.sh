@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/opt/tigersh-deps-0.1/bin/bash
 
 # Install gcc 4.2 from tigerbrew.
 
 package=gcc
 version=4.2
 
-set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
+set -e -o pipefail
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"

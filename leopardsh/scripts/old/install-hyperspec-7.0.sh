@@ -7,12 +7,11 @@ package=hyperspec
 version=7.0
 
 set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 
 pkgspec=$package-$version
 
-srcmirror=http://ftp.lispworks.com/pub/software_tools/reference
-tarball=HyperSpec-7-0.tar.gz
+upstream=http://ftp.lispworks.com/pub/software_tools/reference/HyperSpec-7-0.tar.gz
 
 if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads

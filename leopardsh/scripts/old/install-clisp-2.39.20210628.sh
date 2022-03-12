@@ -7,8 +7,8 @@ package=clisp
 version=2.39.20210628
 
 set -e -x -o pipefail
-PATH="/opt/portable-curl/bin:$PATH"
-LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -42,28 +42,19 @@ done
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
-binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
-    commit=de01f0f47bb44d3a0f9e842464cf2520b238f356
-    srcmirror=https://gitlab.com/gnu-clisp/clisp/-/archive/$commit
-    tarball=$package-$commit.tar.gz
+if leopard.sh --install-binpkg $pkgspec ; then
+    exit 0
+fi
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
+set -x
 
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = b8b12ea8f6e1f23daa910a256dd55c49
+if ! test -e /usr/bin/gcc ; then
+    leopard.sh xcode-3.1.4
+fi
 
-    cd /tmp
-    rm -rf $package-$commit
-
-    tar xzf ~/Downloads/$tarball
-
-    cd $package-$commit
+leopard.sh --unpack-dist $pkgspec
+    cd /tmp/$package-$commit
 
     # Note: stock leopard gcc fails with:
     #   gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..   -I/opt/libiconv-bootstrap-1.16/include -I/opt/libunistring-1.0/include -I/opt/libsigsegv-2.14/include -I/opt/gettext-0.21/include -I/opt/libffcall-2.4/include -I/opt/readline-8.1.2/include  -g -O2 -W -Wswitch -Wcomment -Wpointer-arith -Wreturn-type -Wmissing-declarations -Wimplicit -Wno-sign-compare -Wno-format-nonliteral -O2 -fwrapv -fno-strict-aliasing -DUNIX_BINARY_DISTRIB -DNO_ASM -DENABLE_UNICODE -DDYNAMIC_MODULES  -fno-common -DPIC  -MT localcharset.o -MD -MP -MF $depbase.Tpo -c -o localcharset.o localcharset.c &&\
@@ -86,7 +77,7 @@ else
         LDFLAGS="-m64 $LDFLAGS"
     fi
 
-    ./configure --prefix=/opt/$pkgspec \
+    /usr/bin/time ./configure --prefix=/opt/$pkgspec \
         --with-ffcall \
         --with-unicode \
         --with-threads=POSIX_THREADS \
@@ -159,7 +150,7 @@ else
 
     make config.lisp
 
-    make $(leopard.sh -j) V=1
+    /usr/bin/time make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
         make check
@@ -172,15 +163,9 @@ else
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip config.cache
+        gzip -9 config.cache
         mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
     fi
 fi
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
-fi
 
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
-fi

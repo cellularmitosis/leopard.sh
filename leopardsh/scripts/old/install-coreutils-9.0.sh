@@ -6,8 +6,8 @@ package=coreutils
 version=9.0
 
 set -e -x -o pipefail
-PATH="/opt/portable-curl/bin:$PATH"
-LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -37,29 +37,20 @@ fi
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
-binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
-    srcmirror=https://ftp.gnu.org/gnu/$package
-    tarball=$package-$version.tar.gz
+if leopard.sh --install-binpkg $pkgspec ; then
+    exit 0
+fi
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
+set -x
 
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 2971e74d6503a901856f1dcc6f00af40
+if ! test -e /usr/bin/gcc ; then
+    leopard.sh xcode-3.1.4
+fi
 
-    cd /tmp
-    rm -rf $package-$version
+leopard.sh --unpack-dist $pkgspec
+    cd /tmp/$package-$version
 
-    tar xzf ~/Downloads/$tarball
-    
-    cd $package-$version
-
-    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
     # Note: fails to build when using the stock gcc, so we use gcc-4.2:
     # gcc -std=gnu99   -mcpu=7450 -O2   -o src/make-prime-list src/make-prime-list.o  
@@ -104,13 +95,13 @@ else
     LDFLAGS="-L/opt/gettext-0.21$ppc64/lib -L/opt/gmp-4.3.2$ppc64/lib -L/opt/libiconv-1.16$ppc64/lib -L/opt/libressl-3.4.2$ppc64/lib"
     export CPPFLAGS LDFLAGS
 
-    ./configure -C --prefix=/opt/$pkgspec \
+    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
         --with-openssl=yes \
         --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
         --with-libgmp-prefix=/opt/gmp-4.3.2$ppc64 \
         --with-libintl-prefix=/opt/gettext-0.20$ppc64
 
-    make $(leopard.sh -j) V=1
+    /usr/bin/time make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
         # Note: three test failures on ppc32:
@@ -130,15 +121,9 @@ else
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip config.cache
+        gzip -9 config.cache
         mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
     fi
 fi
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
-fi
 
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
-fi

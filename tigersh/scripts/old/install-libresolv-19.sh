@@ -1,14 +1,15 @@
-#!/bin/bash
+#!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/install-foo-1.0.sh v4
 
 # Install libresolv on OS X Tiger / PowerPC.
 
 package=libresolv
 version=19
+upstream=https://opensource.apple.com/tarballs/$package/$package-$version.tar.gz
 
-set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
+set -e -o pipefail
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -21,57 +22,44 @@ if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGER
     cd /opt
     curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-    srcmirror=https://opensource.apple.com/tarballs/$package
-    tarball=$package-$version.tar.gz
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
-
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 1411402275ee7ecfd4bebc5ccfd42962
-
-    cd /tmp
-    rm -rf $package-$version
-
-    tar xzf ~/Downloads/$tarball
-
-    cd $package-$version
-
-    curl -#fO https://opensource.apple.com/source/configd/configd-136.2/dnsinfo/dnsinfo.h
-    curl -#fO https://opensource.apple.com/source/Libinfo/Libinfo-222.3.6/lookup.subproj/netdb_async.h
-
-    CFLAGS=$(tiger.sh -mcpu -O)
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $CFLAGS"
-    fi
-
-    # ./configure -C --prefix=/opt/$pkgspec \
-    #     --with-bar=/opt/bar-1.0 \
-    #     --with-bar-prefix=/opt/bar-1.0 \
-    #     CPPFLAGS="$CPPFLAGS" \
-    #     LDFLAGS="$LDFLAGS" \
-    #     LIBS="$LIBS" \
-    #     CFLAGS="$CFLAGS" \
-    #     CXXFLAGS="$CXXFLAGS" \
-    #     CC="$CC" \
-    #     CXX="$CXX"
-
-    make $(tiger.sh -j) V=1
-
-    if test -n "$TIGERSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    # Note: no 'make check' available.
-
-
+if ! test -e ~/Downloads/$tarball ; then
+    cd ~/Downloads
+    curl -#fLO $srcmirror/$tarball
 fi
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 1411402275ee7ecfd4bebc5ccfd42962
+
+cd /tmp
+rm -rf $package-$version
+
+tar xzf ~/Downloads/$tarball
+
+cd /tmp/$package-$version
+
+curl -#fO https://opensource.apple.com/source/configd/configd-136.2/dnsinfo/dnsinfo.h
+curl -#fO https://opensource.apple.com/source/Libinfo/Libinfo-222.3.6/lookup.subproj/netdb_async.h
+
+CFLAGS=$(tiger.sh -mcpu -O)
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
 fi
 
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+# /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+#     --with-bar=/opt/bar-1.0 \
+#     --with-bar-prefix=/opt/bar-1.0 \
+#     CPPFLAGS="$CPPFLAGS" \
+#     LDFLAGS="$LDFLAGS" \
+#     LIBS="$LIBS" \
+#     CFLAGS="$CFLAGS" \
+#     CXXFLAGS="$CXXFLAGS" \
+#     CC="$CC" \
+#     CXX="$CXX"
+
+/usr/bin/time make $(tiger.sh -j) V=1
+
+if test -n "$TIGERSH_RUN_TESTS" ; then
+    make check
 fi
+
+# Note: no 'make check' available.

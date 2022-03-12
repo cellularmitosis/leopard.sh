@@ -9,7 +9,7 @@ version=0.9.4
 mountpoint="/Volumes/$appname-$version-MacOSX.5_GUI_ppc"
 
 set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 
 pkgspec=$package-$version
 

@@ -7,8 +7,8 @@ package=rlwrap
 version=0.45.2
 
 set -e -x -o pipefail
-PATH="/opt/portable-curl/bin:$PATH"
-LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -30,42 +30,33 @@ LIBS="-lncurses -lreadline"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
-binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
-    srcmirror=https://github.com/hanslub42/$package/releases/download/v$version
-    tarball=$package-$version.tar.gz
+if leopard.sh --install-binpkg $pkgspec ; then
+    exit 0
+fi
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
+set -x
 
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 20190f4c48758109649cc349605ac31d
+if ! test -e /usr/bin/gcc ; then
+    leopard.sh xcode-3.1.4
+fi
 
-    cd /tmp
-    rm -rf $package-$version
+leopard.sh --unpack-dist $pkgspec
+    cd /tmp/$package-$version
 
-    tar xzf ~/Downloads/$tarball
-
-    cd $package-$version
-
-    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
 
     CFLAGS=$(leopard.sh -mcpu -O)
     if test -n "$ppc64" ; then
         CFLAGS="-m64 $CFLAGS"
     fi
 
-    ./configure -C --prefix=/opt/$pkgspec \
+    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
         CPPFLAGS="$CPPFLAGS" \
         LDFLAGS="$LDFLAGS" \
         LIBS="$LIBS" \
         CFLAGS="$CFLAGS"
 
-    make $(leopard.sh -j) V=1
+    /usr/bin/time make $(leopard.sh -j) V=1
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
         make check
@@ -78,15 +69,9 @@ else
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip config.cache
+        gzip -9 config.cache
         mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
     fi
 fi
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
-fi
 
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
-fi

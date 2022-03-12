@@ -6,8 +6,8 @@ package=guile
 version=2.2.7
 
 set -e -x -o pipefail
-PATH="/opt/portable-curl/bin:$PATH"
-LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -17,31 +17,26 @@ pkgspec=$package-$version$ppc64
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
-binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
-    srcmirror=https://ftp.gnu.org/gnu/$package
-    tarball=$package-$version.tar.gz
+if leopard.sh --install-binpkg $pkgspec ; then
+    exit 0
+fi
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
+set -x
 
-    cd /tmp
-    rm -rf $package-$version
-    tar xzf ~/Downloads/$tarball
-    cd $package-$version
+if ! test -e /usr/bin/gcc ; then
+    leopard.sh xcode-3.1.4
+fi
 
-    cat /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache > config.cache
+leopard.sh --unpack-dist $pkgspec
+    cd /tmp/$package-$version
+
 
     # Note: guile tries to use /lib/cpp, which is /usr/bin/cpp on leopard.
     # FIXME: take a closer look at the available options.
-    CPP=/usr/bin/cpp ./configure -C --prefix=/opt/$pkgspec
+    CPP=/usr/bin/cpp /usr/bin/time ./configure -C --prefix=/opt/$pkgspec
 
-    make $(leopard.sh -j)
+    /usr/bin/time make $(leopard.sh -j)
 
     if test -n "$LEOPARDSH_RUN_TESTS" ; then
         make check
@@ -54,18 +49,12 @@ else
 
     if test -e config.cache ; then
         mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip config.cache
+        gzip -9 config.cache
         mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
     fi
 fi
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
-fi
 
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
-fi
 
 # failing with:
 # checking for socklen_t... no

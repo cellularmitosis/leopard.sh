@@ -2,7 +2,7 @@
 
 set -e -x
 
-for i in scripts/install-*.sh; do
+for i in scripts/old/install-*.sh; do
     if test -L $i ; then
         continue
     fi

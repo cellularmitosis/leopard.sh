@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/opt/tigersh-deps-0.1/bin/bash
 
 # Install portable curl (with ssl support) from tigerbrew.
 
-set -e -x
+set -e -o pipefail
 
 package=portable-curl
 version="7.58.0-1"
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
 pkgspec=$package-$version
 

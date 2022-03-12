@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/install-foo-1.0.sh v3
 
 # Install zstd on OS X Tiger / PowerPC.
 
 package=zstd
 version=1.5.1
+upstream=https://github.com/facebook/$package/releases/download/v$version/$package-$version.tar.gz
 
 # fails to build using stock tiger gcc:
 # cc -DXXH_NAMESPACE=ZSTD_ -DDEBUGLEVEL=0 -DZSTD_LEGACY_SUPPORT=5 -DZSTD_MULTITHREAD  -mcpu=7450 -O2   -fPIC -fvisibility=hidden -shared -pthread obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/debug.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/entropy_common.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/error_private.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/fse_decompress.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/pool.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/threading.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/xxhash.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_common.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_v05.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_v06.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_v07.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/fse_compress.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/hist.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/huf_compress.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_compress.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_compress_literals.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_compress_sequences.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_compress_superblock.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_double_fast.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_fast.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_lazy.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_ldm.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_opt.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstdmt_compress.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/huf_decompress.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_ddict.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_decompress.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zstd_decompress_block.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/huf_decompress_amd64.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/cover.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/divsufsort.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/fastcover.o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/zdict.o -shared -pthread -install_name /opt/zstd-1.5.1/lib/libzstd.1.dylib -dynamiclib -compatibility_version 1 -current_version 1.5.1 -o obj/conf_be95a23b7339dcc3f1bcce2052683006/dynamic/libzstd.1.5.1.dylib
@@ -47,15 +48,28 @@ version=1.5.1
 # make[1]: Leaving directory '/private/tmp/zstd-1.5.1/lib'
 # make: *** [Makefile:63: lib-release] Error 2
 
-set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
+set -e -o pipefail
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
 fi
 
 pkgspec=$package-$version$ppc64
+
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
+
+if tiger.sh --install-binpkg $pkgspec ; then
+    exit 0
+fi
+
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
+set -x
+
+if ! test -e /usr/bin/gcc ; then
+    tiger.sh xcode-2.5
+fi
 
 # Note: fails to build on tiger using gcc and gcc-4.2, so we use gcc-4.9.
 # Note: ppc64 gcc-4.9.4 unavailable.
@@ -75,57 +89,27 @@ if ! test -e /opt/make-4.3$ppc64 ; then
     tiger.sh make-4.3$ppc64
 fi
 
-echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
+tiger.sh --unpack-dist $pkgspec
+cd /tmp/$package-$version
 
-binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
-    srcmirror=https://github.com/facebook/$package/releases/download/v$version
-    tarball=$package-$version.tar.gz
+# Fix for '-compatibility_version only allowed with -dynamiclib' error:
+perl -pi -e "s/-compatibility_version/-dynamiclib -compatibility_version/" lib/Makefile
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
+for f in Makefile */Makefile */*/Makefile */*.mk ; do
+    if test -n "$ppc64" ; then
+        perl -pi -e "s/-O3/-m64 $(tiger.sh -mcpu -O)/g" $f
+    else
+        perl -pi -e "s/-O3/$(tiger.sh -mcpu -O)/g" $f
     fi
+done
 
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = b97d53547220355907dedec7de9a4f29
+/usr/bin/time make $(tiger.sh -j) V=1 prefix=/opt/$pkgspec CC=gcc-4.9
 
-    cd /tmp
-    rm -rf $package-$version
-
-    tar xzf ~/Downloads/$tarball
-
-    cd $package-$version
-
-    # Fix for '-compatibility_version only allowed with -dynamiclib' error:
-    perl -pi -e "s/-compatibility_version/-dynamiclib -compatibility_version/" lib/Makefile
-
-    for f in Makefile */Makefile */*/Makefile */*.mk ; do
-        if test -n "$ppc64" ; then
-            perl -pi -e "s/-O3/-m64 $(tiger.sh -mcpu -O)/g" $f
-        else
-            perl -pi -e "s/-O3/$(tiger.sh -mcpu -O)/g" $f
-        fi
-    done
-
-    make $(tiger.sh -j) V=1 prefix=/opt/$pkgspec CC=gcc-4.9
-
-    if test -n "$TIGERSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make prefix=/opt/$pkgspec install
-
-    tiger.sh --linker-check $pkgspec
-    tiger.sh --arch-check $pkgspec $ppc64
+if test -n "$TIGERSH_RUN_TESTS" ; then
+    make check
 fi
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
-fi
+make prefix=/opt/$pkgspec install
 
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
-fi
+tiger.sh --linker-check $pkgspec
+tiger.sh --arch-check $pkgspec $ppc64

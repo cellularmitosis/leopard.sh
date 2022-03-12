@@ -7,8 +7,8 @@ package=zstd
 version=1.5.1
 
 set -e -x -o pipefail
-PATH="/opt/portable-curl/bin:$PATH"
-LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://ssl.pepas.com/leopardsh}
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -21,8 +21,7 @@ if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEO
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-    srcmirror=https://github.com/facebook/$package/releases/download/v$version
-    tarball=$package-$version.tar.gz
+upstream=https://github.com/facebook/$package/releases/download/v$version/$package-$version.tar.gz
 
     if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads
@@ -36,7 +35,7 @@ else
 
     tar xzf ~/Downloads/$tarball
 
-    cd $package-$version
+    cd /tmp/$package-$version
 
     # Fix for '-compatibility_version only allowed with -dynamiclib' error:
     perl -pi -e "s/-compatibility_version/-dynamiclib -compatibility_version/" lib/Makefile
@@ -49,7 +48,7 @@ else
         fi
     done
 
-    make $(leopard.sh -j) V=1 prefix=/opt/$pkgspec
+    /usr/bin/time make $(leopard.sh -j) V=1 prefix=/opt/$pkgspec
 
     if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
         # 'make check' fails to build:
@@ -71,10 +70,4 @@ else
     leopard.sh --arch-check $pkgspec $ppc64
 fi
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
-fi
 
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
-fi

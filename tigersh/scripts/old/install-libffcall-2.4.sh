@@ -1,14 +1,15 @@
-#!/bin/bash
+#!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/install-foo-1.0.sh v3
 
 # Install libffcall on OS X Tiger / PowerPC.
 
 package=libffcall
 version=2.4
+upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
-set -e -x
-PATH="/opt/portable-curl/bin:$PATH"
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://ssl.pepas.com/tigersh}
+set -e -o pipefail
+PATH="/opt/tigersh-deps-0.1/bin:$PATH"
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -22,32 +23,24 @@ pkgspec=$package-$version$ppc64
 
 # echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
 
-binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
-    srcmirror=https://ftp.gnu.org/gnu/$package
-    tarball=$package-$version.tar.gz
+if tiger.sh --install-binpkg $pkgspec ; then
+    exit 0
+fi
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
+set -x
 
-    test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = e7ef6e7cab40f6e224a89cc8dec6fc15
+if ! test -e /usr/bin/gcc ; then
+    tiger.sh xcode-2.5
+fi
 
-    cd /tmp
-    rm -rf $package-$version
+tiger.sh --unpack-dist $pkgspec
+cd /tmp/$package-$version
 
-    tar xzf ~/Downloads/$tarball
+FIXME WIP
 
-    cd $package-$version
-
-    FIXME WIP
-
-    # Note: sys_icache_invalidate is unavailable on tiger.
-    patch -p1 << "EOF"
+# Note: sys_icache_invalidate is unavailable on tiger.
+patch -p1 << "EOF"
 diff '--color=auto' -urN libffcall-2.4/callback/trampoline_r/trampoline.c libffcall-2.4.patched/callback/trampoline_r/trampoline.c
 --- libffcall-2.4/callback/trampoline_r/trampoline.c	2021-03-22 18:32:56.000000000 -0500
 +++ libffcall-2.4.patched/callback/trampoline_r/trampoline.c	2022-02-09 00:34:32.590302563 -0600
@@ -102,63 +95,53 @@ diff '--color=auto' -urN libffcall-2.4/trampoline/trampoline.c libffcall-2.4.pat
    /* AIX.  */
 EOF
 
-    cat /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache > config.cache
+# export CC=gcc-4.2 CXX=g++-4.2
 
-    # export CC=gcc-4.2 CXX=g++-4.2
-
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        CXXFLAGS="-m64 $(tiger.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        cpu=$(tiger.sh --cpu)
-        if test "$cpu" = "g3" ; then
-            # make check fails with "illegal instruction"
-            exit 1
-        elif test "$cpu" = "g4" ; then
-            # fails to build, try default flags.
-            CFLAGS=-O2
-            CXXFLAGS=-O2
-        elif test "$cpu" = "g4e" ; then
-            # works.
-            CFLAGS=$(tiger.sh -m32 -mcpu -O)
-            CXXFLAGS=$(tiger.sh -m32 -mcpu -O)
-        elif test "$cpu" = "g5" ; then
-            # fails some tests, try default flags.
-            CFLAGS=-O2
-            CXXFLAGS=-O2
-        fi
-    fi
-    export CFLAGS CXXFLAGS
-
-    ./configure -C --prefix=/opt/$pkgspec \
-        --with-threads=posix
-
-    make $(tiger.sh -j) V=1
-
-    if test -n "$TIGERSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    tiger.sh --linker-check $pkgspec
-    tiger.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
-        gzip config.cache
-        mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $(tiger.sh -mcpu -O)"
+    CXXFLAGS="-m64 $(tiger.sh -mcpu -O)"
+    export LDFLAGS=-m64
+else
+    cpu=$(tiger.sh --cpu)
+    if test "$cpu" = "g3" ; then
+        # make check fails with "illegal instruction"
+        exit 1
+    elif test "$cpu" = "g4" ; then
+        # fails to build, try default flags.
+        CFLAGS=-O2
+        CXXFLAGS=-O2
+    elif test "$cpu" = "g4e" ; then
+        # works.
+        CFLAGS=$(tiger.sh -m32 -mcpu -O)
+        CXXFLAGS=$(tiger.sh -m32 -mcpu -O)
+    elif test "$cpu" = "g5" ; then
+        # fails some tests, try default flags.
+        CFLAGS=-O2
+        CXXFLAGS=-O2
     fi
 fi
+export CFLAGS CXXFLAGS
 
-if test -e /opt/$pkgspec/bin ; then
-    ln -sf /opt/$pkgspec/bin/* /usr/local/bin/
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --with-threads=posix
+
+/usr/bin/time make $(tiger.sh -j) V=1
+
+if test -n "$TIGERSH_RUN_TESTS" ; then
+    make check
 fi
 
-if test -e /opt/$pkgspec/sbin ; then
-    ln -sf /opt/$pkgspec/sbin/* /usr/local/sbin/
+make install
+
+tiger.sh --linker-check $pkgspec
+tiger.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
 fi
+
 
 # fails on tiger with:
 # cd trampoline && make all
