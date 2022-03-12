@@ -23,6 +23,39 @@ ac_cv_func_abs=${ac_cv_func_abs=yes}
 # checking for access... yes
 ac_cv_func_access=${ac_cv_func_access=yes}
 
+# checking for acl_copy_ext_native... yes
+ac_cv_func_acl_copy_ext_native=${ac_cv_func_acl_copy_ext_native=yes}
+
+# checking for acl_create_entry_np... yes
+ac_cv_func_acl_create_entry_np=${ac_cv_func_acl_create_entry_np=yes}
+
+# checking for acl_delete_def_file... yes
+ac_cv_func_acl_delete_def_file=${ac_cv_func_acl_delete_def_file=yes}
+
+# checking for acl_delete_fd_np... yes
+ac_cv_func_acl_delete_fd_np=${ac_cv_func_acl_delete_fd_np=yes}
+
+# checking for acl_delete_file_np... yes
+ac_cv_func_acl_delete_file_np=${ac_cv_func_acl_delete_file_np=yes}
+
+# checking for acl_free... yes
+ac_cv_func_acl_free=${ac_cv_func_acl_free=yes}
+
+# checking for acl_from_text... yes
+ac_cv_func_acl_from_text=${ac_cv_func_acl_from_text=yes}
+
+# checking for acl_get_fd... yes
+ac_cv_func_acl_get_fd=${ac_cv_func_acl_get_fd=yes}
+
+# checking for acl_get_file... yes
+ac_cv_func_acl_get_file=${ac_cv_func_acl_get_file=yes}
+
+# checking for acl_set_fd... yes
+ac_cv_func_acl_set_fd=${ac_cv_func_acl_set_fd=yes}
+
+# checking for acl_set_file... yes
+ac_cv_func_acl_set_file=${ac_cv_func_acl_set_file=yes}
+
 # checking for alloca... yes
 ac_cv_func_alloca_works=${ac_cv_func_alloca_works=yes}
 
@@ -43,6 +76,9 @@ ac_cv_func_basename=${ac_cv_func_basename=yes}
 
 # checking for bcopy... yes
 ac_cv_func_bcopy=${ac_cv_func_bcopy=yes}
+
+# checking for btowc... yes
+ac_cv_func_btowc=${ac_cv_func_btowc=yes}
 
 # checking for calloc... yes
 ac_cv_func_calloc=${ac_cv_func_calloc=yes}
@@ -80,14 +116,8 @@ ac_cv_func_dup=${ac_cv_func_dup=yes}
 # checking for dup2... yes
 ac_cv_func_dup2=${ac_cv_func_dup2=yes}
 
-# checking for free... yes
-ac_cv_func_free=${ac_cv_func_free=yes}
-
-# checking for fork... yes
-ac_cv_func_fork=${ac_cv_func_fork=yes}
-
-# checking for working fork... yes
-ac_cv_func_fork_works=${ac_cv_func_fork_works=yes}
+# checking for duplocale... yes
+ac_cv_func_duplocale=${ac_cv_func_duplocale=yes}
 
 # checking for fchdir... yes
 ac_cv_func_fchdir=${ac_cv_func_fchdir=yes}
@@ -101,14 +131,35 @@ ac_cv_func_fchown=${ac_cv_func_fchown=yes}
 # checking for fcntl... yes
 ac_cv_func_fcntl=${ac_cv_func_fcntl=yes}
 
+# checking for flockfile... yes
+ac_cv_func_flockfile=${ac_cv_func_flockfile=yes}
+
+# checking for fork... yes
+ac_cv_func_fork=${ac_cv_func_fork=yes}
+
+# checking for working fork... yes
+ac_cv_func_fork_works=${ac_cv_func_fork_works=yes}
+
 # checking for fpurge... yes
 ac_cv_func_fpurge=${ac_cv_func_fpurge=yes}
+
+# checking for free... yes
+ac_cv_func_free=${ac_cv_func_free=yes}
+
+# checking for freelocale... yes
+ac_cv_func_freelocale=${ac_cv_func_freelocale=yes}
 
 # checking for fstat... yes
 ac_cv_func_fstat=${ac_cv_func_fstat=yes}
 
 # checking for fsync... yes
 ac_cv_func_fsync=${ac_cv_func_fsync=yes}
+
+# checking for ftruncate... yes
+ac_cv_func_ftruncate=${ac_cv_func_ftruncate=yes}
+
+# checking for funlockfile... yes
+ac_cv_func_funlockfile=${ac_cv_func_funlockfile=yes}
 
 # checking for futimes... yes
 ac_cv_func_futimes=${ac_cv_func_futimes=yes}
@@ -158,8 +209,26 @@ ac_cv_func_gettimeofday=${ac_cv_func_gettimeofday=yes}
 # checking for gmtime... yes
 ac_cv_func_gmtime=${ac_cv_func_gmtime=yes}
 
+# checking for ioctl... yes
+ac_cv_func_ioctl=${ac_cv_func_ioctl=yes}
+
+# checking for isascii... yes
+ac_cv_func_isascii=${ac_cv_func_isascii=yes}
+
 # checking for isatty... yes
 ac_cv_func_isatty=${ac_cv_func_isatty=yes}
+
+# checking for isblank... yes
+ac_cv_func_isblank=${ac_cv_func_isblank=yes}
+
+# checking for iswcntrl... yes
+ac_cv_func_iswcntrl=${ac_cv_func_iswcntrl=yes}
+
+# checking for iswctype... yes
+ac_cv_func_iswctype=${ac_cv_func_iswctype=yes}
+
+# checking for link... yes
+ac_cv_func_link=${ac_cv_func_link=yes}
 
 # checking for localtime... yes
 ac_cv_func_localtime=${ac_cv_func_localtime=yes}
@@ -179,8 +248,17 @@ ac_cv_func_malloc=${ac_cv_func_malloc=yes}
 # checking whether malloc (0) returns nonnull... yes
 ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
 
+# checking for mbrlen... yes
+ac_cv_func_mbrlen=${ac_cv_func_mbrlen=yes}
+
 # checking for mbrtowc... yes
 ac_cv_func_mbrtowc=${ac_cv_func_mbrtowc=yes}
+
+# checking for mbsinit... yes
+ac_cv_func_mbsinit=${ac_cv_func_mbsinit=yes}
+
+# checking for mbtowc... yes
+ac_cv_func_mbtowc=${ac_cv_func_mbtowc=yes}
 
 # checking for memcmp... yes
 ac_cv_func_memcmp=${ac_cv_func_memcmp=yes}
@@ -221,14 +299,23 @@ ac_cv_func_munmap=${ac_cv_func_munmap=yes}
 # checking for nanosleep... yes
 ac_cv_func_nanosleep=${ac_cv_func_nanosleep=yes}
 
+# checking for newlocale... yes
+ac_cv_func_newlocale=${ac_cv_func_newlocale=yes}
+
 # checking for nl_langinfo... yes
 ac_cv_func_nl_langinfo=${ac_cv_func_nl_langinfo=yes}
 
 # checking for opendir... yes
 ac_cv_func_opendir=${ac_cv_func_opendir=yes}
 
+# checking for pathconf... yes
+ac_cv_func_pathconf=${ac_cv_func_pathconf=yes}
+
 # checking for pipe... yes
 ac_cv_func_pipe=${ac_cv_func_pipe=yes}
+
+# checking for popen... yes
+ac_cv_func_popen=${ac_cv_func_popen=yes}
 
 # checking for posix_spawn... yes
 ac_cv_func_posix_spawn=${ac_cv_func_posix_spawn=yes}
@@ -238,6 +325,9 @@ ac_cv_func_posix_spawnattr_setsigmask=${ac_cv_func_posix_spawnattr_setsigmask=ye
 
 # checking for pselect... yes
 ac_cv_func_pselect=${ac_cv_func_pselect=yes}
+
+# checking for pthread_sigmask... yes
+ac_cv_func_pthread_sigmask=${ac_cv_func_pthread_sigmask=yes}
 
 # checking for putenv... yes
 ac_cv_func_putenv=${ac_cv_func_putenv=yes}
@@ -269,6 +359,9 @@ ac_cv_func_rmdir=${ac_cv_func_rmdir=yes}
 # checking for setegid... yes
 ac_cv_func_setegid=${ac_cv_func_setegid=yes}
 
+# checking for setenv... yes
+ac_cv_func_setenv=${ac_cv_func_setenv=yes}
+
 # checking for seteuid... yes
 ac_cv_func_seteuid=${ac_cv_func_seteuid=yes}
 
@@ -277,6 +370,9 @@ ac_cv_func_setjmp=${ac_cv_func_setjmp=yes}
 
 # checking for setlinebuf... yes
 ac_cv_func_setlinebuf=${ac_cv_func_setlinebuf=yes}
+
+# checking for setlocale... yes
+ac_cv_func_setlocale=${ac_cv_func_setlocale=yes}
 
 # checking for setregid... yes
 ac_cv_func_setregid=${ac_cv_func_setregid=yes}
@@ -296,6 +392,9 @@ ac_cv_func_setvbuf_reversed=${ac_cv_func_setvbuf_reversed=no}
 # checking for shmat... yes
 ac_cv_func_shmat=${ac_cv_func_shmat=yes}
 
+# checking for shutdown... yes
+ac_cv_func_shutdown=${ac_cv_func_shutdown=yes}
+
 # checking for sigaction... yes
 ac_cv_func_sigaction=${ac_cv_func_sigaction=yes}
 
@@ -313,6 +412,9 @@ ac_cv_func_sigprocmask=${ac_cv_func_sigprocmask=yes}
 
 # checking for sigsetmask... yes
 ac_cv_func_sigsetmask=${ac_cv_func_sigsetmask=yes}
+
+# checking for sleep... yes
+ac_cv_func_sleep=${ac_cv_func_sleep=yes}
 
 # checking for snprintf... yes
 ac_cv_func_snprintf=${ac_cv_func_snprintf=yes}
@@ -398,6 +500,12 @@ ac_cv_func_symlink=${ac_cv_func_symlink=yes}
 # checking for time... yes
 ac_cv_func_time=${ac_cv_func_time=yes}
 
+# checking for towlower... yes
+ac_cv_func_towlower=${ac_cv_func_towlower=yes}
+
+# checking for tsearch... yes
+ac_cv_func_tsearch=${ac_cv_func_tsearch=yes}
+
 # checking for ttyname... yes
 ac_cv_func_ttyname=${ac_cv_func_ttyname=yes}
 
@@ -406,6 +514,9 @@ ac_cv_func_umask=${ac_cv_func_umask=yes}
 
 # checking for unsetenv... yes
 ac_cv_func_unsetenv=${ac_cv_func_unsetenv=yes}
+
+# checking for uselocale... yes
+ac_cv_func_uselocale=${ac_cv_func_uselocale=yes}
 
 # checking for utime... yes
 ac_cv_func_utime=${ac_cv_func_utime=yes}
@@ -430,6 +541,9 @@ ac_cv_func_wcrtomb=${ac_cv_func_wcrtomb=yes}
 
 # checking for wcslen... yes
 ac_cv_func_wcslen=${ac_cv_func_wcslen=yes}
+
+# checking for wctob... yes
+ac_cv_func_wctob=${ac_cv_func_wctob=yes}
 
 # checking whether alarm is declared... yes
 ac_cv_have_decl_alarm=${ac_cv_have_decl_alarm=yes}
