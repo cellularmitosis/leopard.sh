@@ -85,8 +85,6 @@ for pkgspec in $(cat /tmp/to-build.txt) ; do
     rm -f ~/Desktop/leopard.sh/binpkgs/$binpkg
 done
 
-set -x
-
 # and another pass to build.
 for pkgspec in $(cat /tmp/to-build.txt) ; do
     mv /usr/local/bin/leopard.sh /opt/tigersh-deps-0.1 /tmp/

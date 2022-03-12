@@ -1,7 +1,5 @@
 #!/opt/tigersh-deps-0.1/bin/bash
-# based on templates/template.sh v3
-
-FIXME WIP
+# based on templates/build-from-source.sh v6
 
 # Install libressl on OS X Tiger / PowerPC.
 
@@ -19,36 +17,27 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
-if ! test -e ~/Downloads/$tarball ; then
-    cd ~/Downloads
-    curl -#fLO $srcmirror/$tarball
+if tiger.sh --install-binpkg $pkgspec ; then
+    exit 0
 fi
 
-test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 18aa728e7947a30af3bb04243e4482aa
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
+set -x
 
-cd /tmp
-rm -rf $package-$version
+if ! test -e /usr/bin/gcc ; then
+    tiger.sh xcode-2.5
+fi
 
-tar xzf ~/Downloads/$tarball
-
+tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-
-for f in configure ; do
-    if test -n "$ppc64" ; then
-        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-        perl -pi -e "s/CFLAGS=\"-O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-    else
-        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-        perl -pi -e "s/CFLAGS=\"-O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-    fi
-done
+CFLAGS="-Wall -std=gnu99 -fno-strict-aliasing -Wno-pointer-sign"
+CFLAGS="$(tiger.sh -mcpu -O) $CFLAGS"
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
+fi
 
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     CFLAGS="$CFLAGS"

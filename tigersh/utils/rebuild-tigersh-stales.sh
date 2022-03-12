@@ -34,7 +34,6 @@ rm -f build-order.txt build-order.ppc64.txt to-build.txt
 tiger.sh --setup
 export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 
-
 if test -n "$1" ; then
     # if the user specifies a pkgspec, just rebuild that one.
     echo "$1" > /tmp/to-build.txt
@@ -85,8 +84,6 @@ for pkgspec in $(cat /tmp/to-build.txt) ; do
     binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
     rm -f ~/Desktop/leopard.sh/binpkgs/$binpkg
 done
-
-set -x
 
 # and another pass to build.
 for pkgspec in $(cat /tmp/to-build.txt) ; do
