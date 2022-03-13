@@ -1,14 +1,12 @@
 #!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/install-app.sh v1
 
-# 👇 EDIT HERE:
-# Install Foo.app on OS X / PowerPC.
+# Install TextWrangler.app on OS X / PowerPC.
 
-# 👇 EDIT HERE:
-package=foo.app
-version=1.0
-appname1=Foo
-upstream=https://ccl.clozure.com/ftp/pub/release/$version/${appname}_$version.dmg
+package=textwrangler.app
+version=3.5.3
+appname1=TextWrangler
+upstream=http://pine.barebones.com/freeware/TextWrangler_3.5.3.dmg
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -17,6 +15,15 @@ TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
 pkgspec=$package-$version
 
+osversion=$(sw_vers -productVersion | awk '{print $NF}')
+if test "${osversion:0:4}" = "10.4" ; then
+    pkgmgr="tiger.sh"
+    mirror=$TIGERSH_MIRROR
+elif test "${osversion:0:4}" = "10.5" ; then
+    pkgmgr="leopard.sh"
+    mirror=$LEOPARDSH_MIRROR
+fi
+test -n "$pkgmgr"
 
 echo -n -e "\033]0;$pkgmgr $pkgspec ($($pkgmgr --cpu))\007"
 
@@ -47,16 +54,8 @@ for appname in "$appname1" ; do
     done
 done
 
-# 👇 EDIT HERE:
-defaults write com.foo "Some Setting" "Some Value"
-
-# 👇 EDIT HERE:
-# Thanks to https://stackoverflow.com/a/13484552
-$( osascript \
-    -e 'tell application "Finder"' \
-    -e 'activate' \
-    -e 'display dialog "Here is a way to tell the user something." buttons {"OK"} default button 1' \
-    -e 'end tell'\
-    >/dev/null 2>&1 \
-    &
-)
+mkdir -p /opt/$pkgspec/bin
+cd /opt/$pkgspec/bin
+for f in edit twdiff twfind ; do
+    ln -s ../$appname.app/Contents/MacOS/$f .
+done
