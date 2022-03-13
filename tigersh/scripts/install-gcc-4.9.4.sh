@@ -1,5 +1,5 @@
 #!/opt/tigersh-deps-0.1/bin/bash
-# based on templates/install-foo-1.0.sh v4
+# based on templates/build-from-source.sh v6
 
 # Install gcc on OS X Tiger / PowerPC.
 
