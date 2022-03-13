@@ -1,14 +1,18 @@
 #!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/install-app.sh v1
 
-# 👇 EDIT HERE:
-# Install Foo.app on OS X / PowerPC.
+# Install Clozure CL.app on OS X / PowerPC.
 
-# 👇 EDIT HERE:
-package=foo.app
-version=1.0
-appname1=Foo
-upstream=https://ccl.clozure.com/ftp/pub/release/$version/${appname}_$version.dmg
+package=clozure-cl.app
+version=1.4
+appname1="Clozure CL32"
+appname2="Clozure CL64"
+upstream=https://ccl.clozure.com/ftp/pub/release/$version/ccl-$version-darwinppc.dmg
+
+# Note: there are two types of downloads available:
+# - ccl-1.4-darwinppc.dmg
+# - ccl-1.4-darwinppc.tar.gz
+# The .dmg contains a GUI IDE .app which the tarball does not.
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -35,7 +39,7 @@ echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $tarball into /opt." >&2
 $pkgmgr --unpack-tarball-check-md5 $url /opt
 
 echo -e "${COLOR_CYAN}Creating${COLOR_NONE} aliases for $pkgspec." >&2
-for appname in "$appname1" ; do
+for appname in "$appname1" "$appname2" ; do
     # Note: these must be aliases, symlinks don't work.
     # Note: if we call this too soon after unpacking, it will fail with:
     #     29:124: execution error: Finder got an error: The operation could not be completed. (-1407)
@@ -56,16 +60,14 @@ for appname in "$appname1" ; do
     done
 done
 
-# 👇 EDIT HERE:
-defaults write com.foo "Some Setting" "Some Value"
+for f in ccl ccl64 ; do
+    perl -pi \
+        -e "s|CCL_DEFAULT_DIRECTORY=/usr/local/src/ccl|CCL_DEFAULT_DIRECTORY=/opt/$pkgspec|" \
+        /opt/$pkgspec/scripts/$f
+done
 
-# 👇 EDIT HERE:
-# Thanks to https://stackoverflow.com/a/13484552
-$( osascript \
-    -e 'tell application "Finder"' \
-    -e 'activate' \
-    -e 'display dialog "Here is a way to tell the user something." buttons {"OK"} default button 1' \
-    -e 'end tell'\
-    >/dev/null 2>&1 \
-    &
-)
+mkdir -p /opt/$pkgspec/bin
+cd /opt/$pkgspec/bin
+for f in ccl ccl64 ; do
+    ln -s ../scripts/$f .
+done
