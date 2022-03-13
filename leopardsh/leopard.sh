@@ -523,6 +523,11 @@ if test "$op" = "unpack-tarball-check-md5" ; then
     dest="$1"
     shift 1
 
+    if test "$1" = "sudo" ; then
+        sudo="sudo"
+        shift 1
+    fi
+
     tmp=$(mktemp -u /tmp/leopard.sh.tarball.XXXX)
 
     cd /tmp
@@ -543,12 +548,17 @@ if test "$op" = "unpack-tarball-check-md5" ; then
         | sed "s/$(printf '\r')//"
     )
 
+    if test -n "$sudo" ; then
+        # prompt the user for their password before we start the curl pipeline.
+        sudo true
+    fi
+
     cd $dest
     nice curl --fail --silent --show-error $insecure_url \
         | pv --force --size $size \
         | tee $fifo \
         | nice gunzip \
-        | nice tar x
+        | nice $sudo tar x
 
     while ! test -e $tmp.localmd5 ; do sleep 0.1 ; done
 
