@@ -4,6 +4,7 @@
 
 package=neofetch
 version=7.1.0
+upstream=https://distfiles.gentoo.org/distfiles/$package-$version.tar.gz
 
 set -e -x -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -20,26 +21,22 @@ if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEO
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-upstream=https://distfiles.gentoo.org/distfiles/$package-$version.tar.gz
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
-
-    cd /tmp
-    rm -rf $package-$version
-    tar xzf ~/Downloads/$tarball
-    cd /tmp/$package-$version
-
-
-    make install PREFIX=/opt/$pkgspec
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+if ! test -e ~/Downloads/$tarball ; then
+    cd ~/Downloads
+    curl -#fLO $srcmirror/$tarball
 fi
 
+cd /tmp
+rm -rf $package-$version
+tar xzf ~/Downloads/$tarball
+cd /tmp/$package-$version
 
+
+make install PREFIX=/opt/$pkgspec
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi

@@ -41,35 +41,31 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd /tmp/$package-$version
+cd /tmp/$package-$version
 
+CPPFLAGS=-I/opt/readline-8.1.2$ppc64/include \
+LDFLAGS=-L/opt/readline-8.1.2$ppc64/lib \
+    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+        --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
+        --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
+        --with-readline
 
-    CPPFLAGS=-I/opt/readline-8.1.2$ppc64/include \
-    LDFLAGS=-L/opt/readline-8.1.2$ppc64/lib \
-        /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-            --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
-            --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
-            --with-readline
+/usr/bin/time make $(leopard.sh -j)
 
-    /usr/bin/time make $(leopard.sh -j)
-
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    make check
 fi
 
+make install
 
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi
 
 # input-rl.c: In function 'instream_readline_history_get':
 # input-rl.c:194: error: subscripted value is neither array nor pointer

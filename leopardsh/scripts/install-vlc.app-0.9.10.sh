@@ -1,14 +1,12 @@
-#!/opt/tigersh-deps-0.1/bin/bash
+#!/bin/bash
 # based on templates/install-app.sh v1
 
-# 👇 EDIT HERE:
-# Install Foo.app on OS X / PowerPC.
+# Install VLC.app on OS X / PowerPC.
 
-# 👇 EDIT HERE:
-package=foo.app
-version=1.0
-upstream=https://ccl.clozure.com/ftp/pub/release/$version/${appname}_$version.dmg
-appname1=Foo
+package=vlc.app
+version=0.9.10
+upstream=https://download.videolan.org/pub/videolan/vlc/$version/macosx/vlc-$version-powerpc.dmg
+appname1=VLC
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -55,17 +53,3 @@ for appname in "$appname1" ; do
         break
     done
 done
-
-# 👇 EDIT HERE:
-defaults write com.foo "Some Setting" "Some Value"
-
-# 👇 EDIT HERE:
-# Thanks to https://stackoverflow.com/a/13484552
-$( osascript \
-    -e 'tell application "Finder"' \
-    -e 'activate' \
-    -e 'display dialog "Here is a way to tell the user something." buttons {"OK"} default button 1' \
-    -e 'end tell'\
-    >/dev/null 2>&1 \
-    &
-)

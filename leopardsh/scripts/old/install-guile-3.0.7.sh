@@ -33,29 +33,25 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd /tmp/$package-$version
+cd /tmp/$package-$version
 
+# Note: guile 3 needs c11 (i.e. gcc-4.9.4).
+# FIXME take a closer look at the available options.
+CC=/opt/gcc-4.9.4$ppc64/bin/gcc /usr/bin/time ./configure -C --prefix=/opt/$pkgspec
 
-    # Note: guile 3 needs c11 (i.e. gcc-4.9.4).
-    # FIXME take a closer look at the available options.
-    CC=/opt/gcc-4.9.4$ppc64/bin/gcc /usr/bin/time ./configure -C --prefix=/opt/$pkgspec
+/usr/bin/time make $(leopard.sh -j)
 
-    /usr/bin/time make $(leopard.sh -j)
-
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    make check
 fi
 
+make install
 
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi

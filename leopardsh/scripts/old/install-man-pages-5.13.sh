@@ -4,6 +4,7 @@
 
 package=man-pages
 version=5.13
+upstream=https://mirrors.edge.kernel.org/pub/linux/docs/$package/$package-$version.tar.gz
 
 set -e -x -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -20,21 +21,16 @@ if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEO
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-upstream=https://mirrors.edge.kernel.org/pub/linux/docs/$package/$package-$version.tar.gz
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
-
-    cd /tmp
-    rm -rf $package-$version
-    tar xzf ~/Downloads/$tarball
-    cd /tmp/$package-$version
-
-
-    # FIXME this fails with: 'install: illegal option -T'
-    /usr/bin/time make $(leopard.sh -j) prefix=/opt/$pkgspec install
+if ! test -e ~/Downloads/$tarball ; then
+    cd ~/Downloads
+    curl -#fLO $srcmirror/$tarball
 fi
 
+cd /tmp
+rm -rf $package-$version
+tar xzf ~/Downloads/$tarball
+cd /tmp/$package-$version
 
+# FIXME this fails with: 'install: illegal option -T'
+/usr/bin/time make $(leopard.sh -j) prefix=/opt/$pkgspec install

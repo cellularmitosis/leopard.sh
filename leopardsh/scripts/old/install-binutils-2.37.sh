@@ -5,6 +5,7 @@
 
 package=binutils
 version=2.37
+upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
 set -e -x -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -21,51 +22,48 @@ if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEO
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
-    if ! test -e ~/Downloads/$tarball ; then
-        cd ~/Downloads
-        curl -#fLO $srcmirror/$tarball
-    fi
-
-    cd /tmp
-    rm -rf $package-$version
-
-    tar xzf ~/Downloads/$tarball
-
-    cd /tmp/$package-$version
-
-
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
-        CXXFLAGS=$(leopard.sh -m32 -mcpu -O)
-    fi
-    export CFLAGS CXXFLAGS
-
-    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec
-
-    /usr/bin/time make $(leopard.sh -j) V=1
-
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+if ! test -e ~/Downloads/$tarball ; then
+    cd ~/Downloads
+    curl -#fLO $srcmirror/$tarball
 fi
 
+cd /tmp
+rm -rf $package-$version
+
+tar xzf ~/Downloads/$tarball
+
+cd /tmp/$package-$version
+
+
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+    CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
+    export LDFLAGS=-m64
+else
+    CFLAGS=$(leopard.sh -m32 -mcpu -O)
+    CXXFLAGS=$(leopard.sh -m32 -mcpu -O)
+fi
+export CFLAGS CXXFLAGS
+
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec
+
+/usr/bin/time make $(leopard.sh -j) V=1
+
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    make check
+fi
+
+make install
+
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi
 
 
 # checking for isl 0.15 or later... no

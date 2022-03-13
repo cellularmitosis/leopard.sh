@@ -4,6 +4,7 @@
 
 package=autogen
 version=5.18.16
+upstream=https://ftp.gnu.org/gnu/$package/rel$version/$package-$version.tar.gz
 
 set -e -x -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -15,7 +16,7 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if ! which -s guile ; then
     leopard.sh guile-1.8.8
@@ -26,7 +27,6 @@ if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEO
     cd /opt
     curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
 else
-upstream=https://ftp.gnu.org/gnu/$package/rel$version/$package-$version.tar.gz
 
     if ! test -e ~/Downloads/$tarball ; then
         cd ~/Downloads

@@ -38,37 +38,33 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd /tmp/$package-$version
+cd /tmp/$package-$version
 
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+    export LDFLAGS=-m64
+else
+    CFLAGS=$(leopard.sh -m32 -mcpu -O)
+fi
+export CFLAGS
 
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
-    fi
-    export CFLAGS
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
+    --with-libintl-prefix=/opt/gettext-0.21$ppc64
 
-    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-        --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
-        --with-libintl-prefix=/opt/gettext-0.21$ppc64
+/usr/bin/time make $(leopard.sh -j) V=1
 
-    /usr/bin/time make $(leopard.sh -j) V=1
-
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    make check
 fi
 
+make install
 
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi

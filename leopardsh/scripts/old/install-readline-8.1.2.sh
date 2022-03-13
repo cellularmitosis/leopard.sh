@@ -6,7 +6,7 @@
 package=readline
 version=8.1.2
 
-set -e -x -o pipefail
+set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
@@ -41,43 +41,39 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd /tmp/$package-$version
+cd /tmp/$package-$version
 
-
-    CFLAGS=$(leopard.sh -mcpu -O)
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $CFLAGS"
-        # Note: readline ends up linking a ppc dylib, rather than ppc64,
-        # so we pass -m64 in LDFLAGS:
-        LDFLAGS="-m64 $LDFLAGS"
-    fi
-
-    # Note: the dylibs still end up being "ppc" rather than e.g. ppc7400,
-    # so we also pass -mcpu in LDFLAGS:
-    LDFLAGS="$(leopard.sh -mcpu) $LDFLAGS"
-
-    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-        --with-curses \
-        CPPFLAGS="$CPPFLAGS" \
-        LDFLAGS="$LDFLAGS" \
-        CFLAGS="$CFLAGS"
-
-    /usr/bin/time make $(leopard.sh -j)
-
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+CFLAGS=$(leopard.sh -mcpu -O)
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
+    # Note: readline ends up linking a ppc dylib, rather than ppc64,
+    # so we pass -m64 in LDFLAGS:
+    LDFLAGS="-m64 $LDFLAGS"
 fi
 
+# Note: the dylibs still end up being "ppc" rather than e.g. ppc7400,
+# so we also pass -mcpu in LDFLAGS:
+LDFLAGS="$(leopard.sh -mcpu) $LDFLAGS"
 
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --with-curses \
+    CPPFLAGS="$CPPFLAGS" \
+    LDFLAGS="$LDFLAGS" \
+    CFLAGS="$CFLAGS"
+
+/usr/bin/time make $(leopard.sh -j)
+
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    make check
+fi
+
+make install
+
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi

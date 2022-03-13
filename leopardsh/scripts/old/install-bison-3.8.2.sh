@@ -35,48 +35,44 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd /tmp/$package-$version
-    
+cd /tmp/$package-$version
 
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
-        export LDFLAGS=-m64
-    else
-        CFLAGS=$(leopard.sh -m32 -mcpu -O)
-        CXXFLAGS=$(leopard.sh -m32 -mcpu -O)
-    fi
-    export CFLAGS CXXFLAGS
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $(leopard.sh -mcpu -O)"
+    CXXFLAGS="-m64 $(leopard.sh -mcpu -O)"
+    export LDFLAGS=-m64
+else
+    CFLAGS=$(leopard.sh -m32 -mcpu -O)
+    CXXFLAGS=$(leopard.sh -m32 -mcpu -O)
+fi
+export CFLAGS CXXFLAGS
 
-    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec
-    
-    /usr/bin/time make $(leopard.sh -j) V=1
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec
 
-    if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
-        # 'make check' fails with:
-        # examples/c++/calc++/parser.cc: In constructor 'yy::parser::parser(driver&)':
-        # examples/c++/calc++/parser.cc:149: error: the default argument for parameter 0 of 'yy::parser::stack<T, S>::stack(typename S::size_type) [with T = yy::parser::stack_symbol_type, S = std::vector<yy::parser::stack_symbol_type, std::allocator<yy::parser::stack_symbol_type> >]' has not yet been parsed
-        # make[3]: *** [examples/c++/calc++/calc__-parser.o] Error 1
-        # make[2]: *** [check-am] Error 2
-        # make[1]: *** [check-recursive] Error 1
-        # make: *** [check] Error 2
+/usr/bin/time make $(leopard.sh -j) V=1
 
-        make check
-    fi
+if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
+    # 'make check' fails with:
+    # examples/c++/calc++/parser.cc: In constructor 'yy::parser::parser(driver&)':
+    # examples/c++/calc++/parser.cc:149: error: the default argument for parameter 0 of 'yy::parser::stack<T, S>::stack(typename S::size_type) [with T = yy::parser::stack_symbol_type, S = std::vector<yy::parser::stack_symbol_type, std::allocator<yy::parser::stack_symbol_type> >]' has not yet been parsed
+    # make[3]: *** [examples/c++/calc++/calc__-parser.o] Error 1
+    # make[2]: *** [check-am] Error 2
+    # make[1]: *** [check-recursive] Error 1
+    # make: *** [check] Error 2
 
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+    make check
 fi
 
+make install
 
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi
 
 
 # Optional Packages:

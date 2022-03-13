@@ -33,31 +33,28 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd /tmp/$package-$version
+cd /tmp/$package-$version
 
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    CC=gcc-4.2 \
+    CFLAGS="-std=c99 $(leopard.sh -m32 -mcpu -O)"
 
-    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-        CC=gcc-4.2 \
-        CFLAGS="-std=c99 $(leopard.sh -m32 -mcpu -O)"
-  
-    /usr/bin/time make $(leopard.sh -j) V=1
+/usr/bin/time make $(leopard.sh -j) V=1
 
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    make check
 fi
 
+make install
+
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi
 
 
 # Note: Using gcc-4.2 and -std=c99 to avoid the following failure:

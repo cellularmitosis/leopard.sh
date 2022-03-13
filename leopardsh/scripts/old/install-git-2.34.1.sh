@@ -45,54 +45,50 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd /tmp/$package-$version
+cd /tmp/$package-$version
 
-
-    CFLAGS=$(leopard.sh -mcpu -O)
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $CFLAGS"
-        LDFLAGS="-m64 $LDFLAGS"
-    fi
-
-    # FIXME despite all of these flags, git is still missing a curl symbol:
-    #     LINK git-http-fetch
-    # Undefined symbols:
-    #   "_curl_global_sslset", referenced from:
-    #       _http_init in http.o
-    # ld: symbol(s) not found
-    # collect2: ld returned 1 exit status
-    # make: *** [git-http-fetch] Error 1
-    CPPFLAGS="$CPPFLAGS -I/opt/portable-curl-7.58.0-1/include"
-    LDFLAGS="$LDFLAGS -L/opt/portable-curl-7.58.0-1/lib"
-    LIBS="$LIBS -lcurl"
-
-        /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-            --with-openssl=/opt/libressl-3.4.2$ppc64 \
-            --with-curl=/opt/portable-curl-7.58.0-1 \
-            --with-iconv=/opt/libiconv-1.16$ppc64 \
-            --with-expat=/opt/expat-2.4.3$ppc64 \
-            CFLAGS="$CFLAGS" \
-            CPPFLAGS="$CPPFLAGS" \
-            LDFLAGS="$LDFLAGS" \
-            LIBS="$LIBS"
-
-    /usr/bin/time make $(leopard.sh -j) V=1
-
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        # FIXME some tests need a recent python.
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+CFLAGS=$(leopard.sh -mcpu -O)
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
+    LDFLAGS="-m64 $LDFLAGS"
 fi
 
+# FIXME despite all of these flags, git is still missing a curl symbol:
+#     LINK git-http-fetch
+# Undefined symbols:
+#   "_curl_global_sslset", referenced from:
+#       _http_init in http.o
+# ld: symbol(s) not found
+# collect2: ld returned 1 exit status
+# make: *** [git-http-fetch] Error 1
+CPPFLAGS="$CPPFLAGS -I/opt/portable-curl-7.58.0-1/include"
+LDFLAGS="$LDFLAGS -L/opt/portable-curl-7.58.0-1/lib"
+LIBS="$LIBS -lcurl"
 
+    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+        --with-openssl=/opt/libressl-3.4.2$ppc64 \
+        --with-curl=/opt/portable-curl-7.58.0-1 \
+        --with-iconv=/opt/libiconv-1.16$ppc64 \
+        --with-expat=/opt/expat-2.4.3$ppc64 \
+        CFLAGS="$CFLAGS" \
+        CPPFLAGS="$CPPFLAGS" \
+        LDFLAGS="$LDFLAGS" \
+        LIBS="$LIBS"
+
+/usr/bin/time make $(leopard.sh -j) V=1
+
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    # FIXME some tests need a recent python.
+    make check
+fi
+
+make install
+
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi

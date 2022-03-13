@@ -11,7 +11,7 @@ appname4="GLQuakeWorld"
 version=1.1
 mountpoint="/Volumes/$appname1 v$version"
 
-set -e -x
+set -e
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 
 pkgspec=$package-$version

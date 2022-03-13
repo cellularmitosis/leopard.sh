@@ -28,5 +28,3 @@ rm -rf $package
 tar xzf ~/Downloads/$tarball
 mv $package/$version /opt/$pkgspec
 rmdir $package
-
-

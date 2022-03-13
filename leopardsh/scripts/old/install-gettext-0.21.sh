@@ -47,69 +47,65 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd /tmp/$package-$version
+cd /tmp/$package-$version
 
-
-    CFLAGS=$(leopard.sh -mcpu -O)
-    CXXFLAGS=$(leopard.sh -mcpu -O)
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $CFLAGS"
-        CXXFLAGS="-m64 $CXXFLAGS"
-    fi
-
-    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-        --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
-        --with-libcurses-prefix=/opt/ncurses-6.3$ppc64 \
-        --with-libunistring-prefix=/opt/libunistring-1.0$ppc64 \
-        CPPFLAGS="$CPPFLAGS" \
-        LDFLAGS="$LDFLAGS" \
-        CFLAGS="$CFLAGS" \
-        CXXFLAGS="$CXXFLAGS" \
-        LIBS="-lncurses"
-
-    /usr/bin/time make $(leopard.sh -j) V=1
-
-    if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
-        # Two failing tests on ppc:
-        # FAIL: msgunfmt-java-1
-        # FAIL: lang-java
-
-        # 21 failing tests on ppc64:
-        # FAIL: msgattrib-properties-1
-        # FAIL: msgcat-properties-1
-        # FAIL: msgcat-properties-2
-        # FAIL: msgcmp-3
-        # FAIL: msgcomm-24
-        # FAIL: msgconv-4
-        # FAIL: msgen-2
-        # FAIL: msgexec-3
-        # FAIL: msgfilter-3
-        # FAIL: msgfmt-properties-1
-        # FAIL: msggrep-6
-        # FAIL: msgmerge-properties-1
-        # FAIL: msgmerge-properties-2
-        # FAIL: msgunfmt-java-1
-        # FAIL: msgunfmt-properties-1
-        # FAIL: msguniq-4
-        # FAIL: xgettext-properties-1
-        # FAIL: xgettext-properties-2
-        # FAIL: xgettext-properties-3
-        # FAIL: xgettext-properties-4
-        # FAIL: lang-java
-
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+CFLAGS=$(leopard.sh -mcpu -O)
+CXXFLAGS=$(leopard.sh -mcpu -O)
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
+    CXXFLAGS="-m64 $CXXFLAGS"
 fi
 
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
+    --with-libcurses-prefix=/opt/ncurses-6.3$ppc64 \
+    --with-libunistring-prefix=/opt/libunistring-1.0$ppc64 \
+    CPPFLAGS="$CPPFLAGS" \
+    LDFLAGS="$LDFLAGS" \
+    CFLAGS="$CFLAGS" \
+    CXXFLAGS="$CXXFLAGS" \
+    LIBS="-lncurses"
 
+/usr/bin/time make $(leopard.sh -j) V=1
+
+if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
+    # Two failing tests on ppc:
+    # FAIL: msgunfmt-java-1
+    # FAIL: lang-java
+
+    # 21 failing tests on ppc64:
+    # FAIL: msgattrib-properties-1
+    # FAIL: msgcat-properties-1
+    # FAIL: msgcat-properties-2
+    # FAIL: msgcmp-3
+    # FAIL: msgcomm-24
+    # FAIL: msgconv-4
+    # FAIL: msgen-2
+    # FAIL: msgexec-3
+    # FAIL: msgfilter-3
+    # FAIL: msgfmt-properties-1
+    # FAIL: msggrep-6
+    # FAIL: msgmerge-properties-1
+    # FAIL: msgmerge-properties-2
+    # FAIL: msgunfmt-java-1
+    # FAIL: msgunfmt-properties-1
+    # FAIL: msguniq-4
+    # FAIL: xgettext-properties-1
+    # FAIL: xgettext-properties-2
+    # FAIL: xgettext-properties-3
+    # FAIL: xgettext-properties-4
+    # FAIL: lang-java
+
+    make check
+fi
+
+make install
+
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi

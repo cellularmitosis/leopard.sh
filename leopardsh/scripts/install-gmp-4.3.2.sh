@@ -17,7 +17,7 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
     exit 0

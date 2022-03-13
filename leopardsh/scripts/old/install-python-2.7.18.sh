@@ -42,34 +42,33 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd Python-$version
+cd Python-$version
 
+pkgconfignames="readline libressl gdbm"
+CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
+LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
+LIBS=$(pkg-config --libs-only-l $pkgconfignames)
+export CPPFLAGS LDFLAGS LIBS
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --with-threads \
+    --enable-ipv6
 
-    pkgconfignames="readline libressl gdbm"
-    CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
-    LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
-    LIBS=$(pkg-config --libs-only-l $pkgconfignames)
-    export CPPFLAGS LDFLAGS LIBS
-    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-        --with-threads \
-        --enable-ipv6
+/usr/bin/time make $(leopard.sh -j)
 
-    /usr/bin/time make $(leopard.sh -j)
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    make check
+fi
 
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
-    fi
+make install
 
-    make install
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
 
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi
 fi
 
 ln -sf /opt/$pkgspec/bin/python /usr/local/bin/python2

@@ -36,48 +36,44 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd ncurses-$version
+cd ncurses-$version
 
-
-    CFLAGS=$(leopard.sh -mcpu -O)
-    CXXFLAGS=$(leopard.sh -mcpu -O)
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $CFLAGS"
-        CXXFLAGS="-m64 $CXXFLAGS"
-    fi
-
-    # Note: ncurses needs the directory for .pc files to already exist:
-    mkdir -p /opt/$pkgspec/lib/pkgconfig
-
-    if test "$package" = "ncursesw" ; then
-        enable_widec="--enable-widec"
-    fi
-
-    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-        --with-manpage-format=normal \
-        --with-shared \
-        --without-debug \
-        $enable_widec \
-        CFLAGS="$CFLAGS" \
-        CXXFLAGS="$CXXFLAGS"
-
-        # --enable-pc-files \
-        # --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
-
-    /usr/bin/time make $(leopard.sh -j) V=1
-
-    # Note: no 'make check' available.
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+CFLAGS=$(leopard.sh -mcpu -O)
+CXXFLAGS=$(leopard.sh -mcpu -O)
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
+    CXXFLAGS="-m64 $CXXFLAGS"
 fi
 
+# Note: ncurses needs the directory for .pc files to already exist:
+mkdir -p /opt/$pkgspec/lib/pkgconfig
 
+if test "$package" = "ncursesw" ; then
+    enable_widec="--enable-widec"
+fi
+
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --with-manpage-format=normal \
+    --with-shared \
+    --without-debug \
+    $enable_widec \
+    CFLAGS="$CFLAGS" \
+    CXXFLAGS="$CXXFLAGS"
+
+    # --enable-pc-files \
+    # --with-pkg-config-libdir=/opt/$pkgspec/lib/pkgconfig \
+
+/usr/bin/time make $(leopard.sh -j) V=1
+
+# Note: no 'make check' available.
+
+make install
+
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi

@@ -15,10 +15,6 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! which -s gcc-4.2 ; then
-    leopard.sh gcc-4.2
-fi
-
 if ! which -s xz ; then
     leopard.sh xz-5.2.5
 fi
@@ -36,32 +32,32 @@ if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
 
-leopard.sh --unpack-dist $pkgspec
-    cd /tmp/$package-$version
-
-
-    CC=gcc-4.2 CXX=g++-4.2 /usr/bin/time ./configure -C \
-        --prefix=/opt/$pkgspec \
-        --enable-cxx
-    /usr/bin/time make $(leopard.sh -j)
-
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+if ! which -s gcc-4.2 ; then
+    leopard.sh gcc-4.2
 fi
 
+leopard.sh --unpack-dist $pkgspec
+cd /tmp/$package-$version
 
+CC=gcc-4.2 CXX=g++-4.2 /usr/bin/time ./configure -C \
+    --prefix=/opt/$pkgspec \
+    --enable-cxx
+/usr/bin/time make $(leopard.sh -j)
+
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    make check
+fi
+
+make install
+
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi
 
 # Note: /usr/bin/gcc (4.0.1) fails with:
 #   ld: duplicate symbol ___gmpz_abs in .libs/compat.o and .libs/assert.o

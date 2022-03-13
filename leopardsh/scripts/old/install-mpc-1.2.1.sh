@@ -37,29 +37,25 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd /tmp/$package-$version
+cd /tmp/$package-$version
 
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --with-gmp=/opt/gmp-6.2.1$ppc64 \
+    --with-mpfr=/opt/mpfr-4.1.0$ppc64
 
-    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-        --with-gmp=/opt/gmp-6.2.1$ppc64 \
-        --with-mpfr=/opt/mpfr-4.1.0$ppc64
+/usr/bin/time make $(leopard.sh -j)
 
-    /usr/bin/time make $(leopard.sh -j)
-
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    make check
 fi
 
+make install
 
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi
