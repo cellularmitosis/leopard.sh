@@ -5,6 +5,7 @@ gcc-4.2
 gcc-4.9.4
 gmp-4.3.2
 gzip-1.11
+handbrake.app-0.9.1
 isl-0.12.2
 lhasa-0.3.1
 libressl-3.4.2
