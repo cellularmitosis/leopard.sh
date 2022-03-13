@@ -1,4 +1,5 @@
 adium.app-1.3.10
+chicken.app-2.2b2
 cloog-0.18.1
 gcc-4.2
 gcc-4.9.4
