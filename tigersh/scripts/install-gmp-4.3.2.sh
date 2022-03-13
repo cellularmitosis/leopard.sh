@@ -1,5 +1,5 @@
 #!/opt/tigersh-deps-0.1/bin/bash
-# based on templates/install-foo-1.0.sh v4
+# based on templates/build-from-source.sh v6
 
 # Install gmp on OS X Tiger / PowerPC.
 
@@ -28,6 +28,10 @@ set -x
 
 if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
+fi
+
+if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
+    tiger.sh gcc-4.2
 fi
 
 tiger.sh --unpack-dist $pkgspec
