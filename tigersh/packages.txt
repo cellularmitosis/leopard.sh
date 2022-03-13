@@ -18,6 +18,7 @@ make-4.3
 mpc-1.0.3
 mpfr-3.1.6
 openmark.app-1.60
+opera.app-10.63
 patch-2.7.6
 pv-1.6.20
 quake.app-1.1
