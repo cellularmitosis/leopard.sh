@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-tenfourfox.app-fpr32.5.sh
