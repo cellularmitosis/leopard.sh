@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-iceweaselppc.app-fpr13.sh
