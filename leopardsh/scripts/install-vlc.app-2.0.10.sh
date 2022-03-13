@@ -1,15 +1,12 @@
 #!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/install-app.sh v1
 
-# Install InterWebPPC.app on OS X / PowerPC.
+# Install VLC.app on OS X / PowerPC.
 
-package=interwebppc.app
-version=rr1
-ucversion=RR1
-appname1=InterWebPPC
-upstream_g3=https://github.com/wicknix/InterWebPPC/releases/download/RR1/InterWebPPC-RR1-G3.zip
-upstream_g4=https://github.com/wicknix/InterWebPPC/releases/download/RR1/InterWebPPC-RR1-G4.zip
-upstream_g5=https://github.com/wicknix/InterWebPPC/releases/download/RR1/InterWebPPC-RR1-G5.zip
+package=vlc.app
+version=2.0.10
+appname1=VLC
+upstream=https://download.videolan.org/pub/videolan/vlc/$version/macosx/vlc-$version-powerpc.dmg
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -28,29 +25,12 @@ elif test "${osversion:0:4}" = "10.5" ; then
 fi
 test -n "$pkgmgr"
 
-cpu_id=$(sysctl hw.cpusubtype | awk '{print $NF}')
-if test "$cpu_id" = "9" ; then
-    cpu=g3
-elif test "$cpu_id" = "10" -o "$cpu_id" = "11" ; then
-    cpu=g4
-elif test "$cpu_id" = "100" ; then
-    cpu=g5
-fi
-test -n "$cpu"
-
 echo -n -e "\033]0;$pkgmgr $pkgspec ($($pkgmgr --cpu))\007"
 
-tarball=$pkgspec.$cpu.tar.gz
+tarball=$pkgspec.tar.gz
 url=$mirror/dist/$tarball
 echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $tarball into /opt." >&2
 $pkgmgr --unpack-tarball-check-md5 $url /opt
-
-cd /opt/$pkgspec
-mkdir -p bin
-cd bin
-for f in js xpcshell ; do
-    ln -s ../$appname1.app/Contents/MacOS/$f .
-done
 
 echo -e "${COLOR_CYAN}Creating${COLOR_NONE} aliases for $pkgspec." >&2
 for appname in "$appname1" ; do
@@ -67,8 +47,8 @@ for appname in "$appname1" ; do
             continue
         fi
         aliasname=$( echo $aliasname | sed 's/^alias file //' )
-        rm -f "/Applications/$appname $ucversion"
-        mv "/opt/$pkgspec/$aliasname" "/Applications/$appname $ucversion"
+        rm -f "/Applications/$appname $version"
+        mv "/opt/$pkgspec/$aliasname" "/Applications/$appname $version"
         echo "  \"/Applications/$appname $version\" -> /opt/$pkgspec/$appname"
         break
     done
