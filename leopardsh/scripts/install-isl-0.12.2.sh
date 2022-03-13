@@ -1,12 +1,13 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v4
+# based on templates/build-from-source.sh v6
 
 # Install isl on OS X Leopard / PowerPC.
 
 package=isl
 version=0.12.2
+upstream=https://gcc.gnu.org/pub/gcc/infrastructure/$package-$version.tar.bz2
 
-set -e -x -o pipefail
+set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
@@ -40,34 +41,30 @@ if ! test -e /usr/bin/gcc ; then
 fi
 
 leopard.sh --unpack-dist $pkgspec
-    cd /tmp/$package-$version
+cd /tmp/$package-$version
 
-
-    CFLAGS="$(leopard.sh -mcpu -O) -fomit-frame-pointer -fstrict-aliasing -ffast-math"
-    if test -n "$ppc64" ; then
-        CFLAGS="-m64 $CFLAGS"
-    fi
-
-    /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-        --with-gmp-prefix=/opt/gmp-4.3.2$ppc64 \
-        CFLAGS="$CFLAGS"
-
-    /usr/bin/time make $(leopard.sh -j) V=1
-
-    if test -n "$LEOPARDSH_RUN_TESTS" ; then
-        make check
-    fi
-
-    make install
-
-    leopard.sh --linker-check $pkgspec
-    leopard.sh --arch-check $pkgspec $ppc64
-
-    if test -e config.cache ; then
-        mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
-        gzip -9 config.cache
-        mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
-    fi
+CFLAGS="$(leopard.sh -mcpu -O) -fomit-frame-pointer -fstrict-aliasing -ffast-math"
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
 fi
 
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --with-gmp-prefix=/opt/gmp-4.3.2$ppc64 \
+    CFLAGS="$CFLAGS"
 
+/usr/bin/time make $(leopard.sh -j) V=1
+
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
+    make check
+fi
+
+make install
+
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
+
+if test -e config.cache ; then
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    gzip -9 config.cache
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+fi
