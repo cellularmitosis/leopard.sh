@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-openmark.app-1.60.sh
