@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/install-app.sh v1
 
 # Install VLC.app on OS X / PowerPC.
 
 package=vlc.app
 version=0.9.10
-upstream=https://download.videolan.org/pub/videolan/vlc/$version/macosx/vlc-$version-powerpc.dmg
 appname1=VLC
+upstream=https://download.videolan.org/pub/videolan/vlc/$version/macosx/vlc-$version-powerpc.dmg
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
