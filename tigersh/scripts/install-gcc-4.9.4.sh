@@ -70,7 +70,7 @@ CXX=g++-4.2
     --enable-objc-gc \
     --enable-shared \
     --program-suffix=-4.9 \
-    --disable-bootstrap  # FIXME remove this
+    # --disable-bootstrap
 
 /usr/bin/time make $(tiger.sh -j)
 
