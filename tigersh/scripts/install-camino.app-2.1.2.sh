@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-camino.app-2.1.2.sh
