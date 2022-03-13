@@ -325,13 +325,14 @@ EOF
         bits=32
     fi
     if test ! -e $opt_config_cache/leopard.cache || test ! -e $opt_config_cache/leopard.$bits.cache ; then
-        echo "Fetching configure cache." >&2
         cd $opt_config_cache
         if ! test -e $opt_config_cache/leopard.cache ; then
+            echo "Fetching configure cache (leopard.cache)." >&2
             url=$LEOPARDSH_MIRROR/leopardsh/config.cache/leopard.cache
             curl --fail --silent --show-error --location --remote-name $url
         fi
         if ! test -e $opt_config_cache/leopard.$bits.cache ; then
+            echo "Fetching configure cache (leopard.$bits.cache)." >&2
             url=$LEOPARDSH_MIRROR/leopardsh/config.cache/leopard.$bits.cache
             curl --fail --silent --show-error --location --remote-name $url
         fi

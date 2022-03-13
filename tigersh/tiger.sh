@@ -332,13 +332,14 @@ EOF
         bits=32
     fi
     if test ! -e $opt_config_cache/tiger.cache || test ! -e $opt_config_cache/tiger.$bits.cache ; then
-        echo "Fetching configure cache." >&2
         cd $opt_config_cache
         if ! test -e $opt_config_cache/tiger.cache ; then
+            echo "Fetching configure cache (tiger.cache)." >&2
             url=$TIGERSH_MIRROR/tigersh/config.cache/tiger.cache
             curl --fail --silent --show-error --location --remote-name $url
         fi
         if ! test -e $opt_config_cache/tiger.$bits.cache ; then
+            echo "Fetching configure cache (tiger.$bits.cache)." >&2
             url=$TIGERSH_MIRROR/tigersh/config.cache/tiger.$bits.cache
             curl --fail --silent --show-error --location --remote-name $url
         fi
