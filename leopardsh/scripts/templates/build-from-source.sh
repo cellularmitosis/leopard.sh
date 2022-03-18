@@ -22,6 +22,7 @@ pkgspec=$package-$version$ppc64
 # 👇 EDIT HERE:
 if ! test -e /opt/bar-2.0$ppc64 ; then
     leopard.sh bar-2.0$ppc64
+    PATH="/opt/bar-2.0$ppc64/bin:$PATH"
 fi
 
 # 👇 EDIT HERE:
@@ -34,6 +35,7 @@ do
     fi
     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+    PATH="/opt/$dep/bin:$PATH"
 done
 LIBS="-lbar -lqux"
 
@@ -51,6 +53,7 @@ do
         leopard.sh $dep
     fi
     PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+    PATH="/opt/$dep/bin:$PATH"
 done
 export PKG_CONFIG_PATH
 
@@ -78,6 +81,8 @@ fi
 if ! which -s gcc-4.2 ; then
     leopard.sh gcc-4.2
 fi
+
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version

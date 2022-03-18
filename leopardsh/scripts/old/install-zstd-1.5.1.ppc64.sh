@@ -1,1 +1,0 @@
-install-zstd-1.5.1.sh

@@ -26,6 +26,7 @@ openmark.app-1.60
 opera.app-10.63
 patch-2.7.6
 pv-1.6.20
+python2-2.7.18
 quake.app-1.1
 quake-pak0.pak-1.06
 sdl-1.2.15.20220129
@@ -38,3 +39,4 @@ vlc.app-0.9.10
 vlc.app-2.0.10
 xbench.app-1.3
 xcode-3.1.4
+zstd-1.5.1

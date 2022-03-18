@@ -22,6 +22,7 @@ pkgspec=$package-$version$ppc64
 # 👇 EDIT HERE:
 if ! test -e /opt/bar-2.0$ppc64 ; then
     tiger.sh bar-2.0$ppc64
+    PATH="/opt/bar-2.0$ppc64/bin:$PATH"
 fi
 
 # 👇 EDIT HERE:
@@ -34,6 +35,7 @@ do
     fi
     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+    PATH="/opt/$dep/bin:$PATH"
 done
 LIBS="-lbar -lqux"
 
@@ -52,6 +54,7 @@ do
         tiger.sh $dep
     fi
     PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+    PATH="/opt/$dep/bin:$PATH"
 done
 export PKG_CONFIG_PATH
 
@@ -79,6 +82,8 @@ fi
 if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
     tiger.sh gcc-4.2
 fi
+
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
