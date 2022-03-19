@@ -1,6 +1,6 @@
 #!/opt/tigersh-deps-0.1/bin/bash
 
-# Install gcc 4.2 from tigerbrew.
+# Install gcc 4.2 from tigerbrew, see https://github.com/mistydemeo/tigerbrew
 
 package=gcc
 version=4.2
@@ -22,5 +22,7 @@ fi
 tarball=gcc-42-5553-darwin8-all.tar.gz
 
 echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $tarball into /." >&2
-url=$TIGERSH_MIRROR/dist/$tarball
-tiger.sh --unpack-tarball-check-md5 $url / sudo
+url=$upstream
+tiger.sh --unpack-tarball-check-md5 $url / sudo b12cdbef3c73af31674851f04c3b234b
+
+# thanks misty!
