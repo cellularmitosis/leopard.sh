@@ -38,7 +38,8 @@ if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
 fi
 
-/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+/usr/bin/time ./configure -C \
+    --prefix=/opt/$pkgspec \
     CFLAGS="$CFLAGS"
 
 /usr/bin/time make $(tiger.sh -j) V=1
@@ -48,6 +49,18 @@ if test -n "$TIGERSH_RUN_TESTS" ; then
 fi
 
 make install
+
+cd /opt/$pkgspec/bin
+patch -p0 << EOF
+--- runtest	2022-03-19 16:36:45.000000000 -0500
++++ runtest.patched	2022-03-19 16:38:36.000000000 -0500
+@@ -1,4 +1,5 @@
+ #!/bin/sh
++DEJAGNULIBS=/opt/$pkgspec/share/dejagnu
+ #
+ # Copyright (C) 1992-2016, 2021 Free Software Foundation, Inc.
+ #
+EOF
 
 tiger.sh --linker-check $pkgspec
 tiger.sh --arch-check $pkgspec $ppc64
