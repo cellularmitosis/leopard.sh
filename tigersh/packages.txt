@@ -3,6 +3,7 @@ camino.app-2.1.2
 chicken.app-2.2b2
 cloog-0.18.1
 clozure-cl.app-1.4
+dejagnu-1.6.3
 gcc-4.2
 gcc-4.9.4
 gmp-4.3.2
