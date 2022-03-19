@@ -549,11 +549,21 @@ if test "$op" = "unpack-tarball-check-md5" ; then
         shift 1
     fi
 
-    tmp=$(mktemp -u /tmp/tiger.sh.tarball.XXXX)
+    if test -n "$1" ; then
+        md5arg="$1"
+        shift 1
+    fi
 
     cd /tmp
-    curl --fail --silent --show-error --location $url.md5 > $tmp.md5 &
-    curl_md5_pid=$!
+
+    tmp=$(mktemp -u /tmp/tiger.sh.tarball.XXXX)
+
+    if test -n "$md5arg" ; then
+        echo "$md5arg" > $tmp.md5
+    else
+        curl --fail --silent --show-error --location $url.md5 > $tmp.md5 &
+        curl_md5_pid=$!
+    fi
 
     fifo=$tmp.fifo
     ( mkfifo $fifo \
@@ -563,7 +573,7 @@ if test "$op" = "unpack-tarball-check-md5" ; then
 
     while ! test -e $fifo ; do sleep 0.1 ; done
 
-    size=$(curl --fail --silent --show-error --head $insecure_url \
+    size=$(curl --fail --silent --show-error --location --head $insecure_url \
         | grep -i '^content-length:' \
         | awk '{print $NF}' \
         | sed "s/$(printf '\r')//"
@@ -575,7 +585,7 @@ if test "$op" = "unpack-tarball-check-md5" ; then
     fi
 
     cd $dest
-    nice curl --fail --silent --show-error $insecure_url \
+    nice curl --fail --silent --show-error --location $insecure_url \
         | pv --force --size $size \
         | tee $fifo \
         | nice gunzip \

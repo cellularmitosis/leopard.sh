@@ -13,9 +13,11 @@ handbrake.app-0.9.4
 iceweaselppc.app-fpr13
 interwebppc.app-rr1
 isl-0.12.2
+ld64-97.17
 lhasa-0.3.1
 libressl-3.4.2
 lua-5.1.5
+luajit-2.1.0-beta3
 lzo-2.10
 lzop-1.04
 make-4.3
