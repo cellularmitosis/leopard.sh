@@ -1,1 +1,0 @@
-../../leopardsh/scripts/install-ld64-97.17.sh

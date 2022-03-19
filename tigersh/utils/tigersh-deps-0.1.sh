@@ -50,7 +50,7 @@ make install
 echo -n -e "\033]0;building otool\007"
 package=otool
 version=667.3
-srcmirror=https://github.com/apple-oss-distributions/cctools/archive
+srcmirror=https://opensource.apple.com/tarballs/cctools/cctools-$version.tar.gz
 tarball=cctools-$version.tar.gz
 if ! test -e ~/Downloads/$tarball ; then
     cd ~/Downloads
@@ -61,9 +61,9 @@ if ! test -e ~/Downloads/$tarball ; then
 fi
 test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = e90e5b27f96eddacd966a3f983a80cbf
 cd /tmp
-rm -rf cctools-cctools-$version
+rm -rf cctools-$version
 tar xzf ~/Downloads/$tarball
-cd cctools-cctools-$version
+cd cctools-$version
 # For whatever reason, '#include <ar.h>' is not seeing /usr/include/ar.h.
 ln -s /usr/include/ar.h include/
 cd libstuff
