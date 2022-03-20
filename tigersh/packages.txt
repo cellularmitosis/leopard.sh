@@ -20,6 +20,7 @@ libressl-3.4.2
 lua-5.1.5
 lzo-2.10
 lzop-1.04
+m4-1.4.19
 make-4.3
 mpc-1.0.3
 mpfr-3.1.6

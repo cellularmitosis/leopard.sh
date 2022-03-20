@@ -6,6 +6,7 @@ lhasa-0.3.1.ppc64
 lua-5.1.5.ppc64
 lzo-2.10.ppc64
 lzop-1.04.ppc64
+m4-1.4.19.ppc64
 make-4.3.ppc64
 mpc-1.0.3.ppc64
 mpfr-3.1.6.ppc64
