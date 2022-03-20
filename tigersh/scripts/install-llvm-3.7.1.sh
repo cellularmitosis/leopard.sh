@@ -42,8 +42,8 @@ if ! test -e /opt/python2-2.7.18 ; then
     tiger.sh python2-2.7.18
 fi
 
-if ! test -e /opt/ld64-97.17 ; then
-    tiger.sh ld64-97.17
+if ! test -e /opt/ld64-97.17-tigerbrew ; then
+    tiger.sh ld64-97.17-tigerbrew
 fi
 export PATH="/opt/ld64-97.17/bin:$PATH"
 
