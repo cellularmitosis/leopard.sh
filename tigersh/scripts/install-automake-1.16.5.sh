@@ -1,10 +1,10 @@
 #!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/build-from-source.sh v6
 
-# Install autoconf on OS X Tiger / PowerPC.
+# Install automake on OS X Tiger / PowerPC.
 
-package=autoconf
-version=2.71
+package=automake
+version=1.16.5
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
 set -e -o pipefail
@@ -17,10 +17,10 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! test -e /opt/m4-1.4.19$ppc64 ; then
-    tiger.sh m4-1.4.19$ppc64
+if ! test -e /opt/autoconf-2.71 ; then
+    tiger.sh autoconf-2.71
 fi
-export PATH="/opt/m4-1.4.19$ppc64/bin:$PATH"
+export PATH="/opt/autoconf-2.71/bin:$PATH"
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
