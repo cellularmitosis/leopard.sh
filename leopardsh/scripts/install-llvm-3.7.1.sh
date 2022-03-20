@@ -42,6 +42,11 @@ if ! test -e /opt/python2-2.7.18 ; then
     leopard.sh python2-2.7.18
 fi
 
+if ! test -e /opt/ld64-97.17-tigerbrew ; then
+    leopard.sh ld64-97.17-tigerbrew
+fi
+export PATH="/opt/ld64-97.17/bin:$PATH"
+
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec
@@ -56,20 +61,20 @@ mv /tmp/libcxx-3.7.1.src /tmp/$package-$version/projects/libcxx
 leopard.sh --unpack-dist libcxxabi-3.7.1.src
 mv /tmp/libcxxabi-3.7.1.src /tmp/$package-$version/libcxxabi
 
-leopard.sh --unpack-dist polly-3.7.1.src
-mv /tmp/polly-3.7.1.src /tmp/$package-$version/tools/polly
+# leopard.sh --unpack-dist polly-3.7.1.src
+# mv /tmp/polly-3.7.1.src /tmp/$package-$version/tools/polly
 
-leopard.sh --unpack-dist clang-tools-extra-3.7.1.src
-mv /tmp/clang-tools-extra-3.7.1.src /tmp/$package-$version/tools/clang/tools/extra
+# leopard.sh --unpack-dist clang-tools-extra-3.7.1.src
+# mv /tmp/clang-tools-extra-3.7.1.src /tmp/$package-$version/tools/clang/tools/extra
 
-leopard.sh --unpack-dist compiler-rt-3.7.1.src
-mv /tmp/compiler-rt-3.7.1.src /tmp/$package-$version/projects/compiler-rt
+# leopard.sh --unpack-dist compiler-rt-3.7.1.src
+# mv /tmp/compiler-rt-3.7.1.src /tmp/$package-$version/projects/compiler-rt
 
-leopard.sh --unpack-dist lld-3.7.1.src
-mv /tmp/lld-3.7.1.src /tmp/$package-$version/tools/lld
+# leopard.sh --unpack-dist lld-3.7.1.src
+# mv /tmp/lld-3.7.1.src /tmp/$package-$version/tools/lld
 
-leopard.sh --unpack-dist lldb-3.7.1.src
-mv /tmp/lldb-3.7.1.src /tmp/$package-$version/tools/lldb
+# leopard.sh --unpack-dist lldb-3.7.1.src
+# mv /tmp/lldb-3.7.1.src /tmp/$package-$version/tools/lldb
 
 for pair in \
     "1006-Only-call-setpriority-PRIO_DARWIN_THREAD-0-PRIO_DARW.patch ccdf219c313120ef149adf05c6ff2da1" \
@@ -85,20 +90,27 @@ done
 CC=gcc-4.9
 CXX=g++-4.9
 
-mkdir build
-cd build
-/usr/bin/time ../configure -C --prefix=/opt/$pkgspec \
+builddir=/tmp/$pkgspec.build
+rm -rf $builddir
+mkdir $builddir
+cd $builddir
+
+/usr/bin/time /tmp/$package-$version/configure -C --prefix=/opt/$pkgspec \
     --with-python=/opt/python2-2.7.18/bin/python2 \
     --enable-targets=powerpc \
-    --enable-shared \
     --enable-optimized \
-    --enable-profiling \
+    --with-optimize-option=" -O0" \
+    --disable-bindings \
     CC="$CC" \
     CXX="$CXX"
 
+    # --enable-shared \
+    # --disable-assertions
+    # --with-optimize-option=" $(leopard.sh -mcpu -O)" \
+    # --enable-profiling \
     # --enable-libffi
 
-/usr/bin/time make $(leopard.sh -j) OPTIMIZE_OPTION="$(leopard.sh -mcpu -O)" VERBOSE=1
+/usr/bin/time make $(leopard.sh -j) VERBOSE=1
 
 if test -n "$LEOPARDSH_RUN_TESTS" ; then
     make check
