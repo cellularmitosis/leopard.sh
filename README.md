@@ -78,17 +78,6 @@ script wasn't tampered with during download.  Because the version of Safari
 which shipped with Leopard and Tiger doesn't support modern SSL, this step has
 to be performed on either a modern PC or on your smartphone.
 
-You'll need to move `leopard.sh` to somewhere in your $PATH.  This is because
-some of the package installer scripts need to call `leopard.sh` recursively.
-
-You can either move it to a system-wide location, like `/usr/local/bin`:
-
-```
-$ mv leopard.sh /usr/local/bin/
-```
-
-or if you know how to edit your `$PATH`, perhaps somewhere like `~/bin`.
-
 
 ## List the available packages:
 
@@ -140,7 +129,7 @@ xbench.app-1.3
 ...
 ```
 
-The Unix geeks will note that technically we should grep for '\.app', not .app.
+The Unix geeks will note that technically we should grep for `'\.app'`, not .app.
 
 
 ## Install a package:
@@ -152,7 +141,7 @@ $ leopard.sh gzip-1.11
 ```
 
 Note: currently, you have to use the full pkgspec, i.e. you can't do something
-like "leopard.sh gzip".  I'll implement some sort of pkgspec aliases soon, but
+like `leopard.sh gzip`.  I'll implement some sort of pkgspec aliases soon, but
 in the mean time you could use a subshell as a work-around:
 
 ```
@@ -199,17 +188,10 @@ free to muck with /opt in any way you see fit.  That is, `leopard.sh` does not
 *own* /opt, it is a *citizen* of /opt.
 
 If you had previously unlinked a package but hadn't actually deleted it, and
-now you'd like to re-link it, here's how to do that:
+now you'd like to re-link it, just run:
 
 ```
-$ rm -rf /opt/gzip-1.11
-$ leopard.sh gzip-1.11
-```
-
-No, I'm not kidding :)  Of course you could also just manually run:
-
-```
-$ ln -s /opt/gzip-1.11/bin/* /usr/local/bin/
+$ leopard.sh --link gzip-1.11
 ```
 
 
@@ -242,9 +224,9 @@ simple as:
 ```
 $ cd
 $ curl -L https://github.com/cellularmitosis/leopard.sh/archive/refs/heads/main.tar.gz | gunzip | tar x
-$ export LEOPARDSH_MIRROR=file://$HOME/leopard.sh-main/leopardsh
+$ export LEOPARDSH_MIRROR=file://$HOME/leopard.sh-main
 $ # or, for tiger:
-$ export TIGERSH_MIRROR=file://$HOME/leopard.sh-main/tigersh
+$ export TIGERSH_MIRROR=file://$HOME/leopard.sh-main
 ```
 
 Bam, you're now running entirely from your self-contained copy of the project.
