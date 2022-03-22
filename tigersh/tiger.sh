@@ -170,11 +170,11 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
             sudo chgrp admin $d
             sudo chmod g+w $d
         else
-            if ! test "$(stat -f '%Sg' /opt)" = "admin" ; then
+            if ! test "$(stat -f '%Sg' $d)" = "admin" ; then
                 echo "Changing group of $d to admin." >&2
                 sudo chgrp admin $d
             fi
-            if ! test "$(expr $(stat -f '%Sp' /opt) : '.....\(.\)')" = "w" ; then
+            if ! test "$(expr $(stat -f '%Sp' $d) : '.....\(.\)')" = "w" ; then
                 echo "Making $d group-writeable." >&2
                 sudo chmod g+w $d
             fi
