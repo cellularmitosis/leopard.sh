@@ -110,7 +110,7 @@ if test -n "$needs_cpu_info" ; then
         cpu_name=g5
         cpu_num=970
     else
-        echo "${COLOR_RED}Error${COLOR_NONE}: unsupported CPU type." >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: unsupported CPU type." >&2
         exit 1
     fi
 fi
@@ -174,7 +174,7 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
         fi
 
         if ! mktemp $d/leopard.sh.write-check.XXX >/dev/null ; then
-            echo "${COLOR_RED}Error${COLOR_NONE}: can't write to $d." >&2
+            echo -e "${COLOR_RED}Error${COLOR_NONE}: can't write to $d." >&2
             exit 1
         else
             touch ~/.leopardsh/checks/$stamp
@@ -420,7 +420,7 @@ fi
 if test "$op" = "url-exists" ; then
     shift 1
     if test -z "$1" ; then
-        echo "${COLOR_RED}Error${COLOR_NONE}: check which url?" >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: check which url?" >&2
         echo "e.g. leopard.sh --url-exists http://example.com" >&2
         exit 1
     fi
@@ -436,7 +436,7 @@ fi
 if test "$op" = "install-binpkg" ; then
     shift 1
     if test -z "$1" ; then
-        echo "${COLOR_RED}Error${COLOR_NONE}: install which binpkg?" >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: install which binpkg?" >&2
         echo "e.g. leopard.sh --install-binpkg gzip-1.11" >&2
         exit 1
     fi
@@ -476,7 +476,7 @@ fi
 if test "$op" = "unpack-dist" ; then
     shift 1
     if test -z "$1" ; then
-        echo "${COLOR_RED}Error${COLOR_NONE}: unpack distfile for which pkgspec?" >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: unpack distfile for which pkgspec?" >&2
         echo "e.g. leopard.sh --unpack-dist gzip-1.11" >&2
         exit 1
     fi
@@ -506,7 +506,7 @@ fi
 if test "$op" = "unpack-tarball-check-md5" ; then
     shift 1
     if test -z "$1" ; then
-        echo "${COLOR_RED}Error${COLOR_NONE}: unpack which tarball url?" >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: unpack which tarball url?" >&2
         echo "e.g. leopard.sh --unpack-tarball-check-md5 http://leopard.sh/dist/gzip-1.11.tar.gz /tmp" >&2
         echo "e.g. leopard.sh --unpack-tarball-check-md5 http://leopard.sh/binpkgs/gzip-1.11.leopard.g4e.tar.gz /opt" >&2
         exit 1
@@ -516,7 +516,7 @@ if test "$op" = "unpack-tarball-check-md5" ; then
     shift 1
 
     if test -z "$1" ; then
-        echo "${COLOR_RED}Error${COLOR_NONE}: unpack tarball where?" >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: unpack tarball where?" >&2
         echo "e.g. leopard.sh --unpack-tarball-check-md5 http://leopard.sh/dist/gzip-1.11.tar.gz /tmp" >&2
         echo "e.g. leopard.sh --unpack-tarball-check-md5 http://leopard.sh/binpkgs/gzip-1.11.leopard.g4e.tar.gz /opt" >&2
         exit 1
@@ -582,7 +582,7 @@ if test "$op" = "unpack-tarball-check-md5" ; then
     rm -f $fifo $tmp.localmd5 $tmp.md5
 
     if test -n "$badmd5" ; then
-        echo "${COLOR_RED}Error${COLOR_NONE}: MD5 sum mismatch for $url."
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: MD5 sum mismatch for $url."
         exit 1
     else
         exit 0
@@ -595,7 +595,7 @@ fi
 if test "$op" = "link" ; then
     shift 1
     if test -z "$1" ; then
-        echo "${COLOR_RED}Error${COLOR_NONE}: link which package?" >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: link which package?" >&2
         echo "e.g. leopard.sh --link foo-1.0" >&2
         exit 1
     fi
@@ -642,7 +642,7 @@ fi
 if test "$op" = "unlink" ; then
     shift 1
     if test -z "$1" ; then
-        echo "${COLOR_RED}Error${COLOR_NONE}: unlink which package?" >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: unlink which package?" >&2
         echo "e.g. leopard.sh --unlink foo-1.0" >&2
         exit 1
     fi
@@ -750,7 +750,7 @@ fi
 if test "$op" = "arch-check" ; then
     shift 1
     if test -z "$1" ; then
-        echo "${COLOR_RED}Error${COLOR_NONE}: arch-check which package?" >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: arch-check which package?" >&2
         echo "e.g. leopard.sh --arch-check tar-1.34" >&2
         exit 1
     fi
@@ -815,7 +815,7 @@ fi
 if test "$op" = "linker-check" ; then
     shift 1
     if test -z "$1" ; then
-        echo "${COLOR_RED}Error${COLOR_NONE}: linker-check which package?" >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: linker-check which package?" >&2
         echo "e.g. leopard.sh --linker-check tar-1.34" >&2
         exit 1
     fi
