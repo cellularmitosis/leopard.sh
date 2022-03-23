@@ -39,6 +39,7 @@ python-3.10.3
 python2-2.7.18
 quake.app-1.1
 quake-pak0.pak-1.06
+ragel-6.10
 screen-4.8.0
 sdl-1.2.15.20220129
 sed-4.8

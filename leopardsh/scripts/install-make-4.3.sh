@@ -1,5 +1,5 @@
 #!/bin/bash
-# based on templates/build-from-source.sh v5
+# based on templates/build-from-source.sh v6
 
 # Install make on OS X Leopard / PowerPC.
 

@@ -1,11 +1,11 @@
 #!/bin/bash
 # based on templates/build-from-source.sh v6
 
-# Install coreutils on OS X Leopard / PowerPC.
+# Install ragel on OS X Leopard / PowerPC.
 
-package=coreutils
-version=9.0
-upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
+package=ragel
+version=6.10
+upstream=http://www.colm.net/files/ragel/ragel-$version.tar.gz
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -30,20 +30,21 @@ if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
 
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
+
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
 CFLAGS=$(leopard.sh -mcpu -O)
+CXXFLAGS=$(leopard.sh -mcpu -O)
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
+    CXXFLAGS="-m64 $CXXFLAGS"
 fi
 
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-    CFLAGS="$CFLAGS"
-
-# On Leopard, coreutils attempts to build libstdbuf, but it fails due to bad
-# flags (i.e. -shared instead of -dynamiclib, etc).  Disable it:
-perl -pi -e "s|pkglibexec_PROGRAMS = src/libstdbuf.so|pkglibexec_PROGRAMS = |" Makefile
+    CFLAGS="$CFLAGS" \
+    CXXFLAGS="$CXXFLAGS"
 
 /usr/bin/time make $(leopard.sh -j) V=1
 
