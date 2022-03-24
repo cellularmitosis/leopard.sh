@@ -1,11 +1,13 @@
 #!/bin/bash
 # based on templates/build-from-source.sh v6
 
-# Install gzip on OS X Leopard / PowerPC.
+# Install xz on OS X Leopard / PowerPC.
 
-package=gzip
-version=1.11
-upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
+# Note: xz provides liblzma.
+
+package=xz
+version=5.2.5
+upstream=https://tukaani.org/$package/$package-$version.tar.gz
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"

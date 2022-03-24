@@ -16,4 +16,5 @@ ragel-6.10.ppc64
 sdl-1.2.15.20220129.ppc64
 sed-4.8.ppc64
 termcap-1.3.1.ppc64
+xz-5.2.5.ppc64
 zstd-1.5.1.ppc64
