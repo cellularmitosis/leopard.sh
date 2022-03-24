@@ -19,7 +19,7 @@ fi
 #   export LEOPARDSH_MIRROR=file:///Users/foo/leopard.sh
 # If you care more about speed than glowies, drop HTTPS for a speed-up:
 #   export LEOPARDSH_MIRROR=http://leopard.sh
-LEOPARDSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
+LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 export LEOPARDSH_MIRROR
 
 
