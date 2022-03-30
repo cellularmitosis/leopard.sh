@@ -30,7 +30,6 @@ do
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
 
-
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
