@@ -29,6 +29,8 @@ make-4.3
 mpc-1.0.3
 mpfr-3.1.6
 mplayer-osx.app-rev11
+ncurses-6.3
+ncursesw-6.3
 openmark.app-1.60
 opera.app-10.63
 patch-2.7.6

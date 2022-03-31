@@ -1,5 +1,5 @@
 #!/opt/tigersh-deps-0.1/bin/bash
-# based on templates/install-foo-1.0.sh v4
+# based on templates/build-from-source.sh v6
 
 # Install ncurses / ncursesw on OS X Tiger / PowerPC.
 
@@ -23,7 +23,7 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 if tiger.sh --install-binpkg $pkgspec ; then
     exit 0
@@ -36,8 +36,10 @@ if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
 fi
 
-tiger.sh --unpack-dist $pkgspec
-cd ncurses-$version
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
+
+tiger.sh --unpack-dist ncurses-$version
+cd /tmp/ncurses-$version
 
 CFLAGS=$(tiger.sh -mcpu -O)
 CXXFLAGS=$(tiger.sh -mcpu -O)
