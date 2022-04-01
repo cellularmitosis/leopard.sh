@@ -10,6 +10,7 @@ dejagnu-1.6.3
 expect-5.45.4
 gcc-4.2
 gcc-4.9.4
+gettext-0.20
 gmp-4.3.2
 gzip-1.11
 handbrake.app-0.9.1

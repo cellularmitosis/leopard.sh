@@ -1,4 +1,5 @@
 cloog-0.18.1.ppc64
+gettext-0.21.ppc64
 gmp-4.3.2.ppc64
 gzip-1.11.ppc64
 isl-0.12.2.ppc64
