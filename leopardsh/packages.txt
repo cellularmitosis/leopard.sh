@@ -22,6 +22,7 @@ isl-0.12.2
 janet-1.20.0
 ld64-97.17-tigerbrew
 lhasa-0.3.1
+libiconv-1.16
 libiconv-bootstrap-1.16
 libressl-3.4.2
 libunistring-1.0

@@ -39,6 +39,31 @@ do
 done
 LIBS="-lbar -lqux"
 
+# 👇 EDIT HERE:
+if ! test -e /opt/pkg-config-0.29.2$ppc64 ; then
+    leopard.sh pkg-config-0.29.2$ppc64
+fi
+
+# 👇 EDIT HERE:
+for dep in \
+    bar-2.1$ppc64 \
+    qux-3.4$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+    PATH="/opt/$dep/bin:$PATH"
+done
+export PKG_CONFIG_PATH
+
+# 👇 EDIT HERE:
+for dep in \
+    baz-4.5$ppc64
+do
+    export PKG_CONFIG_PATH="/opt/$dep/lib/pkgconfig:$PKG_CONFIG_PATH"
+done
+
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
@@ -76,6 +101,24 @@ if test -n "$ppc64" ; then
 fi
 
 # 👇 EDIT HERE:
+for f in configure libfoo/configure ; do
+    if test -n "$ppc64" ; then
+        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
+        perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"-m64 $(leopard.sh -mcpu -O)\"/g" $f
+        export LDFLAGS=-m64
+    else
+        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(leopard.sh -mcpu -O)\"/g" $f
+        perl -pi -e "s/CXXFLAGS=\"-g -O2\"/CXXFLAGS=\"$(leopard.sh -mcpu -O)\"/g" $f
+    fi
+done
+
+# 👇 EDIT HERE:
+pkgconfignames="bar qux"
+CPPFLAGS=$(pkg-config --cflags-only-I $pkgconfignames)
+LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L $pkgconfignames)"
+LIBS=$(pkg-config --libs-only-l $pkgconfignames)
+
+    # 👇 EDIT HERE:
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --with-bar=/opt/bar-1.0 \
     --with-bar-prefix=/opt/bar-1.0 \
