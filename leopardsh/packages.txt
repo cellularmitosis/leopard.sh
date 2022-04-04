@@ -49,6 +49,7 @@ quake-pak0.pak-1.06
 ragel-6.10
 screen-4.8.0
 sdl-1.2.15.20220129
+sdl_mixer-1.2.13.20220314
 sed-4.8
 tcl-8.6.12
 tenfourfox.app-fpr32.5
