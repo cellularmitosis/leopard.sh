@@ -15,3 +15,5 @@ dist/orig/*.*
 **/md5s.manifest.gz
 
 .vscode
+
+misc/js-benchmarks
