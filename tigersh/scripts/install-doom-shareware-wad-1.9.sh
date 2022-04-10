@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-doom-shareware-wad-1.9.sh

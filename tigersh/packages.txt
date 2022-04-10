@@ -7,6 +7,7 @@ cloog-0.18.1
 clozure-cl.app-1.4
 coreutils-9.0
 dejagnu-1.6.3
+doom-shareware-wad-1.9
 expect-5.45.4
 gcc-4.2
 gcc-4.9.4
@@ -54,3 +55,4 @@ vlc.app-0.9.10
 xbench.app-1.3
 xcode-2.5
 xz-5.2.5
+zdoom.app-2.8.1
