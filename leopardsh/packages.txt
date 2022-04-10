@@ -19,7 +19,7 @@ handbrake.app-0.9.4
 iceweaselppc.app-fpr13
 interwebppc.app-rr1
 isl-0.12.2
-janet-1.20.0
+janet-1.21.1
 ld64-97.17-tigerbrew
 lhasa-0.3.1
 libiconv-1.16
