@@ -14,6 +14,7 @@ gcc-4.2
 gcc-4.9.4
 gettext-0.21
 gmp-4.3.2
+gmp-6.2.1
 gzip-1.11
 handbrake.app-0.9.1
 handbrake.app-0.9.4
