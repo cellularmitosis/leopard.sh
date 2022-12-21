@@ -7,6 +7,7 @@ chicken.app-2.2b2
 cloog-0.18.1
 clozure-cl.app-1.4
 coreutils-9.0
+curl-7.87.0
 dejagnu-1.6.3
 doom-shareware-wad-1.9
 expat-2.5.0
