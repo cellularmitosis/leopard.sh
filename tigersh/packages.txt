@@ -19,6 +19,7 @@ handbrake.app-0.9.1
 iceweaselppc.app-fpr13
 interwebppc.app-rr1
 interwebppc.app-rr2
+interwebppc.app-rr3
 isl-0.12.2
 janet-1.21.1
 janet-1.25.1
