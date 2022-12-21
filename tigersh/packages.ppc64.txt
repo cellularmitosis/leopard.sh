@@ -2,6 +2,7 @@ cloog-0.18.1.ppc64
 curl-7.87.0.ppc64
 expat-2.5.0.ppc64
 gettext-0.20.ppc64
+git-2.35.1.ppc64
 gmp-4.3.2.ppc64
 gmp-6.2.1.ppc64
 gzip-1.11.ppc64
