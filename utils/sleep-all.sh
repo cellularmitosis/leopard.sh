@@ -12,11 +12,11 @@ uphosts=""
 echo "👉 ping"
 # make two passes, because sometimes the .local hosts resolve after a ping.
 for host in $hosts ; do
-    ( ping -o -t 1 $host.local >/dev/null 2>&1 || true ) &
+    ( ping -o -t 1 $host >/dev/null 2>&1 || true ) &
 done
 sleep 0.1
 for host in $hosts ; do
-    if ping -o -t 1 $host.local >/dev/null 2>&1 ; then
+    if ping -o -t 1 $host >/dev/null 2>&1 ; then
         uphosts="$uphosts $host"
         echo " ✅ $host is up"
     else

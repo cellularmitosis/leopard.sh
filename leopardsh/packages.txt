@@ -38,6 +38,7 @@ m4-1.4.19
 make-4.3
 mpc-1.0.3
 mpfr-3.1.6
+mpfr-4.1.0
 mplayer-osx.app-rev11
 mplayer-osx.app-rev14
 ncurses-6.3
