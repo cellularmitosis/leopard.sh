@@ -136,15 +136,33 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
         fi
     fi
 
+    needs_new_terminal="false"
+
     if ! test -e ~/.tigersh/checks/user-in-admin-group ; then
         if ! dseditgroup -o checkmember -m $USER admin >/dev/null ; then
             echo "Adding your user to the admin group." >&2
-            sudo dscl . append /Groups/admin GroupMembership $USER
-            echo "Please open a new Terminal window for this change to take effect." >&2
-            exit 1
+            # thanks to https://blog.travismclarke.com/post/osx-cli-group-management/
+            sudo dseditgroup -o edit -a $USER -t user admin
+            needs_new_terminal="true"
         else
             touch ~/.tigersh/checks/user-in-admin-group
         fi
+    fi
+
+    if ! test -e ~/.tigersh/checks/user-in-wheel-group ; then
+        if ! dseditgroup -o checkmember -m $USER wheel >/dev/null ; then
+            echo "Adding your user to the wheel group." >&2
+            # thanks to https://blog.travismclarke.com/post/osx-cli-group-management/
+            sudo dseditgroup -o edit -a $USER -t user wheel
+            needs_new_terminal="true"
+        else
+            touch ~/.tigersh/checks/user-in-wheel-group
+        fi
+    fi
+
+    if test "$needs_new_terminal" = "true" ; then
+        echo "Please open a new Terminal window for this change to take effect." >&2
+        exit 1
     fi
 
     # thanks to https://stackoverflow.com/a/61367055
