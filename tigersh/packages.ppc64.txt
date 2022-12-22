@@ -17,6 +17,7 @@ lzop-1.04.ppc64
 m4-1.4.19.ppc64
 make-4.3.ppc64
 mpc-1.0.3.ppc64
+mpc-1.2.1.ppc64
 mpfr-3.1.6.ppc64
 mpfr-4.1.0.ppc64
 ncurses-6.3.ppc64

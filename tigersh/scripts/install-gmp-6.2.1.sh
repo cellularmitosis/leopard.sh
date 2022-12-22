@@ -17,6 +17,10 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
+    tiger.sh gcc-4.9.4
+fi
+
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 if tiger.sh --install-binpkg $pkgspec ; then
@@ -28,10 +32,6 @@ set -x
 
 if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
-fi
-
-if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
-    tiger.sh gcc-4.9.4
 fi
 
 tiger.sh --unpack-dist $pkgspec

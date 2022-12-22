@@ -1,11 +1,11 @@
 #!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/build-from-source.sh v6
 
-# Install mpfr on OS X Tiger / PowerPC.
+# Install mpc on OS X Tiger / PowerPC.
 
-package=mpfr
-version=4.1.0
-upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
+package=mpc
+version=1.2.1
+upstream=https://gcc.gnu.org/pub/gcc/infrastructure/$package-$version.tar.gz
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -18,7 +18,8 @@ fi
 pkgspec=$package-$version$ppc64
 
 for dep in \
-    gmp-6.2.1$ppc64
+    gmp-6.2.1$ppc64 \
+    mpfr-4.1.0$ppc64
 do
     if ! test -e /opt/$dep ; then
         tiger.sh $dep
@@ -49,19 +50,31 @@ cd /tmp/$package-$version
 
 CC=gcc-4.9
 
-CFLAGS=" $(tiger.sh -mcpu -O) -Wall -Wmissing-prototypes -Wpointer-arith"
+# Note: gcc-4.9 does not support '-no-cpp-precomp'.
+CFLAGS="$(tiger.sh -mcpu -O) -pedantic"
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
 fi
 
+cpu=$(tiger.sh --cpu)
+if test "$cpu" = "g4e" \
+|| test "$cpu" = "g4" \
+|| test "$cpu" = "g5" -a -z "$ppc64"
+then
+    # Note: see the comments in install-gmp-4.3.2.sh re: force_cpusubtype_ALL.
+    CFLAGS="$CFLAGS -force_cpusubtype_ALL"
+fi
+
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --with-gmp=/opt/gmp-6.2.1$ppc64 \
+    --with-mpfr=/opt/mpfr-4.1.0$ppc64 \
     CFLAGS="$CFLAGS" \
     CC="$CC"
 
-/usr/bin/time make $(tiger.sh -j)
 
-if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
+/usr/bin/time make $(tiger.sh -j) V=1
+
+if test -n "$TIGERSH_RUN_TESTS" ; then
     make check
 fi
 

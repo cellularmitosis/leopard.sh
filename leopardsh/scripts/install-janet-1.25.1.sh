@@ -17,6 +17,11 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+# Janet needs thread-local storage.
+if ! test -e /opt/gcc-4.9.4 ; then
+    leopard.sh gcc-4.9.4
+fi
+
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
@@ -38,10 +43,6 @@ if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
 
-# Janet needs thread-local storage.
-if ! test -e /opt/gcc-4.9.4 ; then
-    leopard.sh gcc-4.9.4
-fi
 CC=gcc-4.9
 
 if ! test -e /opt/make-4.3 ; then
