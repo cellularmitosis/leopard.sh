@@ -19,10 +19,6 @@ pkgspec=$package-$version$ppc64
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
-if ! test -e /opt/gcc-4.9.4 ; then
-    leopard.sh gcc-4.9.4
-fi
-
 if leopard.sh --install-binpkg $pkgspec ; then
     exit 0
 fi
@@ -30,9 +26,23 @@ fi
 echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
 set -x
 
+# Note: building on G5 fails with:
+# ./build/janet tools/patch-header.janet src/include/janet.h src/conf/janetconf.h build/janet.h
+# C runtime error at line 388 in file src/core/gc.c: please initialize janet before use
+# make: *** [Makefile:181: build/janet.h] Error 1
+if test "$(tiger.sh --cpu)" = "g5" ; then
+    exit 1
+fi
+
 if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
+
+# Janet needs thread-local storage.
+if ! test -e /opt/gcc-4.9.4 ; then
+    leopard.sh gcc-4.9.4
+fi
+CC=gcc-4.9
 
 if ! test -e /opt/make-4.3 ; then
     leopard.sh make-4.3
@@ -86,16 +96,14 @@ diff '--color=auto' -urN janet/src/core/util.c janet.patched/src/core/util.c
      while (n > 0) {
 EOF
 
+
 CFLAGS=$(leopard.sh -mcpu -O)
-if test -n "$ppc64" ; then
-    CFLAGS="-m64 $CFLAGS"
-fi
 
 /usr/bin/time make $(leopard.sh -j) \
-    CC=gcc-4.9 \
+    PREFIX=/opt/$pkgspec \
     CFLAGS="$CFLAGS" \
     LDFLAGS="" \
-    PREFIX=/opt/$pkgspec
+    CC="$CC"
 
 if test -n "$LEOPARDSH_RUN_TESTS" ; then
     make test

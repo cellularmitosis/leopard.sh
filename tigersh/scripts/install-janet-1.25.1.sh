@@ -19,10 +19,6 @@ pkgspec=$package-$version$ppc64
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
-if ! test -e /opt/gcc-4.9.4 ; then
-    tiger.sh gcc-4.9.4
-fi
-
 if tiger.sh --install-binpkg $pkgspec ; then
     exit 0
 fi
@@ -30,9 +26,23 @@ fi
 echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
 set -x
 
+# Note: building on G5 fails with:
+# ./build/janet tools/patch-header.janet src/include/janet.h src/conf/janetconf.h build/janet.h
+# C runtime error at line 388 in file src/core/gc.c: please initialize janet before use
+# make: *** [Makefile:181: build/janet.h] Error 1
+if test "$(leopard.sh --cpu)" = "g5" ; then
+    exit 1
+fi
+
 if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
 fi
+
+# Janet needs thread-local storage.
+if ! test -e /opt/gcc-4.9.4 ; then
+    tiger.sh gcc-4.9.4
+fi
+CC=gcc-4.9
 
 if ! test -e /opt/make-4.3 ; then
     tiger.sh make-4.3
@@ -137,15 +147,12 @@ patch -p0 << "EOF"
 EOF
 
 CFLAGS=$(tiger.sh -mcpu -O)
-if test -n "$ppc64" ; then
-    CFLAGS="-m64 $CFLAGS"
-fi
 
 /usr/bin/time make $(tiger.sh -j) \
-    CC=gcc-4.9 \
+    PREFIX=/opt/$pkgspec \
     CFLAGS="$CFLAGS" \
     LDFLAGS="" \
-    PREFIX=/opt/$pkgspec
+    CC="$CC"
 
 if test -n "$TIGERSH_RUN_TESTS" ; then
     make test
