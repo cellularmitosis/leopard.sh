@@ -1,14 +1,13 @@
 #!/opt/tigersh-deps-0.1/bin/bash
 
-# Install Quake shareware data on OS X Tiger / PowerPC.
+# Install Quake II shareware data on OS X Tiger / PowerPC.
 
-package=quake-pak0.pak
-version=1.06
+package=quake2-pak0.pak
+version=3.14
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
 pkgspec=$package-$version
 
@@ -20,16 +19,12 @@ elif test "${osversion:0:4}" = "10.5" ; then
 fi
 test -n "$pkgmgr"
 
-if ! test -e /opt/lhasa-0.3.1 ; then
-    $pkgmgr lhasa-0.3.1
-fi
-
-srcmirror=ftp://ftp.idsoftware.com/idstuff/quake  # offline?
-srcmirror=https://web.archive.org/web/20151201225632/ftp://ftp.idsoftware.com/idstuff/quake
-srcmirror=https://ftp.gwdg.de/pub/misc/ftp.idsoftware.com/idstuff/quake
-srcmirror=ftp://ftp.gamers.org/pub/idgames/idstuff/quake
+srcmirror=ftp://ftp.idsoftware.com/idstuff/quake2  # offline?
+srcmirror=https://web.archive.org/web/20151201225632/ftp://ftp.idsoftware.com/idstuff/quake2
+srcmirror=https://ftp.gwdg.de/pub/misc/ftp.idsoftware.com/idstuff/quake2
+srcmirror=ftp://ftp.gamers.org/pub/idgames/idstuff/quake2
 srcmirror=https://leopard.sh/dist/orig
-zip=quake106.zip
+zip=q2-314-demo-x86.exe
 
 echo -n -e "\033]0;$pkgmgr $pkgspec ($($pkgmgr --cpu))\007"
 
@@ -48,15 +43,18 @@ fi
 
 echo -e "${COLOR_CYAN}Extracting${COLOR_NONE} pak0.pak." >&2
 cd /opt/$pkgspec
-size=$(stat -f '%z' ~/Downloads/$zip)
-unzip -p -q ~/Downloads/$zip resource.1 \
+mkdir -p baseq2
+size=$(unzip -l ~/Downloads/$zip Install/Data/baseq2/pak0.pak \
+    | tail -n1 \
+    | awk '{print $1}'
+)
+unzip -p -q ~/Downloads/$zip Install/Data/baseq2/pak0.pak \
     | pv --force --size $size \
-    | lha -xq - id1/pak0.pak
+    > baseq2/pak0.pak
 
-# md5 hash from https://quakewiki.org/w/index.php?title=pak0.pak
-test "$(md5 id1/pak0.pak | awk '{print $NF}')" = 5906e5998fc3d896ddaf5e6a62e03abb
+test "$(md5 baseq2/pak0.pak | awk '{print $NF}')" = 27d77240466ec4f3253256832b54db8a
 
-mkdir -p ~/.quake/id1
-if ! test -e ~/.quake/id1/pak0.pak ; then
-    ln -sf /opt/$pkgspec/id1/pak0.pak ~/.quake/id1/
+mkdir -p ~/.quake2/baseq2
+if ! test -e ~/.quake2/baseq2/pak0.pak ; then
+    ln -sf /opt/$pkgspec/baseq2/pak0.pak ~/.quake2/baseq2/
 fi
