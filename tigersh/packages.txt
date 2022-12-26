@@ -55,6 +55,7 @@ python-3.10.3
 python2-2.7.18
 quake.app-1.1
 quake-pak0.pak-1.06
+quake2.app-1.1
 quake2-pak0.pak-3.14
 ragel-6.10
 screen-4.8.0

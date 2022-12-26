@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-quake2.app-1.1.sh
