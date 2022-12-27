@@ -80,7 +80,7 @@ curl $patchroot/patch-darwin8.diff | patch -p0
     --with-mpc=/opt/mpc-1.2.1$ppc64 \
     --with-mpfr=/opt/mpfr-4.1.0$ppc64 \
     --with-isl=/opt/isl-0.24$ppc64 \
-    --enable-languages=c \
+    --enable-languages=c,c++,objc,obj-c++,fortran \
     --enable-libssp \
     --enable-lto \
     --enable-objc-gc \
@@ -89,8 +89,6 @@ curl $patchroot/patch-darwin8.diff | patch -p0
     --enable-bootstrap \
     CC="$CC" \
     CXX="$CXX"
-
-    # --enable-languages=c,c++,objc,obj-c++,fortran \
 
 /usr/bin/time make $(leopard.sh -j) V=1
 

@@ -30,9 +30,14 @@ do
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
 
-# if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
-#     tiger.sh gcc-4.9.4
-# fi
+exit 1 # currently failing because I don't have boehm-gc installed as a dep.
+#checking for bdw garbage collector... 
+#checking for system boehm-gc... 
+#configure: error: system bdw-gc required but not found
+#make[1]: *** [Makefile:14095: configure-target-libobjc] Error 1
+#make[1]: Leaving directory '/private/tmp/gcc-10.3.0'
+#make: *** [Makefile:997: all] Error 2
+#    28336.36 real     23164.61 user      4276.78 sys
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
@@ -51,6 +56,10 @@ if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
     tiger.sh gcc-4.2
 fi
 
+if ! test -d /opt/ld64-97.17-tigerbrew ; then
+    tiger.sh ld64-97.17-tigerbrew
+fi
+
 if ! test -e /opt/make-4.3 ; then
     tiger.sh make-4.3
 fi
@@ -59,10 +68,8 @@ export PATH="/opt/make-4.3/bin:$PATH"
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-CC=gcc-4.2
-CXX=g++-4.2
-# CC=gcc-4.9
-# CXX=g++-4.9
+CC='gcc-4.2 -B/opt/ld64-97.17-tigerbrew/bin'
+CXX='g++-4.2 -B/opt/ld64-97.17-tigerbrew/bin'
 
 # Note: I haven't figured out how to get gcc to build using custom flags,
 # nor how to build a 64-bit gcc on G5.
@@ -80,7 +87,7 @@ curl $patchroot/patch-darwin8.diff | patch -p0
     --with-mpc=/opt/mpc-1.2.1$ppc64 \
     --with-mpfr=/opt/mpfr-4.1.0$ppc64 \
     --with-isl=/opt/isl-0.24$ppc64 \
-    --enable-languages=c \
+    --enable-languages=c,c++,objc,obj-c++,fortran \
     --enable-libssp \
     --enable-lto \
     --enable-objc-gc \
@@ -90,7 +97,13 @@ curl $patchroot/patch-darwin8.diff | patch -p0
     CC="$CC" \
     CXX="$CXX"
 
-    # --enable-languages=c,c++,objc,obj-c++,fortran \
+# Bootstrapping fails at the end when comparing the stages:
+#  Comparing stages 2 and 3
+#  Bootstrap comparison failure!
+#  powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs/libstdc++.6.dylib-master.o differs
+#  make[2]: *** [Makefile:23202: compare] Error 1
+
+#    --enable-bootstrap \
 
 /usr/bin/time make $(tiger.sh -j) V=1
 
