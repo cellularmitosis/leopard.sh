@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-quake3.app-1.32c.sh

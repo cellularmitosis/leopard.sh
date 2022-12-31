@@ -57,6 +57,7 @@ quake.app-1.1
 quake-pak0.pak-1.06
 quake2.app-1.1
 quake2-pak0.pak-3.14
+quake3.app-1.32c
 ragel-6.10
 screen-4.8.0
 sdl-1.2.15.20220129
