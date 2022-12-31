@@ -12,6 +12,7 @@ dejagnu-1.6.3
 doom-shareware-wad-1.9
 expat-2.5.0
 expect-5.45.4
+gc-8.2.2
 gcc-4.2
 gcc-4.9.4
 gettext-0.20
