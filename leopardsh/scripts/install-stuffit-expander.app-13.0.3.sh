@@ -6,7 +6,7 @@
 package=stuffit-expander.app
 version=13.0.3
 appname1="Stuffit Expander"
-upstream=FIXME
+upstream=https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/StuffIt_Expanders_1314.zip
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
