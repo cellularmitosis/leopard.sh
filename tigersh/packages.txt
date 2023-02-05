@@ -10,6 +10,7 @@ coreutils-9.0
 curl-7.87.0
 dejagnu-1.6.3
 doom-shareware-wad-1.9
+drracket.app-6.0.1
 expat-2.5.0
 expect-5.45.4
 gc-8.2.2
@@ -60,6 +61,7 @@ quake-pak0.pak-1.06
 quake2.app-1.1
 quake2-pak0.pak-3.14
 quake3.app-1.32c
+racket-6.0.1
 ragel-6.10
 screen-4.8.0
 sdl-1.2.15.20220129
