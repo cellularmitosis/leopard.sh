@@ -7,8 +7,6 @@ written in Bash!
 
 Github repo: https://github.com/cellularmitosis/leopard.sh
 
-See also leopardsh/README.md and tigersh/README.md.
-
 
 In a nutshell:
 --------------
@@ -16,6 +14,13 @@ In a nutshell:
     $ curl -O http://leopard.sh/leopard.sh
     $ chmod +x leopard.sh
     $ ./leopard.sh quake.app-1.1
+    $ open "/Applications/GLQuake 1.1"
+
+or:
+
+    $ curl -O http://leopard.sh/tiger.sh
+    $ chmod +x tiger.sh
+    $ ./tiger.sh quake.app-1.1
     $ open "/Applications/GLQuake 1.1"
 
 

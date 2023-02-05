@@ -3,15 +3,21 @@
 Package managers for PowerPC Macs running OS X Leopard (10.5) and Tiger (10.4),
 written in Bash 😱
 
-See also [leopardsh/README.md](leopardsh/README.md) and [tigersh/README.md](tigersh/README.md).
-
-
 ## In a nutshell:
 
 ```
 $ curl -O http://leopard.sh/leopard.sh
 $ chmod +x leopard.sh
 $ ./leopard.sh quake.app-1.1
+$ open "/Applications/GLQuake 1.1"
+```
+
+or:
+
+```
+$ curl -O http://leopard.sh/tiger.sh
+$ chmod +x tiger.sh
+$ ./tiger.sh quake.app-1.1
 $ open "/Applications/GLQuake 1.1"
 ```
 
