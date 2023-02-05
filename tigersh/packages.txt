@@ -3,6 +3,7 @@ autoconf-2.71
 automake-1.16.5
 ca-certificates-20221011
 camino.app-2.1.2
+chicken-5.3.0
 chicken.app-2.2b2
 cloog-0.18.1
 clozure-cl.app-1.4
@@ -28,7 +29,6 @@ interwebppc.app-rr2
 interwebppc.app-rr3
 isl-0.12.2
 isl-0.24
-janet-1.21.1
 janet-1.25.1
 ld64-97.17-tigerbrew
 lhasa-0.3.1
