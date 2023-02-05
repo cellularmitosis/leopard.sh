@@ -6,7 +6,7 @@
 package=quake3.app
 version=1.32c
 upstream=https://macintoshgarden.org/sites/macintoshgarden.org/files/games/Quake_3.zip
-appname1="Quake 3"
+appname1="Quake3"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
