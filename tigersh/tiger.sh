@@ -656,20 +656,22 @@ if test "$op" = "link" ; then
         ln -vsf /opt/$pkgspec/sbin/* /usr/local/sbin | sed 's/^/  /'
     fi
 
-    if find /opt/$pkgspec/share/man -mindepth 1 2>/dev/null | grep -q . ; then
-        cd /opt/$pkgspec/share/man
-        for d in * ; do
-            if find /opt/$pkgspec/share/man/$d -mindepth 1 2>/dev/null | grep -q . ; then
-                if test -z "$did_print_header" ; then
-                    echo -e "${COLOR_CYAN}Linking${COLOR_NONE} $pkgspec into /usr/local." >&2
-                    did_print_header=1
+    for optpkgman in /opt/$pkgspec/man /opt/$pkgspec/share/man ; do
+        if find $optpkgman -mindepth 1 2>/dev/null | grep -q . ; then
+            cd $optpkgman
+            for d in * ; do
+                if find $optpkgman/$d -mindepth 1 2>/dev/null | grep -q . ; then
+                    if test -z "$did_print_header" ; then
+                        echo -e "${COLOR_CYAN}Linking${COLOR_NONE} $pkgspec into /usr/local." >&2
+                        did_print_header=1
+                    fi
+                    mkdir -p /usr/local/share/man/$d/
+                    ln -vsf $optpkgman/$d/* /usr/local/share/man/$d | sed 's/^/  /'
                 fi
-                mkdir -p /usr/local/share/man/$d/
-                ln -vsf /opt/$pkgspec/share/man/$d/* /usr/local/share/man/$d | sed 's/^/  /'
-            fi
-        done
-        cd - >/dev/null
-    fi
+            done
+            cd - >/dev/null
+        fi
+    done
 
     exit 0
 fi
