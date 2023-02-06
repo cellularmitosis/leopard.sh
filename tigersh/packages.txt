@@ -52,6 +52,8 @@ ncursesw-6.3
 openmark.app-1.60
 opera.app-10.63
 patch-2.7.6
+petite-chezscheme-7.4
+petite-chezscheme-7.4t
 prboom.app-2.5.0
 pv-1.6.20
 python-3.10.3

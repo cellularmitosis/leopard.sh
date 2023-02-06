@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-petite-chezscheme-7.4t.sh
