@@ -27,6 +27,11 @@ test -n "$pkgmgr"
 
 echo -n -e "\033]0;$pkgmgr $pkgspec ($($pkgmgr --cpu))\007"
 
+if test "$($pkgmgr --cpu)" = "g3" ; then
+    echo "Sorry, $pkgspec does not run on G3 processors." >&2
+    exit 1
+fi
+
 tarball=$pkgspec.tar.gz
 url=$mirror/dist/$tarball
 echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $tarball into /opt." >&2
