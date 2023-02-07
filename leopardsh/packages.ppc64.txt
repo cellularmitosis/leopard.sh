@@ -13,6 +13,7 @@ libiconv-1.16.ppc64
 libiconv-bootstrap-1.16.ppc64
 libunistring-1.0.ppc64
 lua-5.1.5.ppc64
+lz4-1.9.4.ppc64
 lzo-2.10.ppc64
 lzop-1.04.ppc64
 m4-1.4.19.ppc64
