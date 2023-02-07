@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-neofetch-7.1.0.sh

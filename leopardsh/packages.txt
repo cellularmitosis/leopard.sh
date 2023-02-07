@@ -54,6 +54,7 @@ mplayer-osx.app-rev11
 mplayer-osx.app-rev14
 ncurses-6.3
 ncursesw-6.3
+neofetch-7.1.0
 openmark.app-1.60
 opera.app-10.63
 patch-2.7.6
