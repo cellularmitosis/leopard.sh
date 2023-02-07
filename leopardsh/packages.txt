@@ -3,6 +3,7 @@ autoconf-2.71
 automake-1.16.5
 ca-certificates-20221011
 camino.app-2.1.2
+chezscheme-9.5.9-racket-20230127
 chicken-5.3.0
 chicken.app-2.2b2
 cloog-0.18.1
