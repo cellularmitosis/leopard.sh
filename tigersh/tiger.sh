@@ -48,10 +48,13 @@ elif test "$1" = "--unlink" ; then
     op=unlink
 elif test "$1" = "-j" ; then
     op=makeflags
+    unset needs_setup_check
 elif test "$1" = "-m32" -o "$1" = "-mcpu" -o "$1" = "-O" ; then
     op=gccflags
+    unset needs_setup_check
 elif test "$1" = "--cpu" -o "$1" = "--os.cpu" -o "$1" = "--bits" ; then
     op=platform-info
+    unset needs_setup_check
 elif test "$1" = "--arch-check" ; then
     op=arch-check
 elif test "$1" = "--linker-check" ; then
