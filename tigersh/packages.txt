@@ -55,6 +55,7 @@ neofetch-7.1.0
 openmark.app-1.60
 opera.app-10.63
 patch-2.7.6
+pcre-8.45
 petite-chezscheme-7.4
 petite-chezscheme-7.4t
 prboom.app-2.5.0

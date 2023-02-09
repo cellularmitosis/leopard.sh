@@ -25,6 +25,7 @@ mpfr-4.1.0.ppc64
 ncurses-6.3.ppc64
 ncursesw-6.3.ppc64
 patch-2.7.6.ppc64
+pcre-8.45.ppc64
 pv-1.6.20.ppc64
 ragel-6.10.ppc64
 sed-4.8.ppc64
