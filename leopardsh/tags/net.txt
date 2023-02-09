@@ -1,0 +1,8 @@
+curl-7.87.0
+curl-7.87.0.ppc64
+iceweaselppc.app-fpr13
+interwebppc.app-rr3
+opera.app-10.63
+tenfourfox.app-fpr32.5
+vlc.app-0.9.10
+vlc.app-2.0.10

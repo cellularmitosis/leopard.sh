@@ -1,0 +1,17 @@
+chezscheme-9.5.9-racket-20230127
+chicken-5.3.0
+chicken-5.3.0.ppc64
+clozure-cl.app-1.4
+drracket.app-6.0.1
+gcc-4.2
+gcc-4.9.4
+janet-1.25.1
+lua-5.1.5
+lua-5.1.5.ppc64
+petite-chezscheme-7.4
+petite-chezscheme-7.4t
+python-3.10.3
+python2-2.7.18
+racket-6.0.1
+scheme48-1.9.2
+tcl-8.6.12

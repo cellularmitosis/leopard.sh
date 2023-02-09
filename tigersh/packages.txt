@@ -26,8 +26,6 @@ gmp-6.2.1
 gzip-1.11
 handbrake.app-0.9.1
 iceweaselppc.app-fpr13
-interwebppc.app-rr1
-interwebppc.app-rr2
 interwebppc.app-rr3
 isl-0.12.2
 isl-0.24

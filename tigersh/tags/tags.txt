@@ -1,0 +1,9 @@
+app
+common-lisp
+compression
+game
+lang
+lib
+net
+scheme
+shell
