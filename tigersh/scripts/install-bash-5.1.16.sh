@@ -27,7 +27,9 @@ do
     fi
     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+    # PATH="/opt/$dep/bin:$PATH"
 done
+# LIBS="-lbar -lqux"
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
@@ -42,6 +44,8 @@ if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
 fi
 
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
+
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
@@ -51,15 +55,18 @@ if test -n "$ppc64" ; then
     LDFLAGS="-m64 $LDFLAGS"
 fi
 
-/usr/bin/time \
-    ./configure -C --prefix=/opt/$pkgspec \
-        --enable-threads=posix \
-        --with-installed-readline \
-        --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
-        --with-libintl-prefix=/opt/gettext-0.20$ppc64 \
-        CFLAGS="$CFLAGS" \
-        LDFLAGS="$LDFLAGS" \
-    && make $(tiger.sh -j) V=1
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --enable-threads=posix \
+    --with-installed-readline \
+    --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
+    --with-libintl-prefix=/opt/gettext-0.20$ppc64 \
+    CPPFLAGS="$CPPFLAGS" \
+    LDFLAGS="$LDFLAGS" \
+    CFLAGS="$CFLAGS"
+
+    # LIBS="$LIBS" \
+
+/usr/bin/time make $(leopard.sh -j) V=1
 
 if test -n "$TIGERSH_RUN_TESTS" ; then
     make check
