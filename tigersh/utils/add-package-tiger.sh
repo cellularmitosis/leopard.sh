@@ -19,7 +19,7 @@ fi
 
 if test "$( basename $0 )" = "add-package-tiger.sh" ; then
     if test -n "$ppc64" ; then
-        packages=leopardsh/packages.ppc64.txt
+        packages=tigersh/packages.ppc64.txt
     else
         packages=tigersh/packages.txt
     fi

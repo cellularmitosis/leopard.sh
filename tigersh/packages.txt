@@ -37,6 +37,7 @@ libiconv-bootstrap-1.16
 libressl-3.4.2
 libtool-2.4.6
 libunistring-1.0
+libutil-11
 lua-5.1.5
 lz4-1.9.4
 lzo-2.10
@@ -61,10 +62,10 @@ prboom.app-2.5.0
 pv-1.6.20
 python-3.10.3
 python2-2.7.18
-quake.app-1.1
 quake-pak0.pak-1.06
-quake2.app-1.1
+quake.app-1.1
 quake2-pak0.pak-3.14
+quake2.app-1.1
 quake3.app-1.32c
 racket-6.0.1
 ragel-6.10
