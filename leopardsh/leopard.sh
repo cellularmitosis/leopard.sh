@@ -5,6 +5,8 @@
 
 set -e -o pipefail
 
+pkgmgr=leopard.sh
+
 if test "$1" = "--verbose" ; then
     shift 1
     export LEOPARDSH_VERBOSE=1
@@ -14,7 +16,6 @@ if test -n "$LEOPARDSH_VERBOSE" ; then
     set -x
 fi
 
-
 # Note: for offline use or to run you own local fork, put this in your ~/.bashrc:
 #   export LEOPARDSH_MIRROR=file:///Users/foo/leopard.sh
 # If you care more about speed than glowies, drop HTTPS for a speed-up:
@@ -22,12 +23,68 @@ fi
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 export LEOPARDSH_MIRROR
 
-
 # no alarms and no surprises, please.
 export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 
+# colors:
+
+export COLOR_RED="\e[31;1m"
+export COLOR_GREEN="\e[32;1m"
+export COLOR_YELLOW="\e[33;1m"
+export COLOR_MAGENTA="\e[35;1m"
+export COLOR_CYAN="\e[36;1m"
+export COLOR_NONE="\e[0m"
+
 
 # process the command line args:
+
+if test "$1" = "--help" ; then
+    echo "$pkgmgr: a packge manager for PowerPC Macs running OS X 10.5 \"Leopard\"."
+    echo " * To list the available packages, just run '$pkgmgr'."
+    echo " * To install a package, run e.g. '$pkgmgr foo-1.0'".
+    echo " * To uninstall a package, '$pkgmgr --unlink foo-1.0 && rm -r /opt/foo-1.0'".
+    echo
+    echo "Command-line commands:"
+    echo "  --help: display this message."
+    echo "  --list: list the available packages (or just run '$pkgmgr')."
+    echo "  --link foo-1.0: symlink bin, man, share/man from /opt/foo-1.0 into /usr/local."
+    echo "  --unlink foo-1.0: remove the /usr/local symlinks for foo-1.0."
+    echo "  --setup: perform initial setup (this is done automatically as needed)."
+    echo
+    echo "Command-line options:"
+    echo "  --verbose: print every command being run (note: must be the first arg)."
+    echo
+    echo "Obscure command-line commands (used internally by $pkgmgr):"
+    echo "  --cpu: print the CPU type (g3, g4, g4e, or g5)."
+    echo "  --os.cpu: print OS and CPU type (e.g. leopard.g4e)."
+    echo "  --bits: print the bit-width of the CPU (32 or 64)."
+    echo "  -j: (for make) print the -j flag based on number of CPU's (e.g. '-j1')."
+    echo "  -m32: (for gcc) print '-m32', but only if a G5 chip is detected."
+    echo "  -mcpu: (for gcc) print the CPU flag (e.g. '-mcpu=970')."
+    echo "  -O: (for gcc) print the optimization flag (e.g. '-O2')."
+    echo "  --arch-check foo-1.0: print the architecture of foo-1.0's binaries."
+    echo "  --linker-check foo-1.0: print the linked libraries for foo-1.0."
+    echo "  --url-exists http://...: fail if the url is a 404."
+    echo "  --install-binpkg foo-1.0: download and unpack a binary tarball into /opt."
+    echo "  --unpack-dist foo-1.0: download and unpack a source tarball into /tmp."
+    echo "  --unpack-tarball-check-md5 http://... /dest/dir:"
+    echo "      download, unpack and verify a tarball into /dest/dir."
+    echo
+    echo "Influential environmental variables:"
+    echo "  LEOPARDSH_MIRROR: the root URL to fetch all files from."
+    echo "      Default value: LEOPARDSH_MIRROR=https://leopard.sh"
+    echo "      Note: both 'https://...' and 'file:///...' are supported."
+    echo "      Note: http is faster than https, try:"
+    echo "            'export LEOPARDSH_MIRROR=http://leopard.sh'"
+    echo "            (MD5 sums will still be verified when using http)."
+    echo "  LEOPARDSH_VERBOSE: same effect as using --verbose."
+    echo "  LEOPARDSH_FORCE_BUILD_PKGSPEC: build the package from source."
+    echo "  LEOPARDSH_FORCE_BUILD_ALL: build the package and all deps from source."
+    echo "  LEOPARDSH_RUN_TESTS: run 'make check' after building a package from source."
+    echo "  LEOPARDSH_RUN_LONG_TESTS: run tests which are known to take a long time."
+    echo "  LEOPARDSH_RUN_BROKEN_TESTS: run tests which are known to fail."
+    exit 0
+fi
 
 needs_setup_check=1
 
@@ -84,16 +141,6 @@ orig_pwd=$PWD
 if ! test -e ~/.leopardsh/checks ; then
     mkdir -p ~/.leopardsh/checks
 fi
-
-
-# colors:
-
-export COLOR_RED="\e[31;1m"
-export COLOR_GREEN="\e[32;1m"
-export COLOR_YELLOW="\e[33;1m"
-export COLOR_MAGENTA="\e[35;1m"
-export COLOR_CYAN="\e[36;1m"
-export COLOR_NONE="\e[0m"
 
 
 # get the CPU type:

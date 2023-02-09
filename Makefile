@@ -10,7 +10,9 @@ md5s:
 	cd binpkgs && make
 	cd dist && make
 	cd dist/orig && make
+	cd leopardsh && make
 	cd leopardsh/scripts && make
+	cd tigersh && make
 	cd tigersh/scripts && make
 	cd leopardsh/config.cache && make
 	cd tigersh/config.cache && make
