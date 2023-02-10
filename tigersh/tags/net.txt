@@ -5,3 +5,4 @@ interwebppc.app-rr3
 opera.app-10.63
 tenfourfox.app-fpr32.5
 vlc.app-0.9.10
+wget-1.21.3
