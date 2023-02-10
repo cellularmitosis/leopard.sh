@@ -1,10 +1,10 @@
 #!/opt/tigersh-deps-0.1/bin/bash
-# based on templates/install-foo-1.0.sh v4
+# based on templates/build-from-source.sh v6
 
 # Install readline on OS X Tiger / PowerPC.
 
 package=readline
-version=8.1.2
+version=8.2
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 
 set -e -o pipefail
@@ -25,10 +25,10 @@ do
     fi
     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+    PATH="/opt/$dep/bin:$PATH"
 done
-# LIBS="-lbar -lqux"
 
-echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --os.cpu))\007"
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 if tiger.sh --install-binpkg $pkgspec ; then
     exit 0
@@ -41,20 +41,17 @@ if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
 fi
 
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
+
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
 CFLAGS=$(tiger.sh -mcpu -O)
+LDFLAGS="$(tiger.sh -mcpu) $LDFLAGS"
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
-    # Note: readline ends up linking a ppc dylib, rather than ppc64,
-    # so we pass -m64 in LDFLAGS:
     LDFLAGS="-m64 $LDFLAGS"
 fi
-
-# Note: the dylibs still end up being "ppc" rather than e.g. ppc7400,
-# so we also pass -mcpu in LDFLAGS:
-LDFLAGS="$(tiger.sh -mcpu) $LDFLAGS"
 
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --with-curses \
@@ -62,7 +59,7 @@ LDFLAGS="$(tiger.sh -mcpu) $LDFLAGS"
     LDFLAGS="$LDFLAGS" \
     CFLAGS="$CFLAGS"
 
-/usr/bin/time make $(tiger.sh -j)
+/usr/bin/time make $(tiger.sh -j) V=1
 
 if test -n "$TIGERSH_RUN_TESTS" ; then
     make check

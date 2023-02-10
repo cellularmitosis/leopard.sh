@@ -28,6 +28,7 @@ patch-2.7.6.ppc64
 pcre-8.45.ppc64
 pv-1.6.20.ppc64
 ragel-6.10.ppc64
+readline-8.2.ppc64
 scheme48-1.9.2.ppc64
 sdl-1.2.15.20220129.ppc64
 sdl_mixer-1.2.13.20220314.ppc64

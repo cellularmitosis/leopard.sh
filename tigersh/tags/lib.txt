@@ -35,6 +35,8 @@ ncursesw-6.3
 ncursesw-6.3.ppc64
 pcre-8.45
 pcre-8.45.ppc64
+readline-8.2
+readline-8.2.ppc64
 sdl-1.2.15.20220129
 sdl_mixer-1.2.13.20220314
 termcap-1.3.1
