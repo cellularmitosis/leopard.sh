@@ -7,6 +7,8 @@ clozure-cl.app-1.6
 drracket.app-6.0.1
 gcc-4.2
 gcc-4.9.4
+guile-1.8.8
+guile-1.8.8.ppc64
 janet-1.25.1
 lua-5.1.5
 lua-5.1.5.ppc64

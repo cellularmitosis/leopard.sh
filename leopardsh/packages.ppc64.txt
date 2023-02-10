@@ -6,6 +6,7 @@ gettext-0.21.ppc64
 git-2.35.1.ppc64
 gmp-4.3.2.ppc64
 gmp-6.2.1.ppc64
+guile-1.8.8.ppc64
 gzip-1.11.ppc64
 isl-0.12.2.ppc64
 lhasa-0.3.1.ppc64

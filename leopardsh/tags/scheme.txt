@@ -3,6 +3,8 @@ chibi-scheme-20230208
 chicken-5.3.0
 chicken-5.3.0.ppc64
 drracket.app-6.0.1
+guile-1.8.8
+guile-1.8.8.ppc64
 petite-chezscheme-7.4
 petite-chezscheme-7.4t
 petite-chezscheme-8.4
