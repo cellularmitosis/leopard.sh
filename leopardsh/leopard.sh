@@ -421,7 +421,11 @@ if test "$op" = "tag" ; then
     url=$LEOPARDSH_MIRROR/tigersh/tags/$tag.txt
     insecure_url=$(echo "$url" | sed 's|^https:|http:|')
     curl --fail --silent --show-error --location --remote-name $insecure_url
-    cat $tag.txt
+    if test "$cpu_name" = "g5" ; then
+        cat $tag.txt
+    else
+        cat $tag.txt | grep -v '\.ppc64$'
+    fi
     rm -f $tag.txt
 
     exit 0

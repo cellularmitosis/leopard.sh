@@ -71,6 +71,10 @@ for host in $uphosts ; do
         rsync -ai host_files/all/ $host:/Users/macuser/
         rsync -ai tmp/ $host:/Users/macuser/tmp/
         ssh $host rm -f /Users/macuser/.profile
+        # keep imacg3 closer to stock for testing.
+        if test "$host" = "imacg3" ; then
+            rsync -ai host_files/$host/.bashrc $host:/Users/macuser/
+        fi
     ) &
 done
 wait
