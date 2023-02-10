@@ -1,4 +1,5 @@
 chezscheme-9.5.9-racket-20230127
+chibi-scheme-20230208
 chicken-5.3.0
 chicken-5.3.0.ppc64
 drracket.app-6.0.1

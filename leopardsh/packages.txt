@@ -5,6 +5,7 @@ bash-5.1.16
 ca-certificates-20221011
 camino.app-2.1.2
 chezscheme-9.5.9-racket-20230127
+chibi-scheme-20230208
 chicken-5.3.0
 chicken.app-2.2b2
 cloog-0.18.1
@@ -66,10 +67,10 @@ prboom.app-2.5.0
 pv-1.6.20
 python-3.10.3
 python2-2.7.18
-quake.app-1.1
 quake-pak0.pak-1.06
-quake2.app-1.1
+quake.app-1.1
 quake2-pak0.pak-3.14
+quake2.app-1.1
 quake3.app-1.32c
 racket-6.0.1
 ragel-6.10
