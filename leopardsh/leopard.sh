@@ -508,13 +508,20 @@ if test "$op" = "install-binpkg" ; then
     if test -z "$1" ; then
         echo -e "${COLOR_RED}Error${COLOR_NONE}: install which binpkg?" >&2
         echo "e.g. leopard.sh --install-binpkg gzip-1.11" >&2
+        echo "e.g. leopard.sh --install-binpkg gzip-1.11 tiger.g3" >&2
         exit 1
     fi
 
     pkgspec="$1"
     shift 1
 
-    os_cpu=$(LEOPARDSH_RECURSED=1 leopard.sh --os.cpu)
+    if test -n "$1" ; then
+        os_cpu="$1"
+        shift 1
+    else
+        os_cpu=$(LEOPARDSH_RECURSED=1 leopard.sh --os.cpu)
+    fi
+
     binpkg=$pkgspec.$os_cpu.tar.gz
     url=$LEOPARDSH_MIRROR/binpkgs/$binpkg
     insecure_url=$(echo "$url" | sed 's|^https:|http:|')
