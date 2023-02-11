@@ -881,6 +881,7 @@ if test "$op" = "help" ; then
     echo "            (MD5 sums will still be verified when using http)."
     echo "  TIGERSH_VERBOSE: same effect as using --verbose."
     echo "  TIGERSH_FORCE_BUILD_PKGSPEC: build the package from source."
+    echo "    e.g.: TIGERSH_FORCE_BUILD_PKGSPEC=foo-1.0 tiger.sh foo-1.0"
     echo "  TIGERSH_FORCE_BUILD_ALL: build the package and all dependencies from source."
     echo "  TIGERSH_RUN_TESTS: run 'make check' after building a package from source."
     echo "  TIGERSH_RUN_LONG_TESTS: run tests which are known to take a long time."
