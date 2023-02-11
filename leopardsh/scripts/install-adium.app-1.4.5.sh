@@ -4,10 +4,10 @@
 # Install Adium.app on OS X / PowerPC.
 
 package=adium.app
-version=1.3.10
+version=1.4.5
 appname1=Adium
 upstream=https://adiumx.cachefly.net/${appname1}_$version.dmg
-description="Multi-network chat application (AIM, ICQ, Jabber, etc)."
+description="Multi-network chat application (AIM, ICQ, Jabber, IRC, etc)."
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"

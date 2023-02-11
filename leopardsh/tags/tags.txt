@@ -1,4 +1,5 @@
 app
+chat
 common-lisp
 compression
 game
