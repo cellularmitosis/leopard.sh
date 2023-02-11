@@ -55,6 +55,22 @@ if test -n "$ppc64" ; then
     LDFLAGS="-m64 $LDFLAGS"
 fi
 
+# Note: git on Tiger PPC when compiled with older compilers (e.g. gcc-4.2)
+# will create SHA1 routines with the wrong endianness, resulting in errors:
+#   $ git clone https://github.com/cellularmitosis/leopard.sh.git
+#   Cloning into 'leopard.sh'...
+#   remote: Enumerating objects: 4963, done.
+#   remote: Counting objects: 100% (785/785), done.
+#   remote: Compressing objects: 100% (173/173), done.
+#   remote: Total 4963 (delta 624), reused 741 (delta 588), pack-reused 4178
+#   Receiving objects: 100% (4963/4963), 4.34 MiB | 1.05 MiB/s, done.
+#   fatal: pack is corrupted (SHA1 mismatch)
+#   fatal: fetch-pack: invalid index-pack output
+#
+# See https://trac.macports.org/ticket/54602
+# The easiest solution is -DSHA1DC_FORCE_BIGENDIAN=1.
+CFLAGS="$CFLAGS -DSHA1DC_FORCE_BIGENDIAN=1"
+
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --with-openssl=/opt/libressl-3.4.2$ppc64 \
     --with-curl=/opt/curl-7.87.0$ppc64 \
