@@ -64,6 +64,7 @@ COPTIM="$(tiger.sh -mcpu -O) -fomit-frame-pointer"
 if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
     # Note: one failing test:
     # (FAIL) remainder: flo/flo: expected 0.0 but got -0.0
+    # See https://bugs.call-cc.org/ticket/1814
     make \
         XCODE_DEVELOPER="" \
         XCODE_TOOL_PATH=/usr/bin \

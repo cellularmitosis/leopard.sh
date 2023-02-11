@@ -4,6 +4,7 @@ curl-7.87.0.ppc64
 iceweaselppc.app-fpr13
 interwebppc.app-rr3
 opera.app-10.63
+socat-1.7.4.4
 tenfourfox.app-fpr32.5
 vlc.app-0.9.10
 wget-1.21.3
