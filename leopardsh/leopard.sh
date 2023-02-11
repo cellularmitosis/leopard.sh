@@ -80,6 +80,8 @@ elif test "$1" = "--unpack-tarball-check-md5" ; then
     op=unpack-tarball-check-md5
 elif test "$1" = "--glass-dock" ; then
     op=glass-dock
+elif test "$1" = "--spotlight" ; then
+    op=spotlight
 elif test -n "$1" ; then
     op=install
 else
@@ -94,6 +96,8 @@ if test "$1" = "--help" \
 -o "$1" = "--cpu" \
 -o "$1" = "--os.cpu" \
 -o "$1" = "--bits" \
+-o "$1" = "--glass-dock" \
+-o "$1" = "--spotlight" \
 ; then
     unset needs_setup_check
 fi
@@ -103,6 +107,8 @@ if test "$op" = "list" \
 -o "$op" = "gccflags" \
 -o "$op" = "platform-info" \
 -o "$op" = "arch-check" \
+-o "$op" = "glass-dock" \
+-o "$op" = "spotlight" \
 ; then
     needs_cpu_info=1
 fi
@@ -830,7 +836,8 @@ if test "$op" = "help" ; then
     echo "  --setup: perform initial setup (this is done automatically as needed)."
     echo
     echo "Performance tweaks:"
-    echo "  --glass-dock (on|off): turn the glass dock effect on or off."
+    echo "  --glass-dock (on|off): turn the Dock's \"glass\" effect on or off."
+    echo "  --spotlight (on|off): turn Spotlight indexing on or off."
     echo
     echo "Command-line options:"
     echo "  --verbose: print every command being run (note: must be the first arg)."
@@ -1078,8 +1085,35 @@ if test "$op" = "glass-dock" ; then
         defaults write com.apple.dock no-glass -boolean YES
         killall Dock
     else
-        echo -e "${COLOR_RED}Error${COLOR_NONE}: turn the glass dock on or off?" >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: turn the Dock's \"glass\" effect on or off?" >&2
         echo "e.g. leopard.sh --glass-dock off" >&2
+        exit 1
+    fi
+
+    exit 0 
+fi
+
+
+# spotlight:
+
+if test "$op" = "spotlight" ; then
+    shift 1
+    onoff="$1"
+
+    if test "$onoff" = "on" ; then
+        set -x
+        sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+        sudo launchctl load -w /System/Library/LaunchAgents/com.apple.Spotlight.plist
+        set +x
+    elif test "$onoff" = "off" ; then
+        set -x
+        sudo launchctl unload -w /System/Library/LaunchAgents/com.apple.Spotlight.plist
+        sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+        set +x
+        echo "Note: if the above commands emitted errors, you may need to restart your machine for this change to take effect."
+    else
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: turn Spotlight indexing on or off?" >&2
+        echo "e.g. leopard.sh --spotlight off" >&2
         exit 1
     fi
 
