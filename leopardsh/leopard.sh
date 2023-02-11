@@ -78,6 +78,8 @@ elif test "$1" = "--unpack-dist" ; then
     op=unpack-dist
 elif test "$1" = "--unpack-tarball-check-md5" ; then
     op=unpack-tarball-check-md5
+elif test "$1" = "--glass-dock" ; then
+    op=glass-dock
 elif test -n "$1" ; then
     op=install
 else
@@ -827,6 +829,9 @@ if test "$op" = "help" ; then
     echo "  --install foo-1.0: install 'foo-1.0' (redundant, just run '$pkgmgr foo-1.0')."
     echo "  --setup: perform initial setup (this is done automatically as needed)."
     echo
+    echo "Performance tweaks:"
+    echo "  --glass-dock (on|off): turn the glass dock effect on or off."
+    echo
     echo "Command-line options:"
     echo "  --verbose: print every command being run (note: must be the first arg)."
     echo
@@ -1044,4 +1049,39 @@ if test "$op" = "linker-check" ; then
     done
 
     exit 0
+fi
+
+
+# glass-dock:
+
+if test "$op" = "glass-dock" ; then
+    shift 1
+    if test -z "$1" ; then
+        onoff=$(defaults read com.apple.dock no-glass)
+        if test "$onoff" = "0" ; then
+            echo "The glass dock effect is currently on."
+            exit 0
+        elif test "$onoff" = "1" ; then
+            echo "The glass dock effect is currently off."
+            exit 0
+        else
+            exit 1
+        fi
+    fi
+
+    onoff="$1"
+
+    if test "$onoff" = "on" ; then
+        defaults write com.apple.dock no-glass -boolean NO
+        killall Dock
+    elif test "$onoff" = "off" ; then
+        defaults write com.apple.dock no-glass -boolean YES
+        killall Dock
+    else
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: turn the glass dock on or off?" >&2
+        echo "e.g. leopard.sh --glass-dock off" >&2
+        exit 1
+    fi
+
+    exit 0 
 fi
