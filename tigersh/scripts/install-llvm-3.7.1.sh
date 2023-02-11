@@ -21,6 +21,10 @@ if ! test -e /opt/libffi-3.4.2 ; then
     tiger.sh libffi-3.4.2
 fi
 
+if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
+    tiger.sh gcc-4.9.4
+fi
+
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 if tiger.sh --install-binpkg $pkgspec ; then
@@ -32,10 +36,6 @@ set -x
 
 if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
-fi
-
-if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
-    tiger.sh gcc-4.9.4
 fi
 
 if ! test -e /opt/python2-2.7.18 ; then
