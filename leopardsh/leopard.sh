@@ -43,15 +43,18 @@ needs_setup_check=1
 
 if test "$1" = "--help" ; then
     op=help
-    unset needs_setup_check
-elif test "$1" = "--setup" ; then
-    op=setup
 elif test "$1" = "--list" ; then
     op=list
+elif test "$1" = "--describe" -o "$1" = "--descriptions"; then
+    op=describe
 elif test "$1" = "--tags" ; then
     op=tags
 elif test "$1" = "--tag" ; then
     op=tag
+elif test "$1" = "--setup" ; then
+    op=setup
+elif test "$1" = "--install" ; then
+    op=install
 elif test "$1" = "--link" ; then
     op=link
 elif test "$1" = "--unlink" ; then
@@ -61,10 +64,8 @@ elif test "$1" = "-j" ; then
     unset needs_setup_check
 elif test "$1" = "-m32" -o "$1" = "-mcpu" -o "$1" = "-O" ; then
     op=gccflags
-    unset needs_setup_check
 elif test "$1" = "--cpu" -o "$1" = "--os.cpu" -o "$1" = "--bits" ; then
     op=platform-info
-    unset needs_setup_check
 elif test "$1" = "--arch-check" ; then
     op=arch-check
 elif test "$1" = "--linker-check" ; then
@@ -81,6 +82,18 @@ elif test -n "$1" ; then
     op=install
 else
     op=list
+fi
+
+if test "$1" = "--help" \
+-o "$1" = "-j" \
+-o "$1" = "-m32" \
+-o "$1" = "-mcpu" \
+-o "$1" = "-O" \
+-o "$1" = "--cpu" \
+-o "$1" = "--os.cpu" \
+-o "$1" = "--bits" \
+; then
+    unset needs_setup_check
 fi
 
 if test "$op" = "list" \
@@ -390,6 +403,44 @@ if test "$op" = "list" ; then
 fi
 
 
+# describe:
+
+if test "$op" = "describe" ; then
+    shift 1
+    if test -n "$1" ; then
+        pkgspec="$1"
+        shift 1
+        echo "Description of '$pkgspec':" >&2
+    else
+        echo "Available package descriptions:" >&2
+    fi
+
+    cd /tmp
+    url=$LEOPARDSH_MIRROR/leopardsh/descriptions.txt
+    insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    curl --fail --silent --show-error --location --remote-name $insecure_url
+    if test "$cpu_name" = "g5" ; then
+        url=$LEOPARDSH_MIRROR/leopardsh/descriptions.ppc64.txt
+        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+        curl --fail --silent --show-error --location --remote-name $insecure_url
+        if test -n "$pkgspec" ; then
+            cat descriptions.txt descriptions.ppc64.txt | sort | grep "^$pkgspec: "
+        else
+            cat descriptions.txt descriptions.ppc64.txt | sort
+        fi
+    else
+        if test -n "$pkgspec" ; then
+            cat descriptions.txt | sort | grep "^$pkgspec: "
+        else
+            cat descriptions.txt | sort
+        fi
+    fi
+    rm -f descriptions.txt descriptions.ppc64.txt
+
+    exit 0
+fi
+
+
 # tags:
 
 if test "$op" = "tags" ; then
@@ -410,9 +461,8 @@ fi
 if test "$op" = "tag" ; then
     shift 1
     if test -z "$1" ; then
-        echo -e "${COLOR_RED}Error${COLOR_NONE}: list which tag?" >&2
-        echo "e.g. leopard.sh --tag compression" >&2
-        exit 1
+        LEOPARDSH_RECURSED=1 leopard.sh --tags
+        exit 0
     fi
     tag="$1"
 
@@ -435,7 +485,12 @@ fi
 # install:
 
 if test "$op" = "install" ; then
+    if test "$1" = "--install" ; then
+        shift 1
+    fi
+
     pkgspec="$1"
+    script=install-$pkgspec.sh
 
     if test -e "/opt/$pkgspec" \
     && test ! -e "/opt/$pkgspec/INCOMPLETE_INSTALLATION" ; then
@@ -443,8 +498,6 @@ if test "$op" = "install" ; then
         exit 0
     fi
 
-    pkgspec="$1"
-    script=install-$pkgspec.sh
 
     echo -e "${COLOR_CYAN}Installing${COLOR_NONE} ${COLOR_YELLOW}$pkgspec${COLOR_NONE}." >&2
     echo -n -e "\033]0;leopard.sh $pkgspec (leopard.$cpu_name)\007"
@@ -762,11 +815,16 @@ if test "$op" = "help" ; then
     echo
     echo "Command-line commands:"
     echo "  --help: display this message."
-    echo "  --list: list the available packages (or just run '$pkgmgr')."
-    echo "  --tags: list the tags."
+    echo "  --describe: describe all available packages (or --descriptions)."
+    echo "  --describe foo-1.0: describe 'foo-1.0'."
+    echo "  --tag: list the available tags (or --tags)."
     echo "  --tag foo: list the packages tagged as 'foo'."
     echo "  --link foo-1.0: symlink bin, man, share/man from /opt/foo-1.0 into /usr/local."
     echo "  --unlink foo-1.0: remove the /usr/local symlinks for foo-1.0."
+    echo
+    echo "Unnecessary command-line commands:"
+    echo "  --list: list the available packages (redundant, just run '$pkgmgr')."
+    echo "  --install foo-1.0: install 'foo-1.0' (redundant, just run '$pkgmgr foo-1.0')."
     echo "  --setup: perform initial setup (this is done automatically as needed)."
     echo
     echo "Command-line options:"
@@ -797,7 +855,7 @@ if test "$op" = "help" ; then
     echo "            (MD5 sums will still be verified when using http)."
     echo "  LEOPARDSH_VERBOSE: same effect as using --verbose."
     echo "  LEOPARDSH_FORCE_BUILD_PKGSPEC: build the package from source."
-    echo "  LEOPARDSH_FORCE_BUILD_ALL: build the package and all deps from source."
+    echo "  LEOPARDSH_FORCE_BUILD_ALL: build the package and all dependencies from source."
     echo "  LEOPARDSH_RUN_TESTS: run 'make check' after building a package from source."
     echo "  LEOPARDSH_RUN_LONG_TESTS: run tests which are known to take a long time."
     echo "  LEOPARDSH_RUN_BROKEN_TESTS: run tests which are known to fail."
