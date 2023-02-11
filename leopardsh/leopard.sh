@@ -837,7 +837,7 @@ if test "$op" = "help" ; then
     echo
     echo "Performance tweaks:"
     echo "  --glass-dock (on|off): turn the Dock's \"glass\" effect on or off."
-    echo "  --spotlight (on|off): turn Spotlight indexing on or off."
+    echo "  --spotlight (on|off): turn Spotlight on or off."
     echo
     echo "Command-line options:"
     echo "  --verbose: print every command being run (note: must be the first arg)."
@@ -1110,9 +1110,9 @@ if test "$op" = "spotlight" ; then
         sudo launchctl unload -w /System/Library/LaunchAgents/com.apple.Spotlight.plist
         sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
         set +x
-        echo "Note: if the above commands emitted errors, you may need to restart your machine for this change to take effect."
+        echo "Note: if the above commands emitted errors, you may need to restart your Mac for this change to take effect."
     else
-        echo -e "${COLOR_RED}Error${COLOR_NONE}: turn Spotlight indexing on or off?" >&2
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: turn Spotlight on or off?" >&2
         echo "e.g. leopard.sh --spotlight off" >&2
         exit 1
     fi

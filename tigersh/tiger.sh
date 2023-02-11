@@ -84,6 +84,8 @@ elif test "$1" = "--unpack-dist" ; then
     op=unpack-dist
 elif test "$1" = "--unpack-tarball-check-md5" ; then
     op=unpack-tarball-check-md5
+elif test "$1" = "--spotlight" ; then
+    op=spotlight
 elif test -n "$1" ; then
     op=install
 else
@@ -98,6 +100,7 @@ if test "$1" = "--help" \
 -o "$1" = "--cpu" \
 -o "$1" = "--os.cpu" \
 -o "$1" = "--bits" \
+-o "$1" = "--spotlight" \
 ; then
     unset needs_setup_check
 fi
@@ -107,6 +110,7 @@ if test "$op" = "list" \
 -o "$op" = "gccflags" \
 -o "$op" = "platform-info" \
 -o "$op" = "arch-check" \
+-o "$op" = "spotlight" \
 ; then
     needs_cpu_info=1
 fi
@@ -846,6 +850,9 @@ if test "$op" = "help" ; then
     echo "  --install foo-1.0: install 'foo-1.0' (redundant, just run '$pkgmgr foo-1.0')."
     echo "  --setup: perform initial setup (this is done automatically as needed)."
     echo
+    echo "Performance tweaks:"
+    echo "  --spotlight (on|off): turn Spotlight on or off."
+    echo
     echo "Command-line options:"
     echo "  --verbose: print every command being run (note: must be the first arg)."
     echo
@@ -1063,4 +1070,76 @@ if test "$op" = "linker-check" ; then
     done
 
     exit 0
+fi
+
+
+# spotlight:
+
+if test "$op" = "spotlight" ; then
+    shift 1
+    onoff="$1"
+
+    if test "$onoff" = "on" ; then
+        if grep -q '^SPOTLIGHT=-NO-' /etc/hostconfig ; then
+            set -x
+            sudo perl -pi -e 's/^SPOTLIGHT=-NO-/SPOTLIGHT=-YES-/g' /etc/hostconfig
+            set +x
+            needs_reboot=1
+        else
+            echo "Note: Spotlight already disabled."
+        fi
+        set -x
+        sudo mdutil -s / > /tmp/mdutil.status
+        set +x
+        if grep -q "Error: Could not get indexing status for volume." /tmp/mdutil.status ; then
+            echo "Note: metadata indexing can't be enabled until you reboot your Mac."
+            echo "Run 'tiger.sh --spotlight on' again after rebooting."
+            needs_reboot=1
+        elif grep -q "Status: Indexing Disabled" /tmp/mdutil.status ; then
+            set -x
+            sudo mdutil -i on /
+            set +x
+            needs_reboot=1
+        else
+            echo "Note: metadata indexing already enabled."
+        fi
+        rm -f /tmp/mdutil.status
+        if test -n "$needs_reboot" ; then
+            echo "Please restart your Mac for this change to take effect."
+        fi
+    elif test "$onoff" = "off" ; then
+        if grep -q '^SPOTLIGHT=-YES-' /etc/hostconfig ; then
+            set -x
+            sudo perl -pi -e 's/^SPOTLIGHT=-YES-/SPOTLIGHT=-NO-/g' /etc/hostconfig
+            set +x
+            needs_reboot=1
+        else
+            echo "Note: Spotlight already disabled."
+        fi
+        set -x
+        sudo mdutil -s / > /tmp/mdutil.status
+        set +x
+        if grep -q "Error: Could not get indexing status for volume." /tmp/mdutil.status ; then
+            echo "Note: metadata indexing can't be disabled until you reboot your Mac."
+            echo "Run 'tiger.sh --spotlight off' again after rebooting."
+            needs_reboot=1
+        elif grep -q "Status: Indexing Enabled" /tmp/mdutil.status ; then
+            set -x
+            sudo mdutil -i off /
+            set +x
+            needs_reboot=1
+        else
+            echo "Note: metadata indexing already disabled."
+        fi
+        rm -f /tmp/mdutil.status
+        if test -n "$needs_reboot" ; then
+            echo "Please restart your Mac for this change to take effect."
+        fi
+    else
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: turn Spotlight on or off?" >&2
+        echo "e.g. leopard.sh --spotlight off" >&2
+        exit 1
+    fi
+
+    exit 0 
 fi
