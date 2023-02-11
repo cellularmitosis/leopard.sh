@@ -251,6 +251,7 @@ Useful links for OS X PowerPC users:
 - 'Last versions of applications for Mac OS X on PowerPC' http://matejhorvat.si/en/mac/osxppcsw/
 - 'The Tiger Thread (Mac OS X 10.4)' https://forums.macrumors.com/threads/the-tiger-thread-mac-os-x-10-4.2134451/
 - 'The Leopard Thread' https://forums.macrumors.com/threads/the-leopard-thread.2120703/
+- FrogFind! http://frogfind.com/
 
 
 Vintage Mac content:

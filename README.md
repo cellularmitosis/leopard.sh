@@ -261,6 +261,7 @@ If `leopard.sh` and `tiger.sh` aren't for you, checkout these other package mana
 - [_Last versions of applications for Mac OS X on PowerPC_](http://matejhorvat.si/en/mac/osxppcsw/)
 - [_The Tiger Thread (Mac OS X 10.4)_](https://forums.macrumors.com/threads/the-tiger-thread-mac-os-x-10-4.2134451/)
 - [_The Leopard Thread_](https://forums.macrumors.com/threads/the-leopard-thread.2120703/)
+- [FrogFind!](http://frogfind.com/)
 
 
 ## Vintage Mac content:
