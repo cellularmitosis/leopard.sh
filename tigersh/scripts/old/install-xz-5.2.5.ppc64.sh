@@ -1,1 +1,0 @@
-install-xz-5.2.5.sh

@@ -1,1 +1,0 @@
-install-ncursesw-6.3.sh
