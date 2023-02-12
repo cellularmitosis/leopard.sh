@@ -1,0 +1,2 @@
+sqlite3-3.40.1
+sqlite3-3.40.1.ppc64

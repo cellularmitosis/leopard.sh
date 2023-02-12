@@ -2,6 +2,7 @@ app
 chat
 common-lisp
 compression
+db
 game
 lang
 lib

@@ -84,6 +84,7 @@ sdl-1.2.15.20220129
 sdl_mixer-1.2.13.20220314
 sed-4.8
 socat-1.7.4.4
+sqlite3-3.40.1
 stuffit-expander.app-13.0.3
 tcl-8.6.12
 tenfourfox.app-fpr32.5
