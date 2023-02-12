@@ -3,6 +3,7 @@ autoconf-2.71
 automake-1.16.5
 bash-5.1.16
 ca-certificates-20221011
+ca-certificates-20230110
 camino.app-2.1.2
 chezscheme-9.5.9-racket-20230127
 chibi-scheme-20230208
