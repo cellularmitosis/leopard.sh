@@ -1,2 +1,4 @@
+gdbm-1.23
+gdbm-1.23.ppc64
 sqlite3-3.40.1
 sqlite3-3.40.1.ppc64
