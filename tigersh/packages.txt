@@ -55,6 +55,7 @@ ncurses-6.3
 ncursesw-6.3
 neofetch-7.1.0
 openmark.app-1.60
+openssl-1.1.1t
 opera.app-10.63
 patch-2.7.6
 pcre-8.45

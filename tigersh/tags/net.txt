@@ -3,6 +3,8 @@ curl-7.87.0
 curl-7.87.0.ppc64
 iceweaselppc.app-fpr13
 interwebppc.app-rr3
+libressl-3.4.2
+openssl-1.1.1t
 opera.app-10.63
 socat-1.7.4.4
 tenfourfox.app-fpr32.5
