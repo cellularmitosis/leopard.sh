@@ -3,7 +3,7 @@
 
 # Install python on OS X Leopard / PowerPC.
 
-# FIXME: this is just a bare-minimum python build.  get ssl working.
+# FIXME: tkinter still isn't working.
 
 package=python
 version=3.11.2
@@ -19,6 +19,35 @@ if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
 fi
 
 pkgspec=$package-$version$ppc64
+
+# Note: python doesn't like libressl.
+#   checking for openssl/ssl.h in /opt/libressl-3.4.2... yes
+#   checking whether compiling and linking against OpenSSL works... yes
+#   checking for --with-openssl-rpath... 
+#   checking whether OpenSSL provides required ssl module APIs... no
+#   checking whether OpenSSL provides required hashlib module APIs... no
+# https://github.com/kisslinux/repo/issues/263
+# https://peps.python.org/pep-0644/#libressl
+# https://twitter.com/christianheimes/status/953991201660788736?lang=en
+
+for dep in \
+    readline-8.2$ppc64 \
+    openssl-1.1.1t$ppc64 \
+    xz-5.2.5$ppc64 \
+    libffi-3.4.2$ppc64 \
+    expat-2.5.0$ppc64 \
+    sqlite3-3.40.1$ppc64 \
+    gdbm-1.23$ppc64 \
+    tcl-8.6.12$ppc64 \
+    tk-8.6.12$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+    PATH="/opt/$dep/bin:$PATH"
+done
 
 if ! which -s gcc-4.9 ; then
     leopard.sh gcc-4.9.4
@@ -64,8 +93,7 @@ done
 
 CC=gcc-4.9
 
-# CFLAGS=$(leopard.sh -mcpu -O)
-CFLAGS="-O0"
+CFLAGS=$(leopard.sh -mcpu -O)
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
     LDFLAGS="-m64 $LDFLAGS"
@@ -74,89 +102,35 @@ fi
 # Thanks to https://trac.macports.org/ticket/66483
 LDFLAGS="$LDFLAGS -Wl,-read_only_relocs,suppress"
 
+# Note: --enable-optimizations is unavailable for gcc-4.9:
+#   gcc-4.9: error: unrecognized command line option '-fprofile-instr-generate'
+
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --enable-shared \
+    --with-openssl=/opt/openssl-1.1.1t \
+    --with-system-ffi \
+    --with-system-expat \
+    --with-computed-gotos \
+    CPPFLAGS="$CPPFLAGS" \
     LDFLAGS="$LDFLAGS" \
     CFLAGS="$CFLAGS" \
-    OPT="-O0" \
-    CC="$CC"
+    OPT="$CFLAGS" \
+    CC="$CC" \
+    LIBLZMA_CFLAGS="-I/opt/xz-5.2.5$ppc64/include -L/opt/xz-5.2.5$ppc64/lib" \
+    LIBLZMA_LIBS="-llzma" \
+    LIBSQLITE3_CFLAGS="-I/opt/sqlite3-3.40.1$ppc64/include -L/opt/sqlite3-3.40.1$ppc64/lib" \
+    LIBSQLITE3_LIBS="-lsqlite3" \
+    GDBM_CFLAGS="-I/opt/gdbm-1.23$ppc64/include -L/opt/gdbm-1.23$ppc64/lib" \
+    GDBM_LIBS="-lgdbm" \
+    TCLTK_CFLAGS="-I/opt/tcl-8.6.12$ppc64/include -I/opt/tk-8.6.12$ppc64/include -L/opt/tcl-8.6.12$ppc64/lib -L/opt/tk-8.6.12$ppc64/lib" \
+    TCLTK_LIBS="-ltcl8.6 -ltk8.6"
 
-    # --enable-optimizations \
-    # --enable-shared \
     # --with-lto=full \
-    # --with-system-expat \
-    # --with-system-ffi \
     # --with-system-libmpdec \
-    # --with-openssl=/opt/libressl-3.4.2 \
-    # LIBUUID_LIBS="" \
-    # LIBNSL_CFLAGS="" \
-    # LIBNSL_LIBS="" \
-    # LIBSQLITE3_CFLAGS="" \
-    # LIBSQLITE3_LIBS="" \
-    # TCLTK_CFLAGS="" \
-    # TCLTK_LIBS="" \
-    # X11_CFLAGS="" \
-    # X11_LIBS="" \
-    # GDBM_CFLAGS="" \
-    # GDBM_LIBS="" \
-    # ZLIB_CFLAGS="" \
-    # ZLIB_LIBS="" \
-    # BZIP2_CFLAGS="" \
-    # BZIP2_LIBS="" \
-    # LIBLZMA_CFLAGS="" \
-    # LIBLZMA_LIBS="" \
-    # LIBCRYPT_CFLAGS="" \
-    # LIBCRYPT_LIBS="" \
-    # LIBB2_CFLAGS="" \
-    # LIBB2_LIBS="" \
 
-
-# current status:
-#
-# gcc-4.9 -DNDEBUG -O0 -O0 -std=c11 -Werror=implicit-function-declaration -fvisibility=hidden -I./Include/internal -I_ctypes/darwin -I./Include -I. -I/private/tmp/python-3.11.2/Include -I/private/tmp/python-3.11.2 -c /private/tmp/python-3.11.2/Modules/_ctypes/_ctypes.c -o build/temp.macosx-10.4-ppc-3.11/private/tmp/python-3.11.2/Modules/_ctypes/_ctypes.o -DUSING_MALLOC_CLOSURE_DOT_C=1 -DMACOSX
-# /private/tmp/python-3.11.2/Modules/_ctypes/_ctypes.c:118:17: fatal error: ffi.h: No such file or directory
-#  #include <ffi.h>
-#                  ^
-# compilation terminated.
-#
-# The necessary bits to build these optional modules were not found:
-# _gdbm                 _hashlib              _lzma              
-# _sqlite3              _ssl                  readline           
-# To find the necessary bits, look in setup.py in detect_modules() for the module's name.
-#
-#
-# Failed to build these modules:
-# _ctypes                                                        
-#
-#
-# Could not build the ssl module!
-# Python requires a OpenSSL 1.1.1 or newer
-# Custom linker flags may require --with-openssl-rpath=auto
-#
-# running build_scripts
-
-
-
-
-# With gcc-4.9, the build fails with:
-#   gcc-4.9 -c  -DNDEBUG -g -fwrapv -O3 -Wall -mcpu=7450 -O2   -std=c11 -Werror=implicit-function-declaration -fvisibility=hidden  -I./Include/internal  -I. -I./Include    -DPy_BUILD_CORE -o Objects/longobject.o Objects/longobject.c
-#   Objects/longobject.c: In function 'bit_length_digit':
-#   Objects/longobject.c:779:5: error: implicit declaration of function 'static_assert' [-Werror=implicit-function-declaration]
-#        static_assert(PyLong_SHIFT <= sizeof(unsigned long) * 8,
-#        ^
-#   cc1: some warnings being treated as errors
-#   make: *** [Objects/longobject.o] Error 1
-#
-# There is already a work-around for this in pymacro.h, but it is only defined
-# for glibc.  So we do the same for __APPLE__.
-cat >> Include/pymacro.h << 'EOF'
-
-// In C++ 11 static_assert is a keyword, redefining is undefined behaviour.
-#if defined(__APPLE__) \
-     && !(defined(__cplusplus) && __cplusplus >= 201103L) \
-     && !defined(static_assert)
-#  define static_assert _Static_assert
-#endif
-EOF
+# Test the openssl integration via the REPL:
+#  import ssl ; print(ssl.OPENSSL_VERSION)
+#  import urllib.request ; print(urllib.request.urlopen("https://leopard.sh").read())
 
 /usr/bin/time make $(leopard.sh -j) V=1
 
@@ -165,6 +139,27 @@ if test -n "$LEOPARDSH_RUN_TESTS" ; then
 fi
 
 make install
+
+scripts_dir=/opt/$pkgspec/share/leopard.sh/$pkgspec
+mkdir -p $scripts_dir
+
+cat > $scripts_dir/test-ssl.py << 'EOF'
+#!/usr/bin/env python3
+import urllib.request
+print(urllib.request.urlopen("https://leopard.sh").read())
+EOF
+chmod +x $scripts_dir/test-ssl.py
+
+cat > $scripts_dir/test-tkinter.py << 'EOF'
+#!/usr/bin/env python3
+# thanks to https://www.geeksforgeeks.org/hello-world-in-tkinter/
+from tkinter import *
+root = Tk()
+a = Label(root, text ="Hello World")
+a.pack()
+root.mainloop()
+EOF
+chmod +x $scripts_dir/test-tkinter.py
 
 leopard.sh --linker-check $pkgspec
 leopard.sh --arch-check $pkgspec $ppc64
