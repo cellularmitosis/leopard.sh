@@ -8,3 +8,4 @@ lib
 net
 scheme
 shell
+video
