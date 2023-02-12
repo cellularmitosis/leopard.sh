@@ -42,3 +42,5 @@ sdl_mixer-1.2.13.20220314
 sdl_mixer-1.2.13.20220314.ppc64
 termcap-1.3.1
 termcap-1.3.1.ppc64
+tk-8.6.12
+tk-8.6.12.ppc64
