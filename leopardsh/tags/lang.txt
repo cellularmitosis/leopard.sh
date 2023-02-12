@@ -13,6 +13,7 @@ janet-1.25.1
 lua-5.1.5
 lua-5.1.5.ppc64
 luajit-2.1.0-beta3
+perl-5.36.0
 petite-chezscheme-7.4
 petite-chezscheme-7.4t
 petite-chezscheme-8.4
