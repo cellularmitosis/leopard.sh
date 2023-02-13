@@ -107,7 +107,7 @@ LDFLAGS="$LDFLAGS -Wl,-read_only_relocs,suppress"
 
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --enable-shared \
-    --with-openssl=/opt/openssl-1.1.1t \
+    --with-openssl=/opt/openssl-1.1.1t$ppc64 \
     --with-system-ffi \
     --with-system-expat \
     --with-computed-gotos \

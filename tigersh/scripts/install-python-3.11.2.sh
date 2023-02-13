@@ -129,7 +129,7 @@ LDFLAGS="$LDFLAGS -Wl,-read_only_relocs,suppress"
 if test -n "$ppc64" ; then
     /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
         --enable-shared \
-        --with-openssl=/opt/openssl-1.1.1t \
+        --with-openssl=/opt/openssl-1.1.1t$ppc64 \
         --with-system-ffi \
         --with-system-expat \
         --with-computed-gotos \
@@ -162,7 +162,7 @@ else
         LIBSQLITE3_LIBS="-lsqlite3" \
         GDBM_CFLAGS="-I/opt/gdbm-1.23/include -L/opt/gdbm-1.23/lib" \
         GDBM_LIBS="-lgdbm" \
-        TCLTK_CFLAGS="-I/opt/tcl-8.6.12/include -I/opt/tk-8.6.12/include -L/opt/tcl-8.6.12$ppc64/lib -L/opt/tk-8.6.12$ppc64/lib" \
+        TCLTK_CFLAGS="-I/opt/tcl-8.6.12/include -I/opt/tk-8.6.12/include -L/opt/tcl-8.6.12/lib -L/opt/tk-8.6.12/lib" \
         TCLTK_LIBS="-ltcl8.6 -ltk8.6"
 fi
 

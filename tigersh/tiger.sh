@@ -841,8 +841,9 @@ if test "$op" = "self-update" ; then
     cd /tmp
     url=$TIGERSH_MIRROR/tigersh/tiger.sh
     curl --fail --silent --show-error --location --remote-name $url
-    cat tiger.sh > /usr/local/bin/tiger.sh
-    rm tiger.sh
+    chmod +x tiger.sh
+    mv tiger.sh /usr/local/bin/
+    exit 0
 fi
 
 
