@@ -6,6 +6,7 @@
 package=gcc
 version=4.9.4
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version/$package-$version.tar.gz
+description="The GNU compiler collection (4.9.4 supports C11 and thread-local storage)"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
