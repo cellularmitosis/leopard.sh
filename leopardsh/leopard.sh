@@ -352,6 +352,10 @@ EOF
     if ! test -e ~/.leopardsh/checks/usr-local-bin-in-path ; then
         if ! echo $PATH | tr ':' '\n' | egrep '^/usr/local/bin/?$' >/dev/null ; then
             echo "Adding /usr/local/bin to your \$PATH." >&2
+            if ! test -e ~/.bashrc -o -e ~/.bash_profile -o -e ~/.profile ; then
+                # This is a brand-new user with no rc files.
+                touch ~/.profile
+            fi
             for f in ~/.bashrc ~/.bash_profile ~/.profile ; do
                 if test -e $f ; then
                     echo >> $f
