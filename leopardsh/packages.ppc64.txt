@@ -30,6 +30,7 @@ openssl-1.1.1t.ppc64
 patch-2.7.6.ppc64
 pcre-8.45.ppc64
 pv-1.6.20.ppc64
+python-3.11.2.ppc64
 ragel-6.10.ppc64
 readline-8.2.ppc64
 scheme48-1.9.2.ppc64

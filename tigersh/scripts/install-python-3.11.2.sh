@@ -173,6 +173,22 @@ fi
 #  import ssl ; print(ssl.OPENSSL_VERSION)
 #  import urllib.request ; print(urllib.request.urlopen("https://leopard.sh").read())
 
+# libmpdec seems to be failing on the 64-bit build:
+# gcc-4.9 -B/opt/ld64-97.17-tigerbrew/bin -c -I./Modules/_decimal/libmpdec -DUNIVERSAL=1  -DNDEBUG -m64 -mcpu=970 -O2 -m64 -mcpu=970 -O2   -std=c11 -Werror=implicit-function-declaration -fvisibility=hidden  -I./Include/internal  -I. -I./Include -I/opt/tcl-8.6.12.ppc64/include -I/opt/gdbm-1.23.ppc64/include -I/opt/sqlite3-3.40.1.ppc64/include -I/opt/expat-2.5.0.ppc64/include -I/opt/libffi-3.4.2.ppc64/include -I/opt/xz-5.2.5.ppc64/include -I/opt/openssl-1.1.1t.ppc64/include -I/opt/readline-8.2.ppc64/include     -o Modules/_decimal/libmpdec/basearith.o ./Modules/_decimal/libmpdec/basearith.c
+# In file included from ./Modules/_decimal/libmpdec/basearith.c:29:0:
+# ./Modules/_decimal/libmpdec/mpdecimal.h:215:4: error: #error "unsupported platform: need mpd_size_t == mpd_uint_t"
+#    #error "unsupported platform: need mpd_size_t == mpd_uint_t"
+#     ^
+# In file included from ./Modules/_decimal/libmpdec/basearith.h:34:0,
+#                  from ./Modules/_decimal/libmpdec/basearith.c:34:
+# ./Modules/_decimal/libmpdec/typearith.h:612:4: error: #error "adapt mul_size_t() and mulmod_size_t()"
+#    #error "adapt mul_size_t() and mulmod_size_t()"
+#     ^
+# make: *** [Modules/_decimal/libmpdec/basearith.o] Error 1
+if test -n "$ppc64" ; then
+    exit 1
+fi
+
 /usr/bin/time make $(tiger.sh -j) V=1
 
 if test -n "$TIGERSH_RUN_TESTS" ; then
