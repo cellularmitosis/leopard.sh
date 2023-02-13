@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-sbcl-1.0.47.sh

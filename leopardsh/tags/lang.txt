@@ -22,6 +22,7 @@ python-3.11.2
 python-3.11.2.ppc64
 python2-2.7.18
 racket-6.0.1
+sbcl-1.0.47
 scheme48-1.9.2
 scheme48-1.9.2.ppc64
 tcl-8.6.12
