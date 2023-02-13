@@ -87,15 +87,17 @@ done
 
 # and another pass to build.
 for pkgspec in $(cat /tmp/to-build.txt) ; do
-    mv /usr/local/bin/leopard.sh /opt/tigersh-deps-0.1 /tmp/
-
-    rm -rf /usr/local/bin/*
-    rm -rf /usr/local/sbin/*
-    rm -rf /usr/local/share/man/*
     if test -e /opt/local ; then
         echo "Error: refusing to delete /opt/local." >&2
         exit 1
     fi
+
+    mv /usr/local/bin/leopard.sh /opt/tigersh-deps-0.1 /tmp/
+
+    echo "Wiping out /opt (but not /opt/local)."
+    rm -rf /usr/local/bin/*
+    rm -rf /usr/local/sbin/*
+    rm -rf /usr/local/share/man/*
     rm -rf /opt/*
 
     mv /tmp/leopard.sh /usr/local/bin/

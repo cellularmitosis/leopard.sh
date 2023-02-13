@@ -59,6 +59,8 @@ elif test "$1" = "--tag" ; then
     op=tag
 elif test "$1" = "--setup" ; then
     op=setup
+elif test "$1" = "--self-update" ; then
+    op=self-update
 elif test "$1" = "--install" ; then
     op=install
 elif test "$1" = "--link" ; then
@@ -828,6 +830,18 @@ if test "$op" = "unlink" ; then
 fi
 
 
+# self-update:
+
+if test "$op" = "self-update" ; then
+    echo "Fetching the latest tiger.sh (into /usr/local/bin)." >&2
+    cd /tmp
+    url=$TIGERSH_MIRROR/tigersh/tiger.sh
+    curl --fail --silent --show-error --location --remote-name $url
+    cat tiger.sh > /usr/local/bin/tiger.sh
+    rm tiger.sh
+fi
+
+
 # display the help message:
 
 if test "$op" = "help" ; then
@@ -844,6 +858,7 @@ if test "$op" = "help" ; then
     echo "  --tag foo: list the packages tagged as 'foo'."
     echo "  --link foo-1.0: symlink bin, man, share/man from /opt/foo-1.0 into /usr/local."
     echo "  --unlink foo-1.0: remove the /usr/local symlinks for foo-1.0."
+    echo "  --self-update: install the latest version of this script."
     echo
     echo "Unnecessary command-line commands:"
     echo "  --list: list the available packages (redundant, just run '$pkgmgr')."
