@@ -68,12 +68,21 @@ sed -i '' -e 's/(defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_
 # These functions are from ucontext.h and weren't introduced until Leopard,
 # to we use no-async.
 
+CFLAGS=$(tiger.sh -mcpu -O)
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
+    target=darwin64-ppc-cc
+else
+    target=darwin-ppc-cc
+fi
+
 PATH="/opt/perl-5.36.0/bin:$PATH" \
-    ./Configure --prefix=/opt/openssl-1.1.1t \
+    ./Configure --prefix=/opt/$pkgspec \
         threads \
         shared \
         no-async \
-        darwin-ppc-cc
+        $target \
+        CFLAGS="$CFLAGS"
 
 PATH="/opt/perl-5.36.0/bin:$PATH" \
     /usr/bin/time make $(tiger.sh -j)
