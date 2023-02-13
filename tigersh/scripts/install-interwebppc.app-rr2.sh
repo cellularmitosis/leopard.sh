@@ -1,1 +1,0 @@
-../../leopardsh/scripts/install-interwebppc.app-rr2.sh
