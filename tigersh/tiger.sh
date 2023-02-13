@@ -1153,7 +1153,7 @@ if test "$op" = "spotlight" ; then
         fi
     else
         echo -e "${COLOR_RED}Error${COLOR_NONE}: turn Spotlight on or off?" >&2
-        echo "e.g. leopard.sh --spotlight off" >&2
+        echo "e.g. tiger.sh --spotlight off" >&2
         exit 1
     fi
 
