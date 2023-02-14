@@ -504,7 +504,12 @@ if test "$op" = "install" ; then
     fi
 
     pkgspec="$1"
+    shift 1
     script=install-$pkgspec.sh
+
+    if test "$1" = "wip" ; then
+        wip=1
+    fi
 
     if test -e "/opt/$pkgspec" \
     && test ! -e "/opt/$pkgspec/INCOMPLETE_INSTALLATION" ; then
@@ -512,12 +517,14 @@ if test "$op" = "install" ; then
         exit 0
     fi
 
-
     echo -e "${COLOR_CYAN}Installing${COLOR_NONE} ${COLOR_YELLOW}$pkgspec${COLOR_NONE}." >&2
     echo -n -e "\033]0;leopard.sh $pkgspec (leopard.$cpu_name)\007"
 
     echo -e "${COLOR_CYAN}Fetching${COLOR_NONE} $script." >&2
     url=$LEOPARDSH_MIRROR/leopardsh/scripts/$script
+    if test -n "$wip" ; then
+        url=$LEOPARDSH_MIRROR/leopardsh/scripts/wip/$script
+    fi
     cd /tmp
     curl --fail --silent --show-error --location --remote-name $url &
     curl_script_pid=$!

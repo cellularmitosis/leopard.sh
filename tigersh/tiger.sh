@@ -516,7 +516,12 @@ if test "$op" = "install" ; then
     fi
 
     pkgspec="$1"
+    shift 1
     script=install-$pkgspec.sh
+
+    if test "$1" = "wip" ; then
+        wip=1
+    fi
 
     if test -e "/opt/$pkgspec" \
     && test ! -e "/opt/$pkgspec/INCOMPLETE_INSTALLATION" ; then
@@ -533,6 +538,9 @@ if test "$op" = "install" ; then
 
     echo -e "${COLOR_CYAN}Fetching${COLOR_NONE} $script." >&2
     url=$TIGERSH_MIRROR/tigersh/scripts/$script
+    if test -n "$wip" ; then
+        url=$TIGERSH_MIRROR/tigersh/scripts/wip/$script
+    fi
     cd /tmp
     curl --fail --silent --show-error --location --remote-name $url &
     curl_script_pid=$!

@@ -17,6 +17,8 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+    # gc-8.2.2$ppc64 \
+
 for dep in \
     gmp-6.2.1$ppc64 \
     mpfr-4.1.0$ppc64 \
@@ -67,12 +69,27 @@ CXX=g++-4.2
 # Note: I haven't figured out how to get gcc to build using custom flags,
 # nor how to build a 64-bit gcc on G5.
 
-# Patches from MacPorts:
+# Many thanks to the MacPorts team!
 patchroot=https://raw.githubusercontent.com/macports/macports-ports/master/lang/gcc10-bootstrap/files
 curl $patchroot/patch-iains-apple-si.diff | patch -p0
 curl $patchroot/patch-iains-ppc.diff | patch -p0
 curl $patchroot/patch-extra-ppc.diff | patch -p0
 curl $patchroot/patch-darwin8.diff | patch -p0
+
+# Bootstrapping fails at the end when comparing the stages:
+#   Comparing stages 2 and 3
+#   Bootstrap comparison failure!
+#   powerpc-apple-darwin8.11.0/libstdc++-v3/src/.libs/libstdc++.6.dylib-master.o differs
+#   make[2]: *** [Makefile:23202: compare] Error 1
+# Thanks to https://github.com/macports/macports-ports/blob/master/lang/gcc10-bootstrap/Portfile
+for f in \
+    Makefile.in \
+    config/bootstrap-debug.mk \
+    config/bootstrap-debug-lean.mk \
+    config/bootstrap-debug-lib.mk
+do
+    sed -i '' -e 's|^do-compare =|do-compare = /usr/bin/true|g' $f
+done
 
 /usr/bin/time ./configure -C \
     --prefix=/opt/$pkgspec \
@@ -83,12 +100,21 @@ curl $patchroot/patch-darwin8.diff | patch -p0
     --enable-languages=c,c++,objc,obj-c++,fortran \
     --enable-libssp \
     --enable-lto \
-    --enable-objc-gc \
+    --disable-objc-gc \
     --enable-shared \
     --program-suffix=-10.3 \
     --enable-bootstrap \
     CC="$CC" \
     CXX="$CXX"
+
+#    --enable-objc-gc \
+#    --with-target-bdw-gc=/opt/gc-8.2.2$ppc64 \
+# Objc garbage collection support fails because I didn't build bdw-gc as multilib:
+#  checking for bdw garbage collector... using paths configured with --with-target-bdw-gc options
+#  configure: error: no multilib path (ppc64) found in --with-target-bdw-gc
+#  make[1]: *** [Makefile:14095: configure-target-libobjc] Error 1
+#  make[1]: Leaving directory '/private/tmp/gcc-10.3.0'
+#  make: *** [Makefile:997: all] Error 2
 
 /usr/bin/time make $(leopard.sh -j) V=1
 

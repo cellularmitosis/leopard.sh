@@ -12,8 +12,10 @@ md5s:
 	cd dist/orig && make
 	cd leopardsh && make
 	cd leopardsh/scripts && make
+	cd leopardsh/scripts/wip && make
 	cd tigersh && make
 	cd tigersh/scripts && make
+	cd tigersh/scripts/wip && make
 	cd leopardsh/config.cache && make
 	cd tigersh/config.cache && make
 	utils/generate-manifest.sh

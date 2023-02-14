@@ -37,6 +37,10 @@ export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/
 if test -n "$1" ; then
     # if the user specifies a pkgspec, just rebuild that one.
     echo "$1" > /tmp/to-build.txt
+    shift 1
+    if test "$1" = "wip" ; then
+        wip="wip"
+    fi
 else
     curl -sSfLO $LEOPARDSH_MIRROR/build-order.txt
 
@@ -105,6 +109,6 @@ for pkgspec in $(cat /tmp/to-build.txt) ; do
 
     binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
     rm -f ~/Desktop/leopard.sh/binpkgs/$binpkg
-    time LEOPARDSH_FORCE_BUILD_PKGSPEC=$pkgspec leopard.sh $pkgspec
+    time LEOPARDSH_FORCE_BUILD_PKGSPEC=$pkgspec leopard.sh $pkgspec $wip
     ~/bin/make-leopardsh-binpkg.sh $pkgspec
 done
