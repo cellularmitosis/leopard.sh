@@ -22,3 +22,10 @@ CC='gcc-4.2 -B/opt/ld64-97.17-tigerbrew/bin'
 CXX='g++-4.2 -B/opt/ld64-97.17-tigerbrew/bin'
 ```
 
+## `gcc -rdynamic`
+
+This gcc option only applies to ELF executables.
+
+If you find it being used in a Makefile, you can just remove it.
+
+https://stackoverflow.com/a/29535789

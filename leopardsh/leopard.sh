@@ -826,7 +826,7 @@ if test "$op" = "self-update" ; then
     cd /tmp
     url=$LEOPARDSH_MIRROR/leopardsh/leopard.sh
     curl --fail --silent --show-error --location --remote-name $url
-    chmod +x tiger.sh
+    chmod +x leopard.sh
     mv leopard.sh /usr/local/bin/
     exit 0
 fi

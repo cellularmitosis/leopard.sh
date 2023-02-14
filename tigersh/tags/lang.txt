@@ -15,6 +15,7 @@ petite-chezscheme-7.4
 petite-chezscheme-7.4t
 python-3.11.2
 python2-2.7.18
+quickjs-20210327
 racket-6.0.1
 sbcl-1.0.47
 scheme48-1.9.2
