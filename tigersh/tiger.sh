@@ -564,12 +564,13 @@ if test "$op" = "install" ; then
 
     if ! test -e /opt/$pkgspec/share/tiger.sh/$pkgspec/$script.log.gz ; then
         mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
+        nice gzip -9 /tmp/$script
+        mv /tmp/$script.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
         nice gzip -9 /tmp/$script.log
         mv /tmp/$script.log.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
     fi
 
     rm -f /opt/$pkgspec/INCOMPLETE_INSTALLATION
-    rm -f /tmp/$script
 
     exit 0
 fi
