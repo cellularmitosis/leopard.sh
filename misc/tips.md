@@ -36,3 +36,16 @@ https://stackoverflow.com/a/29535789
 see https://askubuntu.com/questions/836048/ssh-returns-no-matching-host-key-type-found-their-offer-ssh-dss
 
 
+# Enabling key-based root ssh access
+
+## Tiger
+
+- Set up /var/root/.ssh/authorized_keys
+
+## Leopard
+
+- Set up /var/root/.ssh/authorized_keys
+- In System Preferences -> Sharing -> Remote Login, you must add "Administrators" to the list of "Only these users".  Selecting "All users" will not work.
+
+
+
