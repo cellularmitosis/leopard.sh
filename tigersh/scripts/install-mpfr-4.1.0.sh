@@ -27,8 +27,8 @@ do
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
 
-if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
-    tiger.sh gcc-4.9.4
+if ! test -e /opt/gcc-4.9.4 ; then
+    tiger.sh gcc-libs-4.9.4
 fi
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
@@ -43,6 +43,15 @@ set -x
 if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
 fi
+
+if ! test -d /opt/gcc-4.9.4 ; then
+    if test -L /opt/gcc-4.9.4 ; then
+        rm /opt/gcc-4.9.4
+    fi
+    tiger.sh gcc-4.9.4
+fi
+
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version

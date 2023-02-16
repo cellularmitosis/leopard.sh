@@ -17,6 +17,10 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+if ! test -e /opt/gcc-4.9.4 ; then
+    tiger.sh gcc-libs-4.9.4
+fi
+
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 if tiger.sh --install-binpkg $pkgspec ; then
@@ -30,7 +34,10 @@ if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
 fi
 
-if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
+if ! test -d /opt/gcc-4.9.4 ; then
+    if test -L /opt/gcc-4.9.4 ; then
+        rm /opt/gcc-4.9.4
+    fi
     tiger.sh gcc-4.9.4
 fi
 
@@ -60,7 +67,10 @@ diff -urN LuaJIT-2.1.0-beta3/src/host/buildvm.c LuaJIT-2.1.0-beta3.patched/src/h
      *p = '\0';
 EOF
 
-/usr/bin/time make $(tiger.sh -j) CC="gcc-4.9 $(tiger.sh -mcpu)" PREFIX=/opt/$pkgspec Q=''
+/usr/bin/time make $(tiger.sh -j) \
+    CC="gcc-4.9 $(tiger.sh -mcpu)" \
+    PREFIX=/opt/$pkgspec \
+    Q=''
 
 # Note: no 'make check' available.
 

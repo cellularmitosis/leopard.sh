@@ -27,8 +27,8 @@ do
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
 
-if ! which -s gcc-4.9 ; then
-    leopard.sh gcc-4.9.4
+if ! test -e /opt/gcc-4.9.4 ; then
+    leopard.sh gcc-libs-4.9.4
 fi
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
@@ -43,6 +43,15 @@ set -x
 if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
+
+if ! test -d /opt/gcc-4.9.4 ; then
+    if test -L /opt/gcc-4.9.4 ; then
+        rm /opt/gcc-4.9.4
+    fi
+    leopard.sh gcc-4.9.4
+fi
+
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
