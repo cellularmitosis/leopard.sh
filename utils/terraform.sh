@@ -22,7 +22,12 @@ if test "$1" = "--minimal" ; then
     shift 1
 fi
 
-hosts=${1:-"pmacg5 imacg5 imacg52 emac emac2 emac3 pbookg4 pbookg42 graphite ibookg3 imacg3"}
+if test -n "$1" ; then
+    hosts="$1"
+    shift 1
+else
+    hosts="pmacg5 imacg5 imacg52 emac emac2 emac3 pbookg4 pbookg42 graphite ibookg3 imacg3"
+fi
 
 uphosts=""
 echo "👉 ping"
@@ -42,22 +47,24 @@ done
 
 cd ~/catfarm
 
-echo
-echo "👉 root's files"
-#for host in $uphosts ; do
-for host in $uphosts ; do
-    echo "  🖥  $host"
-    ssh root@$host mkdir -p /var/root/.ssh
-    rsync -ai host_files/_all_/root/ root@$host:/var/root/
-    ssh root@$host rm -f /var/root/.profile
-done
+if test "$1" = "--root" ; then
+    echo
+    echo "👉 root's files"
+    #for host in $uphosts ; do
+    for host in $uphosts ; do
+        echo "  🖥  $host"
+        ssh root@$host mkdir -p /var/root/.ssh
+        rsync -ai host_files/_all_/root/ root@$host:/var/root/
+        ssh root@$host rm -f /var/root/.profile
+    done
 
-echo
-echo "👉 system files"
-for host in $uphosts ; do
-    echo "  🖥  $host"
-    rsync -ai host_files/$host/etc/ssh_host_* root@$host:/etc/
-done
+    echo
+    echo "👉 system files"
+    for host in $uphosts ; do
+        echo "  🖥  $host"
+        rsync -ai host_files/$host/etc/ssh_host_* root@$host:/etc/
+    done
+fi
 
 echo
 echo "👉 user files"

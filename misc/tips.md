@@ -38,6 +38,8 @@ see https://askubuntu.com/questions/836048/ssh-returns-no-matching-host-key-type
 
 # Enabling key-based root ssh access
 
+Hmm, apparently you still have to enable the root account by sudo'ind to root and running `passwd`?  Still having trouble getting passwordless root ssh to work.
+
 ## Tiger
 
 - Set up /var/root/.ssh/authorized_keys
