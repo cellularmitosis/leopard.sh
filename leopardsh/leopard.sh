@@ -511,7 +511,7 @@ if test "$op" = "install" ; then
         wip=1
     fi
 
-    if test -e "/opt/$pkgspec" \
+    if test -d "/opt/$pkgspec" \
     && test ! -e "/opt/$pkgspec/INCOMPLETE_INSTALLATION" ; then
         echo -e "${COLOR_YELLOW}${pkgspec}${COLOR_NONE} is already installed at /opt/$pkgspec" >&2
         exit 0
