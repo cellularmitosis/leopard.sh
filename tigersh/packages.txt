@@ -43,6 +43,7 @@ libtool-2.4.6
 libunistring-1.0
 libutil-11
 lua-5.1.5
+luajit-2.1.0-beta3
 lz4-1.9.4
 lzo-2.10
 lzop-1.04
