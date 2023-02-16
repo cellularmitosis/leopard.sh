@@ -7,7 +7,7 @@ set -e
 mkdir -p ~/.ssh/sockets
 
 # hosts:
-# imacg3, ibookg3, graphite, emac2, emac3, pbookg4, pbookg42, imacg5 imacg52
+# imacg3, ibookg3, graphite, emac2, emac3, pbookg4, pbookg42, imacg5, imacg52, pmacg5
 
 # map:
 # tiger g3:    ibookg3, imacg3
@@ -15,14 +15,14 @@ mkdir -p ~/.ssh/sockets
 # tiger g4e:   emac2, emac3
 # tiger g5:    imacg52
 # leopard g4e: pbookg4, pbookg42
-# leopard g5:  imacg5
+# leopard g5:  imacg5, pmacg5
 
 if test "$1" = "--minimal" ; then
     minimal=1
     shift 1
 fi
 
-hosts=${1:-"imacg5 imacg52 emac2 emac3 pbookg4 pbookg42 graphite ibookg3 imacg3"}
+hosts=${1:-"pmacg5 imacg5 imacg52 emac2 emac3 pbookg4 pbookg42 graphite ibookg3 imacg3"}
 
 uphosts=""
 echo "👉 ping"
@@ -42,21 +42,22 @@ done
 
 cd ~/catfarm
 
-# echo
-# echo "👉 root's files"
-# for host in $uphosts ; do
-#     echo "  🖥  $host"
-#     ssh root@$host mkdir -p /var/root/.ssh
-#     rsync -ai host_files/all/ $host:/var/root/
-#     ssh $host rm -f /var/root/.profile
-# done
+echo
+echo "👉 root's files"
+#for host in $uphosts ; do
+for host in $uphosts ; do
+    echo "  🖥  $host"
+    ssh root@$host mkdir -p /var/root/.ssh
+    rsync -ai host_files/_all_/root/ root@$host:/var/root/
+    ssh root@$host rm -f /var/root/.profile
+done
 
-# echo
-# echo "👉 system files"
-# for host in $uphosts ; do
-#     echo "  🖥  $host"
-#     rsync -ai host_files/$host/ssh_host_* root@$host:/etc/
-# done
+echo
+echo "👉 system files"
+for host in $uphosts ; do
+    echo "  🖥  $host"
+    rsync -ai host_files/$host/etc/ssh_host_* root@$host:/etc/
+done
 
 echo
 echo "👉 user files"
@@ -68,12 +69,10 @@ for host in $uphosts ; do
             /Users/macuser/Downloads \
             /Users/macuser/bin \
             /Users/macuser/tmp
-        rsync -ai host_files/all/ $host:/Users/macuser/
-        rsync -ai tmp/ $host:/Users/macuser/tmp/
+        rsync -ai host_files/_all_/macuser/ $host:/Users/macuser/
         ssh $host rm -f /Users/macuser/.profile
-        # keep imacg3 closer to stock for testing.
-        if test "$host" = "imacg3" ; then
-            rsync -ai host_files/$host/.bashrc $host:/Users/macuser/
+        if test -e host_files/$host/Users/macuser ; then
+            rsync -ai host_files/$host/Users/macuser/ $host:/Users/macuser/
         fi
     ) &
 done
@@ -104,13 +103,9 @@ for host in $uphosts ; do
         rsync -ai ~/leopard.sh/leopardsh/leopard.sh \
             ~/leopard.sh/tigersh/tiger.sh \
             $host:/usr/local/bin/
-        rsync -ai ~/leopard.sh/leopardsh/utils/make-leopardsh-binpkg.sh \
-            ~/leopard.sh/leopardsh/utils/rebuild-leopardsh-stales.sh \
-            ~/leopard.sh/leopardsh/utils/rebuild-leopardsh-all.sh \
-            ~/leopard.sh/tigersh/utils/make-tigersh-binpkg.sh \
-            ~/leopard.sh/tigersh/utils/rebuild-tigersh-stales.sh \
-            ~/leopard.sh/tigersh/utils/rebuild-tigersh-all.sh \
-            ~/leopard.sh/utils/sleep.sh \
+        rsync -ai ~/leopard.sh/leopardsh/utils/ \
+            ~/leopard.sh/tigersh/utils/ \
+            ~/leopard.sh/utils/ \
             $host:/Users/macuser/bin/
         ssh $host "rm -f /opt/leopard.sh/share/leopard.sh/config.cache/leopard.cache \
             /opt/tiger.sh/share/tiger.sh/config.cache/tiger.cache \

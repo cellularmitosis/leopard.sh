@@ -29,3 +29,10 @@ This gcc option only applies to ELF executables.
 If you find it being used in a Makefile, you can just remove it.
 
 https://stackoverflow.com/a/29535789
+
+
+# ssh'ing from modern machines
+
+see https://askubuntu.com/questions/836048/ssh-returns-no-matching-host-key-type-found-their-offer-ssh-dss
+
+
