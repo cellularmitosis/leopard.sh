@@ -1,10 +1,12 @@
 #!/opt/tigersh-deps-0.1/bin/bash
+# based on templates/build-from-source.sh v6
 
 # Install pkg-config on OS X Tiger / PowerPC.
 
 package=pkg-config
 version=0.29.2
 upstream=https://$package.freedesktop.org/releases/$package-$version.tar.gz
+description="Manage compile and link flags for libraries"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -13,6 +15,8 @@ TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
 fi
+
+pkgspec=$package-$version$ppc64
 
 if test -n "$ppc64" ; then
     # Note: pkg-config needs /usr/lib/libresolv.9.dylib, which is 32-bit only
@@ -28,44 +32,43 @@ if test -n "$ppc64" ; then
     exit 1
 fi
 
-pkgspec=$package-$version$ppc64
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
-binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
-
-if ! test -e ~/Downloads/$tarball ; then
-    cd ~/Downloads
-    curl -#fLO $srcmirror/$tarball
+if tiger.sh --install-binpkg $pkgspec ; then
+    exit 0
 fi
 
-test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = f6e931e319531b736fadc017f470e68a
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
+set -x
 
-cd /tmp
-rm -rf $package-$version
+if ! test -e /usr/bin/gcc ; then
+    tiger.sh xcode-2.5
+fi
 
-tar xzf ~/Downloads/$tarball
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
+tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
+# Build was failiing on 32-bit G5 with:
+#   libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../glib -I../glib -I.. -DG_LOG_DOMAIN=\"GLib\" -DG_DISABLE_CAST_CHECKS -DGLIB_COMPILATION -DPCRE_STATIC -D_REENTRANT -Wall -Wstrict-prototypes -mcpu=970 -O2 -MT libglib_2_0_la-gvariant.lo -MD -MP -MF .deps/libglib_2_0_la-gvariant.Tpo -c gvariant.c -o libglib_2_0_la-gvariant.o
+#   gvariant.c:4428: error: size of array '_GStaticAssertCompileTimeAssertion_4428' is negative
+#   make[6]: *** [libglib_2_0_la-gvariant.lo] Error 1
+# Thankfully, this MacPorts patch solves the issue:
+patchroot=https://raw.githubusercontent.com/macports/macports-ports/master/devel/pkgconfig/files
+curl $patchroot/patch-glib-configure.diff | patch -p0
 
-for f in configure glib/configure ; do
-    if test -n "$ppc64" ; then
-        perl -pi -e "s/CFLAGS=\"-g -Wall -O2\"/CFLAGS=\"-Wall -m64 $(tiger.sh -mcpu -O)\"/g" $f
-        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-        perl -pi -e "s/CFLAGS=\"-g\"/CFLAGS=\"-m64 $(tiger.sh -mcpu -O)\"/g" $f
-    else
-        perl -pi -e "s/CFLAGS=\"-g -Wall -O2\"/CFLAGS=\"-Wall $(tiger.sh -m32 -mcpu -O)\"/g" $f
-        perl -pi -e "s/CFLAGS=\"-g -O2\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-        perl -pi -e "s/CFLAGS=\"-g\"/CFLAGS=\"$(tiger.sh -m32 -mcpu -O)\"/g" $f
-    fi
-done
+CFLAGS="$(tiger.sh -mcpu -O)"
+if test -n "$ppc64" ; then
+    CFLAGS="$(tiger.sh -mcpu -O) -m64"
+    LDFLAGS="-m64 $LDFLAGS"
+fi
 
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --with-internal-glib \
-    --disable-host-tool
+    --disable-host-tool \
+    LDFLAGS="$LDFLAGS" \
+    CFLAGS="$CFLAGS"
 
 /usr/bin/time make $(tiger.sh -j) V=1
 

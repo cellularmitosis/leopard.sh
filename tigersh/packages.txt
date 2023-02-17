@@ -65,6 +65,7 @@ pcre-8.45
 perl-5.36.0
 petite-chezscheme-7.4
 petite-chezscheme-7.4t
+pkg-config-0.29.2
 prboom.app-2.5.0
 pv-1.6.20
 python-3.11.2
