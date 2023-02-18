@@ -46,6 +46,18 @@ if tiger.sh --install-binpkg $pkgspec ; then
     exit 0
 fi
 
+if test -z "$ppc64" -a "$(tiger.sh --cpu)" = "g5" ; then
+    # Guile fails during a 32-bit build on a G5 machine,
+    # so we instead install the g4e binpkg in that case.
+    if tiger.sh --install-binpkg $pkgspec tiger.g4e ; then
+        exit 0
+    fi
+else
+    if tiger.sh --install-binpkg $pkgspec ; then
+        exit 0
+    fi
+fi
+
 echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
 set -x
 

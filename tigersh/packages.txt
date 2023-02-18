@@ -4,6 +4,7 @@ autogen-5.18.16
 automake-1.16.5
 bash-5.1.16
 bc-1.07.1
+bison-3.8.2
 ca-certificates-20221011
 ca-certificates-20230110
 camino.app-2.1.2
