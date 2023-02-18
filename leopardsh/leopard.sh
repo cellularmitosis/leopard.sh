@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # leopard.sh: package manager for PowerPC Macs running OS X Leopard (10.5).
+# Try 'leopard.sh --help'.
 # See https://github.com/cellularmitosis/leopard.sh
 
 set -e -o pipefail

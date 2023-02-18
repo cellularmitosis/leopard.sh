@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # tiger.sh: package manager for PowerPC Macs running OS X Tiger (10.4).
+# Try 'tiger.sh --help'.
 # See https://github.com/cellularmitosis/leopard.sh
 
 set -e
