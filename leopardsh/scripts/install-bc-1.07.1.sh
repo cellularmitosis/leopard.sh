@@ -1,11 +1,14 @@
 #!/bin/bash
+# based on templates/build-from-source.sh v6
 
-# Install bc on Leopard / PowerPC.
+# Install bc on OS X Leopard / PowerPC.
 
 package=bc
-version=5.2.1
+version=1.07.1
+upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
+description="An arbitrary precision calculator language"
 
-set -e -x -o pipefail
+set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
@@ -15,11 +18,7 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-if ! which -s xz ; then
-    leopard.sh xz-5.2.5
-fi
-
-echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
     exit 0
@@ -32,18 +31,29 @@ if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
 
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
+
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-/usr/bin/time ./configure -C --prefix=/opt/$pkgspec
+CFLAGS=$(leopard.sh -mcpu -O)
+if test -n "$ppc64" ; then
+    CFLAGS="-m64 $CFLAGS"
+    LDFLAGS="-m64 $LDFLAGS"
+fi
 
-/usr/bin/time make $(leopard.sh -j)
+/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --disable-dependency-tracking \
+    --with-readline \
+    LDFLAGS="$LDFLAGS" \
+    CFLAGS="$CFLAGS"
+
+/usr/bin/time make $(leopard.sh -j) V=1
 
 if test -n "$LEOPARDSH_RUN_TESTS" ; then
     make check
 fi
 
-# FIXME something is messed up during install
 make install
 
 leopard.sh --linker-check $pkgspec
