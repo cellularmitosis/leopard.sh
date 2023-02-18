@@ -1,1 +1,0 @@
-install-gettext-0.21.sh

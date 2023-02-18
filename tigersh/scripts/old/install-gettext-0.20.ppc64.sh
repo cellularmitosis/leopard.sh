@@ -1,1 +1,0 @@
-install-gettext-0.20.sh
