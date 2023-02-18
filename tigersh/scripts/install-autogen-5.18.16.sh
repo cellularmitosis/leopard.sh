@@ -86,8 +86,9 @@ if test -n "$ppc64" ; then
 fi
 
 # Looks like gcc-4.2 is too old to recognize this option:
-#   libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I.. -I/opt/guile-2.0.14/include -mcpu=970 -O2 -Wno-format-contains-nul -fno-strict-aliasing -c snv.c  -fno-common -DPIC -o .libs/snv.o
-#   cc1: error: unrecognized command line option "-Wno-format-contains-nul"
+# libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I.. -I/opt/guile-2.0.14/include -mcpu=970 -O2 -Wno-format-contains-nul -fno-strict-aliasing -c snv.c  -fno-common -DPIC -o .libs/snv.o
+# cc1: error: unrecognized command line option "-Wno-format-contains-nul"
+
 patch -p0 << 'EOF'
 --- configure	2018-08-26 09:44:54.000000000 -0800
 +++ configure.patched	2023-02-17 20:09:31.000000000 -0900

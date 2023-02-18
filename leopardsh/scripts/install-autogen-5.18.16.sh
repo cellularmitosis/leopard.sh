@@ -1,7 +1,7 @@
-#!/opt/tigersh-deps-0.1/bin/bash
+#!/bin/bash
 # based on templates/build-from-source.sh v6
 
-# Install autogen on OS X Tiger / PowerPC.
+# Install autogen on OS X Leopard / PowerPC.
 
 package=autogen
 version=5.18.16
@@ -10,7 +10,7 @@ description="Automated text file generator"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
-TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
+LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -22,7 +22,7 @@ for dep in \
     guile-2.0.14$ppc64
 do
     if ! test -e /opt/$dep ; then
-        tiger.sh $dep
+        leopard.sh $dep
     fi
     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
@@ -30,9 +30,9 @@ do
 done
 # LIBS="-lbar -lqux"
 
-echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
-if tiger.sh --install-binpkg $pkgspec ; then
+if leopard.sh --install-binpkg $pkgspec ; then
     exit 0
 fi
 
@@ -40,15 +40,15 @@ echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
 set -x
 
 if ! test -e /usr/bin/gcc ; then
-    tiger.sh xcode-2.5
+    leopard.sh xcode-3.1.4
 fi
 
-if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
-    tiger.sh gcc-4.2
+if ! which -s gcc-4.2 ; then
+    leopard.sh gcc-4.2
 fi
 
 if ! test -e /opt/pkg-config-0.29.2 ; then
-    tiger.sh pkg-config-0.29.2
+    leopard.sh pkg-config-0.29.2
 fi
 
 # configure failure:
@@ -67,27 +67,28 @@ fi
 #
 # So we pull in mktemp from coreutils and use that instead.
 if ! test -e /opt/coreutils-9.0 ; then
-    tiger.sh coreutils-9.0
+    leopard.sh coreutils-9.0
 fi
 export PATH="/opt/coreutils-9.0/bin:$PATH"
 
-echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
-tiger.sh --unpack-dist $pkgspec
+leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
 CC=gcc-4.2
 CXX=g++-4.2
 
-CFLAGS=$(tiger.sh -mcpu -O)
+CFLAGS=$(leopard.sh -mcpu -O)
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
     LDFLAGS="-m64 $LDFLAGS"
 fi
 
 # Looks like gcc-4.2 is too old to recognize this option:
-#   libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I.. -I/opt/guile-2.0.14/include -mcpu=970 -O2 -Wno-format-contains-nul -fno-strict-aliasing -c snv.c  -fno-common -DPIC -o .libs/snv.o
-#   cc1: error: unrecognized command line option "-Wno-format-contains-nul"
+# libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I.. -I/opt/guile-2.0.14/include -mcpu=970 -O2 -Wno-format-contains-nul -fno-strict-aliasing -c snv.c  -fno-common -DPIC -o .libs/snv.o
+# cc1: error: unrecognized command line option "-Wno-format-contains-nul"
+
 patch -p0 << 'EOF'
 --- configure	2018-08-26 09:44:54.000000000 -0800
 +++ configure.patched	2023-02-17 20:09:31.000000000 -0900
@@ -114,19 +115,19 @@ EOF
     CC="$CC" \
     CXX="$CXX"
 
-/usr/bin/time make $(tiger.sh -j) V=1
+/usr/bin/time make $(leopard.sh -j) V=1
 
-if test -n "$TIGERSH_RUN_TESTS" ; then
+if test -n "$LEOPARDSH_RUN_TESTS" ; then
     make check
 fi
 
 make install
 
-tiger.sh --linker-check $pkgspec
-tiger.sh --arch-check $pkgspec $ppc64
+leopard.sh --linker-check $pkgspec
+leopard.sh --arch-check $pkgspec $ppc64
 
 if test -e config.cache ; then
-    mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
+    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
     gzip -9 config.cache
-    mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
+    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
 fi

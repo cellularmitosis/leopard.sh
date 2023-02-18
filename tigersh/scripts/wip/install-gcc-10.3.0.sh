@@ -58,6 +58,8 @@ if ! test -e /opt/make-4.3 ; then
 fi
 export PATH="/opt/make-4.3/bin:$PATH"
 
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
+
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
