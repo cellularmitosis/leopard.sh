@@ -2,6 +2,8 @@ cloog-0.18.1
 cloog-0.18.1.ppc64
 expat-2.5.0
 expat-2.5.0.ppc64
+gc-8.2.2
+gc-8.2.2.ppc64
 gdbm-1.23
 gdbm-1.23.ppc64
 gettext-0.21

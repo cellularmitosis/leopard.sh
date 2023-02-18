@@ -20,6 +20,7 @@ doom-shareware-wad-1.9
 drracket.app-6.0.1
 expat-2.5.0
 expect-5.45.4
+gc-8.2.2
 gcc-4.2
 gcc-4.9.4
 gdbm-1.23
@@ -38,6 +39,7 @@ isl-0.24
 janet-1.25.1
 ld64-97.17-tigerbrew
 lhasa-0.3.1
+libffi-3.4.2
 libiconv-1.16
 libiconv-bootstrap-1.16
 libressl-3.4.2

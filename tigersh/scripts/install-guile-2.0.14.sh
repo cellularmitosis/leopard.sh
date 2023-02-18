@@ -1,12 +1,14 @@
 #!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/build-from-source.sh v6
 
-# Install gc on OS X Tiger / PowerPC.
+# 👇 EDIT HERE:
+# Install foo on OS X Tiger / PowerPC.
 
-package=gc
-version=8.2.2
-upstream=https://www.hboehm.info/gc/gc_source/$package-$version.tar.gz
-description="The Boehm-Demers-Weiser conservative garbage collector"
+# 👇 EDIT HERE:
+package=foo
+version=1.0
+upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
+description="FIXME"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -17,6 +19,26 @@ if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
 fi
 
 pkgspec=$package-$version$ppc64
+
+# 👇 EDIT HERE:
+if ! test -e /opt/bar-2.0$ppc64 ; then
+    tiger.sh bar-2.0$ppc64
+    PATH="/opt/bar-2.0$ppc64/bin:$PATH"
+fi
+
+# 👇 EDIT HERE:
+for dep in \
+    bar-2.1$ppc64 \
+    qux-3.4$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+    PATH="/opt/$dep/bin:$PATH"
+done
+LIBS="-lbar -lqux"
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
@@ -31,45 +53,61 @@ if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
 fi
 
+# 👇 EDIT HERE:
+if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
+    tiger.sh gcc-4.2
+fi
+
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-atomic_version=7.6.14
-atomic_tarball=libatomic_ops-${atomic_version}.tar.gz
-atomic_url=$TIGERSH_MIRROR/dist/$atomic_tarball
-echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $atomic_tarball into /tmp/$package-$version." >&2
-tiger.sh --unpack-tarball-check-md5 $atomic_url /tmp/$package-$version
-mv libatomic_ops-${atomic_version} libatomic_ops
+# 👇 EDIT HERE:
+CC=gcc-4.2
+CXX=g++-4.2
 
+# 👇 EDIT HERE:
 CFLAGS=$(tiger.sh -mcpu -O)
 CXXFLAGS=$(tiger.sh -mcpu -O)
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
     CXXFLAGS="-m64 $CXXFLAGS"
     LDFLAGS="-m64 $LDFLAGS"
-
-    # The 64-bit G5 build fails:
-    #   libtool: compile:  gcc -DHAVE_CONFIG_H -I./include -I./include -I./libatomic_ops/src -I./libatomic_ops/src -fexceptions -Wall -Wextra -m64 -mcpu=970 -O2 -fno-strict-aliasing -MT os_dep.lo -MD -MP -MF .deps/os_dep.Tpo -c os_dep.c  -fno-common -DPIC -o .libs/os_dep.o
-    #   os_dep.c: In function 'catch_exception_raise':
-    #   os_dep.c:4884: error: 'ppc_exception_state64_t' has no member named '__dar'
-    #   make[1]: *** [os_dep.lo] Error 1
-    exit 1
 fi
 
+# 👇 EDIT HERE:
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-    --enable-cplusplus \
-    --enable-static \
+    --disable-dependency-tracking \
+    --with-bar=/opt/bar-1.0 \
+    --with-bar-prefix=/opt/bar-1.0 \
+    CPPFLAGS="$CPPFLAGS" \
     LDFLAGS="$LDFLAGS" \
+    LIBS="$LIBS" \
     CFLAGS="$CFLAGS" \
-    CXXFLAGS="$CXXFLAGS"
+    CXXFLAGS="$CXXFLAGS" \
+    CC="$CC" \
+    CXX="$CXX"
 
 /usr/bin/time make $(tiger.sh -j) V=1
 
+# 👇 EDIT HERE:
 if test -n "$TIGERSH_RUN_TESTS" ; then
     make check
 fi
+
+# 👇 EDIT HERE:
+if test -n "$TIGERSH_RUN_BROKEN_TESTS" ; then
+    make check
+fi
+
+# 👇 EDIT HERE:
+if test -n "$TIGERSH_RUN_LONG_TESTS" ; then
+    make check
+fi
+
+# 👇 EDIT HERE:
+# Note: no 'make check' available.
 
 make install
 
