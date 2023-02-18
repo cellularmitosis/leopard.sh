@@ -46,7 +46,6 @@ else
     fi
 fi
 
-
 echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
 set -x
 

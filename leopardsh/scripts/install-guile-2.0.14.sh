@@ -35,8 +35,16 @@ LIBS="-lbar -lqux"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
-if leopard.sh --install-binpkg $pkgspec ; then
-    exit 0
+if test -z "$ppc64" -a "$(leopard.sh --cpu)" = "g5" ; then
+    # Guile fails during a 32-bit build on a G5 machine,
+    # so we instead install the g4e binpkg in that case.
+    if leopard.sh --install-binpkg $pkgspec leopard.g4e ; then
+        exit 0
+    fi
+else
+    if leopard.sh --install-binpkg $pkgspec ; then
+        exit 0
+    fi
 fi
 
 echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
