@@ -1,14 +1,12 @@
 #!/bin/bash
 # based on templates/build-from-source.sh v6
 
-# 👇 EDIT HERE:
-# Install foo on OS X Leopard / PowerPC.
+# Install guile on OS X Leopard / PowerPC.
 
-# 👇 EDIT HERE:
-package=foo
-version=1.0
+package=guile
+version=2.0.14
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
-description="FIXME"
+description="GNU extension language and Scheme interpreter"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -20,16 +18,11 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-# 👇 EDIT HERE:
-if ! test -e /opt/bar-2.0$ppc64 ; then
-    leopard.sh bar-2.0$ppc64
-    PATH="/opt/bar-2.0$ppc64/bin:$PATH"
-fi
-
-# 👇 EDIT HERE:
 for dep in \
-    bar-2.1$ppc64 \
-    qux-3.4$ppc64
+    gmp-4.3.2$ppc64 \
+    libunistring-1.0$ppc64 \
+    libffi-3.4.2$ppc64 \
+    gc-8.2.2$ppc64
 do
     if ! test -e /opt/$dep ; then
         leopard.sh $dep
@@ -53,9 +46,8 @@ if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
 
-# 👇 EDIT HERE:
-if ! which -s gcc-4.2 ; then
-    leopard.sh gcc-4.2
+if ! which -s pkg-config-0.29.2 ; then
+    leopard.sh pkg-config-0.29.2
 fi
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
@@ -63,51 +55,52 @@ echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-# 👇 EDIT HERE:
-CC=gcc-4.2
-CXX=g++-4.2
+if test "$(leopard.sh --cpu)" = "g5" ; then
+    # Fails on 32-bit G5:
+    #   GUILE_INSTALL_LOCALE=1 GUILE_AUTO_COMPILE=0 \
+    #   	../meta/build-env				\
+    #   	guild compile --target="powerpc-apple-darwin9.8.0" -Wunbound-variable -Warity-mismatch -Wformat	\
+    #   	  -L "/tmp/guile-2.0.14/module" -L "/tmp/guile-2.0.14/module"		\
+    #   	  -L "/tmp/guile-2.0.14/guile-readline"			\
+    #   	  -o "ice-9/eval.go" "ice-9/eval.scm"
+    #   Backtrace:
+    #   In unknown file:
+    #      ?: 5 [apply-smob/1 #<boot-closure 1156550 (_ _ _)> #t ...]
+    #      ?: 4 [apply-smob/1 #<catch-closure 11cd980>]
+    #      ?: 3 [primitive-eval ((@ # %) (begin # # #))]
+    #      ?: 2 [apply-smob/1 #<boot-closure 24a14c0 ()>]
+    #      ?: 1 [apply-smob/1 #<boot-closure 25807c0 ()>]
+    #      ?: 0 [bytevector-s32-set! #vu8(0 0 0 0) 0 812 big]
+    #   
+    #   ERROR: make[2]: *** [ice-9/eval.go] Error 1
+    exit 1
+fi
 
-# 👇 EDIT HERE:
 CFLAGS=$(leopard.sh -mcpu -O)
-CXXFLAGS=$(leopard.sh -mcpu -O)
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
-    CXXFLAGS="-m64 $CXXFLAGS"
     LDFLAGS="-m64 $LDFLAGS"
 fi
 
-# 👇 EDIT HERE:
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --disable-dependency-tracking \
-    --with-bar=/opt/bar-1.0 \
-    --with-bar-prefix=/opt/bar-1.0 \
-    CPPFLAGS="$CPPFLAGS" \
+    --with-threads \
+    --with-libgmp-prefix=/opt/gmp-4.3.2$ppc64 \
+    --with-libunistring-prefix=/opt/libunistring-1.0$ppc64 \
+    PKG_CONFIG=/opt/pkg-config-0.29.2/bin/pkg-config \
+    PKG_CONFIG_PATH="/opt/libffi-3.4.2/lib/pkgconfig:/opt/gc-8.2.2/lib/pkgconfig" \
     LDFLAGS="$LDFLAGS" \
-    LIBS="$LIBS" \
-    CFLAGS="$CFLAGS" \
-    CXXFLAGS="$CXXFLAGS" \
-    CC="$CC" \
-    CXX="$CXX"
+    CFLAGS="$CFLAGS"
 
 /usr/bin/time make $(leopard.sh -j) V=1
 
-# 👇 EDIT HERE:
-if test -n "$LEOPARDSH_RUN_TESTS" ; then
-    make check
-fi
-
-# 👇 EDIT HERE:
 if test -n "$LEOPARDSH_RUN_BROKEN_TESTS" ; then
+    # 1 failing test:
+    #   Running numbers.test
+    #   /bin/sh: line 1: 11803 Segmentation fault      CHARSETALIASDIR="/tmp/guile-2.0.14/lib" ${dir}$tst
+    #   FAIL: check-guile
     make check
 fi
-
-# 👇 EDIT HERE:
-if test -n "$LEOPARDSH_RUN_LONG_TESTS" ; then
-    make check
-fi
-
-# 👇 EDIT HERE:
-# Note: no 'make check' available.
 
 make install
 
