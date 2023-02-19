@@ -512,7 +512,9 @@ if test "$op" = "install" ; then
         wip=1
     fi
 
-    if test -d "/opt/$pkgspec" \
+    # Note: check for symlinks because e.g. the /opt/gcc-... symlink created
+    # by gcc-libs should be replaced by the real gcc if explicitly requested.
+    if test -e "/opt/$pkgspec" -a ! -L "/opt/$pkgspec" \
     && test ! -e "/opt/$pkgspec/INCOMPLETE_INSTALLATION" ; then
         echo -e "${COLOR_YELLOW}${pkgspec}${COLOR_NONE} is already installed at /opt/$pkgspec" >&2
         exit 0
