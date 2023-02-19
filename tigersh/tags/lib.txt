@@ -23,6 +23,8 @@ libunistring-1.0
 libunistring-1.0.ppc64
 libutil-11
 libutil-11.ppc64
+macports-legacy-support-20221029
+macports-legacy-support-20221029.ppc64
 mpc-1.0.3
 mpc-1.0.3.ppc64
 mpc-1.2.1
