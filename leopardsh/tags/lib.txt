@@ -4,6 +4,8 @@ expat-2.5.0
 expat-2.5.0.ppc64
 gc-8.2.2
 gc-8.2.2.ppc64
+gcc-libs-10.3.0
+gcc-libs-4.9.4
 gdbm-1.23
 gdbm-1.23.ppc64
 gettext-0.21

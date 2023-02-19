@@ -26,8 +26,11 @@ expat-2.5.0
 expect-5.45.4
 flex-2.6.4
 gc-8.2.2
+gcc-10.3.0
 gcc-4.2
 gcc-4.9.4
+gcc-libs-10.3.0
+gcc-libs-4.9.4
 gdbm-1.23
 gettext-0.21
 git-2.35.1

@@ -91,6 +91,12 @@ do
     sed -i '' -e 's|^do-compare =|do-compare = /usr/bin/true|g' $f
 done
 
+bootstrap="--enable-bootstrap"
+if test "$(tiger.sh --cpu)" = "g3" ; then
+    # temporarily disabling bootstrapping on g3
+    bootstrap="--disable-bootstrap"
+fi
+
 /usr/bin/time ./configure -C \
     --prefix=/opt/$pkgspec \
     --with-gmp=/opt/gmp-6.2.1$ppc64 \
@@ -104,7 +110,7 @@ done
     --enable-shared \
     --with-dwarf2 \
     --program-suffix=-10.3 \
-    --enable-bootstrap \
+    $bootstrap \
     CC="$CC" \
     CXX="$CXX"
 
