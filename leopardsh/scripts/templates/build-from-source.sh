@@ -70,6 +70,16 @@ if ! which -s gcc-4.2 ; then
     leopard.sh gcc-4.2
 fi
 
+# 👇 EDIT HERE:
+if ! which -s gcc-4.9 ; then
+    leopard.sh gcc-4.9.4
+fi
+
+# 👇 EDIT HERE:
+if ! which -s gcc-10.3 ; then
+    leopard.sh gcc-10.3.0
+fi
+
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec

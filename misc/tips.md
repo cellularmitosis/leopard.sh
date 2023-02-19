@@ -50,7 +50,7 @@ If you find it being used in a Makefile, you can just remove it.
 https://stackoverflow.com/a/29535789
 
 
-# ssh'ing from modern machines
+## ssh'ing from modern machines
 
 see https://askubuntu.com/questions/836048/ssh-returns-no-matching-host-key-type-found-their-offer-ssh-dss
 
@@ -69,3 +69,6 @@ Hmm, apparently you still have to enable the root account by sudo'ind to root an
 - In System Preferences -> Sharing -> Remote Login, you must add "Administrators" to the list of "Only these users".  Selecting "All users" will not work.
 
 
+## PowerPC assembler, calling conventions, etc.
+
+https://www.mono-project.com/docs/about-mono/supported-platforms/powerpc/

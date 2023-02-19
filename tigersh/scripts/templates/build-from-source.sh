@@ -70,6 +70,16 @@ if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
     tiger.sh gcc-4.2
 fi
 
+# 👇 EDIT HERE:
+if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
+    tiger.sh gcc-4.9.4
+fi
+
+# 👇 EDIT HERE:
+if ! type -a gcc-10.3 >/dev/null 2>&1 ; then
+    tiger.sh gcc-10.3
+fi
+
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 tiger.sh --unpack-dist $pkgspec
