@@ -17,3 +17,14 @@ dist/orig/*.*
 .vscode
 
 misc/js-benchmarks
+
+misc/**/*.wav
+misc/**/*.flac
+misc/**/*.mp3
+misc/**/*.m4a
+misc/**/*.mp4
+misc/**/*.mov
+misc/**/*.mkv
+misc/**/*.avi
+misc/**/*.mpg
+misc/**/*.mpeg
