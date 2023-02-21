@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/build-from-source.sh v6
 
-# Install distcc on OS X Leopard / PowerPC.
+# Install distcc on OS X Tiger / PowerPC.
 
 package=distcc
 version=3.4
@@ -10,7 +10,7 @@ description="Distributed C/C++/ObjC compiler with distcc-pump extensions"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
-LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
+TIGERSH_MIRROR=${TIGERSH_MIRROR:-https://leopard.sh}
 
 if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
     ppc64=".ppc64"
@@ -23,16 +23,16 @@ for dep in \
     python-3.11.2$ppc64
 do
     if ! test -e /opt/$dep ; then
-        leopard.sh $dep
+        tiger.sh $dep
     fi
     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
     PATH="/opt/$dep/bin:$PATH"
 done
 
-echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
-if leopard.sh --install-binpkg $pkgspec ; then
+if tiger.sh --install-binpkg $pkgspec ; then
     exit 0
 fi
 
@@ -40,17 +40,17 @@ echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
 set -x
 
 if ! test -e /usr/bin/gcc ; then
-    leopard.sh xcode-3.1.4
+    tiger.sh xcode-2.5
 fi
 
 # distcc needs to compile a python extension, and python-3.11.2 will expect gcc-4.9.4.
-if ! which -s gcc-4.9 ; then
-    leopard.sh gcc-4.9.4
+if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
+    tiger.sh gcc-4.9.4
 fi
 
-echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
-leopard.sh --unpack-dist $pkgspec
+tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
 # distccd seems to choke on the default ipv6 addresses when using --allow-private:
@@ -58,24 +58,24 @@ cd /tmp/$package-$version
 # We don't care about ipv6 on a local network anyway, so just nix them.
 patch -p1 << 'EOF'
 diff -urN distcc-3.4/src/dopt.c distcc-3.4.patched/src/dopt.c
---- distcc-3.4/src/dopt.c	2021-05-11 09:29:22.000000000 -0800
-+++ distcc-3.4.patched/src/dopt.c	2023-02-18 21:25:04.000000000 -0900
-@@ -127,11 +127,7 @@
- static const char *dcc_private_networks[] = {"192.168.0.0/16",
-                                              "10.0.0.0/8",
+--- distcc-3.4/src/dopt.c	2021-05-11 12:29:22.000000000 -0500
++++ distcc-3.4.patched/src/dopt.c	2023-02-21 09:52:40.000000000 -0600
+@@ -129,9 +129,9 @@
                                               "172.16.0.0/12",
--                                             "127.0.0.0/8",
--
+                                              "127.0.0.0/8",
+ 
 -                                             "fe80::/10",
 -                                              "fc00::/7",
 -                                              "::1/128"};
-+                                             "127.0.0.0/8"};
++                                             "127.0.0.0/8",
++                                              "127.0.0.0/8",
++                                              "127.0.0.0/8"};
  
  const struct poptOption options[] = {
      { "allow", 'a',      POPT_ARG_STRING, 0, 'a', 0, 0 },
 EOF
 
-CFLAGS=$(leopard.sh -mcpu -O)
+CFLAGS=$(tiger.sh -mcpu -O)
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
     LDFLAGS="-m64 $LDFLAGS"
@@ -88,19 +88,19 @@ fi
 
 sed -i '' -e "s/CFLAGS = -g -O2 /CFLAGS = $CFLAGS /" Makefile
 
-/usr/bin/time make $(leopard.sh -j) V=1
+/usr/bin/time make $(tiger.sh -j) V=1
 
-if test -n "$LEOPARDSH_RUN_TESTS" ; then
+if test -n "$TIGERSH_RUN_TESTS" ; then
     make check
 fi
 
 make install
 
-leopard.sh --linker-check $pkgspec
-leopard.sh --arch-check $pkgspec $ppc64
+tiger.sh --linker-check $pkgspec
+tiger.sh --arch-check $pkgspec $ppc64
 
 if test -e config.cache ; then
-    mkdir -p /opt/$pkgspec/share/leopard.sh/$pkgspec
+    mkdir -p /opt/$pkgspec/share/tiger.sh/$pkgspec
     gzip -9 config.cache
-    mv config.cache.gz /opt/$pkgspec/share/leopard.sh/$pkgspec/
+    mv config.cache.gz /opt/$pkgspec/share/tiger.sh/$pkgspec/
 fi
