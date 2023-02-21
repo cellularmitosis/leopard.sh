@@ -54,6 +54,10 @@ https://stackoverflow.com/a/29535789
 
 see https://askubuntu.com/questions/836048/ssh-returns-no-matching-host-key-type-found-their-offer-ssh-dss
 
+```
+ssh -oHostKeyAlgorithms=+ssh-dss macuser@pbookg42
+```
+
 
 ## Enabling key-based root ssh access
 
