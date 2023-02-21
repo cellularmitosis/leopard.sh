@@ -65,6 +65,7 @@ mpc-1.0.3
 mpc-1.2.1
 mpfr-3.1.6
 mpfr-4.1.0
+mplayer-binary-codecs-20041107
 mplayer-osx.app-rev11
 ncurses-6.3
 ncursesw-6.3

@@ -1,2 +1,3 @@
+mplayer-binary-codecs-20041107
 mplayer-osx.app-rev11
 vlc.app-0.9.10
