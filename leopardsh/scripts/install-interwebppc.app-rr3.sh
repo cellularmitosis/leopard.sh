@@ -11,6 +11,9 @@ upstream_g3=https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/Int
 upstream_g4=https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/InterWebPPC-RR3-G4.zip
 upstream_g5=https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/InterWebPPC-RR3-G5.zip
 
+ublockxpi=uBlock0_1.16.4.30.firefox-legacy.xpi
+upstream_ublock=https://github.com/gorhill/uBlock-for-firefox-legacy/releases/download/firefox-legacy-1.16.4.30/$ublockxpi
+
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
@@ -45,13 +48,6 @@ url=$mirror/dist/$tarball
 echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $tarball into /opt." >&2
 $pkgmgr --unpack-tarball-check-md5 $url /opt
 
-cd /opt/$pkgspec
-mkdir -p bin
-cd bin
-for f in js xpcshell ; do
-    ln -s ../$appname1.app/Contents/MacOS/$f .
-done
-
 echo -e "${COLOR_CYAN}Creating${COLOR_NONE} aliases for $pkgspec." >&2
 for appname in "$appname1" ; do
     # Note: these must be aliases, symlinks don't work.
@@ -73,3 +69,37 @@ for appname in "$appname1" ; do
         break
     done
 done
+
+cd /opt/$pkgspec
+mkdir -p bin
+cd bin
+for f in js xpcshell ; do
+    ln -s ../$appname1.app/Contents/MacOS/$f .
+done
+
+mkdir -p /opt/$pkgspec/extras
+cd /opt/$pkgspec/extras
+echo -e "${COLOR_CYAN}Fetching${COLOR_NONE} $ublockxpi." >&2
+url=$LEOPARDSH_MIRROR/dist/$ublockxpi
+insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+size=$(curl --fail --silent --show-error --location --head $insecure_url \
+    | grep -i '^content-length:' \
+    | awk '{print $NF}' \
+    | sed "s/$(printf '\r')//"
+)
+curl --fail --silent --show-error --location $url \
+    | pv --force --size $size \
+    > $ublockxpi
+
+cd /opt/$pkgspec
+cat > install-ublock.sh << EOF
+#!/bin/bash
+set -e
+cd /opt/$pkgspec/$appname1.app/Contents/MacOS
+./interwebppc file:///opt/$pkgspec/extras/$ublockxpi &
+echo "Opening $ublockxpi with $appname1."
+echo "Note: it may be several seconds before you see a browser window appear."
+EOF
+chmod +x install-ublock.sh
+
+echo -e "${COLOR_YELLOW}Note:${COLOR_NONE} run /opt/$pkgspec/install-ublock.sh to install uBlock." >&2
