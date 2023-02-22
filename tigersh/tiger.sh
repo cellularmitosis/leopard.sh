@@ -194,7 +194,7 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
             # thanks to https://blog.travismclarke.com/post/osx-cli-group-management/
             set -x
             sudo dseditgroup -o edit -a $USER -t user admin
-            set +x
+            { set +x; } 2>/dev/null
             sleep 1
             if ! dseditgroup -o checkmember -m $USER admin >/dev/null ; then
                 needs_new_terminal="true"
@@ -210,7 +210,7 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
             # thanks to https://blog.travismclarke.com/post/osx-cli-group-management/
             set -x
             sudo dseditgroup -o edit -a $USER -t user wheel
-            set +x
+            { set +x; } 2>/dev/null
             sleep 1
             if ! dseditgroup -o checkmember -m $USER wheel >/dev/null ; then
                 needs_new_terminal="true"
@@ -248,19 +248,19 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
             sudo mkdir $d
             sudo chgrp admin $d
             sudo chmod g+w $d
-            set +x
+            { set +x; } 2>/dev/null
         else
             if ! test "$(stat -f '%Sg' $d)" = "admin" ; then
                 echo "Changing group of $d to admin." >&2
                 set -x
                 sudo chgrp admin $d
-                set +x
+                { set +x; } 2>/dev/null
             fi
             if ! test "$(expr $(stat -f '%Sp' $d) : '.....\(.\)')" = "w" ; then
                 echo "Making $d group-writeable." >&2
                 set -x
                 sudo chmod g+w $d
-                set +x
+                { set +x; } 2>/dev/null
             fi
         fi
 
@@ -281,7 +281,7 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
         echo "Moving tiger.sh into /usr/local/bin." >&2
         set -x
         sudo mv "$0" /usr/local/bin/
-        set +x
+        { set +x; } 2>/dev/null
     fi
 
     deps_pkgspec=tigersh-deps-0.1
@@ -1135,14 +1135,14 @@ if test "$op" = "spotlight" ; then
         if grep -q '^SPOTLIGHT=-NO-' /etc/hostconfig ; then
             set -x
             sudo perl -pi -e 's/^SPOTLIGHT=-NO-/SPOTLIGHT=-YES-/g' /etc/hostconfig
-            set +x
+            { set +x; } 2>/dev/null
             needs_reboot=1
         else
             echo "Note: Spotlight already disabled."
         fi
         set -x
         sudo mdutil -s / > /tmp/mdutil.status
-        set +x
+        { set +x; } 2>/dev/null
         if grep -q "Error: Could not get indexing status for volume." /tmp/mdutil.status ; then
             echo "Note: metadata indexing can't be enabled until you reboot your Mac."
             echo "Run 'tiger.sh --spotlight on' again after rebooting."
@@ -1150,7 +1150,7 @@ if test "$op" = "spotlight" ; then
         elif grep -q "Status: Indexing Disabled" /tmp/mdutil.status ; then
             set -x
             sudo mdutil -i on /
-            set +x
+            { set +x; } 2>/dev/null
             needs_reboot=1
         else
             echo "Note: metadata indexing already enabled."
@@ -1163,14 +1163,14 @@ if test "$op" = "spotlight" ; then
         if grep -q '^SPOTLIGHT=-YES-' /etc/hostconfig ; then
             set -x
             sudo perl -pi -e 's/^SPOTLIGHT=-YES-/SPOTLIGHT=-NO-/g' /etc/hostconfig
-            set +x
+            { set +x; } 2>/dev/null
             needs_reboot=1
         else
             echo "Note: Spotlight already disabled."
         fi
         set -x
         sudo mdutil -s / > /tmp/mdutil.status
-        set +x
+        { set +x; } 2>/dev/null
         if grep -q "Error: Could not get indexing status for volume." /tmp/mdutil.status ; then
             echo "Note: metadata indexing can't be disabled until you reboot your Mac."
             echo "Run 'tiger.sh --spotlight off' again after rebooting."
@@ -1178,7 +1178,7 @@ if test "$op" = "spotlight" ; then
         elif grep -q "Status: Indexing Enabled" /tmp/mdutil.status ; then
             set -x
             sudo mdutil -i off /
-            set +x
+            { set +x; } 2>/dev/null
             needs_reboot=1
         else
             echo "Note: metadata indexing already disabled."

@@ -192,7 +192,7 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
             # thanks to https://blog.travismclarke.com/post/osx-cli-group-management/
             set -x
             sudo dseditgroup -o edit -a $USER -t user admin
-            set +x
+            { set +x; } 2>/dev/null
             sleep 1
             if ! dseditgroup -o checkmember -m $USER admin >/dev/null ; then
                 needs_new_terminal="true"
@@ -208,7 +208,7 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
             # thanks to https://blog.travismclarke.com/post/osx-cli-group-management/
             set -x
             sudo dseditgroup -o edit -a $USER -t user wheel
-            set +x
+            { set +x; } 2>/dev/null
             sleep 1
             if ! dseditgroup -o checkmember -m $USER wheel >/dev/null ; then
                 needs_new_terminal="true"
@@ -246,19 +246,19 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
             sudo mkdir $d
             sudo chgrp admin $d
             sudo chmod g+w $d
-            set +x
+            { set +x; } 2>/dev/null
         else
             if ! test "$(stat -f '%Sg' $d)" = "admin" ; then
                 echo "Changing group of $d to admin." >&2
                 set -x
                 sudo chgrp admin $d
-                set +x
+                { set +x; } 2>/dev/null
             fi
             if ! test "$(expr $(stat -f '%Sp' $d) : '.....\(.\)')" = "w" ; then
                 echo "Making $d group-writeable." >&2
                 set -x
                 sudo chmod g+w $d
-                set +x
+                { set +x; } 2>/dev/null
             fi
         fi
 
@@ -279,7 +279,7 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
         echo "Moving leopard.sh into /usr/local/bin." >&2
         set -x
         sudo mv "$0" /usr/local/bin/
-        set +x
+        { set +x; } 2>/dev/null
     fi
 
     deps_pkgspec=tigersh-deps-0.1
@@ -1155,12 +1155,12 @@ if test "$op" = "spotlight" ; then
         set -x
         sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
         sudo launchctl load -w /System/Library/LaunchAgents/com.apple.Spotlight.plist
-        set +x
+        { set +x; } 2>/dev/null
     elif test "$onoff" = "off" ; then
         set -x
         sudo launchctl unload -w /System/Library/LaunchAgents/com.apple.Spotlight.plist
         sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
-        set +x
+        { set +x; } 2>/dev/null
         echo "Note: if the above commands emitted errors, you may need to restart your Mac for this change to take effect."
     else
         echo -e "${COLOR_RED}Error${COLOR_NONE}: turn Spotlight on or off?" >&2
