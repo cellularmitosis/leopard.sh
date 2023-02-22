@@ -25,6 +25,7 @@ LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 export LEOPARDSH_MIRROR
 
 # no alarms and no surprises, please.
+ORIG_PATH="$PATH"
 export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 
 # colors:
@@ -165,12 +166,37 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
 
     needs_new_terminal="false"
 
+    if ! test -e ~/.leopardsh/checks/usr-local-bin-in-path ; then
+        if ! echo $ORIG_PATH | tr ':' '\n' | egrep '^/usr/local/bin/?$' >/dev/null ; then
+            echo "Adding /usr/local/bin to your \$PATH." >&2
+            if ! test -e ~/.bashrc -o -e ~/.bash_profile -o -e ~/.profile ; then
+                # This is a brand-new user with no rc files.
+                touch ~/.profile
+            fi
+            for f in ~/.bashrc ~/.bash_profile ~/.profile ; do
+                if test -e $f ; then
+                    echo >> $f
+                    echo "# Added by leopard.sh:" >> $f
+                    echo "export PATH=\"/usr/local/bin:/usr/local/sbin:\$PATH\"" >> $f
+                fi
+            done
+            needs_new_terminal="true"
+        else
+            touch ~/.leopardsh/checks/usr-local-bin-in-path
+        fi
+    fi
+
     if ! test -e ~/.leopardsh/checks/user-in-admin-group ; then
         if ! dseditgroup -o checkmember -m $USER admin >/dev/null ; then
             echo "Adding your user to the admin group." >&2
             # thanks to https://blog.travismclarke.com/post/osx-cli-group-management/
+            set -x
             sudo dseditgroup -o edit -a $USER -t user admin
-            needs_new_terminal="true"
+            set +x
+            sleep 1
+            if ! dseditgroup -o checkmember -m $USER admin >/dev/null ; then
+                needs_new_terminal="true"
+            fi
         else
             touch ~/.leopardsh/checks/user-in-admin-group
         fi
@@ -180,8 +206,13 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
         if ! dseditgroup -o checkmember -m $USER wheel >/dev/null ; then
             echo "Adding your user to the wheel group." >&2
             # thanks to https://blog.travismclarke.com/post/osx-cli-group-management/
+            set -x
             sudo dseditgroup -o edit -a $USER -t user wheel
-            needs_new_terminal="true"
+            set +x
+            sleep 1
+            if ! dseditgroup -o checkmember -m $USER wheel >/dev/null ; then
+                needs_new_terminal="true"
+            fi
         else
             touch ~/.leopardsh/checks/user-in-wheel-group
         fi
@@ -211,17 +242,23 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
 
         if ! test -e $d ; then
             echo "Creating $d." >&2
+            set -x
             sudo mkdir $d
             sudo chgrp admin $d
             sudo chmod g+w $d
+            set +x
         else
             if ! test "$(stat -f '%Sg' $d)" = "admin" ; then
                 echo "Changing group of $d to admin." >&2
+                set -x
                 sudo chgrp admin $d
+                set +x
             fi
             if ! test "$(expr $(stat -f '%Sp' $d) : '.....\(.\)')" = "w" ; then
                 echo "Making $d group-writeable." >&2
+                set -x
                 sudo chmod g+w $d
+                set +x
             fi
         fi
 
@@ -240,7 +277,9 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
 
     if test "$BASH_SOURCE" != "/usr/local/bin/leopard.sh" ; then
         echo "Moving leopard.sh into /usr/local/bin." >&2
+        set -x
         sudo mv "$0" /usr/local/bin/
+        set +x
     fi
 
     deps_pkgspec=tigersh-deps-0.1
@@ -331,6 +370,7 @@ EOF
         read -p "Do the MD5 sums match? [Y/n]: " answer
         while true ; do
             if test "$answer" = "y" -o "$answer" = "Y" -o "$answer" = "" ; then
+                rm -f /tmp/$binpkg.localmd5
                 break
             elif test "$answer" = "n" -o "$answer" = "N" ; then
                 echo >&2
@@ -348,27 +388,6 @@ EOF
         done
 
         rm /opt/$deps_pkgspec/INCOMPLETE_INSTALLATION
-    fi
-
-    if ! test -e ~/.leopardsh/checks/usr-local-bin-in-path ; then
-        if ! echo $PATH | tr ':' '\n' | egrep '^/usr/local/bin/?$' >/dev/null ; then
-            echo "Adding /usr/local/bin to your \$PATH." >&2
-            if ! test -e ~/.bashrc -o -e ~/.bash_profile -o -e ~/.profile ; then
-                # This is a brand-new user with no rc files.
-                touch ~/.profile
-            fi
-            for f in ~/.bashrc ~/.bash_profile ~/.profile ; do
-                if test -e $f ; then
-                    echo >> $f
-                    echo "# Added by leopard.sh:" >> $f
-                    echo "export PATH=\"/usr/local/bin:/usr/local/sbin:\$PATH\"" >> $f
-                fi
-            done
-            echo "Please open a new Terminal window for this change to take effect." >&2
-            exit 1
-        else
-            touch ~/.leopardsh/checks/usr-local-bin-in-path
-        fi
     fi
 
     opt_config_cache=/opt/leopard.sh/share/leopard.sh/config.cache
