@@ -91,9 +91,23 @@ do
     sed -i '' -e 's|^do-compare =|do-compare = /usr/bin/true|g' $f
 done
 
+# The build fails on g3 with --enable-bootstrap:
+#   In file included from ../.././gcc/objc/objc-act.c:10236:
+#   ./gt-objc-objc-act.h: At global scope:
+#   ./gt-objc-objc-act.h:349:2: fatal error: opening dependency file objcp/.deps/objcp-act.TPo: No such file or directory
+#     349 | };
+#         |  ^
+#   compilation terminated.
+#   make[3]: *** [../.././gcc/objcp/Make-lang.in:92: objcp/objcp-act.o] Error 1
+#   make[3]: Leaving directory '/private/tmp/gcc-10.3.0/host-powerpc-apple-darwin8.11.0/gcc'
+#   make[2]: *** [Makefile:4819: all-stage2-gcc] Error 2
+#   make[2]: Leaving directory '/private/tmp/gcc-10.3.0'
+#   make[1]: *** [Makefile:23041: stage2-bubble] Error 2
+#   make[1]: Leaving directory '/private/tmp/gcc-10.3.0'
+#   make: *** [Makefile:1035: all] Error 2
+#      179376.72 real    167784.83 user      7273.43 sys
 bootstrap="--enable-bootstrap"
 if test "$(tiger.sh --cpu)" = "g3" ; then
-    # temporarily disabling bootstrapping on g3
     bootstrap="--disable-bootstrap"
 fi
 

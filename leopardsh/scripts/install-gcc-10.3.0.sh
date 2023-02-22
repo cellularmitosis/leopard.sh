@@ -32,10 +32,6 @@ do
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
 
-# if ! which -s gcc-4.9 ; then
-#     leopard.sh gcc-4.9.4
-# fi
-
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
@@ -65,8 +61,6 @@ cd /tmp/$package-$version
 
 CC=gcc-4.2
 CXX=g++-4.2
-# CC=gcc-4.9
-# CXX=g++-4.9
 
 # Note: I haven't figured out how to get gcc to build using custom flags,
 # nor how to build a 64-bit gcc on G5.
