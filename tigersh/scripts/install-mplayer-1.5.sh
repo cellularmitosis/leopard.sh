@@ -49,6 +49,7 @@ fi
 if ! test -e /opt/make-4.3 ; then
     tiger.sh make-4.3
 fi
+export PATH="/opt/make-4.3/bin:$PATH"
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
@@ -94,7 +95,7 @@ cd -
 # The easy thing to do is just replace this single instance of 'GLint' with 'long'.
 sed -i '' -e 's/GLint/long/g' libvo/osx_objc_common.m
 
-/usr/bin/time /opt/make-4.3/bin/make $(tiger.sh -j) V=1
+/usr/bin/time make $(tiger.sh -j) V=1
 
 # Restore IOCDTypes.h
 cd /System/Library/Frameworks/IOKit.framework/Headers/storage/
