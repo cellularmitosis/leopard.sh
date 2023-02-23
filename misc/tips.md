@@ -76,3 +76,15 @@ Hmm, apparently you still have to enable the root account by sudo'ind to root an
 ## PowerPC assembler, calling conventions, etc.
 
 https://www.mono-project.com/docs/about-mono/supported-platforms/powerpc/
+
+
+## Making a bootable USB installer
+
+Often, disk utility seemed to fail due to permissions.
+
+This appears to be the underlying command it was trying to run (replace `disk4s1` with what is appropriate for your system):
+
+```
+sudo /usr/sbin/asr restore --source /Volumes/Mac\ OS\ X\ Install\ Disc\ 1 --target /dev/disk4s1 --erase
+```
+
