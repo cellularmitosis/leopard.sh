@@ -118,3 +118,4 @@ dscl . -passwd /Users/bob hackme
 ## Misc
 
 - https://www.seriss.com/people/erco/osx/
+  - creating users
