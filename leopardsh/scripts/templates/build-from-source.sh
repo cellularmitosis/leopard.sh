@@ -8,6 +8,7 @@
 package=foo
 version=1.0
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
+upstream=https://sourceforge.net/projects/$package/files/$package/$version/$package-$version.tar.gz/download
 description="FIXME"
 
 set -e -o pipefail
@@ -101,10 +102,10 @@ fi
 # 👇 EDIT HERE:
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --disable-dependency-tracking \
-    --with-bar=/opt/bar-1.0 \
-    --with-bar-prefix=/opt/bar-1.0 \
     CFLAGS="$CFLAGS" \
     CXXFLAGS="$CXXFLAGS" \
+    # --with-bar=/opt/bar-1.0 \
+    # --with-bar-prefix=/opt/bar-1.0 \
     # LDFLAGS="$LDFLAGS" \
     # CPPFLAGS="$CPPFLAGS" \
     # LIBS="$LIBS" \

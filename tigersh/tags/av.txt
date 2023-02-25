@@ -1,3 +1,5 @@
+mpg123-1.31.2
+mpg123-1.31.2.ppc64
 mplayer-1.5
 mplayer-binary-codecs-20041107
 mplayer-osx.app-rev11
