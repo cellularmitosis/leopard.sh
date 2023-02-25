@@ -88,3 +88,30 @@ This appears to be the underlying command it was trying to run (replace `disk4s1
 sudo /usr/sbin/asr restore --source /Volumes/Mac\ OS\ X\ Install\ Disc\ 1 --target /dev/disk4s1 --erase
 ```
 
+
+## Resetting a user password
+
+First, boot into single-user mode.  Reboot and hold CMD-s.
+
+### Tiger
+
+To reset `bob`'s password:
+
+```
+sh /etc/rc
+passwd bob
+```
+
+(Note: after running `sh /etc/rc`, text will continue to print to the console even after the prompt returns.
+Run `passwd bob` after the prompt returns, before waiting for all output to stop printing.
+
+### Leopard
+
+To reset `bob`'s password to `hackme`:
+
+```
+mount -uw /
+launchctl load /System/Library/LaunchDaemons/com.apple.DirectoryServices.plist
+dscl . -passwd /Users/bob hackme
+```
+

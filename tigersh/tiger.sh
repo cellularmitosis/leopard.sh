@@ -90,6 +90,8 @@ elif test "$1" = "--unpack-tarball-check-md5" ; then
     op=unpack-tarball-check-md5
 elif test "$1" = "--spotlight" ; then
     op=spotlight
+elif test "$1" = "--dashboard" ; then
+    op=dashboard
 elif test -n "$1" ; then
     op=install
 else
@@ -105,6 +107,7 @@ if test "$1" = "--help" \
 -o "$1" = "--os.cpu" \
 -o "$1" = "--bits" \
 -o "$1" = "--spotlight" \
+-o "$1" = "--dashboard" \
 ; then
     unset needs_setup_check
 fi
@@ -114,7 +117,6 @@ if test "$op" = "list" \
 -o "$op" = "gccflags" \
 -o "$op" = "platform-info" \
 -o "$op" = "arch-check" \
--o "$op" = "spotlight" \
 ; then
     needs_cpu_info=1
 fi
@@ -903,6 +905,7 @@ if test "$op" = "help" ; then
     echo
     echo "Performance tweaks:"
     echo "  --spotlight (on|off): turn Spotlight on or off."
+    echo "  --dashboard (on|off): turn Dashboard on or off."
     echo
     echo "Command-line options:"
     echo "  --verbose: print every command being run (note: must be the first arg)."
@@ -1190,6 +1193,30 @@ if test "$op" = "spotlight" ; then
     else
         echo -e "${COLOR_RED}Error${COLOR_NONE}: turn Spotlight on or off?" >&2
         echo "e.g. tiger.sh --spotlight off" >&2
+        exit 1
+    fi
+
+    exit 0 
+fi
+
+
+# dashboard:
+
+if test "$op" = "dashboard" ; then
+    shift 1
+    onoff="$1"
+
+    if test "$onoff" = "on" ; then
+        set -x
+        defaults write com.apple.dashboard mcx-disabled -boolean NO && killall Dock
+        { set +x; } 2>/dev/null
+    elif test "$onoff" = "off" ; then
+        set -x
+        defaults write com.apple.dashboard mcx-disabled -boolean YES && killall Dock
+        { set +x; } 2>/dev/null
+    else
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: turn Dashboard on or off?" >&2
+        echo "e.g. tiger.sh --dashboard off" >&2
         exit 1
     fi
 
