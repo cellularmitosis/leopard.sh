@@ -115,3 +115,6 @@ launchctl load /System/Library/LaunchDaemons/com.apple.DirectoryServices.plist
 dscl . -passwd /Users/bob hackme
 ```
 
+## Misc
+
+- https://www.seriss.com/people/erco/osx/
