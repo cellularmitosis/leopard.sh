@@ -9,6 +9,20 @@
 - https://github.com/mattl/opensource.apple.com/blob/master/files.txt
 
 
+## `@executable_path`, `@loader_path`, `@rpath`
+
+- https://wincent.com/wiki/%40executable_path%2C_%40load_path_and_%40rpath
+
+looking for `@executable_path`, etc:
+
+```
+otool -l /opt/foo-1.0/lib/libfoo.dylib | grep name
+          name @executable_path/../lib/libfoo.dylib (offset 24)
+          name /usr/lib/libgcc_s_ppc64.1.dylib (offset 24)
+          name /usr/lib/libSystem.B.dylib (offset 24)
+```
+
+
 ## Debugging a misbehaving Makefile
 
 ```

@@ -35,6 +35,11 @@ if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
     tiger.sh gcc-4.2
 fi
 
+if ! test -e /opt/cctools-667.3 ; then
+    tiger.sh cctools-667.3
+fi
+export PATH="/opt/cctools-667.3/bin:$PATH"
+
 if ! test -e /opt/ld64-97.17 ; then
     tiger.sh ld64-97.17-tigerbrew
 fi
@@ -49,38 +54,6 @@ cd /tmp/$package-$version
 #   until upstream can be fixed, do not include atexit symbols
 #   under certain circumstances, infinite recursive loops can form
 rm src/macports_legacy_atexit.c
-
-# The ppc64 build gets tripped up:
-#   install_name_tool -id /opt/macports-legacy-support-20221029.ppc64/lib/libMacportsLegacySupport.dylib /opt/macports-legacy-support-20221029.ppc64/lib/libMacportsLegacySupport.dylib
-#   install_name_tool: file not in an order that can be processed (string table out of place): /opt/macports-legacy-support-20221029.ppc64/lib/libMacportsLegacySupport.dylib
-#   make: *** [install-dlib] Error 1
-# This call to install_name_tool comes from the Makefile line:
-#   $(POSTINSTALL) -id $(DLIBPATH) $(DESTDIR)$(DLIBPATH)
-# But in our case, this is unnecessary as $(DLIBPATH) and $(DESTDIR)$(DLIBPATH) are the same.
-if test -n "$ppc64" ; then
-    patch -p0 << 'EOF'
---- Makefile	2023-02-18 21:54:23.000000000 -0600
-+++ Makefile.patched	2023-02-18 21:56:25.000000000 -0600
-@@ -312,13 +312,17 @@
- install-dlib: $(BUILDDLIBPATH)
- 	$(MKINSTALLDIRS) $(DESTDIR)$(LIBDIR)
- 	$(INSTALL_PROGRAM) $(BUILDDLIBPATH) $(DESTDIR)$(LIBDIR)
-+ifneq "$(DLIBPATH)" "$(DESTDIR)$(DLIBPATH)"
- 	$(POSTINSTALL) -id $(DLIBPATH) $(DESTDIR)$(DLIBPATH)
-+endif
- 
- install-syslib: $(BUILDSYSLIBPATH)
- ifeq ($(shell test $(PLATFORM) -le $(MAX_DARWIN_REEXPORT); echo $$?),0)
- 	$(MKINSTALLDIRS) $(DESTDIR)$(LIBDIR)
- 	$(INSTALL_PROGRAM) $(BUILDSYSLIBPATH) $(DESTDIR)$(LIBDIR)
-+ifneq "$(SYSLIBPATH)" "$(DESTDIR)$(SYSLIBPATH)"
- 	$(POSTINSTALL) -id $(SYSLIBPATH) $(DESTDIR)$(SYSLIBPATH)
-+endif
- endif
- 
- install-slib: $(BUILDSLIBPATH)
-EOF
-fi
 
 # Tiger's ld doesn't understand -reexport_library, which we can solve with ld64-97.17.
 # However, /usr/bin/gcc will try to use libtool rather than ld, so we need gcc-4.2.
