@@ -86,6 +86,22 @@ sed -i '' -e '/lame_init_old/d' include/libmp3lame.sym
 
 make install
 
+mkdir -p /opt/$pkgspec/lib/pkgconfig
+# Based on https://github.com/audacity/audacity/blob/Audacity-3.0.3-RC2/linux/build-environment/pkgconfig/lame.pc
+cat > /opt/$pkgspec/lib/pkgconfig/lame.pc << EOF
+prefix=/opt/$pkgspec
+exec_prefix=\${prefix}
+libdir=\${exec_prefix}/lib
+includedir=\${prefix}/include
+
+Name: lame
+Description: MP3 encoding library
+Requires:
+Version: $version
+Libs: -L\${libdir} -lmp3lame
+Cflags: -I\${includedir}
+EOF
+
 leopard.sh --linker-check $pkgspec
 leopard.sh --arch-check $pkgspec $ppc64
 
