@@ -7,4 +7,6 @@ mpg123-1.31.2.ppc64
 mplayer-1.5
 mplayer-binary-codecs-20041107
 mplayer-osx.app-rev11
+speex-1.2.1
+speex-1.2.1.ppc64
 vlc.app-0.9.10
