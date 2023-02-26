@@ -26,6 +26,8 @@ libiconv-bootstrap-1.16.ppc64
 libogg-1.5.3
 libogg-1.5.3.ppc64
 libressl-3.4.2
+libsndfile-1.0.28
+libsndfile-1.0.28.ppc64
 libunistring-1.0
 libunistring-1.0.ppc64
 libutil-11

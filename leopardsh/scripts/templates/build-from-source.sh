@@ -8,7 +8,7 @@
 package=foo
 version=1.0
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
-upstream=https://sourceforge.net/projects/$package/files/$package/$version/$package-$version.tar.gz/download
+# upstream=https://sourceforge.net/projects/$package/files/$package/$version/$package-$version.tar.gz/download
 description="FIXME"
 
 set -e -o pipefail
@@ -38,8 +38,10 @@ pkgspec=$package-$version$ppc64
 #     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
 #     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 #     PATH="/opt/$dep/bin:$PATH"
+#     PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
 # done
 # LIBS="-lbar -lqux"
+# PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
