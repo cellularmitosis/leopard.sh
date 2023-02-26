@@ -16,6 +16,8 @@ mplayer-osx.app-rev11
 mplayer-osx.app-rev14
 speex-1.2.1
 speex-1.2.1.ppc64
+twolame-0.4.0
+twolame-0.4.0.ppc64
 vlc.app-0.9.10
 vlc.app-2.0.10
 vorbis-tools-1.4.2

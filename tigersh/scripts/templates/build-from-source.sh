@@ -8,7 +8,7 @@
 package=foo
 version=1.0
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
-# upstream=https://sourceforge.net/projects/$package/files/$package/$version/$package-$version.tar.gz/download
+# upstream=upstream=https://downloads.sourceforge.net/$package/$package-$version.tar.gz
 description="FIXME"
 
 set -e -o pipefail
