@@ -18,6 +18,7 @@ gmp-6.2.1.ppc64
 isl-0.12.2
 isl-0.12.2.ppc64
 isl-0.24
+libao-1.2.0
 libiconv-1.16
 libiconv-1.16.ppc64
 libiconv-bootstrap-1.16

@@ -1,5 +1,7 @@
 flac-1.4.2
 flac-1.4.2.ppc64
+libao-1.2.0
+libao-1.2.0.ppc64
 libogg-1.5.3
 libogg-1.5.3.ppc64
 libvorbis-1.3.7
