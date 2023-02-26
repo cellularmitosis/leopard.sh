@@ -102,6 +102,7 @@ fi
 # 👇 EDIT HERE:
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --disable-dependency-tracking \
+    --disable-maintainer-mode \
     CFLAGS="$CFLAGS" \
     CXXFLAGS="$CXXFLAGS" \
     # --with-bar=/opt/bar-1.0 \

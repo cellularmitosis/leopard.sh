@@ -17,8 +17,10 @@ rm -rf \
     ~/bin/tiger.sh \
     ~/bin/make-leopardsh-binpkg.sh \
     ~/bin/make-tigersh-binpkg.sh \
+    ~/bin/make-binpkg.sh \
     ~/bin/rebuild-leopardsh-stales.sh \
     ~/bin/rebuild-tigersh-stales.sh \
+    ~/bin/rebuild-stales.sh \
     ~/bin/rebuild-leopardsh-all.sh \
     ~/bin/rebuild-tigersh-all.sh \
 

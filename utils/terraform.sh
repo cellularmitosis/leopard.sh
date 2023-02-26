@@ -94,10 +94,9 @@ echo "👉 pull binpkgs"
 for host in $uphosts ; do
     echo "  🖥  $host"
     (
-        ssh $host mkdir -p /Users/macuser/Desktop/leopard.sh/binpkgs /Users/macuser/Desktop/tiger.sh/binpkgs
-        rsync -ai --update $host:/Users/macuser/Desktop/leopard.sh/binpkgs/ ~/leopard.sh/binpkgs
-        rsync -ai --update $host:/Users/macuser/Desktop/tiger.sh/binpkgs/ ~/leopard.sh/binpkgs
-        ssh $host rm -f '/Users/macuser/Desktop/*.sh/binpkgs/*'
+        ssh $host mkdir -p /Users/macuser/Desktop/binpkgs
+        rsync -ai --update $host:/Users/macuser/Desktop/binpkgs/ ~/leopard.sh/binpkgs
+        ssh $host rm -f '/Users/macuser/Desktop/binpkgs/*'
     ) &
 done
 wait
@@ -107,10 +106,12 @@ echo "👉 push leopard.sh"
 for host in $uphosts ; do
     echo "  🖥  $host"
     (
-        rsync -ai ~/leopard.sh/leopardsh/leopard.sh \
+        rsync -ai \
+            ~/leopard.sh/leopardsh/leopard.sh \
             ~/leopard.sh/tigersh/tiger.sh \
             $host:/usr/local/bin/
-        rsync -ai ~/leopard.sh/leopardsh/utils/ \
+        rsync -ai \
+            ~/leopard.sh/leopardsh/utils/ \
             ~/leopard.sh/tigersh/utils/ \
             ~/leopard.sh/utils/ \
             $host:/Users/macuser/bin/

@@ -10,7 +10,6 @@ fi
 host=$1
 shift 1
 
-ssh $host mkdir -p /Users/macuser/Desktop/leopard.sh/binpkgs /Users/macuser/Desktop/tiger.sh/binpkgs
-rsync -ai --update $host:/Users/macuser/Desktop/leopard.sh/binpkgs/ ~/leopard.sh/binpkgs
-rsync -ai --update $host:/Users/macuser/Desktop/tiger.sh/binpkgs/ ~/leopard.sh/binpkgs
-ssh $host rm -f '/Users/macuser/Desktop/*.sh/binpkgs/*'
+ssh $host mkdir -p /Users/macuser/Desktop/binpkgs
+rsync -ai --update $host:/Users/macuser/Desktop/binpkgs/ ~/leopard.sh/binpkgs
+ssh $host rm -f '/Users/macuser/Desktop/binpkgs/*'

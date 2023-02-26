@@ -28,10 +28,20 @@ else
     exit 1
 fi
 
+osversion=$(sw_vers -productVersion | awk '{print $NF}')
+if test "${osversion:0:4}" = "10.4" ; then
+    pkgmgr="tiger.sh"
+    mirror=$TIGERSH_MIRROR
+elif test "${osversion:0:4}" = "10.5" ; then
+    pkgmgr="leopard.sh"
+    mirror=$LEOPARDSH_MIRROR
+fi
+test -n "$pkgmgr"
+
 cd /tmp
 rm -f build-order.txt build-order.ppc64.txt to-build.txt
 
-leopard.sh --setup
+$pkgmgr --setup
 export PATH="/opt/tigersh-deps-0.1/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 
 if test -n "$1" ; then
@@ -42,10 +52,10 @@ if test -n "$1" ; then
         wip="wip"
     fi
 else
-    curl -sSfLO $LEOPARDSH_MIRROR/build-order.txt
+    curl -sSfLO $mirror/build-order.txt
 
     if test -n "$is_g5" ; then
-        curl -sSfLO $LEOPARDSH_MIRROR/build-order.ppc64.txt
+        curl -sSfLO $mirror/build-order.ppc64.txt
         cat build-order.ppc64.txt >> build-order.txt
     fi
 
@@ -53,12 +63,12 @@ else
     for pkgspec in $(cat /tmp/build-order.txt) ; do
         echo -n "." >&2
         should_build=0
-        binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-        if ! test -e ~/Desktop/leopard.sh/binpkgs/$binpkg ; then
+        binpkg=$pkgspec.$($pkgmgr --os.cpu).tar.gz
+        if ! test -e ~/Desktop/binpkgs/$binpkg ; then
             should_build=1
         else
-            curl -RsSfLO $LEOPARDSH_MIRROR/scripts/install-$pkgspec.sh
-            binpkg_mtime=$(stat -L -f '%m' ~/Desktop/leopard.sh/binpkgs/$binpkg)
+            curl -RsSfLO $mirror/scripts/install-$pkgspec.sh
+            binpkg_mtime=$(stat -L -f '%m' ~/Desktop/binpkgs/$binpkg)
             script_mtime=$(stat -L -f '%m' install-$pkgspec.sh)
             if test "$binpkg_mtime" -lt "$script_mtime" ; then
                 should_build=1
@@ -85,8 +95,8 @@ fi
 
 # another pass to wipe.
 for pkgspec in $(cat /tmp/to-build.txt) ; do
-    binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-    rm -f ~/Desktop/leopard.sh/binpkgs/$binpkg
+    binpkg=$pkgspec.$($pkgmgr --os.cpu).tar.gz
+    rm -f ~/Desktop/binpkgs/$binpkg
 done
 
 # and another pass to build.
@@ -96,7 +106,7 @@ for pkgspec in $(cat /tmp/to-build.txt) ; do
         exit 1
     fi
 
-    mv /usr/local/bin/leopard.sh /opt/tigersh-deps-0.1 /tmp/
+    mv /usr/local/bin/$pkgmgr /opt/tigersh-deps-0.1 /tmp/
 
     echo "Wiping out /opt (but not /opt/local)."
     rm -rf /usr/local/bin/*
@@ -104,11 +114,18 @@ for pkgspec in $(cat /tmp/to-build.txt) ; do
     rm -rf /usr/local/share/man/*
     rm -rf /opt/*
 
-    mv /tmp/leopard.sh /usr/local/bin/
+    mv /tmp/$pkgmgr /usr/local/bin/
     mv /tmp/tigersh-deps-0.1 /opt/
 
-    binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-    rm -f ~/Desktop/leopard.sh/binpkgs/$binpkg
-    time LEOPARDSH_FORCE_BUILD_PKGSPEC=$pkgspec leopard.sh $pkgspec $wip
-    ~/bin/make-leopardsh-binpkg.sh $pkgspec
+    binpkg=$pkgspec.$($pkgmgr --os.cpu).tar.gz
+    rm -f ~/Desktop/binpkgs/$binpkg
+    if test "$pkgmgr" = "leopard.sh" ; then
+        time LEOPARDSH_FORCE_BUILD_PKGSPEC=$pkgspec $pkgmgr $pkgspec $wip
+    elif test "$pkgmgr" = "tiger.sh" ; then
+        time TIGERSH_FORCE_BUILD_PKGSPEC=$pkgspec $pkgmgr $pkgspec $wip
+    else
+        echo "Error: unreachable" >&2
+        exit 1
+    fi
+    ~/bin/make-binpkg.sh $pkgspec
 done

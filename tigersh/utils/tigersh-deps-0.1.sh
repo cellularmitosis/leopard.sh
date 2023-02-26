@@ -181,7 +181,7 @@ cp $opt/lib/libssl.50.dylib lib/
 cp $opt/lib/libcrypto.47.dylib lib/
 cp $opt/share/cacert.pem share/
 
-TIGERSH_BINPKG_PATH=${TIGERSH_BINPKG_PATH:-~/Desktop/tiger.sh/binpkgs}
+TIGERSH_BINPKG_PATH=${TIGERSH_BINPKG_PATH:-~/Desktop/binpkgs}
 mkdir -p $TIGERSH_BINPKG_PATH
 cd $TIGERSH_BINPKG_PATH
 tar c tigersh-deps-0.1 | nice gzip -9 > tigersh-deps-0.1.tiger.g3.tar.gz
