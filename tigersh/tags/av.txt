@@ -1,5 +1,7 @@
 libogg-1.5.3
 libogg-1.5.3.ppc64
+libvorbis-1.3.7
+libvorbis-1.3.7.ppc64
 mpg123-1.31.2
 mpg123-1.31.2.ppc64
 mplayer-1.5

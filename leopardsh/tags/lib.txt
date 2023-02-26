@@ -26,6 +26,8 @@ libogg-1.5.3.ppc64
 libressl-3.4.2
 libunistring-1.0
 libunistring-1.0.ppc64
+libvorbis-1.3.7
+libvorbis-1.3.7.ppc64
 macports-legacy-support-20221029
 macports-legacy-support-20221029.ppc64
 mpc-1.0.3

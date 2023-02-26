@@ -105,8 +105,8 @@ fi
     --disable-maintainer-mode \
     CFLAGS="$CFLAGS" \
     CXXFLAGS="$CXXFLAGS" \
-    # --with-bar=/opt/bar-1.0 \
-    # --with-bar-prefix=/opt/bar-1.0 \
+    # --with-bar=/opt/bar-1.0$ppc64 \
+    # --with-bar-prefix=/opt/bar-1.0$ppc64 \
     # LDFLAGS="$LDFLAGS" \
     # CPPFLAGS="$CPPFLAGS" \
     # LIBS="$LIBS" \
