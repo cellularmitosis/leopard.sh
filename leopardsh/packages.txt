@@ -51,6 +51,7 @@ lhasa-0.3.1
 libffi-3.4.2
 libiconv-1.16
 libiconv-bootstrap-1.16
+libogg-1.5.3
 libressl-3.4.2
 libtool-2.4.6
 libunistring-1.0
