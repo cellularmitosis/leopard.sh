@@ -81,6 +81,12 @@ fi
 #     leopard.sh gcc-10.3.0
 # fi
 
+# 👇 EDIT HERE:
+# if ! which -s pkg-config-0.29.2 ; then
+#     leopard.sh pkg-config-0.29.2
+# fi
+# export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
+
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec
@@ -111,7 +117,9 @@ fi
     # CPPFLAGS="$CPPFLAGS" \
     # LIBS="$LIBS" \
     # CC="$CC" \
-    # CXX="$CXX"
+    # CXX="$CXX" \
+    # PKG_CONFIG=/opt/pkg-config-0.29.2/bin/pkg-config \
+    # PKG_CONFIG_PATH="/opt/libfoo-1.0$ppc64/lib/pkgconfig:/opt/libbar-1.0$ppc64/lib/pkgconfig" \
 
 /usr/bin/time make $(leopard.sh -j) V=1
 

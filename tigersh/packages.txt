@@ -115,6 +115,7 @@ termcap-1.3.1
 textwrangler.app-3.1
 tk-8.6.12
 vlc.app-0.9.10
+vorbis-tools-1.4.2
 wget-1.21.3
 xbench.app-1.3
 xcode-2.5

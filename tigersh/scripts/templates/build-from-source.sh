@@ -81,6 +81,12 @@ fi
 #     tiger.sh gcc-10.3
 # fi
 
+# 👇 EDIT HERE:
+# if ! type -a pkg-config-0.29.2 >/dev/null 2>&1 ; then
+#     tiger.sh pkg-config-0.29.2
+# fi
+# export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
+
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 tiger.sh --unpack-dist $pkgspec
@@ -111,7 +117,9 @@ fi
     # CPPFLAGS="$CPPFLAGS" \
     # LIBS="$LIBS" \
     # CC="$CC" \
-    # CXX="$CXX"
+    # CXX="$CXX" \
+    # PKG_CONFIG=/opt/pkg-config-0.29.2/bin/pkg-config \
+    # PKG_CONFIG_PATH="/opt/libfoo-1.0$ppc64/lib/pkgconfig:/opt/libbar-1.0$ppc64/lib/pkgconfig" \
 
 /usr/bin/time make $(tiger.sh -j) V=1
 
