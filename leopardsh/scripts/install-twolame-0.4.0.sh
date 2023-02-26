@@ -46,7 +46,7 @@ if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
 
-if ! which -s pkg-config-0.29.2 ; then
+if ! which -s pkg-config ; then
     leopard.sh pkg-config-0.29.2
 fi
 export PATH="/opt/pkg-config-0.29.2/bin:$PATH"

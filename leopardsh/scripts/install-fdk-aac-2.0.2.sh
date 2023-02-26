@@ -1,15 +1,12 @@
 #!/bin/bash
 # based on templates/build-from-source.sh v6
 
-# 👇 EDIT HERE:
-# Install foo on OS X Leopard / PowerPC.
+# Install fdk-aac on OS X Leopard / PowerPC.
 
-# 👇 EDIT HERE:
-package=foo
-version=1.0
-upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
-# upstream=upstream=https://downloads.sourceforge.net/$package/$package-$version.tar.gz
-description="FIXME"
+package=fdk-aac
+version=2.0.2
+upstream=http://deb.debian.org/debian/pool/non-free/f/$package/$package_$version.orig.tar.gz
+description="Fraunhofer AAC codec"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -119,7 +116,6 @@ fi
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --disable-dependency-tracking \
     --disable-maintainer-mode \
-    --disable-debug \
     CFLAGS="$CFLAGS" \
     CXXFLAGS="$CXXFLAGS" \
     # --with-bar=/opt/bar-1.0$ppc64 \

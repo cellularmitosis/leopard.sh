@@ -69,7 +69,7 @@ if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
 fi
 
-if ! type -a pkg-config-0.29.2 >/dev/null 2>&1 ; then
+if ! type -a pkg-config >/dev/null 2>&1 ; then
     tiger.sh pkg-config-0.29.2
 fi
 

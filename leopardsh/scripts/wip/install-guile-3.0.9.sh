@@ -52,7 +52,7 @@ if ! which -s gcc-4.9 ; then
     leopard.sh gcc-4.9.4
 fi
 
-if ! which -s pkg-config-0.29.2 ; then
+if ! which -s pkg-config ; then
     leopard.sh pkg-config-0.29.2
 fi
 

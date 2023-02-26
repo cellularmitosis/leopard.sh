@@ -2,6 +2,8 @@ cloog-0.18.1
 cloog-0.18.1.ppc64
 expat-2.5.0
 expat-2.5.0.ppc64
+fdk-aac-2.0.2
+fdk-aac-2.0.2.ppc64
 flac-1.4.2
 flac-1.4.2.ppc64
 gc-8.2.2

@@ -22,9 +22,10 @@ fi
 pkgspec=$package-$version$ppc64
 
 # 👇 EDIT HERE:
-# if ! test -e /opt/bar-2.0$ppc64 ; then
-#     tiger.sh bar-2.0$ppc64
-#     PATH="/opt/bar-2.0$ppc64/bin:$PATH"
+# dep=bar-1.0$ppc64
+# if ! test -e /opt/$dep ; then
+#     tiger.sh $dep
+#     PATH="/opt/$dep/bin:$PATH"
 # fi
 
 # 👇 EDIT HERE:
@@ -43,12 +44,19 @@ pkgspec=$package-$version$ppc64
 # LIBS="-lbar -lqux"
 # PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
 
+# 👇 EDIT HERE:
+# if ! perl -e "use Text::Unidecode" >/dev/null 2>&1 ; then
+#     echo no | cpan
+#     cpan Text::Unidecode
+# fi
+
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 if tiger.sh --install-binpkg $pkgspec ; then
     exit 0
 fi
 
+# 👇 EDIT HERE:
 # if test -z "$ppc64" -a "$(tiger.sh --cpu)" = "g5" ; then
 #     # Fails during a 32-bit build on a G5 machine,
 #     # so we instead install the g4e binpkg in that case.
@@ -84,7 +92,7 @@ fi
 # fi
 
 # 👇 EDIT HERE:
-# if ! type -a pkg-config-0.29.2 >/dev/null 2>&1 ; then
+# if ! type -a pkg-config >/dev/null 2>&1 ; then
 #     tiger.sh pkg-config-0.29.2
 # fi
 # export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
@@ -111,6 +119,7 @@ fi
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --disable-dependency-tracking \
     --disable-maintainer-mode \
+    --disable-debug \
     CFLAGS="$CFLAGS" \
     CXXFLAGS="$CXXFLAGS" \
     # --with-bar=/opt/bar-1.0$ppc64 \

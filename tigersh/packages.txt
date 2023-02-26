@@ -23,6 +23,7 @@ doom-shareware-wad-1.9
 drracket.app-6.0.1
 expat-2.5.0
 expect-5.45.4
+fdk-aac-2.0.2
 flac-1.4.2
 flex-2.6.4
 gc-8.2.2
