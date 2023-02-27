@@ -129,6 +129,7 @@ vlc.app-0.9.10
 vlc.app-2.0.10
 vorbis-tools-1.4.2
 wget-1.21.3
+x264-ca5408b1
 xbench.app-1.3
 xcode-3.1.4
 xz-5.2.5

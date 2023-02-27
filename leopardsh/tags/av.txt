@@ -24,3 +24,4 @@ vlc.app-0.9.10
 vlc.app-2.0.10
 vorbis-tools-1.4.2
 vorbis-tools-1.4.2.ppc64
+x264-ca5408b1

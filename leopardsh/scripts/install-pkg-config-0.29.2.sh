@@ -8,6 +8,10 @@ version=0.29.2
 upstream=https://$package.freedesktop.org/releases/$package-$version.tar.gz
 description="Manage compile and link flags for libraries"
 
+# Note: pkg-config's default search path can be revealed via:
+#   $ pkg-config --variable pc_path pkg-config
+#   /opt/pkg-config-0.29.2/lib/pkgconfig:/opt/pkg-config-0.29.2/share/pkgconfig
+
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}

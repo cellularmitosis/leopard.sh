@@ -88,7 +88,7 @@ fi
 
 # 👇 EDIT HERE:
 # if ! type -a gcc-10.3 >/dev/null 2>&1 ; then
-#     tiger.sh gcc-10.3
+#     tiger.sh gcc-10.3.0
 # fi
 
 # 👇 EDIT HERE:
@@ -108,7 +108,7 @@ cd /tmp/$package-$version
 
 # 👇 EDIT HERE:
 CFLAGS="$(tiger.sh -mcpu -O) $CFLAGS"
-CXXFLAGS="$(tiger.sh -mcpu -O) $CFLAGS"
+CXXFLAGS="$(tiger.sh -mcpu -O) $CXXFLAGS"
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
     CXXFLAGS="-m64 $CXXFLAGS"

@@ -66,3 +66,4 @@ tk-8.6.12
 tk-8.6.12.ppc64
 twolame-0.4.0
 twolame-0.4.0.ppc64
+x264-ca5408b1
