@@ -16,6 +16,8 @@ mplayer-1.5
 mplayer-binary-codecs-20041107
 mplayer-osx.app-rev11
 mplayer-osx.app-rev14
+sdl2-2.0.3
+sdl2-2.0.3.ppc64
 speex-1.2.1
 speex-1.2.1.ppc64
 twolame-0.4.0

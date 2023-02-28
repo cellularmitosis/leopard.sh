@@ -14,6 +14,7 @@ all: mpeg2-480x204-1024k-mp2-128k-2ch-ffmpeg.mpeg   mpeg2-720x306-1536k-mp2-192k
 all: mpeg2-480x204-1024k-mp3-128k-2ch-ffmpeg.mpeg   mpeg2-720x306-1536k-mp3-192k-2ch-ffmpeg.mpeg   mpeg2-960x408-2M-mp3-192k-2ch-ffmpeg.mpeg
 all: mpeg2-480x204-1024k-ac3-128k-2ch-ffmpeg.mpeg   mpeg2-720x306-1536k-ac3-192k-2ch-ffmpeg.mpeg   mpeg2-960x408-2M-ac3-192k-2ch-ffmpeg.mpeg
 all: mpeg2-1440x612-4M-ac3-192k-2ch-ffmpeg.mpeg     mpeg2-1440x612-8M-ac3-192k-2ch-ffmpeg.mpeg     mpeg2-1920x816-8M-ac3-192k-2ch-ffmpeg.mpeg
+all: mpeg2-1440x612-4M-mp3-vbr2-2ch-ffmpeg.mpeg     mpeg2-1920x816-8M-mp3-vbr2-2ch-ffmpeg.mpeg
 all: mpeg4-480x204-1024k-aac-lc-128k-2ch-ffmpeg.mp4 mpeg4-720x306-1536k-aac-lc-192k-2ch-ffmpeg.mp4 mpeg4-960x408-2M-aac-lc-192k-2ch-ffmpeg.mp4
 all: xvid-480x204-1024k-aac-lc-128k-2ch-ffmpeg.mp4  xvid-720x306-1536k-aac-lc-192k-2ch-ffmpeg.mp4  xvid-960x408-2M-aac-lc-192k-2ch-ffmpeg.mp4
 all: h264-480x204-1024k-aac-lc-128k-2ch-ffmpeg.mp4  h264-720x306-1536k-aac-lc-192k-2ch-ffmpeg.mp4  h264-960x408-2M-aac-lc-192k-2ch-ffmpeg.mp4
@@ -247,9 +248,23 @@ mpeg2-1440x612-8M-ac3-192k-2ch-ffmpeg.mpeg:
 mpeg2-1920x816-8M-ac3-192k-2ch-ffmpeg.mpeg:
 	ffmpeg -i source.mov -ss 3 \
 	-codec:v mpeg2video -b:v 8M \
-	-filter:v "scale=1440:612" \
+	-filter:v "scale=1920:816" \
 	-codec:a ac3 -b:a 192k \
 	mpeg2-1920x816-8M-ac3-192k-2ch-ffmpeg.mpeg
+
+mpeg2-1440x612-4M-mp3-vbr2-2ch-ffmpeg.mpeg:
+	ffmpeg -i source.mov -ss 3 \
+	-codec:v mpeg2video -b:v 4M \
+	-filter:v "scale=1440:612" \
+	-codec:a libmp3lame -qscale:a 2 \
+	mpeg2-1440x612-4M-mp3-vbr2-2ch-ffmpeg.mpeg
+
+mpeg2-1920x816-8M-mp3-vbr2-2ch-ffmpeg.mpeg:
+	ffmpeg -i source.mov -ss 3 \
+	-codec:v mpeg2video -b:v 8M \
+	-filter:v "scale=1920:816" \
+	-codec:a libmp3lame -qscale:a 2 \
+	mpeg2-1920x816-8M-mp3-vbr2-2ch-ffmpeg.mpeg
 
 #
 # MPEG-4 video:

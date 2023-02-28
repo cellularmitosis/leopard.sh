@@ -80,16 +80,30 @@ fi
 # if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
 #     tiger.sh gcc-4.2
 # fi
+# CC=gcc-4.2
+# CXX=g++-4.2
 
 # 👇 EDIT HERE:
 # if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
 #     tiger.sh gcc-4.9.4
 # fi
+# CC=gcc-4.9
+# CXX=g++-4.9
 
 # 👇 EDIT HERE:
 # if ! type -a gcc-10.3 >/dev/null 2>&1 ; then
 #     tiger.sh gcc-10.3.0
 # fi
+# CC=gcc-10.3
+# CXX=g++-10.3
+
+# 👇 EDIT HERE:
+# if ! test -e /opt/ld64-97.17-tigerbrew ; then
+#     tiger.sh ld64-97.17-tigerbrew
+# fi
+# export PATH="/opt/ld64-97.17-tigerbrew/bin:$PATH"
+# CC='gcc -B/opt/ld64-97.17-tigerbrew/bin'
+# CXX='gxx -B/opt/ld64-97.17-tigerbrew/bin'
 
 # 👇 EDIT HERE:
 # if ! type -a pkg-config >/dev/null 2>&1 ; then
@@ -101,10 +115,6 @@ echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
-
-# 👇 EDIT HERE:
-# CC=gcc-4.2
-# CXX=g++-4.2
 
 # 👇 EDIT HERE:
 CFLAGS="$(tiger.sh -mcpu -O) $CFLAGS"

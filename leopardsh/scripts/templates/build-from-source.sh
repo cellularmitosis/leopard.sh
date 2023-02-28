@@ -80,16 +80,30 @@ fi
 # if ! which -s gcc-4.2 ; then
 #     leopard.sh gcc-4.2
 # fi
+# CC=gcc-4.2
+# CXX=g++-4.2
 
 # 👇 EDIT HERE:
 # if ! which -s gcc-4.9 ; then
 #     leopard.sh gcc-4.9.4
 # fi
+# CC=gcc-4.9
+# CXX=g++-4.9
 
 # 👇 EDIT HERE:
 # if ! which -s gcc-10.3 ; then
 #     leopard.sh gcc-10.3.0
 # fi
+# CC=gcc-10.3
+# CXX=g++-10.3
+
+# 👇 EDIT HERE:
+# if ! test -e /opt/ld64-97.17-tigerbrew ; then
+#     leopard.sh ld64-97.17-tigerbrew
+# fi
+# export PATH="/opt/ld64-97.17-tigerbrew/bin:$PATH"
+# CC='gcc -B/opt/ld64-97.17-tigerbrew/bin'
+# CXX='gxx -B/opt/ld64-97.17-tigerbrew/bin'
 
 # 👇 EDIT HERE:
 # if ! which -s pkg-config ; then
@@ -101,10 +115,6 @@ echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
-
-# 👇 EDIT HERE:
-# CC=gcc-4.2
-# CXX=g++-4.2
 
 # 👇 EDIT HERE:
 CFLAGS="$(leopard.sh -mcpu -O) $CFLAGS"

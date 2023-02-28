@@ -129,7 +129,16 @@ launchctl load /System/Library/LaunchDaemons/com.apple.DirectoryServices.plist
 dscl . -passwd /Users/bob hackme
 ```
 
+## Enabling rsh / rcp
+
+- On Tiger, `sudo service shell start`
+- Leopard? https://discussions.apple.com/thread/1329821
+  - https://github.com/dreamcat4/lingon
+
+
 ## Misc
 
 - https://www.seriss.com/people/erco/osx/
   - creating users
+
+

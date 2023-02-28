@@ -56,6 +56,8 @@ readline-8.2
 readline-8.2.ppc64
 sdl-1.2.15.20220129
 sdl-1.2.15.20220129.ppc64
+sdl2-2.0.3
+sdl2-2.0.3.ppc64
 sdl_mixer-1.2.13.20220314
 sdl_mixer-1.2.13.20220314.ppc64
 speex-1.2.1

@@ -55,6 +55,7 @@ pcre-8.45.ppc64
 readline-8.2
 readline-8.2.ppc64
 sdl-1.2.15.20220129
+sdl2-2.0.3
 sdl_mixer-1.2.13.20220314
 speex-1.2.1
 speex-1.2.1.ppc64
