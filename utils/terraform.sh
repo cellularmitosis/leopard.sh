@@ -7,13 +7,13 @@ set -e
 mkdir -p ~/.ssh/sockets
 
 # hosts:
-# imacg3, ibookg3, graphite, emac, emac2, emac3, pbookg4, pbookg42, imacg5, imacg52, pmacg5
+# imacg3, ibookg3, graphite, emac, emac2, emac3, pbookg4, pbookg42, imacg5, imacg52, imacg53, pmacg5
 
 # map:
 # tiger g3:    ibookg3, imacg3
 # tiger g4:    graphite
 # tiger g4e:   emac2
-# tiger g5:    imacg52
+# tiger g5:    imacg52, imacg53
 # leopard g4e: pbookg4, pbookg42, emac, emac3
 # leopard g5:  imacg5, pmacg5
 
@@ -26,7 +26,7 @@ if test -n "$1" ; then
     hosts="$1"
     shift 1
 else
-    hosts="pmacg5 imacg5 imacg52 emac emac2 emac3 pbookg4 pbookg42 graphite ibookg3 imacg3"
+    hosts="pmacg5 imacg5 imacg52 imacg53 emac emac2 emac3 pbookg4 pbookg42 graphite ibookg3 imacg3"
 fi
 
 uphosts=""
