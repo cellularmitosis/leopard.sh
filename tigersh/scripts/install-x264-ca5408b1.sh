@@ -4,6 +4,7 @@
 # Install x264 on OS X Tiger / PowerPC.
 
 package=x264
+# Note: this revision is from before the ppc assembly was updated to use POWER7 VSX instructions.
 version=ca5408b1
 # git clone https://code.videolan.org/videolan/x264.git
 upstream=https://code.videolan.org/videolan/x264/-/archive/master/x264-master.tar.bz2
@@ -56,7 +57,7 @@ env CC="$CC" \
 sed -i '' -e 's/ -mvsx / /' config.mak
 
 # cc1: warning: '-mdynamic-no-pic' overrides '-fpic', '-fPIC', '-fpie' or '-fPIE'
-sed -i '' -e 's/ -fPIC / /' config.mak
+sed -i '' -e 's/ -mdynamic-no-pic / /' config.mak
 
 if test -n "$ppc64" ; then
      sed -i '' -e "s/-mcpu=G3/ $(tiger.sh -mcpu) -m64 /" config.mak
@@ -68,6 +69,7 @@ else
      sed -i '' -e "s/-mcpu=G4/ $(tiger.sh -mcpu) /" config.mak
      sed -i '' -e "s/-mcpu=G5/ $(tiger.sh -mcpu) /" config.mak
 fi
+sed -i '' -e "s/ -O3 / $(leopard.sh -O) /" config.mak
 
 # configure seems to incorrectly detect VSX instructions.
 sed -i '' -e 's/#define HAVE_VSX 1/#define HAVE_VSX 0/' config.h
