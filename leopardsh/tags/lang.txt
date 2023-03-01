@@ -4,6 +4,7 @@ chicken-5.3.0
 chicken-5.3.0.ppc64
 clozure-cl.app-1.4
 clozure-cl.app-1.6
+drjava-20120818
 drracket.app-6.0.1
 gcc-4.2
 gcc-4.9.4

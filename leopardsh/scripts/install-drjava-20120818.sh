@@ -1,16 +1,14 @@
 #!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/install-app.sh v1
 
-# Install openjdk on OS X / PowerPC.
+# Install drjava on OS X / PowerPC.
 
-# See https://web.archive.org/web/20150517050519/http://www.intricatesoftware.com/OpenJDK/macppc/
-# See https://macintoshgarden.org/apps/openjdk7-ppc
-# See https://macintoshgarden.org/forum/advancing-java-tiger-leopard
+# See http://www.drjava.org/download.shtml
 
-package=openjdk7
-version=20120314
-upstream=https://web.archive.org/web/20150822121344/http://www.intricatesoftware.com/OpenJDK/macppc/openjdk7u2-macppc-fcs-2012-03-14.tar.bz2
-description="Open source implementation of the Java programming language"
+package=drjava
+version=20120818
+upstream=https://cytranet.dl.sourceforge.net/project/drjava/1.%20DrJava%20Stable%20Releases/drjava-stable-20120818-r5686/drjava-stable-20120818-r5686.jar
+description="Java IDE"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -29,9 +27,14 @@ elif test "${osversion:0:4}" = "10.5" ; then
 fi
 test -n "$pkgmgr"
 
+dep=openjdk7-20120314
+if ! test -e /opt/$dep ; then
+    $pkgmgr $dep
+fi
+
 echo -n -e "\033]0;$pkgmgr $pkgspec ($($pkgmgr --cpu))\007"
 
-tarball=$pkgspec.leopard.tar.gz
+tarball=$pkgspec.tar.gz
 url=$mirror/dist/$tarball
 echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $tarball into /opt." >&2
 $pkgmgr --unpack-tarball-check-md5 $url /opt
