@@ -480,7 +480,7 @@ fi
 if test "$op" = "tags" ; then
     echo "Available tags:" >&2
     cd /tmp
-    url=$LEOPARDSH_MIRROR/tigersh/tags/tags.txt
+    url=$LEOPARDSH_MIRROR/leopardsh/tags/tags.txt
     insecure_url=$(echo "$url" | sed 's|^https:|http:|')
     curl --fail --silent --show-error --location --remote-name $insecure_url
     cat tags.txt
@@ -502,7 +502,7 @@ if test "$op" = "tag" ; then
 
     echo "Packages tagged as '$tag':" >&2
     cd /tmp
-    url=$LEOPARDSH_MIRROR/tigersh/tags/$tag.txt
+    url=$LEOPARDSH_MIRROR/leopardsh/tags/$tag.txt
     insecure_url=$(echo "$url" | sed 's|^https:|http:|')
     curl --fail --silent --show-error --location --remote-name $insecure_url
     if test "$cpu_name" = "g5" ; then
