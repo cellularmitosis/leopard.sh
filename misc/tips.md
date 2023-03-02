@@ -12,6 +12,11 @@ SDK's:
 - https://github.com/phracker/MacOSX-SDKs
 
 
+## _POSIX_C_SOURCE
+
+- https://trac.macports.org/timeline?from=2017-01-29T03%3A21%3A54Z&precision=second
+
+
 ## `@executable_path`, `@loader_path`, `@rpath`
 
 - https://wincent.com/wiki/%40executable_path%2C_%40load_path_and_%40rpath

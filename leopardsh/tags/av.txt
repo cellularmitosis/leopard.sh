@@ -18,6 +18,8 @@ mplayer-1.5
 mplayer-binary-codecs-20041107
 mplayer-osx.app-rev11
 mplayer-osx.app-rev14
+opus-1.1.2
+opus-1.1.2.ppc64
 sdl2-2.0.3
 sdl2-2.0.3.ppc64
 speex-1.2.1

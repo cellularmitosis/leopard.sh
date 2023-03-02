@@ -88,6 +88,7 @@ openjdk7-20120314
 openmark.app-1.60
 openssl-1.1.1t
 opera.app-10.63
+opus-1.1.2
 patch-2.7.6
 pcre-8.45
 perl-5.36.0
