@@ -44,10 +44,7 @@ if ! test -e /usr/bin/gcc ; then
     tiger.sh xcode-2.5
 fi
 
-if ! test -d /opt/gcc-4.9.4 ; then
-    if test -L /opt/gcc-4.9.4 ; then
-        rm /opt/gcc-4.9.4
-    fi
+if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
     tiger.sh gcc-4.9.4
 fi
 

@@ -35,10 +35,7 @@ if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
 
-if ! test -d /opt/gcc-4.9.4 ; then
-    if test -L /opt/gcc-4.9.4 ; then
-        rm /opt/gcc-4.9.4
-    fi
+if ! which -s gcc-4.9 ; then
     leopard.sh gcc-4.9.4
 fi
 

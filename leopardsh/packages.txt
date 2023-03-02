@@ -98,7 +98,6 @@ petite-chezscheme-8.4t
 pkg-config-0.29.2
 prboom.app-2.5.0
 pv-1.6.20
-python-3.10.3
 python-3.11.2
 python2-2.7.18
 quake-pak0.pak-1.06

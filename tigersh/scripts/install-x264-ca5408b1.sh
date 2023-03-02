@@ -20,6 +20,15 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+if test "$(tiger.sh --cpu)" = "g3" ; then
+    echo "Sorry, x264 does not run on G3 processors." >&2
+    exit 1
+fi
+
+if ! test -e /opt/gcc-4.9.4 ; then
+    tiger.sh gcc-libs-4.9.4
+fi
+
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 if tiger.sh --install-binpkg $pkgspec ; then
@@ -36,14 +45,13 @@ fi
 if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
     tiger.sh gcc-4.9.4
 fi
+CC=gcc-4.9
+CXX=g++-4.9
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
-
-CC=gcc-4.9
-CXX=g++-4.9
 
 # gcc-4.9: error: unrecognized command line option '-fastf'
 sed -i '' -e 's/ -fastf / -ffast-math /' configure
@@ -60,16 +68,23 @@ sed -i '' -e 's/ -mvsx / /' config.mak
 sed -i '' -e 's/ -mdynamic-no-pic / /' config.mak
 
 if test -n "$ppc64" ; then
-     sed -i '' -e "s/-mcpu=G3/ $(tiger.sh -mcpu) -m64 /" config.mak
-     sed -i '' -e "s/-mcpu=G4/ $(tiger.sh -mcpu) -m64 /" config.mak
-     sed -i '' -e "s/-mcpu=G5/ $(tiger.sh -mcpu) -m64 /" config.mak
-     sed -i '' -e 's/LDFLAGS=/LDFLAGS=-m64 /' config.mak
+    sed -i '' -e "s/-mcpu=G3/ $(tiger.sh -mcpu) -m64 /" config.mak
+    sed -i '' -e "s/-mcpu=G4/ $(tiger.sh -mcpu) -m64 /" config.mak
+    sed -i '' -e "s/-mcpu=G5/ $(tiger.sh -mcpu) -m64 /" config.mak
+    sed -i '' -e 's/LDFLAGS=/LDFLAGS=-m64 /' config.mak
 else
-     sed -i '' -e "s/-mcpu=G3/ $(tiger.sh -mcpu) /" config.mak
-     sed -i '' -e "s/-mcpu=G4/ $(tiger.sh -mcpu) /" config.mak
-     sed -i '' -e "s/-mcpu=G5/ $(tiger.sh -mcpu) /" config.mak
+    sed -i '' -e "s/-mcpu=G3/ $(tiger.sh -mcpu) /" config.mak
+    sed -i '' -e "s/-mcpu=G4/ $(tiger.sh -mcpu) /" config.mak
+    sed -i '' -e "s/-mcpu=G5/ $(tiger.sh -mcpu) /" config.mak
 fi
-sed -i '' -e "s/ -O3 / $(leopard.sh -O) /" config.mak
+sed -i '' -e "s/ -O3 / $(tiger.sh -O) /" config.mak
+
+# Gave this a shot, but it appears that altivec is required.  RIP G3 support.
+# if test "$(tiger.sh --cpu)" = "g3" ; then
+#     sed -i '' -e "s/ -faltivec / /" config.mak
+#     sed -i '' -e "s/LDFLAGS=/LDFLAGS=$(tiger.sh -mcpu) /" config.mak
+#     sed -i '' -e "s/SOFLAGS=/SOFLAGS=$(tiger.sh -mcpu) /" config.mak
+# fi
 
 # configure seems to incorrectly detect VSX instructions.
 sed -i '' -e 's/#define HAVE_VSX 1/#define HAVE_VSX 0/' config.h

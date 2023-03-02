@@ -56,6 +56,7 @@ if test "$1" = "--root" ; then
         ssh root@$host mkdir -p /var/root/.ssh
         rsync -ai host_files/_all_/root/ root@$host:/var/root/
         ssh root@$host rm -f /var/root/.profile
+        ssh root@$host chmod go-r /var/root/.ssh/id_rsa
     done
 
     echo
@@ -78,6 +79,7 @@ for host in $uphosts ; do
             /Users/macuser/tmp
         rsync -ai host_files/_all_/macuser/ $host:/Users/macuser/
         ssh $host rm -f /Users/macuser/.profile
+        ssh $host chmod go-r /Users/macuser/.ssh/id_rsa
         if test -e host_files/$host/Users/macuser ; then
             rsync -ai host_files/$host/Users/macuser/ $host:/Users/macuser/
         fi

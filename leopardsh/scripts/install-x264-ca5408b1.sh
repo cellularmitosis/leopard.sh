@@ -20,6 +20,10 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+if ! test -e /opt/gcc-4.9.4 ; then
+    leopard.sh gcc-libs-4.9.4
+fi
+
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
@@ -36,14 +40,13 @@ fi
 if ! which -s gcc-4.9 ; then
     leopard.sh gcc-4.9.4
 fi
+CC=gcc-4.9
+CXX=g++-4.9
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
-
-CC=gcc-4.9
-CXX=g++-4.9
 
 # gcc-4.9: error: unrecognized command line option '-fastf'
 sed -i '' -e 's/ -fastf / -ffast-math /' configure

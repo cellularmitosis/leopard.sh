@@ -8,6 +8,9 @@
   - e.g. https://github.com/opensource-apple/cctools
 - https://github.com/mattl/opensource.apple.com/blob/master/files.txt
 
+SDK's:
+- https://github.com/phracker/MacOSX-SDKs
+
 
 ## `@executable_path`, `@loader_path`, `@rpath`
 

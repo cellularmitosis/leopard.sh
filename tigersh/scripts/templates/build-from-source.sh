@@ -22,6 +22,11 @@ fi
 pkgspec=$package-$version$ppc64
 
 # 👇 EDIT HERE:
+# if ! test -e /opt/gcc-4.9.4 ; then
+#     tiger.sh gcc-libs-4.9.4
+# fi
+
+# 👇 EDIT HERE:
 # dep=bar-1.0$ppc64
 # if ! test -e /opt/$dep ; then
 #     tiger.sh $dep
@@ -89,13 +94,6 @@ fi
 # fi
 # CC=gcc-4.9
 # CXX=g++-4.9
-
-# 👇 EDIT HERE:
-# if ! type -a gcc-10.3 >/dev/null 2>&1 ; then
-#     tiger.sh gcc-10.3.0
-# fi
-# CC=gcc-10.3
-# CXX=g++-10.3
 
 # 👇 EDIT HERE:
 # if ! test -e /opt/ld64-97.17-tigerbrew ; then
