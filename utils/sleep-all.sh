@@ -6,7 +6,7 @@ set -e
 
 mkdir -p ~/.ssh/sockets
 
-hosts=${1:-"imacg5 imacg52 emac2 emac3 pbookg4 pbookg42 graphite ibookg3 imacg3"}
+hosts=${1:-"imacg5 imacg52 imacg53 pmacg5 emac emac2 emac3 pbookg4 pbookg42 graphite ibookg3 imacg3"}
 
 uphosts=""
 echo "👉 ping"

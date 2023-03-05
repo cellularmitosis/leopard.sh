@@ -28,3 +28,6 @@ misc/**/*.mkv
 misc/**/*.avi
 misc/**/*.mpg
 misc/**/*.mpeg
+
+.wwdc/
+.books/

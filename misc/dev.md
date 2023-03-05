@@ -1,5 +1,31 @@
 # Developing for OS X Tiger / Leopard
 
+- ADC https://web.archive.org/web/20060314030003/http://developer.apple.com/
+  - Reference Library https://web.archive.org/web/20060207230031/http://developer.apple.com/referencelibrary/
+- lists.apple.com: Cocoa-dev https://lists.apple.com/archives/Cocoa-dev
+
+
+# WWDC
+
+- 2000
+  - https://www.macintoshrepository.org/18729-apple-wwdc-2000-conference-sessions
+- 2001
+  - https://www.macintoshrepository.org/22730-apple-wwdc-2001-conference-sessions
+- 2002
+  - https://archive.org/details/Wwdc2002DvdSet
+  - https://www.macintoshrepository.org/22421-wwdc-2002-conference-sessions-dvds
+- 2003
+  - https://archive.org/details/Apple_WWDC_2003_DVDs
+  - https://www.macintoshrepository.org/18733-apple-wwdc-2003-conference-sessions
+- 2004
+  - https://web.archive.org/web/20040713003715/http://developer.apple.com/wwdc/descriptions/
+- 2005
+  - https://macosxautomation.com/applescript/wwdc-session-138.html
+- misc
+  - https://gist.github.com/IsaacXen/874c59aec92a13f30728aecdabb9ea80
+  - https://pvieito.com/2022/05/wwdc-sessions-archive
+
+
 # Open source codebases to study
 
 
