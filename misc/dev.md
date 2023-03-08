@@ -26,6 +26,24 @@
   - https://pvieito.com/2022/05/wwdc-sessions-archive
 
 
+# Books
+
+- _Learning Cocoa_ by Apple Computer, Inc
+  - https://www.oreilly.com/library/view/learning-cocoa/0596001606/
+  - Example code: https://resources.oreilly.com/examples/9780596001605/
+  - libgen MD5: 905E5A172536DD312A82DD59751DD3D1
+- _Programming Mac OS X with Cocoa for Beginners_
+  - https://en.wikibooks.org/wiki/Programming_Mac_OS_X_with_Cocoa_for_Beginners
+
+
+# Sample code
+
+- https://github.com/HelmutJ/CocoaSampleCode
+- https://github.com/kicsipixel/Cocoa-Samples
+- https://github.com/gammasoft71/Examples_Cocoa
+- https://github.com/MrNoodle/NoodleKit
+
+
 # Open source codebases to study
 
 
