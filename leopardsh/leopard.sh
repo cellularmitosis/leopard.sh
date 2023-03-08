@@ -231,6 +231,8 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
     "usr-local-sbin /usr/local/sbin" \
     "usr-local-share /usr/local/share" \
     "usr-local-share-man /usr/local/share/man" \
+    "usr-local-share-man1 /usr/local/share/man/man1" \
+    "usr-local-share-man3 /usr/local/share/man/man3" \
     ; do
         arr=($pair)
         stamp="can-write-in-${arr[0]}"
@@ -801,7 +803,10 @@ if test "$op" = "link" ; then
                         echo -e "${COLOR_CYAN}Linking${COLOR_NONE} $pkgspec into /usr/local." >&2
                         did_print_header=1
                     fi
-                    mkdir -p /usr/local/share/man/$d/
+                    if ! test -e /usr/local/share/man/$d ; then
+                        mkdir -p /usr/local/share/man/$d/
+                        chmod g+w /usr/local/share/man/$d
+                    fi
                     ln -vsf $optpkgman/$d/* /usr/local/share/man/$d | sed 's/^/  /'
                 fi
             done

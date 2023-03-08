@@ -86,6 +86,7 @@ neofetch-7.1.0
 ninja-1.11.1
 openjdk7-20120314
 openmark.app-1.60
+openssh-9.2p1
 openssl-1.1.1t
 opera.app-10.63
 opus-1.1.2

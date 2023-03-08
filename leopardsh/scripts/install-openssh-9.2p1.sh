@@ -4,7 +4,7 @@
 # Install openssh on OS X Leopard / PowerPC.
 
 package=openssh
-version=9.1p1
+version=9.2p1
 upstream=https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/$package-$version.tar.gz
 
 set -e -o pipefail
@@ -18,7 +18,7 @@ fi
 pkgspec=$package-$version$ppc64
 
 for dep in \
-    libressl-3.4.2$ppc64
+    openssl-1.1.1t$ppc64
 do
     if ! test -e /opt/$dep ; then
         leopard.sh $dep
@@ -43,22 +43,22 @@ fi
 if ! which -s gcc-4.2 ; then
     leopard.sh gcc-4.2
 fi
+CC=gcc-4.2
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-CC=gcc-4.2
 
-CFLAGS=$(leopard.sh -mcpu -O)
+CFLAGS="$(leopard.sh -mcpu -O) $CFLAGS"
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
     LDFLAGS="-m64 $LDFLAGS"
 fi
 
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-    --with-ssl-dir=/opt/libressl-3.4.2 \
+    --with-ssl-dir=/opt/openssl-1.1.1t$ppc64 \
     CPPFLAGS="$CPPFLAGS" \
     LDFLAGS="$LDFLAGS" \
     CFLAGS="$CFLAGS" \
