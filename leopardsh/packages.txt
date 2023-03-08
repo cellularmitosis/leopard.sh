@@ -108,6 +108,7 @@ quake2-pak0.pak-3.14
 quake2.app-1.1
 quake3.app-1.32c
 quickjs-20210327
+quicktime-7.7.0
 racket-6.0.1
 ragel-6.10
 readline-8.2

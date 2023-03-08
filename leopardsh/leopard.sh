@@ -219,7 +219,8 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
     fi
 
     if test "$needs_new_terminal" = "true" ; then
-        echo "Please open a new Terminal window for this change to take effect." >&2
+        echo "This change won't take effect until you open a new Terminal window." >&2
+        echo "Please open a new Terminal window and run $0 again." >&2
         exit 1
     fi
 
@@ -579,6 +580,10 @@ if test "$op" = "install" ; then
     fi
 
     rm -f /opt/$pkgspec/INCOMPLETE_INSTALLATION
+
+    if test -e /opt/$pkgspec/SUPERFLUOUS_DIRECTORY ; then
+        rm -rf /opt/$pkgspec
+    fi
 
     exit 0
 fi
