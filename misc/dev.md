@@ -34,9 +34,15 @@
   - libgen MD5: 905E5A172536DD312A82DD59751DD3D1
 - _Programming Mac OS X with Cocoa for Beginners_
   - https://en.wikibooks.org/wiki/Programming_Mac_OS_X_with_Cocoa_for_Beginners
+- https://news.ycombinator.com/item?id=34680345
 
 
 # Sample code
+
+Unfortunately, all of the old Xcode sample code appears to be offline :(
+- https://web.archive.org/web/20080509104309/http://developer.apple.com/samplecode/index-date.html
+
+<br>
 
 - https://github.com/HelmutJ/CocoaSampleCode
 - https://github.com/kicsipixel/Cocoa-Samples
