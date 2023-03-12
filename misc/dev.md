@@ -18,6 +18,7 @@
   - https://archive.org/details/Apple_WWDC_2003_DVDs
   - https://www.macintoshrepository.org/18733-apple-wwdc-2003-conference-sessions
 - 2004
+  - https://www.macintoshrepository.org/26106-apple-wwdc-2004-conference-sessions
   - https://web.archive.org/web/20040713003715/http://developer.apple.com/wwdc/descriptions/
 - 2005
   - https://macosxautomation.com/applescript/wwdc-session-138.html
@@ -42,12 +43,22 @@
 Unfortunately, all of the old Xcode sample code appears to be offline :(
 - https://web.archive.org/web/20080509104309/http://developer.apple.com/samplecode/index-date.html
 
+However, it appears this sample code is still available via the Apple Developer Connection monthly DVD's.
+- https://archive.org/details/Apple_Developer_Discs_1989-2009
+- https://www.macintoshrepository.org/software_search.php?s=apple+developer+connection&sid=&p=1
+- Note: the last "Leopard Reference Library" is in the August 2009 DVD.  However, that DVD is corrupted, but the July 2009 DVD appears to have the same ADC Reference Library content.
+- perhaps https://www.betaarchive.com/forum/viewtopic.php?t=37380 
+
 <br>
 
 - https://github.com/HelmutJ/CocoaSampleCode
 - https://github.com/kicsipixel/Cocoa-Samples
 - https://github.com/gammasoft71/Examples_Cocoa
 - https://github.com/MrNoodle/NoodleKit
+- https://cocoadev.github.io/all.html
+- https://th30z.blogspot.com/search/label/Cocoa
+  - https://github.com/matteobertozzi/blog-code/tree/master/zips
+- https://www.harmless.de/cocoa-code.php
 
 
 # Open source codebases to study
@@ -62,6 +73,13 @@ Unfortunately, all of the old Xcode sample code appears to be offline :(
     - https://get.videolan.org/vlc/0.9.10/vlc-0.9.10.tar.bz2
   - last Leopard release: 2.0.10
     - https://get.videolan.org/vlc/2.0.10/vlc-2.0.10.tar.xz
+
+
+## MPlayer OSX Extended
+
+- https://github.com/sttz/MPlayer-OSX-Extended
+- rev14 is the last Leopard release
+- rev11 is the last Tiger release
 
 
 ## Play (music player / manager)
@@ -101,28 +119,19 @@ Supports Tiger.
   - looks like v1.73 was the last PowerPC version
 
 
-## fre:ac (Free Audio Converter)
+## Adium
 
-Note: only supports back to OS X 10.9
-
-- https://www.freac.org/
-
-
-## Clementine (music player / manager)
-
-Note: appears to only support modern macOS
-
-- https://www.clementine-player.org/
+- https://github.com/adium/adium
+- https://web.archive.org/web/20161110032216/https://trac.adium.im/wiki/PreviousReleases
+- Last Leopard release: https://adiumx.cachefly.net/adium-1.4.5.tgz
+- Last Tiger release: http://adiumx.cachefly.net/adium-1.3.10.tgz
 
 
 ## Camino
 
-FIXME
-
-
-## Adium
-
-FIXME
+- https://hg.mozilla.org/camino
+- https://hg.mozilla.org/camino/archive/tip.zip
+- https://github.com/cellularmitosis/camino
 
 
 ## TenFourFox / InterWebPPC
@@ -143,3 +152,16 @@ FIXME
 - Swift on Mac OS 9 https://belkadan.com/blog/2020/04/Swift-on-Mac-OS-9/
   - hmm, perhaps this could be the basis for Swift on Tiger?
 
+
+## fre:ac (Free Audio Converter)
+
+Note: only supports back to OS X 10.9
+
+- https://www.freac.org/
+
+
+## Clementine (music player / manager)
+
+Note: appears to only support modern macOS
+
+- https://www.clementine-player.org/
