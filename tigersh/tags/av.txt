@@ -19,6 +19,7 @@ mplayer-osx.app-rev11
 opus-1.1.2
 opus-1.1.2.ppc64
 quicktime-7.6.4
+realplayer.app-12.0.1
 sdl2-2.0.3
 speex-1.2.1
 speex-1.2.1.ppc64
