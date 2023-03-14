@@ -1,30 +1,38 @@
 # Developing for OS X Tiger / Leopard
 
-- ADC https://web.archive.org/web/20060314030003/http://developer.apple.com/
-  - Reference Library https://web.archive.org/web/20060207230031/http://developer.apple.com/referencelibrary/
-- lists.apple.com: Cocoa-dev https://lists.apple.com/archives/Cocoa-dev
+
+# ADC Reference Library
+
+- https://leopard-adc.pepas.com/
+  - https://github.com/cellularmitosis/ADC-reference-library-2009-july
+  - Previously online at https://web.archive.org/web/20090130073524/http://developer.apple.com:80/referencelibrary/
 
 
 # WWDC
 
 - 2000
   - https://www.macintoshrepository.org/18729-apple-wwdc-2000-conference-sessions
+  - https://github.com/ASCIIwwdc/wwdc-session-transcripts/tree/master/en/2000
 - 2001
   - https://www.macintoshrepository.org/22730-apple-wwdc-2001-conference-sessions
+  - https://github.com/ASCIIwwdc/wwdc-session-transcripts/tree/master/en/2001
 - 2002
   - https://archive.org/details/Wwdc2002DvdSet
   - https://www.macintoshrepository.org/22421-wwdc-2002-conference-sessions-dvds
 - 2003
   - https://archive.org/details/Apple_WWDC_2003_DVDs
+  - https://github.com/ASCIIwwdc/wwdc-session-transcripts/tree/master/en/2003
   - https://www.macintoshrepository.org/18733-apple-wwdc-2003-conference-sessions
 - 2004
   - https://www.macintoshrepository.org/26106-apple-wwdc-2004-conference-sessions
+  - https://github.com/ASCIIwwdc/wwdc-session-transcripts/tree/master/en/2004
   - https://web.archive.org/web/20040713003715/http://developer.apple.com/wwdc/descriptions/
 - 2005
   - https://macosxautomation.com/applescript/wwdc-session-138.html
 - misc
   - https://gist.github.com/IsaacXen/874c59aec92a13f30728aecdabb9ea80
   - https://pvieito.com/2022/05/wwdc-sessions-archive
+  - https://github.com/ASCIIwwdc/wwdc-session-transcripts/blob/master/sessions.json
 
 
 # Books
@@ -38,18 +46,23 @@
 - https://news.ycombinator.com/item?id=34680345
 
 
-# Sample code
+# Mailing Lists, Forums, etc
 
-Unfortunately, all of the old Xcode sample code appears to be offline :(
-- https://web.archive.org/web/20080509104309/http://developer.apple.com/samplecode/index-date.html
+- lists.apple.com: Cocoa-dev https://lists.apple.com/archives/Cocoa-dev
 
-However, it appears this sample code is still available via the Apple Developer Connection monthly DVD's.
-- https://archive.org/details/Apple_Developer_Discs_1989-2009
-- https://www.macintoshrepository.org/software_search.php?s=apple+developer+connection&sid=&p=1
-- Note: the last "Leopard Reference Library" is in the August 2009 DVD.  However, that DVD is corrupted, but the July 2009 DVD appears to have the same ADC Reference Library content.
-- perhaps https://www.betaarchive.com/forum/viewtopic.php?t=37380 
 
-<br>
+# Objective-C 2.0 (Leopard-only)
+
+- https://web.archive.org/web/20080509103217/https://developer.apple.com/leopard/overview/objectivec2.html
+  - https://lethain.com/finally-waving-the-white-flag-to-objective-c-2-0/
+
+
+# Open source codebases to study
+
+- https://github.com/uhub/awesome-objective-c
+
+
+## Misc
 
 - https://github.com/HelmutJ/CocoaSampleCode
 - https://github.com/kicsipixel/Cocoa-Samples
@@ -61,7 +74,11 @@ However, it appears this sample code is still available via the Apple Developer 
 - https://www.harmless.de/cocoa-code.php
 
 
-# Open source codebases to study
+## GNUStep
+
+- https://github.com/gnustep/libs-gui/tree/master/Source
+- https://github.com/gnustep/libs-base/tree/master/Source
+- https://github.com/gnustep/libs-corebase/tree/master/Source
 
 
 ## VLC
