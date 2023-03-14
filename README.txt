@@ -268,3 +268,4 @@ Vintage Mac content:
 - https://www.youtube.com/@HrutkayMods
 - https://www.youtube.com/@Druaga1
 - https://www.youtube.com/@themacintoshmuseum
+- https://www.reddit.com/r/VintageApple

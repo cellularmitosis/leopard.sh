@@ -277,3 +277,4 @@ If `leopard.sh` and `tiger.sh` aren't for you, checkout these other package mana
 - https://www.youtube.com/@HrutkayMods
 - https://www.youtube.com/@Druaga1
 - https://www.youtube.com/@themacintoshmuseum
+- https://www.reddit.com/r/VintageApple
