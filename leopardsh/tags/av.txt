@@ -1,5 +1,7 @@
 fdk-aac-2.0.2
 fdk-aac-2.0.2.ppc64
+ffmpeg-5.1.2
+ffmpeg-5.1.2.ppc64
 flac-1.4.2
 flac-1.4.2.ppc64
 libao-1.2.0
