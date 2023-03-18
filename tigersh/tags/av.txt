@@ -30,3 +30,4 @@ twolame-0.4.0.ppc64
 vlc.app-0.9.10
 vorbis-tools-1.4.2
 x264-ca5408b1
+xiphqt-0.1.9

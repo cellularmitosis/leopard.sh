@@ -133,5 +133,6 @@ wget-1.21.3
 x264-ca5408b1
 xbench.app-1.3
 xcode-2.5
+xiphqt-0.1.9
 xz-5.2.5
 zdoom.app-2.8.1
