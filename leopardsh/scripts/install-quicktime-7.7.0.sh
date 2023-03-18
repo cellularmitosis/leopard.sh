@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install quicktime 7.7.0 on OS X Leopard / PowerPC.
+# Install QuickTime 7.7.0 on OS X Leopard / PowerPC.
 
 set -e -o pipefail
 

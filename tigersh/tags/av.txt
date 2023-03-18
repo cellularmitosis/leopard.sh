@@ -19,6 +19,7 @@ mplayer-binary-codecs-20041107
 mplayer-osx.app-rev11
 opus-1.1.2
 opus-1.1.2.ppc64
+perian-1.2.3
 quicktime-7.6.4
 quicktime-mpeg2-6.4.1
 realplayer.app-12.0.1
