@@ -80,6 +80,10 @@ if test -z "$ppc64" ; then
     PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
 fi
 
+if ! test -e /opt/gcc-4.9.4 ; then
+    tiger.sh gcc-libs-4.9.4
+fi
+
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 if tiger.sh --install-binpkg $pkgspec ; then

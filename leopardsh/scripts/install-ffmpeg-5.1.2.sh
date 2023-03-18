@@ -44,6 +44,10 @@ done
 # LIBS="-lbar -lqux"
 PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
 
+if ! test -e /opt/gcc-4.9.4 ; then
+    leopard.sh gcc-libs-4.9.4
+fi
+
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
