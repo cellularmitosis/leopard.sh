@@ -3,6 +3,7 @@ fdk-aac-2.0.2.ppc64
 ffmpeg-5.1.2
 flac-1.4.2
 flac-1.4.2.ppc64
+flip4mac-2.3.8.1
 libao-1.2.0
 libogg-1.5.3
 libogg-1.5.3.ppc64

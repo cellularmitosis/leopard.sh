@@ -4,6 +4,7 @@ ffmpeg-5.1.2
 ffmpeg-5.1.2.ppc64
 flac-1.4.2
 flac-1.4.2.ppc64
+flip4mac-2.4.4.2
 libao-1.2.0
 libao-1.2.0.ppc64
 libogg-1.5.3
