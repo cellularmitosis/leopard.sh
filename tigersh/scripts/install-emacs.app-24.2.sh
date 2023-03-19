@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-emacs.app-24.2.sh

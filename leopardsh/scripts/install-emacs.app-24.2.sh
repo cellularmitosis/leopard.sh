@@ -4,9 +4,8 @@
 # Install Emacs.app on OS X / PowerPC.
 
 package=emacs.app
-version=23.1
+version=24.2
 appname1=Emacs
-upstream=https://emacsformacosx.com/emacs-builds/Emacs-23.1-universal-10.5.8.dmg
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
