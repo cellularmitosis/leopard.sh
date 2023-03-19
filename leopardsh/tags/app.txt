@@ -3,6 +3,7 @@ adium.app-1.4.5
 camino.app-2.1.2
 chicken.app-2.2b2
 drracket.app-6.0.1
+emacs.app-23.1
 handbrake.app-0.9.1
 handbrake.app-0.9.4
 iceweaselppc.app-fpr13
