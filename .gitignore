@@ -12,6 +12,9 @@ dist/orig/*.*
 
 linux/*
 !linux/.keep
+!linux/Makefile
+!linux/remaster.sh
+!linux/README.txt
 
 **/*.md5
 **/md5s.manifest
