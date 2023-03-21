@@ -1,0 +1,1 @@
+../../leopardsh/scripts/install-hyperspec-7.0.sh

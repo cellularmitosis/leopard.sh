@@ -11,6 +11,7 @@ gcc-4.9.4
 guile-1.8.8
 guile-1.8.8.ppc64
 guile-2.0.14
+hyperspec-7.0
 janet-1.25.1
 lua-5.1.5
 lua-5.1.5.ppc64
