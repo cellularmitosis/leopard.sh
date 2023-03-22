@@ -1,11 +1,12 @@
 #!/opt/tigersh-deps-0.1/bin/bash
-# based on templates/install-foo-1.0.sh v4
+# based on templates/build-from-source.sh v6
 
 # Install libsigsegv on OS X Tiger / PowerPC.
 
 package=libsigsegv
 version=2.14
-upstream=https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/$package-$version.tar.gz
+upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
+description="Library for handling page faults in user mode"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -17,37 +18,33 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-binpkg=$pkgspec.$(tiger.sh --os.cpu).tar.gz
-if curl -sSfI $TIGERSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$TIGERSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $TIGERSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
-if ! test -e ~/Downloads/$tarball ; then
-    cd ~/Downloads
-    curl -#fLO $srcmirror/$tarball
+if tiger.sh --install-binpkg $pkgspec ; then
+    exit 0
 fi
 
-test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 63a2b35f11b2fbccc3d82f9e6c6afd58
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
+set -x
 
-cd /tmp
-rm -rf $package-$version
+if ! test -e /usr/bin/gcc ; then
+    tiger.sh xcode-2.5
+fi
 
-tar xzf ~/Downloads/$tarball
+echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
+tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-
-CFLAGS=$(tiger.sh -mcpu -O)
+CFLAGS="$(tiger.sh -mcpu -O) $CFLAGS"
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
-    # LDFLAGS="-m64 $LDFLAGS"
 fi
 
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --disable-dependency-tracking \
     --enable-shared \
-    CFLAGS="$CFLAGS" \
-    # LDFLAGS="$LDFLAGS"
+    CFLAGS="$CFLAGS"
 
 /usr/bin/time make $(tiger.sh -j) V=1
 

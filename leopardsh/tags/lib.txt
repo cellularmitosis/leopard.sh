@@ -32,6 +32,8 @@ libiconv-bootstrap-1.16.ppc64
 libogg-1.5.3
 libogg-1.5.3.ppc64
 libressl-3.4.2
+libsigsegv-2.14
+libsigsegv-2.14.ppc64
 libsndfile-1.0.28
 libsndfile-1.0.28.ppc64
 libtheora-1.1.1

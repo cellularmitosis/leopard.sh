@@ -1,13 +1,14 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v4
+# based on templates/build-from-source.sh v6
 
 # Install libsigsegv on OS X Leopard / PowerPC.
 
 package=libsigsegv
 version=2.14
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
+description="Library for handling page faults in user mode"
 
-set -e -x -o pipefail
+set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
@@ -17,37 +18,33 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-binpkg=$pkgspec.$(leopard.sh --os.cpu).tar.gz
-if curl -sSfI $LEOPARDSH_MIRROR/binpkgs/$binpkg >/dev/null 2>&1 && test -z "$LEOPARDSH_FORCE_BUILD" ; then
-    cd /opt
-    curl -#f $LEOPARDSH_MIRROR/binpkgs/$binpkg | gunzip | tar x
-else
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
-if ! test -e ~/Downloads/$tarball ; then
-    cd ~/Downloads
-    curl -#fLO $srcmirror/$tarball
+if leopard.sh --install-binpkg $pkgspec ; then
+    exit 0
 fi
 
-test "$(md5 ~/Downloads/$tarball | awk '{print $NF}')" = 63a2b35f11b2fbccc3d82f9e6c6afd58
+echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
+set -x
 
-cd /tmp
-rm -rf $package-$version
+if ! test -e /usr/bin/gcc ; then
+    leopard.sh xcode-3.1.4
+fi
 
-tar xzf ~/Downloads/$tarball
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
+leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-
-CFLAGS=$(leopard.sh -mcpu -O)
+CFLAGS="$(leopard.sh -mcpu -O) $CFLAGS"
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
-    # LDFLAGS="-m64 $LDFLAGS"
 fi
 
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+    --disable-dependency-tracking \
     --enable-shared \
-    CFLAGS="$CFLAGS" \
-    # LDFLAGS="$LDFLAGS"
+    CFLAGS="$CFLAGS"
 
 /usr/bin/time make $(leopard.sh -j) V=1
 
