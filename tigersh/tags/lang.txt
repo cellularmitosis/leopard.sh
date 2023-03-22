@@ -22,6 +22,7 @@ python2-2.7.18
 quickjs-20210327
 racket-6.0.1
 sbcl-1.0.47
+sbcl-2.0.9
 scheme48-1.9.2
 tcl-8.6.12
 tcl-8.6.12.ppc64

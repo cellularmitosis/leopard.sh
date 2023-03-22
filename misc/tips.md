@@ -12,6 +12,13 @@ SDK's:
 - https://github.com/phracker/MacOSX-SDKs
 
 
+## Misty's blog posts
+
+Many of Misty Demeo's old blog posts (while developing Tigerbrew) contain lots of Darwin porting tips.
+
+- https://www.mistys-internet.website/blog/blog/2013/04/09/software-archaeology-apples-cctools/
+
+
 ## _POSIX_C_SOURCE
 
 - https://trac.macports.org/timeline?from=2017-01-29T03%3A21%3A54Z&precision=second

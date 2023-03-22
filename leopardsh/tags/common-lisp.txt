@@ -3,3 +3,4 @@ clozure-cl.app-1.4
 clozure-cl.app-1.6
 hyperspec-7.0
 sbcl-1.0.47
+sbcl-2.0.9

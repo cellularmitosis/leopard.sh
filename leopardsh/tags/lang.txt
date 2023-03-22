@@ -30,6 +30,7 @@ quickjs-20210327
 quickjs-20210327.ppc64
 racket-6.0.1
 sbcl-1.0.47
+sbcl-2.0.9
 scheme48-1.9.2
 scheme48-1.9.2.ppc64
 tcl-8.6.12

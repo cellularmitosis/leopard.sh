@@ -124,6 +124,7 @@ ragel-6.10
 readline-8.2
 realplayer.app-12.0.1
 sbcl-1.0.47
+sbcl-2.0.9
 scheme48-1.9.2
 screen-4.8.0
 sdl-1.2.15.20220129
