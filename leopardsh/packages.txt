@@ -13,6 +13,7 @@ chezscheme-9.5.9-racket-20230127
 chibi-scheme-20230208
 chicken-5.3.0
 chicken.app-2.2b2
+clisp-2.49.93.20230212
 cloog-0.18.1
 clozure-cl.app-1.4
 clozure-cl.app-1.6

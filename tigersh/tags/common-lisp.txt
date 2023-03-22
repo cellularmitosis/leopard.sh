@@ -1,3 +1,4 @@
+clisp-2.49.93.20230212
 clozure-cl.app-1.4
 hyperspec-7.0
 sbcl-1.0.47

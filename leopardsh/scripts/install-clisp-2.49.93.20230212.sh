@@ -1,12 +1,16 @@
 #!/bin/bash
-# based on templates/install-foo-1.0.sh v4
+# based on templates/build-from-source.sh v6
 
 # Install clisp on OS X Leopard / PowerPC.
 
 package=clisp
-version=2.39.20210628
+version=2.49.93.20230212
+# upstream=https://gitlab.com/gnu-clisp/clisp/-/archive/master/clisp-master.tar.gz
+commit=79cbafdbc6337d6dcd8f2dbad69fb7ebf7a46012
+upstream=https://gitlab.com/gnu-clisp/clisp/-/archive/$commit/$package-$commit.tar.gz
+description="An ANSI Common Lisp implementation in C"
 
-set -e -x -o pipefail
+set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
 LEOPARDSH_MIRROR=${LEOPARDSH_MIRROR:-https://leopard.sh}
 
@@ -15,10 +19,6 @@ if test -n "$(echo -n $0 | grep '\.ppc64\.sh$')" ; then
 fi
 
 pkgspec=$package-$version$ppc64
-
-if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
-    leopard.sh gcc-4.2
-fi
 
 if ! test -e /opt/hyperspec-7.0 ; then
     leopard.sh hyperspec-7.0
@@ -30,7 +30,7 @@ for dep in \
     libiconv-bootstrap-1.16$ppc64 \
     libsigsegv-2.14$ppc64 \
     libunistring-1.0$ppc64 \
-    readline-8.1.2$ppc64
+    readline-8.2$ppc64
     # lightning-2.1.3$ppc64
 do
     if ! test -e /opt/$dep ; then
@@ -40,7 +40,7 @@ do
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 done
 
-echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --os.cpu))\007"
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
     exit 0
@@ -52,9 +52,6 @@ set -x
 if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
-
-leopard.sh --unpack-dist $pkgspec
-cd /tmp/$package-$commit
 
 # Note: stock leopard gcc fails with:
 #   gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..   -I/opt/libiconv-bootstrap-1.16/include -I/opt/libunistring-1.0/include -I/opt/libsigsegv-2.14/include -I/opt/gettext-0.21/include -I/opt/libffcall-2.4/include -I/opt/readline-8.1.2/include  -g -O2 -W -Wswitch -Wcomment -Wpointer-arith -Wreturn-type -Wmissing-declarations -Wimplicit -Wno-sign-compare -Wno-format-nonliteral -O2 -fwrapv -fno-strict-aliasing -DUNIX_BINARY_DISTRIB -DNO_ASM -DENABLE_UNICODE -DDYNAMIC_MODULES  -fno-common -DPIC  -MT localcharset.o -MD -MP -MF $depbase.Tpo -c -o localcharset.o localcharset.c &&\
@@ -69,15 +66,26 @@ cd /tmp/$package-$commit
 #   make[1]: *** [all] Error 2
 #   make: *** [gllib/libgnu.a] Error 2
 # So we use gcc-4.2.
+if ! which -s gcc-4.2 ; then
+    leopard.sh gcc-4.2
+fi
 CC=gcc-4.2
 
-CFLAGS=$(leopard.sh -mcpu -O)
+echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
+
+leopard.sh --unpack-dist $pkgspec
+cd /tmp/$package-$version
+
+CFLAGS="$(leopard.sh -mcpu -O) $CFLAGS"
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
     LDFLAGS="-m64 $LDFLAGS"
 fi
 
 /usr/bin/time ./configure --prefix=/opt/$pkgspec \
+    --disable-dependency-tracking \
+    --disable-maintainer-mode \
+    --disable-debug \
     --with-ffcall \
     --with-unicode \
     --with-threads=POSIX_THREADS \
@@ -85,7 +93,7 @@ fi
     --with-libffcall-prefix=/opt/libffcall-2.4$ppc64 \
     --with-libiconv-prefix=/opt/libiconv-bootstrap-1.16$ppc64 \
     --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
-    --with-libreadline-prefix=/opt/readline-8.1.2$ppc64 \
+    --with-libreadline-prefix=/opt/readline-8.2$ppc64 \
     --with-libsigsegv-prefix=/opt/libsigsegv-2.14$ppc64 \
     --with-libunistring-prefix=/opt/libunistring-1.0$ppc64 \
         --with-module=asdf \
