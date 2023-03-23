@@ -1,0 +1,2 @@
+texi2html-5.0
+texinfo-6.8
