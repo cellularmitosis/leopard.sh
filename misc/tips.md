@@ -26,6 +26,7 @@ Many of Misty Demeo's old blog posts (while developing Tigerbrew) contain lots o
 
 ## `@executable_path`, `@loader_path`, `@rpath`
 
+- https://matthew-brett.github.io/docosx/mac_runtime_link.html
 - https://wincent.com/wiki/%40executable_path%2C_%40load_path_and_%40rpath
 
 looking for `@executable_path`, etc:

@@ -22,22 +22,6 @@ if ! test -e /opt/gcc-4.9.4 ; then
     leopard.sh gcc-libs-4.9.4
 fi
 
-# 👇 EDIT HERE:
-# for dep in \
-#     bar-2.1$ppc64 \
-#     qux-3.4$ppc64
-# do
-#     if ! test -e /opt/$dep ; then
-#         leopard.sh $dep
-#     fi
-#     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
-#     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
-#     PATH="/opt/$dep/bin:$PATH"
-#     PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
-# done
-# LIBS="-lbar -lqux"
-# PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
-
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
