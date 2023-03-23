@@ -23,13 +23,6 @@ if ! test -e /opt/gcc-4.9.4 ; then
 fi
 
 # 👇 EDIT HERE:
-# dep=bar-1.0$ppc64
-# if ! test -e /opt/$dep ; then
-#     leopard.sh $dep
-#     PATH="/opt/$dep/bin:$PATH"
-# fi
-
-# 👇 EDIT HERE:
 # for dep in \
 #     bar-2.1$ppc64 \
 #     qux-3.4$ppc64
@@ -114,9 +107,9 @@ done
 #  #include <dispatch/dispatch.h>
 
 # TODO: make a tex package and build the docs
-#cd doc/manual
-#make
-#cd - >/dev/null
+# cd doc/manual
+# make info html
+# cd - >/dev/null
 
 if test -n "$LEOPARDSH_RUN_LONG_TESTS" ; then
     cd tests

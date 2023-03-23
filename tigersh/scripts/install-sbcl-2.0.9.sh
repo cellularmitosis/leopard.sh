@@ -22,13 +22,6 @@ if ! test -e /opt/gcc-4.9.4 ; then
     tiger.sh gcc-libs-4.9.4
 fi
 
-# 👇 EDIT HERE:
-# dep=bar-1.0$ppc64
-# if ! test -e /opt/$dep ; then
-#     tiger.sh $dep
-#     PATH="/opt/$dep/bin:$PATH"
-# fi
-
 # Tiger needs _SC_NPROCESSORS_ONLN:
 # gcc-4.9 -Wall -Os -fdollars-in-identifiers -mmacosx-version-min=10.4 -I../src/runtime   grovel-headers.c  -lSystem -lc -lgcc -o grovel-headers
 # grovel-headers.c: In function 'main':
@@ -114,10 +107,18 @@ sed -i '' -e 's|`expr|`/opt/coreutils-9.0/bin/expr|g' make-config.sh
 # darwin-os.h:41:31: fatal error: dispatch/dispatch.h: No such file or directory
 #  #include <dispatch/dispatch.h>
 
-# TODO: make a tex package and install the docs.
-#cd doc/manual
-#make
-#cd - >/dev/null
+if ! test -e /usr/local/texlive/2010 ; then
+    echo "Error: MacTex 2010 missing" >&2
+    echo "tiger.sh mactex-2010" >&2
+    exit 1
+fi
+
+cd doc/manual
+# note: 'make pdf' fails:
+#   /usr/local/bin/texi2dvi: pdfetex exited with bad status, quitting.
+#   make: *** [sbcl.pdf] Error 1
+make info html
+cd - >/dev/null
 
 if test -n "$TIGERSH_RUN_LONG_TESTS" ; then
     cd tests
