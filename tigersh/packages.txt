@@ -75,6 +75,7 @@ lzo-2.10
 lzop-1.04
 m4-1.4.19
 macports-legacy-support-20221029
+mactex-2010
 make-4.3
 meson-1.0.0
 mpc-1.0.3
