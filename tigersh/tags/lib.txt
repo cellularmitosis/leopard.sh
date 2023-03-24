@@ -14,6 +14,7 @@ gdbm-1.23
 gdbm-1.23.ppc64
 gettext-0.20
 gettext-0.20.ppc64
+glib-1.2.10
 gmp-4.3.2
 gmp-4.3.2.ppc64
 gmp-6.2.1

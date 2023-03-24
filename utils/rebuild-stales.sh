@@ -111,8 +111,11 @@ for pkgspec in $(cat /tmp/to-build.txt) ; do
     echo "Wiping out /opt (but not /opt/local)."
     rm -rf /usr/local/bin/*
     rm -rf /usr/local/sbin/*
-    rm -rf /usr/local/share/man/*
+    rm -rf /usr/local/share/man/* || sudo rm -rf /usr/local/share/man/*  # MacTex installs files owned by root.
     rm -rf /opt/*
+    if test -e /usr/local/texlive || test -e /usr/texbin ; then
+        sudo rm -rf /usr/local/texlive /usr/texbin
+    fi
 
     mv /tmp/$pkgmgr /usr/local/bin/
     mv /tmp/tigersh-deps-0.1 /opt/
