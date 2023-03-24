@@ -1,6 +1,6 @@
 #!/opt/tigersh-deps-0.1/bin/bash
 
-# Install MacTeX 2010 on OS X Tiger / PowerPC.
+# Install MacTeX on OS X Tiger / PowerPC.
 
 set -e -o pipefail
 

@@ -1,10 +1,10 @@
-#!/opt/tigersh-deps-0.1/bin/bash
+#!/bin/bash
 
-# Install BasicTeX on OS X Tiger / PowerPC.
+# Install BasicTeX on OS X Leopard / PowerPC.
 
 set -e -o pipefail
 
-pkgspec=basictex-2010
+pkgspec=basictex-2016
 
 if test -e /usr/local/texlive/2010basic ; then
     echo -e "${COLOR_YELLOW}${pkgspec}${COLOR_NONE} is already installed." >&2
@@ -12,9 +12,9 @@ if test -e /usr/local/texlive/2010basic ; then
     exit 0
 fi
 
-tiger.sh --unpack-dist $pkgspec.tiger
-open /tmp/$pkgspec/BasicTex-2010.pkg
+leopard.sh --unpack-dist $pkgspec.leopard
+open /tmp/$pkgspec/mactex-basictex-20161009.pkg
 echo "Please use the on-screen dialog to install BasicTeX." >&2
-echo "Afterwards, try running your tiger.sh command again." >&2
+echo "Afterwards, try running your leopard.sh command again." >&2
 rm -rf /opt/$pkgspec
 exit 1

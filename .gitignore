@@ -10,6 +10,9 @@ dist/*.*
 dist/orig/*.*
 !dist/orig/.keep
 
+dist/fonts/*.*
+!dist/fonts/.keep
+
 linux/*
 !linux/.keep
 !linux/Makefile
