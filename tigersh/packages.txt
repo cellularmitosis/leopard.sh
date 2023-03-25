@@ -144,6 +144,7 @@ tk-8.6.12
 twolame-0.4.0
 vlc.app-0.9.10
 vorbis-tools-1.4.2
+wcalc-1.0
 wget-1.21.3
 x264-ca5408b1
 xbench.app-1.3
