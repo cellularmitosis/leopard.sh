@@ -11,6 +11,7 @@ guile-1.8.8
 guile-2.0.14
 hyperspec-7.0
 janet-1.25.1
+janet-1.27.0
 lua-5.1.5
 lua-5.1.5.ppc64
 luajit-2.1.0-beta3
