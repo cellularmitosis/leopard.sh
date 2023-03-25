@@ -1,12 +1,12 @@
 #!/bin/bash
 # based on templates/build-from-source.sh v6
 
-# Install XMMS on OS X Leopard / PowerPC.
+# Install GNU Awk on OS X Leopard / PowerPC.
 
-package=xmms
-version=1.2.11
-upstream=http://www.xmms.org/files/1.2.x/$package-$version.tar.bz2
-description="Music player for Unix systems"
+package=gawk
+version=3.1.8
+upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
+description="GNU awk pattern-matching language"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -19,8 +19,9 @@ fi
 pkgspec=$package-$version$ppc64
 
 for dep in \
-    glib-1.2.10$ppc64 \
-    gtk+-1.2.10$ppc64
+    libiconv-1.16$ppc64 \
+    gettext-0.21$ppc64 \
+    libsigsegv-2.14$ppc64
 do
     if ! test -e /opt/$dep ; then
         leopard.sh $dep
@@ -28,9 +29,7 @@ do
     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
     PATH="/opt/$dep/bin:$PATH"
-    PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
 done
-PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
@@ -53,14 +52,27 @@ cd /tmp/$package-$version
 CFLAGS="$(leopard.sh -mcpu -O) $CFLAGS"
 if test -n "$ppc64" ; then
     CFLAGS="-m64 $CFLAGS"
+    LDFLAGS="-m64 $LDFLAGS"
 fi
+
+# Apparently someone decided to hard-code the arch as x86_64 on darwin.
+# sed -i '' -e 's|CFLAGS="${CFLAGS} -arch x86_64"|CFLAGS="${CFLAGS}"|' configure
+
+# Something is broken with the extension's handling of config.cache.
+#   configure: loading cache ../config.cache
+#   configure: error: `LDFLAGS' was not set in the previous run
+#   configure: error: in `/tmp/gawk-5.2.1/extension':
+#   configure: error: changes in the environment can compromise the build
+#   configure: error: run `make distclean' and/or `rm ../config.cache'
+#   	    and start over
+#   configure: error: ./configure failed for extension
+# rm -f config.cache
 
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --disable-dependency-tracking \
-    --disable-maintainer-mode \
-    --disable-debug \
-    --with-glib-prefix=/opt/glib-1.2.10$ppc64 \
-    --with-gtk-prefix=/opt/gtk+-1.2.10$ppc64 \
+    --with-libiconv-prefix=/opt/libiconv-1.16$ppc64 \
+    --with-libintl-prefix=/opt/gettext-0.21$ppc64 \
+    --with-libsigsegv-prefix=/opt/libsigsegv-2.14$ppc64 \
     CFLAGS="$CFLAGS"
 
 /usr/bin/time make $(leopard.sh -j) V=1
