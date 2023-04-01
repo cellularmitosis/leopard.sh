@@ -2,6 +2,7 @@ adium.app-1.3.10
 adium.app-1.4.5
 camino.app-2.1.2
 chicken.app-2.2b2
+djview.app-4.5
 drracket.app-6.0.1
 emacs.app-24.2
 handbrake.app-0.9.1
