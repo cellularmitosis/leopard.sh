@@ -31,6 +31,7 @@ libtheora-1.1.1.ppc64
 libtiff-4.5.1.ppc64
 libunistring-1.0.ppc64
 libvorbis-1.3.7.ppc64
+libwebp-1.3.1.ppc64
 lua-5.1.5.ppc64
 lz4-1.9.4.ppc64
 lzo-2.10.ppc64
