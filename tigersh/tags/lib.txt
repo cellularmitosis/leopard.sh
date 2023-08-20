@@ -1,3 +1,5 @@
+blas-3.11.0
+blas-3.11.0.ppc64
 cloog-0.18.1
 cloog-0.18.1.ppc64
 expat-2.5.0

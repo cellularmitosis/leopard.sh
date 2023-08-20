@@ -1,3 +1,4 @@
+blas-3.11.0.ppc64
 chicken-5.3.0.ppc64
 cloog-0.18.1.ppc64
 curl-7.87.0.ppc64
