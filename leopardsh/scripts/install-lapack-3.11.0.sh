@@ -44,6 +44,11 @@ if ! which -s gcc-4.9 ; then
     leopard.sh gcc-4.9.4
 fi
 
+dep=python-3.11.2
+if ! test -e /opt/$dep ; then
+    leopard.sh $dep
+fi
+
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec

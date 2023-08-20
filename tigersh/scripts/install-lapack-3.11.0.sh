@@ -44,6 +44,11 @@ if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
     tiger.sh gcc-4.9.4
 fi
 
+dep=python-3.11.2
+if ! test -e /opt/$dep ; then
+    tiger.sh $dep
+fi
+
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
 tiger.sh --unpack-dist $pkgspec
