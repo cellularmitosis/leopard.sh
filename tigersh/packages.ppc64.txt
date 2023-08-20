@@ -51,4 +51,5 @@ sqlite3-3.40.1.ppc64
 tcl-8.6.12.ppc64
 termcap-1.3.1.ppc64
 twolame-0.4.0.ppc64
+xblas-1.0.248.ppc64
 xz-5.2.5.ppc64
