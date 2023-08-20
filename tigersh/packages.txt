@@ -74,6 +74,7 @@ libressl-3.4.2
 libsigsegv-2.14
 libsndfile-1.0.28
 libtheora-1.1.1
+libtiff-4.5.1
 libtool-2.4.6
 libunistring-1.0
 libutil-11

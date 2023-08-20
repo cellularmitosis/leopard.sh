@@ -23,6 +23,7 @@ libpng-1.6.40.ppc64
 libsigsegv-2.14.ppc64
 libsndfile-1.0.28.ppc64
 libtheora-1.1.1.ppc64
+libtiff-4.5.1.ppc64
 libunistring-1.0.ppc64
 libutil-11.ppc64
 libvorbis-1.3.7.ppc64
