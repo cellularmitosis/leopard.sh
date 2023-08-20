@@ -32,6 +32,8 @@ lapack-3.11.0.ppc64
 libao-1.2.0
 libao-1.2.0.ppc64
 libffcall-2.4
+libgif-5.2.1
+libgif-5.2.1.ppc64
 libiconv-1.16
 libiconv-1.16.ppc64
 libiconv-bootstrap-1.16
