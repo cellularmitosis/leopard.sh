@@ -11,3 +11,5 @@ lzop-1.04.ppc64
 stuffit-expander.app-13.0.3
 xz-5.2.5
 xz-5.2.5.ppc64
+zlib-1.3
+zlib-1.3.ppc64

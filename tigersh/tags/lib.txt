@@ -82,3 +82,5 @@ twolame-0.4.0.ppc64
 x264-ca5408b1
 xblas-1.0.248
 xblas-1.0.248.ppc64
+zlib-1.3
+zlib-1.3.ppc64
