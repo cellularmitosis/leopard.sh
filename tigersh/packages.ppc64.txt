@@ -19,6 +19,7 @@ libiconv-1.16.ppc64
 libiconv-bootstrap-1.16.ppc64
 libjpeg-6b.ppc64
 libogg-1.5.3.ppc64
+libpng-1.6.40.ppc64
 libsigsegv-2.14.ppc64
 libsndfile-1.0.28.ppc64
 libtheora-1.1.1.ppc64

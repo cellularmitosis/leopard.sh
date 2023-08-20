@@ -36,6 +36,8 @@ libjpeg-6b
 libjpeg-6b.ppc64
 libogg-1.5.3
 libogg-1.5.3.ppc64
+libpng-1.6.40
+libpng-1.6.40.ppc64
 libressl-3.4.2
 libsigsegv-2.14
 libsigsegv-2.14.ppc64

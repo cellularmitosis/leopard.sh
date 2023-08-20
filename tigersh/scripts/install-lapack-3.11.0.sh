@@ -90,6 +90,7 @@ cd CBLAS
 make $(tiger.sh -j)
 cd ../LAPACKE
 make $(tiger.sh -j)
+cd ..
 
 # Note: tests are run as part of 'make'.
 

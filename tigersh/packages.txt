@@ -69,6 +69,7 @@ libiconv-1.16
 libiconv-bootstrap-1.16
 libjpeg-6b
 libogg-1.5.3
+libpng-1.6.40
 libressl-3.4.2
 libsigsegv-2.14
 libsndfile-1.0.28

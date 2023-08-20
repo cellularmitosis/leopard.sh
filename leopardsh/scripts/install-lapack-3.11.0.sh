@@ -90,6 +90,7 @@ cd CBLAS
 make $(leopard.sh -j)
 cd ../LAPACKE
 make $(leopard.sh -j)
+cd ..
 
 # Note: tests are run as part of 'make'.
 
