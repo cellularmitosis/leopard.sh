@@ -27,6 +27,8 @@ gtk+-1.2.10
 isl-0.12.2
 isl-0.12.2.ppc64
 isl-0.24
+lapack-3.11.0
+lapack-3.11.0.ppc64
 libao-1.2.0
 libao-1.2.0.ppc64
 libffcall-2.4
