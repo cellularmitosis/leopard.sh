@@ -56,8 +56,10 @@ cd /tmp/$package-$version
 
 CFLAGS="$(leopard.sh -mcpu -O)"
 LDFLAGS=""
+M64=""
 if test -n "$ppc64" ; then
-    CFLAGS="-m64 $CLAGS"
+    M64="-m64"
+    CFLAGS="-m64 $CFLAGS"
     LDFLAGS="-m64 $LDFLAGS"
 fi
 
@@ -68,7 +70,7 @@ CFLAGS = $CFLAGS
 FC = gfortran-4.9
 FFLAGS = $CFLAGS -frecursive
 FFLAGS_DRV = \$(FFLAGS)
-FFLAGS_NOOPT = -O0 -frecursive
+FFLAGS_NOOPT = $M64 -O0 -frecursive
 LDFLAGS = $LDFLAGS
 AR = ar
 ARFLAGS = cr
@@ -76,7 +78,7 @@ RANLIB = ranlib
 TIMER = INT_ETIME
 LAPACKE_WITH_TMG = Yes
 USEXBLAS = Yes
-XBLASLIB = /opt/xblas-1.0.248/lib/libxblas_.a
+XBLASLIB = /opt/xblas-1.0.248$ppc64/lib/libxblas_.a
 BLASLIB = \$(TOPSRCDIR)/libblas.a
 CBLASLIB = \$(TOPSRCDIR)/libcblas.a
 LAPACKLIB = \$(TOPSRCDIR)/liblapack.a
