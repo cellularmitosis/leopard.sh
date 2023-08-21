@@ -4,6 +4,7 @@ cloog-0.18.1.ppc64
 curl-7.87.0.ppc64
 expat-2.5.0.ppc64
 fdk-aac-2.0.2.ppc64
+fftw-3.3.10.ppc64
 flac-1.4.2.ppc64
 flex-2.6.4.ppc64
 gdbm-1.23.ppc64

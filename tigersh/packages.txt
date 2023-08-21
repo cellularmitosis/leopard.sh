@@ -31,6 +31,7 @@ expat-2.5.0
 expect-5.45.4
 fdk-aac-2.0.2
 ffmpeg-5.1.2
+fftw-3.3.10
 flac-1.4.2
 flex-2.6.4
 flip4mac-2.3.8.1
