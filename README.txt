@@ -245,6 +245,60 @@ If `leopard.sh` and `tiger.sh` aren't for you, checkout these other package mana
 - Fink: https://www.finkproject.org/ (looks like they only support 10.6 and up these days)
 
 
+Mirroring
+---------
+
+The http://leopard.sh server now runs rsyncd!
+
+List the available directories via:
+
+    rsync leopard.sh::
+
+The only exposed directory is 'html' (as in '/var/www/html'), so you can create
+a mirror via:
+
+    rsync -av leopard.sh::html .
+
+But in practice this would look something more like:
+
+    rsync -av --delete leopard.sh::html /var/www/html/mirrors/leopard.sh/
+
+Support for mirrors which force HTTPS
+-------------------------------------
+
+Where appropriate, leopard.sh will use plain-HTTP URLs for a small performance
+boost (or in the case of a slow G3, not so small!).
+
+However, some mirrors automatically redirect all plain-HTTP traffic to HTTPS.
+This defeats the point of using plain-HTTP, as you not only suffer the
+performance hit of using HTTPS, but on top of that an additional redirect from
+HTTP to HTTPS.  It would have been better to use HTTPS to begin with!
+
+In this case, you can 'export LEOPARDSH_MIRROR_NO_HTTP=1' (or 'export TIGERSH_MIRROR_NO_HTTP=1')
+to inform leopard.sh that it should not use plain-HTTP URLs.
+
+Note that if you set LEOPARDSH_MIRROR_NO_HTTP and use an HTTPS-only mirror when
+intially installing `leopard.sh`, it will be unable to download download its
+dependencies, as /usr/bin/curl does not support modern HTTPS.
+
+In this case, you can download https://leopard.sh/binpkgs/tigersh-deps-0.1.tiger.g3.tar.gz
+using another computer, then place it in /tmp and run leopard.sh again.
+
+### Support for mirrors which don't allow HEAD
+
+The HTTP HEAD operation can be used to fetch only the HTTP headers without
+downloading the contents of the URL.
+
+leopard.sh uses HEAD to fetch the Content-Length of files before downloading
+them, and hands that size to 'pv' to make its progress bar more informative.
+
+However, some mirrors do not support the HEAD operation, causing spurious
+failures.
+
+In this case, you can 'export LEOPARDSH_MIRROR_NO_HEAD=1' (or 'export TIGERSH_MIRROR_NO_HEAD=1')
+to inform leopard.sh that it should not attempt to fetch the size of files before downloading them.
+
+
 Useful links for OS X PowerPC users:
 ------------------------------------
 

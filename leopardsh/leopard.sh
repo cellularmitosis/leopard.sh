@@ -306,10 +306,23 @@ if test "$op" = "setup" || test -n "$needs_setup_check" ; then
 
         while ! test -e $fifo ; do sleep 0.1 ; done
 
-        url=$LEOPARDSH_MIRROR/binpkgs/$binpkg
+        if test -e /tmp/$binpkg ; then
+            # If the user provided the file locally, use that.
+            url=file:///tmp/$binpkg
+            insecure_url=$url
+        else
+            url=$LEOPARDSH_MIRROR/binpkgs/$binpkg
 
-        # At this point we are still using /usr/bin/curl, so drop back to http.
-        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+            # At this point we are still using /usr/bin/curl, so drop back to http.
+            insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+
+            if test -n "$LEOPARDSH_MIRROR_NO_HTTP" ; then
+                echo "Error: unable to fetch $url" >&2
+                echo "/usr/bin/curl is unable to use HTTPS, but LEOPARDSH_MIRROR_NO_HTTP has been set." >&2
+                echo "Please place a copy of $binpkg into /tmp and try again." >&2
+                exit 1
+            fi
+        fi
 
         cd /opt
         nice curl --fail --silent --show-error $insecure_url \
@@ -424,11 +437,19 @@ if test "$op" = "list" ; then
     echo "Available packages:" >&2
     cd /tmp
     url=$LEOPARDSH_MIRROR/leopardsh/packages.txt
-    insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    if test -n "$LEOPARDSH_MIRROR_NO_HTTP" ; then
+        insecure_url=$url
+    else
+        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    fi
     curl --fail --silent --show-error --location --remote-name $insecure_url
     if test "$cpu_name" = "g5" ; then
         url=$LEOPARDSH_MIRROR/leopardsh/packages.ppc64.txt
-        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+        if test -n "$LEOPARDSH_MIRROR_NO_HTTP" ; then
+            insecure_url=$url
+        else
+            insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+        fi
         curl --fail --silent --show-error --location --remote-name $insecure_url
         cat packages.txt packages.ppc64.txt | sort
     else
@@ -454,11 +475,19 @@ if test "$op" = "describe" ; then
 
     cd /tmp
     url=$LEOPARDSH_MIRROR/leopardsh/descriptions.txt
-    insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    if test -n "$LEOPARDSH_MIRROR_NO_HTTP" ; then
+        insecure_url=$url
+    else
+        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    fi
     curl --fail --silent --show-error --location --remote-name $insecure_url
     if test "$cpu_name" = "g5" ; then
         url=$LEOPARDSH_MIRROR/leopardsh/descriptions.ppc64.txt
-        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+        if test -n "$LEOPARDSH_MIRROR_NO_HTTP" ; then
+            insecure_url=$url
+        else
+            insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+        fi
         curl --fail --silent --show-error --location --remote-name $insecure_url
         if test -n "$pkgspec" ; then
             cat descriptions.txt descriptions.ppc64.txt | sort | grep "^$pkgspec: "
@@ -484,7 +513,11 @@ if test "$op" = "tags" ; then
     echo "Available tags:" >&2
     cd /tmp
     url=$LEOPARDSH_MIRROR/leopardsh/tags/tags.txt
-    insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    if test -n "$LEOPARDSH_MIRROR_NO_HTTP" ; then
+        insecure_url=$url
+    else
+        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    fi
     curl --fail --silent --show-error --location --remote-name $insecure_url
     cat tags.txt
     rm -f tags.txt
@@ -506,7 +539,11 @@ if test "$op" = "tag" ; then
     echo "Packages tagged as '$tag':" >&2
     cd /tmp
     url=$LEOPARDSH_MIRROR/leopardsh/tags/$tag.txt
-    insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    if test -n "$LEOPARDSH_MIRROR_NO_HTTP" ; then
+        insecure_url=$url
+    else
+        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    fi
     curl --fail --silent --show-error --location --remote-name $insecure_url
     if test "$cpu_name" = "g5" ; then
         cat $tag.txt
@@ -628,7 +665,11 @@ if test "$op" = "install-binpkg" ; then
 
     binpkg=$pkgspec.$os_cpu.tar.gz
     url=$LEOPARDSH_MIRROR/binpkgs/$binpkg
-    insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    if test -n "$LEOPARDSH_MIRROR_NO_HTTP" ; then
+        insecure_url=$url
+    else
+        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    fi
 
     if ! LEOPARDSH_RECURSED=1 leopard.sh --url-exists "$insecure_url" ; then
         echo "Pre-compiled binary package unavailable for $pkgspec on $os_cpu." >&2
@@ -693,7 +734,11 @@ if test "$op" = "unpack-tarball-check-md5" ; then
         exit 1
     fi
     url="$1"
-    insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    if test -n "$LEOPARDSH_MIRROR_NO_HTTP" ; then
+        insecure_url=$url
+    else
+        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    fi
     shift 1
 
     if test -z "$1" ; then
@@ -734,11 +779,17 @@ if test "$op" = "unpack-tarball-check-md5" ; then
 
     while ! test -e $fifo ; do sleep 0.1 ; done
 
-    size=$(curl --fail --silent --show-error --location --head $insecure_url \
-        | grep -i '^content-length:' \
-        | awk '{print $NF}' \
-        | sed "s/$(printf '\r')//"
-    )
+    if test -n "$LEOPARDSH_MIRROR_NO_HEAD" ; then
+        # Some servers don't support HTTP HEAD
+        size=0
+    else
+        size=$(curl --fail --silent --show-error --location --head $insecure_url \
+            | grep -i '^content-length:' \
+            | tail -n1 \
+            | awk '{print $NF}' \
+            | sed "s/$(printf '\r')//"
+        )
+    fi
 
     if test -n "$sudo" ; then
         # prompt the user for their password before we start the curl pipeline.
@@ -932,6 +983,8 @@ if test "$op" = "help" ; then
     echo "  LEOPARDSH_RUN_TESTS: run 'make check' after building a package from source."
     echo "  LEOPARDSH_RUN_LONG_TESTS: run tests which are known to take a long time."
     echo "  LEOPARDSH_RUN_BROKEN_TESTS: run tests which are known to fail."
+    echo "  LEOPARDSH_MIRROR_NO_HTTP: set to indicate your mirror redirects HTTP traffic HTTPS."
+    echo "  LEOPARDSH_MIRROR_NO_HEAD: set to indicate your mirror does not allow HEAD requests."
     exit 0
 fi
 
