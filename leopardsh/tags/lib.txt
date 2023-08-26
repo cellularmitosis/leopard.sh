@@ -33,6 +33,7 @@ lapack-3.11.0
 lapack-3.11.0.ppc64
 libao-1.2.0
 libao-1.2.0.ppc64
+libatomic_ops-7.6.14
 libdvdcss-1.4.3
 libdvdcss-1.4.3.ppc64
 libdvdnav-6.1.1

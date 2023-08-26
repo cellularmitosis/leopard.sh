@@ -30,6 +30,7 @@ isl-0.24
 lapack-3.11.0
 lapack-3.11.0.ppc64
 libao-1.2.0
+libatomic_ops-7.6.14
 libdvdcss-1.4.3
 libdvdnav-6.1.1
 libdvdread-6.1.3
