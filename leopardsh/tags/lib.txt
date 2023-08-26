@@ -33,6 +33,8 @@ lapack-3.11.0
 lapack-3.11.0.ppc64
 libao-1.2.0
 libao-1.2.0.ppc64
+libdvdcss-1.4.3
+libdvdcss-1.4.3.ppc64
 libffcall-2.4
 libgif-5.2.1
 libgif-5.2.1.ppc64
