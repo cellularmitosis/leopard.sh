@@ -5,6 +5,7 @@ ffmpeg-5.1.2
 flac-1.4.2
 flac-1.4.2.ppc64
 flip4mac-2.3.8.1
+handbrake.app-0.9.1
 libao-1.2.0
 libdvdcss-1.4.3
 libdvdnav-6.1.1
