@@ -35,6 +35,8 @@ libao-1.2.0
 libao-1.2.0.ppc64
 libdvdcss-1.4.3
 libdvdcss-1.4.3.ppc64
+libdvdnav-6.1.1
+libdvdnav-6.1.1.ppc64
 libdvdread-6.1.3
 libdvdread-6.1.3.ppc64
 libffcall-2.4

@@ -6,6 +6,7 @@ flac-1.4.2.ppc64
 flip4mac-2.3.8.1
 libao-1.2.0
 libdvdcss-1.4.3
+libdvdnav-6.1.1
 libdvdread-6.1.3
 libogg-1.5.3
 libogg-1.5.3.ppc64
