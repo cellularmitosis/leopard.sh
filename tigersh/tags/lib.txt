@@ -31,6 +31,7 @@ lapack-3.11.0
 lapack-3.11.0.ppc64
 libao-1.2.0
 libdvdcss-1.4.3
+libdvdread-6.1.3
 libgif-5.2.1
 libgif-5.2.1.ppc64
 libiconv-1.16
