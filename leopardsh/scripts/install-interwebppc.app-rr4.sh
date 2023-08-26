@@ -4,12 +4,10 @@
 # Install InterWebPPC.app on OS X / PowerPC.
 
 package=interwebppc.app
-version=rr3
-ucversion=RR3
+version=rr4
+ucversion=RR4
 appname1=InterWebPPC
-upstream_g3=https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/InterWebPPC-RR3-G3.zip
-upstream_g4=https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/InterWebPPC-RR3-G4.zip
-upstream_g5=https://macintoshgarden.org/sites/macintoshgarden.org/files/apps/InterWebPPC-RR3-G5.zip
+upstream_g3=https://github.com/wicknix/InterWebPPC/releases/download/RR4/InterWebPPC-RR4.zip
 
 ublock_xpi=uBlock0_1.16.4.30.firefox-legacy.xpi
 upstream_ublock=https://github.com/gorhill/uBlock-for-firefox-legacy/releases/download/firefox-legacy-1.16.4.30/$ublock_xpi
@@ -49,7 +47,8 @@ test -n "$cpu"
 
 echo -n -e "\033]0;$pkgmgr $pkgspec ($($pkgmgr --cpu))\007"
 
-tarball=$pkgspec.$cpu.tar.gz
+# Note: RR4 is a single build for all architectures.
+tarball=$pkgspec.g3.tar.gz
 url=$mirror/dist/$tarball
 echo -e "${COLOR_CYAN}Unpacking${COLOR_NONE} $tarball into /opt." >&2
 $pkgmgr --unpack-tarball-check-md5 $url /opt

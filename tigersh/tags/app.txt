@@ -7,6 +7,7 @@ emacs.app-24.2
 handbrake.app-0.9.1
 iceweaselppc.app-fpr13
 interwebppc.app-rr3
+interwebppc.app-rr4
 mactex-2010
 mplayer-osx.app-rev11
 openmark.app-1.60

@@ -9,6 +9,7 @@ handbrake.app-0.9.1
 handbrake.app-0.9.4
 iceweaselppc.app-fpr13
 interwebppc.app-rr3
+interwebppc.app-rr4
 mactex-2016
 mplayer-osx.app-rev11
 mplayer-osx.app-rev14
