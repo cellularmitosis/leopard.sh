@@ -26,6 +26,7 @@ djview.app-4.5
 docutils-0.19
 doom-shareware-wad-1.9
 drracket.app-6.0.1
+dvdbackup-0.4.2
 emacs.app-24.2
 expat-2.5.0
 expect-5.45.4
