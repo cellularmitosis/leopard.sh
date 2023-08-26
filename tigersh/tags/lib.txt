@@ -59,6 +59,8 @@ libunistring-1.0
 libunistring-1.0.ppc64
 libutil-11
 libutil-11.ppc64
+libuv-1.44.2
+libuv-1.44.2.ppc64
 libvorbis-1.3.7
 libvorbis-1.3.7.ppc64
 libwebp-1.3.1
