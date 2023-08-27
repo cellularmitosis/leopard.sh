@@ -92,6 +92,8 @@ opus-1.1.2
 opus-1.1.2.ppc64
 pcre-8.45
 pcre-8.45.ppc64
+pcre2-10.42
+pcre2-10.42.ppc64
 readline-8.2
 readline-8.2.ppc64
 sdl-1.2.15.20220129

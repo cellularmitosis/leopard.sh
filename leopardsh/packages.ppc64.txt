@@ -56,6 +56,7 @@ openssl-1.1.1t.ppc64
 opus-1.1.2.ppc64
 patch-2.7.6.ppc64
 pcre-8.45.ppc64
+pcre2-10.42.ppc64
 pv-1.6.20.ppc64
 python-3.11.2.ppc64
 quickjs-20210327.ppc64
