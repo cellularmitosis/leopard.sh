@@ -56,9 +56,6 @@ echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 tiger.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-CC=gcc-4.9
-CXX=g++-4.9
-
 # The build fails due to:
 #In file included from stream/vcd_read_darwin.h:32:0,
 #                 from stream/stream_vcd.c:46:
@@ -80,11 +77,32 @@ if ! test -e IOCDTypes.h.orig && grep -q -e '#pragma options align=reset' IOCDTy
 fi
 cd -
 
+pkgspec=mplayer-1.5
+CPPFLAGS="-I/opt/macports-legacy-support-20221029/include/LegacySupport $CPPFLAGS"
+LDFLAGS="-L/opt/macports-legacy-support-20221029/lib $LDFLAGS"
+LIBS="-lMacportsLegacySupport $LIBS"
+for pair in "openssl-1.1.1t ssl" "libpng-1.6.40 png" "libjpeg-6b jpeg" "libgif-5.2.1 gif" "sdl-1.2.15.20220129 SDL" ; do
+    depspec=$(echo $pair | awk '{print $1}')
+    libname=$(echo $pair | awk '{print $2}')
+    CPPFLAGS="-I/opt/$depspec/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$depspec/lib $LDFLAGS"
+    LIBS="-l$libname $LIBS"
+done
+CC=gcc-4.9
+CXX=g++-4.9
 /usr/bin/time \
     env CC="$CC" CXX="$CXX" \
     ./configure --prefix=/opt/$pkgspec \
     --codecsdir="/opt/mplayer-binary-codecs-20041107/lib/codecs" \
-    --enable-macosx-finder
+    --enable-openssl-nondistributable \
+    --enable-macosx-finder \
+    --enable-macosx-bundle \
+    --extra-cflags="$CPPFLAGS" \
+    --extra-ldflags="$LDFLAGS" \
+    --extra-libs-mplayer="$LIBS" \
+    --extra-libs-mencoder="$LIBS" \
+    | tee /tmp/mplayer.log
+
 
 # The build fails with:
 #  libvo/osx_objc_common.m: In function '-[MPCommonOpenGLView preinit]':

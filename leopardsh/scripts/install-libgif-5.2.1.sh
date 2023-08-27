@@ -79,8 +79,8 @@ patch -p1 << 'EOF'
  
 -libgif.so: $(OBJECTS) $(HEADERS)
 -	$(CC) $(CFLAGS) -shared $(LDFLAGS) -Wl,-soname -Wl,libgif.so.$(LIBMAJOR) -o libgif.so $(OBJECTS)
-+libgif.$(SO): $(OBJECTS) $(HEADERS)
-+	$(CC) $(CFLAGS) $(LDFLAGS) $(GIF_SOFLAGS) -o libgif.$(SO) $(OBJECTS)
++libgif.$(SO): $(OBJECTS) $(HEADERS) $(UOBJECTS)
++	$(CC) $(CFLAGS) $(LDFLAGS) $(GIF_SOFLAGS) -o libgif.$(SO) $(OBJECTS) $(UOBJECTS)
  
  libgif.a: $(OBJECTS) $(HEADERS)
  	$(AR) rcs libgif.a $(OBJECTS)
@@ -127,6 +127,29 @@ patch -p1 << 'EOF'
  
 EOF
 
+# Thanks to https://682198.bugs.gentoo.org/attachment.cgi?id=609396 via https://bugs.gentoo.org/682198
+patch -p1 << 'EOF'
+Index: giflib-5.2.1/gif_lib.h
+===================================================================
+--- giflib-5.2.1.orig/gif_lib.h
++++ giflib-5.2.1/gif_lib.h
+@@ -295,6 +295,14 @@ extern void GifDrawBoxedText8x8(SavedIma
+                           const char *legend,
+                           const int border, const int bg, const int fg);
+ 
++/******************************************************************************
++ Color table quantization
++******************************************************************************/
++int GifQuantizeBuffer(unsigned int Width, unsigned int Height,
++                   int *ColorMapSize, GifByteType * RedInput,
++                   GifByteType * GreenInput, GifByteType * BlueInput,
++                   GifByteType * OutputBuffer,
++                   GifColorType * OutputColorMap);
+ #ifdef __cplusplus
+ }
+ #endif /* __cplusplus */
+EOF
+
 CFLAGS="$(leopard.sh -mcpu -O)"
 LDFLAGS=""
 if test -n "$ppc64" ; then
@@ -134,7 +157,7 @@ if test -n "$ppc64" ; then
     LDFLAGS="-m64 $LDFLAGS"
 fi
 
-make $(leopard.sh -j) OFLAGS="" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" CC=gcc-4.2 PREFIX=/opt/$pkgspec
+make OFLAGS="" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" CC=gcc-4.2 PREFIX=/opt/$pkgspec
 
 # Note: no 'make check' available.
 

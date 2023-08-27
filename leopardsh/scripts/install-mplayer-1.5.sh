@@ -55,7 +55,6 @@ CXX=g++-4.9
     env CC="$CC" CXX="$CXX" \
     ./configure --prefix=/opt/$pkgspec \
     --codecsdir="/opt/mplayer-binary-codecs-20041107/lib/codecs" \
-    --enable-macosx-finder
 
 /usr/bin/time make $(leopard.sh -j) V=1
 
