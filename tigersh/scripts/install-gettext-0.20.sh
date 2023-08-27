@@ -83,6 +83,21 @@ fi
 
 make install
 
+# gettext doesn't provide any .pc files.
+mkdir -p /opt/$pkgspec/lib/pkgconfig
+cat > /opt/$pkgspec/lib/pkgconfig/intl.pc << EOF
+prefix=/opt/$pkgspec
+exec_prefix=\${prefix}
+libdir=\${exec_prefix}/lib
+includedir=\${prefix}/include
+
+Name: intl
+Description: GNU internationalization (i18n) and localization (l10n) library
+Version: $version
+Libs: -L\${libdir} -lintl
+Cflags: -I\${includedir}
+EOF
+
 tiger.sh --linker-check $pkgspec
 tiger.sh --arch-check $pkgspec $ppc64
 
