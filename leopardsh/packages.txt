@@ -38,6 +38,8 @@ fftw-3.3.10
 flac-1.4.2
 flex-2.6.4
 flip4mac-2.4.4.2
+fontconfig-2.14.1
+freetype-2.13.0
 gawk-3.1.8
 gawk-5.2.1
 gc-8.2.2

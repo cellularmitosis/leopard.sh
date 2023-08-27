@@ -12,6 +12,9 @@ fftw-3.3.10
 fftw-3.3.10.ppc64
 flac-1.4.2
 flac-1.4.2.ppc64
+fontconfig-2.14.1
+freetype-2.13.0
+freetype-2.13.0.ppc64
 gc-8.2.2
 gc-8.2.2.ppc64
 gcc-libs-10.3.0
