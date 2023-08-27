@@ -115,6 +115,7 @@ mplayer-osx.app-rev11
 ncurses-6.3
 ncursesw-6.3
 neofetch-7.1.0
+ninja-1.11.1
 openmark.app-1.60
 openssh-9.2p1
 openssl-1.1.1t
