@@ -4,7 +4,7 @@
 # Install meson on OS X Leopard / PowerPC.
 
 package=meson
-version=1.0.0
+version=1.2.1
 upstream=https://github.com/mesonbuild/$package/releases/download/$version/$package-$version.tar.gz
 description="Open source build system"
 
