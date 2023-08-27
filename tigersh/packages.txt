@@ -55,6 +55,7 @@ guile-1.8.8
 guile-2.0.14
 gzip-1.11
 handbrake.app-0.9.1
+htop-3.2.2
 hyperspec-7.0
 iceweaselppc.app-fpr13
 interwebppc.app-rr3
