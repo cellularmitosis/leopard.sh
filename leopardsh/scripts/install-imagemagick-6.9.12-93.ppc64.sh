@@ -1,0 +1,1 @@
+install-imagemagick-6.9.12-93.sh

@@ -1,15 +1,12 @@
 #!/opt/tigersh-deps-0.1/bin/bash
 # based on templates/build-from-source.sh v6
 
-# 👇 EDIT HERE:
-# Install foo on OS X Tiger / PowerPC.
+# Install ImageMagick on OS X Tiger / PowerPC.
 
-# 👇 EDIT HERE:
-package=foo
-version=1.0
-upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
-# upstream=https://downloads.sourceforge.net/$package/$package-$version.tar.gz
-description="FIXME"
+package=imagemagick
+version=6.9.12-93
+upstream=https://imagemagick.org/archive/ImageMagick-$version.tar.gz
+description="A collection of tools and libraries for many image formats"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -33,21 +30,30 @@ pkgspec=$package-$version$ppc64
 #     PATH="/opt/$dep/bin:$PATH"
 # fi
 
-# 👇 EDIT HERE:
-# for dep in \
-#     bar-2.1$ppc64 \
-#     qux-3.4$ppc64
-# do
-#     if ! test -e /opt/$dep ; then
-#         tiger.sh $dep
-#     fi
-#     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
-#     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
-#     PATH="/opt/$dep/bin:$PATH"
-#     PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
-# done
+for dep in \
+    zlib-1.3$ppc64 \
+    fftw-3.3.10$ppc64 \
+    libjpeg-6b$ppc64 \
+    libpng-1.6.40$ppc64 \
+    xz-5.2.5$ppc64 \
+    libtiff-4.5.1$ppc64 \
+    libwebp-1.3.1$ppc64 \
+    libxml2-2.9.12$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+    # CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    # LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+    PATH="/opt/$dep/bin:$PATH"
+    PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
+done
 # LIBS="-lbar -lqux"
-# PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
+PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
+
+if ! test -e /opt/perl-5.36.0 ; then
+    tiger.sh perl-5.36.0
+fi
 
 # 👇 EDIT HERE:
 # if ! perl -e "use Text::Unidecode" >/dev/null 2>&1 ; then
@@ -106,11 +112,10 @@ fi
 # OBJC='gcc -B/opt/ld64-97.17-tigerbrew/bin'
 # CXX='gxx -B/opt/ld64-97.17-tigerbrew/bin'
 
-# 👇 EDIT HERE:
-# if ! type -a pkg-config >/dev/null 2>&1 ; then
-#     tiger.sh pkg-config-0.29.2
-# fi
-# export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
+if ! type -a pkg-config >/dev/null 2>&1 ; then
+    tiger.sh pkg-config-0.29.2
+fi
+export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
@@ -127,10 +132,13 @@ if test -n "$ppc64" ; then
 fi
 
 # 👇 EDIT HERE:
-/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
+/usr/bin/time env PKG_CONFIG_PATH="$PKG_CONFIG_PATH" \
+./configure -C --prefix=/opt/$pkgspec \
     --disable-dependency-tracking \
     --disable-maintainer-mode \
-    --disable-debug \
+    --with-perl \
+    --with-x \
+    --with-fftw \
     CFLAGS="$CFLAGS" \
     CXXFLAGS="$CXXFLAGS" \
     LDFLAGS="$LDFLAGS" \
@@ -141,8 +149,6 @@ fi
     # CC="$CC" \
     # OBJC="$CC" \
     # CXX="$CXX" \
-    # PKG_CONFIG=/opt/pkg-config-0.29.2/bin/pkg-config \
-    # PKG_CONFIG_PATH="/opt/libfoo-1.0$ppc64/lib/pkgconfig:/opt/libbar-1.0$ppc64/lib/pkgconfig" \
 
 /usr/bin/time make $(tiger.sh -j) V=1
 

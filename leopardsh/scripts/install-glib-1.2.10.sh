@@ -80,7 +80,7 @@ fi
 
 make install
 
-# An attempt and making dylibs...
+# An attempt at making dylibs...
 gcc $CFLAGS -dynamiclib \
     -install_name /opt/glib-1.2.10/lib/libglib.1.dylib \
     -compatibility_version 1.2 \

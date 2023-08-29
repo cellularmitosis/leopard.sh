@@ -1,15 +1,12 @@
 #!/bin/bash
 # based on templates/build-from-source.sh v6
 
-# 👇 EDIT HERE:
-# Install foo on OS X Leopard / PowerPC.
+# Install libbluray on OS X Leopard / PowerPC.
 
-# 👇 EDIT HERE:
-package=foo
-version=1.0
-upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
-# upstream=https://downloads.sourceforge.net/$package/$package-$version.tar.gz
-description="FIXME"
+package=libbluray
+version=1.3.4
+upstream=https://download.videolan.org/pub/videolan/libbluray/$version/libbluray-$version.tar.bz2
+description="Blu-ray playback libraries"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -86,7 +83,6 @@ fi
 #     leopard.sh gcc-4.2
 # fi
 # CC=gcc-4.2
-# OBJC=gcc-4.2
 # CXX=g++-4.2
 
 # 👇 EDIT HERE:
@@ -94,7 +90,6 @@ fi
 #     leopard.sh gcc-4.9.4
 # fi
 # CC=gcc-4.9
-# OBJC=gcc-4.9
 # CXX=g++-4.9
 
 # 👇 EDIT HERE:
@@ -103,7 +98,6 @@ fi
 # fi
 # export PATH="/opt/ld64-97.17-tigerbrew/bin:$PATH"
 # CC='gcc -B/opt/ld64-97.17-tigerbrew/bin'
-# OBJC='gcc -B/opt/ld64-97.17-tigerbrew/bin'
 # CXX='gxx -B/opt/ld64-97.17-tigerbrew/bin'
 
 # 👇 EDIT HERE:
@@ -129,8 +123,6 @@ fi
 # 👇 EDIT HERE:
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --disable-dependency-tracking \
-    --disable-maintainer-mode \
-    --disable-debug \
     CFLAGS="$CFLAGS" \
     CXXFLAGS="$CXXFLAGS" \
     LDFLAGS="$LDFLAGS" \
@@ -139,7 +131,6 @@ fi
     # CPPFLAGS="$CPPFLAGS" \
     # LIBS="$LIBS" \
     # CC="$CC" \
-    # OBJC="$OBJC" \
     # CXX="$CXX" \
     # PKG_CONFIG=/opt/pkg-config-0.29.2/bin/pkg-config \
     # PKG_CONFIG_PATH="/opt/libfoo-1.0$ppc64/lib/pkgconfig:/opt/libbar-1.0$ppc64/lib/pkgconfig" \

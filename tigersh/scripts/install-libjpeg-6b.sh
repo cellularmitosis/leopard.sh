@@ -71,6 +71,20 @@ done
 
 make install
 
+mkdir -p /opt/$pkgspec/lib/pkgconfig
+cat > /opt/$pkgspec/lib/pkgconfig/jpeg.pc << EOF
+prefix=/opt/$pkgspec
+exec_prefix=\${prefix}
+libdir=\${exec_prefix}/lib
+includedir=\${prefix}/include
+
+Name: libjpeg
+Description: JPEG image codec
+Version: $version
+Libs: -L\${libdir} -ljpeg
+Cflags: -I\${includedir}
+EOF
+
 tiger.sh --linker-check $pkgspec
 tiger.sh --arch-check $pkgspec $ppc64
 

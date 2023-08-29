@@ -870,6 +870,15 @@ if test "$op" = "link" ; then
         fi
     done
 
+    if find /opt/$pkgspec/lib/pkgconfig -mindepth 1 2>/dev/null | grep -q . ; then
+        if test -z "$did_print_header" ; then
+            echo -e "${COLOR_CYAN}Linking${COLOR_NONE} $pkgspec into /usr/local." >&2
+            did_print_header=1
+        fi
+        mkdir -p /usr/local/lib/pkgconfig
+        ln -vsf /opt/$pkgspec/lib/pkgconfig/* /usr/local/lib/pkgconfig | sed 's/^/  /'
+    fi
+
     exit 0
 fi
 
