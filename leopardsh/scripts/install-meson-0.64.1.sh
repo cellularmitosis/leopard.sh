@@ -30,6 +30,8 @@ curl -f $patchroot/patch-meson-gcc-appleframeworks.diff | patch -p0
 curl -f $patchroot/patch-meson-gnome.diff | patch -p0
 curl -f $patchroot/patch-meson64-tiger-no-rpath-fix.diff | patch -p0
 
+exit 0
+
 # disable the rpath shenanigans
 patch -p0 << 'EOF'
 --- mesonbuild/backend/backends.py.orig	2023-08-28 23:12:56.000000000 -0500

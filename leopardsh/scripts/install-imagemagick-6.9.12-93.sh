@@ -54,6 +54,7 @@ PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
 
 if ! test -e /opt/perl-5.36.0 ; then
     leopard.sh perl-5.36.0
+    PATH="/opt/perl-5.36.0/bin:$PATH"
 fi
 
 # 👇 EDIT HERE:

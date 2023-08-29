@@ -72,7 +72,7 @@ done
 make install
 
 mkdir -p /opt/$pkgspec/lib/pkgconfig
-cat > /opt/$pkgspec/lib/pkgconfig/jpeg.pc << EOF
+cat > /opt/$pkgspec/lib/pkgconfig/libjpeg.pc << EOF
 prefix=/opt/$pkgspec
 exec_prefix=\${prefix}
 libdir=\${exec_prefix}/lib
