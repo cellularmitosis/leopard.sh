@@ -67,6 +67,7 @@ isl-0.12.2
 isl-0.24
 janet-1.25.1
 janet-1.27.0
+lame-3.100
 lapack-3.11.0
 ld64-97.17-tigerbrew
 lhasa-0.3.1
@@ -80,7 +81,7 @@ libgif-5.2.1
 libiconv-1.16
 libiconv-bootstrap-1.16
 libjpeg-6b
-libogg-1.5.3
+libogg-1.3.5
 libpng-1.6.40
 libressl-3.4.2
 libsigsegv-2.14

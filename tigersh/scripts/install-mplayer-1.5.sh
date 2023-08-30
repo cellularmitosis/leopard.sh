@@ -18,33 +18,62 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-for dep in \
-    openssl-1.1.1t$ppc64 \
-    libpng-1.6.40$ppc64 \
-    libjpeg-6b$ppc64 \
-do
-    if ! test -e /opt/$dep ; then
-        tiger.sh $dep
-    fi
-    # CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
-    # LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
-    # PATH="/opt/$dep/bin:$PATH"
-    PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
-done
-# LIBS="-lbar -lqux"
-PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
-
-CPPFLAGS="-I/opt/macports-legacy-support-20221029/include/LegacySupport $CPPFLAGS"
-LDFLAGS="-L/opt/macports-legacy-support-20221029/lib $LDFLAGS"
-LIBS="-lMacportsLegacySupport $LIBS"
-
-for pair in "libgif-5.2.1 gif" "sdl-1.2.15.20220129 SDL" ; do
+for pair in \
+"openssl-1.1.1t$ppc64 ssl" \
+"sdl-1.2.15.20220129$ppc64 SDL" \
+"libdvdnav-6.1.1$ppc64 dvdnav" \
+"libdvdread-6.1.3$ppc64 dvdread" \
+"libdvdcss-1.4.3$ppc64 dvdcss" \
+"libjpeg-6b$ppc64 jpeg" \
+"libpng-1.6.40$ppc64 png" \
+"libgif-5.2.1$ppc64 gif" \
+"freetype-2.13.0$ppc64 freetype" \
+"fontconfig-2.14.1$ppc64 fontconfig" \
+"twolame-0.4.0$ppc64 twolame" \
+"libogg-1.3.5$ppc64 ogg" \
+"libvorbis-1.3.7$ppc64 vorbis" \
+"libtheora-1.1.1$ppc64 theora" \
+"speex-1.2.1$ppc64 speex" \
+"mpg123-1.31.2$ppc64 mpg123" \
+"opus-1.1.2$ppc64 opus" \
+"libxml2-2.9.12$ppc64 xml2" \
+"lame-3.100$ppc64 mp3lame" \
+; do
     depspec=$(echo $pair | awk '{print $1}')
     libname=$(echo $pair | awk '{print $2}')
+    if ! test -e /opt/$depspec ; then
+        tiger.sh $depspec
+    fi
     CPPFLAGS="-I/opt/$depspec/include $CPPFLAGS"
     LDFLAGS="-L/opt/$depspec/lib $LDFLAGS"
     LIBS="-l$libname $LIBS"
+    PATH="/opt/$depspec/bin:$PATH"
 done
+
+# Note: x264 does not run on G3 processors.
+if test "$(tiger.sh --cpu)" != "g3" ; then
+    for pair in \
+    "x264-ca5408b1$ppc64 x264" \
+    ; do
+        depspec=$(echo $pair | awk '{print $1}')
+        libname=$(echo $pair | awk '{print $2}')
+        if ! test -e /opt/$depspec ; then
+            tiger.sh $depspec
+        fi
+        CPPFLAGS="-I/opt/$depspec/include $CPPFLAGS"
+        LDFLAGS="-L/opt/$depspec/lib $LDFLAGS"
+        LIBS="-l$libname $LIBS"
+        PATH="/opt/$depspec/bin:$PATH"
+    done
+fi
+
+dep=macports-legacy-support-20221029$ppc64
+if ! test -e /opt/$dep ; then
+    tiger.sh $dep
+fi
+CPPFLAGS="-I/opt/$dep/include/LegacySupport $CPPFLAGS"
+LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+LIBS="-lMacportsLegacySupport $LIBS"
 
 if ! test -e /opt/mplayer-binary-codecs-20041107 ; then
     tiger.sh mplayer-binary-codecs-20041107
@@ -78,6 +107,7 @@ if ! type -a pkg-config >/dev/null 2>&1 ; then
     tiger.sh pkg-config-0.29.2
 fi
 export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
+PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 # MPlayer 1.5's Makefile causes:
 #   make: *** virtual memory exhausted.  Stop.
@@ -114,7 +144,7 @@ fi
 cd -
 
 /usr/bin/time \
-    env CC="$CC" CXX="$CXX" \
+    env CC="$CC" CXX="$CXX" PKG_CONFIG_PATH="$PKG_CONFIG_PATH" \
     ./configure --prefix=/opt/$pkgspec \
     --codecsdir="/opt/mplayer-binary-codecs-20041107/lib/codecs" \
     --enable-openssl-nondistributable \
@@ -125,7 +155,6 @@ cd -
     --extra-libs-mplayer="$LIBS" \
     --extra-libs-mencoder="$LIBS" \
     | tee /tmp/mplayer.log
-
 
 # The build fails with:
 #  libvo/osx_objc_common.m: In function '-[MPCommonOpenGLView preinit]':

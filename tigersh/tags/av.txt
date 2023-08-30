@@ -6,12 +6,14 @@ flac-1.4.2
 flac-1.4.2.ppc64
 flip4mac-2.3.8.1
 handbrake.app-0.9.1
+lame-3.100
+lame-3.100.ppc64
 libao-1.2.0
 libdvdcss-1.4.3
 libdvdnav-6.1.1
 libdvdread-6.1.3
-libogg-1.5.3
-libogg-1.5.3.ppc64
+libogg-1.3.5
+libogg-1.3.5.ppc64
 libsndfile-1.0.28
 libsndfile-1.0.28.ppc64
 libtheora-1.1.1
