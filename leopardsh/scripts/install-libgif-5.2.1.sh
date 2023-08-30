@@ -165,6 +165,8 @@ make OFLAGS="" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" CC="$CC" PREFIX=/opt/$pkgspec
 
 make install PREFIX=/opt/$pkgspec
 
+install_name_tool -id /opt/$pkgspec/lib/libgif.dylib /opt/$pkgspec/lib/libgif.dylib
+
 mkdir -p /opt/$pkgspec/lib/pkgconfig
 cat > /opt/$pkgspec/lib/pkgconfig/libgif.pc << EOF
 prefix=/opt/$pkgspec
