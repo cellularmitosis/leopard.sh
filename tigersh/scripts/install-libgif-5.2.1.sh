@@ -34,6 +34,7 @@ fi
 if ! type -a gcc-4.2 >/dev/null 2>&1 ; then
     tiger.sh gcc-4.2
 fi
+CC=gcc-4.2
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 
@@ -157,11 +158,26 @@ if test -n "$ppc64" ; then
     LDFLAGS="-m64 $LDFLAGS"
 fi
 
-make OFLAGS="" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" CC=gcc-4.2 PREFIX=/opt/$pkgspec
+# Note: this makefile seems to misbehave for anything above -j1
+make OFLAGS="" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" CC="$CC" PREFIX=/opt/$pkgspec
 
 # Note: no 'make check' available.
 
 make install PREFIX=/opt/$pkgspec
+
+mkdir -p /opt/$pkgspec/lib/pkgconfig
+cat > /opt/$pkgspec/lib/pkgconfig/libgif.pc << EOF
+prefix=/opt/$pkgspec
+exec_prefix=\${prefix}
+libdir=\${exec_prefix}/lib
+includedir=\${prefix}/include
+
+Name: libgif
+Description: GIF image codec
+Version: $version
+Libs: -L\${libdir} -lgif
+Cflags: -I\${includedir}
+EOF
 
 tiger.sh --linker-check $pkgspec
 tiger.sh --arch-check $pkgspec $ppc64

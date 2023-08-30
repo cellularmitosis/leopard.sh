@@ -18,6 +18,22 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+for dep in \
+    gettext-0.21$ppc64 \
+    pcre2-10.42$ppc64 \
+    libffi-3.4.2$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    # CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    # LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+    # PATH="/opt/$dep/bin:$PATH"
+    PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
+done
+# LIBS="-lbar -lqux"
+PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
+
 if ! test -e /opt/mplayer-binary-codecs-20041107 ; then
     leopard.sh mplayer-binary-codecs-20041107
 fi
@@ -42,19 +58,32 @@ fi
 if ! which -s gcc-4.9 ; then
     leopard.sh gcc-4.9.4
 fi
+CC=gcc-4.9
+CXX=g++-4.9
+OBJC=gcc-4.9
+
+if ! which -s pkg-config ; then
+    leopard.sh pkg-config-0.29.2
+fi
+export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-CC=gcc-4.9
-CXX=g++-4.9
-
 /usr/bin/time \
     env CC="$CC" CXX="$CXX" \
     ./configure --prefix=/opt/$pkgspec \
     --codecsdir="/opt/mplayer-binary-codecs-20041107/lib/codecs" \
+    --enable-openssl-nondistributable \
+    --enable-macosx-finder \
+    --enable-macosx-bundle \
+    --extra-cflags="$CPPFLAGS" \
+    --extra-ldflags="$LDFLAGS" \
+    --extra-libs-mplayer="$LIBS" \
+    --extra-libs-mencoder="$LIBS" \
+    | tee /tmp/mplayer.log
 
 /usr/bin/time make $(leopard.sh -j) V=1
 

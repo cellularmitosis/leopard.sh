@@ -18,6 +18,34 @@ fi
 
 pkgspec=$package-$version$ppc64
 
+for dep in \
+    openssl-1.1.1t$ppc64 \
+    libpng-1.6.40$ppc64 \
+    libjpeg-6b$ppc64 \
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+    # CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    # LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+    # PATH="/opt/$dep/bin:$PATH"
+    PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
+done
+# LIBS="-lbar -lqux"
+PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
+
+CPPFLAGS="-I/opt/macports-legacy-support-20221029/include/LegacySupport $CPPFLAGS"
+LDFLAGS="-L/opt/macports-legacy-support-20221029/lib $LDFLAGS"
+LIBS="-lMacportsLegacySupport $LIBS"
+
+for pair in "libgif-5.2.1 gif" "sdl-1.2.15.20220129 SDL" ; do
+    depspec=$(echo $pair | awk '{print $1}')
+    libname=$(echo $pair | awk '{print $2}')
+    CPPFLAGS="-I/opt/$depspec/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$depspec/lib $LDFLAGS"
+    LIBS="-l$libname $LIBS"
+done
+
 if ! test -e /opt/mplayer-binary-codecs-20041107 ; then
     tiger.sh mplayer-binary-codecs-20041107
 fi
@@ -42,6 +70,14 @@ fi
 if ! type -a gcc-4.9 >/dev/null 2>&1 ; then
     tiger.sh gcc-4.9.4
 fi
+CC=gcc-4.9
+CXX=g++-4.9
+OBJC=gcc-4.9
+
+if ! type -a pkg-config >/dev/null 2>&1 ; then
+    tiger.sh pkg-config-0.29.2
+fi
+export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
 
 # MPlayer 1.5's Makefile causes:
 #   make: *** virtual memory exhausted.  Stop.
@@ -77,19 +113,6 @@ if ! test -e IOCDTypes.h.orig && grep -q -e '#pragma options align=reset' IOCDTy
 fi
 cd -
 
-pkgspec=mplayer-1.5
-CPPFLAGS="-I/opt/macports-legacy-support-20221029/include/LegacySupport $CPPFLAGS"
-LDFLAGS="-L/opt/macports-legacy-support-20221029/lib $LDFLAGS"
-LIBS="-lMacportsLegacySupport $LIBS"
-for pair in "openssl-1.1.1t ssl" "libpng-1.6.40 png" "libjpeg-6b jpeg" "libgif-5.2.1 gif" "sdl-1.2.15.20220129 SDL" ; do
-    depspec=$(echo $pair | awk '{print $1}')
-    libname=$(echo $pair | awk '{print $2}')
-    CPPFLAGS="-I/opt/$depspec/include $CPPFLAGS"
-    LDFLAGS="-L/opt/$depspec/lib $LDFLAGS"
-    LIBS="-l$libname $LIBS"
-done
-CC=gcc-4.9
-CXX=g++-4.9
 /usr/bin/time \
     env CC="$CC" CXX="$CXX" \
     ./configure --prefix=/opt/$pkgspec \
