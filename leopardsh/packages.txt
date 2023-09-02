@@ -121,6 +121,7 @@ mplayer-osx.app-rev14
 ncurses-6.3
 ncursesw-6.3
 neofetch-7.1.0
+nettle-3.9.1
 ninja-1.11.1
 openjdk7-20120314
 openmark.app-1.60
