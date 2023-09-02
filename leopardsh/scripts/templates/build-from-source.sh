@@ -111,6 +111,7 @@ fi
 #     leopard.sh pkg-config-0.29.2
 # fi
 # export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
+# export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 

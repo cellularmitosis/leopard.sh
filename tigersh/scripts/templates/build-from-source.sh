@@ -111,6 +111,7 @@ fi
 #     tiger.sh pkg-config-0.29.2
 # fi
 # export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
+# export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 

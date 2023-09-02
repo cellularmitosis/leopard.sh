@@ -46,7 +46,7 @@ cd /tmp/$package-$version
 #   make[6]: *** [libglib_2_0_la-gvariant.lo] Error 1
 # Thankfully, this MacPorts patch solves the issue:
 patchroot=https://raw.githubusercontent.com/macports/macports-ports/master/devel/pkgconfig/files
-curl $patchroot/patch-glib-configure.diff | patch -p0
+curl -f $patchroot/patch-glib-configure.diff | patch -p0
 
 CFLAGS="$(leopard.sh -mcpu -O)"
 if test -n "$ppc64" ; then
@@ -57,6 +57,7 @@ fi
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --with-internal-glib \
     --disable-host-tool \
+    --with-pc-path=/usr/local/lib/pkgconfig \
     LDFLAGS="$LDFLAGS" \
     CFLAGS="$CFLAGS"
 
