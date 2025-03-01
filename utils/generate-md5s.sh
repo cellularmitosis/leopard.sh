@@ -18,8 +18,13 @@ while read f ; do
     if ! test -e "$f.md5" ; then
         should_md5=1
     else
-        md5_mtime=$(stat -L -f '%m' "$f.md5")
-        binpkg_mtime=$(stat -L -f '%m' "$f")
+	if test "$(uname -s)" = "Darwin" ; then
+            md5_mtime=$(stat -L -f '%m' "$f.md5")
+            binpkg_mtime=$(stat -L -f '%m' "$f")
+	else
+            md5_mtime=$(stat -L --format '%Y' "$f.md5")
+            binpkg_mtime=$(stat -L --format '%Y' "$f")
+	fi
         if test "$md5_mtime" -lt "$binpkg_mtime" ; then
             should_md5=1
         fi
@@ -27,7 +32,11 @@ while read f ; do
 
     if test "$should_md5" = "1" ; then
         echo "Generating \"$f.md5\"" >&2
-        md5 -q "$f" > "$f.md5"
+	if test "$(uname -s)" = "Darwin" ; then
+            md5 -q "$f" > "$f.md5"
+        else
+            md5sum "$f" | awk '{print $1}' > "$f.md5"
+	fi
     fi
 
 done < $tmp
