@@ -84,6 +84,8 @@ elif test "$1" = "--url-exists" ; then
     op=url-exists
 elif test "$1" = "--install-binpkg" ; then
     op=install-binpkg
+elif test "$1" = "--resolve" ; then
+    op=resolve
 elif test "$1" = "--unpack-dist" ; then
     op=unpack-dist
 elif test "$1" = "--unpack-tarball-check-md5" ; then
@@ -108,6 +110,7 @@ if test "$1" = "--help" \
 -o "$1" = "--bits" \
 -o "$1" = "--spotlight" \
 -o "$1" = "--dashboard" \
+-o "$1" = "--resolve" \
 ; then
     unset needs_setup_check
 fi
@@ -475,6 +478,92 @@ if test "$op" = "list" ; then
 fi
 
 
+# resolve a bare package name to the newest-version pkgspec:
+# e.g. 'gzip' -> 'gzip-1.11', 'gcc' -> 'gcc-10.3.0'.
+# If the arg already looks like a full pkgspec it is echoed as-is.
+
+resolve_pkgspec() {
+    local arg="$1"
+    local suffix=""
+
+    # a '.ppc64' arg resolves exclusively against packages.ppc64.txt.
+    # strip it here so the full-slug and bare-name paths both see the core arg.
+    case "$arg" in
+        *.ppc64) suffix=".ppc64" ; arg="${arg%.ppc64}" ;;
+    esac
+
+    # already a full pkgspec? (contains "-<token containing a digit>")
+    case "$arg" in
+        *-*[0-9]*) echo "$arg$suffix" ; return 0 ;;
+    esac
+
+    local name="$arg"
+    local url insecure_url slug packages_file
+
+    cd /tmp
+    if test -n "$suffix" ; then
+        packages_file=packages.ppc64.txt
+    else
+        packages_file=packages.txt
+    fi
+    url=$TIGERSH_MIRROR/tigersh/$packages_file
+    if test -n "$TIGERSH_MIRROR_NO_HTTP" ; then
+        insecure_url=$url
+    else
+        insecure_url=$(echo "$url" | sed 's|^https:|http:|')
+    fi
+    curl --fail --silent --show-error --location --remote-name $insecure_url
+
+    # A candidate pkgspec is "$name-<token>..." where <token> (the first
+    # hyphen-separated segment after "$name-") contains at least one digit.
+    # This keeps e.g. 'gcc' from wrongly matching 'gcc-libs-10.3.0'.
+    # Of the candidates, pick the "newest" via a sort key which pads every run
+    # of digits to 10 chars (so '1.10' sorts above '1.9').
+    slug=$(awk -v name="$name" '
+        BEGIN { prefix = name "-" ; plen = length(prefix) }
+        substr($0, 1, plen) != prefix { next }
+        {
+            rest = substr($0, plen + 1)
+            i = index(rest, "-")
+            tok = (i > 0) ? substr(rest, 1, i - 1) : rest
+            if (tok !~ /[0-9]/) next
+
+            s = $0 ; k = ""
+            while (match(s, /[0-9]+/)) {
+                k = k substr(s, 1, RSTART - 1) sprintf("%010d", substr(s, RSTART, RLENGTH) + 0)
+                s = substr(s, RSTART + RLENGTH)
+            }
+            k = k s
+            if (k > best_k) { best_k = k ; best_l = $0 }
+        }
+        END { if (best_l != "") print best_l }
+    ' $packages_file)
+
+    rm -f $packages_file
+
+    if test -z "$slug" ; then
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: no package named '$name$suffix'." >&2
+        return 1
+    fi
+
+    echo "$slug"
+}
+
+
+# resolve:
+
+if test "$op" = "resolve" ; then
+    shift 1
+    if test -z "$1" ; then
+        echo -e "${COLOR_RED}Error${COLOR_NONE}: resolve which package?" >&2
+        echo "e.g. tiger.sh --resolve gzip" >&2
+        exit 1
+    fi
+    resolve_pkgspec "$1"
+    exit 0
+fi
+
+
 # describe:
 
 if test "$op" = "describe" ; then
@@ -577,7 +666,10 @@ if test "$op" = "install" ; then
         shift 1
     fi
 
-    pkgspec="$1"
+    pkgspec=$(resolve_pkgspec "$1") || exit 1
+    if test "$pkgspec" != "$1" ; then
+        echo -e "${COLOR_CYAN}Resolved${COLOR_NONE} '$1' to '$pkgspec'." >&2
+    fi
     shift 1
     script=install-$pkgspec.sh
 
@@ -991,6 +1083,7 @@ if test "$op" = "help" ; then
     echo "  --arch-check foo-1.0: print the architecture of foo-1.0's binaries."
     echo "  --linker-check foo-1.0: print the linked libraries for foo-1.0."
     echo "  --url-exists http://...: fail if the url is a 404."
+    echo "  --resolve foo: print the newest pkgspec matching 'foo' (e.g. 'foo-1.2.3')."
     echo "  --install-binpkg foo-1.0: download and unpack a binary tarball into /opt."
     echo "  --unpack-dist foo-1.0: download and unpack a source tarball into /tmp."
     echo "  --unpack-tarball-check-md5 http://... /dest/dir:"
