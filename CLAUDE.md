@@ -74,3 +74,17 @@ Inside each topic directory, store anything related to that topic:
 
 Pick file names that read well in `ls`. Prefer many small focused files over
 one mega-doc.
+
+### `claude/reference/`
+
+Durable, accumulating knowledge that outlives any single topic — "how it
+all works" docs that get edited in place as understanding grows. No
+"done" state, unlike topics.
+
+The split:
+
+- *what we did and what we found in a specific investigation* → `claude/topics/`
+- *how it all works, in general* → `claude/reference/`
+
+Today: just [claude/reference/how-it-works.md](claude/reference/how-it-works.md).
+Split into more files when one becomes unwieldy; don't pre-fragment.

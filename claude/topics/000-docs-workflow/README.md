@@ -125,6 +125,24 @@ follows an old link.
 When a topic pivots, note the pivot in its README ("started as an
 investigation, became a feature on YYYY-MM-DD") rather than renaming.
 
+### `claude/reference/` (parallel to `claude/topics/`)
+
+**Considered:** stuffing living "how it all works" docs into a
+`docs`-category topic, or into the `000` meta slot.
+
+**Chose because:** topics are bounded units of work — they have a
+beginning, a goal, and a "done" state. Reference docs aren't bounded;
+they grow forever as understanding accumulates. Forcing them into the
+topic shape would either bloat one giant `docs` topic or fragment
+related knowledge across many short-lived ones.
+
+The split:
+- *findings from a specific investigation* → topic
+- *durable knowledge that outlives the investigation* → reference
+
+Started with a single `how-it-works.md` to avoid pre-fragmenting; will
+split into more files when one becomes unwieldy.
+
 ### CLAUDE.md vs 000-docs-workflow split
 
 **Why both:** CLAUDE.md is loaded into context every session. It
