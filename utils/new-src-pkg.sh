@@ -19,3 +19,5 @@ for bigcat in tiger leopard ; do
     ln -s install-$pkgspec.sh install-$pkgspec.ppc64.sh
     cd -
 done
+
+lcode-diff.sh $pkgspec

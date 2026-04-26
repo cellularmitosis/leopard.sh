@@ -1,15 +1,12 @@
 #!/bin/bash
 # based on templates/build-from-source.sh v6
 
-# 👇 EDIT HERE:
-# Install foo on OS X Leopard / PowerPC.
+# Install gnutls on OS X Leopard / PowerPC.
 
-# 👇 EDIT HERE:
-package=foo
-version=1.0
-upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
-# upstream=https://downloads.sourceforge.net/$package/$package-$version.tar.gz
-description="FIXME"
+package=gnutls
+version=3.7.10
+upstream=https://www.gnupg.org/ftp/gcrypt/gnutls/v3.7/gnutls-$version.tar.xz
+description="A secure communications library implementing the SSL, TLS and DTLS protocols"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -21,17 +18,25 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-# 👇 EDIT HERE:
-# if ! test -e /opt/gcc-4.9.4 ; then
-#     leopard.sh gcc-libs-4.9.4
-# fi
+if ! test -e /opt/gcc-4.9.4 ; then
+    leopard.sh gcc-libs-4.9.4
+fi
 
-# 👇 EDIT HERE:
-# dep=bar-1.0$ppc64
-# if ! test -e /opt/$dep ; then
-#     leopard.sh $dep
-#     PATH="/opt/$dep/bin:$PATH"
-# fi
+dep=nettle-3.9.1$ppc64
+if ! test -e /opt/$dep ; then
+    leopard.sh $dep
+fi
+PATH="/opt/$dep/bin:$PATH"
+CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+
+dep=gmp-6.2.1$ppc64
+if ! test -e /opt/$dep ; then
+    leopard.sh $dep
+fi
+PATH="/opt/$dep/bin:$PATH"
+CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 
 # 👇 EDIT HERE:
 # for dep in \
@@ -44,8 +49,10 @@ pkgspec=$package-$version$ppc64
 #     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
 #     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
 #     PATH="/opt/$dep/bin:$PATH"
+#     PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
 # done
 # LIBS="-lbar -lqux"
+# PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
 
 # 👇 EDIT HERE:
 # if ! perl -e "use Text::Unidecode" >/dev/null 2>&1 ; then
@@ -87,13 +94,12 @@ fi
 # OBJC=gcc-4.2
 # CXX=g++-4.2
 
-# 👇 EDIT HERE:
-# if ! which -s gcc-4.9 ; then
-#     leopard.sh gcc-4.9.4
-# fi
-# CC=gcc-4.9
-# OBJC=gcc-4.9
-# CXX=g++-4.9
+if ! which -s gcc-4.9 ; then
+    leopard.sh gcc-4.9.4
+fi
+CC=gcc-4.9
+OBJC=gcc-4.9
+CXX=g++-4.9
 
 # 👇 EDIT HERE:
 # if ! test -e /opt/ld64-97.17-tigerbrew ; then
@@ -105,16 +111,31 @@ fi
 # CXX='gxx -B/opt/ld64-97.17-tigerbrew/bin'
 
 # 👇 EDIT HERE:
-# if ! which -s pkg-config ; then
-#     leopard.sh pkg-config-0.29.2
-# fi
-# export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
-# export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/X11/lib/pkgconfig:/usr/lib/pkgconfig"
+if ! which -s pkg-config ; then
+    leopard.sh pkg-config-0.29.2
+fi
+export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
+
+# We use nettle's built-in mini-gmp 
+# patch -p0 << 'EOF'
+# --- configure.orig	2023-09-02 16:19:10.000000000 -0500
+# +++ configure	2023-09-02 16:19:22.000000000 -0500
+# @@ -8872,7 +8872,7 @@
+#    rpathdirs=
+#    ltrpathdirs=
+#    names_already_handled=
+# -  names_next_round='nettle hogweed gmp'
+# +  names_next_round='nettle hogweed'
+#    while test -n "$names_next_round"; do
+#      names_this_round="$names_next_round"
+#      names_next_round=
+# EOF
 
 # 👇 EDIT HERE:
 CFLAGS="$(leopard.sh -mcpu -O) $CFLAGS"
@@ -128,18 +149,19 @@ fi
 # 👇 EDIT HERE:
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
     --disable-dependency-tracking \
-    --disable-maintainer-mode \
-    --disable-debug \
+    --with-included-libtasn1 \
+    --with-included-unistring \
+    --without-p11-kit \
     CFLAGS="$CFLAGS" \
     CXXFLAGS="$CXXFLAGS" \
+    CPPFLAGS="$CPPFLAGS" \
     LDFLAGS="$LDFLAGS" \
+    CC="$CC" \
+    CXX="$CXX" \
     # --with-bar=/opt/bar-1.0$ppc64 \
     # --with-bar-prefix=/opt/bar-1.0$ppc64 \
-    # CPPFLAGS="$CPPFLAGS" \
     # LIBS="$LIBS" \
-    # CC="$CC" \
     # OBJC="$OBJC" \
-    # CXX="$CXX" \
     # PKG_CONFIG=/opt/pkg-config-0.29.2/bin/pkg-config \
     # PKG_CONFIG_PATH="/opt/libfoo-1.0$ppc64/lib/pkgconfig:/opt/libbar-1.0$ppc64/lib/pkgconfig" \
 

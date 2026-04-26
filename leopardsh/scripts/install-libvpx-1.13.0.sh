@@ -18,53 +18,15 @@ fi
 
 pkgspec=$package-$version$ppc64
 
-# 👇 EDIT HERE:
-# dep=bar-1.0$ppc64
-# if ! test -e /opt/$dep ; then
-#     leopard.sh $dep
-#     PATH="/opt/$dep/bin:$PATH"
-# fi
-
-# 👇 EDIT HERE:
-# for dep in \
-#     bar-2.1$ppc64 \
-#     qux-3.4$ppc64
-# do
-#     if ! test -e /opt/$dep ; then
-#         leopard.sh $dep
-#     fi
-#     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
-#     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
-#     PATH="/opt/$dep/bin:$PATH"
-#     PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
-# done
-# LIBS="-lbar -lqux"
-# PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
-
-# 👇 EDIT HERE:
-# if ! perl -e "use Text::Unidecode" >/dev/null 2>&1 ; then
-#     echo no | cpan
-#     cpan Text::Unidecode
-# fi
+if ! test -e /opt/gcc-10.3.0 ; then
+    leopard.sh gcc-libs-10.3.0
+fi
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 if leopard.sh --install-binpkg $pkgspec ; then
     exit 0
 fi
-
-# 👇 EDIT HERE:
-# if test -z "$ppc64" -a "$(leopard.sh --cpu)" = "g5" ; then
-#     # Fails during a 32-bit build on a G5 machine,
-#     # so we instead install the g4e binpkg in that case.
-#     if leopard.sh --install-binpkg $pkgspec leopard.g4e ; then
-#         exit 0
-#     fi
-# else
-#     if leopard.sh --install-binpkg $pkgspec ; then
-#         exit 0
-#     fi
-# fi
 
 echo -e "${COLOR_CYAN}Building${COLOR_NONE} $pkgspec from source." >&2
 set -x
@@ -73,37 +35,19 @@ if ! test -e /usr/bin/gcc ; then
     leopard.sh xcode-3.1.4
 fi
 
-# 👇 EDIT HERE:
-# if ! which -s gcc-4.2 ; then
-#     leopard.sh gcc-4.2
-# fi
+if ! type -a gcc-10.3 >/dev/null 2>&1 ; then
+    leopard.sh gcc-10.3.0
+fi
+CC=gcc-10.3
+CXX=g++-10.3
+LD=gcc-10.3
 
-# 👇 EDIT HERE:
-# if ! which -s gcc-4.9 ; then
-#     leopard.sh gcc-4.9.4
-# fi
-
-# 👇 EDIT HERE:
-# if ! which -s gcc-10.3 ; then
-#     leopard.sh gcc-10.3.0
-# fi
-
-# 👇 EDIT HERE:
-# if ! which -s pkg-config ; then
-#     leopard.sh pkg-config-0.29.2
-# fi
-# export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
 
-# 👇 EDIT HERE:
-# CC=gcc-4.2
-# CXX=g++-4.2
-
-# 👇 EDIT HERE:
 CFLAGS="$(leopard.sh -mcpu -O) $CFLAGS"
 CXXFLAGS="$(leopard.sh -mcpu -O) $CXXFLAGS"
 if test -n "$ppc64" ; then
@@ -112,24 +56,32 @@ if test -n "$ppc64" ; then
     LDFLAGS="-m64 $LDFLAGS"
 fi
 
-# 👇 EDIT HERE:
-/usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-    --disable-dependency-tracking \
-    --disable-maintainer-mode \
-    --disable-debug \
+/usr/bin/time env \
     CFLAGS="$CFLAGS" \
     CXXFLAGS="$CXXFLAGS" \
-    # --with-bar=/opt/bar-1.0$ppc64 \
-    # --with-bar-prefix=/opt/bar-1.0$ppc64 \
-    # LDFLAGS="$LDFLAGS" \
-    # CPPFLAGS="$CPPFLAGS" \
-    # LIBS="$LIBS" \
-    # CC="$CC" \
-    # CXX="$CXX" \
-    # PKG_CONFIG=/opt/pkg-config-0.29.2/bin/pkg-config \
-    # PKG_CONFIG_PATH="/opt/libfoo-1.0$ppc64/lib/pkgconfig:/opt/libbar-1.0$ppc64/lib/pkgconfig" \
+    LDFLAGS="$LDFLAGS" \
+    CC="$CC" \
+    CXX="$CXX" \
+    LD="$LD -lstdc++" \
+    ./configure --prefix=/opt/$pkgspec \
+        --disable-dependency-tracking \
+        --disable-debug \
+        --disable-examples \
+        --enable-shared
 
-/usr/bin/time make $(leopard.sh -j) V=1
+for f in tools-generic-gnu.mk libs-generic-gnu.mk docs-generic-gnu.mk ; do
+    sed -i '' -e 's| -O3 ||' $f
+done
+
+for f in Makefile build/make/Makefile ; do
+    sed -i '' -e 's|-Wl,--no-undefined ||' $f
+done
+
+/usr/bin/time make $(leopard.sh -j) CC="$CC" CXX="$CXX" LD="$LD" V=1
+
+# Undefined symbols:
+#   "__Unwind_Resume", referenced from:
+# see https://stackoverflow.com/a/22774664/558735
 
 # 👇 EDIT HERE:
 if test -n "$LEOPARDSH_RUN_TESTS" ; then

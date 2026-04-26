@@ -5,8 +5,8 @@
 # Install foo on OS X Tiger / PowerPC.
 
 # 👇 EDIT HERE:
-package=foo
-version=1.0
+package=gnucobol
+version=3.2
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 # upstream=https://downloads.sourceforge.net/$package/$package-$version.tar.gz
 description="FIXME"
@@ -34,18 +34,23 @@ pkgspec=$package-$version$ppc64
 # fi
 
 # 👇 EDIT HERE:
-# for dep in \
-#     bar-2.1$ppc64 \
-#     qux-3.4$ppc64
-# do
-#     if ! test -e /opt/$dep ; then
-#         tiger.sh $dep
-#     fi
-#     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
-#     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
-#     PATH="/opt/$dep/bin:$PATH"
-# done
+for dep in \
+    gmp-4.3.2$ppc64 \
+    libxml2-2.9.12$ppc64
+json
+ncurses-6.3$ppc64 \
+bdb
+do
+    if ! test -e /opt/$dep ; then
+        tiger.sh $dep
+    fi
+#    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+#    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+#    PATH="/opt/$dep/bin:$PATH"
+#    PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
+done
 # LIBS="-lbar -lqux"
+#PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
 
 # 👇 EDIT HERE:
 # if ! perl -e "use Text::Unidecode" >/dev/null 2>&1 ; then
@@ -109,7 +114,6 @@ fi
 #     tiger.sh pkg-config-0.29.2
 # fi
 # export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
-# export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/X11R6/lib/pkgconfig:/usr/lib/pkgconfig"
 
 echo -n -e "\033]0;tiger.sh $pkgspec ($(tiger.sh --cpu))\007"
 

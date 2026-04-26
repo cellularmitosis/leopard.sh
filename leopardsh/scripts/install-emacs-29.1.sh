@@ -5,11 +5,11 @@
 # Install foo on OS X Leopard / PowerPC.
 
 # 👇 EDIT HERE:
-package=foo
-version=1.0
+package=emacs
+version=29.1
 upstream=https://ftp.gnu.org/gnu/$package/$package-$version.tar.gz
 # upstream=https://downloads.sourceforge.net/$package/$package-$version.tar.gz
-description="FIXME"
+description="An operating system in need of a good editor"
 
 set -e -o pipefail
 PATH="/opt/tigersh-deps-0.1/bin:$PATH"
@@ -22,9 +22,9 @@ fi
 pkgspec=$package-$version$ppc64
 
 # 👇 EDIT HERE:
-# if ! test -e /opt/gcc-4.9.4 ; then
-#     leopard.sh gcc-libs-4.9.4
-# fi
+if ! test -e /opt/gcc-4.9.4 ; then
+    leopard.sh gcc-libs-4.9.4
+fi
 
 # 👇 EDIT HERE:
 # dep=bar-1.0$ppc64
@@ -34,18 +34,37 @@ pkgspec=$package-$version$ppc64
 # fi
 
 # 👇 EDIT HERE:
-# for dep in \
-#     bar-2.1$ppc64 \
-#     qux-3.4$ppc64
-# do
-#     if ! test -e /opt/$dep ; then
-#         leopard.sh $dep
-#     fi
-#     CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
-#     LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
-#     PATH="/opt/$dep/bin:$PATH"
-# done
+for dep in \
+    libpng-1.6.40$ppc64 \
+    libwebp-1.3.1$ppc64 \
+    sqlite3-3.40.1$ppc64 \
+    libxml2-2.9.12$ppc64 \
+    freetype-2.13.0$ppc64 \
+    gnutls-3.7.10$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    # CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    # LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+    PATH="/opt/$dep/bin:$PATH"
+    # PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/$dep/lib/pkgconfig"
+done
 # LIBS="-lbar -lqux"
+# PKG_CONFIG_PATH="$(echo $PKG_CONFIG_PATH | sed -e 's/^://')"
+
+for dep in \
+    libjpeg-6b$ppc64 \
+    libtiff-4.5.1$ppc64 \
+    libgif-5.2.1$ppc64
+do
+    if ! test -e /opt/$dep ; then
+        leopard.sh $dep
+    fi
+    CPPFLAGS="-I/opt/$dep/include $CPPFLAGS"
+    LDFLAGS="-L/opt/$dep/lib $LDFLAGS"
+    PATH="/opt/$dep/bin:$PATH"
+done
 
 # 👇 EDIT HERE:
 # if ! perl -e "use Text::Unidecode" >/dev/null 2>&1 ; then
@@ -88,12 +107,12 @@ fi
 # CXX=g++-4.2
 
 # 👇 EDIT HERE:
-# if ! which -s gcc-4.9 ; then
-#     leopard.sh gcc-4.9.4
-# fi
-# CC=gcc-4.9
-# OBJC=gcc-4.9
-# CXX=g++-4.9
+if ! which -s gcc-4.9 ; then
+    leopard.sh gcc-4.9.4
+fi
+CC=gcc-4.9
+OBJC=gcc-4.9
+CXX=g++-4.9
 
 # 👇 EDIT HERE:
 # if ! test -e /opt/ld64-97.17-tigerbrew ; then
@@ -105,16 +124,40 @@ fi
 # CXX='gxx -B/opt/ld64-97.17-tigerbrew/bin'
 
 # 👇 EDIT HERE:
-# if ! which -s pkg-config ; then
-#     leopard.sh pkg-config-0.29.2
-# fi
-# export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
-# export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/X11/lib/pkgconfig:/usr/lib/pkgconfig"
+if ! which -s pkg-config ; then
+    leopard.sh pkg-config-0.29.2
+fi
+export PATH="/opt/pkg-config-0.29.2/bin:$PATH"
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/X11/lib/pkgconfig"
 
 echo -n -e "\033]0;leopard.sh $pkgspec ($(leopard.sh --cpu))\007"
 
 leopard.sh --unpack-dist $pkgspec
 cd /tmp/$package-$version
+
+patch -p0 << 'EOF'
+--- configure.orig	2023-09-02 14:49:58.000000000 -0500
++++ configure	2023-09-02 14:51:13.000000000 -0500
+@@ -6109,8 +6109,8 @@
+   ## Apple Darwin / macOS
+   *-apple-darwin* )
+     case "${canonical}" in
+-      *-apple-darwin[0-9].*) unported=yes ;;
+-      i[3456]86-* | x86_64-* | arm-* | aarch64-* )  ;;
++      *-apple-darwin[0-7].*) unported=yes ;;
++      i[3456]86-* | x86_64-* | arm-* | aarch64-* | powerpc-* )  ;;
+       * )            unported=yes ;;
+     esac
+     opsys=darwin
+EOF
+
+for f in configure lwlib/lwlib-Xaw.c lwlib/lwlib.c src/xfns.c src/xmenu.c src/xterm.c ; do
+    sed -i '' -e 's|#include <X11/Xaw3d/|#include <X11/Xaw/|g' $f
+done
+
+for f in configure  ; do
+    sed -i '' -e 's|-lXaw3d|-lXaw|g' $f
+done
 
 # 👇 EDIT HERE:
 CFLAGS="$(leopard.sh -mcpu -O) $CFLAGS"
@@ -127,21 +170,23 @@ fi
 
 # 👇 EDIT HERE:
 /usr/bin/time ./configure -C --prefix=/opt/$pkgspec \
-    --disable-dependency-tracking \
-    --disable-maintainer-mode \
-    --disable-debug \
+    --without-ns \
+    --with-x \
     CFLAGS="$CFLAGS" \
     CXXFLAGS="$CXXFLAGS" \
+    CPPFLAGS="$CPPFLAGS" \
     LDFLAGS="$LDFLAGS" \
+    CC="$CC" \
+    CXX="$CXX" \
+    OBJC="$OBJC" \
     # --with-bar=/opt/bar-1.0$ppc64 \
     # --with-bar-prefix=/opt/bar-1.0$ppc64 \
-    # CPPFLAGS="$CPPFLAGS" \
     # LIBS="$LIBS" \
-    # CC="$CC" \
-    # OBJC="$OBJC" \
-    # CXX="$CXX" \
     # PKG_CONFIG=/opt/pkg-config-0.29.2/bin/pkg-config \
     # PKG_CONFIG_PATH="/opt/libfoo-1.0$ppc64/lib/pkgconfig:/opt/libbar-1.0$ppc64/lib/pkgconfig" \
+
+# error: unknown type name 'XRRScreenResources'
+sed -i '' -e 's|#define HAVE_XRANDR 1|#undef HAVE_XRANDR|' src/config.h
 
 /usr/bin/time make $(leopard.sh -j) V=1
 
