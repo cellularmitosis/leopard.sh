@@ -39,6 +39,10 @@ misc/**/*.mkv
 misc/**/*.avi
 misc/**/*.mpg
 misc/**/*.mpeg
+misc/TigerTube/
+
+osx/
 
 .wwdc/
 .books/
+
